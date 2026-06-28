@@ -1,0 +1,78 @@
+// data/1949.js — 1949년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1949.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1949 = [
+
+  { id:'person_1949_01', year:1949, visible_from:1949, visible_until:1949,
+    month:5, day:26, type:'person', priority:1,
+    title_ko:'김구 암살',
+    title_en:'Assassination of Kim Gu',
+    title_ja:'金九暗殺',
+    place_ko:'서울 (경교장)',
+    lat:37.566, lng:126.967,
+    people:['김구'],
+    summary_ko:'1949년 6월 26일, 김구는 자택인 경교장에서 육군 소위 안두희가 쏜 총탄에 맞아 암살됐다. 안두희의 단독 범행으로 발표됐으나, 배후를 둘러싼 의혹은 이후로도 끊이지 않았다 — 안두희는 사건 후에도 군의 보호를 받으며 형 집행정지로 풀려나 군에 복귀했고, 1992년 그는 특무대장 김창룡의 사주를 받았다고 증언했지만(증언은 이후 여러 차례 번복돼 신빙성 논란이 있다) 결국 1996년 한 시민에게 살해되기까지 진상을 명확히 밝히지 않았다. 1995년 국회 조사보고서는 단독 범행이 아닌 군부 내 서북청년단 세력과 고위 장성들의 조직적 개입으로 결론 내렸다. 임시정부를 이끌며 평생 독립운동에 헌신했고 분단을 막기 위해 마지막까지 남북협상을 시도했던 김구의 죽음은, 통일 정부 노선이 정치적으로 완전히 패배했음을 상징하는 사건으로 남았다.',
+    video:null,
+    connections:['person_1948_01','person_1956_03'],
+    tags:['person','서울','김구','암살'],
+    sources:['한국민족문화대백과사전 김구암살사건','위키백과 안두희'] },
+
+  { id:'policy_1949_01', year:1949, visible_from:1949, visible_until:1950,
+    month:5, day:21, type:'policy', priority:1,
+    title_ko:'농지개혁법 공포',
+    title_en:'Land Reform Act',
+    title_ja:'農地改革法',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    summary_ko:'1949년 제정되고 이듬해 시행된 농지개혁법은 3정보를 초과하는 지주의 농지를 유상으로 매수해 소작농에게 유상으로 분배하는 것을 골자로 했다. 일제강점기 내내 식민지 지주제 아래 시달려온 농민들에게 자기 땅을 가질 기회를 열어준 정책으로, 이후 한국 사회에서 지주 계급이 빠르게 해체되고 자작농 중심의 농촌 구조가 자리잡는 계기가 됐다. 같은 시기 북한이 무상몰수·무상분배 방식의 토지개혁을 먼저 단행한 데 대응한 측면도 있었다. 시행 과정에서 지주들의 사전 매각·은닉도 있었지만, 한국 현대사에서 가장 성공적인 평등화 정책으로 평가된다.',
+    video:null,
+    connections:[],
+    tags:['policy','서울','농지개혁','토지'],
+    sources:['한국민족문화대백과사전 농지개혁'] },
+
+  { id:'political_1949_01', year:1949, visible_from:1949, visible_until:1949,
+    month:5, day:null, type:'political', priority:2,
+    title_ko:'반민특위 활동 무력화 — 친일 청산의 좌절',
+    title_en:'Collapse of the Anti-National Activities Investigation',
+    title_ja:'反民特委活動の無力化',
+    place_ko:'서울 (국회)',
+    lat:37.576, lng:126.977,
+    people:[],
+    summary_ko:'1949년 들어 반민특위는 친일 경력을 가진 경찰·군 간부들의 강한 반발에 부딸혔다. 6월 6일 경찰이 반민특위 사무실을 습격해 직원들을 연행하는 초유의 사건까지 벌어졌고, 국회프락치사건으로 특위에 협조적이던 의원들이 구속되면서 활동은 사실상 마비됐다. 이승만 정부는 반공을 명분으로 친일 경력자의 등용을 용인했고, 1949년 말 반민특위는 조사를 거의 마무리하지 못한 채 활동을 접었다. 식민지 청산이라는 과제가 신생 분단국가의 반공 우선주의 속에서 미완으로 남게 된 전환점이었다.',
+    video:null,
+    connections:['political_1948_02'],
+    tags:['political','서울','반민특위','친일청산','국회프락치사건'],
+    sources:['한국민족문화대백과사전 반민족행위특별조사위원회'] },
+
+  { id:'organization_1949_01', year:1949, visible_from:1949, visible_until:1950,
+    month:3, day:null, type:'organization', priority:2,
+    title_ko:'국민보도연맹 결성',
+    title_en:'National Guidance Alliance',
+    title_ja:'国民保導連盟',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    summary_ko:'정부는 좌익 전력자를 "전향"시켜 관리한다는 명목으로 국민보도연맹을 조직했다. 가입자에게는 전향 증명과 보호를 약속했지만, 실제로는 지역별 가입 인원을 채우려 좌익과 무관한 농민·청년까지 강제로 가입시킨 경우가 많았다. 이 단체는 이듬해 6·25전쟁이 터지자 정부가 가입자 전체를 잠재적 위험인물로 간주해 즉결처형하는 비극으로 이어진다 — 1949년의 이 평범해 보이는 행정 조치가, 이듬해 전국 각지에서 벌어질 민간인 학살의 명단이 될 줄은 누구도 예상하지 못했다.',
+    video:null,
+    connections:[],
+    tags:['organization','서울','국민보도연맹','좌익전향'],
+    sources:['한국민족문화대백과사전 국민보도연맹'] },
+
+  { id:'massacre_1949_01', year:1949, visible_from:1949, visible_until:1949,
+    month:0, day:null, type:'massacre', priority:2, area:true, areaRadius:30000,
+    title_ko:'제주 4·3사건 — 토벌 소강과 잔여 희생',
+    title_en:'Jeju 4·3 — Waning Suppression Operations',
+    title_ja:'済州四・三事件 — 鎮圧の沈静化',
+    place_ko:'제주도',
+    lat:33.40, lng:126.55,
+    people:[],
+    summary_ko:'1948년 말 초토화 작전의 절정을 지나, 1949년에는 무장대 규모가 크게 줄며 토벌 작전도 점차 소강 상태로 들어갔다. 그러나 산간 마을 주민에 대한 검속과 즉결처분은 이 시기에도 계속됐고, 한라산에 남은 잔여 무장대를 두고 군경의 수색이 이어졌다. 1949년 5월 제주도지구 계엄령이 해제됐지만, 사건이 완전히 종결된 것은 아니었다 — 한라산 금족 지역이 전면 개방되는 1954년까지 5년이 더 필요했다. 정부 수립 직후의 격렬한 폭력이 지나간 자리에, 길고 지친 토벌과 침묵의 시간이 이어졌다.',
+    video:null,
+    connections:['massacre_1948_01'],
+    tags:['massacre','제주','4·3사건','토벌'],
+    sources:['제주4·3사건진상조사보고서'] }
+
+];

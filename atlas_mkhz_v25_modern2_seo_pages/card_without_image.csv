@@ -1,0 +1,206 @@
+card_id,title,type,year_file,has_content_field
+organization_1881_01,별기군 창설 — 신식 군대의 등장,organization,1881.js,False
+political_1882_02,조미수호통상조약 — 서양과의 첫 수교,political,1882.js,False
+political_1885_01,톈진조약 — 두 제국의 약속,political,1885.js,False
+international_1885_02,거문도 사건,international,1885.js,False
+policy_1886_01,육영공원 — 첫 관립 근대학교,policy,1886.js,False
+policy_1886_02,배재학당과 이화학당 — 사립 근대교육,policy,1886.js,False
+policy_1887_01,경복궁의 전등 — 들어온 근대의 빛,policy,1887.js,False
+policy_1887_02,전신망의 확장 — 이어지는 선들,policy,1887.js,False
+political_1889_01,방곡령 — 곡물을 둘러싼 마찰,political,1889.js,False
+movement_1892_01,교조신원운동 — 동학의 첫 집회,movement,1892.js,False
+movement_1893_01,보은집회 — 척왜양창의,movement,1893.js,False
+political_1894_01,일본군의 경복궁 점령과 청일전쟁,plot,1894.js,False
+policy_1894_01,갑오개혁 — 위로부터의 근대화,policy,1894.js,False
+political_1895_01,시모노세키조약과 삼국간섭,political,1895.js,False
+policy_1895_01,을미개혁과 단발령,policy,1895.js,False
+political_1896_01,아관파천 — 러시아 공사관으로,political,1896.js,False
+political_1896_02,열강의 이권 침탈,policy,1896.js,False
+political_1896_03,독립신문 창간,political,1896.js,False
+political_1897_01,대한제국 선포 — 황제의 나라,political,1897.js,False
+movement_1898_01,만민공동회 — 광장의 정치,movement,1898.js,False
+political_1898_02,헌의6조,political,1898.js,False
+political_1898_01,독립협회 해산,political,1898.js,False
+policy_1899_01,대한국 국제 반포 — 황제 중심 체제,policy,1899.js,False
+policy_1899_02,경인선 개통 — 첫 철도,policy,1899.js,False
+policy_1900_01,대한제국 — 자주의 마지막 빛,policy,1900.js,False
+policy_1900_02,양전사업과 지계 발급,policy,1900.js,False
+policy_1900_03,원수부와 대한제국군,organization,1900.js,False
+policy_1900_04,전차가 달리기 시작한 수도,policy,1900.js,False
+political_1900_01,폭풍 전야 — 두 제국 사이의 대한제국,political,1900.js,False
+movement_1901_01,제주의 격랑 — 이재수의 난,movement,1901.js,False
+policy_1901_01,지계 사업 확대,policy,1901.js,False
+policy_1901_02,전차와 전등의 시대,policy,1901.js,False
+political_1901_01,흔들리는 균형 외교,political,1901.js,False
+political_1902_01,간도관리사 이범윤 파견,political,1902.js,False
+organization_1903_01,황성기독교청년회(YMCA) 창립,organization,1903.js,False
+battle_1904_01,러일전쟁 발발 — 한반도를 건 제국의 충돌,battle,1904.js,False
+policy_1904_01,한일의정서 — 중립선언을 짓밟다,policy,1904.js,False
+policy_1904_02,제1차 한일협약 — 고문정치의 시작,policy,1904.js,False
+person_1905_01,민영환 자결 — 죽어도 죽지 않는다,person,1905.js,False
+policy_1905_02,경부선 철도 개통,policy,1905.js,False
+policy_1906_01,통감부 설치 — 이토 히로부미 초대 통감,policy,1906.js,False
+movement_1907_01,국채보상운동 — 나라 빚을 백성이 갚자,movement,1907.js,False
+policy_1907_01,정미7조약 — 차관정치와 통치권 장악,policy,1907.js,True
+movement_1907_05,대한제국 군대해산과 정미의병,movement,1907.js,False
+movement_1908_01,13도창의군 서울진공작전,movement,1908.js,False
+policy_1909_01,기유각서 — 사법권마저 빼앗기다,policy,1909.js,False
+policy_1910_02,회사령 공포 — 민족자본 억압,policy,1910.js,False
+policy_1910_03,토지조사사업 시작,policy,1910.js,False
+policy_1910_04,헌병경찰제 시행 — 무단통치의 일상적 통제,policy,1910.js,False
+person_1910_01,순종 — 대한제국 마지막 황제,person,1910.js,False
+person_1910_02,데라우치 마사타케 — 초대 조선총독,person,1910.js,False
+migration_1910_01,하와이 한인 이주 — 사탕수수밭의 첫 디아스포라,migration,1910.js,False
+migration_1910_02,멕시코 애니깽 — 속아서 건너간 노예 이민,migration,1910.js,False
+migration_1910_03,중국 조선족 — 간도에 뿌리내린 공동체,migration,1910.js,False
+plot_1911_01,105인 사건 — 신민회 와해,plot,1911.js,False
+policy_1911_01,제1차 조선교육령 공포 — 차별 학제의 시작,policy,1911.js,False
+policy_1912_01,토지조사령 공포,policy,1912.js,False
+policy_1912_02,조선태형령 시행 — 일상 속의 신체형,policy,1912.js,False
+organization_1912_01,대한독립의군부 조직,organization,1912.js,False
+organization_1913_02,송죽회 결성 — 여성 비밀결사,organization,1913.js,False
+organization_1914_02,대조선국민군단 — 하와이의 군사 양성,organization,1914.js,False
+person_1914_02,이동휘 — 무장투쟁과 사회주의의 길,person,1914.js,False
+person_1914_03,박용만 — 하와이 무장투쟁의 기수,person,1914.js,False
+person_1915_01,박상진 — 대한광복회 총사령,person,1915.js,False
+organization_1916_01,원불교 개교 — 민중 속의 자력 신앙,organization,1916.js,False
+organization_1918_01,한인사회당 결성 — 한국 최초의 사회주의 정당,organization,1918.js,False
+movement_1919_01,2·8 독립선언 — 도쿄 유학생들의 외침,movement,1919.js,False
+movement_1919_04,평양 만세운동,movement,1919.js,False
+movement_1919_05,대구 만세운동,movement,1919.js,False
+movement_1919_06,원산 만세운동,movement,1919.js,False
+movement_1919_07,조천 만세운동 — 제주의 독립선언,movement,1919.js,False
+movement_1919_08,발안 장날 만세시위 — 제암리 학살의 전조,movement,1919.js,False
+political_1919_01,대한민국 임시정부 수립,political,1919.js,False
+person_1919_04,하세가와 요시미치 — 3·1운동을 진압한 총독,person,1919.js,False
+person_1919_05,스코필드 — 3·1운동의 서른네 번째 민족대표,person,1919.js,False
+massacre_1920_01,간도 참변 (경신참변),massacre,1920.js,False
+plot_1920_01,훈춘 사건,plot,1920.js,False
+battle_1920_04,삼둔자 전투,battle,1920.js,False
+political_1920_01,동아·조선일보 창간,political,1920.js,False
+battle_1920_05,독립군 밀산 집결,battle,1920.js,False
+policy_1920_01,산미증식계획 시작,policy,1920.js,False
+policy_1920_02,일본·국제 정세,policy,1920.js,False
+massacre_1920_02,연해주 4월참변 (신한촌 사건),massacre,1920.js,False
+plot_1920_02,니콜라옙스크 사건 (니항사건),plot,1920.js,False
+political_1920_02,영친왕-이방자 결혼과 폭탄 미수,political,1920.js,False
+political_1920_03,민원식 — 친일단체 국민협회 조직,political,1920.js,False
+movement_1920_01,조선물산장려운동 발족,movement,1920.js,False
+movement_1920_02,조선노동공제회 창립,movement,1920.js,False
+battle_1920_06,천마산대 — 국내 무장유격전,organization,1920.js,False
+battle_1920_07,보합단 — 평북 무장조직,organization,1920.js,False
+battle_1920_08,구월산대 — 황해도 무장조직,organization,1920.js,False
+battle_1920_09,블라디보스토크 무기 조달 루트,battle,1920.js,False
+policy_1920_03,회사령 폐지,policy,1920.js,False
+person_1920_09,박헌영 — 상하이에서 공산주의와 만나다,person,1920.js,False
+massacre_1921_01,자유시 참변 (흑하사변),massacre,1921.js,False
+political_1921_02,군사통일주비회 — 임정 해산 요구,political,1921.js,False
+political_1921_03,워싱턴 회의 — 외교독립의 좌절,political,1921.js,False
+righteous_1921_01,민원식 암살 — 양근환 의거,righteous,1921.js,False
+policy_1921_01,문화통치 본격화 — 회유와 분열,policy,1921.js,False
+policy_1921_02,시베리아 출병 철수 시작,policy,1921.js,False
+migration_1921_02,대한독립군단 해체,migration,1921.js,False
+political_1921_04,고려공산당 분립 — 상해파와 이르쿠츠크파,political,1921.js,False
+movement_1921_01,부산부두 노동자 총파업,movement,1921.js,False
+person_1921_06,나혜석 — 한국 최초 여성 개인전,person,1921.js,False
+battle_1922_02,독립군 만주 귀환,battle,1922.js,False
+political_1922_02,국민대표회의 소집 운동,political,1922.js,False
+movement_1922_01,조선노동연맹회 결성,movement,1922.js,False
+movement_1922_02,형평사 전사(前史) — 백정 차별 철폐 움직임,movement,1922.js,False
+policy_1922_01,제2차 조선교육령 공포,policy,1922.js,False
+person_1922_04,박헌영 — 국내 잠입과 체포,person,1922.js,False
+political_1923_02,국민대표회의 개막,political,1923.js,False
+political_1923_03,국민대표회의 결렬,political,1923.js,False
+battle_1923_01,육군주만참의부 결성,organization,1923.js,False
+movement_1923_01,조선형평사 창립,movement,1923.js,False
+movement_1923_02,암태도 소작쟁의,movement,1923.js,False
+policy_1923_01,조선인 도일(渡日) 증가와 차별,policy,1923.js,False
+person_1923_03,강상호 — 양반이 백정과 함께 서다,person,1923.js,False
+battle_1924_01,정의부 결성,organization,1924.js,False
+movement_1924_01,조선노농총동맹 창립,movement,1924.js,False
+movement_1924_02,암태도 소작쟁의 승리,movement,1924.js,False
+policy_1924_01,경성제국대학 설립,policy,1924.js,False
+movement_1924_03,민립대학 설립운동,movement,1924.js,False
+battle_1925_01,신민부 결성,organization,1925.js,False
+policy_1925_01,미쓰야 협정,policy,1925.js,False
+political_1925_01,조선공산당 창당,political,1925.js,False
+policy_1925_02,치안유지법 시행,policy,1925.js,False
+political_1925_03,신의주사건 — 제1차 조선공산당 검거,political,1925.js,False
+movement_1925_02,을축년 대홍수,movement,1925.js,False
+political_1926_02,제2차 조선공산당 검거,political,1926.js,False
+political_1926_05,정우회 선언 — 민족협동전선의 길,political,1926.js,False
+political_1926_06,임시정부 — 국무령제 전환,political,1926.js,False
+person_1926_01,김창숙 — 의열투쟁의 자금줄,person,1926.js,False
+political_1927_01,신간회 창립 — 민족유일당,political,1927.js,False
+person_1927_03,정칠성 — 계급과 여성해방을 함께 외치다,person,1927.js,False
+political_1928_01,제3차 조선공산당 사건 — 마지막 당대회,political,1928.js,False
+movement_1928_01,신간회 전국 확장과 노선 갈등,movement,1928.js,False
+person_1928_02,박용만 — 베이징에서 피살,person,1928.js,False
+movement_1929_01,나주역 사건 — 광주학생운동의 불씨,movement,1929.js,False
+movement_1929_03,신간회 민중대회 사건,political,1929.js,False
+political_1929_01,당재건운동의 분파적 출발,political,1929.js,False
+political_1929_02,신간회 복대표대회 — 사회주의자의 약진,political,1929.js,False
+policy_1929_01,세계 대공황 발발,policy,1929.js,False
+person_1929_01,홍명희 — 신간회의 사상가,person,1929.js,False
+person_1930_01,김좌진 암살,plot,1930.js,False
+political_1930_01,신간회 해소론의 부상,political,1930.js,False
+movement_1930_01,광주학생운동의 여진 — 백지동맹과 3차 시위,movement,1930.js,False
+movement_1930_02,원산총파업,movement,1930.js,False
+person_1930_02,허정숙 — 옌안으로의 길,person,1930.js,False
+person_1930_03,강주룡 — 평원고무공장 파업과 을밀대 고공농성,person,1930.js,False
+political_1931_01,신간회 해체,political,1931.js,False
+plot_1931_01,만보산 사건,plot,1931.js,False
+massacre_1931_01,평양 화교 학살,massacre,1931.js,False
+plot_1931_02,류탸오후 사건 — 만주사변의 발화점,plot,1931.js,False
+policy_1931_01,만주사변 — 일본의 만주 침략,policy,1931.js,True
+political_1931_02,한인애국단 결성,political,1931.js,False
+political_1931_03,한국독립당·조선혁명당 창립,political,1931.js,False
+policy_1932_01,만주국 수립,policy,1932.js,False
+battle_1932_01,서란현 전투,battle,1932.js,False
+movement_1932_01,제주 해녀 항일운동,movement,1932.js,False
+battle_1933_02,동녕현성 전투 — 한중연합의 마지막 불꽃,battle,1933.js,False
+political_1933_01,한국독립군 해체와 임시정부 합류,political,1933.js,False
+political_1934_01,낙양군관학교 한인특별반 개설,political,1934.js,False
+political_1934_02,한국대일전선통일동맹의 모색,political,1934.js,False
+policy_1934_01,농촌진흥운동과 식민 동화의 심화,policy,1934.js,False
+policy_1935_01,신사참배 강요의 시작,policy,1935.js,False
+person_1935_02,주기철 — 신앙으로 맞선 저항,person,1935.js,False
+battle_1936_01,동북항일연군 결성,organization,1936.js,False
+political_1936_01,조국광복회 결성,political,1936.js,False
+person_1936_01,김일성 — 만주 항일연군의 청년 지휘관,person,1936.js,False
+organization_1936_01,관동군 방역부 발족 — 731부대의 출발점,organization,1936.js,False
+plot_1937_01,노구교 사건 — 중일전쟁 발발,plot,1937.js,False
+battle_1937_01,보천보 전투,battle,1937.js,False
+political_1937_01,한국광복운동단체연합회 결성,political,1937.js,False
+policy_1937_01,황국신민화 정책의 본격화,policy,1937.js,False
+migration_1937_01,연해주 한인 중앙아시아 강제이주,migration,1937.js,False
+policy_1938_01,국가총동원법 시행,policy,1938.js,True
+policy_1938_02,국민정신총동원조선연맹 결성 — 동원이 일상으로 들어오다,policy,1938.js,False
+plot_1938_01,남목청 사건 — 김구 피격,plot,1938.js,False
+organization_1938_01,간도특설대 창설,organization,1938.js,False
+political_1939_01,7당 통일회의 — 또 한 번의 좌절,political,1939.js,False
+political_1939_02,한국청년전지공작대 결성,organization,1939.js,False
+policy_1939_01,창씨개명령 공포,policy,1939.js,True
+policy_1939_03,사할린 조선인 강제동원 시작,policy,1939.js,False
+massacre_1939_01,간도특설대의 항일연군·민간인 살해,massacre,1939.js,False
+massacre_1939_02,731부대 핑팡 시설 완공과 생체실험,massacre,1939.js,False
+political_1940_01,한국독립당 통합 — 마침내 하나로,political,1940.js,False
+policy_1940_01,창씨개명 시행과 동아·조선일보 폐간,policy,1940.js,False
+policy_1941_01,진주만 공격 — 태평양전쟁 발발,policy,1941.js,False
+battle_1941_01,조선의용대 화북지대 결성,organization,1941.js,False
+battle_1941_02,호가장 전투,battle,1941.js,False
+political_1942_01,조선의용대의 광복군 편입과 김원봉의 임정 합류,political,1942.js,False
+battle_1942_01,조선의용군 — 화북지대의 재편,organization,1942.js,False
+battle_1943_01,인면전구공작대 파견,organization,1943.js,False
+policy_1943_01,학병제 시행 — 학생들의 강제 징집,policy,1943.js,False
+person_1943_01,백선엽 — 간도특설대 배속,person,1943.js,False
+person_1943_02,김창룡 — 관동군 헌병대 분견 근무,person,1943.js,False
+political_1944_02,임시정부 헌법 개정 — 주석·부주석제,political,1944.js,False
+battle_1945_01,독수리작전 — 광복군 국내정진군 편성,organization,1945.js,False
+policy_1945_04,결7호작전 — 제주의 본토결전 준비,policy,1945.js,False
+policy_1945_03,패전 직전 조선은행권 남발 — 마지막 약탈,policy,1945.js,False
+battle_1945_02,광복군 여의도 진입,battle,1945.js,False
+migration_1945_01,해외 한인의 귀환과 잔류,migration,1945.js,False
+migration_1945_03,사할린 한인 — 돌아오지 못한 4만 명,migration,1945.js,False
+political_1945_02,해방 직전 제주 — 끝내 터지지 못한 전장,political,1945.js,False
+international_1945_01,731부대 해체와 미국의 면책 거래,international,1945.js,False

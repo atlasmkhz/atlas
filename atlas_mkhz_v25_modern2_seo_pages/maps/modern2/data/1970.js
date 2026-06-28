@@ -1,0 +1,78 @@
+// data/1970.js — 1970년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1970.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1970 = [
+
+  { id:'massacre_1970_01', year:1970, visible_from:1970, visible_until:1970,
+    month:3, day:8, type:'massacre', priority:1,
+    title_ko:'와우아파트 붕괴 사고',
+    title_en:'The Wow Apartment Collapse',
+    title_ja:'臥牛アパート崩壊事故',
+    place_ko:'서울 마포구 창전동',
+    lat:37.547, lng:126.933,
+    people:[],
+    summary_ko:'1970년 4월 8일 마포구 창전동 와우시민아파트 15동이 붕괴해 33명이 사망하고 39명이 부상했다. 무허가 건물을 없애고 서민에게 저렴한 주거를 제공하겠다는 취지로 지어진 아파트였지만, 책정 비용의 절반도 안 되는 돈으로 6개월 만에 날림 시공됐다. 필요한 철근 70개 중 5개만 사용됐을 정도였다. 완공 4개월 만에 무너진 이 사고는, 고도성장을 향한 무리한 속도전이 시민의 생명을 직접 위협하는 부실로 이어진 1960~70년대 한국 개발의 어두운 단면을 압축해서 보여줬다.',
+    video:null,
+    connections:[],
+    tags:['massacre','서울','와우아파트붕괴','부실공사'],
+    sources:['한국민족문화대백과사전 와우아파트붕괴사고','인천투데이 오늘의역사와우아파트'] },
+
+  { id:'policy_1970_01', year:1970, visible_from:1968, visible_until:1970,
+    month:6, day:7, type:'policy', priority:1,
+    title_ko:'경부고속도로 개통',
+    title_en:'Opening of the Gyeongbu Expressway',
+    title_ja:'京釜高速道路開通',
+    place_ko:'대구 (개통식)',
+    lat:35.871, lng:128.601,
+    people:['박정희'],
+    summary_ko:'1968년 2월 1일 착공된 경부고속도로가 2년 5개월 만인 1970년 7월 7일 전 구간(428km) 개통됐다. 서울과 부산을 잇는 이 "국토의 대동맥"은 한국 최초의 장거리 고속도로로, 건설 과정에서 77명의 인부가 목숨을 잃을 만큼 무리한 속도로 추진됐다. 완공 당시 "서울에서 아침 먹고 부산에서 점심 먹는다"는 말이 생겼을 만큼 국토의 시간적 거리를 압축시켰고, 1970년대 산업화와 지역 균형 발전의 상징적 인프라가 됐다. 전태일의 분신과 함께 1970년대를 상징하는 명(明)과 암(暗)의 양면으로 꼽힌다.',
+    video:null,
+    connections:[],
+    tags:['policy','대구','경부고속도로','박정희','산업화'],
+    sources:['우리역사넷 경부고속도로개통','위키백과 경부고속도로의역사'] },
+
+  { id:'policy_1970_02', year:1970, visible_from:1970, visible_until:1972,
+    month:3, day:22, type:'policy', priority:1,
+    title_ko:'새마을가꾸기 사업 시작',
+    title_en:'Launch of the Saemaul Village Improvement Project',
+    title_ja:'セマウル(新しい村)づくり事業開始',
+    place_ko:'전국 농촌',
+    lat:36.5, lng:127.8,
+    people:['박정희'],
+    summary_ko:'1970년 4월 22일 박정희가 전국지방장관회의에서 "새마을가꾸기"를 처음 언급하며 새마을운동이 시작됐다. 과잉 생산된 시멘트를 활용해 1970~1971년 겨울 농한기 동안 전국 3만 3천여 마을에 시멘트 335부대씩 무상 지원해 마을 안길 확장, 공동빨래터·우물 설치 등 환경 개선 사업을 벌였다. 1969년 3선 개헌과 1971년 대선을 앞두고 농촌의 전통적 지지 기반을 관리하려는 정치적 동기가 짙게 깔려 있었다. 이듬해 근면·자조·협동이 새마을정신으로 공식화되며, 1972년부터는 전국민적 운동으로 확장된다.',
+    video:null,
+    connections:['political_1969_02'],
+    tags:['policy','전국','새마을운동','박정희','농촌개발'],
+    sources:['우리역사넷 새마을운동','국가기록원 새마을운동기록물'] },
+
+  { id:'person_1970_01', year:1970, visible_from:1970, visible_until:1970,
+    month:10, day:13, type:'person', priority:1,
+    title_ko:'전태일 분신',
+    title_en:'The Self-Immolation of Jeon Tae-il',
+    title_ja:'全泰壹焼身',
+    place_ko:'서울 (평화시장)',
+    lat:37.566, lng:127.013,
+    people:['전태일','이소선'],
+    summary_ko:'평화시장 재단사 전태일은 1969년 "바보회", 1970년 "삼동친목회"를 조직해 봉제 노동자들의 열악한 노동환경 개선을 정부에 호소했지만 받아들여지지 않았다. 1970년 11월 13일, 근로기준법 책을 불태우는 "화형식"과 함께 시위를 벌이려다 경찰에 강제해산되자, 전태일은 자신의 몸에 휘발유를 끼얹고 불을 붙이며 "근로기준법을 준수하라", "우리는 기계가 아니다"를 외쳤다. 같은 날 밤 "배고프다"는 마지막 말을 남기고 22세로 사망했다. 그의 죽음으로 청계피복노동조합이 결성되고 학생·종교계의 추도 운동이 일며, 경제성장 우선주의에 가려졌던 노동자의 현실이 처음으로 사회 전면에 드러났다.',
+    video:null,
+    connections:['policy_1970_01'],
+    tags:['person','서울','전태일','분신','노동운동'],
+    sources:['한국민족문화대백과사전 전태일분신자살사건','위키백과 전태일'] },
+
+  { id:'movement_1970_01', year:1970, visible_from:1970, visible_until:1971,
+    month:10, day:2, type:'movement', priority:2,
+    title_ko:'교련 강화 반대 운동의 시작',
+    title_en:'Beginning of the Movement against Strengthened Military Training',
+    title_ja:'教練強化反対運動の始まり',
+    place_ko:'서울 (연세대)',
+    lat:37.566, lng:126.939,
+    people:[],
+    summary_ko:'3선개헌 이후 정부가 학원을 "병영화"한다는 비판 속에, 1970년 11월 3일 서울 5개 대학 총학생회가 교련 강화 반대 공동선언을 발표했다. 12월 2일 연세대 학생들이 첫 반대 시위를 시작했고, 정부가 내놓은 개선안마저 교련 수업을 전체 수업의 20%까지 늘리는 강화된 내용이어서 반발이 더 커졌다. 학생들은 교련 강화가 이듬해 선거를 앞두고 학생들의 정치 참여를 막으려는 의도라고 봤다. 1971년 봄 전국 대학으로 확산될 교련철폐투쟁의 시작이었다.',
+    video:null,
+    connections:[],
+    tags:['movement','서울','교련반대운동','학원병영화'],
+    sources:['나무위키 민주화운동대한민국'] }
+
+];

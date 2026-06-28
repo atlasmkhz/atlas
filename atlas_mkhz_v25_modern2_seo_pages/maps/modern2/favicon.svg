@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- ATLAS by MKHZ favicon: 나침반 + 지도 테두리 심볼 (사진 미사용).
+       팔레트는 css/style.css의 ink색(어두운 잉크) 금색 종이색과 동일하게 맞춰
+       지도 UI와 색감이 이어지도록 했다. -->
+  <circle cx="32" cy="32" r="30" fill="#1a1714" stroke="#b89860" stroke-width="2"/>
+  <circle cx="32" cy="32" r="23" fill="none" stroke="#b89860" stroke-width="1" stroke-dasharray="2.2 3.4" opacity="0.55"/>
+  <!-- 나침반 니들: 세로(주축, 골드) + 가로(보조축, 페이퍼톤) -->
+  <path d="M32 9 L38.5 32 L32 55 L25.5 32 Z" fill="#b89860"/>
+  <path d="M9 32 L32 26.5 L55 32 L32 37.5 Z" fill="#e8e0d0" opacity="0.85"/>
+  <circle cx="32" cy="32" r="3.2" fill="#e8e0d0"/>
+</svg>

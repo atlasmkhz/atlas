@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>타일 비교 프로토타입 — legacy(가리개) vs world(no-label+overlay)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  html,body{margin:0;height:100%;font-family:sans-serif;background:#111;}
+  .wrap{display:flex;flex-direction:column;height:100%;}
+  .row{display:flex;flex:1;min-height:0;}
+  .col{flex:1;position:relative;border:2px solid #444;}
+  .col h3{position:absolute;top:0;left:0;z-index:1000;background:#000;color:#fff;
+    margin:0;padding:6px 12px;font-size:13px;}
+  .map{position:absolute;inset:0;top:30px;}
+  .controls{padding:8px;background:#222;color:#ddd;font-size:12px;display:flex;gap:12px;align-items:center;}
+  .controls button{cursor:pointer;padding:4px 10px;}
+  .label-overlay{white-space:nowrap;transform:translate(-50%,-50%);font-size:12px;
+    letter-spacing:2px;color:rgba(180,200,220,0.95);
+    text-shadow:0 0 4px #000,0 0 2px #000;pointer-events:none;font-weight:500;}
+  .city-overlay{white-space:nowrap;transform:translate(-50%,-50%);font-size:10px;
+    color:rgba(220,220,220,0.9);text-shadow:0 0 3px #000;pointer-events:none;}
+  .dokdo-dot{width:6px;height:6px;border-radius:50%;background:#e8e0d0;
+    border:1px solid rgba(0,0,0,0.4);}
+  #fpsLegacy, #fpsWorld { font-weight:bold; color:#9f9; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="controls">
+    <span>줌 레벨 동기화 테스트:</span>
+    <button onclick="setZoom(4)">z4</button>
+    <button onclick="setZoom(5)">z5</button>
+    <button onclick="setZoom(6)">z6</button>
+    <button onclick="setZoom(7)">z7</button>
+    <button onclick="setZoom(8)">z8</button>
+    <button onclick="setZoom(9)">z9</button>
+    <button onclick="setZoom(10)">z10</button>
+    <button onclick="setZoom(11)">z11</button>
+    <span>|</span>
+    <span>legacy 타일 로드: <span id="fpsLegacy">측정중...</span></span>
+    <span>world 타일 로드: <span id="fpsWorld">측정중...</span></span>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>A. legacy — dark_all (라벨 포함) + seaLabelMask 가리개</h3>
+      <div id="mapA" class="map"></div>
+    </div>
+    <div class="col">
+      <h3>B. world — dark_nolabels (라벨 없음) + 직접 오버레이 4개</h3>
+      <div id="mapB" class="map"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const CENTER = [37.5, 133.0];
+const START_ZOOM = 6;
+
+// ── A. legacy 방식 (현행 코드와 동일한 구조) ──
+const mapA = L.map('mapA', {
+  center: CENTER, zoom: START_ZOOM,
+  attributionControl: false, minZoom: 4, maxZoom: 11
+});
+let tLegacyStart = performance.now();
+const tileA = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  maxZoom: 11, noWrap: true, subdomains: 'abcd', crossOrigin: true
+}).addTo(mapA);
+tileA.on('load', () => {
+  document.getElementById('fpsLegacy').textContent =
+    Math.round(performance.now() - tLegacyStart) + 'ms (타일셋 1회 로드)';
+});
+
+// 현행 코드와 동일한 가리개 + 라벨
+L.rectangle([[39.0, 129.8], [41.0, 133.2]],
+  { color:'transparent', weight:0, fillColor:'#3a3f42', fillOpacity:1, interactive:false }
+).addTo(mapA);
+L.marker([39.8, 131.5], {
+  icon: L.divIcon({ className:'', iconSize:[0,0],
+    html:'<div class="label-overlay">동해 East Sea</div>' }),
+  interactive:false
+}).addTo(mapA);
+L.marker([37.2417, 131.8639], {
+  icon: L.divIcon({ className:'', iconSize:[6,6], iconAnchor:[3,3],
+    html:'<div class="dokdo-dot"></div>' })
+}).addTo(mapA).bindTooltip('독도');
+
+// ── B. world 방식 (no-label 타일 + 직접 오버레이) ──
+const mapB = L.map('mapB', {
+  center: CENTER, zoom: START_ZOOM,
+  attributionControl: false, minZoom: 4, maxZoom: 11
+});
+let tWorldStart = performance.now();
+const tileB = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+  maxZoom: 11, noWrap: true, subdomains: 'abcd', crossOrigin: true,
+  errorTileUrl: '' // 실패 시 빈 타일 — 콘솔에서 네트워크 오류 확인 가능
+}).addTo(mapB);
+let worldTileLoaded = false;
+let worldTileError = false;
+tileB.on('load', () => {
+  worldTileLoaded = true;
+  document.getElementById('fpsWorld').textContent =
+    Math.round(performance.now() - tWorldStart) + 'ms (타일셋 1회 로드)';
+});
+tileB.on('tileerror', (e) => {
+  worldTileError = true;
+  document.getElementById('fpsWorld').textContent = '⚠ 타일 로드 실패 (dark_nolabels 접근 불가)';
+  console.error('dark_nolabels 타일 로드 실패:', e);
+});
+
+// 직접 그리는 4개 라벨: 동해, 독도, 서울, 도쿄
+L.marker([39.8, 131.5], {
+  icon: L.divIcon({ className:'', iconSize:[0,0],
+    html:'<div class="label-overlay">동해 East Sea</div>' }),
+  interactive:false
+}).addTo(mapB);
+L.marker([37.2417, 131.8639], {
+  icon: L.divIcon({ className:'', iconSize:[6,6], iconAnchor:[3,3],
+    html:'<div class="dokdo-dot"></div>' })
+}).addTo(mapB).bindTooltip('독도 Dokdo');
+L.marker([37.5665, 126.9780], {
+  icon: L.divIcon({ className:'', iconSize:[0,0],
+    html:'<div class="city-overlay">서울 Seoul</div>' }),
+  interactive:false
+}).addTo(mapB);
+L.marker([35.6762, 139.6503], {
+  icon: L.divIcon({ className:'', iconSize:[0,0],
+    html:'<div class="city-overlay">도쿄 Tokyo</div>' }),
+  interactive:false
+}).addTo(mapB);
+
+// ── 줌 동기화 ──
+function setZoom(z){ mapA.setZoom(z); mapB.setZoom(z); }
+mapA.on('zoomend', () => { if (mapB.getZoom() !== mapA.getZoom()) mapB.setZoom(mapA.getZoom()); });
+mapB.on('zoomend', () => { if (mapA.getZoom() !== mapB.getZoom()) mapA.setZoom(mapB.getZoom()); });
+mapA.on('moveend', () => { if (!mapB.getCenter().equals(mapA.getCenter())) mapB.setView(mapA.getCenter(), mapA.getZoom()); });
+mapB.on('moveend', () => { if (!mapA.getCenter().equals(mapB.getCenter())) mapA.setView(mapB.getCenter(), mapB.getZoom()); });
+
+// 10초 후 world 타일 결과 콘솔 요약 (자동 진단용)
+setTimeout(() => {
+  console.log('=== world 모드(dark_nolabels) 접근성 진단 ===');
+  console.log('타일 로드 성공:', worldTileLoaded);
+  console.log('타일 로드 에러 발생:', worldTileError);
+  if (!worldTileLoaded && !worldTileError) {
+    console.warn('10초 경과했으나 load/error 이벤트 모두 없음 — 네트워크 차단 또는 무한 대기 의심');
+  }
+}, 10000);
+</script>
+</body>
+</html>

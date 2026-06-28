@@ -1,0 +1,78 @@
+// data/1954.js — 1954년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1954.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1954 = [
+
+  { id:'political_1954_01', year:1954, visible_from:1954, visible_until:1954,
+    month:3, day:26, type:'political', priority:1,
+    title_ko:'제네바 정치회담 — 통일 논의의 마지막 기회',
+    title_en:'The Geneva Political Conference',
+    title_ja:'ジュネーブ政治会談',
+    place_ko:'스위스 제네바',
+    lat:46.204, lng:6.143,
+    people:['변영태'],
+    summary_ko:'정전협정에 따라 1954년 4월 26일부터 6월 15일까지 한국을 포함한 유엔 참전국과 북한·중국·소련 등 19개국이 제네바에 모여 한반도 통일방안을 논의했다. 변영태 외무장관이 이끈 한국 대표단은 회담 참여 자체에 소극적이었지만 미국의 권고로 참석했다. 외국군 철수와 남북 동시선거 등 다양한 방안이 50여 일간 논의됐지만, 남북 양측의 근본적 입장차로 어떤 합의도 이루지 못한 채 결렬됐다. 전쟁 직후 한반도 문제를 평화적으로 해결할 마지막 국제적 기회가 사라지며, 분단은 정전체제 아래 더 굳게 제도화됐다.',
+    video:null,
+    connections:['political_1953_02'],
+    tags:['political','제네바','제네바정치회담','통일논의'],
+    sources:['한국민족문화대백과사전 제네바회담','우리역사넷 제네바회담'] },
+
+  { id:'political_1954_02', year:1954, visible_from:1954, visible_until:1954,
+    month:4, day:19, type:'political', priority:2,
+    title_ko:'제3대 민의원 선거 — 개헌 의석 확보',
+    title_en:'The 3rd National Assembly Election',
+    title_ja:'第三代民議院選挙',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:['이승만'],
+    summary_ko:'1954년 5월 20일 치러진 제3대 민의원 선거에서 자유당이 원내 압도적 다수를 차지했다. 이승만은 이 선거 결과를 발판으로 초대 대통령에 한해 3선 중임 제한을 철폐하는 개헌안을 발의했다. 종신 집권을 향한 제도적 정비가 선거라는 절차를 거쳐 추진되기 시작한 시점으로, 1952년 부산 정치파동에서 시작된 권력 연장의 흐름이 이 선거를 계기로 한 단계 더 나아가게 됐다.',
+    video:null,
+    connections:['political_1954_03'],
+    tags:['political','전국','제3대민의원선거','자유당','이승만'],
+    sources:['우리역사넷 진보당사건공판'] },
+
+  { id:'political_1954_03', year:1954, visible_from:1954, visible_until:1954,
+    month:10, day:27, type:'political', priority:1,
+    title_ko:'사사오입 개헌',
+    title_en:'The "Rounding Off" Constitutional Amendment',
+    title_ja:'四捨五入改憲',
+    place_ko:'서울 (국회)',
+    lat:37.566, lng:126.978,
+    people:['이승만'],
+    summary_ko:'1954년 11월 27일 국회는 초대 대통령의 3선 중임 제한 철폐를 담은 개헌안을 표결에 부쳤으나, 재적 203명 중 135표 찬성으로 개헌 정족수(136명)에 1표가 모자라 부결됐다. 그러나 이승만과 자유당은 이틀 뒤인 11월 29일, 재적 인원의 3분의 2는 135.333…이므로 사사오입(四捨五入)하면 135명이 정족수라는 억지 논리를 내세워 부결을 번복하고 가결을 선언했다. 명백한 수학적 조작을 통해 헌법을 고친 이 사건은, 발췌개헌에 이어 또 한 번 절차적 정당성을 무너뜨리며 영구집권의 길을 텄다.',
+    video:null,
+    connections:['political_1954_02','organization_1954_01'],
+    tags:['political','서울','사사오입개헌','이승만','3선개헌'],
+    sources:['우리역사넷 진보당사건공판','나무위키 1954년'] },
+
+  { id:'organization_1954_01', year:1954, visible_from:1954, visible_until:1955,
+    month:10, day:29, type:'organization', priority:2,
+    title_ko:'호헌동지회 결성',
+    title_en:'Formation of the Constitutional Defense Group',
+    title_ja:'護憲同志会結成',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    summary_ko:'사사오입 개헌에 반발해 1954년 11월 30일 민국당 의원, 자유당 탈당파, 무소속 의원들이 모여 호헌동지회를 결성했다. 헌정 질서를 지키겠다는 뜻을 모은 이 모임은 반이승만·반자유당 세력이 결집하는 출발점이 됐고, 이듬해 민주당 창당으로 이어진다. 그러나 조봉암 등 혁신계 인사는 이 신당 창당 과정에서 배제되며, 이후 그가 독자적으로 진보당을 결성하게 되는 정치적 배경이 만들어졌다.',
+    video:null,
+    connections:['political_1954_03'],
+    tags:['organization','서울','호헌동지회','반자유당'],
+    sources:['나무위키 1954년','경향신문 진보당사건과조봉암'] },
+
+  { id:'organization_1954_02', year:1954, visible_from:1954, visible_until:1956,
+    month:3, day:20, type:'organization', priority:2, area:true, areaRadius:5000,
+    title_ko:'독도의용수비대',
+    title_en:'The Dokdo Volunteer Defense Corps',
+    title_ja:'独島義勇守備隊',
+    place_ko:'독도',
+    lat:37.242, lng:131.868,
+    people:['홍순칠'],
+    summary_ko:'1954년 4월 울릉도 주민들이 일본 해상보안청의 독도 접근에 맞서 독도자위대(이후 독도의용수비대로 불림)를 결성했다. 정부는 경찰을 통해 총기와 탄약을 지원했고, 8월에는 독도에 경비초사와 영토 표석을 세웠다. 11월에는 일본 해상보안청 함정과의 교전("독도대첩")까지 벌어지며 영유권 수호 의지를 분명히 보였다. 1954년 말 대원 다수가 경찰관으로 특채되며 활동은 사실상 마무리됐지만, 전후 한국 사회가 영토 주권 문제에 얼마나 민감했는지를 보여주는 사건으로 남았다.',
+    video:null,
+    connections:[],
+    tags:['organization','독도','독도의용수비대','영토주권'],
+    sources:['미디어오늘 독도의용수비대','나무위키 1954년'] }
+
+];

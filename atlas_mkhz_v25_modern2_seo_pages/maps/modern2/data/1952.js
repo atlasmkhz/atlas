@@ -1,0 +1,78 @@
+// data/1952.js — 1952년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1952.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1952 = [
+
+  { id:'political_1952_01', year:1952, visible_from:1952, visible_until:1952,
+    month:4, day:null, type:'political', priority:1,
+    title_ko:'부산 정치파동',
+    title_en:'Busan Political Crisis',
+    title_ja:'釜山政治波動',
+    place_ko:'부산 (임시수도)',
+    lat:35.180, lng:129.075,
+    people:['이승만'],
+    summary_ko:'전쟁으로 정부가 부산에 피란해 있던 1952년, 국회 간선으로는 재선이 어렵다고 판단한 이승만은 직선제 개헌을 밀어붙였다. 국회가 개헌안을 거부하자 5월 부산 일대에 비상계엄을 선포하고 국회의원 다수를 헌병대로 강제 연행해 구금했다. 전쟁 중 임시수도에서 벌어진 이 폭력적인 정치 파동은 국제사회의 우려까지 샀다. 결국 7월 4일 국회는 직선제를 포함한 개헌안(발췌개헌)을 강제 분위기 속에서 통과시켰다. 전쟁의 위기를 정권 연장의 발판으로 이용한, 한국 헌정사 최초의 헌법 파괴적 사건이었다.',
+    video:null,
+    connections:['political_1948_01','political_1952_02'],
+    tags:['political','부산','부산정치파동','이승만','발췌개헌'],
+    sources:['한국민족문화대백과사전 부산정치파동'] },
+
+  { id:'political_1952_02', year:1952, visible_from:1952, visible_until:1952,
+    month:7, day:4, type:'political', priority:2,
+    title_ko:'발췌개헌 — 대통령 직선제 도입',
+    title_en:'Abridged Constitutional Amendment',
+    title_ja:'抜萃改憲',
+    place_ko:'부산',
+    lat:35.180, lng:129.075,
+    people:[],
+    summary_ko:'부산 정치파동 끝에 국회는 1952년 7월 4일 대통령 직선제와 양원제를 골자로 한 개헌안을 통과시켰다. "발췌개헌"이라는 이름은 여러 개헌안 중 일부 조항만 발췌해 절충했다는 뜻에서 붙었지만, 실상은 계엄과 의원 구금이라는 위협 아래 강제로 통과된 것이었다. 이 개헌으로 국민 직접 투표에 의한 대통령 선출이 가능해지면서, 이승만은 같은 해 8월 실시된 선거에서 재선에 성공한다. 절차적 정당성을 잃은 개헌이 장기집권의 제도적 발판이 된 첫 사례였다.',
+    video:null,
+    connections:['political_1952_01','political_1952_03'],
+    tags:['political','부산','발췌개헌','직선제'],
+    sources:['한국민족문화대백과사전 발췌개헌'] },
+
+  { id:'political_1952_03', year:1952, visible_from:1952, visible_until:1952,
+    month:7, day:5, type:'political', priority:2,
+    title_ko:'이승만 제2대 대통령 재선',
+    title_en:'Syngman Rhee Re-elected as President',
+    title_ja:'李承晩、第二代大統領に再選',
+    place_ko:'부산',
+    lat:35.180, lng:129.075,
+    people:['이승만'],
+    summary_ko:'발췌개헌으로 도입된 직선제에 따라 1952년 8월 5일 실시된 선거에서 이승만이 압도적인 득표율로 재선에 성공했다. 전쟁이 한창인 가운데 치러진 이 선거는 임시수도 부산에서 진행됐다. 이승만은 이 선거로 정권의 정당성을 일정 부분 회복했지만, 그 과정 자체가 정치파동이라는 헌정 파괴를 거친 것이었다는 점에서 이후 장기집권 논란의 씨앗을 남겼다. 전쟁의 혼란 속에서도 권력은 멈추지 않고 스스로를 재생산하고 있었다.',
+    video:null,
+    connections:['political_1952_02'],
+    tags:['political','부산','이승만','대통령선거'],
+    sources:['한국민족문화대백과사전 이승만'] },
+
+  { id:'political_1952_04', year:1952, visible_from:1952, visible_until:1952,
+    month:4, day:null, type:'political', priority:1, area:true, areaRadius:5000,
+    title_ko:'거제포로수용소 폭동',
+    title_en:'Geoje POW Camp Riots',
+    title_ja:'巨済捕虜収容所暴動',
+    place_ko:'경남 거제도',
+    lat:34.88, lng:128.62,
+    people:[],
+    summary_ko:'거제도에 수용된 북한군·중국군 포로 가운데 공산주의 신념을 지킨 포로들이 1952년 초부터 수용소 곳곳에서 폭동을 일으켰다. 5월에는 친공포로들이 수용소장 프랜시스 도드 준장을 납치해 인질로 잡는 사건까지 벌어져, 미군이 전차를 동원해 강제 진압하기까지 했다. 이 혼란은 휴전회담의 최대 난제였던 포로 송환 문제 — 본국 송환을 원치 않는 반공포로를 어떻게 처리할 것인가 — 를 그대로 드러낸 사건이었다. 포로수용소가 전선 못지않은 또 하나의 전장이 됐음을 보여줬다.',
+    video:null,
+    connections:['political_1951_01'],
+    tags:['political','거제','거제포로수용소','포로송환'],
+    sources:['한국민족문화대백과사전 거제포로수용소'] },
+
+  { id:'battle_1952_01', year:1952, visible_from:1952, visible_until:1952,
+    month:9, day:6, type:'battle', priority:1,
+    title_ko:'백마고지 전투',
+    title_en:'Battle of White Horse Hill',
+    title_ja:'白馬高地の戦い',
+    place_ko:'강원도 철원 (395고지)',
+    lat:38.15, lng:127.20,
+    people:[],
+    summary_ko:'1952년 10월 강원도 철원의 395고지(백마고지)를 둘러싸고 국군 제9사단과 중공군 38군이 열흘간 처절한 고지 쟁탈전을 벌였다. 고지의 주인이 12차례나 바뀔 정도로 치열했던 이 전투에서 국군은 결국 고지를 확보했다. 휴전회담이 진행되는 동안에도 군사분계선을 자국에 유리하게 그으려는 양측의 고지전이 계속됐고, 백마고지는 그 가운데 가장 격렬했던 전투로 꼽힌다. 포격으로 산의 형태가 백마처럼 패였다는 데서 이름이 붙었다는 이야기가 전해진다.',
+    video:null,
+    connections:['political_1951_01'],
+    tags:['battle','철원','백마고지전투','고지전'],
+    sources:['전쟁기념관 6·25전쟁','국가기록원 6·25전쟁 연표'] }
+
+];

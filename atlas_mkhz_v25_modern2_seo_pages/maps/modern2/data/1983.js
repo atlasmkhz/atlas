@@ -1,0 +1,78 @@
+// data/1983.js — 1983년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1983.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1983 = [
+
+  { id:'political_1983_01', year:1983, visible_from:1983, visible_until:1983,
+    month:7, day:31, type:'political', priority:2,
+    title_ko:'중국 민항기 불시착 사건',
+    title_en:'Forced Landing of a Chinese Civil Aircraft',
+    title_ja:'中国民航機不時着事件',
+    place_ko:'강원 춘천',
+    lat:37.881, lng:127.730,
+    people:[],
+    summary_ko:'1983년 5월 5일 중국 민항기가 6명의 무장 납치범에 의해 공중 납치돼, 당시 적대국이던 한국의 춘천 공군기지에 불시착했다. 수교가 없던 한중 양국이 이 사건을 계기로 처음으로 직접 협상 테이블에 마주 앉았고, 협상은 원만하게 타결돼 승객과 승무원이 무사히 귀환했다. 냉전 구도 속에서 외교 관계가 없던 두 나라가 실질적으로 접촉한 이례적 사례로, 이후 한중 관계 개선의 작은 물줄기가 되었다는 평가를 받는다.',
+    video:null,
+    connections:[],
+    tags:['political','춘천','중국민항기불시착','한중관계'],
+    sources:['위키백과 1983년'] },
+
+  { id:'political_1983_02', year:1983, visible_from:1983, visible_until:1983,
+    month:8, day:1, type:'political', priority:1,
+    title_ko:'대한항공 007편 격추 사건',
+    title_en:'The Korean Air Lines Flight 007 Shootdown',
+    title_ja:'大韓航空007便撃墜事件',
+    place_ko:'사할린 모네론섬 인근',
+    lat:46.55, lng:141.30,
+    people:[],
+    summary_ko:'1983년 9월 1일 뉴욕에서 김포로 향하던 대한항공 007편이 항로를 이탈해 소련 영공에 진입했다가, 소련 방공군 전투기의 미사일 공격을 받고 사할린 인근 해상에 추락했다. 한국인 105명을 포함해 16개국 269명 전원이 사망했다. 블랙박스를 회수하지 못해 영공 침범의 정확한 원인은 끝내 의혹으로 남았다. 미국은 이 사건을 냉전 선전전에 적극 활용했고, 한국에서는 사건 발생 한 달여 만에 아웅산 테러가 터지며 국민적 충격이 연쇄적으로 이어졌다.',
+    video:null,
+    connections:[],
+    tags:['political','사할린','대한항공007편격추사건','냉전'],
+    sources:['위키백과 대한항공007편격추사건','한국민족문화대백과사전 칼기피격사건'] },
+
+  { id:'person_1983_01', year:1983, visible_from:1983, visible_until:1983,
+    month:9, day:9, type:'person', priority:1,
+    title_ko:'아웅산 묘소 테러 사건',
+    title_en:'The Rangoon Bombing',
+    title_ja:'アウンサン廟爆破テロ事件',
+    place_ko:'미얀마 양곤 (아웅산 묘소)',
+    lat:16.794, lng:96.142,
+    people:['전두환','서석준','이범석'],
+    summary_ko:'1983년 10월 9일 전두환의 동남아·대양주 순방 중, 미얀마 양곤 아웅산 묘소에 북한 공작원이 설치한 폭탄이 터졌다. 대통령 도착이 지연된 것을 모른 공작원이 예행연습 음악을 듣고 오인 폭파한 덕에 전두환은 화를 면했지만, 서석준 부총리·이범석 외무부장관·김재익 경제수석 등 정부 수행원 17명이 현장에서 사망했다. 미얀마는 한 달 만에 북한의 소행임을 공식 발표하고 북한과 단교했으며, 세계 60여개국이 대북 제재에 동참했다. 정권 핵심 경제·외교 인력을 한순간에 잃은 이 사건은 5공화국 최대의 안보 위기로 기록된다.',
+    video:null,
+    connections:['political_1983_02'],
+    tags:['person','양곤','아웅산테러','전두환','북한공작원'],
+    sources:['위키백과 아웅산묘역테러사건','한국민족문화대백과사전 버마암살폭파사건'] },
+
+  { id:'movement_1983_01', year:1983, visible_from:1983, visible_until:1983,
+    month:5, day:30, type:'movement', priority:2,
+    title_ko:'KBS 이산가족찾기 생방송',
+    title_en:'The KBS Live Broadcast Reuniting Separated Families',
+    title_ja:'KBS離散家族探し生放送',
+    place_ko:'서울 (여의도 KBS)',
+    lat:37.524, lng:126.918,
+    people:[],
+    summary_ko:'1983년 6월 30일부터 11월 14일까지 KBS 1TV가 6·25전쟁으로 헤어진 이산가족을 찾아주는 특별 생방송을 138일간 이어갔다. 여의도 KBS 사옥 벽면은 가족을 찾는 메모로 가득 뒤덮였고, 1만여 건의 상봉이 이뤄지며 전국이 눈물과 감동에 휩싸였다. 분단의 고통이 여전히 현재진행형임을 가장 가시적으로 보여준 이 방송은, 2015년 유네스코 세계기록유산으로 등재되며 한국 현대사의 상징적인 장면으로 남았다.',
+    video:null,
+    connections:[],
+    tags:['movement','서울','이산가족찾기','KBS','분단'],
+    sources:['위키백과 1983년'] },
+
+  { id:'policy_1983_01', year:1983, visible_from:1983, visible_until:1984,
+    month:11, day:21, type:'policy', priority:1,
+    title_ko:'학원자율화조치',
+    title_en:'The Campus Autonomy Measure',
+    title_ja:'学園自律化措置',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['전두환'],
+    summary_ko:'1983년 12월 21일 전두환 정부는 학원자율화조치를 발표해 긴급조치·유신체제 시기 해직된 교수와 제적된 학생들의 복교·복직을 허용했다. 강경 통치 일변도였던 5공 초기에서 벗어나 유화 국면을 조성하려는 시도였지만, 이는 통제의 완화가 아니라 관리 방식의 전환에 가까웠다. 실제로 이 조치는 의도와 달리 잠시 위축돼 있던 학생운동과 노동운동이 이듬해부터 다시 활기를 띠는 계기가 됐고, 1985~1987년 민주화운동으로 이어지는 흐름의 한 발판이 됐다.',
+    video:null,
+    connections:['person_1983_01'],
+    tags:['policy','서울','학원자율화조치','전두환','유화정책'],
+    sources:['나무위키 1983년'] }
+
+];

@@ -1,0 +1,150 @@
+card_id,title,type,year_file,hero_url,hero_exists,hero_size,hero_is_ai,legacy_image_url,legacy_image_exists,gallery_count,gallery_missing,gallery_urls,has_related_content
+political_1876_01,강화도조약 — 닫힌 문이 열리다,political,1876.js,assets/images/entity/event/event_political_1876_01_01.webp,True,121480,false,,,0,0,,False
+policy_1880_01,조선책략과 영남만인소 — 갈라진 길,policy,1880.js,assets/images/entity/event/event_policy_1880_01_01.webp,True,23280,false,,,0,0,,False
+institution_1880_01,통리기무아문 설치,organization,1880.js,assets/images/entity/person/person_김홍집_01.webp,True,23280,false,,,0,0,,False
+international_1881_01,조사시찰단 파견,international,1881.js,assets/images/entity/person/person_홍영식_01.webp,True,20716,false,,,0,0,,False
+political_1882_01,임오군란 — 구식 군인의 봉기,movement,1882.js,assets/images/entity/event/event_political_1882_01_01.webp,True,136898,true,,,0,0,,False
+policy_1883_01,박문국과 한성순보 — 첫 근대 신문,policy,1883.js,assets/images/entity/event/event_policy_1883_01_01.webp,True,60578,false,,,0,0,,False
+plot_1884_01,갑신정변 — 사흘 천하,plot,1884.js,assets/images/entity/event/event_plot_1884_01_01.webp,True,810688,false,,,2,0,assets/images/entity/person/person_박영효_01.webp;assets/images/entity/person/person_김옥균_01.webp,False
+movement_1894_01,동학농민운동 — 제1차 봉기,movement,1894.js,assets/images/entity/event/event_movement_1894_01_01.webp,True,103110,true,,,0,0,,False
+battle_1894_01,우금치 전투 — 동학농민군의 최후,battle,1894.js,assets/images/entity/event/event_battle_1894_01_01.webp,True,58628,true,,,0,0,,False
+plot_1895_01,을미사변 — 명성황후 시해,plot,1895.js,assets/images/entity/event/event_plot_1895_01_01.webp,True,81900,true,,,0,0,,False
+movement_1895_01,을미의병 — 첫 항일 의병,movement,1895.js,assets/images/entity/event/event_movement_1895_01_01.webp,True,66484,false,,,0,0,,False
+organization_1896_01,독립협회 창립,organization,1896.js,assets/images/entity/person/person_서재필_01.webp,True,124588,true,,,0,0,,False
+organization_1897_01,독립문 완공,organization,1897.js,assets/images/entity/event/event_organization_1897_01_01.webp,True,523826,false,,,0,0,,False
+person_1898_01,흥선대원군 별세,person,1898.js,assets/images/entity/person/person_흥선대원군_01.webp,True,244654,false,,,0,0,,False
+policy_1905_01,을사늑약 — 외교권을 빼앗기다,policy,1905.js,assets/images/entity/event/event_policy_1905_01_01.webp,True,94746,true,,,4,0,assets/images/entity/person/person_박제순_01.webp;assets/images/entity/person/person_이근택_01.webp;assets/images/entity/person/person_이지용_01.webp;assets/images/entity/person/person_권중현_01.webp,True
+righteous_1906_01,최익현 의병 봉기와 순국,righteous,1906.js,assets/images/entity/event/event_righteous_1906_01_01.webp,True,1456560,false,,,0,0,,False
+political_1907_01,헤이그 특사 — 만국평화회의의 호소,political,1907.js,assets/images/entity/event/event_political_1907_01_01.webp,True,11808,false,,,1,0,assets/images/entity/person/person_이준_01.webp,False
+political_1907_02,고종 강제퇴위,political,1907.js,assets/images/entity/event/event_political_1907_02_01.webp,True,614112,false,,,1,0,assets/images/entity/person/person_고종_01.webp,False
+policy_1907_01,정미7조약 — 차관정치와 통치권 장악,policy,1907.js,,,,,,,0,0,,True
+organization_1907_01,신민회 결성 — 비밀결사의 시작,organization,1907.js,assets/images/entity/event/event_organization_1907_01_01.webp,True,17996,false,,,0,0,,False
+righteous_1908_01,전명운·장인환 스티븐스 저격,righteous,1908.js,assets/images/entity/event/event_righteous_1908_01_01.webp,True,16156,false,,,2,0,assets/images/entity/person/person_전명운_01.webp;assets/images/entity/person/person_장인환_01.webp,False
+organization_1909_01,동의단지회 — 안중근의 단지동맹,organization,1909.js,assets/images/entity/event/event_organization_1909_01_01.webp,True,17516,false,,,0,0,,False
+righteous_1909_01,안중근 하얼빈 의거 — 이토 히로부미 처단,righteous,1909.js,assets/images/entity/event/event_righteous_1909_01_01.webp,True,182318,true,,,1,0,assets/images/entity/person/person_이토히로부미_01.webp,False
+policy_1910_01,경술국치 — 한일병합조약 공포,policy,1910.js,assets/images/entity/event/event_policy_1910_01_01.webp,True,404420,false,,,0,0,,True
+person_1910_03,이완용 — 병합을 체결한 매국의 얼굴,person,1910.js,assets/images/entity/person/person_이완용_01.webp,True,193212,false,,,0,0,,False
+person_1910_04,안중근 순국 — 뤼순 감옥의 마지막,person,1910.js,assets/images/entity/person/person_안중근_01.webp,True,68744,true,,,0,0,,False
+organization_1911_01,신흥강습소 설립 — 서간도 독립군 기지,organization,1911.js,assets/images/entity/event/event_organization_1911_01_01.webp,True,182088,false,,,0,0,,False
+organization_1913_01,흥사단 창립 — 안창호의 인격수양운동,organization,1913.js,assets/images/entity/event/event_organization_1913_01_01.webp,True,125422,true,,,0,0,,False
+person_1913_01,안창호 — 미주 한인사회의 지도자,person,1913.js,assets/images/entity/person/person_안창호_01.webp,True,125422,true,,,0,0,,False
+organization_1914_01,대한광복군정부 수립,organization,1914.js,assets/images/entity/event/event_organization_1914_01_01.webp,True,70284,false,,,0,0,,False
+person_1914_01,이상설 — 연해주 독립운동의 구심,person,1914.js,assets/images/entity/person/person_이상설_01.webp,True,41838,false,,,0,0,,False
+person_1914_04,최재형 — 연해주 한인사회의 페치카,person,1914.js,assets/images/entity/person/person_최재형_01.webp,True,160050,true,,,0,0,,False
+organization_1915_01,대한광복회 결성 — 1910년대 최대 비밀결사,organization,1915.js,assets/images/entity/event/event_organization_1915_01_01.webp,True,26766,false,,,0,0,,False
+person_1916_01,서일 — 북간도 대종교 무장운동의 총재,person,1916.js,assets/images/entity/person/person_서일_01.webp,True,106630,true,,,0,0,,False
+political_1917_01,대동단결선언 — 국민주권의 첫 선언,political,1917.js,assets/images/entity/event/event_political_1917_01_01.webp,True,12584,false,,,0,0,,False
+person_1917_01,신규식 — 상하이 독립운동의 개척자,person,1917.js,assets/images/entity/person/person_신규식_01.webp,True,12584,false,,,0,0,,False
+political_1918_01,무오독립선언 — 해외 39인의 독립선언,political,1918.js,assets/images/entity/person/person_조소앙_01.webp,True,133392,false,,,0,0,,False
+policy_1918_01,토지조사사업 완료 — 수탈의 마무리,policy,1918.js,assets/images/entity/event/event_policy_1918_01_01.webp,True,62020,false,,,0,0,,False
+person_1918_01,김알렉산드라 — 한인 최초의 볼셰비키,person,1918.js,assets/images/entity/person/person_김알렉산드라_01.webp,True,63394,false,,,0,0,,False
+movement_1919_02,3·1운동 — 거족적 독립만세운동,movement,1919.js,assets/images/entity/event/event_movement_1919_02_01.webp,True,71030,true,,,1,0,assets/images/entity/person/person_이승훈_01.webp,False
+movement_1919_03,아우내 장터 만세운동,movement,1919.js,assets/images/entity/event/event_movement_1919_03_01.webp,True,43282,true,,,0,0,,False
+massacre_1919_01,제암리 학살 사건,massacre,1919.js,assets/images/entity/event/event_massacre_1919_01_01.webp,True,299088,false,,,0,0,,False
+massacre_1919_02,수촌리 학살 사건,massacre,1919.js,assets/images/entity/event/event_massacre_1919_02_01.webp,True,42308,false,,,0,0,,False
+person_1919_01,손병희 — 3·1운동 민족대표의 영수,person,1919.js,assets/images/entity/person/person_손병희_01.webp,True,217362,false,,,0,0,,False
+person_1919_02,김구 — 임시정부에 투신하다,person,1919.js,assets/images/entity/person/person_김구_01.webp,True,89680,true,,,0,0,,False
+person_1919_03,이승만 — 외교독립론과 초대 임시대통령,person,1919.js,assets/images/entity/person/person_이승만_01.webp,True,14592,false,,,0,0,,False
+person_1919_06,오동진 — 서간도 망명과 무장투쟁의 시작,person,1919.js,assets/images/entity/person/person_오동진_01.webp,True,74368,true,,,0,0,,False
+battle_1920_01,봉오동 전투,battle,1920.js,assets/images/entity/event/event_battle_1920_01_01.webp,True,42096,false,,,0,0,,False
+battle_1920_02,청산리 대첩,battle,1920.js,assets/images/entity/event/event_battle_1920_02_01.webp,True,22500,false,,,1,0,assets/images/entity/person/person_이범석_01.webp,False
+righteous_1920_01,부산경찰서 투탄 (박재혁),righteous,1920.js,assets/images/entity/person/person_박재혁_01.webp,True,112586,true,,,0,0,,False
+battle_1920_03,신흥무관학교,battle,1920.js,assets/images/entity/person/person_이시영_01.webp,True,163634,true,,,1,0,assets/images/entity/person/person_신팔균_01.webp,False
+righteous_1920_02,밀양경찰서 투탄 (최수봉),righteous,1920.js,assets/images/entity/event/event_righteous_1920_02_01.webp,True,130984,true,,,1,0,assets/images/entity/person/person_최수봉_01.webp,False
+righteous_1920_03,강우규 순국,righteous,1920.js,assets/images/entity/event/event_righteous_1920_03_01.webp,True,141150,true,,,1,0,assets/images/entity/person/person_강우규_01.webp,False
+righteous_1920_04,유관순 순국,righteous,1920.js,assets/images/entity/event/event_righteous_1920_04_01.webp,True,361600,false,,,1,0,assets/images/entity/person/person_유관순_01.webp,False
+person_1920_01,김구 — 임시정부 경무국장,person,1920.js,assets/images/entity/person/person_김구_01.webp,True,89680,true,,,0,0,,False
+person_1920_02,김원봉 — 의열단 결성·지휘,person,1920.js,assets/images/entity/person/person_김원봉_01.webp,True,116054,true,,,0,0,,False
+person_1920_03,안창호 — 임정 내무총장·흥사단,person,1920.js,assets/images/entity/person/person_안창호_01.webp,True,125422,true,,,0,0,,False
+person_1920_04,신채호 — 보합단 조직,person,1920.js,assets/images/entity/person/person_신채호_01.webp,True,21166,false,,,0,0,,False
+person_1920_05,이회영 — 베이징 망명 활동,person,1920.js,assets/images/entity/person/person_이회영_01.webp,True,111790,true,,,0,0,,False
+person_1920_06,윤봉길 — 농촌계몽운동,person,1920.js,assets/images/entity/person/person_윤봉길_01.webp,True,95010,true,,,0,0,,False
+person_1920_07,이봉창 — 오사카에서 노동,person,1920.js,assets/images/entity/person/person_이봉창_01.webp,True,50388,true,,,0,0,,False
+person_1920_08,양세봉 — 남만주 무장투쟁 시작,person,1920.js,assets/images/entity/person/person_양세봉_01.webp,True,82798,true,,,0,0,,False
+migration_1921_01,대한독립군단 자유시 이동,migration,1921.js,assets/images/entity/event/event_migration_1921_01_01.webp,True,239814,true,,,0,0,,False
+person_1921_01,서일 순국 (자유시 참변 충격),person,1921.js,assets/images/entity/person/person_서일_01.webp,True,106630,true,,,0,0,,False
+political_1921_01,임정 내분 — 이동휘 사임,political,1921.js,assets/images/entity/event/event_political_1921_01_01.webp,True,494056,false,,,0,0,,False
+righteous_1921_02,박상진 순국,righteous,1921.js,assets/images/entity/event/event_righteous_1921_02_01.webp,True,26766,false,,,0,0,,False
+righteous_1921_03,김익상 — 조선총독부 투탄,righteous,1921.js,assets/images/entity/event/event_righteous_1921_03_01.webp,True,41604,false,,,0,0,,False
+person_1921_02,김구 — 임정 수습,person,1921.js,assets/images/entity/person/person_김구_01.webp,True,89680,true,,,0,0,,False
+person_1921_03,신채호 — 군사통일주비회 주도,person,1921.js,assets/images/entity/person/person_신채호_01.webp,True,21166,false,,,0,0,,False
+person_1921_04,홍범도 — 이르쿠츠크 고려혁명군관학교,person,1921.js,assets/images/entity/person/person_홍범도_01.webp,True,89924,true,,,0,0,,False
+political_1921_05,임정 개조·창조 논쟁의 시작,political,1921.js,assets/images/entity/event/event_political_1921_05_01.webp,True,494056,false,,,0,0,,False
+person_1921_05,여운형 — 고려공산당과 모스크바,person,1921.js,assets/images/entity/person/person_여운형_01.webp,True,181998,true,,,0,0,,False
+battle_1922_01,대한통의부 결성,organization,1922.js,assets/images/entity/person/person_김동삼_01.webp,True,86864,true,,,0,0,,False
+righteous_1922_01,황포탄 의거 (김익상·오성륜·이종암),righteous,1922.js,assets/images/entity/event/event_righteous_1922_01_01.webp,True,41604,false,,,0,0,,False
+political_1922_01,극동민족대회 — 모스크바,political,1922.js,assets/images/entity/event/event_political_1922_01_01.webp,True,30814,false,,,0,0,,False
+person_1922_01,홍범도 — 연해주 이만에서,person,1922.js,assets/images/entity/person/person_홍범도_01.webp,True,89924,true,,,0,0,,False
+person_1922_02,김원봉 — 의열단 본부 베이징,person,1922.js,assets/images/entity/person/person_김원봉_01.webp,True,116054,true,,,0,0,,False
+person_1922_03,안창호 — 국민대표회의 준비,person,1922.js,assets/images/entity/person/person_안창호_01.webp,True,125422,true,,,0,0,,False
+righteous_1923_01,김상옥 — 종로경찰서 의거,righteous,1923.js,assets/images/entity/event/event_righteous_1923_01_01.webp,True,43024,false,,,1,0,assets/images/entity/person/person_김상옥_01.webp,False
+political_1923_01,조선혁명선언 발표,political,1923.js,assets/images/entity/event/event_political_1923_01_01.webp,True,162652,false,,,0,0,,False
+massacre_1923_01,관동대지진 조선인 학살,massacre,1923.js,assets/images/entity/event/event_massacre_1923_01_01.webp,True,356158,false,,,0,0,,False
+person_1923_01,신채호 — 베이징에서 역사연구로,person,1923.js,assets/images/entity/person/person_신채호_01.webp,True,21166,false,,,0,0,,False
+person_1923_02,안창호 — 분열을 끌어안다,person,1923.js,assets/images/entity/person/person_안창호_01.webp,True,125422,true,,,0,0,,False
+righteous_1924_01,김지섭 — 도쿄 이중교 의거,righteous,1924.js,assets/images/entity/event/event_righteous_1924_01_01.webp,True,36104,false,,,0,0,,False
+political_1924_01,임시정부 침체와 이승만 탄핵 움직임,political,1924.js,assets/images/entity/event/event_political_1924_01_01.webp,True,14592,false,,,0,0,,False
+person_1924_01,김원봉 — 노선 전환의 고민,person,1924.js,assets/images/entity/person/person_김원봉_01.webp,True,116054,true,,,0,0,,False
+person_1924_02,박은식 — 임정을 떠받치다,person,1924.js,assets/images/entity/person/person_박은식_01.webp,True,82920,true,,,0,0,,False
+political_1925_02,이승만 탄핵과 박은식 대통령 취임,political,1925.js,assets/images/entity/event/event_political_1925_02_01.webp,True,14592,false,,,0,0,,False
+person_1925_01,권기옥 — 한국 최초의 여성 비행사,person,1925.js,assets/images/entity/person/person_권기옥_01.webp,True,155978,true,,,0,0,,False
+person_1925_02,김좌진 — 북만주에서 다시 서다,person,1925.js,assets/images/entity/person/person_김좌진_01.webp,True,77524,true,,,0,0,,False
+political_1926_01,순종 승하 — 대한제국 황실의 종말,political,1926.js,assets/images/entity/event/event_political_1926_01_01.webp,True,499938,false,,,0,0,,False
+movement_1926_01,6·10 만세운동,movement,1926.js,assets/images/entity/event/event_movement_1926_01_01.webp,True,104874,false,,,0,0,,False
+righteous_1926_01,나석주 — 동양척식회사 의거,righteous,1926.js,assets/images/entity/event/event_righteous_1926_01_01.webp,True,133140,true,,,1,0,assets/images/entity/person/person_나석주_01.webp,False
+policy_1926_01,조선총독부 신청사 준공,policy,1926.js,assets/images/entity/event/event_policy_1926_01_01.webp,True,59816,false,,,0,0,,False
+person_1926_02,김구 — 임시정부 국무령에 오르다,person,1926.js,assets/images/entity/person/person_김구_01.webp,True,89680,true,,,0,0,,False
+person_1926_03,"이상화 — ""빼앗긴 들에도 봄은 오는가""",person,1926.js,assets/images/entity/person/person_이상화_01.webp,True,389418,false,,,0,0,,False
+person_1926_04,한용운 — 『님의 침묵』 출간,person,1926.js,assets/images/entity/person/person_한용운_01.webp,True,110600,true,,,0,0,,False
+movement_1927_01,근우회 창립 — 여성계 민족유일당,movement,1927.js,assets/images/entity/person/person_박차정_01.webp,True,111454,true,,,0,0,,False
+political_1927_02,이상재 별세 — 신간회 초대 회장,political,1927.js,assets/images/entity/event/event_political_1927_02_01.webp,True,150714,false,,,0,0,,False
+political_1927_03,의열단의 노선 전환 — 개별투쟁에서 조직투쟁으로,political,1927.js,assets/images/entity/event/event_political_1927_03_01.webp,True,116054,true,,,0,0,,False
+righteous_1927_01,김창숙 체포 — 나석주 의거의 여파,righteous,1927.js,assets/images/entity/event/event_righteous_1927_01_01.webp,True,85146,false,,,0,0,,False
+political_1927_04,중국 국공분열과 독립운동의 동요,political,1927.js,assets/images/entity/event/event_political_1927_04_01.webp,True,80632,true,,,0,0,,False
+person_1927_01,신채호 — 무정부주의 동방연맹,person,1927.js,assets/images/entity/person/person_신채호_01.webp,True,21166,false,,,0,0,,False
+person_1927_02,김활란 — 근우회와 여성운동,person,1927.js,assets/images/entity/person/person_김활란_01.webp,True,173150,false,,,0,0,,True
+righteous_1928_01,조명하 — 타이중 의거,righteous,1928.js,assets/images/entity/person/person_조명하_01.webp,True,170076,true,,,0,0,,False
+political_1928_02,코민테른 12월테제,political,1928.js,assets/images/entity/event/event_political_1928_02_01.webp,True,18520,false,,,0,0,,False
+person_1928_01,신채호 — 동방연맹 활동과 체포 직전,person,1928.js,assets/images/entity/person/person_신채호_01.webp,True,21166,false,,,0,0,,False
+movement_1929_02,광주학생항일운동,movement,1929.js,assets/images/entity/event/event_movement_1929_02_01.webp,True,36714,false,,,0,0,,False
+policy_1931_01,만주사변 — 일본의 만주 침략,policy,1931.js,,,,,,,0,0,,True
+person_1931_01,지청천 — 한중연합의 길,person,1931.js,assets/images/entity/person/person_지청천_01.webp,True,86546,true,,,0,0,,False
+righteous_1932_01,이봉창 — 도쿄 의거,righteous,1932.js,assets/images/entity/event/event_righteous_1932_01_01.webp,True,10776,false,,,0,0,,False
+righteous_1932_02,윤봉길 — 훙커우공원 의거,righteous,1932.js,assets/images/entity/event/event_righteous_1932_02_01.webp,True,167686,false,,,0,0,,False
+battle_1932_02,쌍성보 전투,battle,1932.js,assets/images/entity/event/event_battle_1932_02_01.webp,True,86546,true,,,0,0,,False
+battle_1932_03,영릉가 전투,battle,1932.js,assets/images/entity/event/event_battle_1932_03_01.webp,True,218450,true,,,0,0,,False
+person_1932_01,김구 — 거사 이후의 임시정부,person,1932.js,assets/images/entity/person/person_김구_01.webp,True,89680,true,,,0,0,,False
+battle_1933_01,대전자령 전투,battle,1933.js,assets/images/entity/event/event_battle_1933_01_01.webp,True,86546,true,,,0,0,,False
+battle_1933_03,흥경성 전투,battle,1933.js,assets/images/entity/event/event_battle_1933_03_01.webp,True,218450,true,,,0,0,,False
+person_1933_01,지청천 — 만주를 떠나 관내로,person,1933.js,assets/images/entity/person/person_지청천_01.webp,True,86546,true,,,0,0,,False
+person_1934_01,지청천 — 낙양군관학교 총교도관,person,1934.js,assets/images/entity/person/person_지청천_01.webp,True,86546,true,,,0,0,,False
+political_1935_01,민족혁명당 결성,political,1935.js,assets/images/entity/person/person_김규식_01.webp,True,64430,true,,,0,0,,False
+political_1935_02,한국독립당 재건과 한국국민당 창립 — 갈라진 두 길,political,1935.js,assets/images/entity/person/person_이동녕_01.webp,True,94798,false,,,0,0,,False
+person_1935_01,김원봉 — 민족혁명당 총서기,person,1935.js,assets/images/entity/person/person_김원봉_01.webp,True,116054,true,,,0,0,,False
+battle_1936_02,조선혁명군의 해체와 동북항일연군 합류,organization,1936.js,assets/images/entity/event/event_battle_1936_02_01.webp,True,82798,true,,,0,0,,False
+movement_1936_01,손기정 — 베를린올림픽 마라톤 우승,movement,1936.js,assets/images/entity/event/event_movement_1936_01_01.webp,True,153390,false,,,1,0,assets/images/entity/person/person_손기정_01.webp,False
+movement_1936_02,일장기 말소 사건,movement,1936.js,assets/images/entity/event/event_movement_1936_02_01.webp,True,153390,false,,,0,0,,False
+political_1937_02,조선민족전선연맹 결성,political,1937.js,assets/images/entity/event/event_political_1937_02_01.webp,True,168532,false,,,0,0,,False
+policy_1937_02,일본군 위안부 동원 본격화,policy,1937.js,assets/images/entity/event/event_policy_1937_02_01.webp,True,70170,false,,,0,0,,False
+policy_1937_03,알뜨르 비행장 — 제주 군사화의 시작,policy,1937.js,assets/images/entity/event/event_policy_1937_03_01.webp,True,31918,false,,,0,0,,False
+battle_1938_01,조선의용대 창설,organization,1938.js,assets/images/entity/event/event_battle_1938_01_01.webp,True,789210,false,,,0,0,,False
+policy_1938_01,국가총동원법 시행,policy,1938.js,,,,,,,0,0,,True
+policy_1939_01,창씨개명령 공포,policy,1939.js,,,,,,,0,0,,True
+policy_1939_02,국민징용령 시행,policy,1939.js,assets/images/entity/event/event_policy_1939_02_01.webp,True,113786,false,,,0,0,,False
+person_1939_01,김구 — 남목청의 총탄에서 살아나다,person,1939.js,assets/images/entity/person/person_김구_01.webp,True,89680,true,,,0,0,,False
+battle_1940_01,한국광복군 창설,organization,1940.js,assets/images/entity/event/event_battle_1940_01_01.webp,True,70284,false,,,0,0,,False
+political_1941_01,임시정부 대일선전포고,political,1941.js,assets/images/entity/event/event_political_1941_01_01.webp,True,110518,true,,,0,0,,False
+policy_1942_01,조선어학회 사건,policy,1942.js,assets/images/entity/event/event_policy_1942_01_01.webp,True,78158,false,,,1,0,assets/images/entity/person/person_최현배_01.webp,False
+political_1943_01,카이로 선언 — 한국 독립의 첫 국제 약속,political,1943.js,assets/images/entity/event/event_political_1943_01_01.webp,True,722602,false,,,0,0,,False
+policy_1943_02,군함도(하시마) 탄광 강제징용,policy,1943.js,assets/images/entity/event/event_policy_1943_02_01.webp,True,131026,false,,,0,0,,False
+policy_1943_03,유바리 탄광 강제징용,policy,1943.js,assets/images/entity/event/event_policy_1943_03_01.webp,True,113786,false,,,0,0,,False
+political_1944_01,조선건국동맹 결성,political,1944.js,assets/images/entity/event/event_political_1944_01_01.webp,True,96966,false,,,0,0,,False
+person_1944_01,장준하·김준엽 — 학병 탈출과 6천 리 장정,person,1944.js,assets/images/entity/person/person_장준하_01.webp,True,176612,true,,,0,0,,False
+person_1944_02,이육사 — 베이징 감옥에서 순국,person,1944.js,assets/images/entity/person/person_이육사_01.webp,True,79456,true,,,0,0,,False
+policy_1944_01,여자정신근로령 공포 — 여자근로정신대 동원,policy,1944.js,assets/images/entity/event/event_policy_1944_01_01.webp,True,9866,false,,,0,0,,False
+policy_1945_01,일본 무조건 항복 — 8·15 광복,policy,1945.js,assets/images/entity/event/event_policy_1945_01_01.webp,True,100060,false,,,0,0,,False
+policy_1945_02,38선 분할 — 또 다른 경계의 시작,policy,1945.js,assets/images/entity/event/event_policy_1945_02_01.webp,True,18152,false,,,0,0,,False
+political_1945_01,건국준비위원회 결성,political,1945.js,assets/images/entity/event/event_political_1945_01_01.webp,True,96966,false,,,0,0,,False
+person_1945_02,윤동주 — 후쿠오카 형무소에서 옥사,person,1945.js,assets/images/entity/person/person_윤동주_01.webp,True,138232,true,,,0,0,,False
+person_1945_01,김구 — 개인 자격으로 돌아온 주석,person,1945.js,assets/images/entity/person/person_김구_01.webp,True,89680,true,,,0,0,,False
+migration_1945_02,우키시마호 침몰 — 귀국길의 비극,migration,1945.js,assets/images/entity/event/event_migration_1945_02_01.webp,True,16198,false,,,0,0,,False

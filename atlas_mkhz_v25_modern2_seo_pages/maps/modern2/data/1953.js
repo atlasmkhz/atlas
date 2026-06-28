@@ -1,0 +1,78 @@
+// data/1953.js — 1953년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1953.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1953 = [
+
+  { id:'political_1953_01', year:1953, visible_from:1953, visible_until:1953,
+    month:5, day:18, type:'political', priority:1,
+    title_ko:'반공포로 일방 석방',
+    title_en:'Unilateral Release of Anti-Communist POWs',
+    title_ja:'反共捕虜の一方的釈放',
+    place_ko:'전국 포로수용소 (부산·논산·마산 등)',
+    lat:35.6, lng:128.0,
+    people:['이승만'],
+    summary_ko:'휴전협정 조인이 임박했던 1953년 6월 18일, 이승만 정부는 유엔군과 사전 협의 없이 전국 포로수용소에 수용된 반공포로 약 2만 7천 명을 일방적으로 석방했다. 휴전을 정치적으로 받아들일 수 없었던 이승만이 협상을 무산시키려 시도한 행동이었다. 이 조치는 공산군 측의 강한 반발로 휴전회담을 또 한 번 중단 위기로 몰았으나, 유엔군이 한국군의 협정 준수를 보장하겠다고 확약하면서 회담은 가까스로 재개됐다. 끝까지 휴전에 반대했던 이승만의 의지를 가장 극적으로 보여준 사건이었다.',
+    video:null,
+    connections:['political_1952_04'],
+    tags:['political','부산','반공포로석방','이승만','휴전반대'],
+    sources:['한국민족문화대백과사전 휴전회담'] },
+
+  { id:'political_1953_02', year:1953, visible_from:1953, visible_until:1953,
+    month:6, day:27, type:'political', priority:1,
+    title_ko:'한국 군사 정전에 관한 협정 조인',
+    title_en:'Signing of the Korean Armistice Agreement',
+    title_ja:'朝鮮戦争休戦協定調印',
+    place_ko:'판문점',
+    lat:37.957, lng:126.667,
+    people:[],
+    summary_ko:'1953년 7월 27일 오전 판문점에서 유엔군 측 윌리엄 해리슨 중장과 공산군 측 남일 대장이 휴전협정에 서명했다. 발발 3년 1개월여 만에 전쟁은 휴전으로 봉인됐다. 휴전선을 따라 남북 2km씩 비무장지대가 설정됐고, 군사정전위원회와 중립국감시위원단이 설치됐다. 대한민국 대표는 분단을 고착시키는 휴전을 인정할 수 없다며 끝내 서명에 참여하지 않았다. 이 협정은 평화협정이 아닌 정전협정으로, 70여 년이 지난 지금까지도 한반도는 법적으로 전쟁이 완전히 끝나지 않은 상태에 있다.',
+    video:null,
+    connections:['political_1951_01','political_1953_01'],
+    tags:['political','판문점','휴전협정','정전'],
+    sources:['나무위키 정전협정','국가기록원 6·25전쟁 연표'] },
+
+  { id:'political_1953_03', year:1953, visible_from:1953, visible_until:1954,
+    month:9, day:1, type:'political', priority:1,
+    title_ko:'한미상호방위조약 체결',
+    title_en:'Mutual Defense Treaty between the ROK and the US',
+    title_ja:'米韓相互防衛条約',
+    place_ko:'워싱턴',
+    lat:38.90, lng:-77.04,
+    people:['이승만'],
+    summary_ko:'이승만은 휴전협정을 묵인하는 대가로 미국으로부터 안전보장을 받아내는 데 집중했다. 그 결과 1953년 10월 한미상호방위조약이 체결돼, 유사시 미군의 자동 개입을 명문화하는 것은 아니었지만 주한미군 주둔의 법적 기반과 군사·경제 원조 약속을 확보했다. 이 조약은 이후 70년 넘게 한미동맹의 법적 근간으로 작동하며, 한국의 안보·외교 정책 전반에 지속적인 영향을 미친다. 전쟁으로 폐허가 된 나라가 미국이라는 동맹을 외교적 자산으로 확보한 순간이었다.',
+    video:null,
+    connections:['political_1953_02'],
+    tags:['political','워싱턴','한미상호방위조약','이승만'],
+    sources:['한국민족문화대백과사전 한미상호방위조약'] },
+
+  { id:'movement_1953_01', year:1953, visible_from:1953, visible_until:1953,
+    month:8, day:null, type:'movement', priority:2,
+    title_ko:'전쟁고아와 피란민 — 폐허 속의 생존',
+    title_en:'War Orphans and Refugees in the Ruins',
+    title_ja:'戦争孤児と避難民',
+    place_ko:'부산·대구 등 후방 도시',
+    lat:35.5, lng:128.5,
+    people:[],
+    summary_ko:'휴전 직후 한반도는 전 국토의 상당 부분이 폐허로 변해 있었다. 전쟁으로 부모를 잃은 고아가 수만 명에 달했고, 피란 중 가족과 헤어진 이산가족도 수백만 명을 헤아렸다. 부산·대구 등 후방 도시에는 피란민이 몰려들어 천막촌과 판자촌이 곳곳에 형성됐다. 한국군 약 62만 명, 북한군 약 64만 명이 인명피해를 입었고, 남북 합쳐 민간인 약 200만 명이 사망·부상한 것으로 추정된다. 전쟁이 멈춘 자리에는 싸움보다 더 오래갈 가난과 상실이 남았다.',
+    video:null,
+    connections:['political_1953_02'],
+    tags:['movement','부산','전쟁고아','피란민','이산가족'],
+    sources:['우리역사넷 6·25전쟁'] },
+
+  { id:'massacre_1953_01', year:1953, visible_from:1953, visible_until:1954,
+    month:0, day:null, type:'massacre', priority:2, area:true, areaRadius:30000,
+    title_ko:'제주 4·3사건 — 잔여 토벌과 종결을 향한 길',
+    title_en:'Jeju 4·3 — The Long Road to Closure',
+    title_ja:'済州四・三事件 — 終結への道',
+    place_ko:'제주도 한라산',
+    lat:33.40, lng:126.55,
+    people:[],
+    summary_ko:'6·25전쟁이 한창이던 이 시기에도 제주 한라산에는 여전히 소수의 무장대가 남아 있었다. 전쟁 중에는 예비검속된 4·3 관련자들이 즉결처형되는 추가 희생까지 발생했다. 1953년 무렵 무장대는 거의 소멸 단계에 이르렀지만, 한라산 금족령은 여전히 유지됐다. 사건이 공식적으로 마무리되는 것은 1954년 9월 한라산이 전면 개방되면서였다 — 1947년 발포사건부터 따지면 7년 7개월, 한반도 전쟁의 또 다른 격랑 속에서 제주는 자신만의 긴 전쟁을 끝내가고 있었다.',
+    video:null,
+    connections:['massacre_1949_01'],
+    tags:['massacre','제주','4·3사건','종결'],
+    sources:['제주4·3사건진상조사보고서'] }
+
+];

@@ -1,0 +1,78 @@
+// data/1958.js — 1958년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1958.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1958 = [
+
+  { id:'plot_1958_01', year:1958, visible_from:1958, visible_until:1958,
+    month:0, day:13, type:'plot', priority:1,
+    title_ko:'진보당 사건 — 조봉암 체포',
+    title_en:'The Progressive Party Case — Arrest of Cho Bong-am',
+    title_ja:'進歩党事件 — 曺奉岩逮捕',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['조봉암'],
+    summary_ko:'1958년 1월 13일 서울시 경찰국은 조봉암을 비롯한 진보당 간부들을 평화통일 구호와 간첩 접선 혐의로 체포했다. "사회주의 제도로 정부를 변란하려 했다"는 혐의였지만, 실제로는 1956년 대통령 선거에서 216만 표를 얻어 이승만 정권에 위협적인 정치인으로 떠오른 조봉암을 제거하려는 의도가 작용한 것이었다. 2월 20일에는 육군특무부대가 양이섭(양명산)이라는 인물을 통해 조봉암의 간첩 혐의를 추가로 발표했는데, 이는 훗날 협박과 회유로 만들어진 허위 자백이었음이 드러난다.',
+    video:null,
+    connections:['movement_1957_02','organization_1956_01'],
+    tags:['plot','서울','진보당사건','조봉암','조작사건'],
+    sources:['한국민족문화대백과사전 진보당사건','오픈아카이브 조봉암과진보당'] },
+
+  { id:'political_1958_01', year:1958, visible_from:1958, visible_until:1958,
+    month:1, day:25, type:'political', priority:1,
+    title_ko:'진보당 강제 해산',
+    title_en:'Forced Dissolution of the Progressive Party',
+    title_ja:'進歩党強制解散',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    summary_ko:'조봉암 체포 한 달여 만인 1958년 2월 25일, 정부는 미군정법령 55호를 발동해 진보당의 정당 등록을 취소한다고 공식 발표했다. 창당 2년이 채 되지 않은 정당이 재판 결과조차 기다리지 않고 행정 조치만으로 강제 해산된 것이었다. 한국 정치사에서 본격적인 사회민주주의 정당이 제도권 안에 자리 잡을 기회가 이렇게 차단됐고, 이후 진보 정치 세력은 구심점을 잃고 급격히 위축돼 오랫동안 회복하지 못했다.',
+    video:null,
+    connections:['plot_1958_01'],
+    tags:['political','서울','진보당강제해산','정당등록취소'],
+    sources:['시사오늘 1958진보당사건','오늘의AI위키 진보당'] },
+
+  { id:'political_1958_02', year:1958, visible_from:1958, visible_until:1958,
+    month:4, day:1, type:'political', priority:2,
+    title_ko:'제4대 민의원 선거 — 보수 양당 구도의 고착',
+    title_en:'The 4th National Assembly Election',
+    title_ja:'第四代民議院選挙',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:[],
+    summary_ko:'1958년 5월 2일 치러진 제4대 민의원 선거에서 자유당과 민주당이 의석을 나눠 가지며 보수 양당 체제가 굳어졌다. 진보당이 강제 해산된 상태에서 치러진 이 선거는, 혁신 정치 세력이 빠져나간 자리를 두 보수 정당이 양분하는 구도를 확정시켰다. 자유당은 개헌선 확보에는 실패했지만 다수당 지위를 지켰고, 이는 이듬해 더 노골적인 권력 연장 시도로 이어지는 발판이 됐다.',
+    video:null,
+    connections:['political_1958_01'],
+    tags:['political','전국','제4대민의원선거','보수양당구도'],
+    sources:['시사오늘 1958진보당사건'] },
+
+  { id:'person_1958_01', year:1958, visible_from:1958, visible_until:1959,
+    month:6, day:2, type:'person', priority:1,
+    title_ko:'조봉암 1심 재판 — 사법 파동',
+    title_en:'The First Trial of Cho Bong-am — A Judicial Disturbance',
+    title_ja:'曺奉岩第一審裁判 — 司法波動',
+    place_ko:'서울지방법원',
+    lat:37.566, lng:126.978,
+    people:['조봉암','유병진'],
+    summary_ko:'1958년 7월 2일 1심에서 유병진 판사는 조봉암에게 간첩 혐의는 무죄로, 불법 무기 소지죄만 적용해 징역 5년을 선고하고 나머지 간부들에게는 무죄를 내렸다. 이는 반공 청년단이 보기엔 지나치게 가벼운 처벌이었고, 이들이 법원에 난입해 "용공 판사 타도"를 외치며 난동을 부리는, 한국 사법 역사상 최초의 재판 파동이 벌어졌다. 유병진 판사는 이후 법관 연임 심사에서 탈락해 법복을 벗어야 했다. 9월부터 진행된 2심에서는 핵심 증인 양이섭이 자신의 자백이 특무대의 협박에 의한 허위였다고 진술을 번복했지만, 재판부는 이를 받아들이지 않았다.',
+    video:null,
+    connections:['plot_1958_01'],
+    tags:['person','서울','조봉암','재판파동','유병진'],
+    sources:['나무위키 조봉암','경향신문 진보당사건과조봉암'] },
+
+  { id:'political_1958_03', year:1958, visible_from:1958, visible_until:1959,
+    month:11, day:24, type:'political', priority:1,
+    title_ko:'2·4 보안법 파동',
+    title_en:'The February 4th National Security Act Incident',
+    title_ja:'二・四保安法波動',
+    place_ko:'서울 (국회)',
+    lat:37.576, lng:126.977,
+    people:['이기붕','조병옥'],
+    summary_ko:'1960년 제4대 정·부통령 선거를 앞두고 야당과 언론을 통제하기 위해, 자유당은 간첩 처벌을 강화한다는 명분의 국가보안법 개정안을 추진했다. 야당은 이것이 야당 탄압의 수단이 될 것이라며 강력히 반대했지만, 1958년 12월 24일 자유당은 무술경관 300여 명을 임시 국회경위로 특별 채용해 야당 의원들을 강제로 끌어내거나 지하실에 감금한 채, 자유당 단독으로 국가보안법과 지방자치법 개정안 등 10개 법안을 통과시켰다. 의회민주주의의 가장 기본적인 절차마저 폭력으로 짓밟은 이 사건은 자유당 정권의 정당성을 크게 갉아먹으며, 1960년 4·19 혁명으로 이어지는 누적된 분노의 한 장이 됐다.',
+    video:null,
+    connections:['political_1958_01','political_1958_02'],
+    tags:['political','서울','2·4보안법파동','국가보안법','자유당'],
+    sources:['위키백과 2·4보안법파동','오마이뉴스 날치기로강화된국가보안법'] }
+
+];

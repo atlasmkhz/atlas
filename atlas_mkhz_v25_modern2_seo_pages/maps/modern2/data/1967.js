@@ -1,0 +1,78 @@
+// data/1967.js — 1967년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1967.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1967 = [
+
+  { id:'organization_1967_01', year:1967, visible_from:1967, visible_until:1967,
+    month:1, day:7, type:'organization', priority:2,
+    title_ko:'신민당 야권 후보 단일화',
+    title_en:'Unification of the Opposition Candidacy under the New Democratic Party',
+    title_ja:'新民党野党候補一本化',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['윤보선','유진오'],
+    summary_ko:'1965년 분열했던 민중당과 신한당이 1967년 2월 7일 재합당해 신민당을 창당하고, 윤보선을 대통령 후보로 추대했다. 분열된 야권으로는 박정희 정권에 맞설 수 없다는 위기감이 통합의 동력이 됐다. 그러나 신민당과 민주공화당 모두 보수 정당이라 정책적 차별성이 크지 않았고, 뚜렷한 선거 쟁점도 없어 유권자의 관심은 시들했다 — 역대 최저 투표율(83.6%)을 기록하게 되는 배경이었다.',
+    video:null,
+    connections:['organization_1966_01'],
+    tags:['organization','서울','신민당','윤보선','야권통합'],
+    sources:['위키백과 대한민국제6대대통령선거신민당후보선출'] },
+
+  { id:'political_1967_01', year:1967, visible_from:1967, visible_until:1967,
+    month:4, day:3, type:'political', priority:1,
+    title_ko:'제6대 대통령 선거 — 박정희 재선',
+    title_en:'The 6th Presidential Election — Park Chung-hee Re-elected',
+    title_ja:'第六代大統領選挙 — 朴正煕再選',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:['박정희','윤보선'],
+    summary_ko:'1967년 5월 3일 치러진 대통령 선거에서 박정희가 568만 표(51.4%)로 윤보선(452만 표, 40.9%)을 116만 표 차이로 누르고 재선에 성공했다. 4년 전 15만 표의 근소한 차이가 이번에는 크게 벌어졌는데, 경제개발 5개년 계획의 성과가 가시화되며 박정희에 대한 지지가 한층 굳어진 결과였다. 추풍령을 기준으로 한 남북 대결이었던 5대 선거와 달리, 이번엔 태백산맥을 기준으로 동서가 갈리는 새로운 지역 구도가 나타났다.',
+    video:null,
+    connections:['organization_1967_01'],
+    tags:['political','전국','제6대대통령선거','박정희','윤보선'],
+    sources:['위키백과 대한민국제6대대통령선거','나무위키 제6대대통령선거'] },
+
+  { id:'plot_1967_01', year:1967, visible_from:1967, visible_until:1967,
+    month:5, day:8, type:'plot', priority:1, area:true, areaRadius:300000,
+    title_ko:'6·8 부정선거',
+    title_en:'The June 8th Rigged Parliamentary Election',
+    title_ja:'六・八不正選挙',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:[],
+    summary_ko:'대통령 선거 한 달 뒤인 1967년 6월 8일 치러진 제7대 국회의원 선거에서, 민주공화당은 개헌선(2/3)을 넘는 의석을 확보하기 위해 막걸리와 고무신을 살포하는 "막걸리 선거"를 자행했다. 동장·통반장이 현금·쌀·밀가루를 나눠주고 투표 직전 현금 봉투까지 살포됐다는 의혹이 일었으며, 한 달 전 대선보다 유권자가 74만 명이나 늘어난 의문스러운 통계까지 나왔다. 결과적으로 공화당은 개헌이 가능한 129석을 확보했지만, 부정의 규모가 너무 커서 "6·8 부정선거"라는 별도의 이름으로 불리는 대표적 부정선거 사례가 됐다.',
+    video:null,
+    connections:['political_1967_01'],
+    tags:['plot','전국','6·8부정선거','민주공화당','막걸리선거'],
+    sources:['민주화운동사전 6.8부정선거','나무위키 박정희정부'] },
+
+  { id:'movement_1967_01', year:1967, visible_from:1967, visible_until:1967,
+    month:5, day:12, type:'movement', priority:2,
+    title_ko:'6·8부정선거 규탄시위',
+    title_en:'Protests against the June 8th Rigged Election',
+    title_ja:'六・八不正選挙糾弾デモ',
+    place_ko:'전국 (대학가)',
+    lat:36.5, lng:127.8,
+    people:[],
+    summary_ko:'6·8 부정선거의 실체가 드러나자 1967년 6월 12일부터 대학가를 중심으로 규탄 시위가 전국으로 확산됐다. 신민당도 부정선거에 항의하며 국회 등원을 거부하고 반년 가까이 국회에 출석하지 않았다(11월 29일에야 등원). 대학생뿐 아니라 고등학생까지 시위에 참여하며 사태는 더 커졌는데, 정부는 결국 이 정치적 위기를 다른 곳으로 돌리기 위해 대규모 간첩단 사건을 발표하는 길을 택한다.',
+    video:null,
+    connections:['plot_1967_01'],
+    tags:['movement','전국','6·8부정선거규탄시위','신민당','학생운동'],
+    sources:['민주화운동사전 동백림사건'] },
+
+  { id:'plot_1967_02', year:1967, visible_from:1967, visible_until:1967,
+    month:6, day:8, type:'plot', priority:1,
+    title_ko:'동백림(東伯林) 사건 — "동베를린"을 거점으로 조작된 간첩단',
+    title_en:'The East Berlin ("Dongbaeklim") Espionage Fabrication',
+    title_ja:'東伯林事件',
+    place_ko:'서울 (중앙정보부)',
+    lat:37.566, lng:126.978,
+    people:['윤이상','이응노','천상병'],
+    summary_ko:'"동백림"은 동베를린을 한자로 표기한 말이다(서울을 "한성", 베를린을 "백림"이라 적던 관행에서 나왔다). 6·8부정선거 규탄시위가 전국적으로 절정에 이르자, 1967년 7월 8일 김형욱 중앙정보부장은 유럽 거주 유학생·교민 194명이 동베를린의 북한대사관을 거점으로 대남 간첩활동을 벌였다고 발표했다. 작곡가 윤이상과 화가 이응노 등은 평양을 한 차례 방문하고 북한대사관에서 식사를 한 정도였는데도 서독 현지에서 중앙정보부 요원에게 강제로 끌려와 모진 고문을 당했다. 시인 천상병은 동베를린에 다녀온 지인과 막걸리를 마시며 1,000원을 받은 일로 끌려가 6개월간 전기고문을 당했고, 이 후유증으로 평생 정신이 온전치 못한 채 살았다. 정작 간첩죄로 기소된 인원은 23명에 불과했고 서독 검찰 수사로도 대규모 간첩단의 존재는 끝내 입증되지 않았다. 중앙정보부 요원의 서독 내 강제 납치 행위는 서독과의 외교 단절 위기로까지 번졌고, 정부는 결국 서독의 압박에 굴복해 핵심 피해자들을 조기 석방했다. 정치적 위기를 안보 위협으로 돌리려 한 전형적인 공작이었다.',
+    video:null,
+    connections:['movement_1967_01'],
+    tags:['plot','서울','동백림사건','동베를린','윤이상','천상병','조작사건'],
+    sources:['위키백과 동백림사건','민주화운동사전 동백림사건'] }
+
+];

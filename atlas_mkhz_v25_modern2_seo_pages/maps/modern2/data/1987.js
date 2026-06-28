@@ -1,0 +1,78 @@
+// data/1987.js — 1987년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1987.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1987 = [
+
+  { id:'plot_1987_01', year:1987, visible_from:1987, visible_until:1987,
+    month:0, day:14, type:'plot', priority:1,
+    title_ko:'박종철 고문치사 사건',
+    title_en:'The Torture Death of Park Jong-cheol',
+    title_ja:'朴鍾哲拷問致死事件',
+    place_ko:'서울 (남영동 대공분실)',
+    lat:37.541, lng:126.971,
+    people:['박종철'],
+    summary_ko:'1987년 1월 14일 서울대생 박종철이 운동권 선배의 행방을 캐묻는 경찰 조사 중 남영동 대공분실에서 물고문을 당해 사망했다. 경찰은 "책상을 탁 치니 억하고 쓰러졌다"는 황당한 설명으로 단순 쇼크사라 발표했지만, 온몸에 남은 명백한 고문 흔적과 부검의의 증언으로 거짓이 드러났다. 5일 만에 경찰 2명이 물고문 사실을 시인했다. 5월 18일 천주교정의구현사제단은 고문 경찰이 둘이 아니라 다섯 명이며 사건이 조직적으로 은폐·조작됐다고 추가로 폭로하며, 분노에 다시 불을 붙였다.',
+    video:null,
+    connections:['organization_1984_02'],
+    tags:['plot','서울','박종철고문치사사건','남영동대공분실','인권탄압'],
+    sources:['위키백과 6월민주항쟁','서울대학교 어두운죽음의시대6월항쟁35주기'] },
+
+  { id:'political_1987_01', year:1987, visible_from:1987, visible_until:1987,
+    month:3, day:13, type:'political', priority:1,
+    title_ko:'4·13 호헌조치',
+    title_en:'The April 13th Constitution-Defense Declaration',
+    title_ja:'四・一三護憲措置',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['전두환'],
+    summary_ko:'1987년 4월 13일 전두환은 특별 담화를 발표해 "임기 중 개헌이 불가능하다"며 현행 간선제 헌법대로 정권을 이양하겠다고 선언했다. 직선제 개헌을 바라던 국민적 열망에 정면으로 배치되는 조치였다. 박종철 고문치사 사건으로 이미 들끓던 민심에 기름을 부은 격이었고, 전경련·한국노총 같은 관변 단체들의 호헌 지지 관제데모가 잇따랐지만 발표 당일부터 전국 각계각층의 반대 시위가 산발적으로 시작됐다. 이 조치는 이후 6월 항쟁이 직선제 개헌이라는 명확한 단일 목표로 결집하는 결정적 계기가 됐다.',
+    video:null,
+    connections:['plot_1987_01'],
+    tags:['political','서울','4·13호헌조치','전두환','직선제개헌'],
+    sources:['우리역사넷 1987년6월항쟁','민주화운동기념사업회 4.13호헌조치'] },
+
+  { id:'person_1987_01', year:1987, visible_from:1987, visible_until:1987,
+    month:5, day:9, type:'person', priority:1,
+    title_ko:'이한열 최루탄 피격',
+    title_en:'Lee Han-yeol Struck by a Tear Gas Canister',
+    title_ja:'李韓烈催涙弾被撃',
+    place_ko:'서울 (연세대 정문)',
+    lat:37.566, lng:126.939,
+    people:['이한열'],
+    summary_ko:'6·10국민대회를 하루 앞둔 1987년 6월 9일, 연세대생 이한열이 출정식을 마치고 교문을 나서다 경찰이 쏜 최루탄(직격탄)에 뒷머리를 맞고 피를 흘리며 쓰러졌다. 그는 곧바로 혼수상태에 빠졌고, 이 장면이 보도되며 학생과 시민의 분노가 들끓었다. 다음날 열린 6·10대회의 규모를 키운 결정적 계기가 됐고, 이한열은 27일간의 사투 끝에 7월 5일 사망했다.',
+    video:null,
+    connections:['political_1987_01'],
+    tags:['person','서울','이한열','최루탄피격','6월항쟁'],
+    sources:['위키백과 6월민주항쟁','인권위 해시태그키워드로보는6월항쟁'] },
+
+  { id:'movement_1987_01', year:1987, visible_from:1987, visible_until:1987,
+    month:5, day:10, type:'movement', priority:1, area:true, areaRadius:300000,
+    title_ko:'6월 민주항쟁',
+    title_en:'The June Democratic Uprising',
+    title_ja:'六月民主抗争',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:[],
+    summary_ko:'1987년 6월 10일, 민주헌법쟁취국민운동본부 주도로 전국 22개 도시에서 "박종철군 고문살인 조작·은폐규탄 및 호헌철폐 국민대회"가 열려 약 24만 명이 참여했다. 경찰이 5만 8천여 명을 동원해 강경 진압했지만 시위는 6월 내내 전국에서 동시다발적으로 이어졌다. 6월 26일에는 "민주헌법쟁취 국민평화대행진"이 사상 최대 규모로 펼쳐지며 "호헌철폐 독재타도"의 함성이 전국을 뒤덮었다. 더 이상 경찰력으로 막을 수 없고 군 투입도 어렵다고 판단한 정권은 결국 항복할 수밖에 없었다.',
+    video:null,
+    connections:['person_1987_01'],
+    tags:['movement','전국','6월민주항쟁','국민운동본부','직선제개헌'],
+    sources:['한국민족문화대백과사전 6월항쟁','우리역사넷 1987년6월항쟁'] },
+
+  { id:'political_1987_02', year:1987, visible_from:1987, visible_until:1987,
+    month:5, day:29, type:'political', priority:1,
+    title_ko:'6·29 선언',
+    title_en:'The June 29th Declaration',
+    title_ja:'六・二九宣言',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['노태우'],
+    summary_ko:'6월 항쟁이 멈추지 않자 1987년 6월 29일 민주정의당 대통령 후보 노태우가 대통령 직선제 개헌 수용, 김대중 사면·복권과 양심수 석방, 언론 자유 보장 등 8개 항을 담은 6·29선언을 발표했다. 1972년 유신헌법 이후 15년 만에 국민이 대통령을 직접 뽑을 권리를 되찾은 순간이었다. 이한열은 선언 엿새 뒤인 7월 5일 끝내 사망했고, 7월 9일 장례 노제에는 서울시청광장에 100만여 명이 모여 그를 애도하며 약 한 달간의 항쟁을 마무리했다.',
+    video:null,
+    connections:['movement_1987_01'],
+    tags:['political','서울','6·29선언','노태우','직선제개헌'],
+    sources:['한국민족문화대백과사전 6월항쟁','노동과세계 1987년6월항쟁'] }
+
+];

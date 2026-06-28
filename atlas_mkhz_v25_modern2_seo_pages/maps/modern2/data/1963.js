@@ -1,0 +1,78 @@
+// data/1963.js — 1963년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1963.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1963 = [
+
+  { id:'organization_1963_01', year:1963, visible_from:1963, visible_until:1963,
+    month:1, day:26, type:'organization', priority:2,
+    title_ko:'민주공화당 창당',
+    title_en:'Founding of the Democratic Republican Party',
+    title_ja:'民主共和党創党',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['박정희','김종필'],
+    summary_ko:'군사정변 세력의 민정 참여를 위해 1963년 2월 26일 민주공화당이 창당됐다. 김종필이 중앙정보부를 동원해 비밀리에 조직 작업을 벌인 끝에 결성된 이 정당은, 군사정부 출신 인사들이 민간 정치 무대로 옮겨가는 통로가 됐다. 5월 27일 전당대회에서 박정희가 대통령 후보로 만장일치 추대되며, 군에서 민간으로의 권력 이양이 "박정희의 군복을 벗는 형태"로 진행되는 모양새가 갖춰졌다.',
+    video:null,
+    connections:['political_1962_01'],
+    tags:['organization','서울','민주공화당','박정희','김종필'],
+    sources:['위키백과 대한민국제5대대통령선거','천지일보 대통령선거의역사3'] },
+
+  { id:'political_1963_01', year:1963, visible_from:1963, visible_until:1963,
+    month:9, day:15, type:'political', priority:1,
+    title_ko:'제5대 대통령 선거 — 박정희 당선',
+    title_en:'The 5th Presidential Election — Park Chung-hee Elected',
+    title_ja:'第五代大統領選挙 — 朴正煕当選',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:['박정희','윤보선'],
+    summary_ko:'1963년 10월 15일 직선제로 치러진 제5대 대통령 선거에서 민주공화당 박정희가 민정당 윤보선을 단 15만 6,026표(득표율 차 1.55%포인트) 차이로 꺾고 당선됐다. 한국 대통령 선거 역사상 가장 근소한 표차였다. 윤보선이 박정희의 이념을 문제 삼은 색깔론 공방이 선거 막판까지 이어졌고, 추풍령을 기준으로 북쪽은 윤보선, 영남·호남은 박정희를 지지하는 최초의 지역 대결 구도가 나타났다. 군사정변을 일으킨 인물이 국민 직접투표를 통해 정당성을 얻어낸 선거였다.',
+    video:null,
+    connections:['organization_1963_01'],
+    tags:['political','전국','제5대대통령선거','박정희','윤보선'],
+    sources:['나무위키 제5대대통령선거','위키백과 대한민국제5대대통령선거'] },
+
+  { id:'organization_1963_02', year:1963, visible_from:1963, visible_until:1967,
+    month:11, day:17, type:'organization', priority:1,
+    title_ko:'제3공화국 출범',
+    title_en:'Launch of the Third Republic',
+    title_ja:'第三共和国発足',
+    place_ko:'서울 (중앙청광장)',
+    lat:37.575, lng:126.977,
+    people:['박정희'],
+    summary_ko:'1963년 12월 17일 중앙청 광장에서 박정희의 제5대 대통령 취임식이 열리며 제3공화국이 정식 출범했다. 약 2년 7개월간 이어진 국가재건최고회의의 군정이 끝나고 헌법상 민간정부로 권력이 넘어간 것이었다. 박정희는 취임사에서 정치적 자주와 경제적 자립을 강조했다. 그러나 정권의 기원이 군사정변에 있었다는 사실은 변하지 않았고, 이후 박정희는 1979년까지 5차례 연속 당선되며 18년에 가까운 장기집권을 이어가게 된다.',
+    video:null,
+    connections:['political_1963_01'],
+    tags:['organization','서울','제3공화국','박정희','취임'],
+    sources:['대통령이야기 박정희취임식','한국민족문화대백과사전 박정희'] },
+
+  { id:'political_1963_02', year:1963, visible_from:1963, visible_until:1967,
+    month:10, day:26, type:'political', priority:2,
+    title_ko:'제6대 국회의원 선거',
+    title_en:'The 6th National Assembly Election',
+    title_ja:'第六代国会議員選挙',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:[],
+    summary_ko:'대통령 선거 한 달 뒤인 1963년 11월 26일 제6대 국회의원 선거가 치러졌다. 민주공화당은 득표율 33.5%에 그쳤지만, 야권이 단일 후보를 내지 못하고 분열한 덕에 175석 중 110석을 차지하며 압도적 과반을 확보했다. 대통령 선거에서는 근소한 차이로 이겼던 여당이 국회에서는 야권의 전략 실패에 힘입어 안정적인 입법 기반을 갖추게 된 셈이었다. 이 의석 구조는 박정희 정부 초기 정책 추진의 든든한 발판이 됐다.',
+    video:null,
+    connections:['organization_1963_02'],
+    tags:['political','전국','제6대국회의원선거','민주공화당'],
+    sources:['나무위키 제5대대통령선거','오픈아카이브 1963년정부통령선거'] },
+
+  { id:'person_1963_01', year:1963, visible_from:1963, visible_until:1963,
+    month:0, day:21, type:'person', priority:2,
+    title_ko:'중앙선거관리위원회 창설',
+    title_en:'Establishment of the National Election Commission',
+    title_ja:'中央選挙管理委員会創設',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    summary_ko:'1963년 1월 21일 선거 관리의 공정성을 확보하기 위해 독립 헌법기관인 중앙선거관리위원회가 창설됐다. 3·15 부정선거로 헌정이 무너진 지 3년 만의 일이었다. 각급 선거관리위원회에 야당 추천 위원이 참여하도록 한 제도 덕분에, 같은 해 10월 제5대 대통령 선거에서는 투표·개표 부정이 눈에 띄게 줄었다고 평가된다. 부정선거의 트라우마를 제도적으로 극복하려 한 시도였다.',
+    video:null,
+    connections:['plot_1960_01'],
+    tags:['person','서울','중앙선거관리위원회','선거제도'],
+    sources:['중앙선거관리위원회사이버선거역사관'] }
+
+];

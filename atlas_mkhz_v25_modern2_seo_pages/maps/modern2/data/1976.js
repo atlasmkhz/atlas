@@ -1,0 +1,78 @@
+// data/1976.js — 1976년 사건 데이터
+// 근현대 (Modern-Contemporary, 1945~1993)
+// 이 파일은 index.html에서 <script src="data/1976.js"></script> 로 불립니다.
+// 아직 데이터가 채워지지 않은 빈 골격 파일이다 — 연도 레이아웃만 먼저 잡아둔 상태.
+
+const EVENTS_1976 = [
+
+  { id:'movement_1976_01', year:1976, visible_from:1976, visible_until:1976,
+    month:0, day:23, type:'movement', priority:2,
+    title_ko:'원주선언 — 교회 일치 운동의 결집',
+    title_en:'The Wonju Declaration',
+    title_ja:'原州宣言',
+    place_ko:'강원도 원주교구',
+    lat:37.339, lng:127.939,
+    people:['문익환','함세웅'],
+    summary_ko:'1976년 1월 가톨릭 원주교구에서 신·구교 합동기도회를 통해 발표된 원주선언은, 천주교 정의구현 전국사제단 신부들과 문익환·문동환 등 개신교 목사들이 함께 서명한 인권·민주화 테제였다. 종교계가 교파를 초월해 처음으로 연대 의식을 다진 이 선언은, 두 달 뒤 명동성당에서 발표될 3·1민주구국선언의 직접적 원동력이 됐다. 긴급조치 9호로 모든 정치적 발언이 봉쇄된 상황에서, 종교가 거의 유일하게 남은 공적 발언의 통로가 되고 있었음을 보여준다.',
+    video:null,
+    connections:['political_1975_02','movement_1976_02'],
+    tags:['movement','원주','원주선언','종교계연대'],
+    sources:['오픈아카이브 3.1민주구국선언'] },
+
+  { id:'movement_1976_02', year:1976, visible_from:1976, visible_until:1977,
+    month:2, day:1, type:'movement', priority:1,
+    title_ko:'3·1 민주구국선언 — 명동사건',
+    title_en:'The March 1st Declaration for National Salvation and Democracy',
+    title_ja:'三・一民主救国宣言 — 明洞事件',
+    place_ko:'서울 (명동성당)',
+    lat:37.563, lng:126.987,
+    people:['윤보선','김대중','문익환','함석헌'],
+    summary_ko:'1976년 3월 1일 명동성당 3·1절 기념미사에서 윤보선·김대중·문익환·함석헌·함세웅 등 각계 지도층이 긴급조치 철폐, 민주인사 석방, 대통령직선제 회복, 박정희 정권 퇴진을 요구하는 3·1민주구국선언을 발표했다. 정부는 이를 "일부 재야인사들의 정부 전복 선동 사건"으로 규정하며 관련자 20명을 긴급조치 9호 위반으로 입건했다. 그러나 전직 대통령과 종교계·정치계가 함께한 이 선언은 거꾸로 재야 민주화 세력이 연합하는 기폭제가 됐고, 같은 해 가을부터 대학가의 유신 반대 투쟁이 다시 활발해지는 계기가 됐다.',
+    video:null,
+    connections:['movement_1976_01','political_1976_01'],
+    tags:['movement','서울','3·1민주구국선언','명동사건','윤보선','김대중'],
+    sources:['위키백과 3·1민주구국선언','사료로본한국사'] },
+
+  { id:'political_1976_01', year:1976, visible_from:1976, visible_until:1977,
+    month:2, day:22, type:'political', priority:2,
+    title_ko:'3·1민주구국선언 관련자 재판',
+    title_en:'Trial of the March 1st Declaration Signatories',
+    title_ja:'三・一民主救国宣言関係者裁判',
+    place_ko:'서울 (서울지방검찰청)',
+    lat:37.566, lng:126.978,
+    people:[],
+    summary_ko:'명동사건 직후 선언 관련자들이 연행돼 중앙정보부를 거쳐 서대문구치소에 수감됐다. 1977년 3월 22일 대법원 판결이 열리던 날, 윤보선·함석헌·지학순·박형규 등이 다시 한 번 "민주구국헌장"을 발표하며 굴하지 않는 모습을 보였다. 검찰은 이 사건을 종교계와 정치권의 결합으로 보고 용공조작에 나섰지만, 사건은 오히려 긴급조치 체제 아래서도 광범위한 저항이 존재함을 국내외에 알리는 효과를 낳았다.',
+    video:null,
+    connections:['movement_1976_02'],
+    tags:['political','서울','3·1민주구국선언','재판','민주구국헌장'],
+    sources:['오픈아카이브 3.1민주구국선언'] },
+
+  { id:'battle_1976_01', year:1976, visible_from:1976, visible_until:1976,
+    month:7, day:18, type:'battle', priority:1,
+    title_ko:'판문점 도끼 만행 사건',
+    title_en:'The Panmunjom Axe Murder Incident',
+    title_ja:'板門店斧蛮行事件',
+    place_ko:'판문점 공동경비구역',
+    lat:37.957, lng:126.667,
+    people:[],
+    summary_ko:'1976년 8월 18일 판문점 공동경비구역 내 미루나무 가지치기 작업을 감독하던 미군 장교들을 북한군 30여 명이 도끼와 흉기로 집단 구타해 2명을 살해했다. 미국은 즉각 핵폭격기까지 동원한 무력시위로 강경 대응했고, 한반도는 일시적으로 전면적 군사 충돌 위기에 직면했다. 사건 직후 북한 김일성 명의의 유감 표명으로 사태는 가라앉았지만, 판문점이 여전히 냉전의 최전선이며 작은 충돌도 전쟁으로 비화할 수 있다는 위태로운 현실을 그대로 드러냈다.',
+    video:null,
+    connections:[],
+    tags:['battle','판문점','판문점도끼만행사건','냉전'],
+    sources:['위키백과 판문점도끼만행사건','한국민족문화대백과사전'] },
+
+  { id:'plot_1976_01', year:1976, visible_from:1976, visible_until:1976,
+    month:9, day:24, type:'plot', priority:2,
+    title_ko:'코리아게이트 — 박동선 로비 스캔들',
+    title_en:'Koreagate — The Park Tong-sun Lobbying Scandal',
+    title_ja:'コリアゲート — 朴東宣ロビー事件',
+    place_ko:'워싱턴',
+    lat:38.90, lng:-77.04,
+    people:['박동선'],
+    summary_ko:'1976년 10월 워싱턴포스트는 박정희의 지시로 사업가 박동선과 중앙정보부가 미국 의회 의원들에게 매년 수십만~백만 달러의 뇌물을 제공해 친한 여론을 조성하려 했다고 폭로했다. 닉슨 시절 워터게이트에 빗대 "코리아게이트"로 불린 이 스캔들은 한미관계를 최악의 국면으로 몰았고, 카터 정부의 주한미군 철수 정책을 촉진하는 계기가 됐다. 권위주의 정권이 안보를 지키기 위해 동맹국 의회를 매수하려 했다는 사실이 드러나며, 인권 문제와 별개로 외교적 신뢰까지 무너뜨린 사건이었다.',
+    video:null,
+    connections:[],
+    tags:['plot','워싱턴','코리아게이트','박동선','한미관계'],
+    sources:['위키백과 코리아게이트','한국민족문화대백과사전 박동선사건'] }
+
+];
