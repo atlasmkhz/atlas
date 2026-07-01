@@ -803,6 +803,7 @@ body.route-mode-active [data-route-hidden] {
 
 /* ── 루트 웨이포인트 마커 ── */
 .route-wp-marker {
+  position: relative;
   display: flex; align-items: center; justify-content: center;
   border-radius: 50%;
   background: rgba(26, 23, 20, 0.72);
@@ -814,6 +815,33 @@ body.route-mode-active [data-route-hidden] {
 .route-wp-marker:hover {
   transform: scale(1.25);
   box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+/* ── 루트 웨이포인트 마커 깜빡임 ──
+   사이드 패널 항목 클릭(또는 마커 직접 클릭) 시 routeRenderer.js의
+   flashRouteMarker()가 이 클래스를 잠깐 붙였다 뗀다. 점이 몰린 지역
+   (평양·서울 등)에서 정확히 어느 지점인지 눈에 띄게 하기 위함. */
+.route-wp-marker-flash {
+  animation: route-wp-flash 0.55s ease-out 3;
+}
+.route-wp-marker-flash::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: route-wp-flash-ring 0.9s ease-out 2;
+  pointer-events: none;
+}
+@keyframes route-wp-flash {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.45); }
+}
+@keyframes route-wp-flash-ring {
+  0% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.6); }
 }
 
 /* ── 이동 경로 툴팁 ── */
@@ -847,6 +875,19 @@ body.route-mode-active [data-route-hidden] {
 }
 .route-panel.open {
   right: 0;
+}
+
+/* routeRenderer.js가 buildRoutePanelHtml()로 주입하는 최상위 래퍼.
+   이 규칙이 없으면 일반 블록 요소로 렌더링되어 내용물만큼 키가
+   늘어나 버리고, 부모 .route-panel의 overflow:hidden에 의해 목록
+   아래쪽이 그냥 잘려 보이는 문제가 있었다(웨이포인트가 많은 루트일수록
+   심함). flex 컨테이너로 만들어 .route-panel-list가 남는 높이를
+   차지하고 그 안에서만 스크롤되도록 한다. */
+.route-panel-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0; /* flex 자식의 overflow가 제대로 동작하려면 필요 */
 }
 
 /* 패널 헤더 */
@@ -888,6 +929,7 @@ body.route-mode-active [data-route-hidden] {
   list-style: none;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
   padding: 8px 0;
 }
 .route-panel-wp {

@@ -1,14 +1,18 @@
 // ═══════════════════════════════════════════════════════
 // routeRenderer.js — 루트(Route) 레이어 렌더링 엔진
 //
-// 의존: app.js (COLORS), map.js (map), renderer.js (openInfoPanel),
-//       infoPanel.js (openInfoPanel), routes/*.js (ROUTE_* 상수)
+// 의존: app.js (COLORS), map.js (map)
 //
 // 핵심 원칙:
 //   1. 기존 renderer.js / clearLayers()와 완전히 독립 — routeLayers[] 별도 관리
 //   2. 루트는 연도가 바뀌어도 유지된다 (연도 슬라이더 영향 받지 않음)
-//   3. 기존 카드(card_ref)가 있는 웨이포인트는 기존 openInfoPanel 재사용
-//   4. 루트 전용 웨이포인트는 별도 팝업(buildRouteWaypointHtml) 생성
+//   3. 마커든 우측 연표(사이드 패널) 항목이든, 클릭하면 정보창을 열지
+//      않는다 — 연표 자체에 이미 날짜·장소·제목이 있어 정보창이 중복
+//      이라는 판단. 클릭 시에는 지도 이동 + 해당 마커 깜빡임(flash) +
+//      연표 항목 강조만 한다.
+//   4. 웨이포인트 사이 이동 경로 선(segments)은 더 이상 그리지 않는다
+//      (화면을 어지럽힌다는 피드백). route.segments 데이터 자체는
+//      남겨뒀다 — 지도에 그리지만 않을 뿐.
 //   5. 루트 ON/OFF, 루트 간 전환은 전부 이 파일이 담당
 // ═══════════════════════════════════════════════════════
 
@@ -18,6 +22,9 @@
   // clearLayers()(renderer.js)는 이 배열을 절대 건드리지 않는다.
   let routeLayers = [];
   let activeRouteId = null;
+  // wp.id → Leaflet marker. 사이드 패널 항목을 클릭했을 때 지도 위
+  // 정확히 어떤 마커로 이동했는지 깜빡임(flash)으로 보여주기 위해 추적한다.
+  let routeMarkerById = {};
 
   // ── 루트 데이터 레지스트리 ─────────────────────────────────
   // routes/*.js 파일이 로드되면 여기에 등록된다.
@@ -60,6 +67,7 @@
       try { if (map.hasLayer(layer)) map.removeLayer(layer); } catch (_) { }
     });
     routeLayers.length = 0;
+    routeMarkerById = {};
   }
 
   // ── 웨이포인트 타입별 색상 ────────────────────────────────
@@ -195,7 +203,7 @@
     <span class="route-panel-period">${route.period}</span>
     <h2 class="route-panel-name">${route.name}</h2>
     <p class="route-panel-tagline">${route.tagline || ''}</p>
-    <p class="route-panel-hint">지도의 점을 눌러 각 순간을 확인하세요 · 총 ${route.waypoints.length}개 지점</p>
+    <p class="route-panel-hint">지도의 점을 눌러 위치를 확인하세요 · 총 ${route.waypoints.length}개 지점</p>
   </div>
   <ul class="route-panel-list">${wpRows}</ul>
   <button class="route-panel-close-btn" onclick="window.closeRoute && window.closeRoute()">
@@ -227,62 +235,99 @@
     const wpMap = {};
     route.waypoints.forEach(wp => { wpMap[wp.id] = wp; });
 
-    // ── 1. 이동 경로 선 먼저 그리기 ──
-    route.segments.forEach(seg => {
-      const from = wpMap[seg.from];
-      const to = wpMap[seg.to];
-      if (!from || !to) return;
+    // (이동 경로 선은 더 이상 그리지 않는다 — 웨이포인트가 많은 루트일수록
+    // 선이 화면을 어지럽히기만 하고, 정보 가치도 낮다는 피드백에 따라
+    // 제거했다. route.segments 데이터 자체는 남겨둔다 — 나중에 다시
+    // 쓰고 싶어질 수도 있고, 지우면 각 route 파일에서도 다 들어내야 해서
+    // 굳이 지금 손댈 이유가 없다.)
 
-      const style = getSegmentStyle(seg, route.color);
-      const line = L.polyline(
-        [[from.lat, from.lng], [to.lat, to.lng]],
-        style
-      ).addTo(map);
-
-      // 이동 경로 클릭 시 이동 이유 툴팁
-      if (seg.note) {
-        line.bindTooltip(seg.note, {
-          direction: 'top', sticky: true, opacity: 0.85,
-          className: 'route-seg-tooltip'
-        });
-      }
-      routeLayers.push(line);
-    });
-
-    // ── 2. 웨이포인트 마커 그리기 ──
+    // ── 웨이포인트 마커 그리기 ──
     route.waypoints.forEach(wp => {
       const icon = buildWaypointIcon(wp, route.color);
       const marker = L.marker([wp.lat, wp.lng], { icon, zIndexOffset: 500 }).addTo(map);
 
+      // 마커를 클릭해도 더 이상 정보창을 열지 않는다 — 우측 연표에 이미
+      // 날짜·장소·제목이 있어 정보창이 중복이라는 피드백에 따라, 지도
+      // 위 마커 클릭도 연표 항목 클릭과 동일하게 "위치 확인(강조+깜빡임)"
+      // 만 하도록 통일했다.
       marker.on('click', () => {
-        if (wp.card_ref) {
-          // 기존 카드가 있으면 기존 팝업 사용
-          if (typeof navigateToEvent === 'function') {
-            navigateToEvent(wp.card_ref);
-          }
-        } else {
-          // 루트 전용 웨이포인트
-          if (window.openInfoPanel) {
-            openInfoPanel(buildRouteWaypointHtml(wp, route.name));
-          }
-        }
-        // 사이드 패널의 해당 항목 강조
         highlightPanelItem(wp.id);
+        flashRouteMarker(wp.id);
       });
 
+      marker._origLatLng = [wp.lat, wp.lng];
+      routeMarkerById[wp.id] = marker;
       routeLayers.push(marker);
     });
 
-    // ── 3. 루트 사이드 패널 표시 ──
+    // ── 루트 사이드 패널 표시 ──
     showRoutePanel(route);
 
-    // ── 4. 지도 범위를 루트 전체에 맞춤 ──
+    // ── 지도 범위를 루트 전체에 맞춤 ──
     const bounds = route.waypoints
       .filter(wp => wp.lat && wp.lng)
       .map(wp => [wp.lat, wp.lng]);
     if (bounds.length > 1) {
       map.fitBounds(bounds, { padding: [40, 40], maxZoom: 5 });
     }
+
+    // ── 겹친 마커 펼치기 ──
+    // 상하이·경성처럼 여러 웨이포인트가 같은 도시(거의 같은 좌표)에
+    // 몰리면 화면상 한 점으로 겹쳐 보여 클릭하기 어려웠다. fitBounds
+    // 이후(줌이 확정된 뒤) 화면 픽셀 기준으로 가까운 마커들을 원형으로
+    // 살짝 펼친다.
+    map.once('moveend', declutterRouteMarkers);
+  }
+
+  // 화면 좌표 기준으로 가까운 마커들을 찾아 작은 원형으로 펼친다.
+  // renderer.js의 declutterMarkers()와 같은 접근이지만 routeMarkerById를
+  // 대상으로 하고, 원위치는 marker._origLatLng에 저장해 둔 값으로 매번
+  // 다시 계산한다(줌이 바뀌어도 누적 오차 없이 정확하게 펼쳐지도록).
+  function declutterRouteMarkers() {
+    const ids = Object.keys(routeMarkerById);
+    if (!ids.length) return;
+    const threshold = 26; // 픽셀: 이보다 가까우면 겹침으로 판단
+    const pts = ids.map(id => {
+      const marker = routeMarkerById[id];
+      const p = map.latLngToLayerPoint(L.latLng(marker._origLatLng[0], marker._origLatLng[1]));
+      return { id, marker, x: p.x, y: p.y };
+    });
+    const used = new Array(pts.length).fill(false);
+    for (let i = 0; i < pts.length; i++) {
+      if (used[i]) continue;
+      const group = [i];
+      for (let j = i + 1; j < pts.length; j++) {
+        if (used[j]) continue;
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        if (Math.sqrt(dx * dx + dy * dy) < threshold) {
+          group.push(j);
+          used[j] = true;
+        }
+      }
+      used[i] = true;
+      if (group.length > 1) {
+        const cx = pts[i].x, cy = pts[i].y;
+        const radius = Math.max(16, group.length * 6.5);
+        group.forEach((idx, k) => {
+          const angle = (2 * Math.PI * k) / group.length - Math.PI / 2;
+          const nx = cx + radius * Math.cos(angle);
+          const ny = cy + radius * Math.sin(angle);
+          pts[idx].marker.setLatLng(map.layerPointToLatLng(L.point(nx, ny)));
+        });
+      } else {
+        // 단독 마커는 원래 좌표 유지
+        pts[i].marker.setLatLng(L.latLng(pts[i].marker._origLatLng[0], pts[i].marker._origLatLng[1]));
+      }
+    }
+  }
+
+  // 루트가 열려있는 동안 줌이 바뀌면(예: 사용자가 지역을 확대) 펼침
+  // 간격도 다시 계산해야 자연스럽다. map.js의 zoomend 핸들러는 루트
+  // 모드일 때 safeRender를 건너뛰도록 이미 되어 있으므로, 여기서
+  // 별도로 덧붙여도 서로 간섭하지 않는다.
+  if (typeof map !== 'undefined' && map && typeof map.on === 'function') {
+    map.on('zoomend', () => { if (activeRouteId) declutterRouteMarkers(); });
   }
 
   // ── 루트 사이드 패널 ──────────────────────────────────────────
@@ -313,13 +358,26 @@
     if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+  // ── 지도 위 마커 깜빡임 ──────────────────────────────────────
+  // 사이드 패널 항목을 클릭하면 지도가 해당 좌표로 이동은 하지만,
+  // 점들이 몰려있는 지역(상하이·경성 등)에서는 정확히 "어느 점"인지
+  // 구분이 안 되는 문제가 있었다. 대상 마커에 잠깐 확장되는 링 애니메이션을
+  // 걸어 시선을 정확히 그 지점으로 모은다.
+  function flashRouteMarker(wpId) {
+    const marker = routeMarkerById[wpId];
+    const el = marker && marker._icon && marker._icon.querySelector('.route-wp-marker');
+    if (!el) return;
+    // 연속 클릭 시 애니메이션이 재시작되도록 클래스를 한 번 뗐다가 다시 붙인다.
+    el.classList.remove('route-wp-marker-flash');
+    void el.offsetWidth; // 강제 리플로우 — 같은 클래스를 다시 붙여도 애니메이션이 재생되게 함
+    el.classList.add('route-wp-marker-flash');
+    window.setTimeout(() => { el.classList.remove('route-wp-marker-flash'); }, 1800);
+  }
+
   // ── 특정 웨이포인트로 지도 이동 ──────────────────────────────
-  // 우측 연표(사이드 패널) 항목 클릭 시 호출된다. 패널 항목 자체에
-  // 이미 날짜·장소·제목이 담겨 있어 정보창이 중복이므로, 여기서는
-  // 지도 이동 + 하이라이트만 하고 정보창(카드 팝업이든 루트 전용
-  // 팝업이든)은 열지 않는다. (지도 위 마커를 "직접" 클릭했을 때는
-  // 기존대로 정보창이 뜬다 — marker.on('click') 참고. 그 정보창 안의
-  // "관련 사건" 링크로 다른 도시로 이동하는 기능은 그대로 유지된다.)
+  // 우측 연표(사이드 패널) 항목 클릭 시 호출된다. 지도 이동 + 강조 +
+  // 마커 깜빡임만 한다 — 정보창은 열지 않는다(위 marker.on('click')과
+  // 동일한 동작으로 통일).
   window.focusRouteWaypoint = function (routeId, wpId) {
     const route = ROUTE_REGISTRY[routeId];
     if (!route) return;
@@ -328,6 +386,8 @@
 
     map.setView([wp.lat, wp.lng], Math.max(map.getZoom(), 6), { animate: true });
     highlightPanelItem(wpId);
+    // fitBounds/setView 애니메이션이 끝난 뒤 깜빡여야 위치가 확실히 보인다.
+    window.setTimeout(() => flashRouteMarker(wpId), 350);
   };
 
   // ── 루트 닫기 ────────────────────────────────────────────────
