@@ -29,6 +29,31 @@
     ROUTE_REGISTRY[routeObj.id] = routeObj;
   };
 
+  // ── 루트 모드 UI 전환 ──────────────────────────────────────
+  // 루트가 열려있는 동안 슬라이더를 움직이면 renderYear()가 layers[]를
+  // 새로 그리면서 루트 마커(routeLayers[], 별도 배열이라 안 지워짐)와
+  // 시각적으로 겹친다. 이걸 막기 위해 루트가 열리는 동안은 슬라이더·
+  // 헤더·연도표시·범례/레이어 토글을 통째로 숨긴다 — 기존 렌더링 로직
+  // (renderYear, clearLayers 등)은 전혀 건드리지 않고, 순수하게 "이
+  // UI를 보이지 않게 한다"는 화면 레벨의 조치만 한다.
+  const ROUTE_MODE_HIDE_SELECTORS = [
+    '.header', '.year-display', '.era-card', '.timeline', '.right-stack'
+  ];
+
+  function enterRouteMode() {
+    document.body.classList.add('route-mode-active');
+    ROUTE_MODE_HIDE_SELECTORS.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => { el.dataset.routeHidden = '1'; });
+    });
+  }
+
+  function exitRouteMode() {
+    document.body.classList.remove('route-mode-active');
+    document.querySelectorAll('[data-route-hidden]').forEach(el => {
+      delete el.dataset.routeHidden;
+    });
+  }
+
   // ── 루트 레이어 전체 제거 ─────────────────────────────────
   function clearRouteLayers() {
     routeLayers.forEach(layer => {
@@ -158,12 +183,19 @@
       </li>`;
     }).join('');
 
+    // 히어로 이미지 — 루트에 지정된 것이 있으면 배경으로, 없으면
+    // 텍스트만 있는 대신 은은한 그라디언트 배경을 깔아 "빈 느낌"을 줄인다.
+    const heroStyle = route.hero_image
+      ? `background-image:linear-gradient(180deg, rgba(20,17,14,0.15), rgba(20,17,14,0.92)), url('${route.hero_image}');`
+      : `background:linear-gradient(135deg, ${route.color}22, rgba(20,17,14,0.9));`;
+
     return `
 <div class="route-panel-wrap">
-  <div class="route-panel-hero">
+  <div class="route-panel-hero" style="${heroStyle}">
     <span class="route-panel-period">${route.period}</span>
     <h2 class="route-panel-name">${route.name}</h2>
     <p class="route-panel-tagline">${route.tagline || ''}</p>
+    <p class="route-panel-hint">지도의 점을 눌러 각 순간을 확인하세요 · 총 ${route.waypoints.length}개 지점</p>
   </div>
   <ul class="route-panel-list">${wpRows}</ul>
   <button class="route-panel-close-btn" onclick="window.closeRoute && window.closeRoute()">
@@ -179,6 +211,7 @@
 
     clearRouteLayers();
     activeRouteId = routeId;
+    enterRouteMode();
 
     // 웨이포인트 맵 (id → 객체, 좌표)
     const wpMap = {};
@@ -291,6 +324,7 @@
   window.closeRoute = function () {
     clearRouteLayers();
     hideRoutePanel();
+    exitRouteMode();
     activeRouteId = null;
   };
 

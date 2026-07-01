@@ -23,6 +23,7 @@ const ROUTE_HONG_BEOM_DO = {
   tagline: '함경도 산포수에서 봉오동·청산리의 영웅으로, 카자흐스탄 극장 수위로, 그리고 75년 만의 귀환',
   color: '#c8a827',
   total_waypoints: 26,
+  hero_image: 'assets/images/entity/person/person_hong_beom_do_01.webp',
 
   // 기존 카드 중 이 루트와 연결되는 것들 (지도 렌더러가 강조 표시)
   card_refs: [

@@ -37,6 +37,16 @@
     { key:'contemporary',name:'현대',    period:'1993–현재', ready:false, url:null }
   ];
 
+  // ── 루트 목록 — 루트가 늘어날 때마다 이 배열에 항목 하나만 추가한다.
+  // routeId는 routes/*.js가 registerRoute()로 등록하는 route.id와 같아야
+  // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
+  // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
+  const ROUTE_HUB_ITEMS = [
+    { routeId:'hong_beom_do', name:'홍범도', period:'1868–2021', tagline:'포수에서 현충원까지', ready:true, thumbnail:null },
+    { routeId:'baekbeom',     name:'백범 김구', period:'1876–1949', tagline:'준비 중', ready:false, thumbnail:null },
+    { routeId:'uiyeoldan',    name:'의열단', period:'1919–1935', tagline:'준비 중', ready:false, thumbnail:null },
+  ];
+
   const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };
 
   document.addEventListener('DOMContentLoaded', init);
@@ -75,6 +85,46 @@
     eraHubClose?.addEventListener('click', window.closeEraHub);
     eraHubScrim?.addEventListener('click', window.closeEraHub);
 
+    // ── 루트 선택 허브 (routeHub) ── era-hub와 완전히 같은 패턴을
+    // 재사용한다. 카드를 누르면 허브를 닫고 routeRenderer.js의
+    // window.openRoute(routeId)를 호출한다.
+    const routeHub = document.getElementById('routeHub');
+    const routeHubScrim = document.getElementById('routeHubScrim');
+    const routeHubClose = document.getElementById('routeHubClose');
+    const routeHubGrid = document.getElementById('routeHubGrid');
+
+    if (routeHubGrid && !routeHubGrid.dataset.built) {
+      routeHubGrid.dataset.built = '1';
+      routeHubGrid.innerHTML = ROUTE_HUB_ITEMS.map(renderRouteCard).join('');
+    }
+
+    window.openRouteHub = function(){
+      if (!routeHub) return;
+      routeHub.classList.add('open');
+      routeHub.setAttribute('aria-hidden', 'false');
+      routeHubScrim?.classList.add('open');
+      lockBodyScroll(true);
+    };
+    window.closeRouteHub = function(){
+      if (!routeHub) return;
+      routeHub.classList.remove('open');
+      routeHub.setAttribute('aria-hidden', 'true');
+      routeHubScrim?.classList.remove('open');
+      lockBodyScroll(false);
+    };
+
+    routeHubClose?.addEventListener('click', window.closeRouteHub);
+    routeHubScrim?.addEventListener('click', window.closeRouteHub);
+
+    routeHubGrid?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.era-card-item');
+      if (!btn || btn.classList.contains('disabled')) return;
+      const item = ROUTE_HUB_ITEMS.find(it => it.routeId === btn.dataset.routeId);
+      if (!item || !item.ready) return;
+      window.closeRouteHub();
+      if (typeof window.openRoute === 'function') window.openRoute(item.routeId);
+    });
+
     // ── 소개 페이지 (introPage) ── era-hub와 같은 scrim+lockBodyScroll
     // 패턴을 재사용한다. 첫 진입 자동 노출은 없고, 오직 "소개" 메뉴를
     // 직접 눌러야만 열린다.
@@ -102,6 +152,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
       if (eraHub.classList.contains('open')) window.closeEraHub();
+      else if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
       else if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
     });
 
@@ -133,14 +184,10 @@
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
       } else if (key === 'route') {
-        // 루트 허브 — 루트가 하나뿐이므로 지금은 바로 홍범도 루트를 열고
-        // 루트가 여러 개 생기면 이 분기를 루트 선택 오버레이로 교체한다.
+        // 루트 허브 — era-hub와 동일한 패턴으로 먼저 선택 화면을 보여준다.
         if (eraHub.classList.contains('open')) window.closeEraHub();
-        if (typeof window.openRoute === 'function') {
-          window.openRoute('hong_beom_do');
-        } else {
-          showComingSoon(NAV_LABELS[key] || key);
-        }
+        if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
+        window.openRouteHub();
       } else {
         showComingSoon(NAV_LABELS[key] || key);
       }
@@ -155,6 +202,21 @@
       <button type="button" class="era-card-item${disabledClass}" data-era-key="${item.key}">
         <span class="era-card-period">${item.period}</span>
         <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderRouteCard(item){
+    const statusClass = item.ready ? 'ready' : 'soon';
+    const statusText = item.ready ? '탐험하기' : '준비 중';
+    const disabledClass = item.ready ? '' : ' disabled';
+    const thumbStyle = item.thumbnail ? ` style="background-image:url('${item.thumbnail}');"` : '';
+    return `
+      <button type="button" class="era-card-item route-card-item${disabledClass}"
+              data-route-id="${item.routeId}"${thumbStyle}>
+        <span class="era-card-period">${item.period}</span>
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-tagline">${item.tagline || ''}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
   }

@@ -719,6 +719,17 @@
   .era-card-status.ready { background:rgba(58,130,97,0.12); color:#2c6b48; }
   .era-card-status.soon { background:rgba(58,53,44,0.08); color:#8a8276; }
 
+  /* ── 루트 카드 (route-card-item) — era-card-item 확장 ── */
+  .route-card-item {
+    background-size: cover;
+    background-position: center;
+    min-height: 92px;
+    justify-content: flex-end;
+  }
+  .era-card-tagline {
+    font-size: 11px; color:#7a7060; margin-top:-2px;
+  }
+
   @media (max-width:640px) {
     .era-hub { width:92%; padding:26px 20px; max-height:82vh; }
     .era-hub-grid { grid-template-columns:repeat(2, 1fr); gap:10px; }
@@ -726,6 +737,17 @@
     .era-card-name { font-size:13.5px; }
   }
 
+
+/* ── 루트 모드 — 기존 UI 숨김 ──
+   routeRenderer.js의 enterRouteMode()가 data-route-hidden 속성을 붙이면
+   해당 요소만 화면에서 사라진다. display:none이 아니라 visibility를
+   쓰는 이유는, 슬라이더 값(#slider의 value)이나 다른 요소 크기 계산에
+   기존 로직이 의존할 가능성을 차단하기 위해서다 — 레이아웃 공간은
+   유지하되 안 보이고 클릭도 안 되게만 한다. */
+body.route-mode-active [data-route-hidden] {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
 
 /* ════════════════════════════════════════════════════════
    루트(Route) 렌더링 스타일 — routeRenderer.js와 함께 동작
@@ -784,6 +806,14 @@
   padding: 18px 16px 14px;
   border-bottom: 1px solid rgba(184,152,96,0.18);
   flex-shrink: 0;
+  background-size: cover;
+  background-position: center 20%;
+}
+.route-panel-hint {
+  font-size: 10.5px;
+  color: var(--gold);
+  margin-top: 8px;
+  opacity: 0.85;
 }
 .route-panel-period {
   display: block;
