@@ -213,6 +213,16 @@
     activeRouteId = routeId;
     enterRouteMode();
 
+    // ── 기존 연도별 레이어 제거 ──
+    // 루트 레이어(routeLayers[])는 clearLayers()의 영향을 받지 않도록
+    // 일부러 독립시켰지만, 그 반대 방향은 막지 않았다 — 루트를 여는
+    // "이 순간"에 화면에 떠 있던 일반 연도 마커(layers[])와 세계사
+    // 배경(worldLayers[])은 루트와 무관하므로 반드시 지워야 한다.
+    // (슬라이더는 route-mode-active로 숨기지만, 데이터 레이어 자체는
+    //  안 지우면 루트 마커와 겹쳐 보이는 문제가 있었다.)
+    if (typeof clearLayers === 'function') clearLayers();
+    if (typeof clearWorldLayers === 'function') clearWorldLayers();
+
     // 웨이포인트 맵 (id → 객체, 좌표)
     const wpMap = {};
     route.waypoints.forEach(wp => { wpMap[wp.id] = wp; });
@@ -326,6 +336,12 @@
     hideRoutePanel();
     exitRouteMode();
     activeRouteId = null;
+
+    // 루트 진입 시 지웠던 연도별 레이어를 다시 그려 정상 화면으로 복귀.
+    if (typeof safeRender === 'function' && typeof currentDisplayYear === 'function') {
+      const y = currentDisplayYear();
+      if (y != null) safeRender(y);
+    }
   };
 
   // ── 루트 열기 (외부 호출용) ──────────────────────────────────
