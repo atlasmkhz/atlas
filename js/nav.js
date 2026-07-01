@@ -132,6 +132,15 @@
       } else if (key === 'intro') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
+      } else if (key === 'route') {
+        // 루트 허브 — 루트가 하나뿐이므로 지금은 바로 홍범도 루트를 열고
+        // 루트가 여러 개 생기면 이 분기를 루트 선택 오버레이로 교체한다.
+        if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (typeof window.openRoute === 'function') {
+          window.openRoute('hong_beom_do');
+        } else {
+          showComingSoon(NAV_LABELS[key] || key);
+        }
       } else {
         showComingSoon(NAV_LABELS[key] || key);
       }
