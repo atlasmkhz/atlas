@@ -86,6 +86,17 @@
   <div class="era-hub-grid" id="eraHubGrid"><!-- nav.js가 채운다 --></div>
 </div>
 
+<!-- ── 루트 선택 허브 — "루트" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     근대(1876~1945) 지도의 routeHub와 완전히 같은 구조를 재사용한다.
+     카드 목록은 nav.js의 ROUTE_HUB_ITEMS에서 관리한다. -->
+<div class="era-hub-scrim" id="routeHubScrim"></div>
+<div class="era-hub" id="routeHub" role="dialog" aria-modal="true" aria-label="루트 선택">
+  <button type="button" class="era-hub-close" id="routeHubClose" aria-label="닫기">×</button>
+  <div class="era-hub-title">루트를 선택하세요</div>
+  <div class="era-hub-sub">전투와 학살, 그 현장을 지도 위에서 따라갑니다.</div>
+  <div class="era-hub-grid" id="routeHubGrid"><!-- nav.js가 채운다 --></div>
+</div>
+
 <!-- ── 소개 페이지 — "소개" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
      근대 지도(index.html)와 똑같은 본문을 그대로 공유한다. 포털 전체
      공통 소개글이라, 어느 시대 지도에서 열어도 같은 내용이 보인다. -->
@@ -309,6 +320,11 @@
 <script src="js/timeline.js"></script>
 <script src="js/ui.js?v=20260627a"></script>
 <script src="js/nav.js"></script>
+<script src="js/routeRenderer.js"></script>
+<script src="routes/korean_war_battles.js"></script>
+<script src="routes/korean_war_massacres.js"></script>
+<script src="routes/syngman_rhee.js"></script>
+<script src="routes/kim_il_sung.js"></script>
 
 </body>
 </html>

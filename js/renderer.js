@@ -511,10 +511,14 @@ function safeRender(year) {
 }
 
 // ── 관련 사건 클릭 이동 ──
-// popupHtml()의 "관련 사건" 링크에서 호출된다. 다른 연도의 사건일 수도
-// 있으므로: (검색 중이면 먼저 해제) → 슬라이더를 그 사건의 연도로 옮기고
-// 다시 렌더링 → 지도를 그 위치로 이동 → 마커를 찾아 팝업을 연다.
-function navigateToEvent(id){
+// popupHtml()의 "관련 사건" 링크와 routeRenderer.js의 마커 클릭에서
+// 호출된다. 다른 연도의 사건일 수도 있으므로: (검색 중이면 먼저 해제) →
+// 슬라이더를 그 사건의 연도로 옮기고 다시 렌더링 → 지도를 그 위치로
+// 이동 → 마커를 찾아 팝업을 연다.
+// opts.openPanel = false 로 호출하면 정보창은 열지 않고 지도 이동만 한다
+// (루트 사이드 패널 항목 클릭 등, 이미 텍스트로 정보가 충분한 경우 용도).
+function navigateToEvent(id, opts){
+  const openPanel = !(opts && opts.openPanel === false);
   const target = findEventById(id);
   if(!target){ console.warn('관련 사건을 찾을 수 없음:', id); return; }
 
@@ -524,20 +528,29 @@ function navigateToEvent(id){
     clearSearch();
   }
 
-  const slider = document.getElementById('slider');
-  if(slider){
-    slider.value = target.year;
-    const yearNumEl = document.getElementById('yearNum');
-    if(yearNumEl) yearNumEl.textContent = target.year;
-    const ganjiEl = document.getElementById('ganji');
-    if(ganjiEl && typeof getGanji === 'function') ganjiEl.textContent = getGanji(target.year);
-    safeRender(target.year);
-    if (typeof updateEra === 'function') updateEra(target.year);
+  // 루트가 열려있는 동안에는 슬라이더/연도 렌더링을 건드리지 않는다 —
+  // safeRender(year)를 호출하면 그 연도의 모든 일반 사건 마커가 루트
+  // 마커 위에 겹쳐 그려지는 문제가 있었다(루트는 routeLayers[]로 독립
+  // 관리되어 clearLayers() 대상이 아니므로, 새로 그려진 layers[]가
+  // 그대로 남아 루트와 뒤섞여 보인다).
+  const routeActive = typeof getActiveRouteId === 'function' && getActiveRouteId();
+
+  if (!routeActive) {
+    const slider = document.getElementById('slider');
+    if(slider){
+      slider.value = target.year;
+      const yearNumEl = document.getElementById('yearNum');
+      if(yearNumEl) yearNumEl.textContent = target.year;
+      const ganjiEl = document.getElementById('ganji');
+      if(ganjiEl && typeof getGanji === 'function') ganjiEl.textContent = getGanji(target.year);
+      safeRender(target.year);
+      if (typeof updateEra === 'function') updateEra(target.year);
+    }
   }
 
   map.setView([target.lat, target.lng], Math.max(map.getZoom(), 7));
   // 새 사건의 정보창을 연다(기존 팝업 방식 대체). 마커 선택 링도 갱신.
-  if(window.openInfoPanel) openInfoPanel(popupHtml(target));
+  if(openPanel && window.openInfoPanel) openInfoPanel(popupHtml(target));
   const marker = eventMarkers.find(m => m._eventId === id);
   if(marker && typeof setSelectRing === 'function') setSelectRing(marker);
 }

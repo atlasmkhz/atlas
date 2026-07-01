@@ -41,6 +41,17 @@
 
   const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };
 
+  // ── 루트 목록 — 루트가 늘어날 때마다 이 배열에 항목 하나만 추가한다.
+  // routeId는 routes/*.js가 registerRoute()로 등록하는 route.id와 같아야
+  // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
+  // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
+  const ROUTE_HUB_ITEMS = [
+    { routeId:'korean_war_battles', name:'한국전쟁 주요 전투', period:'1950–1953', tagline:'인천상륙작전에서 장진호까지', ready:true, thumbnail:null },
+    { routeId:'korean_war_massacres', name:'학살의 기록',      period:'1948–1953', tagline:'제주에서 거창까지, 잊지 말아야 할 이름들', ready:true, thumbnail:null },
+    { routeId:'syngman_rhee', name:'이승만',                   period:'1875–1965', tagline:'독립운동가에서 하와이의 망명객으로', ready:true, thumbnail:null },
+    { routeId:'kim_il_sung', name:'김일성',                    period:'1912–1994', tagline:'항일유격대 대장에서 "수령"으로', ready:true, thumbnail:null },
+  ];
+
   document.addEventListener('DOMContentLoaded', init);
   if (document.readyState === 'complete' || document.readyState === 'interactive') init();
 
@@ -77,6 +88,46 @@
     eraHubClose?.addEventListener('click', window.closeEraHub);
     eraHubScrim?.addEventListener('click', window.closeEraHub);
 
+    // ── 루트 선택 허브 (routeHub) ── era-hub와 완전히 같은 패턴을
+    // 재사용한다. 카드를 누르면 허브를 닫고 routeRenderer.js의
+    // window.openRoute(routeId)를 호출한다.
+    const routeHub = document.getElementById('routeHub');
+    const routeHubScrim = document.getElementById('routeHubScrim');
+    const routeHubClose = document.getElementById('routeHubClose');
+    const routeHubGrid = document.getElementById('routeHubGrid');
+
+    if (routeHubGrid && !routeHubGrid.dataset.built) {
+      routeHubGrid.dataset.built = '1';
+      routeHubGrid.innerHTML = ROUTE_HUB_ITEMS.map(renderRouteCard).join('');
+    }
+
+    window.openRouteHub = function(){
+      if (!routeHub) return;
+      routeHub.classList.add('open');
+      routeHub.setAttribute('aria-hidden', 'false');
+      routeHubScrim?.classList.add('open');
+      lockBodyScroll(true);
+    };
+    window.closeRouteHub = function(){
+      if (!routeHub) return;
+      routeHub.classList.remove('open');
+      routeHub.setAttribute('aria-hidden', 'true');
+      routeHubScrim?.classList.remove('open');
+      lockBodyScroll(false);
+    };
+
+    routeHubClose?.addEventListener('click', window.closeRouteHub);
+    routeHubScrim?.addEventListener('click', window.closeRouteHub);
+
+    routeHubGrid?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.era-card-item');
+      if (!btn || btn.classList.contains('disabled')) return;
+      const item = ROUTE_HUB_ITEMS.find(it => it.routeId === btn.dataset.routeId);
+      if (!item || !item.ready) return;
+      window.closeRouteHub();
+      if (typeof window.openRoute === 'function') window.openRoute(item.routeId);
+    });
+
     // ── 소개 페이지 (introPage) ── era-hub와 같은 scrim+lockBodyScroll
     // 패턴을 재사용한다. 첫 진입 자동 노출은 없고, 오직 "소개" 메뉴를
     // 직접 눌러야만 열린다.
@@ -104,6 +155,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
       if (eraHub.classList.contains('open')) window.closeEraHub();
+      else if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
       else if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
     });
 
@@ -134,6 +186,10 @@
       } else if (key === 'intro') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
+      } else if (key === 'route') {
+        if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
+        window.openRouteHub();
       } else {
         showComingSoon(NAV_LABELS[key] || key);
       }
@@ -146,6 +202,18 @@
     const disabledClass = item.ready ? '' : ' disabled';
     return `
       <button type="button" class="era-card-item${disabledClass}" data-era-key="${item.key}">
+        <span class="era-card-period">${item.period}</span>
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderRouteCard(item){
+    const statusClass = item.ready ? 'ready' : 'soon';
+    const statusText = item.ready ? '입장 가능' : '준비 중';
+    const disabledClass = item.ready ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-route-id="${item.routeId}">
         <span class="era-card-period">${item.period}</span>
         <span class="era-card-name">${item.name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>

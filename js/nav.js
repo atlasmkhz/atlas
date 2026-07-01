@@ -42,9 +42,11 @@
   // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
   // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
   const ROUTE_HUB_ITEMS = [
-    { routeId:'hong_beom_do', name:'홍범도', period:'1868–2021', tagline:'포수에서 현충원까지', ready:true, thumbnail:null },
-    { routeId:'baekbeom',     name:'백범 김구', period:'1876–1949', tagline:'준비 중', ready:false, thumbnail:null },
-    { routeId:'uiyeoldan',    name:'의열단', period:'1919–1935', tagline:'준비 중', ready:false, thumbnail:null },
+    { routeId:'hong_beom_do',       name:'홍범도',      period:'1868–2021', tagline:'포수에서 현충원까지', ready:true, thumbnail:null },
+    { routeId:'kim_gu',             name:'백범 김구',    period:'1876–1949', tagline:'상놈의 아들에서 임시정부의 얼굴로', ready:true, thumbnail:null },
+    { routeId:'kim_won_bong',       name:'김원봉',      period:'1898–1958', tagline:'의열단을 만든 사람, 두 번 지워진 이름', ready:true, thumbnail:null },
+    { routeId:'righteous_struggle', name:'의열투쟁',    period:'1908–1932', tagline:'조선의 심장을 겨누다', ready:true, thumbnail:null },
+    { routeId:'japanese_atrocities',name:'일제 만행',   period:'1895–1945', tagline:'50년의 가해 기록', ready:true, thumbnail:null },
   ];
 
   const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };

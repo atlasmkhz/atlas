@@ -786,3 +786,234 @@
     .era-card-name { font-size:13.5px; }
   }
 
+/* ── 루트 모드 — 기존 UI 숨김 ──
+   routeRenderer.js의 enterRouteMode()가 data-route-hidden 속성을 붙이면
+   해당 요소만 화면에서 사라진다. display:none이 아니라 visibility를
+   쓰는 이유는, 슬라이더 값(#slider의 value)이나 다른 요소 크기 계산에
+   기존 로직이 의존할 가능성을 차단하기 위해서다 — 레이아웃 공간은
+   유지하되 안 보이고 클릭도 안 되게만 한다. */
+body.route-mode-active [data-route-hidden] {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   루트(Route) 렌더링 스타일 — routeRenderer.js와 함께 동작
+   ════════════════════════════════════════════════════════ */
+
+/* ── 루트 웨이포인트 마커 ── */
+.route-wp-marker {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(26, 23, 20, 0.72);
+  border: 1.5px solid currentColor;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.55);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.route-wp-marker:hover {
+  transform: scale(1.25);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+/* ── 이동 경로 툴팁 ── */
+.route-seg-tooltip {
+  background: rgba(26,23,20,0.88) !important;
+  border: 1px solid rgba(184,152,96,0.35) !important;
+  color: var(--paper) !important;
+  font-size: 11.5px !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5) !important;
+}
+.route-seg-tooltip::before { display: none !important; }
+
+/* ── 루트 사이드 패널 ── */
+.route-panel {
+  position: fixed;
+  top: var(--top-nav-height);
+  right: -320px; /* 기본 숨김 */
+  width: 300px;
+  height: calc(100dvh - var(--top-nav-height));
+  background: rgba(20,17,14,0.96);
+  border-left: 1px solid rgba(184,152,96,0.22);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: right 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.route-panel.open {
+  right: 0;
+}
+
+/* 패널 헤더 */
+.route-panel-hero {
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid rgba(184,152,96,0.18);
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center 20%;
+}
+.route-panel-hint {
+  font-size: 10.5px;
+  color: var(--gold);
+  margin-top: 8px;
+  opacity: 0.85;
+}
+.route-panel-period {
+  display: block;
+  font-size: 10.5px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+.route-panel-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--paper);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.route-panel-tagline {
+  font-size: 11px;
+  color: #9a907e;
+  line-height: 1.55;
+}
+
+/* 웨이포인트 목록 */
+.route-panel-list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  padding: 8px 0;
+}
+.route-panel-wp {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border-left: 2px solid transparent;
+  position: relative;
+}
+.route-panel-wp:hover { background: rgba(184,152,96,0.08); }
+.route-panel-wp.active {
+  background: rgba(184,152,96,0.13);
+  border-left-color: var(--gold);
+}
+.route-panel-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.route-panel-wp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.route-panel-wp-date {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.route-panel-wp-title {
+  font-size: 12.5px;
+  color: var(--paper);
+  font-weight: 600;
+  line-height: 1.35;
+}
+.route-panel-wp-place {
+  font-size: 10.5px;
+  color: #7a7060;
+}
+
+/* 닫기 버튼 */
+.route-panel-close-btn {
+  margin: 12px 14px;
+  padding: 8px 0;
+  background: rgba(184,152,96,0.12);
+  border: 1px solid rgba(184,152,96,0.28);
+  border-radius: 6px;
+  color: var(--gold);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.route-panel-close-btn:hover { background: rgba(184,152,96,0.22); }
+
+/* ── 루트 웨이포인트 팝업 (infoPanel 내부) ── */
+.route-waypoint-popup { padding: 4px 0; }
+.route-wp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.route-wp-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.route-wp-date {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.route-wp-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--paper);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.route-wp-place {
+  font-size: 12px;
+  color: #9a907e;
+  margin-bottom: 6px;
+}
+.route-wp-stay {
+  font-size: 11px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  background: rgba(184,152,96,0.12);
+  border-radius: 4px;
+  display: inline-block;
+}
+.route-wp-summary {
+  font-size: 13px;
+  color: var(--paper);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.route-wp-from {
+  font-size: 11px;
+  color: #7a7060;
+  font-style: italic;
+}
+
+/* ── 모바일 대응 ── */
+@media (max-width: 768px) {
+  .route-panel {
+    width: 100%;
+    right: -100%;
+    top: auto;
+    bottom: 0;
+    height: 55dvh;
+    border-left: none;
+    border-top: 1px solid rgba(184,152,96,0.22);
+    border-radius: 14px 14px 0 0;
+  }
+  .route-panel.open { right: 0; }
+}
+
