@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-generate_sitemap.py
-sitemap.xml을 생성한다. 메인 페이지 1건 + 실제로 생성된 모든 Event
-페이지를 포함한다. 존재하지 않는 URL은 절대 포함하지 않는다(404 방지
-원칙 — 기존 sitemap.xml 주석에 명시된 정책을 그대로 따른다).
+generate_sitemap.py (modern2)
+
+참고용 스크립트다 — 실제로 검색엔진에 제출하는 것은 메인 앱의
+build/generate_unified_sitemap.py가 만드는 통합 sitemap.xml(메인+
+modern2+양쪽 route를 전부 포함)이다. 이 스크립트는 modern2 event만
+담은 sitemap-modern2.xml을 별도로 만들어 두는 것뿐이라, 안 돌려도
+통합 sitemap.xml에는 영향이 없다.
 
 연도/시대를 하드코딩하지 않고, event/*.html 디렉토리를 그대로 스캔해서
-실제로 생성된 파일만 sitemap에 올린다 — 이렇게 해야 빌드 스크립트가
-실패해서 일부 페이지가 안 만들어진 경우에도 sitemap이 거짓말을 하지 않는다.
+실제로 생성된 파일만 sitemap에 올린다.
 """
 import glob
 import os
 
+BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
+MODERN2_ROOT = os.path.dirname(BUILD_DIR)
+
 SITE_ROOT = 'https://atlas.mkhz.kr'
 PATH_PREFIX = '/maps/modern2'
-EVENT_DIR = '/home/claude/work/photos_zip/maps/modern2/event'
-# modern2 전용 sitemap을 따로 만들되, 같은 도메인(atlas.mkhz.kr) 하위
-# 경로이므로 실제로는 메인 sitemap.xml에 이 URL들을 합치는 것이 더
-# 자연스럽다. 이 스크립트는 modern2 전용 sitemap-modern2.xml을 만들고,
-# 메인 sitemap.xml과의 통합은 build_all.py에서 별도로 처리한다.
-OUT_PATH = '/home/claude/work/photos_zip/maps/modern2/sitemap-modern2.xml'
+EVENT_DIR = os.path.join(MODERN2_ROOT, 'event')
+OUT_PATH = os.path.join(MODERN2_ROOT, 'sitemap-modern2.xml')
 
 def main():
     event_files = sorted(glob.glob(os.path.join(EVENT_DIR, '*.html')))

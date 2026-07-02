@@ -780,20 +780,22 @@ body.route-mode-active [data-route-hidden] {
    루트(Route) 렌더링 스타일 — routeRenderer.js와 함께 동작
    ════════════════════════════════════════════════════════ */
 
-/* ── 루트 웨이포인트 마커 ── */
+/* ── 루트 웨이포인트 마커 ──
+   지도 위 일반 마커(.atlas-marker)와 동일한 스타일 — 원형 배경/테두리
+   없이 아이콘 자체에 드롭섀도만 준다. 예전에는 원형 배지 스타일이라
+   지도 마커와 이질감이 있었는데, 그 문제를 고쳤다. */
 .route-wp-marker {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-  background: rgba(26, 23, 20, 0.72);
-  border: 1.5px solid currentColor;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.55);
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.12s ease;
+}
+.route-wp-marker svg {
+  position: relative; z-index: 2;
+  filter: drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 1px 2px rgba(0,0,0,0.6));
 }
 .route-wp-marker:hover {
-  transform: scale(1.25);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  transform: scale(1.15);
 }
 
 /* ── 이동 경로 툴팁 ── */

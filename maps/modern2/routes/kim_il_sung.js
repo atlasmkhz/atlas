@@ -26,7 +26,7 @@ const ROUTE_KIM_IL_SUNG = {
   period: '1912~1994',
   tagline: '보천보의 유격대원에서 조선민주주의인민공화국의 절대권력자로, 82년의 생애',
   color: '#8c2020',
-  total_waypoints: 22,
+  total_waypoints: 25,
   hero_image: null,
 
   card_refs: [
@@ -114,6 +114,32 @@ const ROUTE_KIM_IL_SUNG = {
       card_ref: null,
     },
 
+    // ── 6-1. 토지개혁과 계급 청산 ──────────────────────────────
+    {
+      id: 'wp_06a',
+      type: 'tragedy',
+      year: 1946, month: 3, day: 5,
+      title_ko: '토지개혁 — "무상몰수 무상분배"와 계급 청산',
+      place_ko: '평양',
+      lat: 39.0194, lng: 125.7381,
+      stay: null,
+      summary_ko: '북조선임시인민위원회 위원장으로서 5정보 이상 토지를 무상몰수해 소작농에게 무상분배하는 토지개혁을 단행했다. 농민의 지지를 얻기 위한 조치였지만, 대상이 된 지주와 그 가족은 재산을 몰수당한 채 "반동 계급"으로 분류돼 감시와 차별을 받았고, 저항하거나 도피를 시도한 이들 다수가 체포·처형되거나 강제 이주됐다. 수만 명의 지주 가족이 이 시기를 전후해 남쪽으로 탈출했다 — 정권 초기부터 계급에 따른 생사가 갈리는 통치 방식이 자리 잡았다.',
+      card_ref: null,
+    },
+
+    // ── 6-2. 정치범수용소 체제의 기원 ──────────────────────────
+    {
+      id: 'wp_06b',
+      type: 'tragedy',
+      year: 1947, month: null, day: null,
+      title_ko: '정치범수용소 — 사라지지 않는 체제의 시작',
+      place_ko: '함경남도 요덕 등 산간지대',
+      lat: 40.03, lng: 127.60,
+      stay: '1947~현재',
+      summary_ko: '정권 수립 이전부터 정치범과 "반혁명분자"를 격리 수용하는 정치범수용소(관리소) 체제를 만들기 시작했다. 요덕을 비롯한 산간 오지에 세워진 이 수용소들은 재판 없이 3대에 걸쳐 가족 전체를 가두는 연좌제 방식으로 운영됐다. 국제앰네스티 등은 현재도 여러 곳의 정치범수용소에 8만~12만 명이 수용돼 있는 것으로 추정한다. 김일성이 만든 이 체제는 그의 사후에도, 오늘날까지도 그대로 작동하고 있다 — 그가 세운 국가 폭력 장치 가운데 가장 오래, 가장 조용히 지속되는 것이다.',
+      card_ref: null,
+    },
+
     // ── 7. 조선민주주의인민공화국 수립 ──────────────────────────
     {
       id: 'wp_07',
@@ -138,6 +164,19 @@ const ROUTE_KIM_IL_SUNG = {
       stay: null,
       summary_ko: '무력에 의한 통일을 오래전부터 계획해 온 김일성은 소련 스탈린의 군사 지원 승인과 중국 마오쩌둥의 묵인을 얻어낸 뒤 전면 남침을 감행했다. 개전 초기 파죽지세로 낙동강까지 밀어붙였으나, 인천상륙작전 이후 전세가 뒤집히며 오히려 정권 자체가 무너질 위기에 몰렸다. 그를 구한 것은 중국인민지원군의 대규모 참전이었다.',
       card_ref: 'battle_1950_01',
+    },
+
+    // ── 8-1. 신천 사건 — 학살은 있었으나, 가해자는 논쟁 중 ──────
+    {
+      id: 'wp_08a',
+      type: 'tragedy',
+      year: 1950, month: 10, day: 13,
+      title_ko: '신천 사건 — 학살은 있었으나, 가해자는 논쟁 중',
+      place_ko: '황해도 신천군',
+      lat: 38.38, lng: 125.53,
+      stay: '1950.10~12',
+      summary_ko: '인천상륙작전 이후 국군과 유엔군이 북진하자, 북한 당국은 후퇴하며 지주·기독교인 등 "반혁명분자"로 분류된 주민들을 예비검속해 처형했다. 이에 맞서 지역 우익 인사들이 봉기해 치안대를 조직했고, 유엔군의 짧은 점령 기간(약 52일) 동안 우익 치안대와 잔류 좌익 세력 사이에 유혈 보복이 반복되며 다수의 민간인이 희생됐다. 그런데 북한은 이 학살의 책임을 전적으로 미군에게 돌려 "희생자 3만 5천 명"이라 발표하고, 김일성의 직접 지시로 1958년 신천군 학살 현장에 신천박물관을 세워 반미 교육의 장으로 활용해 왔다. 국제민주법률가협회(공산권 성향 단체)의 조사 외에는 이 주장을 뒷받침하는 독립적 증거가 없으며, 국내외 학계는 이를 좌우 주민 간의 내전적 유혈 충돌로 보는 견해가 유력하다. 실제 학살이 있었다는 사실과, 그 책임을 자신이 만든 체제 안에서 어떻게 서사화했는가는 별개의 문제다 — 신천은 그 둘이 뒤섞인 자리다.',
+      card_ref: null,
     },
 
     // ── 9. 8월종파사건 ──────────────────────────────────────
@@ -330,9 +369,12 @@ const ROUTE_KIM_IL_SUNG = {
     { from:'wp_03', to:'wp_04', move_type:'overland', line_style:'solid', note:'국경을 넘어 보천보로' },
     { from:'wp_04', to:'wp_05', move_type:'overland', line_style:'solid', note:'일본군 토벌을 피해 소련으로' },
     { from:'wp_05', to:'wp_06', move_type:'sea', line_style:'solid', note:'소련군과 함께 원산으로 귀환' },
-    { from:'wp_06', to:'wp_07', move_type:'overland', line_style:'solid', note:'평양에 권력 기반 구축' },
+    { from:'wp_06', to:'wp_06a', move_type:'overland', line_style:'solid', note:'평양에서 정책 시행' },
+    { from:'wp_06a', to:'wp_06b', move_type:'overland', line_style:'dashed', note:'수용소 체제 구축 (원격)' },
+    { from:'wp_06b', to:'wp_07', move_type:'overland', line_style:'solid', note:'평양에 권력 기반 구축' },
     { from:'wp_07', to:'wp_08', move_type:'overland', line_style:'solid', note:'남침 결정' },
-    { from:'wp_08', to:'wp_09', move_type:'overland', line_style:'dashed', note:'전후 권력 재편 — 정적 숙청' },
+    { from:'wp_08', to:'wp_08a', move_type:'overland', line_style:'dashed', note:'후퇴하며 벌어진 유혈 충돌 (원격)' },
+    { from:'wp_08a', to:'wp_09', move_type:'overland', line_style:'dashed', note:'전후 권력 재편 — 정적 숙청' },
     { from:'wp_09', to:'wp_10', move_type:'overland', line_style:'dashed', note:'대남 도발 노선 강화' },
     { from:'wp_10', to:'wp_11', move_type:'overland', line_style:'solid', note:'같은 해 잇단 도발' },
     { from:'wp_11', to:'wp_12', move_type:'overland', line_style:'solid', note:'같은 해 세 번째 도발' },

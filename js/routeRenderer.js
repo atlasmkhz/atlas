@@ -10,9 +10,13 @@
 //      않는다 — 연표 자체에 이미 날짜·장소·제목이 있어 정보창이 중복
 //      이라는 판단. 클릭 시에는 지도 이동 + 해당 마커 깜빡임(flash) +
 //      연표 항목 강조만 한다.
-//   4. 웨이포인트 사이 이동 경로 선(segments)은 더 이상 그리지 않는다
-//      (화면을 어지럽힌다는 피드백). route.segments 데이터 자체는
-//      남겨뒀다 — 지도에 그리지만 않을 뿐.
+//   4. 웨이포인트 사이 이동 경로 선(route.segments 기반)은 더 이상
+//      그리지 않는다 (화면을 어지럽힌다는 피드백). route.segments
+//      데이터 자체는 남겨뒀다 — 지도에 그리지만 않을 뿐. 이것과는
+//      별개로, 겹친 마커를 펼칠 때 원래 지점까지 잇는 가는 연결선
+//      (declutterRouteMarkers의 leg)은 그대로 그린다 — 이건 "이동
+//      경로"가 아니라 "같은 지역에서 나온 여러 사건"임을 보여주는
+//      용도로, 지도 화면의 declutterMarkers()와 동일한 동작이다.
 //   5. 루트 ON/OFF, 루트 간 전환은 전부 이 파일이 담당
 // ═══════════════════════════════════════════════════════
 
@@ -25,6 +29,11 @@
   // wp.id → Leaflet marker. 사이드 패널 항목을 클릭했을 때 지도 위
   // 정확히 어떤 마커로 이동했는지 깜빡임(flash)으로 보여주기 위해 추적한다.
   let routeMarkerById = {};
+  // 겹친 마커를 펼칠 때 그리는 가는 연결선(leg). declutterRouteMarkers가
+  // 줌이 바뀔 때마다 다시 계산하므로, 이전 선을 지우고 새로 그리기 위해
+  // routeLayers와는 별도로 추적한다(routeLayers에도 함께 넣어서 루트를
+  // 닫을 때는 같이 지워지게 한다).
+  let routeLegLines = [];
 
   // ── 루트 데이터 레지스트리 ─────────────────────────────────
   // routes/*.js 파일이 로드되면 여기에 등록된다.
@@ -68,6 +77,7 @@
     });
     routeLayers.length = 0;
     routeMarkerById = {};
+    routeLegLines.length = 0;
   }
 
   // ── 웨이포인트 타입별 색상 ────────────────────────────────
@@ -115,29 +125,44 @@
   }
 
   // ── 웨이포인트 마커 HTML ──────────────────────────────────
-  // 기존 .atlas-marker 스타일을 재사용하되 루트 전용 클래스 추가
+  // 지도 위 일반 마커(.atlas-marker, markerIcons.js)와 시각적으로
+  // 다르게 보인다는 피드백에 따라, 이제 같은 MARKER_SVG 아이콘 세트와
+  // 같은 스타일(원형 배경 없이, 픽토그램 자체에 드롭섀도만)을 그대로
+  // 재사용한다. 루트 웨이포인트 타입(birth/life/battle/tragedy/exile/
+  // political/death/repatriation)은 일반 사건 타입과 이름이 다르므로,
+  // 아래 매핑을 거쳐 가장 뜻이 가까운 MARKER_SVG 아이콘에 연결한다.
+  //   birth → birth(신설) / life → life(신설) / battle → battle
+  //   tragedy → massacre(가장 가까운 개념) / exile → migration
+  //   political → political / death → death(신설) / repatriation → repatriation(신설)
+  const WP_TYPE_TO_ICON = {
+    birth: 'birth',
+    life: 'life',
+    battle: 'battle',
+    tragedy: 'massacre',
+    exile: 'migration',
+    political: 'political',
+    death: 'death',
+    repatriation: 'repatriation',
+  };
+
   function buildWaypointIcon(wp, routeColor) {
     const color = WP_TYPE_COLOR[wp.type] || routeColor;
-    // 비극/사망/전투는 좀 더 크게, 나머지는 작게
-    const size = ['battle', 'tragedy', 'death', 'repatriation'].includes(wp.type) ? 28 : 22;
+    // 비극/사망/전투는 좀 더 크게, 나머지는 작게 (기존 크기 차등은 유지)
+    const size = ['battle', 'tragedy', 'death', 'repatriation'].includes(wp.type) ? 30 : 26;
     const half = size / 2;
 
-    // 아이콘 SVG — 타입별 간단한 심볼
-    const SYMBOLS = {
-      birth: '<circle cx="12" cy="12" r="5" fill="currentColor"/>',
-      life: '<rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/>',
-      battle: '<path d="M12 3l2.4 5.5 5.8.5-4.3 4 1.3 5.8L12 16l-5.2 2.8 1.3-5.8-4.3-4 5.8-.5z" fill="currentColor"/>',
-      tragedy: '<path d="M12 4l2 5h5l-4 3 1.5 5.5L12 15l-4.5 2.5L9 12 5 9h5z" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="12" y1="8" x2="12" y2="14" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/>',
-      exile: '<path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>',
-      political: '<circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/>',
-      death: '<line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2.5"/><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2.5"/>',
-      repatriation: '<path d="M12 4l0 12M7 12l5 5 5-5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-    };
+    // markerIcons.js가 이미 로드돼 있으면 그 아이콘 세트를 그대로 쓴다.
+    // (스크립트 로드 순서상 항상 그렇지만, 방어적으로 폴백을 둔다.)
+    const iconKey = WP_TYPE_TO_ICON[wp.type] || 'life';
+    const svgInner = (typeof MARKER_SVG !== 'undefined' && MARKER_SVG[iconKey])
+      ? MARKER_SVG[iconKey]
+      : '<circle cx="12" cy="12" r="6" fill="currentColor"/>'; // 폴백
 
-    const svgInner = SYMBOLS[wp.type] || SYMBOLS['life'];
+    // .atlas-marker와 동일한 구조 — 원형 배경/테두리 없이 아이콘만.
+    // CSS의 .route-wp-marker가 .atlas-marker와 같은 드롭섀도·호버 확대를 준다.
     const html =
       `<div class="route-wp-marker" style="color:${color};width:${size}px;height:${size}px;">`
-      + `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${svgInner}</svg>`
+      + `<svg viewBox="0 0 24 24" width="${size - 4}" height="${size - 4}" aria-hidden="true">${svgInner}</svg>`
       + `</div>`;
 
     return L.divIcon({
@@ -256,6 +281,7 @@
       });
 
       marker._origLatLng = [wp.lat, wp.lng];
+      marker._wpColor = WP_TYPE_COLOR[wp.type] || route.color;
       routeMarkerById[wp.id] = marker;
       routeLayers.push(marker);
     });
@@ -283,7 +309,20 @@
   // renderer.js의 declutterMarkers()와 같은 접근이지만 routeMarkerById를
   // 대상으로 하고, 원위치는 marker._origLatLng에 저장해 둔 값으로 매번
   // 다시 계산한다(줌이 바뀌어도 누적 오차 없이 정확하게 펼쳐지도록).
+  // renderer.js와 마찬가지로, 펼쳐진 마커마다 원래 지점(공통 출발점)까지
+  // 가는 연결선(leg)을 그린다 — 여러 사건이 같은 지역(상하이·경성 등)에서
+  // 나왔다는 것을 한눈에 보여주기 위함. 이 선은 웨이포인트 사이 "이동
+  // 경로"(segments, 더 이상 그리지 않음)와는 다른 것이니 혼동하지 말 것.
   function declutterRouteMarkers() {
+    // 이전 프레임의 연결선을 먼저 지운다 — 줌이 바뀔 때마다 새로 계산되므로
+    // 지우지 않으면 누적된다.
+    routeLegLines.forEach(line => {
+      try { if (map.hasLayer(line)) map.removeLayer(line); } catch (_) { }
+      const idx = routeLayers.indexOf(line);
+      if (idx !== -1) routeLayers.splice(idx, 1);
+    });
+    routeLegLines.length = 0;
+
     const ids = Object.keys(routeMarkerById);
     if (!ids.length) return;
     const threshold = 26; // 픽셀: 이보다 가까우면 겹침으로 판단
@@ -308,12 +347,21 @@
       used[i] = true;
       if (group.length > 1) {
         const cx = pts[i].x, cy = pts[i].y;
+        const originLatLng = map.layerPointToLatLng(L.point(cx, cy));
         const radius = Math.max(16, group.length * 6.5);
         group.forEach((idx, k) => {
           const angle = (2 * Math.PI * k) / group.length - Math.PI / 2;
           const nx = cx + radius * Math.cos(angle);
           const ny = cy + radius * Math.sin(angle);
-          pts[idx].marker.setLatLng(map.layerPointToLatLng(L.point(nx, ny)));
+          const newLatLng = map.layerPointToLatLng(L.point(nx, ny));
+          pts[idx].marker.setLatLng(newLatLng);
+          // 공통 출발점(원래 좌표)까지 가는 가는 연결선
+          const leg = L.polyline(
+            [originLatLng, newLatLng],
+            { color: pts[idx].marker._wpColor || '#b89860', weight: 1, opacity: 0.45, interactive: false }
+          ).addTo(map);
+          routeLegLines.push(leg);
+          routeLayers.push(leg);
         });
       } else {
         // 단독 마커는 원래 좌표 유지

@@ -97,9 +97,23 @@ window.onload = () => {
       // (쿼리가 없는 일반 진입)은 한 글자도 바뀌지 않는다 — 이 분기가
       // 없으면 항상 아래의 기존 코드 그대로 실행된다. (1876~1945 메인
       // 지도의 js/app.js에 추가한 것과 동일한 패턴)
-      const eventIdFromUrl = new URLSearchParams(window.location.search).get('event');
+      const params = new URLSearchParams(window.location.search);
+      const eventIdFromUrl = params.get('event');
       if (eventIdFromUrl && typeof navigateToEvent === 'function') {
         navigateToEvent(eventIdFromUrl);
+        return;
+      }
+      // ── SEO 루트 페이지 → 지도 진입 (route/*.html의 "지도에서 루트
+      // 보기" 버튼용). ?route={routeId} 형태로 오면 openRoute를 호출한다.
+      // 웨이포인트 전용 페이지는 ?route={routeId}&wp={wpId}까지 넘어와,
+      // 루트를 연 뒤 그 지점으로 바로 포커스한다.
+      const routeIdFromUrl = params.get('route');
+      if (routeIdFromUrl && typeof window.openRoute === 'function') {
+        window.openRoute(routeIdFromUrl);
+        const wpIdFromUrl = params.get('wp');
+        if (wpIdFromUrl && typeof window.focusRouteWaypoint === 'function') {
+          window.setTimeout(() => window.focusRouteWaypoint(routeIdFromUrl, wpIdFromUrl), 400);
+        }
         return;
       }
       // syncToYear(timeline.js)가 #yearNum·干支·지도 렌더·시대부제·

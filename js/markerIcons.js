@@ -35,7 +35,18 @@ const MARKER_SVG = {
   // 이동·망명 — 경로 화살표
   migration: '<path d="M4 16c3-7 9-9 14-9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M14 4l4 3-4 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="16" r="1.8" fill="currentColor"/>',
   // 조직 결성 — 마름모 결정체
-  organization: '<path d="M12 3l7 9-7 9-7-9z" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 8l3.2 4-3.2 4-3.2-4z" fill="currentColor"/>'
+  organization: '<path d="M12 3l7 9-7 9-7-9z" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 8l3.2 4-3.2 4-3.2-4z" fill="currentColor"/>',
+  // ── 아래 4개는 루트(routeRenderer.js) 전용 웨이포인트 타입을 위해 추가됨.
+  //    기존 타입과 겹치지 않는 route 고유 의미(출생·일상·사망·귀환)를
+  //    같은 미니멀 픽토그램 스타일로 그린다.
+  // 출생 — 새싹
+  birth: '<path d="M12 20V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 11c0-3.2-2.2-5.2-5.2-5.2 0 3.2 2.2 5.2 5.2 5.2z" fill="currentColor"/><path d="M12 13.5c0-3 2.1-5 5-5 0 3-2.1 5-5 5z" fill="currentColor"/>',
+  // 생활·노동 — 집
+  life: '<path d="M4 11.5L12 4l8 7.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10v9.5h11V10" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>',
+  // 사망 — 묘비 십자가
+  death: '<path d="M12 4v16M8 9.2h8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>',
+  // 귀환·봉환 — 위로 향하는 화살표
+  repatriation: '<path d="M12 20V6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M6.8 11.2L12 6l5.2 5.2" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
 };
 
 // 알 수 없는 type을 위한 기본 도형(점). 데이터에 없는 type이 들어와도
