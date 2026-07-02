@@ -286,32 +286,19 @@ const YOUTUBE_VIDEOS = [
     thumbnail_override: null,
   },
 
-  // ── 세월호 2편 ──
+  // ── 세월호 ──
   // 2014년은 근대(1876~1945)·근현대(1945~1993) 어느 지도 범위에도
   // 들지 않아 연결할 카드가 없다. 지시대로 연결 없이 그대로 올린다.
+  // (추모곡 플레이리스트 편은 제외 — 지시에 따라 이 한 편만 넣는다.)
   {
     id: 'v_sewol_promise',
-    youtube_id: null,
+    youtube_id: 'PiVxckND7Xw',
     title: '잊지 않겠다는 약속: 세월호 참사, 그날의 진심과 우리의 무관심',
     description: '"침묵은 죄가 되고, 무관심은 바다가 되었습니다." 세월호 참사 10주기를 맞아, 우리가 잊지 말아야 할 진심과 때로는 뼈아픈 질문을 담은 AI 뮤직필름.',
     published: '2025-08-23',
     duration: '3:58',
     playlist: 'atlas_modern',
     tags: ['세월호'],
-    related_events: [],
-    related_events_modern2: [],
-    related_routes: [],
-    thumbnail_override: null,
-  },
-  {
-    id: 'v_sewol_304',
-    youtube_id: null,
-    title: '잊지 않겠다는 약속: 304명의 별을 기억하는 세월호 추모곡 플레이리스트',
-    description: '"우리는 왜 이 아픔을 겪어야 했습니까?" 세월호 참사 304명의 희생자를 기억하며 만든 추모곡 모음. 아직 끝나지 않은 물음과 책임에 대한 질문을 노래한다.',
-    published: '2025-08-24',
-    duration: '10:02',
-    playlist: 'atlas_modern',
-    tags: ['세월호', '추모곡'],
     related_events: [],
     related_events_modern2: [],
     related_routes: [],
