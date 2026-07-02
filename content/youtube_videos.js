@@ -1,0 +1,293 @@
+// content/youtube_videos.js
+// 유튜브 콘텐츠 갤러리 데이터. js/projectHub.js가 이 배열을 읽어
+// "프로젝트 > 유튜브 갤러리" 탭에 카드로 그린다.
+//
+// ⚠️ youtube_id가 아직 비어있다(null). 스크린샷(YouTube Studio 재생목록
+// 화면)만으로는 실제 영상 URL의 11자리 ID를 알 수 없기 때문이다.
+// youtube_id가 null이면 카드에 "영상 연결 대기중"이 뜨고 썸네일도
+// 표시되지 않는다 — 두목님이 각 영상의 실제 URL(youtube.com/watch?v=
+// 뒤 11자리)만 채워 넣으면 즉시 정상 표시된다. 그 외 제목·설명·태그·
+// 관련 카드/루트는 이미 다 채워뒀다.
+//
+// playlist 필드: 'atlas_modern'(ATLAS|지도 위에서 다시 읽는 한국사),
+// 'memory_old'(기억의 연대기|오래된 기억들), 'philosophy'(철학과 SF),
+// 'quotes'(위인의 문장). 갤러리에서 재생목록별 필터링에 쓸 수 있다.
+//
+// 제외한 것(이 배열에 없음): 파동의 연대기(라이브 스트림), 세월호 2편
+// (2014년은 근현대 지도 범위 1945~1993 밖이라 카드 연결이 아직 불가 —
+// 나중에 별도 시기 지도가 생기면 추가), 시사풍자 5편(형 죽지마유·그때
+// 그사람들이유·군인본분·씨를 말려유·길을 묻다 1/2, 채널에서 일부공개
+// 전환 예정이라 애초에 갤러리 대상 아님), 리릭비디오(정지 이미지+가사
+// 자막만 있고 실제 영상이 없는 형식) 4편 — 날으는 홍범도가 포크/록
+// 리믹스 2편, 2025 독립군가 리메이크, 5월 광주: 윤상원의 노래.
+
+const YOUTUBE_VIDEOS = [
+
+  {
+    id: 'v_liberation_tragedy_1',
+    youtube_id: 'QjMDBgA3Low',
+    title: '[역사 에세이] 광복 후 3년, 우리가 묻어두었던 비극 Part1',
+    description: '1945~1948 비극의 기록 — 산내골령골 학살, 제주4·3사건, 여순사건을 AI로 복원.',
+    published: '2025-09-28',
+    duration: '6:00',
+    playlist: 'atlas_modern',
+    tags: ['제주4.3', '여순사건', '산내골령골', '국가폭력'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: ['korean_war_massacres'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_yeosu_78',
+    youtube_id: 'vtPFPhE1zN8',
+    title: '여순사건 78년, 왜 우리는 아직도 이 비극을 \'이념\'이라 부르는가?',
+    description: '광복 직후 비극의 시작을 다룬 Part 2. 여순사건의 진실을 다시 묻는다.',
+    published: '2025-10-04',
+    duration: '3:34',
+    playlist: 'atlas_modern',
+    tags: ['여순사건', '국가폭력'],
+    related_events: [],
+    related_events_modern2: ['massacre_1948_02'],
+    related_routes: ['korean_war_massacres'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_comfort_women_testimony',
+    youtube_id: 'Z-KdZONjImU',
+    title: '80년의 침묵, 위안부 할머니의 증언 기록 〈바람이 지나간 자리에서〉',
+    description: '일본군 위안부(성노예) 피해자들의 기억을 AI로 복원한 증언 기록.',
+    published: '2025-10-29',
+    duration: '5:16',
+    playlist: 'atlas_modern',
+    tags: ['위안부', '일제강점기', '증언'],
+    related_events: ['policy_1937_02'],
+    related_events_modern2: [],
+    related_routes: ['japanese_atrocities'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_dokripgunga_4k',
+    youtube_id: 'NHwoPJJwEXQ',
+    title: '독립군가 | 항일 독립운동가 노래 (AI 4K 복원)',
+    description: 'AI 복원 기술로 독립군가를 현대적으로 재해석한 뮤직필름.',
+    published: '2025-10-07',
+    duration: '4:38',
+    playlist: 'atlas_modern',
+    tags: ['독립군가', '독립군'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: ['hong_beom_do'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_hong_beom_do_100y',
+    youtube_id: 'IthyNGuvybk',
+    title: '[AI 복원] 잊힌 독립군 홍범도 — 100년 전 노래가 깨어나다',
+    description: '독립군 홍범도 장군의 잊힌 노래를 AI 복원 기술로 되살린 기록.',
+    published: '2025-08-11',
+    duration: '3:25',
+    playlist: 'atlas_modern',
+    tags: ['홍범도', '봉오동전투', '독립군가'],
+    related_events: ['battle_1920_01'],
+    related_events_modern2: [],
+    related_routes: ['hong_beom_do'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_gimidoklip_1919',
+    youtube_id: '5RmKG_MQAjw',
+    title: '기미독립선언서 1919 | 3·1운동과 독립운동가 58인 헌정곡',
+    description: '1919년 3월 1일, 기미독립선언서 전문을 가사로 재해석한 헌정 뮤직필름.',
+    published: '2025-07-19',
+    duration: '3:35',
+    playlist: 'atlas_modern',
+    tags: ['3.1운동', '기미독립선언서'],
+    related_events: ['movement_1919_02'],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_gyeongsulgukchi_1910',
+    youtube_id: '9xFuCmdf1Mk',
+    title: '경술국치 1910 | 광복 이후 100년의 그림자 〈경술년 8월29일〉',
+    description: '광복 80주년, 진정한 광복은 오지 않았다 — 친일파 청산 문제를 다룬 랩.',
+    published: '2025-08-09',
+    duration: '3:15',
+    playlist: 'atlas_modern',
+    tags: ['경술국치', '한일병합'],
+    related_events: ['policy_1910_01'],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_pen_resistance_5',
+    youtube_id: 'ohzms66l0TE',
+    title: '일제강점기, 펜으로 저항했던 영혼들... 당신이 꼭 들어야 할 5인의 노래',
+    description: '한용운, 심훈, 윤동주, 이육사, 이상화 — 글로 맞선 다섯 영혼의 이야기.',
+    published: '2025-09-12',
+    duration: '3:49',
+    playlist: 'atlas_modern',
+    tags: ['한용운', '심훈', '윤동주', '이육사', '이상화'],
+    related_events: ['person_1926_04'],
+    related_events_modern2: [],
+    related_routes: ['kim_won_bong'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_sinchaeho',
+    youtube_id: 'Aecqgxg_gro',
+    title: '단재 신채호 | 일제강점기 독립운동과 『조선상고사』 AI 복원',
+    description: '"역사란 무엇인가? 아(我)와 비아(非我)의 투쟁의 기록이다" — 신채호의 이야기.',
+    published: '2025-08-30',
+    duration: '3:41',
+    playlist: 'atlas_modern',
+    tags: ['신채호', '조선상고사', '의열단'],
+    related_events: ['person_1923_01'],
+    related_events_modern2: [],
+    related_routes: ['righteous_struggle'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_winter_carol',
+    youtube_id: 'sXfwsXNtiHE',
+    title: '한국 독립운동가·민주화 영웅 | 크리스마스 캐롤 〈겨울을 건너〉',
+    description: '100년의 독립·민주를 잇는 캐롤. 홍범도, 안중근, 전태일, 김대중, 노무현까지.',
+    published: '2025-11-17',
+    duration: '4:29',
+    playlist: 'atlas_modern',
+    tags: ['홍범도', '안중근', '전태일', '김대중', '노무현'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: ['hong_beom_do', 'righteous_struggle'],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_donghak_ugeumchi',
+    youtube_id: 'VBRVQL9UI-4',
+    title: '동학농민운동·우금치 전투 (1894) | 2024 계엄 시나리오와 역사의 반복',
+    description: '"역사는 반복된다" — 1894년 동학농민운동의 좌절을 상징하는 우금치 전투.',
+    published: '2025-08-13',
+    duration: '3:42',
+    playlist: 'atlas_modern',
+    tags: ['동학농민운동', '우금치전투'],
+    related_events: ['battle_1894_01'],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_belief_prison',
+    youtube_id: '6Fvn3CHixAA',
+    title: '[역사 에세이] 신념은 어떻게 감옥이 되는가?: 한국 현대사의 굴레 〈길을 묻다〉',
+    description: '한국현대사의 궤적을 따라가며 신념이 어떻게 만들어지고, 누가 살아남았으며, 누가 책임지지 않았는지를 묻는 작품.',
+    published: '2025-12-13',
+    duration: '3:10',
+    playlist: 'atlas_modern',
+    tags: ['부림사건', '공안조작사건'],
+    related_events: [],
+    // ⚠️ 확정 아님 — 부림사건으로 임시 연결해뒀다(제목과 가장 잘 맞는
+    // 후보). 실제로 다른 사건(삼청교육대 등)을 다룬 영상이면 이 id만
+    // 바꾸면 된다.
+    related_events_modern2: ['plot_1981_02'],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+
+  {
+    id: 'v_gyeongseong_jazz',
+    youtube_id: 'uqOcpnNxv18',
+    title: '[Playlist] 비 내리는 1920년대 경성, 그 시절의 재즈',
+    description: '역사는 기록된 활자로만 남지 않습니다. 그 시대의 공기, 고독, 짧은 휴식의 순간이 흘러나오는 음악 속에도 역사는 살아있습니다.',
+    published: '2025-12-28',
+    duration: '3:04:33',
+    playlist: 'atlas_modern',
+    tags: ['1920년대', '경성', '재즈'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+
+  // ── 다른 채널 큐레이션 — 궁예(6·10만세운동·조세이탄광), 해담(윤동주·정지용·이육사 시 관련 곡) ──
+  // ⚠️ 순서(보내주신 링크 순서)와 스크린샷 순서를 대응시켜 채웠다 —
+  // 확실하지 않으면 다시 알려주세요, 바로 고치겠습니다. 지시대로
+  // 카드/루트 연결은 하지 않았다(다른 채널 콘텐츠 큐레이션이라 출처만
+  // 명시).
+  {
+    id: 'v_gungye_610manse',
+    youtube_id: 'ZpCzZAuQr8k',
+    title: '[1926년 6월 10일 그날의 함성] 6·10만세운동',
+    description: '출처: 궁예 채널. 1926년 6월 10일, 순종의 인산일을 계기로 일어난 6·10만세운동을 다룬 영상.',
+    published: null,
+    duration: '3:49',
+    playlist: 'atlas_modern',
+    tags: ['6.10만세운동', '독립운동'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_gungye_chosei',
+    youtube_id: 'do4aMaDkg2A',
+    title: '나는 돌아가지 못했다 (조세이탄광)',
+    description: '출처: 궁예 채널. 일제강점기 강제동원, 조세이(長生)탄광 수몰 사고를 다룬 영상.',
+    published: null,
+    duration: '3:24',
+    playlist: 'atlas_modern',
+    tags: ['조세이탄광', '강제동원', '일제강점기'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_haedam_gwangya',
+    youtube_id: '1mIvqkSIwZQ',
+    title: '광야 (원작 시 이육사) | Haedam',
+    description: '출처: 해담(Haedam) 채널. 이육사의 시 「광야」를 노래로 재해석.',
+    published: null,
+    duration: '4:02',
+    playlist: 'memory_old',
+    tags: ['이육사', '광야'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_haedam_yundongju',
+    youtube_id: 'Mr67o_V0iWY',
+    title: '윤동주, 하늘을 우러러',
+    description: '출처: 해담(Haedam) 채널. 별을 노래한 시인, 윤동주(1917~1945)를 다룬 곡.',
+    published: null,
+    duration: '3:40',
+    playlist: 'memory_old',
+    tags: ['윤동주'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_haedam_jungjiyong',
+    youtube_id: 'Z9xH_FKaJk8',
+    title: '한 편의 시가 노래가 되다 | 정지용 〈향수〉',
+    description: '출처: 해담(Haedam) 채널. 정지용(1902~1950)의 시 「향수」를 노래로 재해석.',
+    published: null,
+    duration: '4:21',
+    playlist: 'memory_old',
+    tags: ['정지용', '향수'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+
+];
+
+if (typeof window !== 'undefined') {
+  window.YOUTUBE_VIDEOS = YOUTUBE_VIDEOS;
+}

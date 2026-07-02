@@ -97,6 +97,28 @@
   <div class="era-hub-grid" id="routeHubGrid"><!-- nav.js가 채운다 --></div>
 </div>
 
+<!-- ── 프로젝트 허브 — "프로젝트" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     era-hub와 같은 틀(스크림/닫기버튼)을 재사용하되, 안에 탭을 둔다.
+     탭별 내용은 js/projectHub.js가 채운다. 유튜브 갤러리는
+     content/youtube_videos.js(window.YOUTUBE_VIDEOS 배열)를 읽어 그린다. 나머지 탭(퀴즈·미니게임·
+     추리게임)은 아직 준비 중 문구만 표시한다. -->
+<div class="era-hub-scrim" id="projectHubScrim"></div>
+<div class="era-hub project-hub" id="projectHub" role="dialog" aria-modal="true" aria-label="프로젝트">
+  <button type="button" class="era-hub-close" id="projectHubClose" aria-label="닫기">×</button>
+  <div class="era-hub-title">프로젝트</div>
+  <div class="era-hub-sub">역사와 철학을 영상, 퀴즈, 게임으로 만나보세요</div>
+  <div class="project-tabs" id="projectTabs" role="tablist">
+    <button type="button" class="project-tab active" data-tab="youtube" role="tab" aria-selected="true">유튜브 갤러리</button>
+    <button type="button" class="project-tab" data-tab="quiz" role="tab" aria-selected="false">퀴즈</button>
+    <button type="button" class="project-tab" data-tab="minigame" role="tab" aria-selected="false">미니게임</button>
+    <button type="button" class="project-tab" data-tab="mystery" role="tab" aria-selected="false">추리게임</button>
+  </div>
+  <div class="project-panel" id="projectPanelYoutube" data-panel="youtube" role="tabpanel"><!-- projectHub.js가 채운다 --></div>
+  <div class="project-panel" id="projectPanelQuiz" data-panel="quiz" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMinigame" data-panel="minigame" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMystery" data-panel="mystery" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+</div>
+
 <!-- ── 소개 페이지 — "소개" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
      era-hub와 같은 scrim+모달 구조를 재사용하되, 글 내용이 길어서
      세로 스크롤이 자연스러운 별도 클래스(.intro-page)로 분리했다.
@@ -338,11 +360,13 @@
 <script src="routes/kim_won_bong.js"></script>
 <script src="routes/righteous_struggle.js"></script>
 <script src="routes/japanese_atrocities.js"></script>
+<script src="content/youtube_videos.js"></script>
 <script src="js/infoPanel.js"></script>
 <script src="js/search.js"></script>
 <script src="js/timeline.js"></script>
 <script src="js/ui.js?v=20260627a"></script>
 <script src="js/nav.js"></script>
+<script src="js/projectHub.js"></script>
 
 </body>
 </html>
