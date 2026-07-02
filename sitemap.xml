@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
-  메인 페이지 1개 + 1876~1945 Event 411개 + 루트 5개 + 
-  근현대(1945~1993) 진입점 1개 + Event 371개 + 루트 4개를 포함한다.
+  메인 페이지 1개 + 1876~1945 Event 421개 + 루트 6개 + 
+  근현대(1945~1993) 진입점 1개 + Event 406개 + 루트 7개를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
   generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를
@@ -1845,6 +1845,56 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_14</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_15</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_16</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_17</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_18</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/route-donghak--wp_19</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/event/route-hong-beom-do--wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -2068,6 +2118,11 @@
     <loc>https://atlas.mkhz.kr/event/route-righteous-struggle--wp_06</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/route/donghak</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/route/hong-beom-do</loc>
@@ -3735,6 +3790,131 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_22</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_27</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_33</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_36</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_37</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-chun-doo-hwan--wp_39</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_11</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_18</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_23</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_24</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_25</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_26</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_27</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_28</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_29</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-il-sung--wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3910,6 +4090,56 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_30</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_34</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-park-chung-hee--wp_35</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/route-syngman-rhee--wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3955,6 +4185,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/route/chun-doo-hwan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/route/kim-dae-jung</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/route/kim-il-sung</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -3966,6 +4206,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/route/korean-war-massacres</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/route/park-chung-hee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>

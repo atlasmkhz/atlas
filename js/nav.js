@@ -47,6 +47,7 @@
     { routeId:'kim_won_bong',       name:'김원봉',      period:'1898–1958', tagline:'의열단을 만든 사람, 두 번 지워진 이름', ready:true, thumbnail:null },
     { routeId:'righteous_struggle', name:'의열투쟁',    period:'1908–1932', tagline:'조선의 심장을 겨누다', ready:true, thumbnail:null },
     { routeId:'japanese_atrocities',name:'일제 만행',   period:'1895–1945', tagline:'50년의 가해 기록', ready:true, thumbnail:null },
+    { routeId:'donghak',            name:'동학',        period:'1860–1919', tagline:'득도에서 우금치까지, 그리고 3·1운동으로', ready:true, thumbnail:null },
   ];
 
   const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };

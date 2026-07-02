@@ -50,6 +50,9 @@
     { routeId:'korean_war_massacres', name:'학살의 기록',      period:'1948–1953', tagline:'제주에서 거창까지, 잊지 말아야 할 이름들', ready:true, thumbnail:null },
     { routeId:'syngman_rhee', name:'이승만',                   period:'1875–1965', tagline:'독립운동가에서 하와이의 망명객으로', ready:true, thumbnail:null },
     { routeId:'kim_il_sung', name:'김일성',                    period:'1912–1994', tagline:'항일유격대 대장에서 "수령"으로', ready:true, thumbnail:null },
+    { routeId:'park_chung_hee', name:'박정희',                 period:'1917–1979', tagline:'만주군관학교에서 궁정동까지', ready:true, thumbnail:null },
+    { routeId:'kim_dae_jung', name:'김대중',                   period:'1924–2009', tagline:'하의도에서 노벨평화상까지', ready:true, thumbnail:null },
+    { routeId:'chun_doo_hwan', name:'전두환',                  period:'1931–2021', tagline:'하나회에서 5·18까지', ready:true, thumbnail:null },
   ];
 
   document.addEventListener('DOMContentLoaded', init);
