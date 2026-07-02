@@ -97,6 +97,28 @@
   <div class="era-hub-grid" id="routeHubGrid"><!-- nav.js가 채운다 --></div>
 </div>
 
+<!-- ── 프로젝트 허브 — "프로젝트" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     근대(1876~1945) 지도의 projectHub와 완전히 같은 구조를 재사용한다.
+     유튜브 갤러리는 content/youtube_videos.js(연도·시대 구분 없이 항상
+     동일한 배열)를 그대로 읽으므로, 어느 지도에서 열어도 같은 영상
+     목록이 보인다. -->
+<div class="era-hub-scrim" id="projectHubScrim"></div>
+<div class="era-hub project-hub" id="projectHub" role="dialog" aria-modal="true" aria-label="프로젝트">
+  <button type="button" class="era-hub-close" id="projectHubClose" aria-label="닫기">×</button>
+  <div class="era-hub-title">프로젝트</div>
+  <div class="era-hub-sub">역사와 철학을 영상, 퀴즈, 게임으로 만나보세요</div>
+  <div class="project-tabs" id="projectTabs" role="tablist">
+    <button type="button" class="project-tab active" data-tab="youtube" role="tab" aria-selected="true">유튜브 갤러리</button>
+    <button type="button" class="project-tab" data-tab="quiz" role="tab" aria-selected="false">퀴즈</button>
+    <button type="button" class="project-tab" data-tab="minigame" role="tab" aria-selected="false">미니게임</button>
+    <button type="button" class="project-tab" data-tab="mystery" role="tab" aria-selected="false">추리게임</button>
+  </div>
+  <div class="project-panel" id="projectPanelYoutube" data-panel="youtube" role="tabpanel"><!-- projectHub.js가 채운다 --></div>
+  <div class="project-panel" id="projectPanelQuiz" data-panel="quiz" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMinigame" data-panel="minigame" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMystery" data-panel="mystery" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+</div>
+
 <!-- ── 소개 페이지 — "소개" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
      근대 지도(index.html)와 똑같은 본문을 그대로 공유한다. 포털 전체
      공통 소개글이라, 어느 시대 지도에서 열어도 같은 내용이 보인다. -->
@@ -319,8 +341,14 @@
 <script src="js/search.js"></script>
 <script src="js/timeline.js"></script>
 <script src="js/ui.js?v=20260627a"></script>
+<!-- content/youtube_videos.js는 프로젝트 전체(근대+근현대)가 공유하는
+     단일 원본이다 — 지도마다 따로 복사해두면 나중에 한쪽만 갱신해
+     어긋나는 문제가 생기므로, 상위 폴더의 파일을 상대경로로 그대로
+     참조한다. -->
+<script src="../../content/youtube_videos.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/routeRenderer.js"></script>
+<script src="js/projectHub.js"></script>
 <script src="routes/korean_war_battles.js"></script>
 <script src="routes/korean_war_massacres.js"></script>
 <script src="routes/syngman_rhee.js"></script>

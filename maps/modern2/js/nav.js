@@ -190,6 +190,11 @@
         if (eraHub.classList.contains('open')) window.closeEraHub();
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         window.openRouteHub();
+      } else if (key === 'project') {
+        if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
+        if (typeof window.openProjectHub === 'function') window.openProjectHub();
+        else showComingSoon(NAV_LABELS[key] || key);
       } else {
         showComingSoon(NAV_LABELS[key] || key);
       }
