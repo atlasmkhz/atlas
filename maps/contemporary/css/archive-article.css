@@ -1,0 +1,209 @@
+/* ═══════════════════════════════════════════════════════
+   archive-article.css — 자료실 정적 글 페이지 전용 스타일
+   build/generate_archive_pages.py가 생성하는 archive/**/*.html이
+   이 파일을 링크한다. 지도 SPA(css/style.css)와는 완전히 분리된
+   스타일시트다 — 이 페이지들은 지도 UI가 아니라 "글을 읽는 페이지"라
+   era-hub·intro-page에서 쓰던 라이트 페이퍼 톤(#f7f4ef 배경·
+   #3a352c 잉크·#b89860 골드 악센트)을 그대로 가져와 사이트 톤을
+   유지하되, 지도 전용 CSS(고정 레이아웃·다크 배경 등)는 섞지 않는다.
+   ═══════════════════════════════════════════════════════ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: #f7f4ef;
+  color: #3a352c;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  line-height: 1.75;
+}
+
+body {
+  padding: 28px 20px 80px;
+}
+
+article {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── 브레드크럼 ── */
+.breadcrumb {
+  display: block;
+  font-size: 12px;
+  color: #a39a8c;
+  letter-spacing: 0.2px;
+  margin-bottom: 22px;
+}
+.breadcrumb a {
+  color: #8a6a3a;
+  text-decoration: none;
+}
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* ── 제목/메타 ── */
+h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+.event-meta {
+  font-size: 13px;
+  color: #a39a8c;
+  letter-spacing: 0.3px;
+  margin-bottom: 26px;
+}
+
+/* ── 본문(주장/반박/서술) ── */
+article section { margin-bottom: 22px; }
+article section h2 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #6a655c;
+}
+article section p {
+  font-size: 15.5px;
+  color: #3a352c;
+  white-space: pre-line;
+}
+
+.post-claim {
+  background: rgba(122, 32, 32, 0.05);
+  border-left: 3px solid rgba(122, 32, 32, 0.35);
+  padding: 16px 18px;
+  border-radius: 0 10px 10px 0;
+}
+.post-claim h2 { color: #7a2020; }
+
+.post-rebuttal {
+  background: rgba(58, 130, 97, 0.06);
+  border-left: 3px solid rgba(58, 130, 97, 0.4);
+  padding: 16px 18px;
+  border-radius: 0 10px 10px 0;
+}
+.post-rebuttal h2 { color: #2c6b48; }
+
+.post-body {
+  background: #fff;
+  border: 1px solid rgba(58,53,44,0.1);
+  padding: 18px 20px;
+  border-radius: 12px;
+}
+
+/* ── 출처 ── */
+.post-sources {
+  background: #fff;
+  border: 1px solid rgba(58,53,44,0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.post-sources ul { list-style: none; }
+.post-sources li {
+  font-size: 13px; color: #55504a;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(58,53,44,0.06);
+}
+.post-sources li:last-child { border-bottom: none; }
+.post-sources a { color: #8a6a3a; }
+.source-type {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  color: #8a6a3a; background: rgba(184,152,96,0.14);
+  padding: 1px 6px; border-radius: 5px; margin-right: 6px;
+}
+.source-meta { color: #a39a8c; }
+
+/* ── 관련 콘텐츠 ── */
+.post-related {
+  background: #fff;
+  border: 1px solid rgba(58,53,44,0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.related-group { margin-bottom: 14px; }
+.related-group:last-child { margin-bottom: 0; }
+.related-group h3 {
+  font-size: 11.5px; font-weight: 800; letter-spacing: 0.5px;
+  color: #8a8276; margin-bottom: 6px;
+}
+.related-group ul { list-style: none; }
+.related-group li { font-size: 13.5px; padding: 3px 0; }
+.related-group a { color: #8a6a3a; }
+.book-meta { color: #a39a8c; font-size: 12px; }
+
+/* ── 시리즈 컨텍스트 / 목록(랜딩 페이지) ── */
+.series-context, .series-list { font-size: 13.5px; color: #6a655c; }
+.series-context a, .series-list a { color: #8a6a3a; }
+.series-list h2 {
+  font-size: 14px; font-weight: 800; margin-bottom: 12px; color: #3a352c;
+}
+.wp-list, .route-wp-list { list-style: none; }
+.wp-list li, .route-wp-list li {
+  padding: 10px 0; border-bottom: 1px solid rgba(58,53,44,0.08);
+  font-size: 14.5px;
+}
+.wp-list li:last-child, .route-wp-list li:last-child { border-bottom: none; }
+.wp-date { color: #a39a8c; font-size: 12.5px; margin-left: 4px; }
+
+/* ── 이전/다음 페이지 네비게이션 ── */
+.wp-pager {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: 13px; margin-top: 8px;
+  padding-top: 16px; border-top: 1px solid rgba(58,53,44,0.1);
+}
+.wp-pager a { color: #8a6a3a; text-decoration: none; }
+.wp-pager a:hover { text-decoration: underline; }
+
+/* ── 지도 CTA / 링크 공통 ── */
+a { color: #8a6a3a; }
+.map-cta { margin-top: 10px; }
+.map-cta a {
+  display: inline-block; font-size: 13px; font-weight: 700;
+  color: #fff; background: #3a352c;
+  padding: 9px 16px; border-radius: 8px; text-decoration: none;
+}
+.map-cta a:hover { background: #2a2620; }
+
+.summary { font-size: 15.5px; color: #55504a; margin-bottom: 20px; }
+
+/* ── 사건카드 전용: 처리 경과(stages)·역사적 평가(legacy) ──
+   generate_archive_pages.py의 format:'case_tracking' 지원 확장과 짝을
+   이룬다(docs/power_accountability_roadmap.md §3). */
+.post-stages ol { list-style: none; counter-reset: stage; }
+.post-stages li {
+  counter-increment: stage;
+  padding: 10px 0 10px 26px;
+  border-bottom: 1px solid #e7e0d3;
+  position: relative;
+}
+.post-stages li:last-child { border-bottom: none; }
+.post-stages li::before {
+  content: counter(stage);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #b89860;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 18px;
+}
+.stage-date { color: #a39a8c; font-size: 12.5px; margin-right: 6px; }
+.stage-name { font-weight: 700; }
+.stage-institution { color: #6a655c; font-size: 13px; }
+.stage-detail { display: block; font-size: 13.5px; color: #55504a; margin-top: 2px; }
+.stage-result { display: block; font-size: 13.5px; color: #7a5a20; margin-top: 2px; font-weight: 600; }
+.post-legacy { background: #f0ebe0; padding: 16px 18px; border-radius: 4px; }
+.post-legacy h2 { color: #5a3d2b; }
+
+@media (max-width: 640px) {
+  body { padding: 20px 16px 60px; }
+  h1 { font-size: 21px; }
+}
