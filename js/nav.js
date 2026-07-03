@@ -187,6 +187,14 @@
       } else if (key === 'intro') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
+      } else if (key === 'archive') {
+        // 자료실 콘텐츠는 지금 근현대(modern2) 지도 쪽에만 있다 — 시대
+        // 구분 없이 자료실이 "열려야" 한다는 요구를 이 페이지 자체에
+        // 자료실 UI를 복제하지 않고, 실제 콘텐츠가 있는 곳으로 안내하는
+        // 방식으로 해결했다(ERA_HUB_ITEMS가 시대 간 이동을 다루는 것과
+        // 같은 방식 — 페이지 자체가 다르면 이동한다). modern2의 nav.js가
+        // ?nav=archive 쿼리를 보고 로드 직후 자동으로 자료실 허브를 연다.
+        window.location.href = 'maps/modern2/index.html?nav=archive';
       } else if (key === 'route') {
         // 루트 허브 — era-hub와 동일한 패턴으로 먼저 선택 화면을 보여준다.
         if (eraHub.classList.contains('open')) window.closeEraHub();

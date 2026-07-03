@@ -794,13 +794,21 @@
   .archive-hub {
     max-width: 720px;
   }
+  /* [버그 수정] .era-hub-grid(display:grid)·.archive-list(display:flex)가
+     이미 display를 명시하고 있어서, 네이티브 hidden 속성(브라우저 기본
+     [hidden]{display:none})이 밀려 무시되는 문제가 있었다 — 카테고리
+     카드와 글 목록이 동시에 보이던 버그의 원인. 이 스코프 안에서는
+     hidden을 항상 최우선으로 강제한다. */
+  .archive-hub [hidden] { display: none !important; }
+
   .archive-hub-back {
-    position: absolute; top: 16px; left: 20px;
+    position: static; display: inline-block;
+    margin-bottom: 14px;
     appearance: none; border: none; background: transparent;
     color: #8a8276; font-size: 12.5px; font-weight: 700;
-    letter-spacing: 0.3px; cursor: pointer; padding: 6px 8px; border-radius: 7px;
+    letter-spacing: 0.3px; cursor: pointer; padding: 4px 0;
   }
-  .archive-hub-back:hover { background: rgba(58,53,44,0.08); color: #3a352c; }
+  .archive-hub-back:hover { color: #3a352c; }
 
   .archive-list {
     display: flex; flex-direction: column; gap: 8px;
@@ -829,7 +837,7 @@
   .archive-empty { font-size: 13px; color: #8a8276; padding: 24px 4px; text-align: center; }
 
   @media (max-width:640px) {
-    .archive-hub-back { top: 14px; left: 14px; font-size: 11.5px; }
+    .archive-hub-back { font-size: 11.5px; }
     .archive-item-title { font-size: 13px; }
   }
 

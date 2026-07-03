@@ -365,6 +365,14 @@
         showComingSoon(NAV_LABELS[key] || key);
       }
     });
+
+    // ── 다른 지도(근대 등)에서 "자료실"을 눌러 넘어온 경우 ──
+    // 그쪽 site-nav가 이 페이지로 ?nav=archive를 붙여 이동시킨다.
+    // 로드 직후 자동으로 자료실 허브를 열어준다(사용자가 "자료실"을
+    // 다시 한 번 누르지 않아도 되게).
+    if (new URLSearchParams(window.location.search).get('nav') === 'archive') {
+      window.openArchiveHub();
+    }
   }
 
   function renderEraCard(item){

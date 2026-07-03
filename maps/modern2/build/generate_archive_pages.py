@@ -268,7 +268,8 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1a1612">
+<meta name="theme-color" content="#f7f4ef">
+<link rel="stylesheet" href="{PATH_PREFIX}/css/archive-article.css">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{page_url}">
@@ -348,7 +349,8 @@ def render_series_landing_page(series, series_slug, out_path):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1a1612">
+<meta name="theme-color" content="#f7f4ef">
+<link rel="stylesheet" href="{PATH_PREFIX}/css/archive-article.css">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{page_url}">
