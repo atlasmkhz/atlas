@@ -119,12 +119,21 @@ window.onload = () => {
       // ── 자료실 글 페이지 → 지도 진입 (archive/**/*.html의 "지도에서
       // 관련 지역 보기" 버튼용). 자료실 글은 특정 사건 카드(card_ref)에
       // 연결되지 않은 경우가 많아 ?event=처럼 특정 id로 이동할 수 없다
-      // — 대신 ?lat=&lng=로 좌표만 넘어오면 해당 연도로 진입한 뒤 그
-      // 위치로 지도만 이동시킨다(팝업은 열지 않는다 — 열 사건이 없다).
+      // — 대신 ?lat=&lng=로 좌표만 넘어오면 그 위치로 지도만 이동시킨다
+      // (팝업은 열지 않는다 — 열 사건이 없다). ?year=가 함께 오면 그
+      // 글의 실제 연도로 슬라이더를 맞추되, 이 지도의 유효 범위
+      // (1945~1993) 밖이면 가장 가까운 경계 연도로 clamp한다 — 자료실
+      // 글은 대부분 1990년대 이후(예: 2008, 2020) 논쟁이라 그대로
+      // 넘기면 슬라이더 범위 밖이 되기 때문. year가 없으면 기존처럼
+      // INITIAL_YEAR로 진입한다.
       const latFromUrl = parseFloat(params.get('lat'));
       const lngFromUrl = parseFloat(params.get('lng'));
       if (!Number.isNaN(latFromUrl) && !Number.isNaN(lngFromUrl)) {
-        syncToYear(INITIAL_YEAR);
+        const yearFromUrl = parseInt(params.get('year'), 10);
+        const clampedYear = Number.isNaN(yearFromUrl)
+          ? INITIAL_YEAR
+          : Math.min(1993, Math.max(1945, yearFromUrl));
+        syncToYear(clampedYear);
         window.setTimeout(() => { map.setView([latFromUrl, lngFromUrl], 7, { animate: true }); }, 350);
         return;
       }

@@ -135,6 +135,21 @@ const EVENTS_1925 = [
     video:null,
     connections:['political_1925_01'],
     tags:['movement','조선국내','경성','재해','생활사'],
-    sources:['한국민족문화대백과사전 조선공산당'] }
+    sources:['한국민족문화대백과사전 조선공산당'] },
+
+  // ══ 역사왜곡(식민사관) — 자료실 「역사왜곡에 맞서다」 wp_01과 연결 ══
+  { id:'policy_1925_03', year:1925, visible_from:1925, visible_until:1945,
+    month:6, day:null, type:'policy', priority:1,
+    title_ko:'조선사편수회 설치 — 식민사관의 제도화',
+    title_en:'Establishment of the Joseonsa Compilation Committee',
+    title_ja:'朝鮮史編修会設置',
+    place_ko:'조선총독부 (경성)',
+    lat:37.5965, lng:126.969,
+    people:['이병도'],
+    summary_ko:'조선총독부가 한국사 편찬을 전담할 조선사편수회를 설치했다. "공정한 조선사 편찬"을 내세웠지만 실제로는 식민통치를 정당화하는 역사 서술 체계를 구축하려는 목적이었다. "조선은 스스로 근대화할 능력이 없어 외부의 개입이 필요했다"는 정체성론(停滯性論), "한국사는 늘 주변 강대국에 종속돼 왔다"는 타율성론(他律性論)이 이 기구를 통해 이론화됐다. 이병도를 비롯한 조선인 학자들도 편찬위원으로 참여했는데, 이들은 광복 이후에도 한국 역사학계 주류로 남아 이 틀을 완전히 청산하지 못한 채 이후 여러 형태로 재생산했다는 평가를 받는다.',
+    video:null,
+    connections:[],
+    tags:['policy','조선국내','경성','식민사관','조선사편수회'],
+    sources:['한국민족문화대백과사전 조선사편수회','우리역사넷 식민사관'] }
 
 ];
