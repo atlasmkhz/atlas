@@ -81,6 +81,22 @@ const EVENTS_2010 = [
     video:null,
     connections:[],
     tags:['culture','대한민국','한류','K-POP'],
-    sources:['한국민족문화대백과사전 한류','위키백과 한류'] }
+    sources:['한국민족문화대백과사전 한류','위키백과 한류'] },
+
+  { id:'organization_2010_01', year:2010, visible_from:2010, visible_until:2010,
+    month:null, day:null, type:'organization', priority:2,
+    title_ko:'일베저장소 등장 — 온라인 극우 커뮤니티의 부상',
+    title_en:'Emergence of Ilbe — Rise of Online Far-right Community',
+    title_ja:'イルベ貯蔵所 登場',
+    place_ko:'대한민국',
+    lat:36.5, lng:127.8,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'디시인사이드의 인기글을 모아두던 사이트에서 출발해 2010년경 독자적 커뮤니티로 성장, 2011년 디시인사이드에서 완전히 독립했다. 지역 비하, 세월호 희생자 조롱, 5·18 민주화운동 비하, 역대 대통령에 대한 극단적 조롱 등으로 사회문제화됐으며, "일베 이용 전력"이 공직자 검증의 기준이 될 정도로 온라인 혐오문화의 상징이 됐다.',
+    video:null,
+    connections:[],
+    tags:['organization','온라인혐오','지역혐오','역사왜곡'],
+    sources:['위키백과 일베저장소','나무위키 일베저장소'] }
 
 ];

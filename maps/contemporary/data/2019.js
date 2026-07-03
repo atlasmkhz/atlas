@@ -81,6 +81,22 @@ const EVENTS_2019 = [
     video:null,
     connections:[],
     tags:['diplomacy','서울','지소미아','한일관계','수출규제'],
-    sources:['한국민족문화대백과사전 지소미아','위키백과 한일 군사정보보호협정'] }
+    sources:['한국민족문화대백과사전 지소미아','위키백과 한일 군사정보보호협정'] },
+
+  { id:'culture_2019_01', year:2019, visible_from:2019, visible_until:2019,
+    month:7, day:10, type:'culture', priority:2,
+    title_ko:'《반일종족주의》 출간',
+    title_en:'Publication of "Anti-Japan Tribalism"',
+    title_ja:'『反日種族主義』出版',
+    place_ko:'서울',
+    lat:37.5665, lng:126.9780,
+    people:['이영훈'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'7월 10일 이영훈 전 서울대 교수 등 6인이 공저한 《반일종족주의》가 미래사에서 출간됐다. 이승만학당 유튜브 강의를 단행본화한 것으로, 강제동원·위안부 등을 둘러싼 식민지 근대화론적 서술로 조국 당시 법무부장관 후보자 등의 거센 비판을 받았음에도 8월 교보문고·YES24 등 종합 베스트셀러 1위에 올랐다. 같은 해 11월 일본어판이 출간돼 아베 신조 총리가 언급하는 등 일본 극우 진영에서도 주목받았다.',
+    video:null,
+    connections:['organization_2005_01','organization_2025_06'],
+    tags:['culture','뉴라이트','역사수정주의','식민지근대화론'],
+    sources:['위키백과 반일 종족주의','나무위키 반일 종족주의'] }
 
 ];

@@ -83,6 +83,22 @@ const EVENTS_2005 = [
     video:null,
     connections:[],
     tags:['policy','충남','세종시','균형발전'],
-    sources:['한국민족문화대백과사전 세종특별자치시','위키백과 세종특별자치시'] }
+    sources:['한국민족문화대백과사전 세종특별자치시','위키백과 세종특별자치시'] },
+
+  { id:'organization_2005_01', year:2005, visible_from:2005, visible_until:2005,
+    month:11, day:7, type:'organization', priority:2,
+    title_ko:'뉴라이트전국연합 창립',
+    title_en:'Founding of the New Right National Alliance',
+    title_ja:'ニューライト全国連合 創立',
+    place_ko:'서울 (한국프레스센터)',
+    lat:37.5658, lng:126.9784,
+    people:['김진홍'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'11월 7일 김진홍 목사를 상임의장으로 뉴라이트전국연합이 창립됐다. 자유주의연대와 함께 뉴라이트 운동의 양대 축으로 불리며, 같은 해 출범한 교과서포럼과 연계해 "대한민국 정통성" 중심의 역사서술을 주장했다. 이후 친일인명사전 발간 반대(2009), 제주 4·3을 폭동으로 규정하는 발언(2010) 등으로 논란을 빚었고, 2007년 대선에서는 이명박 후보를 공식 지지했다.',
+    video:null,
+    connections:['organization_2004_01'],
+    tags:['organization','서울','뉴라이트','역사수정주의','건국절'],
+    sources:['위키백과 뉴라이트전국연합'] }
 
 ];

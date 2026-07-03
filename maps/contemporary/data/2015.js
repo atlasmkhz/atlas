@@ -83,6 +83,22 @@ const EVENTS_2015 = [
     video:null,
     connections:[],
     tags:['policy','대한민국','노동개혁','노사정'],
-    sources:['한국민족문화대백과사전 노동개혁','위키백과 박근혜 정부의 노동개혁'] }
+    sources:['한국민족문화대백과사전 노동개혁','위키백과 박근혜 정부의 노동개혁'] },
+
+  { id:'organization_2015_01', year:2015, visible_from:2015, visible_until:2015,
+    month:8, day:6, type:'organization', priority:2,
+    title_ko:'메갈리아 개설',
+    title_en:'Founding of Megalia',
+    title_ja:'メガリア 開設',
+    place_ko:'대한민국',
+    lat:36.5, lng:127.8,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'디시인사이드 메르스 갤러리에서 남성혐오 발언을 둘러싼 갈등 끝에 분리된 유저들이 8월 6일 메갈리아를 개설했다. 남성 혐오 표현을 "미러링"으로 정당화하는 전략을 내세워 온라인 젠더갈등의 새로운 국면을 열었으며, 4개월여 만인 12월 성소수자 혐오 문제를 둘러싼 내부 분열로 사실상 와해됐다.',
+    video:null,
+    connections:['movement_2016_02','organization_2016_01'],
+    tags:['organization','온라인','젠더갈등','미러링'],
+    sources:['나무위키 메갈리아','페미위키 메갈리아'] }
 
 ];

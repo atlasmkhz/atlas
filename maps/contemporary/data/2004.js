@@ -97,6 +97,22 @@ const EVENTS_2004 = [
     video:null,
     connections:[],
     tags:['diplomacy','서울','나경원','자위대','한일관계'],
-    sources:['나무위키 나경원/비판 및 논란/친일사관','경향신문 나경원 자위대 행사 참석 거짓해명 논란(2011.9.23)','SBS 나경원 7년전 일본 자위대행사 참석 논란(2011.9.21)'] }
+    sources:['나무위키 나경원/비판 및 논란/친일사관','경향신문 나경원 자위대 행사 참석 거짓해명 논란(2011.9.23)','SBS 나경원 7년전 일본 자위대행사 참석 논란(2011.9.21)'] },
+
+  { id:'organization_2004_01', year:2004, visible_from:2004, visible_until:2004,
+    month:11, day:23, type:'organization', priority:2,
+    title_ko:'자유주의연대 창립 — 뉴라이트 운동의 시작',
+    title_en:'Founding of the Liberty Union — Beginning of the New Right Movement',
+    title_ja:'自由主義連帯 創立 — ニューライト運動の始まり',
+    place_ko:'서울',
+    lat:37.5665, lng:126.9780,
+    people:['신지호','홍진표'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'11월 23일 신지호를 대표로 자유주의연대가 출범하며 한국 "뉴라이트" 운동이 공식화됐다. 같은 달 동아일보의 "뉴라이트, 침묵에서 행동으로" 기획 시리즈와 맞물려 기존 보수(올드라이트)와 차별화를 내세운 신우파 담론이 확산되기 시작했으며, 이는 이듬해 뉴라이트전국연합·교과서포럼 결성으로 이어져 건국절 논쟁과 식민지 근대화론 등 역사수정주의 담론의 조직적 기반이 된다.',
+    video:null,
+    connections:['organization_2005_01'],
+    tags:['organization','서울','뉴라이트','역사수정주의'],
+    sources:['위키백과 대한민국의 뉴라이트'] }
 
 ];
