@@ -2,7 +2,7 @@
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 421개 + 루트 6개 + 
-  근현대(1945~1993) 진입점 1개 + Event 415개 + 루트 8개를 포함한다.
+  근현대(1945~1993) 진입점 1개 + Event 406개 + 루트 7개를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
   generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를
@@ -3845,51 +3845,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-historical-revisionism--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/route-kim-dae-jung--wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4235,11 +4190,6 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/route/historical-revisionism</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/route/kim-dae-jung</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -4268,5 +4218,55 @@
     <loc>https://atlas.mkhz.kr/maps/modern2/route/syngman-rhee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_08</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

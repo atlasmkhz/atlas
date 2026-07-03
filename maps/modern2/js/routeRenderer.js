@@ -245,6 +245,7 @@
     clearRouteLayers();
     activeRouteId = routeId;
     enterRouteMode();
+    if (window.trackPageView) window.trackPageView('route', route.name || routeId);
 
     // ── 기존 연도별 레이어 제거 ──
     // 루트 레이어(routeLayers[])는 clearLayers()의 영향을 받지 않도록

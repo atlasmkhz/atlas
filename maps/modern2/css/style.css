@@ -786,6 +786,53 @@
     .era-card-name { font-size:13.5px; }
   }
 
+  /* ── 자료실 허브 (.archive-hub) ──
+     era-hub의 모달 틀(스크림/닫기버튼/타이틀/그리드·카드)을 그대로
+     물려받는다. 카테고리·하위주제 단계는 .era-hub-grid/.era-card-item을
+     그대로 재사용하고(폭만 살짝 넓힘), 마지막 글 목록 단계만
+     .archive-list로 별도 레이아웃을 쓴다. */
+  .archive-hub {
+    max-width: 720px;
+  }
+  .archive-hub-back {
+    position: absolute; top: 16px; left: 20px;
+    appearance: none; border: none; background: transparent;
+    color: #8a8276; font-size: 12.5px; font-weight: 700;
+    letter-spacing: 0.3px; cursor: pointer; padding: 6px 8px; border-radius: 7px;
+  }
+  .archive-hub-back:hover { background: rgba(58,53,44,0.08); color: #3a352c; }
+
+  .archive-list {
+    display: flex; flex-direction: column; gap: 8px;
+    max-height: 56vh; overflow-y: auto;
+  }
+  .archive-list-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    border: 1.5px solid rgba(58,53,44,0.12); border-radius: 12px;
+    background: #fff; padding: 12px 14px; text-decoration: none;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .archive-list-item:hover { border-color: var(--gold); transform: translateY(-1px); }
+  .archive-item-badge {
+    flex: none; font-size: 10px; letter-spacing: 0.3px; font-weight: 700;
+    color: #7a2020; background: rgba(122,32,32,0.1);
+    padding: 3px 8px; border-radius: 6px; margin-top: 2px; white-space: nowrap;
+  }
+  .archive-item-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .archive-item-title { font-size: 14px; font-weight: 800; color: #3a352c; }
+  .archive-item-meta { font-size: 10.5px; color: #a39a8c; letter-spacing: 0.3px; }
+  .archive-item-summary {
+    font-size: 12px; color: #6a655c; line-height: 1.6;
+    overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  .archive-empty { font-size: 13px; color: #8a8276; padding: 24px 4px; text-align: center; }
+
+  @media (max-width:640px) {
+    .archive-hub-back { top: 14px; left: 14px; font-size: 11.5px; }
+    .archive-item-title { font-size: 13px; }
+  }
+
   /* ── 프로젝트 허브 (.project-hub) ──
      era-hub의 모달 틀(스크림/닫기버튼/타이틀)을 그대로 물려받되, 폭을
      넓히고 안에 탭 UI를 추가한다. 실제 콘텐츠는 js/projectHub.js가 채운다. */

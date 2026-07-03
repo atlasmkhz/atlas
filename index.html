@@ -37,18 +37,21 @@
      실제 배포 전, 두목님의 GA4 속성에서 발급받은 측정 ID로 아래 두 곳
      (G-XXXXXXXXXX)을 모두 바꿔야 동작한다. GA4는 기본적으로 IP 주소를
      저장하지 않는다(Universal Analytics 시절의 anonymize_ip 옵션은 GA4에
-     불필요 — 이미 기본 정책). 다만 검색어·클릭 등 커스텀 이벤트 트래킹
-     (검색어, 조회 연도, 마커 클릭)은 이번 작업 범위에 포함하지 않았다 —
-     기본 스니펫은 페이지뷰·체류시간·접속 국가까지는 자동으로 잡아주지만,
-     그 이상의 커스텀 이벤트는 별도 작업으로 추가해야 한다.
+     불필요 — 이미 기본 정책). ATLAS는 SPA(오버레이 기반 화면 전환)라
+     URL이 바뀌지 않으므로, GA4 기본 자동 페이지뷰(send_page_view)는
+     꺼두고 대신 js/analytics.js의 trackPageView()가 화면 전환 시점마다
+     (시대 이동·루트 이동·사건 카드 등) 수동으로 페이지뷰 이벤트를
+     보낸다 — 그래야 리포트에서 실제 화면 흐름이 잡힌다. 커스텀 이벤트
+     구현 자체는 js/analytics.js에서 한 파일로 관리한다.
      ════════════════════════════════════════════════════ -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-XXXXXXXXXX', { send_page_view: false });
 </script>
+<script src="js/analytics.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="css/style.css?v=20260622d" />

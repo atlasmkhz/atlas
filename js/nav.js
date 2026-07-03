@@ -164,6 +164,7 @@
       if (!btn || btn.classList.contains('disabled')) return;
       const item = ERA_HUB_ITEMS.find(it => it.key === btn.dataset.eraKey);
       if (!item || !item.ready) return;
+      if (window.trackPageView) window.trackPageView('era', item.key);
       if (item.url === '.') {
         // 지금 페이지가 곧 "근대" 지도이므로 허브만 닫는다.
         window.closeEraHub();

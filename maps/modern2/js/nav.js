@@ -9,7 +9,10 @@
 //       · 다른 시대 카드 → 아직 별도 페이지가 없으므로 비활성(.disabled)
 //   - "소개" 클릭 → .intro-page(소개 글)가 열린다. 본문은 index.html에
 //     정적으로 박혀 있다(이 파일은 열기/닫기만 담당).
-//   - 나머지 메뉴(자료실/루트/프로젝트) 클릭 → "준비 중" 토스트
+//   - "자료실" 클릭 → .archive-hub(카테고리 → 하위주제 → 글 목록 3단계
+//     오버레이)가 열린다. 실제 글은 정적 페이지로 이동해서 읽는다.
+//   - 나머지 메뉴(프로젝트는 openProjectHub 있으면 그쪽으로) 클릭 →
+//     아직 구현 안 된 것만 "준비 중" 토스트
 //
 // 다른 시대 지도가 실제로 만들어지면, ERA_HUB_ITEMS의 해당 항목에서
 // ready:true와 url을 채우는 것만으로 이 허브가 그 페이지로 안내한다.
@@ -53,8 +56,55 @@
     { routeId:'park_chung_hee', name:'박정희',                 period:'1917–1979', tagline:'만주군관학교에서 궁정동까지', ready:true, thumbnail:null },
     { routeId:'kim_dae_jung', name:'김대중',                   period:'1924–2009', tagline:'하의도에서 노벨평화상까지', ready:true, thumbnail:null },
     { routeId:'chun_doo_hwan', name:'전두환',                  period:'1931–2021', tagline:'하나회에서 5·18까지', ready:true, thumbnail:null },
-    { routeId:'historical_revisionism', name:'역사왜곡에 맞서다', period:'1925–현재', tagline:'주장과 그 반박', ready:true, thumbnail:null },
+    // historical_revisionism은 루트에서 제거됐다 — 실제 이동 경로가
+    // 아니라 논쟁·사료 중심 콘텐츠라 자료실(Archive)로 옮겼다
+    // (archive/historical_revisionism.js, 아래 자료실 섹션 참고).
   ];
+
+  // ── 자료실(Archive) 레지스트리 ──────────────────────────────
+  // archive/*.js가 로드되면 여기에 시리즈 단위로 등록된다. routeRenderer.js
+  // 의 ROUTE_REGISTRY와 완전히 같은 패턴 — archive/*.js 파일이 이
+  // window.registerArchiveSeries를 호출해 스스로 등록한다. 이 함수는
+  // archive/*.js보다 먼저 로드돼야 하므로(index.html에서 이 nav.js를
+  // archive/*.js보다 앞에 로드한다), 아래처럼 IIFE 최상단(= init() 밖)
+  // 에서 즉시 정의한다.
+  const ARCHIVE_REGISTRY = {};
+  window.registerArchiveSeries = function (seriesObj) {
+    ARCHIVE_REGISTRY[seriesObj.id] = seriesObj;
+  };
+  window.ARCHIVE_REGISTRY = ARCHIVE_REGISTRY;
+
+  // ── 자료실 카테고리 ──────────────────────────────────────────
+  // 장기적으로 역사/문학/철학/예술/건축/종교를 모두 아우르는 인문학
+  // 라이브러리를 목표로 한다(docs/archive_design.md 참고). 지금은
+  // History 하나만 실제 콘텐츠(역사왜곡)가 있고, 나머지는 "준비 중"
+  // 카드로만 자리를 잡아둔다 — 콘텐츠가 생기면 ready:true로 바꾸고
+  // ARCHIVE_SUBCATEGORIES에 항목을 채우면 된다(이 파일 구조를 다시
+  // 설계할 필요 없음).
+  const ARCHIVE_CATEGORIES = [
+    { key: 'history', name: '역사', ready: true },
+    { key: 'literature', name: '문학', ready: false },
+    { key: 'philosophy', name: '철학', ready: false },
+    { key: 'art', name: '예술', ready: false },
+    { key: 'architecture', name: '건축', ready: false },
+    { key: 'religion', name: '종교', ready: false },
+  ];
+
+  // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
+  // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다 —
+  // 즉 archive/xxx.js 파일을 실제로 추가하지 않으면 자동으로 "준비 중"
+  // 상태를 유지한다(routeHub의 ready 플래그를 수동으로 관리하는 것보다
+  // 안전한 방식).
+  const ARCHIVE_SUBCATEGORIES = {
+    history: [
+      { subcat: 'revisionism', name: '역사왜곡', seriesId: 'historical_revisionism' },
+      { subcat: 'era_study', name: '시대연구', seriesId: null },
+      { subcat: 'people_study', name: '인물연구', seriesId: null },
+      { subcat: 'primary_sources', name: '사료읽기', seriesId: null },
+    ],
+  };
+
+  const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동' };
 
   document.addEventListener('DOMContentLoaded', init);
   if (document.readyState === 'complete' || document.readyState === 'interactive') init();
@@ -132,6 +182,109 @@
       if (typeof window.openRoute === 'function') window.openRoute(item.routeId);
     });
 
+    // ── 자료실 허브 (archiveHub) ── era-hub와 같은 scrim+lockBodyScroll
+    // 패턴을 재사용하되, 카테고리 → 하위주제 → 글 목록 3단계로 들어간다.
+    // 앞의 두 단계는 era-hub-grid(.era-card-item 카드)를 그대로 쓰고,
+    // 마지막(글 목록) 단계만 다른 레이아웃(.archive-list)으로 그린다.
+    const archiveHub = document.getElementById('archiveHub');
+    const archiveHubScrim = document.getElementById('archiveHubScrim');
+    const archiveHubClose = document.getElementById('archiveHubClose');
+    const archiveHubBack = document.getElementById('archiveHubBack');
+    const archiveHubGrid = document.getElementById('archiveHubGrid');
+    const archiveHubList = document.getElementById('archiveHubList');
+    const archiveHubTitle = document.getElementById('archiveHubTitle');
+    const archiveHubSub = document.getElementById('archiveHubSub');
+
+    // level: 'category' | 'subcategory' | 'postlist'
+    let archiveState = { level: 'category', categoryKey: null, seriesId: null };
+
+    function renderArchiveLevel(){
+      if (!archiveHubGrid || !archiveHubList) return;
+
+      if (archiveState.level === 'category') {
+        if (archiveHubBack) archiveHubBack.hidden = true;
+        if (archiveHubTitle) archiveHubTitle.textContent = '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = '역사·문학·철학·예술을 가로지르는 인문학 라이브러리';
+        archiveHubGrid.hidden = false;
+        archiveHubList.hidden = true;
+        archiveHubGrid.innerHTML = ARCHIVE_CATEGORIES.map(renderArchiveCategoryCard).join('');
+
+      } else if (archiveState.level === 'subcategory') {
+        const cat = ARCHIVE_CATEGORIES.find(c => c.key === archiveState.categoryKey);
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = cat ? cat.name : '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = '주제를 선택하세요';
+        archiveHubGrid.hidden = false;
+        archiveHubList.hidden = true;
+        const subs = ARCHIVE_SUBCATEGORIES[archiveState.categoryKey] || [];
+        archiveHubGrid.innerHTML = subs.map(renderArchiveSubcatCard).join('');
+
+      } else if (archiveState.level === 'postlist') {
+        const series = ARCHIVE_REGISTRY[archiveState.seriesId];
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = series ? series.name : '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = series ? (series.tagline || '') : '';
+        archiveHubGrid.hidden = true;
+        archiveHubList.hidden = false;
+        archiveHubList.innerHTML = series
+          ? series.posts.map(p => renderArchivePostRow(p, series)).join('')
+          : '<div class="archive-empty">아직 준비된 글이 없습니다.</div>';
+      }
+    }
+
+    window.openArchiveHub = function(){
+      if (!archiveHub) return;
+      archiveState = { level: 'category', categoryKey: null, seriesId: null };
+      renderArchiveLevel();
+      archiveHub.classList.add('open');
+      archiveHub.setAttribute('aria-hidden', 'false');
+      archiveHubScrim?.classList.add('open');
+      lockBodyScroll(true);
+      if (window.trackPageView) window.trackPageView('archive_hub', 'root');
+    };
+    window.closeArchiveHub = function(){
+      if (!archiveHub) return;
+      archiveHub.classList.remove('open');
+      archiveHub.setAttribute('aria-hidden', 'true');
+      archiveHubScrim?.classList.remove('open');
+      lockBodyScroll(false);
+    };
+
+    archiveHubClose?.addEventListener('click', window.closeArchiveHub);
+    archiveHubScrim?.addEventListener('click', window.closeArchiveHub);
+
+    archiveHubBack?.addEventListener('click', () => {
+      if (archiveState.level === 'postlist') {
+        archiveState = { level: 'subcategory', categoryKey: archiveState.categoryKey, seriesId: null };
+      } else if (archiveState.level === 'subcategory') {
+        archiveState = { level: 'category', categoryKey: null, seriesId: null };
+      }
+      renderArchiveLevel();
+    });
+
+    // 카테고리 카드 클릭 → 하위주제 단계로.
+    archiveHubGrid?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.era-card-item');
+      if (!btn || btn.classList.contains('disabled')) return;
+
+      if (archiveState.level === 'category') {
+        const item = ARCHIVE_CATEGORIES.find(it => it.key === btn.dataset.archiveCategory);
+        if (!item || !item.ready) return;
+        archiveState = { level: 'subcategory', categoryKey: item.key, seriesId: null };
+        renderArchiveLevel();
+
+      } else if (archiveState.level === 'subcategory') {
+        const seriesId = btn.dataset.seriesId;
+        if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return; // 콘텐츠 없는 "준비 중" 카드
+        archiveState = { level: 'postlist', categoryKey: archiveState.categoryKey, seriesId };
+        if (window.trackPageView) window.trackPageView('archive', seriesId);
+        renderArchiveLevel();
+      }
+    });
+
+    // 글 목록 항목은 <a href="archive/...">라 클릭 시 그냥 정적 페이지로
+    // 이동한다(별도 핸들러 불필요) — SPA 오버레이는 "찾아가는 목록"까지만.
+
     // ── 소개 페이지 (introPage) ── era-hub와 같은 scrim+lockBodyScroll
     // 패턴을 재사용한다. 첫 진입 자동 노출은 없고, 오직 "소개" 메뉴를
     // 직접 눌러야만 열린다.
@@ -160,6 +313,7 @@
       if (e.key !== 'Escape') return;
       if (eraHub.classList.contains('open')) window.closeEraHub();
       else if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
+      else if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();
       else if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
     });
 
@@ -168,6 +322,7 @@
       if (!btn || btn.classList.contains('disabled')) return;
       const item = ERA_HUB_ITEMS.find(it => it.key === btn.dataset.eraKey);
       if (!item || !item.ready) return;
+      if (window.trackPageView) window.trackPageView('era', item.key);
       if (item.url === '.') {
         // 지금 페이지가 곧 "근대" 지도이므로 허브만 닫는다.
         window.closeEraHub();
@@ -190,12 +345,19 @@
       } else if (key === 'intro') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
+      } else if (key === 'archive') {
+        if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
+        if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
+        window.openArchiveHub();
       } else if (key === 'route') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         window.openRouteHub();
       } else if (key === 'project') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         if (typeof window.openProjectHub === 'function') window.openProjectHub();
         else showComingSoon(NAV_LABELS[key] || key);
@@ -227,6 +389,55 @@
         <span class="era-card-name">${item.name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
+  }
+
+  function renderArchiveCategoryCard(item){
+    const statusClass = item.ready ? 'ready' : 'soon';
+    const statusText = item.ready ? '입장 가능' : '준비 중';
+    const disabledClass = item.ready ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-archive-category="${item.key}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderArchiveSubcatCard(item){
+    const ready = !!item.seriesId && !!ARCHIVE_REGISTRY[item.seriesId];
+    const statusClass = ready ? 'ready' : 'soon';
+    const statusText = ready ? '입장 가능' : '준비 중';
+    const disabledClass = ready ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}" data-series-id="${item.seriesId || ''}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  // 정적 글 페이지 경로. build/generate_archive_pages.py가 실제로
+  // archive/{series-slug}/{post_id}.html 파일을 만든다 — 여기서는 그
+  // 경로 규칙만 그대로 재현한다(확장자 생략은 기존 event/route 페이지의
+  // canonical URL 관례와 동일 — 배포 환경에서 clean URL로 서빙된다).
+  function archivePostUrl(series, post){
+    const slug = series.id.replace(/_/g, '-');
+    return `archive/${slug}/${post.id}`;
+  }
+
+  function renderArchivePostRow(post, series){
+    const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
+    const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
+    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : (post.claim_ko || '');
+    const shortSummary = bodyText.length > 72 ? bodyText.slice(0, 72) + '…' : bodyText;
+    const href = archivePostUrl(series, post);
+    return `
+      <a class="archive-list-item" href="${href}">
+        <span class="archive-item-badge">${typeLabel}</span>
+        <span class="archive-item-body">
+          <span class="archive-item-title">${post.title_ko}</span>
+          <span class="archive-item-meta">${dateStr} · ${post.place_ko || ''}</span>
+          <span class="archive-item-summary">${shortSummary}</span>
+        </span>
+      </a>`;
   }
 
   // ── "준비 중" 토스트 — 별도 마크업 없이 가볍게 동적으로 띄운다.

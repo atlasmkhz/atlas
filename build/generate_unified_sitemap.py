@@ -22,6 +22,7 @@ MAIN_EVENT_DIR = os.path.join(PROJECT_ROOT, 'event')
 MAIN_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'route')
 MODERN2_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'event')
 MODERN2_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'route')
+MODERN2_ARCHIVE_DIR = os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'archive')
 OUT_PATH = os.path.join(PROJECT_ROOT, 'sitemap.xml')
 
 def main():
@@ -29,6 +30,23 @@ def main():
     modern2_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MODERN2_EVENT_DIR, '*.html')))
     main_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MAIN_ROUTE_DIR, '*.html')))
     modern2_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MODERN2_ROUTE_DIR, '*.html')))
+    # archive/는 시리즈별 하위 폴더(archive/{series-slug}/*.html)라
+    # event·route와 달리 2단계로 스캔한다. index.html(시리즈 랜딩)과
+    # 글 페이지를 구분해서 각각 다른 URL 패턴으로 담는다.
+    modern2_archive_landing = []   # [(series_slug, )]
+    modern2_archive_posts = []     # [(series_slug, post_slug)]
+    if os.path.isdir(MODERN2_ARCHIVE_DIR):
+        for series_dir in sorted(glob.glob(os.path.join(MODERN2_ARCHIVE_DIR, '*'))):
+            if not os.path.isdir(series_dir):
+                continue
+            series_slug = os.path.basename(series_dir)
+            if os.path.isfile(os.path.join(series_dir, 'index.html')):
+                modern2_archive_landing.append(series_slug)
+            for f in sorted(glob.glob(os.path.join(series_dir, '*.html'))):
+                post_slug = os.path.basename(f)[:-5]
+                if post_slug == 'index':
+                    continue
+                modern2_archive_posts.append((series_slug, post_slug))
 
     lines = []
     lines.append('<?xml version="1.0" encoding="UTF-8"?>')
@@ -89,14 +107,32 @@ def main():
         lines.append('    <priority>0.75</priority>')
         lines.append('  </url>')
 
+    # modern2 자료실 시리즈 랜딩
+    for series_slug in modern2_archive_landing:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/modern2/archive/{series_slug}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.75</priority>')
+        lines.append('  </url>')
+
+    # modern2 자료실 글
+    for series_slug, post_slug in modern2_archive_posts:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/modern2/archive/{series_slug}/{post_slug}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.7</priority>')
+        lines.append('  </url>')
+
     lines.append('</urlset>')
 
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
 
-    total = 2 + len(main_slugs) + len(modern2_slugs) + len(main_route_slugs) + len(modern2_route_slugs)
+    total = (2 + len(main_slugs) + len(modern2_slugs) + len(main_route_slugs) + len(modern2_route_slugs)
+             + len(modern2_archive_landing) + len(modern2_archive_posts))
     print(f'통합 sitemap.xml 생성 완료: 메인 1 + 1876-1945 Event {len(main_slugs)} + 루트 {len(main_route_slugs)} + '
-          f'modern2 진입점 1 + modern2 Event {len(modern2_slugs)} + modern2 루트 {len(modern2_route_slugs)} = 총 {total}건')
+          f'modern2 진입점 1 + modern2 Event {len(modern2_slugs)} + modern2 루트 {len(modern2_route_slugs)} + '
+          f'modern2 자료실 랜딩 {len(modern2_archive_landing)} + modern2 자료실 글 {len(modern2_archive_posts)} = 총 {total}건')
 
 if __name__ == '__main__':
     main()
