@@ -27,7 +27,7 @@ const ROUTE_KOREAN_WAR_BATTLES = {
   hero_image: null,
 
   card_refs: [
-    'battle_1950_01', 'battle_1950_02', 'battle_1950_03', 'battle_1950_04',
+    'battle_1950_01', 'person_1950_01', 'battle_1950_02', 'battle_1950_03', 'battle_1950_04',
     'migration_1951_01', 'battle_1951_01', 'battle_1952_01', 'political_1953_02',
   ],
 
@@ -56,7 +56,7 @@ const ROUTE_KOREAN_WAR_BATTLES = {
       lat: 36.05, lng: 128.42,
       stay: '1950.8.3~9.15',
       summary_ko: '백선엽이 이끄는 국군 1사단이 다부동 일대에서 북한군의 파상 공세를 55일간 막아냈다. 이곳이 뚫리면 대구, 나아가 부산까지 위험해지는 낙동강 방어선의 최후 저지선이었다. 병력 손실을 감수한 사투 끝에 방어선을 지켜냈고, 이는 곧이어 벌어질 인천상륙작전으로 전세를 뒤집을 시간을 벌어줬다.',
-      card_ref: null,
+      card_ref: 'person_1950_01',
     },
 
     // ── 3. 인천상륙작전 ──────────────────────────────────────────

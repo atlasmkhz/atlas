@@ -53,6 +53,7 @@
     { routeId:'park_chung_hee', name:'박정희',                 period:'1917–1979', tagline:'만주군관학교에서 궁정동까지', ready:true, thumbnail:null },
     { routeId:'kim_dae_jung', name:'김대중',                   period:'1924–2009', tagline:'하의도에서 노벨평화상까지', ready:true, thumbnail:null },
     { routeId:'chun_doo_hwan', name:'전두환',                  period:'1931–2021', tagline:'하나회에서 5·18까지', ready:true, thumbnail:null },
+    { routeId:'historical_revisionism', name:'역사왜곡에 맞서다', period:'1925–현재', tagline:'주장과 그 반박', ready:true, thumbnail:null },
   ];
 
   document.addEventListener('DOMContentLoaded', init);
