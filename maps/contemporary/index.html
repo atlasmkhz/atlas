@@ -356,12 +356,16 @@
 <script src="js/nav.js"></script>
 <script src="js/routeRenderer.js"></script>
 <script src="js/projectHub.js"></script>
-<!-- 아직 이 지도 전용 루트(routes/*.js)나 자료실 시리즈가 없다 —
-     nav.js의 ROUTE_HUB_ITEMS는 지금 빈 배열이라 "루트" 메뉴를 눌러도
-     빈 화면만 뜬다(에러 아님). 루트가 생기면 routes/xxx.js 파일을
-     만들고 여기 <script> 태그 한 줄만 추가하면 된다(다른 지도와 동일
-     패턴). 자료실은 이 지도 전용을 만들지 않고, "자료실" 메뉴를 누르면
-     콘텐츠가 있는 근현대(modern2) 지도의 자료실로 이동한다(nav.js 참고).
+<script src="archive/power_accountability.js"></script>
+<!-- 아직 이 지도 전용 루트(routes/*.js)가 없다 — nav.js의 ROUTE_HUB_ITEMS는
+     지금 빈 배열이라 "루트" 메뉴를 눌러도 빈 화면만 뜬다(에러 아님).
+     루트가 생기면 routes/xxx.js 파일을 만들고 여기 <script> 태그 한 줄만
+     추가하면 된다(다른 지도와 동일 패턴).
+     자료실(archive/*.js)은 반드시 nav.js보다 뒤에 로드해야 한다 —
+     window.registerArchiveSeries가 nav.js 최상단에서 정의되기 때문이다.
+     archive/ 안에 새 시리즈 파일을 추가할 때마다 여기 <script> 태그를
+     한 줄 추가하는 걸 잊지 말 것 — extract_archive.js(정적 페이지 빌드용)는
+     폴더를 자동으로 훑지만, 이 index.html(SPA)은 자동으로 훑지 않는다.
      -->
 
 </body>

@@ -10,8 +10,10 @@
 //         아직 별도 페이지가 없으므로 비활성(.disabled)
 //   - "소개" 클릭 → .intro-page(소개 글)가 열린다. 본문은 index.html에
 //     정적으로 박혀 있다(이 파일은 열기/닫기만 담당).
-//   - "자료실" 클릭 → 이 지도 전용 자료실 콘텐츠가 아직 없어서, 실제
-//     콘텐츠가 있는 근현대(modern2) 지도의 자료실로 이동한다.
+//   - "자료실" 클릭 → archiveHub(카테고리→하위주제→글 목록 3단계)가
+//     이 페이지 안에서 바로 열린다. archive/*.js가 등록한 시리즈만
+//     "입장 가능"으로 뜨고, 나머지는 "준비 중"으로 잠긴다(자세한 규칙은
+//     아래 ARCHIVE_CATEGORIES/ARCHIVE_SUBCATEGORIES 주석 참고).
 //   - 나머지 메뉴(프로젝트는 openProjectHub 있으면 그쪽으로) 클릭 →
 //     아직 구현 안 된 것만 "준비 중" 토스트
 //
@@ -71,29 +73,31 @@
 
   // ── 자료실 카테고리 ──────────────────────────────────────────
   // 장기적으로 역사/문학/철학/예술/건축/종교를 모두 아우르는 인문학
-  // 라이브러리를 목표로 한다(docs/archive_design.md 참고). 지금은
-  // History 하나만 실제 콘텐츠(역사왜곡)가 있고, 나머지는 "준비 중"
-  // 카드로만 자리를 잡아둔다 — 콘텐츠가 생기면 ready:true로 바꾸고
-  // ARCHIVE_SUBCATEGORIES에 항목을 채우면 된다(이 파일 구조를 다시
-  // 설계할 필요 없음).
+  // 라이브러리를 목표로 한다(docs/power_accountability_roadmap.md §0-6
+  // 참고 — docs/archive_design.md는 실제로 존재하지 않는 문서라 참조를
+  // 정정했다). 지금은 역사/세계사 두 카테고리만 노출한다 — 한국사(고대·
+  // 중세·근대·현대)와 세계사가 채워지기 전까지 문학·철학·예술·건축·
+  // 종교는 메뉴에서 완전히 뺐다(ready:false 카드로도 안 보여준다 —
+  // 빈 카테고리가 계속 보이면 "언제 채워지나" 하는 인상만 남기고
+  // 실제 우선순위 판단에는 도움이 안 된다). 세계사는 콘텐츠가 아직
+  // 없어 ready:false(준비 중 카드)로 자리만 잡아둔다.
   const ARCHIVE_CATEGORIES = [
     { key: 'history', name: '역사', ready: true },
-    { key: 'literature', name: '문학', ready: false },
-    { key: 'philosophy', name: '철학', ready: false },
-    { key: 'art', name: '예술', ready: false },
-    { key: 'architecture', name: '건축', ready: false },
-    { key: 'religion', name: '종교', ready: false },
+    { key: 'world_history', name: '세계사', ready: false },
   ];
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
   // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다 —
   // 즉 archive/xxx.js 파일을 실제로 추가하지 않으면 자동으로 "준비 중"
   // 상태를 유지한다(routeHub의 ready 플래그를 수동으로 관리하는 것보다
-  // 안전한 방식).
+  // 안전한 방식). era_study는 archive/power_accountability.js가
+  // registerArchiveSeries로 등록하는 실제 시리즈이므로 잠금 해제.
+  // people_study는 로드맵 §5의 인물카드(대통령·고위공직자·재벌총수
+  // 프로필) 전용으로 예약돼 있고 아직 콘텐츠가 없어 계속 잠김 상태다.
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesId: 'historical_revisionism' },
-      { subcat: 'era_study', name: '시대연구', seriesId: null },
+      { subcat: 'era_study', name: '시대연구', seriesId: 'power_accountability' },
       { subcat: 'people_study', name: '인물연구', seriesId: null },
       { subcat: 'primary_sources', name: '사료읽기', seriesId: null },
     ],
@@ -199,7 +203,7 @@
       if (archiveState.level === 'category') {
         if (archiveHubBack) archiveHubBack.hidden = true;
         if (archiveHubTitle) archiveHubTitle.textContent = '자료실';
-        if (archiveHubSub) archiveHubSub.textContent = '역사·문학·철학·예술을 가로지르는 인문학 라이브러리';
+        if (archiveHubSub) archiveHubSub.textContent = '대한민국 현대사와 세계사를 기록하는 라이브러리';
         archiveHubGrid.hidden = false;
         archiveHubList.hidden = true;
         archiveHubGrid.innerHTML = ARCHIVE_CATEGORIES.map(renderArchiveCategoryCard).join('');
