@@ -52,6 +52,92 @@
 
   const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };
 
+  // ── 자료실(Archive) 레지스트리 ──────────────────────────────
+  // content/archive/*.js가 window.registerArchiveSeries로 스스로 등록한다.
+  // init() 밖(IIFE 최상단)에서 즉시 정의해야 한다 — index.html에서 이
+  // nav.js를 content/archive/*.js보다 앞에 로드하기 때문이다.
+  const ARCHIVE_REGISTRY = {};
+  window.registerArchiveSeries = function (seriesObj) {
+    ARCHIVE_REGISTRY[seriesObj.id] = seriesObj;
+  };
+  window.ARCHIVE_REGISTRY = ARCHIVE_REGISTRY;
+
+  // ── 자료실 카테고리 ──────────────────────────────────────────
+  // 자료실은 근대·근현대·현대(그리고 앞으로 생길 선사·고대·중세1·
+  // 중세2까지) 지도 구분 없이 하나로 운영된다 — content/archive/*.js가
+  // 모든 지도에 공유되고(content/youtube_videos.js와 같은 패턴),
+  // 이 ARCHIVE_CATEGORIES/ARCHIVE_SUBCATEGORIES 블록은 모든 지도의
+  // nav.js에 동일하게 복사돼 있어야 한다(다르면 지도마다 다른 자료실이
+  // 보이는 버그가 생긴다 — 실제로 한 번 이렇게 어긋나서 문제가 됐었다).
+  // 장기적으로 문학/철학/예술/건축/종교까지 아우르는 라이브러리가
+  // 목표지만(docs/power_accountability_roadmap.md §0-6), 한국사와
+  // 세계사가 채워지기 전까진 메뉴에서 숨긴다.
+  const ARCHIVE_CATEGORIES = [
+    { key: 'history', name: '역사', ready: true },
+    { key: 'world_history', name: '세계사', ready: false },
+  ];
+
+  // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
+  // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
+  const ARCHIVE_SUBCATEGORIES = {
+    history: [
+      { subcat: 'revisionism', name: '역사왜곡', seriesId: 'historical_revisionism' },
+      { subcat: 'era_study', name: '시대연구', seriesId: 'power_accountability' },
+      { subcat: 'people_study', name: '인물연구', seriesId: null },
+      { subcat: 'primary_sources', name: '사료읽기', seriesId: null },
+    ],
+  };
+
+  const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동' };
+
+  // 정적 글 페이지 경로 — 지도 구분 없이 사이트 루트의 archive/ 하나다.
+  // 이 파일은 atlas/js/nav.js(사이트 루트)이므로 접두사가 필요 없다.
+  const ARCHIVE_ROOT_PREFIX = '';
+  function archivePostUrl(series, post){
+    const slug = series.id.replace(/_/g, '-');
+    return `${ARCHIVE_ROOT_PREFIX}archive/${slug}/${post.id}.html`;
+  }
+
+  function renderArchiveCategoryCard(item){
+    const statusClass = item.ready ? 'ready' : 'soon';
+    const statusText = item.ready ? '입장 가능' : '준비 중';
+    const disabledClass = item.ready ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-archive-category="${item.key}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderArchiveSubcatCard(item){
+    const ready = !!item.seriesId && !!ARCHIVE_REGISTRY[item.seriesId];
+    const statusClass = ready ? 'ready' : 'soon';
+    const statusText = ready ? '입장 가능' : '준비 중';
+    const disabledClass = ready ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}" data-series-id="${item.seriesId || ''}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderArchivePostRow(post, series){
+    const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
+    const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
+    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : (post.claim_ko || '');
+    const shortSummary = bodyText.length > 72 ? bodyText.slice(0, 72) + '…' : bodyText;
+    const href = archivePostUrl(series, post);
+    return `
+      <a class="archive-list-item" href="${href}">
+        <span class="archive-item-badge">${typeLabel}</span>
+        <span class="archive-item-body">
+          <span class="archive-item-title">${post.title_ko}</span>
+          <span class="archive-item-meta">${dateStr} · ${post.place_ko || ''}</span>
+          <span class="archive-item-summary">${shortSummary}</span>
+        </span>
+      </a>`;
+  }
+
   document.addEventListener('DOMContentLoaded', init);
   if (document.readyState === 'complete' || document.readyState === 'interactive') init();
 
@@ -128,6 +214,110 @@
       if (typeof window.openRoute === 'function') window.openRoute(item.routeId);
     });
 
+    // ── 자료실 허브 (archiveHub) ── era-hub와 같은 scrim+lockBodyScroll
+    // 패턴을 재사용하되, 카테고리 → 하위주제 → 글 목록 3단계로 들어간다.
+    // modern2/contemporary와 완전히 같은 구조다 — 자료실이 지도 구분
+    //없이 하나로 운영되므로, 이 로직 자체도 모든 지도 nav.js에 동일하게
+    // 있어야 한다.
+    const archiveHub = document.getElementById('archiveHub');
+    const archiveHubScrim = document.getElementById('archiveHubScrim');
+    const archiveHubClose = document.getElementById('archiveHubClose');
+    const archiveHubBack = document.getElementById('archiveHubBack');
+    const archiveHubGrid = document.getElementById('archiveHubGrid');
+    const archiveHubList = document.getElementById('archiveHubList');
+    const archiveHubTitle = document.getElementById('archiveHubTitle');
+    const archiveHubSub = document.getElementById('archiveHubSub');
+
+    // level: 'category' | 'subcategory' | 'postlist'
+    let archiveState = { level: 'category', categoryKey: null, seriesId: null };
+
+    function renderArchiveLevel(){
+      if (!archiveHubGrid || !archiveHubList) return;
+
+      if (archiveState.level === 'category') {
+        if (archiveHubBack) archiveHubBack.hidden = true;
+        if (archiveHubTitle) archiveHubTitle.textContent = '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = '대한민국 역사와 세계사를 기록하는 라이브러리';
+        archiveHubGrid.hidden = false;
+        archiveHubList.hidden = true;
+        archiveHubGrid.innerHTML = ARCHIVE_CATEGORIES.map(renderArchiveCategoryCard).join('');
+
+      } else if (archiveState.level === 'subcategory') {
+        const cat = ARCHIVE_CATEGORIES.find(c => c.key === archiveState.categoryKey);
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = cat ? cat.name : '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = '주제를 선택하세요';
+        archiveHubGrid.hidden = false;
+        archiveHubList.hidden = true;
+        const subs = ARCHIVE_SUBCATEGORIES[archiveState.categoryKey] || [];
+        archiveHubGrid.innerHTML = subs.map(renderArchiveSubcatCard).join('');
+
+      } else if (archiveState.level === 'postlist') {
+        const series = ARCHIVE_REGISTRY[archiveState.seriesId];
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = series ? series.name : '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = series ? (series.tagline || '') : '';
+        archiveHubGrid.hidden = true;
+        archiveHubList.hidden = false;
+        archiveHubList.innerHTML = series
+          ? series.posts.map(p => renderArchivePostRow(p, series)).join('')
+          : '<div class="archive-empty">아직 준비된 글이 없습니다.</div>';
+      }
+    }
+
+    window.openArchiveHub = function(){
+      if (!archiveHub) return;
+      archiveState = { level: 'category', categoryKey: null, seriesId: null };
+      renderArchiveLevel();
+      archiveHub.classList.add('open');
+      archiveHub.setAttribute('aria-hidden', 'false');
+      archiveHubScrim?.classList.add('open');
+      lockBodyScroll(true);
+      if (window.trackPageView) window.trackPageView('archive_hub', 'root');
+    };
+    window.closeArchiveHub = function(){
+      if (!archiveHub) return;
+      archiveHub.classList.remove('open');
+      archiveHub.setAttribute('aria-hidden', 'true');
+      archiveHubScrim?.classList.remove('open');
+      lockBodyScroll(false);
+    };
+
+    archiveHubClose?.addEventListener('click', window.closeArchiveHub);
+    archiveHubScrim?.addEventListener('click', window.closeArchiveHub);
+
+    archiveHubBack?.addEventListener('click', () => {
+      if (archiveState.level === 'postlist') {
+        archiveState = { level: 'subcategory', categoryKey: archiveState.categoryKey, seriesId: null };
+      } else if (archiveState.level === 'subcategory') {
+        archiveState = { level: 'category', categoryKey: null, seriesId: null };
+      }
+      renderArchiveLevel();
+    });
+
+    // 카테고리 카드 클릭 → 하위주제 단계로.
+    archiveHubGrid?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.era-card-item');
+      if (!btn || btn.classList.contains('disabled')) return;
+
+      if (archiveState.level === 'category') {
+        const item = ARCHIVE_CATEGORIES.find(it => it.key === btn.dataset.archiveCategory);
+        if (!item || !item.ready) return;
+        archiveState = { level: 'subcategory', categoryKey: item.key, seriesId: null };
+        renderArchiveLevel();
+
+      } else if (archiveState.level === 'subcategory') {
+        const seriesId = btn.dataset.seriesId;
+        if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return; // 콘텐츠 없는 "준비 중" 카드
+        archiveState = { level: 'postlist', categoryKey: archiveState.categoryKey, seriesId };
+        if (window.trackPageView) window.trackPageView('archive', seriesId);
+        renderArchiveLevel();
+      }
+    });
+
+    // 글 목록 항목은 <a href="archive/...">라 클릭 시 그냥 정적 페이지로
+    // 이동한다(별도 핸들러 불필요) — SPA 오버레이는 "찾아가는 목록"까지만.
+
     // ── 소개 페이지 (introPage) ── era-hub와 같은 scrim+lockBodyScroll
     // 패턴을 재사용한다. 첫 진입 자동 노출은 없고, 오직 "소개" 메뉴를
     // 직접 눌러야만 열린다.
@@ -188,13 +378,15 @@
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
       } else if (key === 'archive') {
-        // 자료실 콘텐츠는 지금 근현대(modern2) 지도 쪽에만 있다 — 시대
-        // 구분 없이 자료실이 "열려야" 한다는 요구를 이 페이지 자체에
-        // 자료실 UI를 복제하지 않고, 실제 콘텐츠가 있는 곳으로 안내하는
-        // 방식으로 해결했다(ERA_HUB_ITEMS가 시대 간 이동을 다루는 것과
-        // 같은 방식 — 페이지 자체가 다르면 이동한다). modern2의 nav.js가
-        // ?nav=archive 쿼리를 보고 로드 직후 자동으로 자료실 허브를 연다.
-        window.location.href = 'maps/modern2/index.html?nav=archive';
+        // 예전엔 이 지도(근대)에 자료실 콘텐츠가 아예 없어서 modern2로
+        // 페이지 자체를 이동시켰다 — 그러면 지금 보던 화면 상태가 다
+        // 날아가고, modern2가 기본 연도(1945)로 열려 "느닷없이 1945로
+        // 이동했다"는 인상을 줬다. 지금은 이 지도(근대)에도 로컬
+        // archiveHub가 있으므로 그걸 연다 — 페이지 이동이 없다.
+        if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
+        if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
+        window.openArchiveHub();
       } else if (key === 'route') {
         // 루트 허브 — era-hub와 동일한 패턴으로 먼저 선택 화면을 보여준다.
         if (eraHub.classList.contains('open')) window.closeEraHub();

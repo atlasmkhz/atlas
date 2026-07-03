@@ -1,29 +1,32 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-generate_archive_pages.py (contemporary)
-archive/*.js 를 읽어 자료실 정적 페이지를 생성한다:
+generate_archive_pages.py (통합/루트)
+content/archive/*.js 를 읽어 자료실 정적 페이지를 생성한다:
   (1) 시리즈 랜딩 페이지  /archive/{series-slug}/index.html
   (2) 글 페이지          /archive/{series-slug}/{post_id}.html
 
-maps/modern2/build/generate_archive_pages.py를 이식한 것이다. 이식하며
-바뀐 부분만 적는다(나머지는 원본과 동일한 원칙):
+이 스크립트는 원래 maps/modern2/build/에 있다가 maps/contemporary/build/에
+이식됐던 두 버전을 통합해 루트로 옮긴 것이다. 자료실은 근대·근현대·현대
+(그리고 앞으로 생길 선사·고대·중세1·중세2까지) 어느 지도 구분도 없이
+하나로 운영된다 — content/youtube_videos.js(유튜브 갤러리)가 이미 이
+방식으로 모든 지도에 공유되고 있는 것과 같은 패턴이다.
 
-1. PATH_PREFIX/CARD_MAP_PREFIX — modern2 기준('/maps/modern2'가 자기
-   자신)이었던 걸 contemporary 기준('/maps/contemporary'가 자기 자신)
-   으로 뒤집었다.
-2. format:'case_tracking' 지원 추가 — 원본은 claim_rebuttal(주장/반박)과
-   기본값(body_ko 서술)만 알았다. docs/power_accountability_roadmap.md
-   §3에서 설계한 "권력과 책임" 사건카드 포맷(body_ko + stages[] + legacy_ko)
-   은 원본 스크립트로 빌드하면 stages/legacy_ko가 통째로 사라지고
-   body_ko만 나왔을 것 — render_post_body()에 분기를 추가하고,
-   render_stages_section()을 새로 만들어 해결했다.
-3. 이식 과정에서 archive/power_accountability.js의 데이터 버그 2건도
-   함께 발견해 고쳤다(파일 자체 주석 참고): sources[]가
-   title/kind/date라는 임의 필드명을 썼던 것 → 이 스크립트가 실제로
-   읽는 type/name/author/publisher/year/url로 수정, related.people/
-   events가 문자열 배열이었던 것(render_related_section이 .get()을
-   호출하므로 실제 빌드하면 AttributeError) → {title,url} 객체로 수정.
+지도별 버전과 달라진 점:
+- ARCHIVE_DIR이 content/archive(공유 소스)를 가리킨다. 더 이상 각
+  지도 폴더 밑 archive/가 소스가 아니다.
+- ARCHIVE_OUT_DIR이 사이트 루트의 archive/ 하나다. PATH_PREFIX 개념이
+  없다 — 모든 페이지가 항상 도메인 루트 기준 경로다.
+- card_ref/card_map CTA는 여전히 유효하다: 어느 지도의 사건인지에 따라
+  ROOT_MAP_PREFIX로 그 지도의 절대경로를 만든다(이건 "이 시리즈가 어느
+  지도 소속인가"가 아니라 "이 글이 어느 지도의 사건카드를 가리키는가"
+  이므로 시리즈 통합과는 별개 개념 — 계속 필요하다).
+- format:'case_tracking' 지원(stages[]/legacy_ko)을 포함한다
+  (docs/power_accountability_roadmap.md §3).
+
+content/archive/ 아래에 새 시리즈 파일을 추가하면(반드시 파일 끝에서
+window.registerArchiveSeries(...)를 호출해야 한다) 이 스크립트를 다시
+실행하는 것만으로 자동 반영된다 — 코드를 고칠 필요 없음.
 """
 import glob
 import html as html_module
@@ -35,17 +38,16 @@ import sys
 
 # ── 경로 ──────────────────────────────────────────────────────────
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(BUILD_DIR)
-ARCHIVE_DIR = os.path.join(PROJECT_ROOT, 'archive')
-ARCHIVE_OUT_DIR = os.path.join(PROJECT_ROOT, 'archive')  # 데이터 폴더와 출력 폴더를 같은 이름으로 공유(정적 사이트라 무관 — .js와 .html 확장자로 구분됨)
+PROJECT_ROOT = os.path.dirname(BUILD_DIR)  # atlas/
+ARCHIVE_DIR = os.path.join(PROJECT_ROOT, 'content', 'archive')
+ARCHIVE_OUT_DIR = os.path.join(PROJECT_ROOT, 'archive')
 EXTRACT_SCRIPT = os.path.join(BUILD_DIR, 'extract_archive.js')
 
 SITE_ROOT = 'https://atlas.mkhz.kr'
-PATH_PREFIX = '/maps/contemporary' if os.path.basename(PROJECT_ROOT) == 'contemporary' else ''
 
 CATEGORY_LABELS = {
-    'history': '역사', 'literature': '문학', 'philosophy': '철학',
-    'art': '예술', 'architecture': '건축', 'religion': '종교',
+    'history': '역사', 'world_history': '세계사', 'literature': '문학',
+    'philosophy': '철학', 'art': '예술', 'architecture': '건축', 'religion': '종교',
 }
 SUBCATEGORY_LABELS = {
     'revisionism': '역사왜곡', 'era_study': '시대연구',
@@ -63,15 +65,33 @@ RELATED_SECTION_LABELS = [
     ('films', '관련 영화'), ('music', '관련 음악'),
 ]
 
+# 자료실 정적 페이지는 항상 정확히 사이트 루트에서 2단계 아래
+# (archive/{series-slug}/{file})에 생성된다 — 그래서 루트까지 돌아가는
+# 상대경로가 고정값이다. 예전엔 절대경로(/css/..., https://atlas.mkhz.kr/...)
+# 를 썼는데, 이러면 file://로 로컬에서 열었을 때 CSS는 컴퓨터의 실제
+# 파일시스템 루트를 찾다 실패하고(그래서 꾸며지지 않은 "개발자 페이지"
+# 처럼 보임), breadcrumb의 "ATLAS" 링크는 진짜 배포된 라이브 사이트로
+# 이동해버린다("예전 버전으로 돌아간다"는 증상의 정체). 배포 후에도
+# 상대경로는 똑같이 정확하게 동작하므로, 로컬/배포 두 경우 다 되는
+# 상대경로로 통일한다. canonical/og:url/JSON-LD의 "url"처럼 메타데이터
+# 성격이라 사람이 클릭하지 않는 곳만 SITE_ROOT 절대경로를 유지한다
+# (그게 SEO 정석이기도 하다).
+ROOT_PREFIX = '../../'
+
+# 사건카드(card_ref)가 속한 지도별 상대경로 prefix. archive 페이지
+# 기준(ROOT_PREFIX)에서 각 지도의 index.html까지 가는 경로다.
+CARD_MAP_PREFIX = {
+    'root': f'{ROOT_PREFIX}index.html',
+    'modern2': f'{ROOT_PREFIX}maps/modern2/index.html',
+    'contemporary': f'{ROOT_PREFIX}maps/contemporary/index.html',
+}
 
 GA_MEASUREMENT_ID = 'G-9C05WN48C4'  # ATLAS GA4 속성 Measurement ID — index.html과 동일
 
 
 def ga4_snippet():
-    """자료실 정적 페이지용 GA4 스니펫. analytics.js 경로는 PATH_PREFIX
-    기준 절대경로다 — contemporary는 /maps/contemporary/js/analytics.js에
-    있다(각 지도가 자기 js/ 폴더를 갖는 기존 관례와 동일)."""
-    analytics_src = f'{PATH_PREFIX}/js/analytics.js'
+    """자료실 정적 페이지용 GA4 스니펫. analytics.js는 상대경로로 연결한다
+    (위 ROOT_PREFIX 설명 참고)."""
     return f'''<script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -79,7 +99,7 @@ def ga4_snippet():
   gtag('js', new Date());
   gtag('config', '{GA_MEASUREMENT_ID}');
 </script>
-<script src="{analytics_src}"></script>'''
+<script src="{ROOT_PREFIX}js/analytics.js"></script>'''
 
 
 def esc(s):
@@ -106,7 +126,7 @@ def make_description(text, max_len=155):
 
 def load_series():
     if not os.path.isdir(ARCHIVE_DIR):
-        print(f'  (archive/ 디렉토리 없음 — 건너뜀: {ARCHIVE_DIR})')
+        print(f'  (content/archive/ 디렉토리 없음 — 건너뜀: {ARCHIVE_DIR})')
         return []
     result = subprocess.run(
         ['node', EXTRACT_SCRIPT, ARCHIVE_DIR],
@@ -132,8 +152,9 @@ def post_page_filename(post):
 
 
 def post_href(series_slug, post_id):
-    prefix = (PATH_PREFIX.strip('/') + '/') if PATH_PREFIX else ''
-    return f'/{prefix}archive/{series_slug}/{post_id}'
+    # 같은 시리즈의 다른 글로 가는 링크는 항상 같은 디렉토리 안이라
+    # 파일명만으로 충분하다(디렉토리 자체가 이미 시리즈 단위다).
+    return f'{post_id}.html'
 
 
 def render_sources_section(sources):
@@ -160,11 +181,6 @@ def render_sources_section(sources):
 
 
 def render_book_item(book):
-    """books는 다른 related 카테고리와 달리 {isbn,title,author,publisher,
-    affiliate_url,direct_url} 객체다 — 나중에 추천 링크→제휴 판매→직접
-    판매로 이어질 것을 고려한 구조(지금은 두 url 다 비어있어도 된다).
-    direct_url이 있으면 그쪽을 우선 링크, 없으면 affiliate_url, 둘 다
-    없으면 링크 없이 텍스트만 표시한다."""
     title = book.get('title', '')
     author = book.get('author')
     publisher = book.get('publisher')
@@ -198,10 +214,6 @@ def render_related_section(related):
 
 
 def render_stages_section(stages):
-    """format:'case_tracking' 전용 — 수사~판결~사면 등 절차를 순서대로
-    보여준다. stage/date/institution/detail/result 중 없는 필드는
-    조용히 생략한다(로드맵 §3: 단계마다 필드가 다 채워지지 않을 수 있다,
-    예: 수사개시 단계엔 result가 보통 없음)."""
     if not stages:
         return ''
     items = []
@@ -221,18 +233,12 @@ def render_stages_section(stages):
 
 
 def render_legacy_section(legacy_ko):
-    """format:'case_tracking' 전용 — body_ko(사실관계)와 분리된 역사적
-    평가. 로드맵 §0 원칙(사실과 평가를 분리한다)을 페이지 레벨에서
-    시각적으로도 분리한다(.post-legacy는 옅은 배경색 박스로 렌더링,
-    css/archive-article.css 참고)."""
     if not legacy_ko:
         return ''
     return f'<section class="post-legacy"><h2>역사적 평가</h2><p>{esc(legacy_ko)}</p></section>'
 
 
 def render_post_body(post):
-    """format에 따라 (1) 주장/반박, (2) 사실관계+처리경과+평가(case_tracking),
-    (3) 서술(body_ko) 한 블록 중 하나를 만든다."""
     fmt = post.get('format')
     if fmt == 'claim_rebuttal':
         return (
@@ -248,9 +254,6 @@ def render_post_body(post):
 
 
 def post_plain_summary(post):
-    """meta description/JSON-LD용 — claim_ko 또는 body_ko 중 있는 것.
-    case_tracking도 body_ko를 쓴다(사실관계 요약이 설명문으로 적합,
-    legacy_ko는 평가라 메타 설명엔 안 쓴다)."""
     if post.get('format') == 'claim_rebuttal':
         return post.get('claim_ko') or ''
     return post.get('body_ko') or ''
@@ -261,7 +264,7 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
     subcat_label = SUBCATEGORY_LABELS.get(series.get('subcategory'), series.get('subcategory') or '')
     title = f"{post['title_ko']} — {series['name']} | ATLAS by MKHZ"
     description = make_description(post_plain_summary(post))
-    page_url = f"{SITE_ROOT}{PATH_PREFIX}/archive/{series_slug}/{post['id']}"
+    page_url = f"{SITE_ROOT}/archive/{series_slug}/{post['id']}"
     date_str = post_date_str(post)
 
     ld_article = {
@@ -278,9 +281,9 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
         "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "ATLAS", "item": SITE_ROOT + "/"},
-            {"@type": "ListItem", "position": 2, "name": "자료실", "item": f"{SITE_ROOT}{PATH_PREFIX}/?nav=archive"},
+            {"@type": "ListItem", "position": 2, "name": "자료실", "item": f"{SITE_ROOT}/?nav=archive"},
             {"@type": "ListItem", "position": 3, "name": category_label},
-            {"@type": "ListItem", "position": 4, "name": series['name'], "item": f"{SITE_ROOT}{PATH_PREFIX}/archive/{series_slug}"},
+            {"@type": "ListItem", "position": 4, "name": series['name'], "item": f"{SITE_ROOT}/archive/{series_slug}"},
             {"@type": "ListItem", "position": 5, "name": post['title_ko'], "item": page_url},
         ],
     }
@@ -296,25 +299,18 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
     related_html = render_related_section(post.get('related'))
 
     # card_ref(같은 사건이 이미 지도 데이터에 실존하는 경우)가 있으면
-    # ?event=로 그 사건 카드로 정확히 이동시킨다(app.js의 기존
-    # navigateToEvent 딥링크 재사용). card_map으로 어느 지도 소속인지
-    # 표시한다: 'root'는 근대(1876~1945), 'modern2'는 근현대(1945~1993),
-    # 없으면 기본값은 자기 자신(자료실이 있는 현대/contemporary).
-    # card_ref가 아예 없으면 ?lat=&lng=&year=로 좌표와 연도만 넘겨
-    # 지도를 그 위치·시점으로 이동만 시킨다.
-    CARD_MAP_PREFIX = {
-        'root': '',
-        'modern2': '/maps/modern2',
-        'contemporary': PATH_PREFIX,
-    }
+    # ?event=로 그 사건 카드로 정확히 이동시킨다. card_map으로 어느
+    # 지도 소속인지 표시한다: 'root'는 근대(1876~1945), 'modern2'는
+    # 근현대(1945~1993), 'contemporary'는 현대(1994~2025).
     map_cta_html = ''
     if post.get('card_ref'):
-        map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), PATH_PREFIX)
-        map_cta_url = f"{SITE_ROOT}{map_prefix}/?event={post['card_ref']}"
+        map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
+        map_cta_url = f"{map_prefix}?event={post['card_ref']}"
         map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 사건 보기</a></p>'
     elif post.get('lat') is not None and post.get('lng') is not None:
         year_qs = f"&year={post['year']}" if post.get('year') is not None else ''
-        map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/?lat={post['lat']}&lng={post['lng']}{year_qs}"
+        map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
+        map_cta_url = f"{map_prefix}?lat={post['lat']}&lng={post['lng']}{year_qs}"
         map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 지역 보기</a></p>'
 
     html_out = f'''<!DOCTYPE html>
@@ -323,7 +319,7 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f7f4ef">
-<link rel="stylesheet" href="{PATH_PREFIX}/css/archive-article.css">
+<link rel="stylesheet" href="{ROOT_PREFIX}css/archive-article.css">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{page_url}">
@@ -340,14 +336,14 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 {ga4_snippet()}
 </head>
 <body>
-<nav class="breadcrumb"><a href="{SITE_ROOT}/">ATLAS</a> &rsaquo; 자료실 &rsaquo; {esc(category_label)} &rsaquo; <a href="{SITE_ROOT}{PATH_PREFIX}/archive/{series_slug}">{esc(series['name'])}</a> &rsaquo; {esc(post['title_ko'])}</nav>
+<nav class="breadcrumb"><a href="{ROOT_PREFIX}index.html">ATLAS</a> &rsaquo; 자료실 &rsaquo; {esc(category_label)} &rsaquo; <a href="index.html">{esc(series['name'])}</a> &rsaquo; {esc(post['title_ko'])}</nav>
 <article>
 <h1>{esc(post['title_ko'])}</h1>
 <p class="event-meta">{esc(date_str)}{' · ' + esc(post['place_ko']) if post.get('place_ko') else ''}</p>
 {body_html}
 {sources_html}
 {related_html}
-<section class="series-context"><p>이 글은 <a href="{SITE_ROOT}{PATH_PREFIX}/archive/{series_slug}">{esc(series['name'])}</a> 시리즈의 한 편입니다.</p></section>
+<section class="series-context"><p>이 글은 <a href="index.html">{esc(series['name'])}</a> 시리즈의 한 편입니다.</p></section>
 {f'<nav class="wp-pager">{" | ".join(nav_links)}</nav>' if nav_links else ''}
 {map_cta_html}
 </article>
@@ -362,7 +358,7 @@ def render_series_landing_page(series, series_slug, out_path):
     category_label = CATEGORY_LABELS.get(series.get('category'), series.get('category') or '')
     title = f"{series['name']} | ATLAS by MKHZ 자료실"
     description = make_description(series.get('tagline', ''))
-    page_url = f"{SITE_ROOT}{PATH_PREFIX}/archive/{series_slug}"
+    page_url = f"{SITE_ROOT}/archive/{series_slug}"
 
     items = []
     ld_list_items = []
@@ -375,7 +371,7 @@ def render_series_landing_page(series, series_slug, out_path):
         )
         ld_list_items.append({
             "@type": "ListItem", "position": i, "name": post['title_ko'],
-            "url": f"{SITE_ROOT}{href}",
+            "url": f"{SITE_ROOT}/archive/{series_slug}/{post['id']}",
         })
 
     ld_itemlist = {
@@ -392,7 +388,7 @@ def render_series_landing_page(series, series_slug, out_path):
         "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "ATLAS", "item": SITE_ROOT + "/"},
-            {"@type": "ListItem", "position": 2, "name": "자료실", "item": f"{SITE_ROOT}{PATH_PREFIX}/?nav=archive"},
+            {"@type": "ListItem", "position": 2, "name": "자료실", "item": f"{SITE_ROOT}/?nav=archive"},
             {"@type": "ListItem", "position": 3, "name": category_label},
             {"@type": "ListItem", "position": 4, "name": series['name'], "item": page_url},
         ],
@@ -404,7 +400,7 @@ def render_series_landing_page(series, series_slug, out_path):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f7f4ef">
-<link rel="stylesheet" href="{PATH_PREFIX}/css/archive-article.css">
+<link rel="stylesheet" href="{ROOT_PREFIX}css/archive-article.css">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{page_url}">
@@ -421,7 +417,7 @@ def render_series_landing_page(series, series_slug, out_path):
 {ga4_snippet()}
 </head>
 <body>
-<nav class="breadcrumb"><a href="{SITE_ROOT}/">ATLAS</a> &rsaquo; 자료실 &rsaquo; {esc(category_label)} &rsaquo; {esc(series['name'])}</nav>
+<nav class="breadcrumb"><a href="{ROOT_PREFIX}index.html">ATLAS</a> &rsaquo; 자료실 &rsaquo; {esc(category_label)} &rsaquo; {esc(series['name'])}</nav>
 <article>
 <h1>{esc(series['name'])}</h1>
 <p class="event-meta">{esc(series.get('period',''))}</p>

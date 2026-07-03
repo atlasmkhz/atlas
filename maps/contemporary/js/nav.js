@@ -72,28 +72,22 @@
   window.ARCHIVE_REGISTRY = ARCHIVE_REGISTRY;
 
   // ── 자료실 카테고리 ──────────────────────────────────────────
-  // 장기적으로 역사/문학/철학/예술/건축/종교를 모두 아우르는 인문학
-  // 라이브러리를 목표로 한다(docs/power_accountability_roadmap.md §0-6
-  // 참고 — docs/archive_design.md는 실제로 존재하지 않는 문서라 참조를
-  // 정정했다). 지금은 역사/세계사 두 카테고리만 노출한다 — 한국사(고대·
-  // 중세·근대·현대)와 세계사가 채워지기 전까지 문학·철학·예술·건축·
-  // 종교는 메뉴에서 완전히 뺐다(ready:false 카드로도 안 보여준다 —
-  // 빈 카테고리가 계속 보이면 "언제 채워지나" 하는 인상만 남기고
-  // 실제 우선순위 판단에는 도움이 안 된다). 세계사는 콘텐츠가 아직
-  // 없어 ready:false(준비 중 카드)로 자리만 잡아둔다.
+  // 자료실은 근대·근현대·현대(그리고 앞으로 생길 선사·고대·중세1·
+  // 중세2까지) 지도 구분 없이 하나로 운영된다 — content/archive/*.js가
+  // 모든 지도에 공유되고(content/youtube_videos.js와 같은 패턴),
+  // 이 ARCHIVE_CATEGORIES/ARCHIVE_SUBCATEGORIES 블록은 모든 지도의
+  // nav.js에 동일하게 복사돼 있어야 한다(다르면 지도마다 다른 자료실이
+  // 보이는 버그가 생긴다 — 실제로 한 번 이렇게 어긋나서 문제가 됐었다).
+  // 장기적으로 문학/철학/예술/건축/종교까지 아우르는 라이브러리가
+  // 목표지만(docs/power_accountability_roadmap.md §0-6), 한국사와
+  // 세계사가 채워지기 전까진 메뉴에서 숨긴다.
   const ARCHIVE_CATEGORIES = [
     { key: 'history', name: '역사', ready: true },
     { key: 'world_history', name: '세계사', ready: false },
   ];
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
-  // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다 —
-  // 즉 archive/xxx.js 파일을 실제로 추가하지 않으면 자동으로 "준비 중"
-  // 상태를 유지한다(routeHub의 ready 플래그를 수동으로 관리하는 것보다
-  // 안전한 방식). era_study는 archive/power_accountability.js가
-  // registerArchiveSeries로 등록하는 실제 시리즈이므로 잠금 해제.
-  // people_study는 로드맵 §5의 인물카드(대통령·고위공직자·재벌총수
-  // 프로필) 전용으로 예약돼 있고 아직 콘텐츠가 없어 계속 잠김 상태다.
+  // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesId: 'historical_revisionism' },
@@ -345,11 +339,16 @@
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
       } else if (key === 'archive') {
-        // 이 지도(현대) 전용 자료실 콘텐츠는 아직 없다 — 근대 지도와
-        // 같은 방식으로, 실제 콘텐츠가 있는 근현대(modern2) 지도로
-        // 안내한다. modern2의 nav.js가 ?nav=archive 쿼리를 보고 로드
-        // 직후 자동으로 자료실 허브를 연다.
-        window.location.href = '../modern2/index.html?nav=archive';
+        // 이제 이 지도(현대) 전용 자료실 콘텐츠가 있다(archive/
+        // power_accountability.js). 더 이상 modern2로 리다이렉트하지
+        // 않는다 — 예전엔 콘텐츠가 없어서 페이지 전체를 이동시켰는데,
+        // 그러면 지금 보던 연도·화면 상태가 전부 날아간다(다른 페이지로
+        // 완전히 새로 로드되므로). 지금은 다른 오버레이(era-hub 등)와
+        // 같은 방식으로 이 페이지 안에서 archiveHub만 연다 — 지도
+        // 상태는 그대로 유지된다.
+        if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
+        window.openArchiveHub();
       } else if (key === 'route') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
         if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();
@@ -422,13 +421,19 @@
       </button>`;
   }
 
-  // 정적 글 페이지 경로. build/generate_archive_pages.py가 실제로
-  // archive/{series-slug}/{post_id}.html 파일을 만든다 — 여기서는 그
-  // 경로 규칙만 그대로 재현한다(확장자 생략은 기존 event/route 페이지의
-  // canonical URL 관례와 동일 — 배포 환경에서 clean URL로 서빙된다).
+  // 정적 글 페이지 경로. build/generate_archive_pages.py(루트)가 실제로
+  // /archive/{series-slug}/{post_id}.html 파일을 사이트 루트 밑에
+  // 만든다 — 지도 구분이 없다(content/archive/*.js가 근대·근현대·현대
+  // 모두에 공유되는 것과 짝을 이룬다). ARCHIVE_ROOT_PREFIX는 "이
+  // 페이지에서 사이트 루트까지 몇 단계 올라가야 하는가"만 나타낸다 —
+  // 이 파일은 maps/contemporary/js/nav.js이므로 두 단계('../../') 다.
+  // .html 확장자를 명시한다 — 클린 URL(확장자 생략)은 배포 플랫폼의
+  // 리다이렉트 규칙에 의존하는데 이 프로젝트엔 그런 설정이 없어서,
+  // 로컬 테스트와 배포 후 둘 다 항상 동작하는 쪽(확장자 포함)을 쓴다.
+  const ARCHIVE_ROOT_PREFIX = '../../';
   function archivePostUrl(series, post){
     const slug = series.id.replace(/_/g, '-');
-    return `archive/${slug}/${post.id}`;
+    return `${ARCHIVE_ROOT_PREFIX}archive/${slug}/${post.id}.html`;
   }
 
   function renderArchivePostRow(post, series){

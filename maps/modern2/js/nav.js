@@ -81,24 +81,27 @@
   // 카드로만 자리를 잡아둔다 — 콘텐츠가 생기면 ready:true로 바꾸고
   // ARCHIVE_SUBCATEGORIES에 항목을 채우면 된다(이 파일 구조를 다시
   // 설계할 필요 없음).
+  // ── 자료실 카테고리 ──────────────────────────────────────────
+  // 자료실은 근대·근현대·현대(그리고 앞으로 생길 선사·고대·중세1·
+  // 중세2까지) 지도 구분 없이 하나로 운영된다 — content/archive/*.js가
+  // 모든 지도에 공유되고(content/youtube_videos.js와 같은 패턴),
+  // 이 ARCHIVE_CATEGORIES/ARCHIVE_SUBCATEGORIES 블록은 모든 지도의
+  // nav.js에 동일하게 복사돼 있어야 한다(다르면 지도마다 다른 자료실이
+  // 보이는 버그가 생긴다 — 실제로 한 번 이렇게 어긋나서 문제가 됐었다).
+  // 장기적으로 문학/철학/예술/건축/종교까지 아우르는 라이브러리가
+  // 목표지만(docs/power_accountability_roadmap.md §0-6), 한국사와
+  // 세계사가 채워지기 전까진 메뉴에서 숨긴다.
   const ARCHIVE_CATEGORIES = [
     { key: 'history', name: '역사', ready: true },
-    { key: 'literature', name: '문학', ready: false },
-    { key: 'philosophy', name: '철학', ready: false },
-    { key: 'art', name: '예술', ready: false },
-    { key: 'architecture', name: '건축', ready: false },
-    { key: 'religion', name: '종교', ready: false },
+    { key: 'world_history', name: '세계사', ready: false },
   ];
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
-  // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다 —
-  // 즉 archive/xxx.js 파일을 실제로 추가하지 않으면 자동으로 "준비 중"
-  // 상태를 유지한다(routeHub의 ready 플래그를 수동으로 관리하는 것보다
-  // 안전한 방식).
+  // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesId: 'historical_revisionism' },
-      { subcat: 'era_study', name: '시대연구', seriesId: null },
+      { subcat: 'era_study', name: '시대연구', seriesId: 'power_accountability' },
       { subcat: 'people_study', name: '인물연구', seriesId: null },
       { subcat: 'primary_sources', name: '사료읽기', seriesId: null },
     ],
@@ -426,9 +429,13 @@
   // archive/{series-slug}/{post_id}.html 파일을 만든다 — 여기서는 그
   // 경로 규칙만 그대로 재현한다(확장자 생략은 기존 event/route 페이지의
   // canonical URL 관례와 동일 — 배포 환경에서 clean URL로 서빙된다).
+  // 정적 글 페이지 경로 — 이제 지도 구분 없이 사이트 루트의 archive/
+  // 하나다(content/archive/*.js가 모든 지도에 공유되는 것과 짝을 이룬다).
+  // 이 파일은 maps/modern2/js/nav.js이므로 루트까지 두 단계('../../').
+  const ARCHIVE_ROOT_PREFIX = '../../';
   function archivePostUrl(series, post){
     const slug = series.id.replace(/_/g, '-');
-    return `archive/${slug}/${post.id}`;
+    return `${ARCHIVE_ROOT_PREFIX}archive/${slug}/${post.id}.html`;
   }
 
   function renderArchivePostRow(post, series){

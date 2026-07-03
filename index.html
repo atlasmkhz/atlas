@@ -93,6 +93,32 @@
      nav.js의 ROUTE_HUB_ITEMS에서 관리한다. 루트가 늘어날 때마다 이
      배열에 항목 하나만 추가하면 이 허브가 자동으로 카드를 그려준다. -->
 <div class="era-hub-scrim" id="routeHubScrim"></div>
+
+<!-- ── 자료실 허브 — "자료실" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     modern2/contemporary처럼 카테고리→하위주제→글 목록 3단계를 그대로
+     복제하지 않는다 — 그러려면 다른 지도의 archive/*.js 데이터를 이
+     페이지로 끌어와야 하고, 글 링크 경로(archive/{series}/{post})가
+     지금 페이지(루트) 기준으로는 안 맞아서 렌더러 쪽 경로 로직도 같이
+     손봐야 한다. 대신 루트는 "실제 콘텐츠가 있는 곳으로 안내하는 목록"
+     역할만 한다 — era-hub와 같은 틀을 재사용하되 카드가 아니라 단순
+     링크 목록이다. 자료실이 세 지도 모두에 나눠 있는 지금 상태에서는
+     이렇게 명시적으로 목적지를 보여주는 게, 클릭 한 번에 조용히 다른
+     지도로 이동시키는 것보다 사용자에게 덜 놀랍다. -->
+<!-- ── 자료실 허브 — "자료실" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     modern2/contemporary와 완전히 같은 구조(카테고리→하위주제→글 목록
+     3단계)다. 자료실은 지도 구분 없이 하나로 운영된다 —
+     content/archive/*.js가 모든 지도에 공유되고, 이 마크업/nav.js 로직도
+     모든 지도에 동일하게 있어야 한다. -->
+<div class="era-hub-scrim" id="archiveHubScrim"></div>
+<div class="era-hub archive-hub" id="archiveHub" role="dialog" aria-modal="true" aria-label="자료실">
+  <button type="button" class="era-hub-close" id="archiveHubClose" aria-label="닫기">×</button>
+  <button type="button" class="archive-hub-back" id="archiveHubBack" hidden>← 뒤로</button>
+  <div class="era-hub-title" id="archiveHubTitle">자료실</div>
+  <div class="era-hub-sub" id="archiveHubSub">대한민국 역사와 세계사를 기록하는 라이브러리</div>
+  <div class="era-hub-grid" id="archiveHubGrid"><!-- nav.js가 채운다 --></div>
+  <div class="archive-list" id="archiveHubList" hidden><!-- nav.js가 채운다 --></div>
+</div>
+
 <div class="era-hub" id="routeHub" role="dialog" aria-modal="true" aria-label="루트 선택">
   <button type="button" class="era-hub-close" id="routeHubClose" aria-label="닫기">×</button>
   <div class="era-hub-title">루트를 선택하세요</div>
@@ -369,8 +395,16 @@
 <script src="js/search.js"></script>
 <script src="js/timeline.js"></script>
 <script src="js/ui.js?v=20260627a"></script>
-<script src="js/nav.js"></script>
+<script src="js/nav.js?v=20260704b"></script>
 <script src="js/projectHub.js"></script>
+<script src="content/archive/historical_revisionism.js"></script>
+<script src="content/archive/power_accountability.js"></script>
+<!-- 자료실(content/archive/*.js)은 근대·근현대·현대 모든 지도가 공유한다
+     (content/youtube_videos.js와 같은 패턴). 반드시 nav.js보다 뒤에
+     로드해야 한다 — window.registerArchiveSeries가 nav.js 최상단에서
+     정의되기 때문이다. content/archive/ 안에 새 시리즈 파일이 추가되면
+     여기에도 <script> 태그를 한 줄 추가해야 한다 — 모든 지도 nav.js의
+     <script> 목록이 전부 동일해야 한다. -->
 
 </body>
 </html>

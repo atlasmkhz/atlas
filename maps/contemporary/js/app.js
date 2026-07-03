@@ -62,7 +62,8 @@ const DATA = {};
   EVENTS_2006, EVENTS_2007, EVENTS_2008, EVENTS_2009,
   EVENTS_2010, EVENTS_2011, EVENTS_2012, EVENTS_2013, EVENTS_2014, EVENTS_2015,
   EVENTS_2016, EVENTS_2017, EVENTS_2018, EVENTS_2019,
-  EVENTS_2020, EVENTS_2021, EVENTS_2022, EVENTS_2023, EVENTS_2024, EVENTS_2025
+  EVENTS_2020, EVENTS_2021, EVENTS_2022, EVENTS_2023, EVENTS_2024, EVENTS_2025,
+  EVENTS_2026
 ].forEach(arr => {
   if (!arr?.length) return;
   DATA[arr[0].year] = arr;
@@ -125,7 +126,7 @@ window.onload = () => {
         const yearFromUrl = parseInt(params.get('year'), 10);
         const clampedYear = Number.isNaN(yearFromUrl)
           ? INITIAL_YEAR
-          : Math.min(2025, Math.max(1994, yearFromUrl));
+          : Math.min(2026, Math.max(1994, yearFromUrl));
         syncToYear(clampedYear);
         window.setTimeout(() => { map.setView([latFromUrl, lngFromUrl], 7, { animate: true }); }, 350);
         return;

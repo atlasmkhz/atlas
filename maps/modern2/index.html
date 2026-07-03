@@ -370,7 +370,7 @@
      어긋나는 문제가 생기므로, 상위 폴더의 파일을 상대경로로 그대로
      참조한다. -->
 <script src="../../content/youtube_videos.js"></script>
-<script src="js/nav.js"></script>
+<script src="js/nav.js?v=20260704b"></script>
 <script src="js/routeRenderer.js"></script>
 <script src="js/projectHub.js"></script>
 <script src="routes/korean_war_battles.js"></script>
@@ -380,10 +380,14 @@
 <script src="routes/park_chung_hee.js"></script>
 <script src="routes/kim_dae_jung.js"></script>
 <script src="routes/chun_doo_hwan.js"></script>
-<!-- historical_revisionism은 더 이상 지도 루트가 아니다 — 자료실(Archive)로
-     이전됐다(archive/historical_revisionism.js, registerArchiveSeries로 등록).
-     nav.js가 registerArchiveSeries를 정의하므로 nav.js보다 뒤에 로드한다. -->
-<script src="archive/historical_revisionism.js"></script>
+<!-- 자료실(content/archive/*.js)은 근대·근현대·현대 모든 지도가 공유한다
+     (content/youtube_videos.js와 같은 패턴, docs/power_accountability_roadmap.md
+     §0-6). nav.js가 registerArchiveSeries를 정의하므로 nav.js보다 뒤에
+     로드한다. content/archive/ 안에 새 시리즈 파일이 추가되면 여기에도
+     <script> 태그를 한 줄 추가해야 한다 — 모든 지도 nav.js의 <script>
+     목록이 전부 동일해야 한다. -->
+<script src="../../content/archive/historical_revisionism.js"></script>
+<script src="../../content/archive/power_accountability.js"></script>
 
 </body>
 </html>

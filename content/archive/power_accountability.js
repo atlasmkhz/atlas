@@ -119,11 +119,11 @@ const ARCHIVE_SERIES_POWER_ACCOUNTABILITY = {
           { title:'안종범', url:'' }, { title:'정호성', url:'' }, { title:'조원동', url:'' }
         ],
         events: [
-          { title:'박근혜-최순실 국정농단 사건 발각 (2016)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=political_2016_01' },
-          { title:'촛불집회 시작 (2016)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=movement_2016_01' },
-          { title:'박근혜 대통령 탄핵소추안 가결 (2016)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=political_2016_02' },
-          { title:'헌법재판소, 박근혜 대통령 파면 (2017)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=political_2017_01' },
-          { title:'박근혜 전 대통령 구속 (2017)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=political_2017_02' }
+          { title:'박근혜-최순실 국정농단 사건 발각 (2016)', url:'../../maps/contemporary/index.html?event=political_2016_01' },
+          { title:'촛불집회 시작 (2016)', url:'../../maps/contemporary/index.html?event=movement_2016_01' },
+          { title:'박근혜 대통령 탄핵소추안 가결 (2016)', url:'../../maps/contemporary/index.html?event=political_2016_02' },
+          { title:'헌법재판소, 박근혜 대통령 파면 (2017)', url:'../../maps/contemporary/index.html?event=political_2017_01' },
+          { title:'박근혜 전 대통령 구속 (2017)', url:'../../maps/contemporary/index.html?event=political_2017_02' }
         ],
         institutions: ['헌법재판소','대법원','서울중앙지방법원','서울고등법원','검찰 특별수사본부','박영수 특검팀','청와대','국회'],
         archives: [], books: [], videos: [], artworks: [], films: [], music: []
@@ -190,7 +190,7 @@ const ARCHIVE_SERIES_POWER_ACCOUNTABILITY = {
           { title:'김대중', url:'' }, { title:'전재국', url:'' }
         ],
         events: [
-          { title:'전두환·노태우 구속 — 역사바로세우기 (1995)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=political_1995_02' }
+          { title:'전두환·노태우 구속 — 역사바로세우기 (1995)', url:'../../maps/contemporary/index.html?event=political_1995_02' }
         ],
         institutions: ['서울지방법원','서울고등법원','대법원','검찰(서울중앙지검 범죄수익환수부)','국회','청와대'],
         archives: [], books: [], videos: [], artworks: [], films: [], music: []
@@ -305,14 +305,129 @@ const ARCHIVE_SERIES_POWER_ACCOUNTABILITY = {
           { title:'이명박', url:'' }, { title:'김경준', url:'' }, { title:'박근혜', url:'' }
         ],
         events: [
-          { title:'BBK 주가조작 의혹 (2007)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=political_2007_02' },
-          { title:'제17대 대통령 선거 — 이명박 당선 (2007)', url:'https://atlas.mkhz.kr/maps/contemporary/?event=political_2007_01' }
+          { title:'BBK 주가조작 의혹 (2007)', url:'../../maps/contemporary/index.html?event=political_2007_02' },
+          { title:'제17대 대통령 선거 — 이명박 당선 (2007)', url:'../../maps/contemporary/index.html?event=political_2007_01' }
         ],
         institutions: ['서울중앙지방법원','서울고등법원','대법원','검찰(서울중앙지검)','삼성','다스'],
         archives: [], books: [], videos: [], artworks: [], films: [], music: []
       },
 
       connections: []
+    },
+
+    // ── 5. 김건희 도이치모터스 주가조작 사건 ──────────────────────
+    {
+      id: 'kim_keon_hee_deutsch_motors',
+      type: 'political',
+      format: 'case_tracking',
+      year: 2009, month: 12, day: null,
+      title_ko: '김건희 도이치모터스 주가조작 사건',
+      title_en: 'Kim Keon-hee Deutsch Motors Stock Manipulation Case',
+      place_ko: '서울',
+      lat: 37.566, lng: 126.978,
+
+      card_ref: 'political_2025_05',
+      card_map: 'contemporary',
+
+      allegation_status: 'convicted',
+
+      body_ko: '2009년 12월부터 2012년 12월까지 세 차례("0차~2차 작전")에 걸쳐 도이치모터스 권오수 회장 등이 주가조작을 벌였고, 윤석열 대통령의 배우자 김건희와 모친 최은순도 차명계좌를 통해 시세조종에 가담해 각각 약 13억9천만원, 9억원 이상의 수익을 올렸다는 의혹이 제기됐다. 2020년 2월 탐사매체 뉴스타파가 2013년 경찰 내사보고서를 인용해 김건희 연루 의혹을 처음 보도했다. 검찰은 공범 권오수 등 9명을 먼저 기소해 2023년 2월 1심에서 징역형의 집행유예를 이끌어냈으나(검찰·피고인 양측 항소), 정작 김건희 본인에 대해서는 오랫동안 기소 여부를 결정하지 않아 "봐주기 수사" 비판이 이어졌다. 2024년 10월 17일 서울중앙지검은 김건희를 대통령경호처 부속 청사에서 비공개로 조사하고 수사심의위원회도 거치지 않은 채 불기소 처분했다. 국회는 이 수사를 지휘한 이창수 서울중앙지검장·조상원 4차장검사·최재훈 반부패수사2부장검사 3인이 부실 수사·허위사실 유포로 헌법과 법률을 위반했다며 12월 5일 탄핵소추안을 가결했으나, 헌법재판소는 2025년 3월 13일 재판관 전원일치로 이를 기각했다(2024헌나3·4·5). 판이 바뀐 것은 2025년 12·3 내란 사태 이후 출범한 3대 특검 중 하나인 김건희 특검(특별검사 민중기)이었다 — 특검은 도이치모터스 주가조작에 정치자금법 위반(명태균·건진법사 관련 알선수재 등) 혐의를 더해 수사했고, 2025년 8월 12일 김건희에 대한 구속영장을 발부받았다 — 헌정사상 최초로 전직 대통령 배우자가 구속됐고, 남편 윤석열과 부부가 동시에 구속된 것도 최초였다. 특검은 12월 3일 징역 15년을 구형했다. 2026년 1월 28일 서울중앙지법 형사27부(재판장 우인성)는 대부분의 혐의를 무죄로 판단해 징역 1년 8개월에 그치는 판결을 내렸으나, 검찰(특검)이 항소한 2심에서는 여론조사 무상 제공 혐의를 제외한 대부분이 유죄로 인정되며 징역 4년·벌금 5천만원으로 형이 크게 늘었다. 상고심이 진행 중이다.',
+
+      stages: [
+        { stage:'시세조종 발생', date:'2009-12', institution:'도이치모터스(권오수 등)', detail:'0차~2차 작전, 2012년 12월까지 세 차례에 걸쳐 진행. 김건희·최은순 차명계좌 가담 의혹', result:null },
+        { stage:'최초 의혹 보도', date:'2020-02', institution:'언론(뉴스타파)', detail:'2013년 경찰 내사보고서 인용', result:null },
+        { stage:'공범 1심', date:'2023-02-10', institution:'서울중앙지법', detail:'권오수 등 9명', result:'징역형의 집행유예, 양측 항소' },
+        { stage:'불기소 처분(김건희)', date:'2024-10-17', institution:'서울중앙지검', detail:'비공개 조사, 수사심의위 미개최', result:'불기소' },
+        { stage:'담당 검사 3인 탄핵소추', date:'2024-12-05', institution:'국회', detail:'이창수·조상원·최재훈 부실수사·허위사실 유포 사유', result:'가결' },
+        { stage:'헌재 탄핵 기각', date:'2025-03-13', institution:'헌법재판소', detail:'2024헌나3·4·5', result:'재판관 전원일치 기각' },
+        { stage:'특검 구속', date:'2025-08-12', institution:'김건희 특검(민중기)', detail:'자본시장법위반·정치자금법위반·알선수재 등', result:'구속(부부 동시 구속 최초)' },
+        { stage:'구형', date:'2025-12-03', institution:'김건희 특검', detail:null, result:'징역 15년 구형' },
+        { stage:'1심', date:'2026-01-28', institution:'서울중앙지법 형사27부', detail:'재판장 우인성', result:'대부분 무죄, 징역 1년 8개월' },
+        { stage:'2심', date:null, institution:'서울고등법원', detail:'검찰(특검) 항소, 여론조사 무상제공 혐의 제외', result:'대부분 유죄, 징역 4년·벌금 5천만원(상고심 진행 중)' }
+      ],
+
+      legacy_ko: '이 사건은 2020년 첫 보도부터 김건희 본인에 대한 기소까지 5년 넘게 걸렸다는 점에서, 현직 대통령 배우자를 상대로 한 수사가 얼마나 지연·왜곡될 수 있는지를 보여주는 사례로 꼽힌다. 담당 검사들의 탄핵이 헌재에서 기각된 것을 두고는 "정치적 탄핵 남발"이라는 평가와 "그럼에도 불기소 처분 자체의 문제는 남는다"는 평가가 엇갈렸다. 정권교체 후 특검 수사로 비로소 기소·구속에 이르렀다는 사실은, 수사기관의 독립성이 정치적 상황에 따라 흔들릴 수 있다는 우려를 남겼다. 1심과 2심의 형량이 1년 8개월에서 4년으로 크게 벌어진 것은 같은 증거를 두고도 법원의 판단이 크게 갈릴 수 있음을 보여주며, 상고심 결과가 최종적으로 어떻게 정리될지는 아직 지켜봐야 한다.',
+
+      sources: [
+        { type:'newspaper', name:'"검찰, \'도이치모터스 주가조작\' 권오수 집행유예에 항소"', publisher:'나무위키(도이치모터스 주가조작 사건 정리 — 1차사료 아님, 원 기사로 교체 필요)', author:'', year:'', url:'' },
+        { type:'newspaper', name:'"검찰, \\"김건희 모녀 도이치로 23억 수익\\""', publisher:'뉴스타파', author:'', year:'2023', url:'' },
+        { type:'government', name:'헌법재판소 2024헌나3·4·5 결정(검사 이창수·조상원·최재훈 탄핵심판)', publisher:'헌법재판소', author:'', year:'2025', url:'' },
+        { type:'newspaper', name:'"법원, 내일 김건희 도이치모터스 주가조작 선고 생중계"', publisher:'법률신문', author:'', year:'2026', url:'' },
+        { type:'newspaper', name:'나무위키 김건희 구속 사건 (사건 일지 정리 — 1차사료 아님, 원 기사로 교체 필요)', publisher:'나무위키', author:'', year:'', url:'' }
+      ],
+
+      related: {
+        people: [
+          { title:'김건희', url:'' }, { title:'윤석열', url:'' }, { title:'권오수', url:'' }, { title:'최은순', url:'' }
+        ],
+        events: [
+          { title:'김건희 구속 — 전직 대통령 배우자 최초 (2025)', url:'../../maps/contemporary/index.html?event=political_2025_05' }
+        ],
+        institutions: ['서울중앙지방법원','서울고등법원','헌법재판소','서울중앙지검','국회','김건희 특검(민중기)'],
+        archives: [], books: [], videos: [], artworks: [], films: [], music: []
+      },
+
+      connections: [
+        { to:'political_2025_05', relation:'caused' }
+      ]
+    },
+
+    // ── 6. 김건희 디올백·매관매직 사건 ──────────────────────
+    {
+      id: 'kim_keon_hee_dior_bag',
+      type: 'political',
+      format: 'case_tracking',
+      year: 2022, month: 9, day: null,
+      title_ko: '김건희 디올백·매관매직 사건',
+      title_en: 'Kim Keon-hee Dior Bag and Influence-Peddling Case',
+      place_ko: '서울',
+      lat: 37.566, lng: 126.978,
+
+      card_ref: 'political_2026_02',
+      card_map: 'contemporary',
+
+      allegation_status: 'convicted',
+
+      body_ko: '2022년 6월과 9월, 최재영 목사가 김건희에게 각각 179만원 상당 샤넬 화장품 세트와 300만원 상당 디올백을 건넸다. 2023년 11월 인터넷 매체 서울의소리가 이 장면이 담긴 영상을 공개하며 파문이 일었고, 시민단체들이 청탁금지법 위반 등 혐의로 김건희를 고발했다. 서울중앙지검은 초기에 사건을 형사1부에 배당했다가 2024년 5월 이원석 검찰총장 지시로 전담수사팀을 꾸렸으나, 팀 구성 2주 만에 지휘부가 교체되고 이후 대검찰청과 수사팀 사이에 조사 방식·처분 방향을 둘러싼 갈등이 이어졌다. 2024년 7월 김건희를 대통령경호처 보안청사에서 비공개 조사한 사실이 알려지며 "황제 조사" 논란이, 이원석 총장이 관련 사실을 사전 보고받지 못한 사실이 알려지며 "총장 패싱" 논란이 잇따라 불거졌다. 검찰 수사팀과 대검 지휘부 판단이 엇갈리자 이원석 총장은 2024년 9월 직권으로 수사심의위원회를 열었고, 위원회는 8일 김건희에 대해 청탁금지법 위반 등 6개 혐의 모두에 만장일치로 불기소를 권고했다(24일 열린 최재영 관련 수사심의위원회는 8대7로 기소를 권고, 엇갈린 결론이었다). 검찰은 이 권고를 따라 그해 10월 김건희를 "직무 관련성·대가성이 없다"며 불기소 처분했다 — 압수수색 한 번 없이, 통신 내역 확인도 없이 내려진 결론이었다. 판단은 2025년 12·3 내란 사태 이후 출범한 김건희 특검(특별검사 민중기)에서 뒤집혔다. 특검은 디올백 수수 의혹에 반클리프아펠 목걸이·금거북이·고가 그림 등을 받고 인사·이권 청탁을 받은 정황("매관매직")까지 수사를 확대해, 2025년 12월 김건희를 특정범죄가중처벌법상 알선수재 등 혐의로 기소했다. 2026년 6월 26일 서울중앙지법 형사21부(재판장 조순표)는 최재영의 선물이 "대통령의 고유권한이거나 대통령실 내부 운영 업무와 밀접한 관련이 있는" 청탁의 대가였다며 매관매직 혐의를 모두 유죄로 인정해 김건희에게 징역 7년을 선고했다. 한편 경찰은 2026년 6월, 김건희의 디올백 수수 사실을 알고도 감사원 등에 신고하지 않은 혐의(청탁금지법 위반)로 윤석열을 검찰에 송치했다 — 부부 공모에 의한 뇌물수수 혐의는 증거 불충분으로 불송치됐다.',
+
+      stages: [
+        { stage:'금품 수수', date:'2022-09', institution:'최재영(목사)', detail:'샤넬 화장품 세트(2022.6)·디올백 300만원 상당(2022.9)', result:null },
+        { stage:'폭로', date:'2023-11', institution:'서울의소리', detail:'수수 장면 영상 공개', result:null },
+        { stage:'시민단체 고발', date:'2023-11', institution:'시민단체', detail:'청탁금지법 위반 등 혐의', result:null },
+        { stage:'전담수사팀 구성', date:'2024-05', institution:'서울중앙지검', detail:'이원석 검찰총장 지시, 2주 만에 지휘부 교체', result:null },
+        { stage:'비공개 조사', date:'2024-07', institution:'검찰', detail:'대통령경호처 보안청사, "황제 조사"·"총장 패싱" 논란', result:null },
+        { stage:'수사심의위(김건희)', date:'2024-09-08', institution:'대검 수사심의위원회', detail:'6개 혐의 전부', result:'만장일치 불기소 권고' },
+        { stage:'수사심의위(최재영)', date:'2024-09-24', institution:'대검 수사심의위원회', detail:null, result:'8대7 기소 권고' },
+        { stage:'불기소 처분', date:'2024-10', institution:'서울중앙지검', detail:'"직무 관련성·대가성 없음", 압수수색·통신조회 없이 결론', result:'혐의없음' },
+        { stage:'특검 기소', date:'2025-12', institution:'김건희 특검(민중기)', detail:'반클리프아펠 목걸이·금거북이·고가 그림 등 매관매직 정황 추가', result:'특정범죄가중처벌법상 알선수재 등 기소' },
+        { stage:'1심', date:'2026-06-26', institution:'서울중앙지법 형사21부', detail:'재판장 조순표', result:'매관매직 혐의 전부 유죄, 징역 7년' },
+        { stage:'윤석열 미신고 혐의 송치', date:'2026-06', institution:'경찰', detail:'디올백 수수를 알고도 감사원 등에 미신고(청탁금지법 위반). 부부 공모 뇌물수수는 증거불충분 불송치', result:'검찰 송치' }
+      ],
+
+      legacy_ko: '이 사건은 검찰의 불기소 처분과 법원의 유죄 판결이 정반대로 갈린 대표 사례로 남는다 — 같은 사실관계를 두고 검찰은 "직무 관련성이 없다"고 봤지만, 법원은 "대통령의 고유권한과 밀접한 관련이 있는 청탁의 대가"라고 정반대로 판단했다. 압수수색도, 통신 조회도, 대통령에 대한 서면조사조차 없었던 2024년 검찰 수사는 이후 "면죄부"라는 비판을 받았고, 정권교체 후 특검이 재수사에 나서 3년 만에 유죄를 이끌어낸 경위 자체가 수사기관의 독립성과 정치적 중립성에 대한 근본적 물음을 남긴다. 월스트리트저널이 이 사건을 "2200달러 디올백이 여당을 뒤흔들었다"고 보도했을 만큼 국제적으로도 주목받았다. 검찰이 애초 왜 무혐의로 판단했는지, 그 과정에 외압이 있었는지는 별도로 진행 중인 특검의 "수사 무마 의혹" 수사에서 밝혀질 부분으로 남아 있다.',
+
+      sources: [
+        { type:'newspaper', name:'"김건희 \'디올백\' 무혐의 뒤집은 법원…특검 \'검찰 수사 무마\' 수사 힘받나"', publisher:'경향신문', author:'', year:'2026', url:'' },
+        { type:'newspaper', name:'"김건희 \'디올백\' 고발 3년만에 결국 유죄…종합특검 \'검찰 무마 의혹\' 수사 속도 낼까"', publisher:'경향신문', author:'', year:'2026', url:'' },
+        { type:'newspaper', name:'"경찰, \'김건희 디올백 수수\' 윤석열 송치…\\"직무 관련성 알아\\" 청탁금지법 적용"', publisher:'경향신문', author:'', year:'2026', url:'' },
+        { type:'newspaper', name:'"檢 수심위, 김건희 여사 디올백 사건 최재영 목사 기소 권고"', publisher:'매일일보', author:'', year:'2024', url:'' },
+        { type:'newspaper', name:'김건희 명품백 수수 사건 (사건 일지 정리 — 1차사료 아님, 원 기사로 교체 필요)', publisher:'나무위키', author:'', year:'', url:'' }
+      ],
+
+      related: {
+        people: [
+          { title:'김건희', url:'' }, { title:'윤석열', url:'' }, { title:'최재영', url:'' }
+        ],
+        events: [
+          { title:'김건희 도이치모터스 주가조작 사건', url:'kim_keon_hee_deutsch_motors.html' }
+        ],
+        institutions: ['서울중앙지방법원','서울중앙지검','대검찰청 수사심의위원회','경찰청','김건희 특검(민중기)'],
+        archives: [], books: [], videos: [], artworks: [], films: [], music: []
+      },
+
+      connections: [
+        { to:'political_2026_02', relation:'caused' }
+      ]
     }
 
   ]
