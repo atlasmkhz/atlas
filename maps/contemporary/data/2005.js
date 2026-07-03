@@ -1,9 +1,88 @@
 // data/2005.js — 2005년 사건 데이터
 // 현대 지도 (1994~2025)
-// 이 파일은 index.html에서 <script src="data/2005.js"></script> 로 불립니다.
-// 아직 콘텐츠가 채워지지 않은 연도입니다 — 빈 배열이라도 로드에는 문제 없습니다
-// (validator.js가 빈 배열을 만나면 그냥 건너뜁니다).
+// political_2005_01(교과서포럼 결성)은 자료실 「역사왜곡에 맞서다」 wp_07과
+// 연결된다 — archive/historical_revisionism.js의 wp_07에 card_ref로 걸려있다.
 
 const EVENTS_2005 = [
+
+  { id:'political_2005_01', year:2005, visible_from:2005, visible_until:2005,
+    month:1, day:25, type:'political', priority:1,
+    title_ko:'교과서포럼 결성',
+    title_en:'Formation of the Textbook Forum',
+    title_ja:'教科書フォーラム結成',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'뉴라이트 계열 학자들이 "기존 역사교과서가 좌편향됐다"며 교과서포럼을 결성했다. 2008년에는 식민지 근대화론·이승만 국부론·박정희 산업화 영웅론을 담은 《대안교과서 한국근·현대사》를 펴냈으나, 한국사 전공자가 편집진에 한 명도 없었고 김구를 깎아내리는 왜곡 서술 등으로 역사학계의 강한 비판을 받으며 정식 교과서 검정도 통과하지 못했다. 이 단체의 핵심 인사들은 이후 한국현대사학회로 이름을 바꿔 활동을 이어갔다. 이 사건에 대한 자세한 반박은 자료실 「역사왜곡에 맞서다」에서 다룬다.',
+    video:null,
+    connections:[],
+    tags:['political','서울','교과서포럼','역사왜곡','뉴라이트'],
+    sources:['한국민족문화대백과사전 교과서포럼','위키백과 교과서포럼'] },
+
+  { id:'political_2005_02', year:2005, visible_from:2005, visible_until:2005,
+    month:11, day:22, type:'political', priority:1,
+    title_ko:'황우석 논문조작 사건',
+    title_en:'The Hwang Woo-suk Scandal',
+    title_ja:'黄禹錫論文捏造事件',
+    place_ko:'서울 (서울대학교)',
+    lat:37.4601, lng:126.9520,
+    people:['황우석'],
+    party:null,
+    allegation_status:'convicted',
+    summary_ko:'인간 체세포 복제 배아줄기세포 연구로 세계적 명성을 얻었던 서울대 황우석 교수의 논문에 대해, 11월 22일 MBC PD수첩이 난자 채취 과정의 윤리 문제와 연구윤리 의혹을 처음 보도하며 균열이 시작됐다. 서울대 조사위원회는 2006년 1월 10일 2004·2005년 사이언스지 논문이 모두 허위였다고 최종 발표했다. 국가적 자부심의 상징이었던 과학자가 순식간에 사기 논란의 중심에 서며 한국 사회는 큰 충격에 빠졌고, 검찰 수사와 대법원 확정판결(2014년, 일부 유죄)까지 이어진 장기 사건이 됐다.',
+    video:null,
+    connections:[],
+    tags:['political','science','서울','황우석','논문조작'],
+    sources:['한국민족문화대백과사전 황우석','위키백과 황우석 사건'] },
+
+  { id:'diplomacy_2005_01', year:2005, visible_from:2005, visible_until:2005,
+    month:11, day:18, type:'diplomacy', priority:2,
+    title_ko:'APEC 정상회의 부산 개최',
+    title_en:'APEC Summit in Busan',
+    title_ja:'APEC釜山サミット',
+    place_ko:'부산',
+    lat:35.1796, lng:129.0756,
+    people:[],
+    party:'열린우리당',
+    allegation_status:null,
+    summary_ko:'아시아태평양경제협력체(APEC) 정상회의가 부산에서 열려, 조지 W. 부시 미국 대통령·후진타오 중국 국가주석·고이즈미 준이치로 일본 총리 등 21개국 정상이 한자리에 모였다. 한국이 개최한 최대 규모의 국제 다자외교 행사 중 하나로, IMF 위기를 극복한 지 4년 만에 국제사회에서 위상을 재확인하는 자리였다.',
+    video:null,
+    connections:[],
+    tags:['diplomacy','부산','APEC','정상회의'],
+    sources:['한국민족문화대백과사전 APEC','위키백과 2005년 APEC 정상회의'] },
+
+  { id:'policy_2005_01', year:2005, visible_from:2005, visible_until:2005,
+    month:10, day:1, type:'policy', priority:2,
+    title_ko:'청계천 복원 완료',
+    title_en:'Restoration of Cheonggyecheon Stream',
+    title_ja:'清渓川復元完了',
+    place_ko:'서울 (청계천)',
+    lat:37.5696, lng:126.9784,
+    people:['이명박'],
+    party:'한나라당',
+    allegation_status:null,
+    summary_ko:'1970년대 복개돼 고가도로가 덮여 있던 청계천이 이명박 서울시장 재임기의 대표 사업으로 복원돼 10월 1일 시민에게 개방됐다. 도심 하천 복원과 보행 친화적 공간 조성의 성공 사례로 국내외에서 주목받았지만, 급속한 공사 강행에 따른 상인 이주 갈등과 "생태 복원이 아닌 콘크리트 인공하천"이라는 비판도 함께 제기됐다. 이 사업의 성공은 이명박이 이듬해 대선 주자로 부상하는 발판이 됐다.',
+    video:null,
+    connections:[],
+    tags:['policy','서울','청계천','이명박'],
+    sources:['한국민족문화대백과사전 청계천','위키백과 청계천'] },
+
+  { id:'policy_2005_02', year:2005, visible_from:2005, visible_until:2005,
+    month:3, day:18, type:'policy', priority:3,
+    title_ko:'행정중심복합도시(세종시) 특별법 제정',
+    title_en:'Special Act on Sejong Multifunctional Administrative City',
+    title_ja:'世宗特別自治市法制定',
+    place_ko:'충남 연기·공주 일대',
+    lat:36.4801, lng:127.2890,
+    people:[],
+    party:'열린우리당',
+    allegation_status:null,
+    summary_ko:'수도권 과밀 해소와 국가 균형발전을 명분으로, 중앙행정기관 다수를 이전하는 행정중심복합도시(세종시) 건설 특별법이 제정됐다. 노무현 정부의 대표적 지역균형발전 정책이었으나 수도 분할이라는 헌법적 논란과 정치적 공방이 이후 몇 년간 계속됐다. 세종시는 2012년 공식 출범한다.',
+    video:null,
+    connections:[],
+    tags:['policy','충남','세종시','균형발전'],
+    sources:['한국민족문화대백과사전 세종특별자치시','위키백과 세종특별자치시'] }
 
 ];

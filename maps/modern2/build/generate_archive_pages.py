@@ -260,20 +260,22 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 
     # card_ref(같은 사건이 이미 지도 데이터에 실존하는 경우)가 있으면
     # ?event=로 그 사건 카드로 정확히 이동시킨다(app.js의 기존
-    # navigateToEvent 딥링크 재사용). card_map이 'root'면 그 카드가
-    # 근대(1876~1945) 지도 쪽 데이터라는 뜻이므로 링크도 그쪽 사이트
-    # 루트로 보낸다(자료실 자신은 근현대/modern2 쪽에 있다) — 기본값은
-    # 자기 자신(modern2). card_ref가 아예 없으면(자료실 글 대부분이
-    # 여기 해당) ?lat=&lng=&year=로 좌표와 연도를 함께 넘겨 지도를 그
-    # 위치·시점으로 이동만 시킨다(app.js가 연도를 근현대 유효 범위
-    # 1945~1993으로 clamp해서 처리 — 자료실 글은 대부분 1993년 이후라
-    # 그대로 넘기면 범위 밖이라서다).
+    # navigateToEvent 딥링크 재사용). card_map으로 어느 지도 소속인지
+    # 표시한다: 'root'는 근대(1876~1945), 'contemporary'는 현대
+    # (1994~2025), 없으면 기본값은 자기 자신(자료실이 있는 근현대/
+    # modern2). card_ref가 아예 없으면(자료실 글 대부분이 여기 해당)
+    # ?lat=&lng=&year=로 좌표와 연도를 함께 넘겨 지도를 그 위치·시점
+    # 으로 이동만 시킨다(app.js가 연도를 각 지도의 유효 범위로
+    # clamp해서 처리).
+    CARD_MAP_PREFIX = {
+        'root': '',
+        'contemporary': '/maps/contemporary',
+        'modern2': PATH_PREFIX,
+    }
     map_cta_html = ''
     if post.get('card_ref'):
-        if post.get('card_map') == 'root':
-            map_cta_url = f"{SITE_ROOT}/?event={post['card_ref']}"
-        else:
-            map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/?event={post['card_ref']}"
+        map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), PATH_PREFIX)
+        map_cta_url = f"{SITE_ROOT}{map_prefix}/?event={post['card_ref']}"
         map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 사건 보기</a></p>'
     elif post.get('lat') is not None and post.get('lng') is not None:
         year_qs = f"&year={post['year']}" if post.get('year') is not None else ''

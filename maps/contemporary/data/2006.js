@@ -1,9 +1,88 @@
 // data/2006.js — 2006년 사건 데이터
 // 현대 지도 (1994~2025)
-// 이 파일은 index.html에서 <script src="data/2006.js"></script> 로 불립니다.
-// 아직 콘텐츠가 채워지지 않은 연도입니다 — 빈 배열이라도 로드에는 문제 없습니다
-// (validator.js가 빈 배열을 만나면 그냥 건너뜁니다).
+// political_2006_02(건국절 논쟁)는 자료실 「역사왜곡에 맞서다」 wp_06과
+// 연결된다 — archive/historical_revisionism.js의 wp_06에 card_ref로 걸려있다.
 
 const EVENTS_2006 = [
+
+  { id:'diplomacy_2006_01', year:2006, visible_from:2006, visible_until:2006,
+    month:10, day:13, type:'diplomacy', priority:1,
+    title_ko:'반기문, UN 사무총장 선출',
+    title_en:'Ban Ki-moon Elected UN Secretary-General',
+    title_ja:'潘基文 国連事務総長選出',
+    place_ko:'미국 뉴욕 (UN 본부)',
+    lat:40.7489, lng:-73.9680,
+    people:['반기문'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'외교통상부 장관을 지낸 반기문이 10월 13일 UN 총회에서 제8대 UN 사무총장으로 선출됐다 — 한국인 최초의 UN 사무총장이다. 2007년 1월 1일 코피 아난의 뒤를 이어 임기를 시작해 2016년까지 10년간 재임했다. 김대중의 노벨평화상 수상(2000)에 이어, 한국의 국제적 위상이 외교 무대에서도 뚜렷이 상승했음을 보여준 사례로 꼽힌다.',
+    video:null,
+    connections:[],
+    tags:['diplomacy','뉴욕','반기문','UN','사무총장'],
+    sources:['위키백과 반기문','한국민족문화대백과사전 반기문'] },
+
+  { id:'political_2006_02', year:2006, visible_from:2006, visible_until:2006,
+    month:null, day:null, type:'political', priority:1,
+    title_ko:'이승만 국부론과 건국절 논쟁',
+    title_en:"The 'Founding Father' Controversy",
+    title_ja:'李承晩国父論と建国節論争',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['이승만'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'뉴라이트 진영이 대한민국의 역사가 1919년 임시정부 수립이 아니라 1948년 8월 15일 정부 수립에서 시작됐다고 주장하며, 광복절을 "건국절"로 대체하자는 논의가 본격화됐다. 이 논리 아래 이승만은 "건국의 아버지(국부)"로 재조명됐다. 그러나 대한민국 헌법 전문이 "3·1운동으로 건립된 대한민국임시정부의 법통을 계승"한다고 명시하고 있어, 헌법 자체와 배치된다는 반박이 학계·정치권에서 거셌다. 자세한 반박은 자료실 「역사왜곡에 맞서다」에서 다룬다.',
+    video:null,
+    connections:['political_2005_01'],
+    tags:['political','서울','이승만','건국절','역사왜곡'],
+    sources:['한국민족문화대백과사전 건국절 논쟁','위키백과 건국절'] },
+
+  { id:'political_2006_01', year:2006, visible_from:2006, visible_until:2006,
+    month:5, day:31, type:'political', priority:2,
+    title_ko:'제4회 전국동시지방선거 — 한나라당 압승',
+    title_en:'4th Nationwide Local Elections',
+    title_ja:'第4回全国同時地方選挙',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:[],
+    party:'열린우리당',
+    allegation_status:null,
+    summary_ko:'5월 31일 지방선거에서 여당 열린우리당은 16개 광역단체장 중 전북 한 곳만 지키는 참패를 당했고, 야당 한나라당이 대부분의 광역단체장을 석권했다. 부동산 정책 실패와 각종 인사 논란에 대한 중간평가 성격이 강했던 이 선거는, 노무현 정부 후반기 국정 동력 약화와 2007년 대선에서의 정권 재창출 실패를 예고하는 신호탄이었다.',
+    video:null,
+    connections:[],
+    tags:['political','전국','지방선거','한나라당'],
+    sources:['한국민족문화대백과사전 제4회 지방선거','위키백과 2006년 대한민국 지방 선거'] },
+
+  { id:'diplomacy_2006_02', year:2006, visible_from:2006, visible_until:2006,
+    month:10, day:9, type:'diplomacy', priority:1,
+    title_ko:'북한 1차 핵실험',
+    title_en:"North Korea's First Nuclear Test",
+    title_ja:'北朝鮮 第1回核実験',
+    place_ko:'북한 함경북도 길주 (풍계리)',
+    lat:41.2769, lng:129.0972,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'10월 9일 북한이 함경북도 풍계리에서 첫 지하 핵실험을 강행했다고 발표했다. 6·15 정상회담 이후 이어져 온 남북 화해 분위기에 찬물을 끼얹은 사건으로, UN 안전보장이사회는 즉각 대북 제재 결의안을 채택했다. 이후 북한은 2017년까지 총 6차례 핵실험을 강행하며, 북핵 문제는 이 시점부터 "관리"가 아니라 "억제"가 목표가 되는 근본적으로 다른 국면에 들어섰다.',
+    video:null,
+    connections:[],
+    tags:['diplomacy','북한','풍계리','핵실험','북핵'],
+    sources:['한국민족문화대백과사전 북한 핵실험','위키백과 2006년 북핵 실험'] },
+
+  { id:'diplomacy_2006_03', year:2006, visible_from:2006, visible_until:2006,
+    month:2, day:3, type:'diplomacy', priority:2,
+    title_ko:'한미 FTA 협상 개시',
+    title_en:'Launch of Korea-US FTA Negotiations',
+    title_ja:'韓米FTA交渉開始',
+    place_ko:'서울·워싱턴',
+    lat:37.566, lng:126.978,
+    people:[],
+    party:'열린우리당',
+    allegation_status:null,
+    summary_ko:'노무현 정부가 미국과의 자유무역협정(FTA) 협상 개시를 공식 발표했다. 농민단체·노동계는 미국산 농축산물 개방과 스크린쿼터 축소 등을 이유로 격렬히 반대하며 전국적 시위를 벌였고, 지지층 일각에서도 "좌파 정부가 왜 신자유주의 협정을 추진하느냐"는 반발이 나왔다. 이 협상은 2007년 타결됐지만 국회 비준은 2011년에야 이뤄지며, 이후 2008년 광우병 촛불시위로 다시 한 번 전 국민적 논쟁의 중심에 선다.',
+    video:null,
+    connections:[],
+    tags:['diplomacy','economic','서울','한미FTA'],
+    sources:['한국민족문화대백과사전 한미 자유무역협정','위키백과 한미 자유무역협정'] }
 
 ];

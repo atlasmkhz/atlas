@@ -1,9 +1,88 @@
 // data/2013.js — 2013년 사건 데이터
 // 현대 지도 (1994~2025)
-// 이 파일은 index.html에서 <script src="data/2013.js"></script> 로 불립니다.
-// 아직 콘텐츠가 채워지지 않은 연도입니다 — 빈 배열이라도 로드에는 문제 없습니다
-// (validator.js가 빈 배열을 만나면 그냥 건너뜁니다).
+// political_2013_02(박유하 제국의 위안부 논란)는 자료실 「역사왜곡에 맞서다」
+// wp_04와 연결된다 — archive/historical_revisionism.js의 wp_04에 card_ref로 걸려있다.
 
 const EVENTS_2013 = [
+
+  { id:'political_2013_01', year:2013, visible_from:2013, visible_until:2013,
+    month:2, day:25, type:'political', priority:1,
+    title_ko:'박근혜 대통령 취임',
+    title_en:'Inauguration of President Park Geun-hye',
+    title_ja:'朴槿恵大統領就任',
+    place_ko:'서울 (국회의사당)',
+    lat:37.5326, lng:126.9139,
+    people:['박근혜'],
+    party:'새누리당',
+    allegation_status:null,
+    summary_ko:'2월 25일 박근혜가 제18대 대통령으로 취임했다 — 대한민국 헌정사상 첫 여성 대통령이다. "국민행복시대"를 국정 슬로건으로 내걸었지만, 취임 직후부터 전년도 대선 과정에서 불거진 국정원 댓글 사건 수사와 재판이 임기 내내 정치적 부담으로 작용했다.',
+    video:null,
+    connections:['political_2012_03'],
+    tags:['political','서울','박근혜','대통령취임','여성대통령'],
+    sources:['한국민족문화대백과사전 박근혜','위키백과 박근혜'] },
+
+  { id:'political_2013_02', year:2013, visible_from:2013, visible_until:2013,
+    month:8, day:null, type:'political', priority:2,
+    title_ko:"박유하 《제국의 위안부》 출간 논란",
+    title_en:"Controversy over Park Yu-ha's 'Comfort Women of the Empire'",
+    title_ja:'朴裕河『帝国の慰安婦』出版論争',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['박유하'],
+    party:null,
+    allegation_status:'acquitted',
+    summary_ko:'세종대 박유하 교수가 8월 《제국의 위안부》를 출간해, 일본군 위안부를 "매춘"이자 일본군과 "동지적 관계"로 규정하고 일본군의 강제연행이 없었다고 주장하며 큰 논란을 일으켰다. 위안부 피해자 9명이 2014년 명예훼손 혐의로 고소·손해배상 소송을 냈고, 형사재판은 1심 무죄→2심 유죄(벌금 1천만 원)→대법원 파기환송을 거쳐 2024년 서울고법에서 최종 무죄가 확정됐다. 다만 이 무죄 확정은 "이 책이 개별 피해자들의 명예를 형법상 훼손했다고 보기 어렵다"는 표현의 자유 관련 판단이지, 일본군의 강제성 자체를 법원이 인정했다는 뜻은 아니다 — 강제성에 관한 사실관계는 고노 담화·유엔 보고서·ILO 판단 등 별도의 국제적 조사로 이미 확인돼 있다(자료실 「역사왜곡에 맞서다」 참고).',
+    video:null,
+    connections:[],
+    tags:['political','서울','박유하','위안부','역사왜곡','명예훼손'],
+    sources:['한국일보 박유하 제국의 위안부 원본 복원 출간','경향신문 박유하 형사보상금','나무위키 박유하'] },
+
+  { id:'diplomacy_2013_01', year:2013, visible_from:2013, visible_until:2013,
+    month:4, day:8, type:'diplomacy', priority:1,
+    title_ko:'개성공단 잠정 중단',
+    title_en:'Temporary Suspension of the Kaesong Industrial Complex',
+    title_ja:'開城工業団地一時中断',
+    place_ko:'북한 개성',
+    lat:37.9706, lng:126.5544,
+    people:[],
+    party:'새누리당',
+    allegation_status:null,
+    summary_ko:'북한이 3차 핵실험(2월) 이후 고조된 남북 긴장 속에 4월 8일 개성공단 북측 근로자 전원을 철수시키며, 2004년 가동 이후 최대 위기를 맞았다. 5개월간 가동이 전면 중단된 뒤 9월 16일 재가동에 합의했지만, 이는 2016년 박근혜 정부가 북한의 4차 핵실험에 대응해 개성공단을 완전히 폐쇄하기 전 마지막 큰 위기였다.',
+    video:null,
+    connections:[],
+    tags:['diplomacy','개성','개성공단','남북관계'],
+    sources:['한국민족문화대백과사전 개성공단','위키백과 개성공업지구'] },
+
+  { id:'political_2013_03', year:2013, visible_from:2013, visible_until:2013,
+    month:5, day:null, type:'political', priority:3,
+    title_ko:'윤창중 성추행 사건',
+    title_en:'Yoon Chang-jung Sexual Assault Scandal',
+    title_ja:'尹昶重セクハラ事件',
+    place_ko:'미국 워싱턴',
+    lat:38.9072, lng:-77.0369,
+    people:['윤창중'],
+    party:'새누리당',
+    allegation_status:'indicted',
+    summary_ko:'박근혜 대통령의 첫 미국 순방을 수행하던 윤창중 청와대 대변인이 현지 인턴 여성을 성추행한 혐의로 물의를 빚고 전격 경질됐다. 정부 고위 인사가 해외 순방 중 저지른 성비위 사건이 외교적 결례와 함께 큰 파문을 일으켰으며, 이후 그는 미국 내 기소는 피했으나 국내에서 별도 명예훼손 소송 등에 휘말렸다.',
+    video:null,
+    connections:['political_2013_01'],
+    tags:['political','워싱턴','윤창중','성추행'],
+    sources:['한국민족문화대백과사전 윤창중 사건','위키백과 윤창중'] },
+
+  { id:'political_2013_04', year:2013, visible_from:2013, visible_until:2013,
+    month:6, day:14, type:'political', priority:2,
+    title_ko:'국정원 댓글 사건 국정조사',
+    title_en:'National Assembly Investigation into the NIS Scandal',
+    title_ja:'国情院コメント事件 国政調査',
+    place_ko:'서울 (국회)',
+    lat:37.5326, lng:126.9139,
+    people:[],
+    party:'새누리당',
+    allegation_status:'indicted',
+    summary_ko:'전년도 대선 국면에서 불거진 국정원 여론조작 의혹에 대해 국회가 국정조사를 실시했다. 원세훈 전 국정원장은 공직선거법·국정원법 위반 혐의로 기소돼 이후 여러 차례 재판을 거쳐 2018년 대법원에서 유죄가 확정됐다. 이 사건은 이후 촛불집회로 이어지는 박근혜 정부에 대한 신뢰 저하의 초기 균열로 꼽힌다.',
+    video:null,
+    connections:['political_2012_02'],
+    tags:['political','서울','국정원','국정조사','원세훈'],
+    sources:['한국민족문화대백과사전 국정원 여론조작 사건','위키백과 국가정보원 여론 조작 사건'] }
 
 ];

@@ -1,9 +1,88 @@
 // data/2015.js — 2015년 사건 데이터
 // 현대 지도 (1994~2025)
-// 이 파일은 index.html에서 <script src="data/2015.js"></script> 로 불립니다.
-// 아직 콘텐츠가 채워지지 않은 연도입니다 — 빈 배열이라도 로드에는 문제 없습니다
-// (validator.js가 빈 배열을 만나면 그냥 건너뜁니다).
+// political_2015_01(국정교과서 파동)은 자료실 「역사왜곡에 맞서다」 wp_08과
+// 연결된다 — archive/historical_revisionism.js의 wp_08에 card_ref로 걸려있다.
 
 const EVENTS_2015 = [
+
+  { id:'political_2015_01', year:2015, visible_from:2015, visible_until:2015,
+    month:10, day:12, type:'political', priority:1,
+    title_ko:'국정교과서 파동',
+    title_en:'The State-authored History Textbook Controversy',
+    title_ja:'国定教科書波紋',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    party:'새누리당',
+    allegation_status:null,
+    summary_ko:'박근혜 정부가 중·고교 역사 교과서를 국정 단일본으로 전환하겠다고 10월 12일 발표했다. 역사교과서를 국정 체제로 발행하는 나라는 러시아·베트남 등 소수 권위주의 국가뿐이라는 점에서 "역사 다양성 말살"이라는 비판이 거셌다. 집필진과 편찬기준조차 공개하지 않은 채 만들어진 이 교과서는 결국 현장에서 채택되지 못했고, 문재인 정부 출범 직후인 2017년 공식 폐지됐다. 자세한 배경과 반박은 자료실 「역사왜곡에 맞서다」에서 다룬다.',
+    video:null,
+    connections:[],
+    tags:['political','서울','국정교과서','역사왜곡','뉴라이트'],
+    sources:['한국민족문화대백과사전 국정 역사교과서','위키백과 역사 교과서 국정화 논쟁'] },
+
+  { id:'disaster_2015_01', year:2015, visible_from:2015, visible_until:2015,
+    month:5, day:20, type:'disaster', priority:1,
+    title_ko:'메르스(MERS) 사태',
+    title_en:'MERS Outbreak',
+    title_ja:'MERS事態',
+    place_ko:'대한민국',
+    lat:36.5, lng:127.8,
+    people:[],
+    party:'새누리당',
+    allegation_status:null,
+    summary_ko:'중동 방문 후 귀국한 첫 확진자로부터 시작된 중동호흡기증후군(MERS) 감염이 병원 내 감염을 통해 급속히 확산됐다. 최종 186명이 감염되고 38명이 사망했으며, 정부의 초기 정보 비공개와 늑장 대응이 확산을 키웠다는 비판을 받았다. 이 경험은 5년 뒤 코로나19 팬데믹 당시 한국의 빠른 정보 공개·검사 체계 대응의 반면교사가 됐다는 평가를 받는다.',
+    video:null,
+    connections:[],
+    tags:['disaster','대한민국','메르스','감염병'],
+    sources:['한국민족문화대백과사전 메르스 사태','위키백과 대한민국 메르스 유행'] },
+
+  { id:'political_2015_02', year:2015, visible_from:2015, visible_until:2015,
+    month:4, day:9, type:'political', priority:2,
+    title_ko:'성완종 리스트 파문',
+    title_en:'Sung Wan-jong List Scandal',
+    title_ja:'成完鍾リスト波紋',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['성완종'],
+    party:'새누리당',
+    allegation_status:'convicted',
+    summary_ko:'배임·횡령 혐의로 검찰 수사를 받던 경남기업 성완종 회장이 스스로 목숨을 끊기 직전, 여권 핵심 인사 8명에게 정치자금을 건넸다는 내용의 메모(성완종 리스트)를 남겼다. 이완구 국무총리를 비롯한 여권 실세들이 연루 의혹에 휩싸였고, 이완구는 결국 총리 취임 두 달 만에 사퇴했다. 정경유착이 여전히 현재진행형임을 보여준 사건으로, 재판에서 홍준표 경남지사 등 일부는 무죄를, 일부는 유죄를 확정받았다.',
+    video:null,
+    connections:[],
+    tags:['political','서울','성완종','정경유착','리스트파문'],
+    sources:['한국민족문화대백과사전 성완종 리스트','위키백과 성완종 리스트'] },
+
+  { id:'diplomacy_2015_01', year:2015, visible_from:2015, visible_until:2015,
+    month:12, day:28, type:'diplomacy', priority:1,
+    title_ko:'한일 위안부 합의',
+    title_en:'2015 Korea-Japan Comfort Women Agreement',
+    title_ja:'日韓慰安婦合意',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    party:'새누리당',
+    allegation_status:null,
+    summary_ko:'한국과 일본 외교장관이 위안부 문제의 "최종적·불가역적 해결"을 선언하는 합의를 발표했다. 일본 정부는 책임을 인정하고 10억 엔 출연을 약속했지만, 정작 당사자인 위안부 피해자들과 시민단체는 사전 협의 없이 이뤄진 합의에 강하게 반발했다 — 특히 "불가역적"이라는 표현과 소녀상 이전 논의 언급이 논란이 됐다. 이후 문재인 정부는 이 합의가 피해자 중심주의에 부합하지 않는다고 밝히며 사실상 무력화시켰고, 위안부 문제는 지금도 완전히 해결되지 않은 채 남아 있다.',
+    video:null,
+    connections:['political_2015_01'],
+    tags:['diplomacy','서울','위안부','한일합의','역사왜곡'],
+    sources:['한국민족문화대백과사전 한일 위안부 합의','위키백과 2015년 한일 위안부 합의'] },
+
+  { id:'policy_2015_01', year:2015, visible_from:2015, visible_until:2015,
+    month:9, day:15, type:'policy', priority:3,
+    title_ko:'노동시장 구조개혁 2대 지침',
+    title_en:"Two Labor Market Reform Guidelines",
+    title_ja:'労働市場構造改革2大指針',
+    place_ko:'대한민국',
+    lat:36.5, lng:127.8,
+    people:[],
+    party:'새누리당',
+    allegation_status:null,
+    summary_ko:'정부가 일반해고 요건 완화와 취업규칙 변경 요건 완화를 담은 노동시장 구조개혁 지침을 노사정 합의 없이 발표했다. 한국노총이 노사정위원회 불참을 선언하는 등 노동계가 강력 반발하며 노정 관계가 급속히 냉각됐다. 청년실업 해소를 명분으로 내세웠으나 정작 정규직 해고를 쉽게 만든다는 비판이 커, 이후 노동개혁 관련 입법은 국회 문턱을 넘지 못했다.',
+    video:null,
+    connections:[],
+    tags:['policy','대한민국','노동개혁','노사정'],
+    sources:['한국민족문화대백과사전 노동개혁','위키백과 박근혜 정부의 노동개혁'] }
 
 ];

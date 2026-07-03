@@ -1,9 +1,88 @@
 // data/2020.js — 2020년 사건 데이터
 // 현대 지도 (1994~2025)
-// 이 파일은 index.html에서 <script src="data/2020.js"></script> 로 불립니다.
-// 아직 콘텐츠가 채워지지 않은 연도입니다 — 빈 배열이라도 로드에는 문제 없습니다
-// (validator.js가 빈 배열을 만나면 그냥 건너뜁니다).
+// political_2020_04(진실화해위원회 2기 출범)는 자료실 「역사왜곡에 맞서다」
+// wp_09와 연결된다 — archive/historical_revisionism.js의 wp_09에 card_ref로 걸려있다.
 
 const EVENTS_2020 = [
+
+  { id:'disaster_2020_01', year:2020, visible_from:2020, visible_until:2020,
+    month:1, day:20, type:'disaster', priority:1,
+    title_ko:'코로나19(COVID-19) 국내 첫 확진자 발생',
+    title_en:"South Korea's First COVID-19 Case",
+    title_ja:'韓国 COVID-19第1号感染者確認',
+    place_ko:'인천공항',
+    lat:37.4602, lng:126.4407,
+    people:[],
+    party:'더불어민주당',
+    allegation_status:null,
+    summary_ko:'중국 우한에서 입국한 중국인 여성이 1월 20일 국내 첫 코로나19 확진자로 확인됐다. 2월 신천지예수교 대구교회를 중심으로 한 집단감염이 터지며 확진자가 폭증했지만, 한국은 봉쇄(락다운) 없이 광범위한 진단검사·역학조사·자가격리를 결합한 이른바 "K-방역" 모델로 초기 대응에 성공해 국제사회의 주목을 받았다. 이후 팬데믹은 2023년 엔데믹 전환까지 3년 넘게 한국 사회 전반을 재편했다.',
+    video:null,
+    connections:[],
+    tags:['disaster','인천','코로나19','K방역','팬데믹'],
+    sources:['한국민족문화대백과사전 코로나19','위키백과 대한민국의 코로나19 범유행'] },
+
+  { id:'political_2020_01', year:2020, visible_from:2020, visible_until:2020,
+    month:3, day:19, type:'political', priority:1,
+    title_ko:'N번방 사건',
+    title_en:'Nth Room Case',
+    title_ja:'n番部屋事件',
+    place_ko:'대한민국',
+    lat:36.5, lng:127.8,
+    people:['조주빈'],
+    party:null,
+    allegation_status:'convicted',
+    summary_ko:'텔레그램 대화방을 통해 여성·미성년자를 협박해 성착취 영상을 촬영·유포한 조직적 디지털 성범죄("N번방")의 실체가 언론 보도로 드러났다. 주범 조주빈이 3월 검거되며 전모가 밝혀졌고, 26만 명에 달하는 것으로 추산된 유료 회원(관람자)의 규모에 전 국민이 충격을 받았다. 조주빈은 징역 42년이 확정됐고, 이 사건을 계기로 디지털 성범죄 처벌을 강화하는 이른바 "N번방 방지법"이 제정됐다.',
+    video:null,
+    connections:['political_2019_02'],
+    tags:['political','대한민국','N번방','디지털성범죄'],
+    sources:['한국민족문화대백과사전 N번방 사건','위키백과 N번방 사건'] },
+
+  { id:'political_2020_02', year:2020, visible_from:2020, visible_until:2020,
+    month:4, day:15, type:'political', priority:2,
+    title_ko:'제21대 국회의원 총선거',
+    title_en:'21st National Assembly Election',
+    title_ja:'第21代国会議員総選挙',
+    place_ko:'전국',
+    lat:36.5, lng:127.8,
+    people:[],
+    party:'더불어민주당',
+    allegation_status:null,
+    summary_ko:'코로나19 팬데믹 초기의 방역 성과에 대한 긍정 평가 속에 치러진 총선에서, 여당 더불어민주당(위성정당 포함)이 180석에 육박하는 압도적 과반을 차지했다. 방역을 이유로 세계 각국이 선거를 연기하던 시기에, 안전한 투표소 운영으로 정상적으로 선거를 치러낸 것 자체가 국제적으로 주목받았다.',
+    video:null,
+    connections:['disaster_2020_01'],
+    tags:['political','전국','총선','코로나19'],
+    sources:['한국민족문화대백과사전 제21대 국회의원선거','위키백과 2020년 대한민국 국회의원 선거'] },
+
+  { id:'political_2020_03', year:2020, visible_from:2020, visible_until:2020,
+    month:7, day:9, type:'political', priority:2,
+    title_ko:'박원순 서울시장 사망',
+    title_en:'Death of Seoul Mayor Park Won-soon',
+    title_ja:'朴元淳ソウル市長死去',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:['박원순'],
+    party:'더불어민주당',
+    allegation_status:'alleged',
+    summary_ko:'박원순 서울시장이 전직 비서로부터 성추행 혐의로 고소된 다음 날인 7월 9일 실종됐다가 서울 성북구에서 숨진 채 발견됐다. 경찰은 자살로 결론지었다. 피해자 측은 오랜 기간 반복된 성적 괴롭힘을 주장했으나, 고소인 조사 전 당사자가 사망하며 형사 절차는 "공소권 없음"으로 종결돼 법적 사실관계는 확정되지 못했다. 서울시 인권위원회는 2021년 조사를 거쳐 성희롱 사실을 인정했지만, 서울시는 이 결론에 대한 이의를 제기하는 등 진상규명과 피해자 보호를 둘러싼 논쟁이 이후로도 계속됐다.',
+    video:null,
+    connections:[],
+    tags:['political','서울','박원순','성추행의혹'],
+    sources:['한국민족문화대백과사전 박원순','위키백과 박원순'] },
+
+  { id:'political_2020_04', year:2020, visible_from:2020, visible_until:2020,
+    month:12, day:10, type:'political', priority:2,
+    title_ko:'진실화해를위한과거사정리위원회 2기 출범',
+    title_en:'Second Truth and Reconciliation Commission Launched',
+    title_ja:'真実和解のための過去史整理委員会2期発足',
+    place_ko:'서울',
+    lat:37.566, lng:126.978,
+    people:[],
+    party:'더불어민주당',
+    allegation_status:null,
+    summary_ko:'한국전쟁 전후 민간인 학살, 강제동원, 국가폭력에 의한 인권침해 사건들을 다시 조사하기 위해, 2010년 활동이 종료됐던 진실화해위원회가 개정된 특별법에 따라 2기로 재출범했다. 국민보도연맹 학살(자료실 「역사왜곡에 맞서다」 참고)을 비롯해 1기에서 미처 다루지 못했거나 새로 신청된 사건들에 대한 진상규명이 다시 시작됐다. 역사왜곡은 한 번의 반박으로 끝나지 않기에, 사실을 확인하고 기록하는 이런 작업 역시 끝없이 계속돼야 한다.',
+    video:null,
+    connections:[],
+    tags:['political','서울','진실화해위원회','과거사정리','국가폭력'],
+    sources:['한국민족문화대백과사전 진실화해를위한과거사정리위원회','위키백과 진실·화해를위한과거사정리위원회'] }
 
 ];
