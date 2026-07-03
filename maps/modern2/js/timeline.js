@@ -144,10 +144,21 @@ function updateEra(year){
 // occTag(국체: 해방/미군정/대한민국)보다 한 단계 세분화된 정권 단위를
 // #phaseTag에 표시한다. index.html에 #phaseTag가 없는 빌드에서도 에러가
 // 나지 않도록 가드한다(점진적 배포 대비).
+// 슬라이더 'input'마다 계속 불리므로, label이 실제로 바뀔 때만
+// timeline_move를 보내기 위한 dedupe 기준값.
+let _lastTrackedPhaseLabel = null;
+
 function updatePhase(year){
   const phaseTag = document.getElementById('phaseTag');
-  if (!phaseTag) return;
   const phase = getPhase(year);
+  // ── GA4: 시대(정권) 이동 트래킹 ──
+  // #phaseTag가 없는 빌드에서도(위 가드와 별개로) 트래킹은 계속 동작해야
+  // 하므로 phaseTag 존재 여부와 무관하게 먼저 계산한다.
+  if (phase.label && phase.label !== _lastTrackedPhaseLabel) {
+    _lastTrackedPhaseLabel = phase.label;
+    if (window.trackTimelineMove) window.trackTimelineMove(phase.label);
+  }
+  if (!phaseTag) return;
   phaseTag.textContent = phase.label || '';
   phaseTag.title = phase.detail || '';
   phaseTag.classList.toggle('empty', !phase.label);
@@ -230,6 +241,7 @@ slider.addEventListener('input', function(){
 // click 처리가 끝난 뒤에 오므로, 바깥 클릭에 의해 곧바로 닫히는 문제도
 // 구조적으로 사라진다. (openEraCard 내부 가드는 만일을 위한 이중 안전망.)
 slider.addEventListener('change', function(){
+  if (window.trackYearChange) window.trackYearChange(parseInt(this.value));
   // 연도 변경 시 자동 프롤로그는 데스크탑(>=1024px)에서만. 모바일은 지도를
   // 그대로 유지하고, 사용자가 ⓘ 버튼을 눌렀을 때만 열리도록 한다.
   if (window.innerWidth < 1024) return;

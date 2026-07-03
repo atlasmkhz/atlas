@@ -107,6 +107,24 @@ function resetToInitialView(){
 // app.js의 window.onload에서도 한 번 더 호출되며, 여기서는 1차 보정.
 setTimeout(()=>{ map.invalidateSize(); }, 800);
 
+// ── GA4: 지도 조작(줌·드래그) 트래킹 ──
+// 기존 zoomend 리스너(아래, 밀도 재계산용)와는 독립된 별도 리스너다 —
+// Leaflet은 같은 이벤트에 리스너를 여러 개 등록해도 서로 간섭하지
+// 않으므로, 기존 로직은 한 글자도 건드리지 않고 트래킹만 얹었다.
+(function () {
+  let lastZoom = map.getZoom();
+  map.on('zoomend', () => {
+    const z = map.getZoom();
+    if (window.trackMapInteraction) {
+      window.trackMapInteraction(z > lastZoom ? 'zoom_in' : (z < lastZoom ? 'zoom_out' : 'zoom_end'));
+    }
+    lastZoom = z;
+  });
+  map.on('dragend', () => {
+    if (window.trackMapInteraction) window.trackMapInteraction('drag');
+  });
+})();
+
 // 줌 레벨에 따른 사건 밀도 제어 (importance 연동 — validator.js의 getImportance 참고)
 // renderer.js 로드가 끝난 뒤에야 safeRender가 존재하므로, 실제 호출은 항상
 // 사용자 인터랙션(줌 변경) 이후에 일어나 안전하다.

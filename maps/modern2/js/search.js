@@ -116,6 +116,7 @@ function runSearch(query){
 
   const results = searchEvents(trimmed);
   const clearBtn = document.getElementById('searchClearBtn');
+  if (window.trackSearch) window.trackSearch(trimmed, results.length);
 
   if(!results.length){
     // 결과 없음: 지도는 직전 상태 그대로 유지하고 상태 줄에만 표시한다.

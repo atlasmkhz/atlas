@@ -63,7 +63,7 @@ RELATED_SECTION_LABELS = [
 ]
 
 
-GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'  # SPA(index.html)와 동일한 플레이스홀더 — 실제 배포 전 교체 필요
+GA_MEASUREMENT_ID = 'G-9C05WN48C4'  # ATLAS GA4 속성 Measurement ID — index.html과 동일
 
 
 def ga4_snippet():

@@ -71,6 +71,7 @@ function renderWorldEvents(year){
 
     const openThis = ()=>{
       if (window.trackPageView) window.trackPageView('world_event', w.title_ko || w.title_en || w.id);
+      if (window.trackEventOpen) window.trackEventOpen(w);
       if (window.openInfoPanel) openInfoPanel(worldPanelHtml(w, currentDisplayYear()));
     };
 
@@ -475,6 +476,7 @@ function renderYear(year){
       const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);
       circle.on('click', ()=>{
         if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
+        if(window.trackEventOpen) window.trackEventOpen(e);
         if(window.openInfoPanel) openInfoPanel(popupHtml(e));
       });
       layers.push(circle);
@@ -487,6 +489,7 @@ function renderYear(year){
     const m = L.marker([e.lat,e.lng], {icon}).addTo(map);
     m.on('click', ()=>{
       if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
+      if(window.trackEventOpen) window.trackEventOpen(e);
       if(window.openInfoPanel) openInfoPanel(popupHtml(e));
       // 선택 링 표시
       if(typeof setSelectRing === 'function'){ try{ setSelectRing(m); }catch(_){} }
@@ -556,6 +559,7 @@ function navigateToEvent(id, opts){
   map.setView([target.lat, target.lng], Math.max(map.getZoom(), 7));
   // 새 사건의 정보창을 연다(기존 팝업 방식 대체). 마커 선택 링도 갱신.
   if(openPanel && window.trackPageView) window.trackPageView('card', target.title_ko || target.title_en || target.id);
+  if(openPanel && window.trackEventOpen) window.trackEventOpen(target);
   if(openPanel && window.openInfoPanel) openInfoPanel(popupHtml(target));
   const marker = eventMarkers.find(m => m._eventId === id);
   if(marker && typeof setSelectRing === 'function') setSelectRing(marker);

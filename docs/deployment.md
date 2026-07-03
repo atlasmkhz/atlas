@@ -18,20 +18,26 @@
 | `404.html` | "지도를 찾을 수 없습니다" + 역사 탐험 계속하기 버튼 |
 
 **아직 두목님이 채워야 할 것:**
-- `index.html`의 `G-XXXXXXXXXX` 두 곳 → 실제 GA4 측정 ID로 교체 (1단계 참고)
 - `og:image` 메타 태그 (현재 주석 처리됨) → 실제 지도 스크린샷을 찍어 `/assets/og-image.png`로 올린 뒤 주석 해제
+
+> GA4 측정 ID(`G-9C05WN48C4`)는 이미 `index.html`(근대·근현대 둘 다)과
+> 자료실 정적 페이지 생성기에 적용 완료됐다. 검색어·연도 이동·시대
+> 이동·필터·지도 조작·사건 카드 클릭까지 `js/analytics.js`를 통해
+> 이벤트로 잡히도록 구현돼 있다 — 더 손댈 것 없음.
 
 ---
 
-## 1. Google Analytics 측정 ID 발급 (두목님이 직접)
+## 1. Google Analytics 측정 ID 확인 (완료됨 — 참고용)
 
-1. [analytics.google.com](https://analytics.google.com) 접속, 계정 없으면 생성
-2. "속성 만들기" → 이름(예: ATLAS by MKHZ) → 시간대 한국, 통화 KRW
-3. "데이터 스트림" → 웹 → URL에 `https://atlas.mkhz.kr` 입력
-4. 발급된 측정 ID(`G-` 로 시작하는 문자열) 복사
-5. `index.html`에서 `G-XXXXXXXXXX` 두 곳(스크립트 src, `gtag('config', ...)`)을 그 ID로 교체
+측정 ID `G-9C05WN48C4`가 이미 `index.html`(스크립트 src, `gtag('config', ...)`)
+양쪽 지도(근대·근현대)와 자료실 정적 페이지 생성기
+(`maps/modern2/build/generate_archive_pages.py`의 `GA_MEASUREMENT_ID`)에
+전부 적용돼 있다. GA4 관리자 페이지에서 데이터가 들어오는지 확인만
+하면 된다(속성 발급 자체는 이미 완료된 상태).
 
-> GA4는 기본적으로 IP 주소를 저장하지 않는다(개인정보 관련 우려 사항 해소). 검색어·연도 이동·마커 클릭 같은 세부 이벤트 트래킹은 이번 범위에 포함하지 않았다 — 필요하면 별도 작업으로 진행하면 된다.
+> GA4는 기본적으로 IP 주소를 저장하지 않는다(개인정보 관련 우려 사항
+> 해소). `?debug=1`을 붙이거나 localhost에서 접속하면 GA4 관리자 >
+> DebugView에서 이벤트를 실시간으로 확인할 수 있다.
 
 ---
 

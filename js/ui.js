@@ -10,15 +10,18 @@
 // 검색이 활성 상태일 때는 무시한다 — 검색 결과는 이 토글들과 무관하게
 // 매칭된 항목을 전부 보여주는 별도 모드이므로, 토글을 눌러도 검색 결과가
 // 사라지거나 바뀌면 안 된다.
-document.getElementById('layerEvent').addEventListener('change', () => {
+document.getElementById('layerEvent').addEventListener('change', function() {
+  if (window.trackFilterChange) window.trackFilterChange('사건', this.checked);
   if (typeof isSearchActive === 'function' && isSearchActive()) return;
   safeRender(parseInt(document.getElementById('slider').value));
 });
-document.getElementById('layerPerson').addEventListener('change', () => {
+document.getElementById('layerPerson').addEventListener('change', function() {
+  if (window.trackFilterChange) window.trackFilterChange('인물', this.checked);
   if (typeof isSearchActive === 'function' && isSearchActive()) return;
   safeRender(parseInt(document.getElementById('slider').value));
 });
-document.getElementById('layerPolicy').addEventListener('change', () => {
+document.getElementById('layerPolicy').addEventListener('change', function() {
+  if (window.trackFilterChange) window.trackFilterChange('배경·정책', this.checked);
   if (typeof isSearchActive === 'function' && isSearchActive()) return;
   safeRender(parseInt(document.getElementById('slider').value));
 });

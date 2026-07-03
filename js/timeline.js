@@ -113,6 +113,10 @@ function getEraTint(year){
 }
 
 // ── 시대 부제 갱신 ──
+// 슬라이더 'input'마다 updateEra가 계속 불리므로, 텍스트가 실제로
+// 바뀔 때만 timeline_move를 보내기 위한 dedupe 기준값.
+let _lastTrackedEraText = null;
+
 function updateEra(year){
   const era = ERA[year] || {text:'', desc:''};
   document.getElementById('eraText').textContent = era.text;
@@ -120,6 +124,14 @@ function updateEra(year){
   // 모바일 모달 헤더용(시대명) — 데스크탑에서는 ::after를 렌더하지 않으므로
   // 이 속성은 무시된다. 데스크탑 표시·동작에는 아무 영향이 없다.
   document.getElementById('eraCard').setAttribute('data-era-title', era.text || '');
+  // ── GA4: 시대(구간) 이동 트래킹 ──
+  // 슬라이더를 드래그하는 동안 이 함수가 매 틱 호출되므로, era.text가
+  // 실제로 바뀐 순간에만 timeline_move를 보낸다(그렇지 않으면 드래그
+  // 한 번에 수십 개의 중복 이벤트가 쌓인다).
+  if (era.text && era.text !== _lastTrackedEraText) {
+    _lastTrackedEraText = era.text;
+    if (window.trackTimelineMove) window.trackTimelineMove(era.text);
+  }
   // 주의: 시대 부제 카드 자동 오픈은 여기서 하지 않는다.
   // updateEra는 슬라이더 'input'마다(드래그 중 매 틱) 호출되므로, 여기서
   // 카드를 열면 드래그 도중 계속 열리고 손을 놓는 순간의 click과 타이밍이
@@ -205,6 +217,7 @@ slider.addEventListener('input', function(){
 // click 처리가 끝난 뒤에 오므로, 바깥 클릭에 의해 곧바로 닫히는 문제도
 // 구조적으로 사라진다. (openEraCard 내부 가드는 만일을 위한 이중 안전망.)
 slider.addEventListener('change', function(){
+  if (window.trackYearChange) window.trackYearChange(parseInt(this.value));
   // 연도 변경 시 자동 프롤로그는 데스크탑(>=1024px)에서만. 모바일은 지도를
   // 그대로 유지하고, 사용자가 ⓘ 버튼을 눌렀을 때만 열리도록 한다.
   if (window.innerWidth < 1024) return;
