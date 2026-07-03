@@ -258,8 +258,17 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
     sources_html = render_sources_section(post.get('sources'))
     related_html = render_related_section(post.get('related'))
 
+    # card_ref(같은 사건이 이미 지도 데이터에 실존하는 경우)가 있으면
+    # ?event=로 그 사건 카드로 정확히 이동시킨다(app.js의 기존
+    # navigateToEvent 딥링크 재사용). card_ref가 없으면 특정 사건으로
+    # 갈 수 없으니(자료실 글 대부분이 여기 해당 — card_ref는 대부분
+    # null이다) ?lat=&lng=로 좌표만 넘겨 지도를 그 위치로 이동만 시킨다
+    # (app.js에 이 폴백을 추가해뒀다 — 사건 팝업은 열지 않고 이동만).
     map_cta_html = ''
-    if post.get('lat') is not None and post.get('lng') is not None:
+    if post.get('card_ref'):
+        map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/?event={post['card_ref']}"
+        map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 사건 보기</a></p>'
+    elif post.get('lat') is not None and post.get('lng') is not None:
         map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/?lat={post['lat']}&lng={post['lng']}"
         map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 지역 보기</a></p>'
 

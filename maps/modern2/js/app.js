@@ -116,6 +116,18 @@ window.onload = () => {
         }
         return;
       }
+      // ── 자료실 글 페이지 → 지도 진입 (archive/**/*.html의 "지도에서
+      // 관련 지역 보기" 버튼용). 자료실 글은 특정 사건 카드(card_ref)에
+      // 연결되지 않은 경우가 많아 ?event=처럼 특정 id로 이동할 수 없다
+      // — 대신 ?lat=&lng=로 좌표만 넘어오면 해당 연도로 진입한 뒤 그
+      // 위치로 지도만 이동시킨다(팝업은 열지 않는다 — 열 사건이 없다).
+      const latFromUrl = parseFloat(params.get('lat'));
+      const lngFromUrl = parseFloat(params.get('lng'));
+      if (!Number.isNaN(latFromUrl) && !Number.isNaN(lngFromUrl)) {
+        syncToYear(INITIAL_YEAR);
+        window.setTimeout(() => { map.setView([latFromUrl, lngFromUrl], 7, { animate: true }); }, 350);
+        return;
+      }
       // syncToYear(timeline.js)가 #yearNum·干支·지도 렌더·시대부제·
       // occTag·비네트 색조를 한 번에 전부 맞춘다 — 슬라이더를 직접 움직일
       // 때와 똑같은 경로이므로 둘 사이에 어긋남이 생길 수 없다.
