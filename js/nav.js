@@ -34,7 +34,7 @@
     { key:'medieval2',  name:'중세 2',   period:'조선', ready:false, url:null },
     { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'.' },
     { key:'modern2',    name:'근현대',   period:'1945–1993', ready:true, url:'maps/modern2/index.html' },
-    { key:'contemporary',name:'현대',    period:'1993–현재', ready:false, url:null }
+    { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'maps/contemporary/index.html' }
   ];
 
   // ── 루트 목록 — 루트가 늘어날 때마다 이 배열에 항목 하나만 추가한다.

@@ -1,0 +1,1189 @@
+/* build: mobile-prologue-modal v20260622d — 이 줄이 보이면 최신 CSS */
+  :root {
+    --ink:#1a1714; --paper:#e8e0d0; --paper-dark:#d4c8b0;
+    --battle:#c44536; --political:#3a8261; --righteous:#8367a8;
+    --uprising:#d4a04a; --massacre:#7a1f1f; --policy:#5a6b8c; --plot:#b5762a;
+    --gold:#b89860;
+    --bottom-bar-height:0px; /* 예전엔 하단 고정 푸터(.bottom-fixed-bar) 높이였으나, 그 푸터를 제거하면서 0으로 비웠다. 지도/타임라인 위치 계산식(calc 포함)은 그대로 남겨둬서 나중에 하단에 다른 고정 UI가 생기면 이 값만 바꾸면 된다. */
+    --top-nav-height:48px; /* 상단 포털 내비게이션(.site-nav) 실측 높이 — 지도/헤더/연도표시가 이 값만큼 아래로 내려간다 */
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body { height:100%; margin:0; overflow:hidden; }
+  body { font-family:-apple-system,'Apple SD Gothic Neo',sans-serif; background:var(--ink); color:var(--paper);
+    position:relative; width:100%; height:100dvh; overflow:hidden; touch-action:manipulation; }
+
+  #map { position:absolute; top:var(--top-nav-height); left:0; right:0; bottom:var(--bottom-bar-height); width:100%; height:auto; background:#222b30; z-index:1; }
+
+  .occupation-vignette {
+    position:absolute; inset:0; z-index:400; pointer-events:none;
+    box-shadow: inset 0 0 0 6px rgba(139,30,30,0.55), inset 0 0 90px 20px rgba(139,30,30,0.35);
+    transition: opacity 0.6s ease;
+  }
+  .occupation-tag {
+    display:inline-block; margin-top:8px; pointer-events:none;
+    font-size:10px; color:rgba(196,69,54,0.85); letter-spacing:3px;
+    border:1px solid rgba(196,69,54,0.4); border-radius:3px;
+    padding:2px 7px;
+    transition: opacity 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
+  .occupation-tag.liberated { color:rgba(184,152,96,0.95); border-color:rgba(184,152,96,0.5); }
+  .occupation-tag.imperial { color:rgba(212,160,74,0.9); border-color:rgba(212,160,74,0.45); }
+
+  /* ── 정권 띠(phase-tag) ──
+     occupation-tag(국체: 해방/미군정/대한민국)보다 한 단계 세분화된
+     정권 단위(이승만/윤보선·장면/박정희 군정 등)를 옆에 보여준다.
+     occupation-tag와 톤은 맞추되 테두리 없이 텍스트만으로 가볍게
+     구분해, 두 태그가 한 줄에 나란히 있어도 위계가 헷갈리지 않게 했다. */
+  .phase-tag {
+    display:inline-block; margin-top:8px; margin-left:6px; pointer-events:auto;
+    font-size:10px; color:rgba(232,224,208,0.55); letter-spacing:1.5px;
+    transition: opacity 0.4s ease, color 0.4s ease;
+  }
+  .phase-tag.empty { display:none; }
+  .phase-tag::before { content:'· '; opacity:0.6; }
+
+  .header { position:absolute; top:var(--top-nav-height); left:0; right:0; z-index:600; padding:14px 18px 26px;
+    background:linear-gradient(180deg,rgba(20,17,12,0.9),rgba(20,17,12,0.35) 75%,transparent); pointer-events:none; }
+  .title { font-size:19px; font-weight:800; letter-spacing:3px; }
+  .subtitle { font-size:10px; color:var(--gold); letter-spacing:2px; margin-top:3px; }
+
+  .year-display { position:absolute; top:calc(var(--top-nav-height) + 62px); left:18px; z-index:600; pointer-events:none; }
+  .year-number { font-size:50px; font-weight:800; line-height:1; text-shadow:0 2px 16px rgba(0,0,0,0.95); }
+  .year-label { font-size:11px; color:var(--gold); letter-spacing:3px; margin-top:6px; padding-left:3px; }
+
+  /* ── 우측 상단 스택: 검색 / 범례 / 레이어 ── */
+  /* 데스크톱: 한 flex 컨테이너 안에 세로로 쌓아, 검색이 펼쳐져 높이가
+     늘어나도 그 아래 범례·레이어가 자동으로 밀려나며 겹치지 않는다.
+     모바일(@media max-width:480px 아래쪽 블록 참고): 이 스택을 해제하고
+     검색은 상단 전체폭 고정, 범례·레이어는 각자 원래 자리로 되돌린다 —
+     지시서가 모바일에 한해 기존(전체폭) 구조 유지를 명시적으로 허용했다. */
+  .right-stack {
+    position:absolute; top:calc(var(--top-nav-height) + 12px); right:12px; z-index:700;
+    display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+    max-width:calc(100vw - 24px);
+  }
+
+  /* ── 검색 위젯: 기본 접힘, 클릭 시 펼침 ── */
+  .search-widget { /* 데스크톱에서는 .right-stack의 flex item, 위치는 부모가 결정 */ }
+  .search-toggle-btn {
+    background:rgba(20,17,12,0.85); border:1px solid rgba(184,152,96,0.4);
+    color:var(--gold); font-size:12px; letter-spacing:1px; cursor:pointer;
+    padding:9px 16px; border-radius:20px; backdrop-filter:blur(6px);
+    font-family:inherit; white-space:nowrap;
+  }
+  .search-toggle-btn:hover, .search-toggle-btn:active { background:rgba(40,34,24,0.92); }
+  /* 펼쳐진 입력창: 기본은 폭 0·투명으로 숨겨두고, .open일 때만 보인다.
+     transition으로 150~200ms 열림 / 150ms 닫힘 애니메이션을 준다. */
+  .search-expand {
+    width:0; opacity:0; overflow:hidden; pointer-events:none;
+    background:rgba(20,17,12,0.9); border:1px solid rgba(184,152,96,0.4);
+    border-radius:14px; backdrop-filter:blur(6px);
+    transition:width 180ms ease, opacity 150ms ease;
+  }
+  .search-widget.open .search-toggle-btn { display:none; }
+  .search-widget.open .search-expand {
+    width:320px; opacity:1; pointer-events:auto; /* 권장 280~360px 안의 값 */
+  }
+  .search-input-row { display:flex; align-items:center; gap:4px; padding:7px 8px 7px 14px; }
+  .search-input {
+    flex:1; min-width:0; background:transparent; border:none; outline:none;
+    color:var(--paper); font-size:12px; font-family:inherit; padding:3px 0;
+  }
+  .search-input::placeholder { color:rgba(232,224,208,0.45); }
+  .search-icon-btn {
+    background:none; border:none; color:var(--gold); font-size:13px; cursor:pointer;
+    padding:5px 6px; flex-shrink:0; line-height:1; font-family:inherit;
+  }
+  .search-x-btn {
+    background:none; border:none; color:rgba(232,224,208,0.7); font-size:17px; cursor:pointer;
+    padding:2px 6px; flex-shrink:0; line-height:1; font-family:inherit;
+  }
+  .search-x-btn:hover, .search-x-btn:active { color:#fff; }
+  /* 검색 상태(결과 N개 / 결과 없음) — 입력창 바로 아래 작은 한 줄. 내용이
+     없으면(빈 문자열) padding이 0이 되어 자리도 차지하지 않는다. */
+  .search-status {
+    font-size:11px; color:rgba(232,224,208,0.65); padding:0 14px;
+    max-height:0; overflow:hidden; transition:max-height 150ms ease;
+  }
+  .search-status:not(:empty) { padding:0 14px 9px 14px; max-height:20px; }
+  .search-status.no-result { color:#e8a0a0; }
+
+  .legend {
+    background:rgba(20,17,12,0.82); border:1px solid rgba(184,152,96,0.3);
+    border-radius:6px; padding:9px 11px; backdrop-filter:blur(6px); max-width:140px;
+  }
+  .legend-title { font-size:9px; color:var(--gold); letter-spacing:2px; margin-bottom:6px; }
+  .legend-item { display:flex; align-items:center; gap:6px; margin:3px 0; font-size:10px; }
+  .legend-icon { display:flex; align-items:center; justify-content:center; width:14px; height:14px; flex-shrink:0; }
+  .legend-icon svg { filter:drop-shadow(0 0 1px rgba(0,0,0,0.6)); }
+
+  /* 줌 컨트롤 위치는 이제 map.js에서 L.control.zoom({position:'bottomleft'})로
+     지정한다 — 여기서는 시각적 테마(색상·블러)와 하단 타임라인 바에
+     가리지 않도록 여백만 맞춘다. */
+  .leaflet-control-zoom { margin-bottom:96px !important; margin-left:12px !important; }
+  .leaflet-control-zoom a { background:rgba(20,17,12,0.82) !important; color:var(--paper) !important; border-color:rgba(184,152,96,0.3) !important; backdrop-filter:blur(6px); }
+  .leaflet-control-zoom a:hover { background:rgba(40,34,24,0.92) !important; }
+
+  /* ── 모바일: 검색은 전체폭 상단 고정, 범례·레이어는 원래 자리로 분리 ── */
+  @media (max-width:480px) {
+    :root { --top-nav-height:44px; } /* 모바일은 내비게이션 바 높이가 약간 낮음(폰트·패딩 축소) */
+    .header { top:calc(var(--top-nav-height) + 46px); }       /* 상단 검색바 공간 확보 */
+    .year-display { top:calc(var(--top-nav-height) + 108px); }
+    /* .era-card 위치는 아래 모바일 모달 블록에서 중앙 고정으로 처리한다 */
+
+    .right-stack { display:contents; } /* 데스크톱용 세로 스택 해제 */
+
+    .search-widget { position:absolute; top:calc(var(--top-nav-height) + 8px); left:12px; right:12px; z-index:700; }
+    .search-toggle-btn { display:none; } /* 모바일은 항상 펼쳐진 상태 */
+    .search-expand {
+      width:auto !important; opacity:1 !important; pointer-events:auto !important;
+    }
+    .search-input { font-size:13px; } /* 모바일은 입력 가독성을 위해 살짝 키움 */
+
+    .legend { position:absolute; top:calc(var(--top-nav-height) + 106px); right:12px; z-index:600; }
+    .layer-toggle { position:absolute; bottom:110px; right:12px; z-index:600; }
+  }
+
+  /* ════════════════════════════════════════════════════
+     [개선 1] 모바일 시대 개요(eraCard) — 중앙 Modal 표시
+     데스크탑(>=1024px)에는 어떤 영향도 주지 않도록 모바일 폭에서만 적용.
+     기존 eraCard DOM·자동 오픈 로직을 그대로 재사용하고 표시 방식만 바꾼다.
+     ════════════════════════════════════════════════════ */
+  @media (max-width:1023.98px) {
+    .era-card {
+      position:fixed; left:50%; top:50%;
+      transform:translate(-50%, -50%);
+      width:90%; max-width:420px; height:auto; max-height:70vh;
+      z-index:1205;                      /* info-scrim(1150)보다 위 */
+      display:none; flex-direction:column;
+      padding:38px 20px 20px;
+      border-radius:14px;
+      background:rgba(20,17,12,0.97);
+      box-shadow:0 18px 50px rgba(0,0,0,0.5);
+      overflow:hidden;                   /* 내부 본문만 스크롤 */
+    }
+    .era-card.open { display:flex; }
+    /* 배경 dim — 카드가 열릴 때만 나타나는 전체화면 막 (별도 DOM 불필요) */
+    .era-card.open::before {
+      content:''; position:fixed; inset:0; z-index:-1;
+      background:rgba(0,0,0,0.5);
+    }
+    /* 본문(설명)만 스크롤 영역으로 — 내용이 max-height를 넘을 때만 스크롤 */
+    .era-card p {
+      flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain;
+      font-size:13.5px; line-height:1.8; color:rgba(232,224,208,0.88);
+      padding-right:4px;
+    }
+    /* 시대명 헤더를 카드 상단에 함께 노출(맥락 가독성) */
+    .era-card::after {
+      content:attr(data-era-title);
+      order:-1; flex:none;
+      font-size:14px; font-weight:700; letter-spacing:0.5px;
+      color:rgba(232,224,208,0.95);
+      padding-bottom:10px; margin-bottom:10px;
+      border-bottom:1px solid rgba(184,152,96,0.22);
+    }
+    /* 「탐험 시작」 — 높이 축소 + 카드 폭 전체 사용 금지(중앙 정렬, 콘텐츠 폭) */
+    .era-start-btn {
+      flex:none; align-self:center; width:auto; min-width:120px;
+      margin-top:14px; padding:9px 22px; font-size:13px; border-radius:8px;
+    }
+    /* 닫기(X) — 모달 우측 상단 */
+    .era-card .era-close {
+      position:absolute; top:9px; right:11px; z-index:2;
+      width:32px; height:32px; border:none; border-radius:50%;
+      background:rgba(232,224,208,0.1); color:rgba(232,224,208,0.7);
+      font-size:19px; line-height:1; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+    }
+
+    /* ── [1] 모바일: ⓘ → "ⓘ 시대 개요" 텍스트 버튼 ──
+       기존 eraBtn(#eraBtn) DOM·열기 로직을 그대로 쓰고 표시만 바꾼다.
+       HTML 텍스트는 'ⓘ'로 두고, 라벨은 ::after로 덧붙인다(데스크탑은 영향 없음). */
+    .era-info-btn {
+      width:auto; height:auto; border-radius:14px;
+      line-height:1; padding:5px 11px 5px 9px;
+      font-size:12px; color:rgba(184,152,96,0.95);
+      border:1px solid rgba(184,152,96,0.5);
+      background:rgba(184,152,96,0.08);
+      white-space:nowrap;
+      display:inline-block; pointer-events:auto; cursor:pointer; /* 부모(.era-subtitle)의
+        pointer-events:none을 다시 풀어준다 — 데스크탑 규칙이 min-width:1024px로
+        옮겨지면서 모바일에 이 선언이 빠져 클릭이 막혀 있었다(이번 수정의 핵심). */
+    }
+    .era-info-btn::after { content:' 시대 개요'; letter-spacing:0.3px; }
+
+    /* ── [3] 첫 진입 1회성 안내(아주 약한 pulse) ──
+       JS가 #eraBtn에 .era-hint를 잠깐 붙였다 뗀다(저장 없음, 반복 없음).
+       prefers-reduced-motion이면 효과를 끈다. */
+    .era-info-btn.era-hint { animation:eraHintPulse 1.1s ease-out 2; }
+    /* [2] 모달 열린 동안 배경 스크롤 잠금(지도 위치는 유지) */
+    body.era-modal-open { overflow:hidden; touch-action:none; }
+  }
+  /* eraHintPulse 키프레임과 reduced-motion 예외는 미디어쿼리 밖(전역)에 둔다.
+     (@media 안에 @media를 중첩하면 표준 CSS가 아니라 규칙이 통째로 무시될 수 있다.) */
+  @keyframes eraHintPulse {
+    0%   { box-shadow:0 0 0 0 rgba(184,152,96,0.0);  opacity:0.85; }
+    35%  { box-shadow:0 0 0 6px rgba(184,152,96,0.18); opacity:1; }
+    100% { box-shadow:0 0 0 0 rgba(184,152,96,0.0);  opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .era-info-btn.era-hint { animation:none; }
+  }
+  /* 데스크탑: X 닫기 버튼은 숨긴다(기존 ⓘ 토글/바깥 클릭 그대로 사용) */
+  @media (min-width:1024px) {
+    .era-card .era-close { display:none; }
+  }
+
+  .timeline { position:absolute; bottom:var(--bottom-bar-height); left:0; right:0; z-index:600; padding:16px 20px 22px; touch-action:none;
+    background:linear-gradient(0deg,rgba(20,17,12,0.95),rgba(20,17,12,0.6) 70%,transparent); }
+  .slider-labels { position:relative; height:13px; font-size:10px; color:var(--paper-dark); opacity:0.55; margin-bottom:7px; }
+  .slider-labels span { position:absolute; top:0; white-space:nowrap; transform:translateX(-50%); }
+  input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:3px; touch-action:pan-x; background:var(--paper-dark); border-radius:2px; outline:none; opacity:0.8; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:24px; height:24px; border-radius:50%; background:var(--gold); border:3px solid var(--ink); cursor:pointer; }
+  .hint { text-align:center; font-size:10px; color:var(--paper-dark); opacity:0.5; margin-top:9px; }
+
+  .leaflet-popup-content-wrapper { background:var(--paper); color:var(--ink); border-radius:6px; max-width:300px; }
+  .dokdo-tooltip { background:rgba(20,17,12,0.92); color:var(--gold); border:1px solid rgba(184,152,96,0.4); border-radius:4px; font-size:11px; padding:3px 8px; }
+  .dokdo-tooltip::before { border-top-color:rgba(184,152,96,0.4); }
+  .leaflet-popup-tip { background:var(--paper); }
+  .leaflet-popup-content { margin:14px 16px; line-height:1.55; width:270px !important; }
+  .pop-type { display:inline-block; font-size:10px; letter-spacing:1px; padding:2px 8px; border-radius:3px; color:#fff; margin-bottom:7px; }
+  .pop-title { font-size:16px; font-weight:800; margin-bottom:2px; }
+  .pop-date { font-size:11px; color:#8a7a5a; margin-bottom:6px; }
+  .pop-duration { display:inline-block; font-size:10px; color:#7a6a45; background:rgba(184,152,96,0.15);
+    border:1px solid rgba(184,152,96,0.35); border-radius:3px; padding:1px 7px; margin-bottom:7px; letter-spacing:0.5px; }
+  .pop-people { font-size:11px; color:#6a5d44; margin-bottom:8px; }
+  .pop-people b { color:#4a4030; }
+  .pop-summary { font-size:13px; color:#36302a; }
+
+  /* 대표 이미지 — 카드 맨 위, 팝업 좌우 끝까지. 없으면 popupHtml()이
+     이 블록 자체를 만들지 않으므로 별도 분기 없이 항상 안전하다. */
+  .pop-image { margin:-14px -16px 10px -16px; }
+  .pop-image img {
+    width:100%; aspect-ratio:4/3; max-height:420px;
+    object-fit:contain; object-position:center;
+    background:var(--paper); display:block; border-radius:6px 6px 0 0;
+  }
+
+  /* AI 생성 이미지 표시 — image-sourcing-policy.md/v1.1 지시서 3단계 원칙:
+     "아주 작은 안내만, 작은 회색 글씨, 카드 하단, 배지·아이콘·워터마크 금지,
+     몰입 방해 금지". 이미지 바로 아래에 일반 캡션처럼 작게 둔다. */
+  .pop-ai-note {
+    font-size:10px; color:#9a8f7a; text-align:right;
+    padding:3px 4px 0 0; line-height:1.3;
+  }
+  .pop-image .pop-ai-note { padding:4px 8px 0 0; }
+
+  /* 관련 사진 — content.gallery. 여러 장이면 작은 썸네일 그리드로,
+     클릭하면 원본을 새 탭에서 확대해 본다(라이트박스 없이 가장 단순한
+     방식 — UI 리디자인 금지 원칙에 따라 기존 톤만 따름). */
+  .pop-gallery { margin-top:10px; display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; }
+  .pop-gallery-item a { display:block; border-radius:5px; overflow:hidden; }
+  .pop-gallery-item img {
+    width:100%; aspect-ratio:1/1; object-fit:contain; object-position:center;
+    background:var(--paper); display:block;
+  }
+
+  /* 관련 사건 — connections를 클릭 가능한 작은 pill 링크로 나열.
+     클릭하면 navigateToEvent()가 그 사건의 연도로 지도를 이동시킨다. */
+  .pop-connections { margin-top:10px; font-size:11px; color:#6a5d44; }
+  .pop-connections b { color:#4a4030; display:block; margin-bottom:5px; }
+  .pop-conn-list { display:flex; flex-wrap:wrap; gap:5px; }
+  .pop-conn-link {
+    display:inline-block; font-size:11px; color:#5a4d2a; text-decoration:none;
+    background:rgba(184,152,96,0.18); border:1px solid rgba(184,152,96,0.4);
+    border-radius:12px; padding:3px 10px; transition:background 0.15s ease;
+  }
+  .pop-conn-link:hover, .pop-conn-link:active { background:rgba(184,152,96,0.32); }
+
+  .pop-video { margin-top:10px; }
+  .pop-video a { display:block; position:relative; border-radius:6px; overflow:hidden; text-decoration:none; }
+  .pop-video img { width:100%; display:block; }
+  .pop-video .play-badge {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:46px; height:46px; border-radius:50%; background:rgba(0,0,0,0.65);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .pop-video .play-badge::after {
+    content:''; border-style:solid; border-width:8px 0 8px 13px;
+    border-color:transparent transparent transparent #fff; margin-left:2px;
+  }
+  .pop-video .cap { font-size:11px; color:#8a7a5a; margin-top:5px; text-align:center; }
+
+  /* ── 세계 사건 카드(클릭 패널 내부에서 사용) ── */
+  .world-event { margin:0 0 16px 0; }
+  .world-event:last-child { margin-bottom:0; }
+  .world-event-head {
+    display:flex; align-items:baseline; flex-wrap:wrap; gap:6px; margin-bottom:6px;
+  }
+  .world-type {
+    flex:none; font-size:10px; font-weight:700; letter-spacing:0.5px;
+    color:#6a6358; background:rgba(120,110,90,0.14);
+    border-radius:4px; padding:1px 6px;
+  }
+  .world-title { font-size:13px; font-weight:600; color:#4a4338; }
+  .world-period { font-size:11px; color:#9a8f7a; }
+  .world-state {
+    flex:none; font-size:10px; font-weight:600;
+    color:#7a6f5c; background:rgba(150,120,70,0.12);
+    border:1px solid rgba(150,120,70,0.25);
+    border-radius:4px; padding:0 6px;
+  }
+  /* 현재 선택 연도 기준 진행 상태 한 줄 */
+  .world-phase {
+    font-size:11.5px; line-height:1.5; color:#6a6055;
+    background:rgba(120,110,90,0.08);
+    border-left:2px solid rgba(150,120,70,0.3);
+    border-radius:0 4px 4px 0;
+    padding:4px 8px; margin:0 0 8px 0;
+  }
+  .world-phase-year { font-weight:700; color:#4a4338; }
+  /* 3단 설명: 무슨 일 / 왜 중요 / 어떻게 달라졌나 */
+  .world-block { margin:0 0 7px 0; }
+  .world-block:last-child { margin-bottom:0; }
+  .world-q {
+    display:block; font-size:10.5px; font-weight:700; letter-spacing:0.3px;
+    color:#8a7f68; margin-bottom:2px;
+  }
+  .world-block p {
+    font-size:12px; line-height:1.7; color:#5a5348; margin:0;
+  }
+  /* 대표 인물 (보조 요소) */
+  .world-figures-wrap { margin-top:9px; }
+  .world-figures-label {
+    font-size:10.5px; font-weight:700; color:#8a7f68; margin-bottom:3px;
+  }
+  .world-figures {
+    list-style:none; margin:0; padding:0;
+  }
+  .world-figures li {
+    font-size:11.5px; color:#6a6055; line-height:1.6;
+  }
+  .world-figures li::before { content:'• '; color:#a99c80; }
+  .world-figures li b { font-weight:600; color:#4a4338; }
+  .world-figures li span { color:#8a8070; }
+
+  /* 세계 사건 중심 마커(지도 위) — 클릭 가능, 한국 마커보다 약하게 */
+  .world-marker { cursor:pointer; transition:opacity 0.2s, transform 0.15s; pointer-events:auto; }
+  .world-marker:hover { transform:scale(1.08); }
+  /* 세계 사건 영역(면) — 커서만 손가락으로, 외형은 Leaflet 옵션이 담당 */
+  .world-area, .world-center { cursor:pointer; }
+
+  /* 세계 사건 전용 정보창 헤더 배지 */
+  .world-pop-type {
+    display:inline-block; margin-bottom:10px;
+    font-size:11px; font-weight:700; letter-spacing:0.5px;
+    color:#6a6055; background:rgba(120,110,90,0.16);
+    border:1px solid rgba(120,110,90,0.28);
+    border-radius:5px; padding:3px 9px;
+  }
+  /* 세계 정보창: 한국 팝업과 같은 좌우 여백을 맞춘다(.info-scroll 직계 자식) */
+  .info-scroll > .world-panel { margin:0 18px; }
+  .world-panel .world-event { margin-bottom:0; }
+  .world-panel .world-block p { font-size:13px; }   /* 단독 정보창에서는 본문 살짝 크게 */
+
+
+  /* 시대 부제 — 데스크톱 전용. (모바일은 위쪽 @media max-width:1023.98px의
+     중앙 Modal 규칙이 담당한다. 이 블록을 min-width:1024px로 가두지 않으면
+     소스 순서상 뒤에 있어 모바일 규칙을 덮어써 좌측 카드/원형 ⓘ가 새어 나온다.) */
+  .era-subtitle { margin-top:10px; pointer-events:none; }
+  .era-text { font-size:13px; font-weight:600; color:rgba(232,224,208,0.85); letter-spacing:1px; line-height:1.3; max-width:220px; }
+  @media (min-width:1024px) {
+    .era-info-btn {
+      display:inline-block; margin-top:5px; width:18px; height:18px; line-height:18px;
+      text-align:center; border-radius:50%; border:1px solid rgba(184,152,96,0.5);
+      font-size:10px; color:rgba(184,152,96,0.8); cursor:pointer; pointer-events:all;
+      transition:all 0.2s;
+    }
+    .era-info-btn:hover { background:rgba(184,152,96,0.15); }
+    .era-card {
+      display:none; position:absolute; top:210px; left:18px; z-index:601;
+      background:rgba(20,17,12,0.92); border:1px solid rgba(184,152,96,0.3);
+      border-radius:6px; padding:10px 13px; max-width:240px; backdrop-filter:blur(8px);
+    }
+    .era-card.open { display:block; }
+    .era-card p { font-size:12px; color:rgba(232,224,208,0.85); line-height:1.6; }
+    .era-start-btn {
+      display:block; width:100%; margin-top:12px;
+      padding:9px 12px; border:none; border-radius:5px;
+      background:linear-gradient(180deg, rgba(184,152,96,0.95), rgba(160,128,76,0.95));
+      color:#1a1714; font-size:12px; font-weight:700; letter-spacing:1px;
+      cursor:pointer; transition:filter 0.2s, transform 0.1s;
+    }
+    .era-start-btn:hover { filter:brightness(1.07); }
+    .era-start-btn:active { transform:translateY(1px); }
+  }
+
+  /* 레이어 토글 — 데스크톱에서는 .right-stack의 flex item (위치는 부모가
+     결정). 모바일에서는 위쪽 미디어쿼리가 position:absolute로 되돌린다. */
+  .layer-toggle {
+    background:rgba(20,17,12,0.82); border:1px solid rgba(184,152,96,0.3);
+    border-radius:6px; padding:8px 10px; backdrop-filter:blur(6px);
+  }
+  .toggle-title { font-size:9px; color:var(--gold); letter-spacing:2px; margin-bottom:6px; }
+  .toggle-item { display:flex; align-items:center; gap:7px; margin:4px 0; font-size:10px; cursor:pointer; user-select:none; }
+  .toggle-item input[type=checkbox] { accent-color:var(--gold); width:12px; height:12px; cursor:pointer; }
+
+  @keyframes ring-pulse { 0%{transform:scale(1);opacity:0.55;} 70%{transform:scale(2.2);opacity:0;} 100%{opacity:0;} }
+  .pulse-ring { animation:ring-pulse 2.6s ease-out infinite; transform-origin:center; }
+
+  /* ── 유형 기반 SVG 아이콘 마커 (markerIcons.js) ── */
+  /* 형태로 의미를 구분하고, 색은 보조. 다크 지도 위에서 형태가 또렷이
+     보이도록 약한 그림자(스트로크 대용)를 깔았다. */
+  .atlas-marker {
+    position:relative; width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform 0.12s ease;
+  }
+  .atlas-marker svg {
+    position:relative; z-index:2;
+    filter:drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+  }
+  /* hover: 105~110% 확대 (지시서) */
+  .leaflet-marker-icon:hover .atlas-marker { transform:scale(1.1); }
+  /* 선택(팝업 열림): 외곽 링. Leaflet은 팝업이 열린 마커에 별도 클래스를
+     주지 않으므로, 마커 요소에 .atlas-selected를 토글해 표시한다(renderer.js). */
+  .atlas-marker.atlas-selected::after {
+    content:''; position:absolute; top:-4px; left:-4px; right:-4px; bottom:-4px;
+    border:2px solid currentColor; border-radius:50%; opacity:0.9; z-index:1;
+  }
+  /* 펄스 링: 당해 연도 / 검색 결과. 형태 뒤에서 은은하게. */
+  .atlas-marker-pulse {
+    position:absolute; top:50%; left:50%; width:22px; height:22px;
+    margin:-11px 0 0 -11px; border-radius:50%; z-index:0;
+    animation:ring-pulse 2.6s ease-out infinite; transform-origin:center;
+  }
+
+  /* ── historicalLabels.js 전용 스타일 [실험적, 기본 비활성] ── */
+  .hist-label { white-space:nowrap; transform:translate(-50%,-50%); pointer-events:none; }
+  .hist-label-sea { font-size:13px; letter-spacing:3px; color:rgba(180,200,220,0.9); text-shadow:0 0 5px rgba(10,20,30,0.9); }
+  .hist-label-city { font-size:11px; letter-spacing:1px; color:rgba(232,224,208,0.92); text-shadow:0 0 4px rgba(10,20,30,0.9); font-weight:500; }
+  .hist-label-pin { display:flex; align-items:center; gap:4px; }
+  .hist-pin-dot { width:5px; height:5px; border-radius:50%; background:#e8e0d0; border:1px solid rgba(0,0,0,0.4); box-shadow:0 0 3px rgba(232,224,208,0.7); flex-shrink:0; }
+
+  /* ════════════════════════════════════════════════════════════
+     정보창 (infoPanel) — Bottom Sheet(모바일) / Right Panel(데스크탑)
+     반응형 분기점: 1024px. 외형은 여기서, 동작은 js/infoPanel.js에서.
+     내용(.pop-*)은 기존 팝업 스타일을 그대로 재사용한다.
+     ════════════════════════════════════════════════════════════ */
+
+  .info-panel {
+    position:fixed; background:var(--paper); color:var(--ink);
+    z-index:1200; display:flex; flex-direction:column;
+    box-shadow:0 -4px 24px rgba(0,0,0,0.35);
+    -webkit-overflow-scrolling:touch;
+  }
+  .info-scroll { overflow-y:auto; overscroll-behavior:contain; flex:1 1 auto; }
+
+  /* 닫기 버튼 — 터치 영역 44px 이상 */
+  .info-close {
+    position:absolute; top:8px; right:8px; z-index:2;
+    width:36px; height:36px; min-width:36px; border:none; cursor:pointer;
+    background:rgba(26,23,20,0.06); color:#5a4d38; border-radius:50%;
+    font-size:22px; line-height:1; display:flex; align-items:center; justify-content:center;
+  }
+  .info-close:hover, .info-close:active { background:rgba(26,23,20,0.14); }
+
+  /* 드래그 손잡이 — 모바일에서만 보인다 */
+  .info-grabber {
+    display:none; flex:none; height:28px; cursor:grab; touch-action:none;
+    align-items:center; justify-content:center;
+  }
+  .info-grabber-bar { width:42px; height:4px; border-radius:3px; background:rgba(26,23,20,0.25); }
+
+  /* 스크림(모바일 정보창 뒤 어둠막) */
+  .info-scrim { position:fixed; inset:0; z-index:1150; background:rgba(0,0,0,0.28); }
+
+  /* 정보창 내부 내용 패딩 + 긴 콘텐츠 대응 */
+  .info-scroll .pop-image { margin:0 0 12px 0; }
+  .info-scroll .pop-image img { border-radius:0; }
+  .info-scroll > .pop-type,
+  .info-scroll > .pop-title,
+  .info-scroll > .pop-date,
+  .info-scroll > .pop-duration,
+  .info-scroll > .pop-people,
+  .info-scroll > .pop-summary,
+  .info-scroll > .pop-connections,
+  .info-scroll > .pop-world-context,
+  .info-scroll > .pop-video,
+  .info-scroll > .pop-gallery { margin-left:18px; margin-right:18px; }
+  /* 정보창 안에서 갤러리가 패널 좌우 끝까지 붙어버리던 문제 보강:
+     다른 형제 요소(.pop-title 등)와 동일하게 margin만으로 여백을 주고,
+     하단 여백과 overflow 방지만 추가한다. width:100%+padding을 함께 쓰면
+     margin과 중복되어 패널 밖으로 넘치므로 사용하지 않는다.
+     (v2.0 — 기존 grid 레이아웃·이미지 자체는 변경하지 않음) */
+  .info-scroll .pop-gallery { margin-bottom:16px; overflow:hidden; }
+  .info-scroll .pop-summary { font-size:14px; line-height:1.7; }
+  .info-scroll .pop-video a { aspect-ratio:16/9; }
+  .info-scroll .pop-video img { height:100%; object-fit:cover; }
+
+  /* 관련 사건 아코디언 */
+  .pop-connections summary {
+    cursor:pointer; list-style:none; display:flex; align-items:center; gap:6px;
+    padding:4px 0; user-select:none;
+  }
+  .pop-connections summary::-webkit-details-marker { display:none; }
+  .pop-connections summary::before {
+    content:'▸'; color:#8a7a5a; font-size:10px; transition:transform .15s;
+  }
+  .pop-connections[open] summary::before { transform:rotate(90deg); }
+  .pop-conn-count {
+    font-size:10px; color:#8a7a5a; background:rgba(184,152,96,0.18);
+    border-radius:8px; padding:0 6px; min-width:18px; text-align:center;
+  }
+
+  /* ── 세계는 같은 시기 (World Context) 아코디언 ──
+     관련 사건과 같은 펼침/접힘 패턴을 쓰지만, 한국사 마커와 색 경쟁을
+     하지 않도록 세계 팔레트(슬레이트/더스트 계열)로 톤을 낮춘다.
+     기본은 닫힘(close) — 세계 맥락은 "더 알아보기"에 가까운 보조
+     정보라, 관련 사건과 달리 강제로 펼쳐 보이지 않는다. */
+  .pop-world-context {
+    margin-top:10px; padding-top:8px; border-top:1px dashed rgba(140,140,150,0.3);
+    font-size:11px; color:#6a6a74;
+  }
+  .pop-world-context summary {
+    cursor:pointer; list-style:none; display:flex; align-items:center; gap:6px;
+    padding:4px 0; user-select:none; color:#5a5a66; font-weight:600;
+  }
+  .pop-world-context summary::-webkit-details-marker { display:none; }
+  .pop-world-context summary::before {
+    content:'▸'; color:#8593a6; font-size:10px; transition:transform .15s;
+  }
+  .pop-world-context[open] summary::before { transform:rotate(90deg); }
+  .world-context-item {
+    margin-top:8px; padding:8px 10px; background:rgba(133,147,166,0.08);
+    border-radius:6px; border-left:2px solid rgba(133,147,166,0.4);
+  }
+  .world-context-item:first-of-type { margin-top:6px; }
+  .world-context-head {
+    font-size:11px; font-weight:700; color:#5a6878; margin-bottom:4px;
+  }
+  .world-context-item .world-block { margin:0 0 5px 0; }
+  .world-context-item .world-block:last-child { margin-bottom:0; }
+  .world-context-item .world-q {
+    font-size:10px; color:#8593a6; font-weight:600;
+  }
+  .world-context-item .world-block p {
+    margin:2px 0 0 0; font-size:11.5px; line-height:1.55; color:#5a5a66;
+  }
+  .world-context-item .world-state {
+    font-size:9px; color:#8593a6; border:1px solid rgba(133,147,166,0.4);
+    border-radius:8px; padding:0 5px; margin-left:6px;
+  }
+  .world-context-item .world-phase {
+    font-size:10.5px; color:#6a6a74; margin-top:4px; padding-top:4px;
+    border-top:1px dotted rgba(140,140,150,0.25);
+  }
+  .world-context-item .world-phase-year {
+    font-weight:700; color:#5a6878; margin-right:4px;
+  }
+
+  /* ── 모바일 (<1024px): 중앙 Modal (개선됨 — 기존 Bottom Sheet 대체) ── */
+  @media (max-width:1023.98px) {
+    .info-panel {
+      left:50%; top:50%; right:auto; bottom:auto;
+      width:95%; height:85%; max-height:85vh;
+      transform:translate(-50%, calc(-50% + 12px)); /* 등장 전: 살짝 아래 */
+      border-radius:14px;
+      box-shadow:0 18px 50px rgba(0,0,0,0.5);
+      opacity:0; pointer-events:none;
+      transition:opacity 240ms ease, transform 240ms cubic-bezier(0.22,0.61,0.36,1);
+      display:flex; flex-direction:column;
+      overflow:hidden;                 /* 내부 .info-scroll만 스크롤 */
+    }
+    .info-panel.modal-show {
+      opacity:1; pointer-events:auto;
+      transform:translate(-50%, -50%);
+    }
+    /* 드래그 핸들 제거 — 모달은 드래그 없이 X/배경 터치로만 닫는다 */
+    .info-grabber { display:none !important; }
+    .info-close { display:flex; }      /* 우측 상단 X 보장 */
+    .info-scroll { flex:1 1 auto; overflow-y:auto; overscroll-behavior:contain; padding:44px 0 24px 0; }
+    .info-scroll .pop-image { margin-top:0; }
+
+    /* 배경 dim — 기존 info-scrim 재사용(터치 시 닫힘은 JS가 처리) */
+    .info-scrim { background:rgba(0,0,0,0.5); }
+
+    /* 정보창 열린 동안 컨트롤 상태 변화 */
+    body.info-open .legend,
+    body.info-open .layer-toggle { transition:opacity .2s, visibility .2s; }
+    /* 자동 숨김 ON일 때(.controls-hidden) 범례·레이어 감춤 */
+    body.controls-hidden .legend,
+    body.controls-hidden .layer-toggle { opacity:0; visibility:hidden; pointer-events:none; }
+    /* 검색창 축소: 48→36 느낌으로 살짝 줄임 + 슬라이더 흐리게 */
+    body.info-open .search-widget { transform:scale(0.92); transform-origin:top left; transition:transform .2s; }
+    body.info-open .slider-wrap, body.info-open .year-display { opacity:0.6; transition:opacity .2s; }
+    .mobile-only { display:block; }
+  }
+
+  /* ── 데스크탑 (>=1024px): Right Side Panel ── */
+  @media (min-width:1024px) {
+    .info-panel {
+      top:0; right:0; bottom:0; height:100%;
+      width:420px; min-width:360px; max-width:560px;
+      border-radius:0; box-shadow:-4px 0 24px rgba(0,0,0,0.3);
+      transform:translateX(100%);
+      transition:transform 250ms cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .info-panel[data-state="open"] { transform:translateX(0); }
+    .info-grabber { display:none; }
+    .info-scrim { display:none !important; }
+    .info-scroll { padding:48px 0 32px 0; }
+
+    /* 범례·레이어·검색은 .right-stack 한 묶음. 패널 폭(420)+여백(16)만큼 비킨다 */
+    body.info-open-desktop .right-stack { transition:right .25s ease; }
+    body.info-open-desktop.controls-shift .right-stack { right:436px; }
+    .mobile-only { display:none !important; }
+  }
+
+  .toggle-sep { height:1px; background:rgba(232,224,208,0.15); margin:6px 0; }
+
+  /* ════════════════════════════════════════════════════
+     소개(시작) 팝업 + 이메일 표시 팝업
+     — 지도 UI(다크, var(--ink)/var(--paper))와는 완전히 분리된
+       라이트 종이 톤 팔레트를 이 블록 안에서만 사용한다.
+     — 절대 리디자인 금지 지시에 따라 기존 시작 팝업 디자인 시안을
+       (배경 #f7f4ef · radius 24px · 절제된 여백 · 작은 아이콘)
+       그대로 구현한다.
+     ════════════════════════════════════════════════════ */
+
+  /* ── 소개 페이지 (.intro-page) ──
+     era-hub(.era-hub 클래스)의 모달 박스 스타일을 그대로 물려받고,
+     글이 길어서 자연스러운 좌측 정렬 본문과 세로 스크롤만 추가한다.
+     이전에 있던 첫 진입 자동 팝업(welcome-modal)·하단 고정 푸터
+     (bottom-fixed-bar)·이메일 안내 팝업(email-popup)은 모두 제거하고
+     이 자리로 통합했다 — 이제는 사용자가 상단 "소개" 메뉴를 직접 눌러야
+     열리며, 자동 노출이나 노출 억제(localStorage 등)를 다룰 필요가 없다. */
+  .intro-page {
+    text-align:left; max-width:560px;
+  }
+  .intro-title {
+    font-size:20px; font-weight:800; letter-spacing:1px;
+    margin-bottom:18px; color:#3a352c;
+  }
+  .intro-body p {
+    font-size:14.5px; line-height:1.85; color:#4a443a;
+    margin:0 0 14px;
+  }
+  .intro-divider {
+    border:none; border-top:1px solid rgba(0,0,0,0.1);
+    margin:22px 0;
+  }
+  .intro-howto-title {
+    font-size:12.5px; font-weight:700; letter-spacing:1px;
+    color:#8a8276; margin-bottom:10px;
+  }
+  .intro-howto ul {
+    list-style:none; padding:0; margin:0;
+    font-size:13.5px; color:#4a443a; line-height:2;
+  }
+  .intro-howto li::before { content:'· '; color:#b89860; font-weight:700; }
+  .intro-contact {
+    font-size:12.5px; color:#8a8276;
+  }
+  .intro-contact a {
+    color:#3a352c; font-weight:700; text-decoration:none;
+    margin-left:6px; padding:2px 8px; border-radius:7px;
+    background:rgba(184,152,96,0.12);
+  }
+  .intro-contact a:hover { background:rgba(184,152,96,0.2); }
+
+  @media (max-width:640px) {
+    .intro-page { padding:26px 20px; max-height:82vh; }
+    .intro-title { font-size:17px; }
+  }
+
+  /* ════════════════════════════════════════════════════
+     상단 포털 내비게이션 (.site-nav)
+     ATLAS 포털 전체에서 공통으로 쓰이는 상단 바. 지도 화면 위에 항상
+     떠 있으며, "지도" 메뉴를 클릭하면 .era-hub(시대 선택 허브)가
+     열린다. 다른 메뉴(소개/자료실/루트/프로젝트)는 아직 별도 페이지가
+     없으므로 현재는 클릭 시 "준비 중" 안내만 표시한다(nav.js 참고).
+     z-index: .header(600)·.search-widget(700)보다 위, info-panel(1150)·
+     welcome-modal(1300)보다는 아래로 둬서, 정보창이나 시작 팝업이 열릴
+     때 내비게이션이 그 위를 가리지 않게 한다.
+     ════════════════════════════════════════════════════ */
+  .site-nav {
+    position:fixed; top:0; left:0; right:0; height:var(--top-nav-height);
+    z-index:800; display:flex; align-items:center; gap:4px;
+    padding:0 14px; background:rgba(20,17,12,0.92);
+    border-bottom:1px solid rgba(184,152,96,0.18);
+    backdrop-filter:blur(10px);
+  }
+  .site-nav-brand {
+    font-size:14px; font-weight:800; letter-spacing:2px; color:var(--paper);
+    margin-right:10px; white-space:nowrap; flex:none;
+  }
+  .site-nav-menu { display:flex; align-items:center; gap:2px; flex:1; overflow-x:auto; scrollbar-width:none; }
+  .site-nav-menu::-webkit-scrollbar { display:none; }
+  .site-nav-item {
+    appearance:none; border:none; background:transparent; color:rgba(232,224,208,0.78);
+    font-family:inherit; font-size:13px; letter-spacing:0.5px; white-space:nowrap;
+    padding:7px 12px; border-radius:7px; cursor:pointer; flex:none;
+    transition:background 0.15s, color 0.15s;
+  }
+  .site-nav-item:hover { background:rgba(184,152,96,0.14); color:var(--paper); }
+  .site-nav-item.active { color:var(--gold); font-weight:700; }
+
+  @media (max-width:480px) {
+    .site-nav { padding:0 8px; gap:0; }
+    .site-nav-brand { font-size:12px; letter-spacing:1px; margin-right:4px; }
+    .site-nav-item { font-size:11.5px; padding:6px 8px; }
+  }
+
+  /* ── 시대 선택 허브 (.era-hub) ──
+     "지도" 메뉴 클릭 시 지도 위를 덮는 풀스크린 오버레이. 6개 시대
+     카드를 그리드로 보여주고, 구현된 시대(근대)만 클릭 가능하다.
+     welcome-modal과 같은 z-index대(scrim 1300/본체 1301)를 써서,
+     동시에 열릴 일이 없는 두 모달이 같은 층위에서 안전하게 동작한다. */
+  .era-hub-scrim {
+    position:fixed; inset:0; z-index:1300; background:rgba(10,8,5,0.78);
+    backdrop-filter:blur(4px); display:none;
+  }
+  .era-hub-scrim.open { display:block; }
+  .era-hub {
+    position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+    z-index:1301; width:92%; max-width:680px; max-height:84vh; overflow-y:auto;
+    background:#f7f4ef; color:#3a352c; border-radius:20px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.4); padding:32px 28px;
+    font-family:-apple-system,'Apple SD Gothic Neo',sans-serif;
+    display:none;
+  }
+  .era-hub.open { display:block; }
+  .era-hub-title { font-size:18px; font-weight:800; letter-spacing:1px; margin-bottom:4px; }
+  .era-hub-sub { font-size:12.5px; color:#8a8276; margin-bottom:22px; }
+  .era-hub-close {
+    position:absolute; top:16px; right:16px; width:32px; height:32px;
+    border-radius:50%; border:none; background:rgba(58,53,44,0.08); color:#3a352c;
+    font-size:18px; cursor:pointer; line-height:1;
+  }
+  .era-hub-close:hover { background:rgba(58,53,44,0.16); }
+  .era-hub-grid {
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;
+  }
+  .era-card-item {
+    appearance:none; border:1.5px solid rgba(58,53,44,0.12); border-radius:14px;
+    background:#fff; padding:18px 14px; text-align:left; cursor:pointer;
+    transition:border-color 0.15s, transform 0.15s;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .era-card-item:hover:not(.disabled) { border-color:var(--gold); transform:translateY(-2px); }
+  .era-card-item.disabled { cursor:default; opacity:0.5; }
+  .era-card-period { font-size:10.5px; color:#a39a8c; letter-spacing:1px; }
+  .era-card-name { font-size:15px; font-weight:800; color:#3a352c; }
+  .era-card-status {
+    margin-top:4px; font-size:10px; letter-spacing:0.5px; align-self:flex-start;
+    padding:2px 8px; border-radius:5px;
+  }
+  .era-card-status.ready { background:rgba(58,130,97,0.12); color:#2c6b48; }
+  .era-card-status.soon { background:rgba(58,53,44,0.08); color:#8a8276; }
+
+  @media (max-width:640px) {
+    .era-hub { width:92%; padding:26px 20px; max-height:82vh; }
+    .era-hub-grid { grid-template-columns:repeat(2, 1fr); gap:10px; }
+    .era-card-item { padding:14px 12px; }
+    .era-card-name { font-size:13.5px; }
+  }
+
+  /* ── 자료실 허브 (.archive-hub) ──
+     era-hub의 모달 틀(스크림/닫기버튼/타이틀/그리드·카드)을 그대로
+     물려받는다. 카테고리·하위주제 단계는 .era-hub-grid/.era-card-item을
+     그대로 재사용하고(폭만 살짝 넓힘), 마지막 글 목록 단계만
+     .archive-list로 별도 레이아웃을 쓴다. */
+  .archive-hub {
+    max-width: 720px;
+  }
+  /* [버그 수정] .era-hub-grid(display:grid)·.archive-list(display:flex)가
+     이미 display를 명시하고 있어서, 네이티브 hidden 속성(브라우저 기본
+     [hidden]{display:none})이 밀려 무시되는 문제가 있었다 — 카테고리
+     카드와 글 목록이 동시에 보이던 버그의 원인. 이 스코프 안에서는
+     hidden을 항상 최우선으로 강제한다. */
+  .archive-hub [hidden] { display: none !important; }
+
+  .archive-hub-back {
+    position: static; display: inline-block;
+    margin-bottom: 14px;
+    appearance: none; border: none; background: transparent;
+    color: #8a8276; font-size: 12.5px; font-weight: 700;
+    letter-spacing: 0.3px; cursor: pointer; padding: 4px 0;
+  }
+  .archive-hub-back:hover { color: #3a352c; }
+
+  .archive-list {
+    display: flex; flex-direction: column; gap: 8px;
+    max-height: 56vh; overflow-y: auto;
+  }
+  .archive-list-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    border: 1.5px solid rgba(58,53,44,0.12); border-radius: 12px;
+    background: #fff; padding: 12px 14px; text-decoration: none;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .archive-list-item:hover { border-color: var(--gold); transform: translateY(-1px); }
+  .archive-item-badge {
+    flex: none; font-size: 10px; letter-spacing: 0.3px; font-weight: 700;
+    color: #7a2020; background: rgba(122,32,32,0.1);
+    padding: 3px 8px; border-radius: 6px; margin-top: 2px; white-space: nowrap;
+  }
+  .archive-item-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .archive-item-title { font-size: 14px; font-weight: 800; color: #3a352c; }
+  .archive-item-meta { font-size: 10.5px; color: #a39a8c; letter-spacing: 0.3px; }
+  .archive-item-summary {
+    font-size: 12px; color: #6a655c; line-height: 1.6;
+    overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  .archive-empty { font-size: 13px; color: #8a8276; padding: 24px 4px; text-align: center; }
+
+  @media (max-width:640px) {
+    .archive-hub-back { font-size: 11.5px; }
+    .archive-item-title { font-size: 13px; }
+  }
+
+  /* ── 프로젝트 허브 (.project-hub) ──
+     era-hub의 모달 틀(스크림/닫기버튼/타이틀)을 그대로 물려받되, 폭을
+     넓히고 안에 탭 UI를 추가한다. 실제 콘텐츠는 js/projectHub.js가 채운다. */
+  .project-hub {
+    max-width: 920px;
+  }
+  .project-tabs {
+    display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap;
+    border-bottom: 1.5px solid rgba(58,53,44,0.1); padding-bottom: 2px;
+  }
+  .project-tab {
+    appearance: none; border: none; background: transparent; cursor: pointer;
+    padding: 9px 14px; font-size: 13.5px; font-weight: 700; color: #8a8276;
+    border-bottom: 2.5px solid transparent; margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .project-tab:hover { color: #3a352c; }
+  .project-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .project-panel { min-height: 120px; }
+  .project-soon {
+    padding: 40px 12px; text-align: center; color: #a39a8c; font-size: 13.5px;
+  }
+
+  /* ── 유튜브 갤러리 카드 ── */
+  .video-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .video-card {
+    border: 1.5px solid rgba(58,53,44,0.12); border-radius: 14px; overflow: hidden;
+    background: #fff; display: flex; flex-direction: column;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .video-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .video-thumb {
+    position: relative; display: block; aspect-ratio: 16/9; background: #e8e4dc;
+  }
+  .video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-thumb-disabled { cursor: default; pointer-events: none; }
+  .video-thumb-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    color: #a39a8c; font-size: 11.5px; text-align: center; padding: 8px;
+  }
+  .video-duration {
+    position: absolute; right: 6px; bottom: 6px; background: rgba(0,0,0,0.75); color: #fff;
+    font-size: 10.5px; padding: 1px 5px; border-radius: 4px; letter-spacing: 0.3px;
+  }
+  .video-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 5px; }
+  .video-title { font-size: 13.5px; font-weight: 800; line-height: 1.35; margin: 0; }
+  .video-title a { color: #3a352c; text-decoration: none; }
+  .video-title a:hover { color: var(--gold); }
+  .video-date { font-size: 10.5px; color: #a39a8c; margin: 0; }
+  .video-desc { font-size: 11.5px; color: #7a7060; line-height: 1.5; margin: 2px 0 0; }
+  .video-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .video-tag { font-size: 10px; color: #8a8276; }
+  .video-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .video-chip {
+    font-size: 10px; padding: 3px 8px; border-radius: 20px; text-decoration: none;
+    background: rgba(184,152,96,0.12); color: #8a6b2e; white-space: nowrap;
+  }
+  .video-chip:hover { background: rgba(184,152,96,0.22); }
+
+  @media (max-width:900px) {
+    .video-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width:640px) {
+    .project-hub { max-width: 92%; }
+    .video-grid { grid-template-columns: 1fr; }
+    .project-tabs { gap: 2px; }
+    .project-tab { padding: 8px 10px; font-size: 12.5px; }
+  }
+
+/* ── 루트 모드 — 기존 UI 숨김 ──
+   routeRenderer.js의 enterRouteMode()가 data-route-hidden 속성을 붙이면
+   해당 요소만 화면에서 사라진다. display:none이 아니라 visibility를
+   쓰는 이유는, 슬라이더 값(#slider의 value)이나 다른 요소 크기 계산에
+   기존 로직이 의존할 가능성을 차단하기 위해서다 — 레이아웃 공간은
+   유지하되 안 보이고 클릭도 안 되게만 한다. */
+body.route-mode-active [data-route-hidden] {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   루트(Route) 렌더링 스타일 — routeRenderer.js와 함께 동작
+   ════════════════════════════════════════════════════════ */
+
+/* ── 루트 웨이포인트 마커 ── */
+/* ── 루트 웨이포인트 마커 ──
+   지도 위 일반 마커(.atlas-marker)와 동일한 스타일 — 원형 배경/테두리
+   없이 아이콘 자체에 드롭섀도만 준다. */
+.route-wp-marker {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.route-wp-marker svg {
+  position: relative; z-index: 2;
+  filter: drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+}
+.route-wp-marker:hover {
+  transform: scale(1.15);
+}
+
+/* ── 루트 웨이포인트 마커 깜빡임 ──
+   사이드 패널 항목 클릭(또는 마커 직접 클릭) 시 routeRenderer.js의
+   flashRouteMarker()가 이 클래스를 잠깐 붙였다 뗀다. 점이 몰린 지역
+   (평양·서울 등)에서 정확히 어느 지점인지 눈에 띄게 하기 위함. */
+.route-wp-marker-flash {
+  animation: route-wp-flash 0.55s ease-out 3;
+}
+.route-wp-marker-flash::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: route-wp-flash-ring 0.9s ease-out 2;
+  pointer-events: none;
+}
+@keyframes route-wp-flash {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.45); }
+}
+@keyframes route-wp-flash-ring {
+  0% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.6); }
+}
+
+/* ── 이동 경로 툴팁 ── */
+.route-seg-tooltip {
+  background: rgba(26,23,20,0.88) !important;
+  border: 1px solid rgba(184,152,96,0.35) !important;
+  color: var(--paper) !important;
+  font-size: 11.5px !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5) !important;
+}
+.route-seg-tooltip::before { display: none !important; }
+
+/* ── 루트 사이드 패널 ── */
+.route-panel {
+  position: fixed;
+  top: var(--top-nav-height);
+  right: -320px; /* 기본 숨김 */
+  width: 300px;
+  height: calc(100dvh - var(--top-nav-height));
+  background: rgba(20,17,14,0.96);
+  border-left: 1px solid rgba(184,152,96,0.22);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: right 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.route-panel.open {
+  right: 0;
+}
+
+/* routeRenderer.js가 buildRoutePanelHtml()로 주입하는 최상위 래퍼.
+   이 규칙이 없으면 일반 블록 요소로 렌더링되어 내용물만큼 키가
+   늘어나 버리고, 부모 .route-panel의 overflow:hidden에 의해 목록
+   아래쪽이 그냥 잘려 보이는 문제가 있었다(웨이포인트가 많은 루트일수록
+   심함). flex 컨테이너로 만들어 .route-panel-list가 남는 높이를
+   차지하고 그 안에서만 스크롤되도록 한다. */
+.route-panel-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0; /* flex 자식의 overflow가 제대로 동작하려면 필요 */
+}
+
+/* 패널 헤더 */
+.route-panel-hero {
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid rgba(184,152,96,0.18);
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center 20%;
+}
+.route-panel-hint {
+  font-size: 10.5px;
+  color: var(--gold);
+  margin-top: 8px;
+  opacity: 0.85;
+}
+.route-panel-period {
+  display: block;
+  font-size: 10.5px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+.route-panel-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--paper);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.route-panel-tagline {
+  font-size: 11px;
+  color: #9a907e;
+  line-height: 1.55;
+}
+
+/* 웨이포인트 목록 */
+.route-panel-list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  padding: 8px 0;
+}
+.route-panel-wp {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border-left: 2px solid transparent;
+  position: relative;
+}
+.route-panel-wp:hover { background: rgba(184,152,96,0.08); }
+.route-panel-wp.active {
+  background: rgba(184,152,96,0.13);
+  border-left-color: var(--gold);
+}
+.route-panel-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.route-panel-wp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.route-panel-wp-date {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.route-panel-wp-title {
+  font-size: 12.5px;
+  color: var(--paper);
+  font-weight: 600;
+  line-height: 1.35;
+}
+.route-panel-wp-place {
+  font-size: 10.5px;
+  color: #7a7060;
+}
+
+/* 닫기 버튼 */
+.route-panel-close-btn {
+  margin: 12px 14px;
+  padding: 8px 0;
+  background: rgba(184,152,96,0.12);
+  border: 1px solid rgba(184,152,96,0.28);
+  border-radius: 6px;
+  color: var(--gold);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.route-panel-close-btn:hover { background: rgba(184,152,96,0.22); }
+
+/* ── 루트 웨이포인트 팝업 (infoPanel 내부) ── */
+.route-waypoint-popup { padding: 4px 0; }
+.route-wp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.route-wp-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.route-wp-date {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.route-wp-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--paper);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.route-wp-place {
+  font-size: 12px;
+  color: #9a907e;
+  margin-bottom: 6px;
+}
+.route-wp-stay {
+  font-size: 11px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  background: rgba(184,152,96,0.12);
+  border-radius: 4px;
+  display: inline-block;
+}
+.route-wp-summary {
+  font-size: 13px;
+  color: var(--paper);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.route-wp-from {
+  font-size: 11px;
+  color: #7a7060;
+  font-style: italic;
+}
+
+/* ── 모바일 대응 ── */
+@media (max-width: 768px) {
+  .route-panel {
+    width: 100%;
+    right: -100%;
+    top: auto;
+    bottom: 0;
+    height: 55dvh;
+    border-left: none;
+    border-top: 1px solid rgba(184,152,96,0.22);
+    border-radius: 14px 14px 0 0;
+  }
+  .route-panel.open { right: 0; }
+}
+

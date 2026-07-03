@@ -1,16 +1,17 @@
 // ═══════════════════════════════════════════════════════
 // nav.js — 상단 포털 내비게이션 (ATLAS 메뉴 + 시대 선택 허브 + 소개 페이지)
 //
-// 지금 index.html 자체가 "근대(1876~1945)" 지도다. 이 파일은 그 위에
+// 지금 index.html 자체가 "현대(1994~2025)" 지도다. 이 파일은 그 위에
 // 얇은 포털 껍데기를 씌운다:
 //   - 상단 .site-nav: 소개/지도/자료실/루트/프로젝트 5개 메뉴
 //   - "지도" 클릭 → .era-hub(6개 시대 카드)가 열린다
-//       · 근대 카드 클릭 → 허브를 닫고 지금 화면(이 페이지)으로 복귀
-//       · 다른 시대 카드 → 아직 별도 페이지가 없으므로 비활성(.disabled)
+//       · 현대 카드 클릭 → 허브를 닫고 지금 화면(이 페이지)으로 복귀
+//       · 다른 시대 카드 → 근대·근현대는 해당 페이지로 이동, 나머지는
+//         아직 별도 페이지가 없으므로 비활성(.disabled)
 //   - "소개" 클릭 → .intro-page(소개 글)가 열린다. 본문은 index.html에
 //     정적으로 박혀 있다(이 파일은 열기/닫기만 담당).
-//   - "자료실" 클릭 → .archive-hub(카테고리 → 하위주제 → 글 목록 3단계
-//     오버레이)가 열린다. 실제 글은 정적 페이지로 이동해서 읽는다.
+//   - "자료실" 클릭 → 이 지도 전용 자료실 콘텐츠가 아직 없어서, 실제
+//     콘텐츠가 있는 근현대(modern2) 지도의 자료실로 이동한다.
 //   - 나머지 메뉴(프로젝트는 openProjectHub 있으면 그쪽으로) 클릭 →
 //     아직 구현 안 된 것만 "준비 중" 토스트
 //
@@ -24,10 +25,11 @@
   // ── 시대 카드 정의 — 시대가 추가될 때마다 이 배열에 한 항목만 늘리면 된다.
   // ready:false인 항목은 카드가 비활성 처리되고 클릭이 막힌다.
   // url은 ready:true일 때만 사용 — 같은 사이트 내 다른 경로(예: /maps/medieval/)를
-  // 가리키게 될 자리다. 지금은 근대·근현대 두 곳이 ready다. 근현대는
-  // 지금 이 페이지이므로 url:'.'(허브만 닫음), 근대는 상위 디렉토리로
-  // 돌아가는 상대경로다(이 파일이 maps/modern2/js/nav.js 위치이므로
-  // 근대 지도의 index.html은 두 단계 위 '../../'에 있다).
+  // 가리키게 될 자리다. 지금은 근대·근현대·현대 세 곳이 ready다. 현대는
+  // 지금 이 페이지이므로 url:'.'(허브만 닫음), 근현대는 형제 폴더로
+  // 가는 상대경로(이 파일이 maps/contemporary/js/nav.js 위치이므로
+  // '../modern2/index.html'), 근대는 상위 디렉토리로 돌아가는 상대경로
+  // ('../../index.html')다.
   // file:// 환경(로컬 더블클릭)에서는 디렉토리 경로만 주면 브라우저가
   // index.html을 자동으로 찾아주지 않고 폴더 목록을 보여준다 — 그래서
   // 디렉토리를 가리키는 url은 전부 'index.html'까지 명시했다(웹서버에
@@ -38,8 +40,8 @@
     { key:'medieval1',  name:'중세 1',   period:'고려', ready:false, url:null },
     { key:'medieval2',  name:'중세 2',   period:'조선', ready:false, url:null },
     { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'../../index.html' },
-    { key:'modern2',    name:'근현대',   period:'1945–1993', ready:true, url:'.' },
-    { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'../contemporary/index.html' }
+    { key:'modern2',    name:'근현대',   period:'1945–1993', ready:true, url:'../modern2/index.html' },
+    { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'.' }
   ];
 
   const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };
@@ -48,18 +50,11 @@
   // routeId는 routes/*.js가 registerRoute()로 등록하는 route.id와 같아야
   // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
   // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
-  const ROUTE_HUB_ITEMS = [
-    { routeId:'korean_war_battles', name:'한국전쟁 주요 전투', period:'1950–1953', tagline:'인천상륙작전에서 장진호까지', ready:true, thumbnail:null },
-    { routeId:'korean_war_massacres', name:'학살의 기록',      period:'1948–1953', tagline:'제주에서 거창까지, 잊지 말아야 할 이름들', ready:true, thumbnail:null },
-    { routeId:'syngman_rhee', name:'이승만',                   period:'1875–1965', tagline:'독립운동가에서 하와이의 망명객으로', ready:true, thumbnail:null },
-    { routeId:'kim_il_sung', name:'김일성',                    period:'1912–1994', tagline:'항일유격대 대장에서 "수령"으로', ready:true, thumbnail:null },
-    { routeId:'park_chung_hee', name:'박정희',                 period:'1917–1979', tagline:'만주군관학교에서 궁정동까지', ready:true, thumbnail:null },
-    { routeId:'kim_dae_jung', name:'김대중',                   period:'1924–2009', tagline:'하의도에서 노벨평화상까지', ready:true, thumbnail:null },
-    { routeId:'chun_doo_hwan', name:'전두환',                  period:'1931–2021', tagline:'하나회에서 5·18까지', ready:true, thumbnail:null },
-    // historical_revisionism은 루트에서 제거됐다 — 실제 이동 경로가
-    // 아니라 논쟁·사료 중심 콘텐츠라 자료실(Archive)로 옮겼다
-    // (archive/historical_revisionism.js, 아래 자료실 섹션 참고).
-  ];
+  // 아직 이 지도(현대) 전용 루트가 하나도 없다 — 근현대 지도의 루트를
+  // 복사해오지 않았다(다른 시기 인물·사건이라 그대로 가져올 게 없음).
+  // 나중에 이 지도에 맞는 루트(예: 대통령 재직 시절 발자취 등)가 생기면
+  // routes/xxx.js를 만들고 여기 항목을 추가하면 된다.
+  const ROUTE_HUB_ITEMS = [];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
   // archive/*.js가 로드되면 여기에 시리즈 단위로 등록된다. routeRenderer.js
@@ -346,10 +341,11 @@
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
       } else if (key === 'archive') {
-        if (eraHub.classList.contains('open')) window.closeEraHub();
-        if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
-        if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
-        window.openArchiveHub();
+        // 이 지도(현대) 전용 자료실 콘텐츠는 아직 없다 — 근대 지도와
+        // 같은 방식으로, 실제 콘텐츠가 있는 근현대(modern2) 지도로
+        // 안내한다. modern2의 nav.js가 ?nav=archive 쿼리를 보고 로드
+        // 직후 자동으로 자료실 허브를 연다.
+        window.location.href = '../modern2/index.html?nav=archive';
       } else if (key === 'route') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
         if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>ATLAS by MKHZ — 현대 (1994–2025)</title>
+<meta name="description" content="외환위기부터 촛불과 탄핵까지 — 현대 한국사 지도">
+<!-- canonical/og:url은 placeholder다. 이 페이지가 실제로 배포될 하위
+     경로(예: https://atlas.mkhz.kr/maps/contemporary/)가 정해지면 그 값으로
+     바꿔야 한다. 지금은 골격 단계라 정확한 경로를 단정하지 않는다. -->
+<link rel="canonical" href="https://atlas.mkhz.kr/maps/contemporary/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://atlas.mkhz.kr/maps/contemporary/">
+<meta property="og:title" content="ATLAS by MKHZ — 현대 (1994–2025)">
+<meta property="og:description" content="외환위기부터 촛불과 탄핵까지 — 현대 한국사 지도">
+<meta property="og:locale" content="ko_KR">
+<!-- 썸네일: 근대 지도의 og-image.jpg를 그대로 재사용 중. 근현대 전용
+     썸네일이 만들어지면 경로를 교체할 것. -->
+<meta property="og:image" content="https://atlas.mkhz.kr/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta property="og:image:alt" content="ATLAS by MKHZ — 현대 한국사 지도">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATLAS by MKHZ — 현대 (1994–2025)">
+<meta name="twitter:description" content="외환위기부터 촛불과 탄핵까지 — 현대 한국사 지도">
+<meta name="twitter:image" content="https://atlas.mkhz.kr/assets/images/og-image.jpg">
+
+<meta name="theme-color" content="#1a1714">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- ════════════════════════════════════════════════════
+     Google Analytics (GA4) — 측정 ID: G-9C05WN48C4 (ATLAS 속성, 적용 완료).
+     GA4는 기본적으로 IP 주소를 저장하지 않는다(Universal Analytics
+     시절의 anonymize_ip 옵션은 GA4에 불필요 — 이미 기본 정책). ATLAS는
+     SPA(오버레이 기반 화면 전환)라 URL이 바뀌지 않으므로, GA4 기본
+     자동 페이지뷰(send_page_view)는 꺼두고 대신 js/analytics.js의
+     trackPageView()가 화면 전환 시점마다(시대 이동·자료실 이동·루트
+     이동·사건 카드 등) 수동으로 페이지뷰 이벤트를 보낸다 — 그래야
+     리포트에서 실제 화면 흐름이 잡힌다. event_open·search·
+     timeline_move·year_change·filter_change·map_interaction 등
+     커스텀 이벤트 구현도 전부 js/analytics.js 한 파일에서 관리한다.
+     ════════════════════════════════════════════════════ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4', { send_page_view: false });
+</script>
+<script src="js/analytics.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/style.css?v=20260622d" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     상단 포털 내비게이션 (.site-nav)
+     ATLAS 전체 공통 메뉴. "지도"를 누르면 era-hub(시대 선택 허브)가
+     열린다. 다른 메뉴는 아직 페이지가 없어 "준비 중" 안내만 띄운다.
+     nav.js의 initSiteNav()가 클릭 핸들러를 단다.
+     ════════════════════════════════════════════════════ -->
+<div class="site-nav" id="siteNav">
+  <div class="site-nav-brand">ATLAS</div>
+  <div class="site-nav-menu">
+    <button type="button" class="site-nav-item" data-nav="intro">소개</button>
+    <button type="button" class="site-nav-item active" data-nav="map">지도</button>
+    <button type="button" class="site-nav-item" data-nav="archive">자료실</button>
+    <button type="button" class="site-nav-item" data-nav="route">루트</button>
+    <button type="button" class="site-nav-item" data-nav="project">프로젝트</button>
+  </div>
+</div>
+
+<!-- ── 시대 선택 허브 — "지도" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     era hub의 카드 목록은 nav.js의 ERA_HUB_ITEMS에서 관리한다.
+     지금 페이지(index.html) 자체가 "근대" 지도이므로, 근대 카드를
+     누르면 단순히 허브를 닫아 지금 화면으로 돌아간다. 다른 시대는
+     아직 별도 페이지가 없어 클릭이 막혀 있다(.disabled). -->
+<div class="era-hub-scrim" id="eraHubScrim"></div>
+<div class="era-hub" id="eraHub" role="dialog" aria-modal="true" aria-label="시대 선택">
+  <button type="button" class="era-hub-close" id="eraHubClose" aria-label="닫기">×</button>
+  <div class="era-hub-title">시대를 선택하세요</div>
+  <div class="era-hub-sub">선사부터 현대까지, 시대별로 독립된 지도를 탐험합니다.</div>
+  <div class="era-hub-grid" id="eraHubGrid"><!-- nav.js가 채운다 --></div>
+</div>
+
+<!-- ── 루트 선택 허브 — "루트" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     근대(1876~1945) 지도의 routeHub와 완전히 같은 구조를 재사용한다.
+     카드 목록은 nav.js의 ROUTE_HUB_ITEMS에서 관리한다. -->
+<div class="era-hub-scrim" id="routeHubScrim"></div>
+<div class="era-hub" id="routeHub" role="dialog" aria-modal="true" aria-label="루트 선택">
+  <button type="button" class="era-hub-close" id="routeHubClose" aria-label="닫기">×</button>
+  <div class="era-hub-title">루트를 선택하세요</div>
+  <div class="era-hub-sub">전투와 학살, 그 현장을 지도 위에서 따라갑니다.</div>
+  <div class="era-hub-grid" id="routeHubGrid"><!-- nav.js가 채운다 --></div>
+</div>
+
+<!-- ── 자료실 허브 — "자료실" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     era-hub와 같은 틀(scrim/닫기버튼/lockBodyScroll)을 재사용하되,
+     카테고리 → 하위주제 → 글 목록 3단계로 들어간다(뒤로가기 버튼으로
+     이전 단계로 돌아간다). 실제 글 본문은 이 오버레이가 아니라
+     build/generate_archive_pages.py가 만드는 정적 페이지에서 읽는다 —
+     여기서는 "찾아가는 목록"까지만 담당한다. 카드 목록/상태는
+     nav.js의 ARCHIVE_CATEGORIES·ARCHIVE_SUBCATEGORIES·ARCHIVE_REGISTRY
+     에서 관리한다. 장기적으로 역사/문학/철학/예술/건축/종교를 모두
+     아우르는 인문학 라이브러리를 목표로 하며(docs/archive_design.md
+     참고), 지금은 역사(history) > 역사왜곡(revisionism) 하나만
+     실제 콘텐츠가 있다. -->
+<div class="era-hub-scrim" id="archiveHubScrim"></div>
+<div class="era-hub archive-hub" id="archiveHub" role="dialog" aria-modal="true" aria-label="자료실">
+  <button type="button" class="era-hub-close" id="archiveHubClose" aria-label="닫기">×</button>
+  <button type="button" class="archive-hub-back" id="archiveHubBack" hidden>← 뒤로</button>
+  <div class="era-hub-title" id="archiveHubTitle">자료실</div>
+  <div class="era-hub-sub" id="archiveHubSub">역사·문학·철학·예술을 가로지르는 인문학 라이브러리</div>
+  <div class="era-hub-grid" id="archiveHubGrid"><!-- nav.js가 채운다 --></div>
+  <div class="archive-list" id="archiveHubList" hidden><!-- nav.js가 채운다 --></div>
+</div>
+
+<!-- ── 프로젝트 허브 — "프로젝트" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     근대(1876~1945) 지도의 projectHub와 완전히 같은 구조를 재사용한다.
+     유튜브 갤러리는 content/youtube_videos.js(연도·시대 구분 없이 항상
+     동일한 배열)를 그대로 읽으므로, 어느 지도에서 열어도 같은 영상
+     목록이 보인다. -->
+<div class="era-hub-scrim" id="projectHubScrim"></div>
+<div class="era-hub project-hub" id="projectHub" role="dialog" aria-modal="true" aria-label="프로젝트">
+  <button type="button" class="era-hub-close" id="projectHubClose" aria-label="닫기">×</button>
+  <div class="era-hub-title">프로젝트</div>
+  <div class="era-hub-sub">역사와 철학을 영상, 퀴즈, 게임으로 만나보세요</div>
+  <div class="project-tabs" id="projectTabs" role="tablist">
+    <button type="button" class="project-tab active" data-tab="youtube" role="tab" aria-selected="true">유튜브 갤러리</button>
+    <button type="button" class="project-tab" data-tab="quiz" role="tab" aria-selected="false">퀴즈</button>
+    <button type="button" class="project-tab" data-tab="minigame" role="tab" aria-selected="false">미니게임</button>
+    <button type="button" class="project-tab" data-tab="mystery" role="tab" aria-selected="false">추리게임</button>
+  </div>
+  <div class="project-panel" id="projectPanelYoutube" data-panel="youtube" role="tabpanel"><!-- projectHub.js가 채운다 --></div>
+  <div class="project-panel" id="projectPanelQuiz" data-panel="quiz" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMinigame" data-panel="minigame" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMystery" data-panel="mystery" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+</div>
+
+<!-- ── 소개 페이지 — "소개" 메뉴 클릭 시 열리는 풀스크린 오버레이 ──
+     근대 지도(index.html)와 똑같은 본문을 그대로 공유한다. 포털 전체
+     공통 소개글이라, 어느 시대 지도에서 열어도 같은 내용이 보인다. -->
+<div class="era-hub-scrim" id="introScrim"></div>
+<div class="era-hub intro-page" id="introPage" role="dialog" aria-modal="true" aria-label="소개">
+  <button type="button" class="era-hub-close" id="introClose" aria-label="닫기">×</button>
+  <div class="intro-title">기억의 연대기</div>
+  <div class="intro-body">
+    <p>인류가 남긴 흔적은 사건만으로 이루어지지 않습니다. 사람과 공간, 이동과 선택, 기록과 해석이 서로 얽혀 시간을 만듭니다.</p>
+    <p>이 프로젝트는 선사 시대부터 현대까지의 역사를 지도 위에 겹쳐 기록합니다.</p>
+    <p>연도를 움직이면 시대가 변하고, 지점을 열면 사건과 인물, 조직과 경로가 드러납니다.</p>
+    <p>하나의 역사만 제시하지 않습니다. 확인된 사실과 해석, 논쟁과 사료를 함께 남깁니다.</p>
+    <p>역사는 외워지는 것이 아니라 탐험되는 것이라고 믿습니다.</p>
+  </div>
+  <hr class="intro-divider">
+  <div class="intro-howto">
+    <div class="intro-howto-title">탐색 방법</div>
+    <ul>
+      <li>슬라이더로 연도 이동</li>
+      <li>지점 선택 → 사건 열람</li>
+      <li>레이어로 인물·조직·영역 표시</li>
+      <li>루트로 시간의 흐름 따라가기</li>
+    </ul>
+  </div>
+  <hr class="intro-divider">
+  <div class="intro-contact">
+    자료 제안 · 협업 · 오류 수정
+    <a href="mailto:mkhzstudio@gmail.com">mkhzstudio@gmail.com</a>
+  </div>
+</div>
+
+<div id="map"></div>
+<div class="occupation-vignette" id="vignette"></div>
+
+<!-- ── 정보창 (infoPanel) ──
+     사건/인물 클릭 시 여기에 내용이 채워진다. Leaflet 기본 팝업 대신 사용한다.
+     모바일(<1024px): 화면 하단 Bottom Sheet. 위/아래 드래그로 35%↔확장↔닫기.
+     데스크탑(>=1024px): 우측 Side Panel. 드래그 없이 스크롤만, 지도는 계속 조작 가능.
+     상태는 body의 클래스(info-open / info-expanded)와 패널의 data-state로 관리한다. -->
+<div class="info-panel" id="infoPanel" role="dialog" aria-modal="false" aria-label="사건 정보" aria-hidden="true">
+  <div class="info-grabber" id="infoGrabber"><span class="info-grabber-bar"></span></div>
+  <button type="button" class="info-close" id="infoClose" aria-label="정보창 닫기">×</button>
+  <div class="info-scroll" id="infoScroll"><!-- renderer.js의 openInfoPanel()이 채운다 --></div>
+</div>
+<div class="info-scrim" id="infoScrim" hidden></div>
+
+<div class="header">
+  <div class="title">현대</div>
+  <div class="subtitle">CONTEMPORARY KOREA · 1994–2025</div>
+</div>
+
+<div class="year-display">
+  <div class="year-number" id="yearNum">1994</div>
+  <div class="year-label"><span id="ganji">庚申年</span> &nbsp;·&nbsp; <span id="eventCount" style="color:rgba(232,224,208,0.6);">0 사건</span></div>
+  <div><span class="occupation-tag liberated" id="occTag">해방</span> <span class="phase-tag" id="phaseTag" title=""></span></div>
+  <div class="era-subtitle" id="eraSubtitle">
+    <div class="era-text" id="eraText">해방, 그리고 분단의 시작</div>
+    <span class="era-info-btn" id="eraBtn">ⓘ</span>
+  </div>
+</div>
+<div class="era-card" id="eraCard">
+  <button type="button" class="era-close" id="eraCloseBtn" aria-label="시대 개요 닫기">×</button>
+  <p id="eraDesc">봉오동과 청산리의 승리로 독립전쟁은 정점에 도달했다. 그러나 그 빛나는 승리 뒤로 간도참변이라는 보복의 불길이 번졌다. 같은 해, 만주와 연해주에서 학살과 저항이 동시에 일어났다.</p>
+  <button type="button" class="era-start-btn" id="eraStartBtn">탐험 시작 →</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     [제거됨] 소개(시작) 팝업 + 하단 고정 푸터 + 이메일 팝업
+     소개 텍스트와 이메일 주소는 상단 메뉴 "소개" 페이지로 옮겼다.
+     ════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════════════════════
+     우측 상단 스택 — 검색 / 범례 / 레이어를 한 flex 컨테이너에 세로로
+     묶었다. 검색창이 펼쳐져 높이가 늘어나면 그 아래 범례·레이어가
+     flex 흐름에 따라 자동으로 밀려나므로, 별도 좌표 계산 없이도
+     "겹침 금지" 요건이 구조적으로 지켜진다.
+     데스크톱: 검색은 기본 접힘(🔍 검색 버튼만) → 클릭 시 펼침.
+     모바일(@media max-width:480px): css/style.css에서 .right-stack을
+     display:contents로 해제하고, 검색만 상단 전체폭 고정으로,
+     범례·레이어는 각자 원래 자리(우측 상단/하단)로 되돌린다 — 지시서가
+     "모바일은 현재 구조 유지 가능"이라고 명시했기 때문.
+     ════════════════════════════════════════════════════ -->
+<div class="right-stack">
+
+  <div class="search-widget" id="searchWidget">
+    <button type="button" id="searchToggleBtn" class="search-toggle-btn" aria-label="검색 열기">🔍 검색</button>
+    <div class="search-expand" id="searchExpand">
+      <div class="search-input-row">
+        <input type="text" id="searchInput" class="search-input"
+               placeholder="김구, 3·1운동" aria-label="인물 또는 사건 검색">
+        <button type="button" id="searchRunBtn" class="search-icon-btn" aria-label="검색 실행">🔍</button>
+        <button type="button" id="searchClearBtn" class="search-x-btn" aria-label="검색 해제" style="display:none;">×</button>
+      </div>
+      <div class="search-status" id="searchStatus"></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-title">범례</div>
+    <div id="legendItems"><!-- js/markerIcons.js의 renderLegend()가 채운다 (MARKER_SVG·COLORS·TYPE_LABEL 기준 — 항상 실제 마커와 동일하게 유지) --></div>
+  </div>
+
+  <div class="layer-toggle">
+    <div class="toggle-title">레이어</div>
+    <label class="toggle-item"><input type="checkbox" id="layerEvent" checked> 사건</label>
+    <label class="toggle-item"><input type="checkbox" id="layerPerson"> 인물</label>
+    <label class="toggle-item"><input type="checkbox" id="layerPolicy" checked> 배경·정책</label>
+    <div class="toggle-sep mobile-only"></div>
+    <label class="toggle-item mobile-only"><input type="checkbox" id="autoHideControls" checked> 정보창 열 때 자동 숨김</label>
+  </div>
+
+</div>
+
+<div class="timeline">
+  <div class="slider-labels">
+    <span style="left:calc((100% - 24px) * 0.0000 + 12px);">1994</span>
+    <span style="left:calc((100% - 24px) * 0.0968 + 12px);">1997</span>
+    <span style="left:calc((100% - 24px) * 0.3226 + 12px);">2004</span>
+    <span style="left:calc((100% - 24px) * 0.4516 + 12px);">2008</span>
+    <span style="left:calc((100% - 24px) * 0.7419 + 12px);">2017</span>
+    <span style="left:calc((100% - 24px) * 0.9032 + 12px);">2022</span>
+    <span style="left:calc((100% - 24px) * 1.0000 + 12px);">2025</span>
+  </div>
+  <!-- value는 js/app.js의 INITIAL_YEAR, 위 #yearNum의 정적 텍스트와 항상
+       같은 연도여야 한다 — 셋 중 하나만 바꾸면 "슬라이더는 맞는데 좌상단
+       큰 숫자만 다르게 보이는" 버그가 재발한다. -->
+  <input type="range" id="slider" min="1994" max="2025" value="1994" step="1">
+  <div class="hint">슬라이더로 연도 이동 · 두 손가락으로 확대 · 점을 누르면 사건이 열립니다</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     스크립트 로드 순서 — 반드시 이 순서를 지킬 것
+     1) Leaflet 라이브러리 (외부 CDN)
+     2) data/*.js — 32개 연도 데이터 (EVENTS_1994 ~ EVENTS_2025 전역 선언)
+     3) app.js — 상수 정의 + DATA 객체 조립 + 앱 진입점(window.onload)
+     4) map.js — Leaflet 지도 인스턴스 생성 (이후 모든 모듈이 `map` 참조)
+     5) validator.js — 데이터 조회/검증 함수 (renderer.js가 사용)
+     6) renderer.js — 마커/연결선 렌더링 (timeline.js가 safeRender 호출)
+     7) search.js — 검색 기능 (renderer.js의 popupHtml/clearLayers,
+        map.js의 resetToInitialView 참조). timeline.js/ui.js보다 먼저
+        로드해야 isSearchActive()가 그 두 파일의 가드 코드에서 참조 가능.
+     8) timeline.js — ERA 데이터 + 슬라이더 이벤트
+     9) ui.js — 레이어 토글 + 시대 카드 (가장 마지막, DOM 요소 전부 필요)
+     ════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="data/1994.js"></script>
+<script src="data/1995.js"></script>
+<script src="data/1996.js"></script>
+<script src="data/1997.js"></script>
+<script src="data/1998.js"></script>
+<script src="data/1999.js"></script>
+<script src="data/2000.js"></script>
+<script src="data/2001.js"></script>
+<script src="data/2002.js"></script>
+<script src="data/2003.js"></script>
+<script src="data/2004.js"></script>
+<script src="data/2005.js"></script>
+<script src="data/2006.js"></script>
+<script src="data/2007.js"></script>
+<script src="data/2008.js"></script>
+<script src="data/2009.js"></script>
+<script src="data/2010.js"></script>
+<script src="data/2011.js"></script>
+<script src="data/2012.js"></script>
+<script src="data/2013.js"></script>
+<script src="data/2014.js"></script>
+<script src="data/2015.js"></script>
+<script src="data/2016.js"></script>
+<script src="data/2017.js"></script>
+<script src="data/2018.js"></script>
+<script src="data/2019.js"></script>
+<script src="data/2020.js"></script>
+<script src="data/2021.js"></script>
+<script src="data/2022.js"></script>
+<script src="data/2023.js"></script>
+<script src="data/2024.js"></script>
+<script src="data/2025.js"></script>
+
+<!-- ── 세계의 흐름 (World Context Layer) — 근대 지도와 같은 패턴.
+     미·중·소·일 중심 17건의 세계사 사건과, 245건 한국 카드 중
+     관련성이 뚜렷한 53건에 대한 연결을 담고 있다. renderer.js는
+     WORLD_EVENTS/WORLD_CONTEXT가 undefined일 때도 안전하게 건너뛰도록
+     가드돼 있다. -->
+<script src="data/world_events.js"></script>
+<script src="data/world_context.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/map.js"></script>
+
+<!-- ════════════════════════════════════════════════════
+     역사 지명 레이어(historicalLabels.js)는 places/places_min.js에
+     의존하지만, 그 파일이 없어도 PLACES_MIN이 undefined로 안전하게
+     처리되도록 가드돼 있다(빈 배열로 취급). 근현대 지도에서 동해/독도
+     표기가 필요해지면 이 자리에 places_min.js를 추가할 것.
+     ════════════════════════════════════════════════════ -->
+<script src="js/historicalLabels.js"></script>
+
+<script src="js/validator.js"></script>
+<script src="js/markerIcons.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/infoPanel.js"></script>
+<script src="js/search.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/ui.js?v=20260627a"></script>
+<!-- content/youtube_videos.js는 프로젝트 전체(근대+근현대)가 공유하는
+     단일 원본이다 — 지도마다 따로 복사해두면 나중에 한쪽만 갱신해
+     어긋나는 문제가 생기므로, 상위 폴더의 파일을 상대경로로 그대로
+     참조한다. -->
+<script src="../../content/youtube_videos.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/routeRenderer.js"></script>
+<script src="js/projectHub.js"></script>
+<!-- 아직 이 지도 전용 루트(routes/*.js)나 자료실 시리즈가 없다 —
+     nav.js의 ROUTE_HUB_ITEMS는 지금 빈 배열이라 "루트" 메뉴를 눌러도
+     빈 화면만 뜬다(에러 아님). 루트가 생기면 routes/xxx.js 파일을
+     만들고 여기 <script> 태그 한 줄만 추가하면 된다(다른 지도와 동일
+     패턴). 자료실은 이 지도 전용을 만들지 않고, "자료실" 메뉴를 누르면
+     콘텐츠가 있는 근현대(modern2) 지도의 자료실로 이동한다(nav.js 참고).
+     -->
+
+</body>
+</html>
