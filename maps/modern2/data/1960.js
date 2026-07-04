@@ -5,8 +5,22 @@
 
 const EVENTS_1960 = [
 
+  { id:'movement_1960_01', year:1960, visible_from:1960, visible_until:1960,
+    month:2, day:28, type:'movement', priority:1,
+    title_ko:'2·28 대구 학생의거 — 4·19의 도화선',
+    title_en:'The February 28 Daegu Student Uprising',
+    title_ja:'2·28大邱学生義挙',
+    place_ko:'대구',
+    lat:35.8722, lng:128.5992,
+    people:['이대우'],
+    summary_ko:'3·15 대선을 앞두고 대구 지역 자유당은 야당 부통령 후보 장면의 선거 유세에 고등학생들이 참석하지 못하도록, 경북고·대구고 등 시내 8개 고교에 일요일(2월 28일) 등교를 지시했다 — 학기말고사, 토끼 사냥, 영화 관람 등 궁색한 사유였다. 경북고 학생부위원장 이대우 등이 이를 간파하고 "학원을 정치도구화 하지 말라"며 800여 명의 학생을 이끌고 시내로 나섰고, 대구고·경북여고 학생 등 1,200여 명이 가세해 경북도청 앞까지 행진했다. 광주학생항일운동 이후 최초의 조직적 고교생 시위였던 이 사건은 3·15 마산의거를 거쳐 4·19혁명으로 이어지는 첫 불씨가 됐다 — 당시 대구는 이승만·자유당의 대표적 약세 지역으로, 지금과는 정반대로 남한에서 가장 진보적인 도시로 꼽혔다.',
+    video:null,
+    connections:['plot_1960_01'],
+    tags:['movement','대구','2.28','학생운동','민주화'],
+    sources:['위키백과 2·28 대구 학생의거','나무위키 2.28 학생민주의거'] },
+
   { id:'plot_1960_01', year:1960, visible_from:1960, visible_until:1960,
-    month:2, day:15, type:'plot', priority:1, area:true, areaRadius:200000,
+    month:3, day:15, type:'plot', priority:1, area:true, areaRadius:200000,
     title_ko:'3·15 부정선거',
     title_en:'The March 15th Rigged Election',
     title_ja:'三・一五不正選挙',

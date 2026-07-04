@@ -163,10 +163,10 @@
   ];
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesId: 'historical_revisionism' },
-      { subcat: 'era_study', name: '시대연구', seriesId: 'power_accountability' },
-      { subcat: 'people_study', name: '인물연구', seriesId: null },
-      { subcat: 'primary_sources', name: '사료읽기', seriesId: null },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
+      { subcat: 'people_study', name: '인물연구', seriesIds: [] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: [] },
     ],
   };
   const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동' };
@@ -187,7 +187,7 @@
     const archiveHubSub = document.getElementById('archiveHubSub');
     if (!archiveHub) return;
 
-    let state = { level: 'category', categoryKey: null, seriesId: null };
+    let state = { level: 'category', categoryKey: null, subcat: null, seriesId: null };
 
     function renderCategoryCard(item) {
       const statusClass = item.ready ? 'ready' : 'soon';
@@ -199,12 +199,25 @@
       </button>`;
     }
     function renderSubcatCard(item) {
-      const ready = !!item.seriesId && !!ARCHIVE_REGISTRY[item.seriesId];
+      const readyCount = (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length;
+      const ready = readyCount > 0;
       const statusClass = ready ? 'ready' : 'soon';
-      const statusText = ready ? '입장 가능' : '준비 중';
+      const statusText = ready ? `${readyCount}개 시리즈` : '준비 중';
       const disabledClass = ready ? '' : ' disabled';
-      return `<button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}" data-series-id="${item.seriesId || ''}">
+      return `<button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}">
         <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+    }
+    function renderSeriesCard(seriesId) {
+      const series = ARCHIVE_REGISTRY[seriesId];
+      const ready = !!series;
+      const statusClass = ready ? 'ready' : 'soon';
+      const statusText = ready ? `${series.posts.length}편` : '준비 중';
+      const disabledClass = ready ? '' : ' disabled';
+      const name = series ? series.name : seriesId;
+      return `<button type="button" class="era-card-item${disabledClass}" data-series-id="${seriesId}">
+        <span class="era-card-name">${name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
     }
@@ -238,6 +251,17 @@
         if (archiveHubSub) archiveHubSub.textContent = '주제를 선택하세요';
         archiveHubGrid.hidden = false; archiveHubList.hidden = true;
         archiveHubGrid.innerHTML = (ARCHIVE_SUBCATEGORIES[state.categoryKey] || []).map(renderSubcatCard).join('');
+      } else if (state.level === 'serieslist') {
+        const subs = ARCHIVE_SUBCATEGORIES[state.categoryKey] || [];
+        const sub = subs.find(s => s.subcat === state.subcat);
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = sub ? sub.name : '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = '시리즈를 선택하세요';
+        archiveHubGrid.hidden = false; archiveHubList.hidden = true;
+        const seriesIds = sub ? (sub.seriesIds || []) : [];
+        archiveHubGrid.innerHTML = seriesIds.length
+          ? seriesIds.map(renderSeriesCard).join('')
+          : '<div class="archive-empty">아직 준비된 시리즈가 없습니다.</div>';
       } else if (state.level === 'postlist') {
         const series = ARCHIVE_REGISTRY[state.seriesId];
         if (archiveHubBack) archiveHubBack.hidden = false;
@@ -251,7 +275,7 @@
     }
 
     window.openArchiveHub = function () {
-      state = { level: 'category', categoryKey: null, seriesId: null };
+      state = { level: 'category', categoryKey: null, subcat: null, seriesId: null };
       render();
       archiveHub.classList.add('open');
       archiveHubScrim?.classList.add('open');
@@ -265,8 +289,9 @@
     archiveHubClose?.addEventListener('click', window.closeArchiveHub);
     archiveHubScrim?.addEventListener('click', window.closeArchiveHub);
     archiveHubBack?.addEventListener('click', () => {
-      if (state.level === 'postlist') state = { level: 'subcategory', categoryKey: state.categoryKey, seriesId: null };
-      else if (state.level === 'subcategory') state = { level: 'category', categoryKey: null, seriesId: null };
+      if (state.level === 'postlist') state = { level: 'serieslist', categoryKey: state.categoryKey, subcat: state.subcat, seriesId: null };
+      else if (state.level === 'serieslist') state = { level: 'subcategory', categoryKey: state.categoryKey, subcat: null, seriesId: null };
+      else if (state.level === 'subcategory') state = { level: 'category', categoryKey: null, subcat: null, seriesId: null };
       render();
     });
     archiveHubGrid?.addEventListener('click', (e) => {
@@ -275,12 +300,19 @@
       if (state.level === 'category') {
         const item = ARCHIVE_CATEGORIES.find(it => it.key === btn.dataset.archiveCategory);
         if (!item || !item.ready) return;
-        state = { level: 'subcategory', categoryKey: item.key, seriesId: null };
+        state = { level: 'subcategory', categoryKey: item.key, subcat: null, seriesId: null };
         render();
       } else if (state.level === 'subcategory') {
+        const subs = ARCHIVE_SUBCATEGORIES[state.categoryKey] || [];
+        const item = subs.find(it => it.subcat === btn.dataset.archiveSubcat);
+        const readyCount = item ? (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length : 0;
+        if (!item || readyCount === 0) return;
+        state = { level: 'serieslist', categoryKey: state.categoryKey, subcat: item.subcat, seriesId: null };
+        render();
+      } else if (state.level === 'serieslist') {
         const seriesId = btn.dataset.seriesId;
         if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return;
-        state = { level: 'postlist', categoryKey: state.categoryKey, seriesId };
+        state = { level: 'postlist', categoryKey: state.categoryKey, subcat: state.subcat, seriesId };
         render();
       }
     });

@@ -88,12 +88,18 @@
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
   // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
+  // 카테고리 안의 하위 주제(subcategory) 카드. seriesIds 배열에 실제로
+  // ARCHIVE_REGISTRY에 등록된 시리즈가 1개 이상 있어야 "입장 가능"으로
+  // 뜬다. 배열이라 여러 시리즈를 한 subcategory 밑에 둘 수 있다 —
+  // subcategory 카드를 누르면 항상 "시리즈 목록" 단계를 거친다(시리즈가
+  // 1개뿐이어도 마찬가지 — subcategory가 시리즈 하나를 그대로
+  // 가리키는 게 아니라 "묶음"이라는 걸 UI로도 분명히 하기 위해서다).
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesId: 'historical_revisionism' },
-      { subcat: 'era_study', name: '시대연구', seriesId: 'power_accountability' },
-      { subcat: 'people_study', name: '인물연구', seriesId: null },
-      { subcat: 'primary_sources', name: '사료읽기', seriesId: null },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
+      { subcat: 'people_study', name: '인물연구', seriesIds: [] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: [] },
     ],
   };
 
@@ -188,8 +194,8 @@
     const archiveHubTitle = document.getElementById('archiveHubTitle');
     const archiveHubSub = document.getElementById('archiveHubSub');
 
-    // level: 'category' | 'subcategory' | 'postlist'
-    let archiveState = { level: 'category', categoryKey: null, seriesId: null };
+    // level: 'category' | 'subcategory' | 'serieslist' | 'postlist'
+    let archiveState = { level: 'category', categoryKey: null, subcat: null, seriesId: null };
 
     function renderArchiveLevel(){
       if (!archiveHubGrid || !archiveHubList) return;
@@ -212,6 +218,19 @@
         const subs = ARCHIVE_SUBCATEGORIES[archiveState.categoryKey] || [];
         archiveHubGrid.innerHTML = subs.map(renderArchiveSubcatCard).join('');
 
+      } else if (archiveState.level === 'serieslist') {
+        const subs = ARCHIVE_SUBCATEGORIES[archiveState.categoryKey] || [];
+        const sub = subs.find(s => s.subcat === archiveState.subcat);
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = sub ? sub.name : '자료실';
+        if (archiveHubSub) archiveHubSub.textContent = '시리즈를 선택하세요';
+        archiveHubGrid.hidden = false;
+        archiveHubList.hidden = true;
+        const seriesIds = sub ? (sub.seriesIds || []) : [];
+        archiveHubGrid.innerHTML = seriesIds.length
+          ? seriesIds.map(renderArchiveSeriesCard).join('')
+          : '<div class="archive-empty">아직 준비된 시리즈가 없습니다.</div>';
+
       } else if (archiveState.level === 'postlist') {
         const series = ARCHIVE_REGISTRY[archiveState.seriesId];
         if (archiveHubBack) archiveHubBack.hidden = false;
@@ -227,7 +246,7 @@
 
     window.openArchiveHub = function(){
       if (!archiveHub) return;
-      archiveState = { level: 'category', categoryKey: null, seriesId: null };
+      archiveState = { level: 'category', categoryKey: null, subcat: null, seriesId: null };
       renderArchiveLevel();
       archiveHub.classList.add('open');
       archiveHub.setAttribute('aria-hidden', 'false');
@@ -248,9 +267,11 @@
 
     archiveHubBack?.addEventListener('click', () => {
       if (archiveState.level === 'postlist') {
-        archiveState = { level: 'subcategory', categoryKey: archiveState.categoryKey, seriesId: null };
+        archiveState = { level: 'serieslist', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId: null };
+      } else if (archiveState.level === 'serieslist') {
+        archiveState = { level: 'subcategory', categoryKey: archiveState.categoryKey, subcat: null, seriesId: null };
       } else if (archiveState.level === 'subcategory') {
-        archiveState = { level: 'category', categoryKey: null, seriesId: null };
+        archiveState = { level: 'category', categoryKey: null, subcat: null, seriesId: null };
       }
       renderArchiveLevel();
     });
@@ -263,13 +284,21 @@
       if (archiveState.level === 'category') {
         const item = ARCHIVE_CATEGORIES.find(it => it.key === btn.dataset.archiveCategory);
         if (!item || !item.ready) return;
-        archiveState = { level: 'subcategory', categoryKey: item.key, seriesId: null };
+        archiveState = { level: 'subcategory', categoryKey: item.key, subcat: null, seriesId: null };
         renderArchiveLevel();
 
       } else if (archiveState.level === 'subcategory') {
+        const subs = ARCHIVE_SUBCATEGORIES[archiveState.categoryKey] || [];
+        const item = subs.find(it => it.subcat === btn.dataset.archiveSubcat);
+        const readyCount = item ? (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length : 0;
+        if (!item || readyCount === 0) return; // 콘텐츠 없는 "준비 중" 카드
+        archiveState = { level: 'serieslist', categoryKey: archiveState.categoryKey, subcat: item.subcat, seriesId: null };
+        renderArchiveLevel();
+
+      } else if (archiveState.level === 'serieslist') {
         const seriesId = btn.dataset.seriesId;
         if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return; // 콘텐츠 없는 "준비 중" 카드
-        archiveState = { level: 'postlist', categoryKey: archiveState.categoryKey, seriesId };
+        archiveState = { level: 'postlist', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId };
         if (window.trackPageView) window.trackPageView('archive', seriesId);
         renderArchiveLevel();
       }
@@ -410,13 +439,28 @@
   }
 
   function renderArchiveSubcatCard(item){
-    const ready = !!item.seriesId && !!ARCHIVE_REGISTRY[item.seriesId];
+    const readyCount = (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length;
+    const ready = readyCount > 0;
     const statusClass = ready ? 'ready' : 'soon';
-    const statusText = ready ? '입장 가능' : '준비 중';
+    const statusText = ready ? `${readyCount}개 시리즈` : '준비 중';
     const disabledClass = ready ? '' : ' disabled';
     return `
-      <button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}" data-series-id="${item.seriesId || ''}">
+      <button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}">
         <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderArchiveSeriesCard(seriesId){
+    const series = ARCHIVE_REGISTRY[seriesId];
+    const ready = !!series;
+    const statusClass = ready ? 'ready' : 'soon';
+    const statusText = ready ? `${series.posts.length}편` : '준비 중';
+    const disabledClass = ready ? '' : ' disabled';
+    const name = series ? series.name : seriesId;
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-series-id="${seriesId}">
+        <span class="era-card-name">${name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
   }
