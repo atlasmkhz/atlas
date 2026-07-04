@@ -81,6 +81,22 @@ const EVENTS_2002 = [
     video:null,
     connections:[],
     tags:['economic','대한민국','신용카드','가계부채'],
-    sources:['한국민족문화대백과사전 카드대란','위키백과 카드 대란'] }
+    sources:['한국민족문화대백과사전 카드대란','위키백과 카드 대란'] },
+
+  { id:'economic_2002_02', year:2002, visible_from:1999, visible_until:2002,
+    month:null, day:null, type:'economic', priority:2,
+    title_ko:'서정진, 셀트리온 설립 — 바이오시밀러 신화의 시작',
+    title_en:'Seo Jung-jin Founds Celltrion',
+    title_ja:'徐廷珍、セルトリオン設立',
+    place_ko:'인천(송도)',
+    lat:37.3894, lng:126.6432,
+    people:['서정진'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'대우자동차 임원이었던 서정진은 1999년 대우그룹이 해체되며 직장을 잃었다. 재취업이 여의치 않자 동료들과 함께 창업을 모색했고, 당시로선 국내에 거의 알려지지 않았던 바이오산업에 승부를 걸어 셀트리온의 전신인 넥솔을 세웠다. 2002년 셀트리온을 설립해 회장에 올랐고, 이후 항체 바이오시밀러(복제 바이오의약품) 개발에 집중해 2009년 싱가포르 정부와 JP모건으로부터 대규모 투자를 유치하며 성장 발판을 마련했다. 대기업 중심의 한국 제약·바이오 산업에서 벤처로 출발해 세계적 바이오시밀러 기업으로 성장한 사례로 꼽힌다.',
+    video:null,
+    connections:[],
+    tags:['economic','인천','서정진','셀트리온','바이오시밀러'],
+    sources:['나무위키 서정진','위키백과 서정진'] }
 
 ];

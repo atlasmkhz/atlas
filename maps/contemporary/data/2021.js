@@ -81,6 +81,22 @@ const EVENTS_2021 = [
     video:null,
     connections:[],
     tags:['diplomacy','도쿄','올림픽','한일관계'],
-    sources:['한국민족문화대백과사전 도쿄올림픽','위키백과 2020년 하계 올림픽'] }
+    sources:['한국민족문화대백과사전 도쿄올림픽','위키백과 2020년 하계 올림픽'] },
+
+  { id:'economic_2021_01', year:2021, visible_from:2021, visible_until:2021,
+    month:3, day:11, type:'economic', priority:2,
+    title_ko:'쿠팡, 뉴욕증권거래소 상장',
+    title_en:'Coupang Lists on the New York Stock Exchange',
+    title_ja:'クーパン、ニューヨーク証券取引所に上場',
+    place_ko:'미국 뉴욕',
+    lat:40.7069, lng:-74.0113,
+    people:['김범석'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'쿠팡은 3월 11일 34억 달러를 조달하며 뉴욕증권거래소에 상장했다. 첫날 공모가 35달러에서 41% 오른 49.25달러로 장을 마감해 종가 기준 시가총액 95조 원을 기록했는데, 이는 코스피 상장사 기준으로도 최상위권에 해당하는 규모였다. 한국 기업이 국내 증시가 아닌 미국 증시를 택한 배경에는, 창업자 김범석 의장 등 경영진의 형사처벌 위험과 국내 규제 리스크를 증권신고서에서 스스로 명시할 정도로 한국 시장의 특수성에 대한 우려가 있었다. 상장 이후 주가는 급락과 반등을 반복했지만, 쿠팡은 빠른배송(로켓배송)을 앞세워 2022년 거래액 기준 국내 이커머스 시장 1위에 올랐다.',
+    video:null,
+    connections:[],
+    tags:['economic','뉴욕','쿠팡','상장','이커머스'],
+    sources:['나무위키 "쿠팡/역사"'] }
 
 ];

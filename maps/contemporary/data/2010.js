@@ -97,6 +97,22 @@ const EVENTS_2010 = [
     video:null,
     connections:[],
     tags:['organization','온라인혐오','지역혐오','역사왜곡'],
-    sources:['위키백과 일베저장소','나무위키 일베저장소'] }
+    sources:['위키백과 일베저장소','나무위키 일베저장소'] },
+
+  { id:'organization_2010_02', year:2010, visible_from:2010, visible_until:2010,
+    month:3, day:18, type:'organization', priority:2,
+    title_ko:'카카오톡 출시 — 김범수의 두 번째 벤처 신화',
+    title_en:'KakaoTalk Launches — Kim Beom-soo\\u2019s Second Venture',
+    title_ja:'カカオトーク発売 — 金範洙、二度目のベンチャー神話',
+    place_ko:'서울',
+    lat:37.5665, lng:126.9780,
+    people:['김범수'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'한게임을 창업해 NHN(네이버 전신)을 함께 일궜던 김범수는 2007년 회사를 떠나 미국에서 3년을 보낸 뒤, 아이폰의 등장을 보고 모바일 시대가 열릴 것이라 확신해 귀국했다. 2006년 세운 스타트업 아이위랩을 통해 3월 18일 모바일 메신저 카카오톡을 아이폰 앱스토어에 출시했고, 출시 하루 만에 앱스토어 1위에 오르며 3만 명이 가입했다. 6개월 만에 가입자 100만 명을 넘어서자 9월 회사 이름을 카카오로 바꿨고, 이후 2014년 다음커뮤니케이션과 합병하며 네이버와 함께 한국 IT 양대 산맥으로 자리잡았다.',
+    video:null,
+    connections:['organization_1999_01'],
+    tags:['organization','서울','김범수','카카오','카카오톡'],
+    sources:['위키백과 카카오 (2006~2014년 기업)','디지털데일리 "벤처 신화 주역, 카카오 창업자 김범수는 누구"'] }
 
 ];

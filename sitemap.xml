@@ -2,8 +2,8 @@
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 430개 + 루트 7개 + 
-  근현대(1945~1993) 진입점 1개 + Event 407개 + 루트 8개 + 
-  현대(1994~2025) 진입점 1개 + Event 177개(루트 없음)를 포함한다.
+  근현대(1945~1993) 진입점 1개 + Event 410개 + 루트 8개 + 
+  현대(1994~2025) 진입점 1개 + Event 189개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
   generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를
@@ -2971,6 +2971,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1968-park-tae-joon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1968-phong-nhi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3372,6 +3377,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1979-yh-trading-company</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1980-choi-jong-hyon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3832,6 +3842,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1993-kim-young-sam</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1993-lee-kun-hee</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -4431,6 +4446,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/1999-lee-hae-jin</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/1999-sea-land-youth</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4502,6 +4522,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2002-second-battle-yeonpyeong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2002-seo-jung-jin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -4721,6 +4746,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2010-kakaotalk-launches-kim</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2010-prelude-savings-bank</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4777,6 +4807,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2012-president-lee-myung</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2012-sk-acquires-hynix</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -4842,6 +4877,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2015-mers-outbreak</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2015-samsung-c-t</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -4981,6 +5021,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-death-lee-kun</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-death-seoul-mayor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5002,6 +5047,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2021-2020-tokyo-olympics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2021-coupang-lists-new</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5051,6 +5101,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2022-lee-jae-yong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-2023-world-scout</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5072,6 +5127,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-fukushima-treated-water</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-hanwha-acquires-daewoo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5106,7 +5166,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-kakao-founder-kim</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-medical-school-admission</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-tmon-wemakeprice-settlement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5127,6 +5197,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2025-kim-keon-hee</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2025-lee-jae-yong</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

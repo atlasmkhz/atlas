@@ -81,6 +81,22 @@ const EVENTS_1999 = [
     video:null,
     connections:[],
     tags:['diplomacy','동티모르','PKO','파병'],
-    sources:['한국민족문화대백과사전 상록수부대','위키백과 상록수부대'] }
+    sources:['한국민족문화대백과사전 상록수부대','위키백과 상록수부대'] },
+
+  { id:'organization_1999_01', year:1999, visible_from:1999, visible_until:1999,
+    month:null, day:null, type:'organization', priority:2,
+    title_ko:'이해진, 네이버컴 창업',
+    title_en:'Lee Hae-jin Founds Naver',
+    title_ja:'李海珍、ネイバー創業',
+    place_ko:'서울',
+    lat:37.5010, lng:127.0374,
+    people:['이해진'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'삼성SDS 사내벤처로 검색 서비스를 개발하던 이해진은 1999년 독립해 네이버컴을 창업했다. 같은 삼성SDS 입사 동기였던 김범수가 그해 앞서 세운 게임포털 한게임과, 2000년 네이버컴이 합병하며 NHN이 출범했고, 이 회사는 이후 한국 인터넷 검색·포털 시장을 주도하는 네이버로 성장했다. 은둔형 경영자로 알려진 이해진은 2017년 공정거래위원회에 네이버를 "총수 없는 대기업"으로 지정해달라고 요청했으나, 공정위는 그를 실질적 총수로 판단해 지정을 강행했다. 벤처 1세대의 성공 신화로 꼽히는 그의 창업은, 이후 한국 IT 산업이 수입 포털 중심에서 자국 플랫폼 중심으로 재편되는 출발점이 됐다.',
+    video:null,
+    connections:['organization_2010_02'],
+    tags:['organization','서울','이해진','네이버','벤처'],
+    sources:['나무위키 이해진','비즈니스포스트 "김범수 카카오 이사회 의장"'] }
 
 ];

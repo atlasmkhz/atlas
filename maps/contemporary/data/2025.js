@@ -102,6 +102,22 @@ const EVENTS_2025 = [
     video:null,
     connections:['organization_2005_01','culture_2019_01'],
     tags:['organization','서울','뉴라이트','역사왜곡','늘봄학교','여론조작','아동교육'],
-    sources:['나무위키 리박스쿨 여론조작 사건','경향신문 리박스쿨 압수수색','경향신문 리박스쿨 수사 정리'] }
+    sources:['나무위키 리박스쿨 여론조작 사건','경향신문 리박스쿨 압수수색','경향신문 리박스쿨 수사 정리'] },
+
+  { id:'economic_2025_01', year:2025, visible_from:2015, visible_until:2025,
+    month:7, day:17, type:'economic', priority:1,
+    title_ko:'이재용, 삼성물산 합병·삼바 회계부정 의혹 대법원 최종 무죄',
+    title_en:'Lee Jae-yong Cleared by Supreme Court in Final Ruling',
+    title_ja:'李在鎔、合併・会計不正疑惑で最終無罪確定',
+    place_ko:'서울',
+    lat:37.5665, lng:126.9780,
+    people:['이재용'],
+    party:null,
+    allegation_status:'acquitted',
+    summary_ko:'2015년 삼성물산-제일모직 부당 합병과 삼성바이오로직스 회계 부정 의혹으로 자본시장법 위반·업무상 배임 등의 혐의를 받아온 이재용 삼성전자 회장에 대해, 대법원이 7월 17일 검찰의 상고를 기각하고 19개 혐의 전부에 대해 무죄를 확정했다. 2015년 합병 가결 이후 10년, 국정농단 사건으로 구속됐던 2017년 이후 8년 만에 사법 리스크가 최종적으로 해소된 것이다. 검찰은 이재용의 경영권 승계를 위해 그룹 차원에서 합병과 회계처리에 부당하게 관여했다고 주장했지만, 법원은 이를 인정하지 않았다. 이 판결로 이재용은 등기이사 복귀를 포함한 경영 활동에 남아 있던 법적 제약에서 벗어나게 됐다.',
+    video:null,
+    connections:['economic_2015_01','economic_2022_02'],
+    tags:['economic','서울','이재용','삼성물산','대법원','무죄확정'],
+    sources:['위키백과 이재용'] }
 
 ];

@@ -99,6 +99,22 @@ const EVENTS_2015 = [
     video:null,
     connections:['movement_2016_02','organization_2016_01'],
     tags:['organization','온라인','젠더갈등','미러링'],
-    sources:['나무위키 메갈리아','페미위키 메갈리아'] }
+    sources:['나무위키 메갈리아','페미위키 메갈리아'] },
+
+  { id:'economic_2015_01', year:2015, visible_from:2015, visible_until:2015,
+    month:7, day:17, type:'economic', priority:1,
+    title_ko:'삼성물산-제일모직 합병 가결 — 이재용 승계 리스크의 시작',
+    title_en:'Samsung C&T–Cheil Industries Merger Approved',
+    title_ja:'サムスン物産・第一毛織合併決議',
+    place_ko:'서울',
+    lat:37.5665, lng:126.9780,
+    people:['이재용'],
+    party:null,
+    allegation_status:'alleged',
+    summary_ko:'삼성그룹은 5월 제일모직과 삼성물산의 합병을 결의했고, 미국계 헤지펀드 엘리엇매니지먼트는 이 합병이 이재용 부회장에게 유리한 합병비율(1대 0.35)로 삼성물산 소액주주에게 손해를 끼친다며 강하게 반대했다. 세계 최대 의결권 자문사 ISS도 삼성물산 주식이 저평가됐다며 반대 의견을 냈지만, 7월 17일 열린 양사 주주총회에서 제일모직은 만장일치로, 삼성물산은 69.3%의 찬성률로 합병안을 통과시켰다. 이후 검찰 수사에서 국민연금 기금운용본부가 합병에 찬성하는 과정에 부적절한 개입이 있었다는 의혹이 제기됐고, 이는 박근혜·최순실 국정농단 사건과 맞물려 이재용의 경영권 승계를 위한 부정 합병이라는 혐의로 이어졌다. 이 사건은 이후 10년 가까이 이재용의 사법 리스크를 규정하는 출발점이 됐다.',
+    video:null,
+    connections:['economic_2020_01'],
+    tags:['economic','서울','이재용','삼성물산','제일모직','국민연금'],
+    sources:['위키백과 "삼성물산과 제일모직의 합병"','나무위키 "삼성물산/제일모직 합병"','월간 CEO& "다시 들여다보는 삼성물산 합병 과정"'] }
 
 ];

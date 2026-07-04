@@ -81,6 +81,22 @@ const EVENTS_2022 = [
     video:null,
     connections:[],
     tags:['economic','경기','판교','카카오','서비스장애'],
-    sources:['한국민족문화대백과사전 카카오 먹통 사태','위키백과 2022년 카카오 서비스 장애'] }
+    sources:['한국민족문화대백과사전 카카오 먹통 사태','위키백과 2022년 카카오 서비스 장애'] },
+
+  { id:'economic_2022_02', year:2022, visible_from:2022, visible_until:2022,
+    month:10, day:27, type:'economic', priority:2,
+    title_ko:'이재용, 삼성전자 회장 취임',
+    title_en:'Lee Jae-yong Named Samsung Electronics Chairman',
+    title_ja:'李在鎔、サムスン電子会長に就任',
+    place_ko:'서울',
+    lat:37.5054, lng:127.0249,
+    people:['이재용'],
+    party:null,
+    allegation_status:'alleged',
+    summary_ko:'삼성전자는 10월 27일 이사회를 열어 이재용 부회장의 회장 승진을 의결했다. 삼성전자는 글로벌 경영 환경 악화 속에 책임 경영 강화와 신속한 의사결정이 필요하다고 승진 이유를 밝혔으며, 별도의 취임식이나 취임사 없이 조용히 직함이 바뀌었다. 1991년 삼성전자에 입사한 지 31년, 2012년 부회장 승진 이후 10년 만이자 아버지 이건희 별세 2년 만의 취임이었다. 다만 삼성물산 합병·삼성바이오로직스 회계부정 의혹 재판이 남아 있어, 이재용은 취임 이후에도 한동안 등기이사로 복귀하지 못한 채 총수 자리에 올랐다.',
+    video:null,
+    connections:['economic_2020_01','economic_2015_01'],
+    tags:['economic','서울','이재용','삼성전자','회장취임'],
+    sources:['삼성전자 뉴스룸 "이재용 삼성전자 회장 취임"','머니투데이 "91년 공채 32기 이재용 회장"','비즈니스포스트 "이재용 삼성전자 회장"'] }
 
 ];
