@@ -27,7 +27,9 @@ OUT_DIR = os.path.join(PROJECT_ROOT, 'event')
 TYPE_LABELS = {'economic': '경제·산업', 'person': '인물'}
 ERA_LABEL = '대한민국'
 
-TARGET_IDS = ['economic_1993_01', 'person_1968_02', 'person_1980_09']
+TARGET_IDS = ['economic_1993_01', 'person_1968_02', 'person_1980_09', 'person_1977_03',
+              'person_1948_06', 'person_1966_04', 'person_1976_03', 'person_1978_02',
+              'person_1964_05', 'person_1974_03', 'person_1980_10']
 
 STOPWORDS = {'a', 'an', 'the', 'of', 'in', 'at', 'to', 'and', 'for', 'on',
              'by', 'with', 'is', 'was', 'as', 'from', 'into', 'over'}

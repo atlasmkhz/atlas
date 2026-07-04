@@ -113,6 +113,22 @@ const EVENTS_2016 = [
     video:null,
     connections:['organization_2015_01'],
     tags:['organization','온라인','젠더갈등'],
-    sources:['페미위키 워마드','나무위키 메갈리아 분열 사태'] }
+    sources:['페미위키 워마드','나무위키 메갈리아 분열 사태'] },
+
+  { id:'science_2016_01', year:2016, visible_from:2016, visible_until:2016,
+    month:3, day:9, type:'science', priority:1,
+    title_ko:'알파고-이세돌 대국 — AI 충격의 시작',
+    title_en:'AlphaGo Defeats Lee Sedol',
+    title_ja:'アルファ碁-李世ドル対局 — AI衝撃の始まり',
+    place_ko:'서울(포시즌스 호텔)',
+    lat:37.5658, lng:126.9770,
+    people:['이세돌'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'구글 딥마인드가 개발한 인공지능 바둑 프로그램 알파고와 세계 최상위급 프로 기사 이세돌 9단의 5번기 대국이 3월 9일부터 15일까지 서울 포시즌스 호텔에서 열렸다. 체스는 1997년 IBM 딥블루가 정복했지만 경우의 수가 훨씬 많은 바둑은 인간의 영역으로 남아 있을 것이라는 예상이 지배적이었으나, 알파고는 4승 1패로 이세돌을 압도했다. 이세돌은 3연패 후 4국에서 해설진이 "신의 한 수"라 부른 78수로 유일한 1승을 거뒀는데, 이는 지금까지도 인간이 바둑에서 최상위 AI를 이긴 마지막 승리로 남아 있다. 유튜브 생중계를 8000만 명 이상이 시청한 이 대국은 한국 사회에 머신러닝 기반 인공지능의 잠재력을 처음으로 실감시킨 사건으로 꼽히며, 이후 정부와 기업의 AI 투자 확대로 이어졌다.',
+    video:null,
+    connections:[],
+    tags:['science','서울','알파고','이세돌','인공지능'],
+    sources:['위키백과 "알파고 대 이세돌"','나무위키 "구글 딥마인드 챌린지 매치"'] }
 
 ];

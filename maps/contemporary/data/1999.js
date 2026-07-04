@@ -97,6 +97,22 @@ const EVENTS_1999 = [
     video:null,
     connections:['organization_2010_02'],
     tags:['organization','서울','이해진','네이버','벤처'],
-    sources:['나무위키 이해진','비즈니스포스트 "김범수 카카오 이사회 의장"'] }
+    sources:['나무위키 이해진','비즈니스포스트 "김범수 카카오 이사회 의장"'] },
+
+  { id:'science_1999_02', year:1999, visible_from:1998, visible_until:1999,
+    month:4, day:1, type:'science', priority:2,
+    title_ko:'초고속인터넷 세계 최초 ADSL 상용화',
+    title_en:'World\\u2019s First Commercial ADSL Broadband Service',
+    title_ja:'超高速インターネット、世界初のADSL商用化',
+    place_ko:'서울',
+    lat:37.5665, lng:126.9780,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'1998년 7월 두루넷이 케이블망을 이용한 초고속인터넷 서비스를 시작한 데 이어, 하나로통신이 1999년 4월 1일 전화선을 이용한 ADSL 초고속인터넷을 세계 최초로 상용화했다. 이전까지 56Kbps 전화모뎀에 의존하던 가정용 인터넷 속도가 최대 8Mbps까지 뛰어올랐고, "따라올테면 따라와봐"라는 광고 카피와 함께 인터넷 열풍을 일으켰다. 가입자는 첫해 37만 명에서 2000년 402만 명, 2002년 10월 1000만 명을 돌파했으며, 1998년 출범한 김대중 정부가 "사이버코리아21" 계획으로 정보통신 산업을 경제위기 극복의 핵심 동력으로 삼은 점도 확산에 힘을 더했다. 이 초고속 인프라는 이후 스타크래프트로 대표되는 PC방 게임 문화, 전자상거래, 온라인 콘텐츠 산업이 폭발적으로 성장하는 토대가 됐다.',
+    video:null,
+    connections:['organization_1999_01'],
+    tags:['science','서울','초고속인터넷','ADSL','하나로통신','두루넷'],
+    sources:['위키백과 "대한민국의 인터넷"','블로터 "한국을 바꾼 ADSL 상용서비스 10주년"'] }
 
 ];

@@ -81,6 +81,22 @@ const EVENTS_1998 = [
     video:null,
     connections:['diplomacy_1998_01'],
     tags:['diplomacy','강원','금강산','관광','남북교류'],
-    sources:['한국민족문화대백과사전 금강산관광사업','위키백과 금강산 관광'] }
+    sources:['한국민족문화대백과사전 금강산관광사업','위키백과 금강산 관광'] },
+
+  { id:'person_1998_03', year:1998, visible_from:1996, visible_until:1998,
+    month:7, day:7, type:'person', priority:1,
+    title_ko:'박세리, US여자오픈 우승 — "맨발의 투혼"',
+    title_en:'Pak Se-ri Wins the U.S. Women\\u2019s Open',
+    title_ja:'パク・セリ、全米女子オープン優勝 — 「素足の闘魂」',
+    place_ko:'미국 위스콘신',
+    lat:43.4183, lng:-88.4109,
+    people:['박세리'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'IMF 외환위기로 국민들이 실직과 구조조정에 고통받던 시기, LPGA 데뷔 첫해였던 박세리가 7월 7일(현지시간) 미국 위스콘신 블랙울프런 골프장에서 열린 US여자오픈에서 태국계 미국인 아마추어와 연장 92홀까지 가는 메이저 사상 최장 승부 끝에 우승했다. 연장 마지막 홀에서 공이 연못가 언덕 밑에 빠지자 양말까지 벗고 맨발로 물에 들어가 샷을 성공시킨 장면은 "맨발의 투혼"으로 불리며 큰 반향을 일으켰고, 언론은 이를 1면으로 보도하며 "박세리 신드롬"이라 불렀다. 그의 우승은 경제위기로 지친 국민들에게 위로가 됐을 뿐 아니라, 이후 김미현·박지은 등 한국 선수들의 LPGA 진출 붐과 어린 소녀들이 골프를 시작하는 "박세리 키즈" 세대를 낳았다.',
+    video:null,
+    connections:[],
+    tags:['person','미국','박세리','골프','US여자오픈'],
+    sources:['나무위키 박세리','네이트스포츠 "하얀 맨발의 기적, 20세 박세리 US여자오픈 제패"'] }
 
 ];

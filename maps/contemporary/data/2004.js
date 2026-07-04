@@ -113,6 +113,22 @@ const EVENTS_2004 = [
     video:null,
     connections:['organization_2005_01'],
     tags:['organization','서울','뉴라이트','역사수정주의'],
-    sources:['위키백과 대한민국의 뉴라이트'] }
+    sources:['위키백과 대한민국의 뉴라이트'] },
+
+  { id:'person_2004_04', year:2004, visible_from:2003, visible_until:2004,
+    month:5, day:null, type:'person', priority:2,
+    title_ko:'박찬욱, 〈올드보이〉로 칸 심사위원대상',
+    title_en:'Park Chan-wook Wins Cannes Grand Prix for Oldboy',
+    title_ja:'パク・チャヌク、『オールドボイ』でカンヌ審査員大賞',
+    place_ko:'프랑스 칸',
+    lat:43.5528, lng:7.0174,
+    people:['박찬욱'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'일본 만화를 원작으로 2003년 개봉한 박찬욱의 〈올드보이〉는 15년간 감금됐던 남자의 처절한 복수극을 다룬 작품으로, 국내에서 비평과 흥행 모두에서 크게 성공했다. 이 영화는 2004년 칸 영화제에서 미국 감독 쿠엔틴 타란티노가 심사위원장을 맡은 가운데 경쟁부문 심사위원대상을 받아, 해외에서 박찬욱과 한국영화의 이름을 널리 알리는 결정적 계기가 됐다. 〈올드보이〉는 이후 BBC 선정 "21세기의 위대한 영화 100선"에 오르고 IMDb 최상위권에 오르는 등 해외에서 한국 영화보다 더 큰 반향을 일으켰으며, 2000년대 한국영화 르네상스를 대표하는 작품이자 훗날 봉준호의 〈기생충〉으로 이어지는 한국영화 세계화의 초석으로 평가된다.',
+    video:null,
+    connections:[],
+    tags:['person','칸','박찬욱','올드보이','영화'],
+    sources:['나무위키 박찬욱','나무위키 "올드보이(2003)"'] }
 
 ];

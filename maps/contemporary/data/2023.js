@@ -113,6 +113,22 @@ const EVENTS_2023 = [
     video:null,
     connections:[],
     tags:['economic','거제','한화오션','대우조선해양','조선업','김승연'],
-    sources:['위키백과 한화오션','나무위키 한화오션','굿모닝충청 "대우조선해양 한화그룹으로 매각"'] }
+    sources:['위키백과 한화오션','나무위키 한화오션','굿모닝충청 "대우조선해양 한화그룹으로 매각"'] },
+
+  { id:'organization_2023_03', year:2023, visible_from:2016, visible_until:2023,
+    month:4, day:null, type:'organization', priority:2,
+    title_ko:'블랙핑크, 아시아 최초 코첼라 헤드라이너',
+    title_en:'BLACKPINK Becomes First Asian Act to Headline Coachella',
+    title_ja:'BLACKPINK、アジア初のコーチェラヘッドライナー',
+    place_ko:'미국 캘리포니아',
+    lat:33.6803, lng:-116.2378,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'2016년 YG엔터테인먼트에서 데뷔한 4인조 걸그룹 블랙핑크는 2022년 두 번째 정규 프로젝트 〈Born Pink〉로 빌보드 200 앨범 차트 1위에 올라 K팝 걸그룹 최초로 메인 앨범 차트 정상을 차지했다. 이어 4월 미국 최대 음악 페스티벌인 코첼라에서 아시아 아티스트로는 최초로 헤드라이너를 맡아 무대에 올랐다. 이는 2022년 6월 유튜브 구독자 7500만 명을 돌파한 최초의 아티스트라는 기록과 함께, 블랙핑크가 걸그룹으로서 세계 음악시장에서 BTS에 이어 K팝의 또 다른 축을 세웠음을 보여준 사건으로 평가된다.',
+    video:null,
+    connections:['organization_2020_06'],
+    tags:['organization','미국','블랙핑크','코첼라','K팝'],
+    sources:['Billboard Korea "아시아 아티스트가 빌보드 차트에서 이룬 주요 업적 10"'] }
 
 ];
