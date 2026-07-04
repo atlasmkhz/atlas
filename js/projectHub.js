@@ -120,7 +120,11 @@
   }
 
   function renderYoutubeGallery() {
-    const videos = (typeof window.YOUTUBE_VIDEOS !== 'undefined') ? window.YOUTUBE_VIDEOS : [];
+    // 최신 영상이 맨 위에 오도록 published(발행일) 내림차순 정렬 —
+    // content/youtube_videos.js 배열 자체의 순서(추가한 순서, 오래된
+    // 영상이 앞에 옴)와는 무관하게 항상 최신순으로 보여준다.
+    const rawVideos = (typeof window.YOUTUBE_VIDEOS !== 'undefined') ? window.YOUTUBE_VIDEOS : [];
+    const videos = [...rawVideos].sort((a, b) => new Date(b.published) - new Date(a.published));
     if (!videos.length) {
       panelYoutube.innerHTML = `<div class="project-soon">아직 등록된 영상이 없습니다.</div>`;
     } else {

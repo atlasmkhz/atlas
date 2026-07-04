@@ -305,6 +305,21 @@ const YOUTUBE_VIDEOS = [
     thumbnail_override: null,
   },
 
+  {
+    id: 'v_heungseon_daewongun_seclusion',
+    youtube_id: 'UXWZSEloV4E',
+    title: '흥선대원군은 왜 끝까지 문을 닫았을까? — 병인양요와 쇄국정책의 진실',
+    description: '조선을 망친 멍청한 지도자? 흥선대원군이 쇄국정책을 "끝까지" 고집한 이유를 병인양요를 중심으로 다시 살펴본다.',
+    published: '2026-07-04',
+    duration: '4:05',
+    playlist: 'atlas_modern',
+    tags: ['흥선대원군', '병인양요', '쇄국정책'],
+    related_events: [],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+
 ];
 
 if (typeof window !== 'undefined') {

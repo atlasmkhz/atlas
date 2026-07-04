@@ -237,7 +237,7 @@ def render_html(card, slug, breadcrumb, related_cards, slug_map):
 {f'<section class="people"><h2>관련 인물</h2>{people_html}</section>' if people_html else ''}
 {f'<section class="related"><h2>관련 사건</h2>{related_html}</section>' if related_html else ''}
 {f'<section class="sources"><h2>참고 자료</h2>{sources_html}</section>' if sources_html else ''}
-<p class="map-cta"><a href="{SITE_ROOT}/?event={card['id']}">지도에서 보기</a></p>
+<p class="map-cta"><a href="{SITE_ROOT}/map.html?event={card['id']}">지도에서 보기</a></p>
 </article>
 </body>
 </html>"""

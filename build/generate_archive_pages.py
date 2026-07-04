@@ -81,7 +81,7 @@ ROOT_PREFIX = '../../'
 # 사건카드(card_ref)가 속한 지도별 상대경로 prefix. archive 페이지
 # 기준(ROOT_PREFIX)에서 각 지도의 index.html까지 가는 경로다.
 CARD_MAP_PREFIX = {
-    'root': f'{ROOT_PREFIX}index.html',
+    'root': f'{ROOT_PREFIX}map.html',
     'modern2': f'{ROOT_PREFIX}maps/modern2/index.html',
     'contemporary': f'{ROOT_PREFIX}maps/contemporary/index.html',
 }

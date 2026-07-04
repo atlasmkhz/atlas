@@ -15,6 +15,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/map.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/event/1876-fall-heungseon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4220,52 +4225,92 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_01</loc>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_02</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_02</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_03</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_03</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_04</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_04</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_05</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_05</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_06</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_06</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_07</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_07</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_08</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_08</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/modern2/archive/historical-revisionism/wp_09</loc>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability/chun_doo_hwan_bijageum</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability/kim_keon_hee_deutsch_motors</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability/kim_keon_hee_dior_bag</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability/lee_jae_yong_bujeonghappyeong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability/lee_myung_bak_bbk_das</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability/park_geun_hye_gukjeongnongdan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

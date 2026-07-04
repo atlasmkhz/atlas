@@ -53,6 +53,9 @@ SITE_ROOT = 'https://atlas.mkhz.kr'
 # URL 경로 접두사가 달라진다. PROJECT_ROOT 안에 'modern2'가 있으면
 # 그쪽으로 판단한다(하드코딩 대신 실제 폴더 구조로 판별).
 PATH_PREFIX = '/maps/modern2' if os.path.basename(PROJECT_ROOT) == 'modern2' else ''
+# 지도 앱 진입 파일명. 근대는 index.html이 포털(Home)이 되면서
+# map.html로 이름이 바뀌었다 — modern2는 그대로 index.html.
+MAP_ENTRY_FILE = 'index.html' if PATH_PREFIX else 'map.html'
 
 
 def esc(s):
@@ -141,7 +144,7 @@ def render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path):
     description = make_description(wp.get('summary_ko', ''))
     page_slug = waypoint_page_filename(route_slug, wp['id'])
     page_url = f"{SITE_ROOT}{PATH_PREFIX}/event/{page_slug}"
-    map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/?route={route['id']}&wp={wp['id']}"
+    map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/{MAP_ENTRY_FILE}?route={route['id']}&wp={wp['id']}"
     date_str = waypoint_date_str(wp)
 
     ld_event = {
@@ -216,7 +219,7 @@ def render_route_landing_page(route, route_slug, event_id_to_slug, out_path):
     title = f"{route['name']} | ATLAS by MKHZ"
     description = make_description(route.get('tagline', ''))
     page_url = f"{SITE_ROOT}{PATH_PREFIX}/route/{route_slug}"
-    map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/?route={route['id']}"
+    map_cta_url = f"{SITE_ROOT}{PATH_PREFIX}/{MAP_ENTRY_FILE}?route={route['id']}"
 
     items = []
     ld_list_items = []
@@ -249,7 +252,7 @@ def render_route_landing_page(route, route_slug, event_id_to_slug, out_path):
         "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "ATLAS", "item": SITE_ROOT + "/"},
-            {"@type": "ListItem", "position": 2, "name": "루트", "item": f"{SITE_ROOT}{PATH_PREFIX}/?nav=route"},
+            {"@type": "ListItem", "position": 2, "name": "루트", "item": f"{SITE_ROOT}{PATH_PREFIX}/{MAP_ENTRY_FILE}?nav=route"},
             {"@type": "ListItem", "position": 3, "name": route['name'], "item": page_url},
         ],
     }

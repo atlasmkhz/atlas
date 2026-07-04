@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배경 이미지 진단용 — 이 파일은 임시입니다</title>
+<style>
+  html, body { margin:0; padding:0; height:100%; }
+  .test1 {
+    width:100%; height:400px;
+    background-image:url('assets/images/portal-bg-v2.jpg');
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+    background-color:red; /* 이미지가 안 뜨면 이 빨간색이 보여야 한다 */
+  }
+  .test2 { padding:20px; font-family:sans-serif; background:white; }
+  img { max-width:600px; display:block; margin:20px 0; border:3px solid blue; }
+</style>
+</head>
+<body>
+  <div class="test2">
+    <h2>진단 1 — CSS background-image (빨간 배경 위에 얹음)</h2>
+    <p>아래 영역에 <b>지도 이미지가 보이면</b> CSS 로딩은 정상입니다.<br>
+       <b>새빨간 사각형만 보이면</b> 이미지 파일 자체를 못 찾는 겁니다.</p>
+  </div>
+  <div class="test1"></div>
+  <div class="test2">
+    <h2>진단 2 — 일반 &lt;img&gt; 태그로 직접 로드</h2>
+    <p>이것도 안 뜨면 파일 경로/파일 자체 문제가 100% 확실합니다.</p>
+    <img src="assets/images/portal-bg-v2.jpg" alt="테스트 이미지">
+  </div>
+</body>
+</html>
