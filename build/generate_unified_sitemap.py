@@ -22,6 +22,8 @@ MAIN_EVENT_DIR = os.path.join(PROJECT_ROOT, 'event')
 MAIN_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'route')
 MODERN2_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'event')
 MODERN2_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'route')
+# 현대(1994~2025)는 루트(route)가 없고 event만 있다.
+CONTEMPORARY_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'event')
 # 자료실은 더 이상 지도별로 나뉘어 있지 않다 — content/archive/*.js가
 # 근대·근현대·현대 모든 지도에 공유되고(content/youtube_videos.js와
 # 같은 패턴), 정적 출력도 사이트 루트의 archive/ 하나로 통합됐다
@@ -35,6 +37,7 @@ def main():
     modern2_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MODERN2_EVENT_DIR, '*.html')))
     main_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MAIN_ROUTE_DIR, '*.html')))
     modern2_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MODERN2_ROUTE_DIR, '*.html')))
+    contemporary_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(CONTEMPORARY_EVENT_DIR, '*.html')))
     # archive/는 시리즈별 하위 폴더(archive/{series-slug}/*.html)라
     # event·route와 달리 2단계로 스캔한다. index.html(시리즈 랜딩)과
     # 글 페이지를 구분해서 각각 다른 URL 패턴으로 담는다.
@@ -58,7 +61,8 @@ def main():
     lines.append('<!--')
     lines.append('  ATLAS by MKHZ — sitemap.xml (통합)')
     lines.append(f'  메인 페이지 1개 + 1876~1945 Event {len(main_slugs)}개 + 루트 {len(main_route_slugs)}개 + ')
-    lines.append(f'  근현대(1945~1993) 진입점 1개 + Event {len(modern2_slugs)}개 + 루트 {len(modern2_route_slugs)}개를 포함한다.')
+    lines.append(f'  근현대(1945~1993) 진입점 1개 + Event {len(modern2_slugs)}개 + 루트 {len(modern2_route_slugs)}개 + ')
+    lines.append(f'  현대(1994~2025) 진입점 1개 + Event {len(contemporary_slugs)}개(루트 없음)를 포함한다.')
     lines.append('  이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를')
     lines.append('  스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의')
     lines.append('  generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를')
@@ -119,6 +123,21 @@ def main():
         lines.append('    <priority>0.75</priority>')
         lines.append('  </url>')
 
+    # 현대(1994~2025) 진입점
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/maps/contemporary/</loc>')
+    lines.append('    <changefreq>weekly</changefreq>')
+    lines.append('    <priority>0.9</priority>')
+    lines.append('  </url>')
+
+    # 현대(1994~2025) Event (루트는 아직 없음)
+    for slug in contemporary_slugs:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/contemporary/event/{slug}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.7</priority>')
+        lines.append('  </url>')
+
     # 자료실 시리즈 랜딩 (지도 구분 없이 통합)
     for series_slug in archive_landing:
         lines.append('  <url>')
@@ -140,10 +159,12 @@ def main():
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
 
-    total = (3 + len(main_slugs) + len(modern2_slugs) + len(main_route_slugs) + len(modern2_route_slugs)
+    total = (4 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs)
+             + len(main_route_slugs) + len(modern2_route_slugs)
              + len(archive_landing) + len(archive_posts))
     print(f'통합 sitemap.xml 생성 완료: 메인 1 + map.html 1 + 1876-1945 Event {len(main_slugs)} + 루트 {len(main_route_slugs)} + '
           f'modern2 진입점 1 + modern2 Event {len(modern2_slugs)} + modern2 루트 {len(modern2_route_slugs)} + '
+          f'contemporary 진입점 1 + contemporary Event {len(contemporary_slugs)} + '
           f'자료실 랜딩 {len(archive_landing)} + 자료실 글 {len(archive_posts)} = 총 {total}건')
 
 if __name__ == '__main__':
