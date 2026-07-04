@@ -45,7 +45,8 @@ const EVENTS_1987 = [
     video:null,
     connections:['political_1987_01'],
     tags:['person','서울','이한열','최루탄피격','6월항쟁'],
-    sources:['위키백과 6월민주항쟁','인권위 해시태그키워드로보는6월항쟁'] },
+    sources:['위키백과 6월민주항쟁','인권위 해시태그키워드로보는6월항쟁'],
+    content:{ hero:{"url": "assets/images/entity/person/person_i_han_yeol_01.webp", "alt": "이한열", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'movement_1987_01', year:1987, visible_from:1987, visible_until:1987,
     month:5, day:10, type:'movement', priority:1, area:true, areaRadius:300000,
@@ -59,7 +60,8 @@ const EVENTS_1987 = [
     video:null,
     connections:['person_1987_01'],
     tags:['movement','전국','6월민주항쟁','국민운동본부','직선제개헌'],
-    sources:['한국민족문화대백과사전 6월항쟁','우리역사넷 1987년6월항쟁'] },
+    sources:['한국민족문화대백과사전 6월항쟁','우리역사넷 1987년6월항쟁'],
+    content:{ hero:{"url": "assets/images/entity/event/event_movement_1987_01_01.webp", "alt": "6월 민주항쟁", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'political_1987_02', year:1987, visible_from:1987, visible_until:1987,
     month:5, day:29, type:'political', priority:1,

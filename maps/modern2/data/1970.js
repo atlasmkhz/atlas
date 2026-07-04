@@ -59,7 +59,8 @@ const EVENTS_1970 = [
     video:null,
     connections:['policy_1970_01'],
     tags:['person','서울','전태일','분신','노동운동'],
-    sources:['한국민족문화대백과사전 전태일분신자살사건','위키백과 전태일'] },
+    sources:['한국민족문화대백과사전 전태일분신자살사건','위키백과 전태일'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jeon_tae_il_01.webp", "alt": "전태일", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'movement_1970_01', year:1970, visible_from:1970, visible_until:1971,
     month:10, day:2, type:'movement', priority:2,

@@ -59,7 +59,8 @@ const EVENTS_1958 = [
     video:null,
     connections:['plot_1958_01'],
     tags:['person','서울','조봉암','재판파동','유병진'],
-    sources:['나무위키 조봉암','경향신문 진보당사건과조봉암'] },
+    sources:['나무위키 조봉암','경향신문 진보당사건과조봉암'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jo_bong_am_01.webp", "alt": "조봉암", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'political_1958_03', year:1958, visible_from:1958, visible_until:1959,
     month:11, day:24, type:'political', priority:1,

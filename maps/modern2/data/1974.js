@@ -59,7 +59,8 @@ const EVENTS_1974 = [
     video:null,
     connections:['political_1974_01'],
     tags:['person','서울','8·15저격사건','육영수','문세광'],
-    sources:['나무위키 박정희대통령저격미수사건'] },
+    sources:['나무위키 박정희대통령저격미수사건'],
+    content:{ hero:{"url": "assets/images/entity/person/person_yuk_yeong_su_01.webp", "alt": "육영수", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'movement_1974_01', year:1974, visible_from:1974, visible_until:1975,
     month:9, day:24, type:'movement', priority:1,

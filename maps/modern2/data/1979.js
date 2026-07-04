@@ -45,7 +45,8 @@ const EVENTS_1979 = [
     video:null,
     connections:['movement_1979_02','person_1979_02'],
     tags:['person','서울','10·26사건','박정희','김재규'],
-    sources:['한국민족문화대백과사전 10·26사건'] },
+    sources:['한국민족문화대백과사전 10·26사건'],
+    content:{ hero:{"url": "assets/images/entity/event/event_person_1979_01_01.webp", "alt": "박정희 피살, 김재규", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'person_1979_02', year:1979, visible_from:1979, visible_until:1980,
     month:11, day:6, type:'person', priority:1,
@@ -88,7 +89,8 @@ const EVENTS_1979 = [
     video:null,
     connections:['person_1979_03','political_1988_02'],
     tags:['person','서울','정승화','12·12군사반란','강제연행'],
-    sources:['한국민족문화대백과사전 12·12군사반란','나무위키 정승화'] },
+    sources:['한국민족문화대백과사전 12·12군사반란','나무위키 정승화'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jeong_seung_hwa_01.webp", "alt": "정승화", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'person_1979_05', year:1979, visible_from:1979, visible_until:1979,
     month:11, day:12, type:'person', priority:2,
@@ -102,6 +104,7 @@ const EVENTS_1979 = [
     video:null,
     connections:['person_1979_04'],
     tags:['person','서울','장태완','12·12군사반란','진압시도'],
-    sources:['위키백과 12·12군사반란','시사IN 12·12군사쿠데타와인권유린의현대사'] }
+    sources:['위키백과 12·12군사반란','시사IN 12·12군사쿠데타와인권유린의현대사'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jang_tae_wan_01.webp", "alt": "장태완", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } }
 
 ];

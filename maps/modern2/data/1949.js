@@ -17,7 +17,8 @@ const EVENTS_1949 = [
     video:null,
     connections:['person_1948_01','person_1956_03'],
     tags:['person','서울','김구','암살'],
-    sources:['한국민족문화대백과사전 김구암살사건','위키백과 안두희'] },
+    sources:['한국민족문화대백과사전 김구암살사건','위키백과 안두희'],
+    content:{ hero:{"url": "assets/images/entity/event/event_person_1949_01_01.webp", "alt": "김구 암살, 안두희", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'policy_1949_01', year:1949, visible_from:1949, visible_until:1950,
     month:5, day:21, type:'policy', priority:1,

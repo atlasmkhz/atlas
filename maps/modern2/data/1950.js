@@ -17,7 +17,8 @@ const EVENTS_1950 = [
     video:null,
     connections:['political_1948_01','battle_1950_02'],
     tags:['battle','38선','6·25전쟁','남침'],
-    sources:['우리역사넷 6·25전쟁','국가기록원 6·25전쟁 연표'] },
+    sources:['우리역사넷 6·25전쟁','국가기록원 6·25전쟁 연표'],
+    content:{ hero:{"url": "assets/images/entity/event/event_battle_1950_01_01.webp", "alt": "6·25전쟁 발발", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'massacre_1950_01', year:1950, visible_from:1950, visible_until:1950,
     month:6, day:null, type:'massacre', priority:1, area:true, areaRadius:200000,
@@ -87,7 +88,8 @@ const EVENTS_1950 = [
     video:null,
     connections:['massacre_1950_01','organization_1949_01'],
     tags:['massacre','대전','골령골','국민보도연맹','이관술'],
-    sources:['진실화해를위한과거사정리위원회 대전산내골령골학살사건','나무위키 대전형무소학살사건'] },
+    sources:['진실화해를위한과거사정리위원회 대전산내골령골학살사건','나무위키 대전형무소학살사건'],
+    content:{ hero:{"url": "assets/images/entity/event/event_massacre_1950_02_01.webp", "alt": "대전 산내 골령골 학살", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'plot_1950_01', year:1950, visible_from:1950, visible_until:1950,
     month:5, day:27, type:'plot', priority:1,
@@ -115,7 +117,8 @@ const EVENTS_1950 = [
     video:null,
     connections:['massacre_1950_01','massacre_1950_02'],
     tags:['massacre','경산','경산코발트광산','국민보도연맹','경북'],
-    sources:['진실화해를위한과거사정리위원회 경산코발트광산사건','위키백과 경산코발트광산학살사건'] },
+    sources:['진실화해를위한과거사정리위원회 경산코발트광산사건','위키백과 경산코발트광산학살사건'],
+    content:{ hero:{"url": "assets/images/entity/event/event_massacre_1950_03_01.webp", "alt": "경산 코발트광산 학살", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'massacre_1950_04', year:1950, visible_from:1950, visible_until:1950,
     month:5, day:28, type:'massacre', priority:2, area:true, areaRadius:40000,
@@ -185,7 +188,8 @@ const EVENTS_1950 = [
     video:null,
     connections:['battle_1950_04'],
     tags:['migration','흥남','흥남철수','피란민','메러디스빅토리호'],
-    sources:['한국민족문화대백과사전 흥남철수','위키백과 흥남철수작전'] },
+    sources:['한국민족문화대백과사전 흥남철수','위키백과 흥남철수작전'],
+    content:{ hero:{"url": "assets/images/entity/event/event_migration_1951_01_01.webp", "alt": "흥남 철수", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'massacre_1950_08', year:1950, visible_from:1950, visible_until:1950,
     month:6, day:26, type:'massacre', priority:1, area:true, areaRadius:5000,
@@ -199,7 +203,8 @@ const EVENTS_1950 = [
     video:null,
     connections:['battle_1950_04','massacre_1950_01'],
     tags:['massacre','영동','노근리','미군','피난민학살'],
-    sources:['위키백과 노근리양민학살사건','국가기록원 노근리사건진상조사'] },
+    sources:['위키백과 노근리양민학살사건','국가기록원 노근리사건진상조사'],
+    content:{ hero:{"url": "assets/images/entity/event/event_massacre_1950_08_01.webp", "alt": "노근리 학살", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'diplomacy_1950_01', year:1950, visible_from:1950, visible_until:1950,
     month:6, day:27, type:'diplomacy', priority:1,

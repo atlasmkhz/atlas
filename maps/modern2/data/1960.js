@@ -45,7 +45,8 @@ const EVENTS_1960 = [
     video:null,
     connections:['plot_1960_01','movement_1960_01'],
     tags:['massacre','마산','김주열','제2차마산의거','4·19전조'],
-    sources:['한국민족문화대백과사전 김주열','오마이뉴스 419혁명불길올린김주열'] },
+    sources:['한국민족문화대백과사전 김주열','오마이뉴스 419혁명불길올린김주열'],
+    content:{ hero:{"url": "assets/images/entity/event/event_massacre_1960_01_01.webp", "alt": "김주열의 죽음", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'movement_1960_01', year:1960, visible_from:1960, visible_until:1960,
     month:3, day:19, type:'movement', priority:1, area:true, areaRadius:300000,
@@ -59,7 +60,8 @@ const EVENTS_1960 = [
     video:null,
     connections:['massacre_1960_01','political_1960_01'],
     tags:['movement','서울','4·19혁명','이승만하야','민주화'],
-    sources:['한국민족문화대백과사전 4·19혁명','국립4·19민주묘지'] },
+    sources:['한국민족문화대백과사전 4·19혁명','국립4·19민주묘지'],
+    content:{ hero:{"url": "assets/images/entity/event/event_movement_1960_01_01.webp", "alt": "4·19 혁명", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'political_1960_01', year:1960, visible_from:1960, visible_until:1960,
     month:3, day:26, type:'political', priority:2,

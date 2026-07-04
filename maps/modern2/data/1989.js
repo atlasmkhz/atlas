@@ -45,7 +45,8 @@ const EVENTS_1989 = [
     video:null,
     connections:['political_1989_01'],
     tags:['person','평양','문익환','방북','국가보안법'],
-    sources:['한국민족문화대백과사전 북방외교'] },
+    sources:['한국민족문화대백과사전 북방외교'],
+    content:{ hero:{"url": "assets/images/entity/person/person_mun_ik_hwan_01.webp", "alt": "문익환", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'person_1989_02', year:1989, visible_from:1989, visible_until:1989,
     month:6, day:30, type:'person', priority:2,
@@ -87,7 +88,8 @@ const EVENTS_1989 = [
     video:null,
     connections:['political_1988_02'],
     tags:['person','서울','노무현','5공청문회','명패사건'],
-    sources:['나무위키 노무현명패사건','미디어오늘 우연과필연이겹쳐만든청문회스타노무현'] },
+    sources:['나무위키 노무현명패사건','미디어오늘 우연과필연이겹쳐만든청문회스타노무현'],
+    content:{ hero:{"url": "assets/images/entity/event/event_person_1989_03_01.webp", "alt": "노무현, 5공비리 청문회", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'economic_1989_03', year:1989, visible_from:1989, visible_until:1989,
     month:6, day:1, type:'economic', priority:2,

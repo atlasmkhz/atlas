@@ -17,7 +17,8 @@ const EVENTS_1956 = [
     video:null,
     connections:['organization_1954_01'],
     tags:['person','이리','신익희','민주당','급사'],
-    sources:['위키백과 신익희','YTN 역사속오늘'] },
+    sources:['위키백과 신익희','YTN 역사속오늘'],
+    content:{ hero:{"url": "assets/images/entity/person/person_sin_ik_hui_01.webp", "alt": "신익희", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'political_1956_01', year:1956, visible_from:1956, visible_until:1956,
     month:4, day:15, type:'political', priority:1,
@@ -59,7 +60,8 @@ const EVENTS_1956 = [
     video:null,
     connections:['political_1956_01'],
     tags:['person','서울','장면','부통령피격사건','정치테러'],
-    sources:['위키백과 장면','우리역사넷 장면'] },
+    sources:['위키백과 장면','우리역사넷 장면'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jang_myeon_01.webp", "alt": "장면 부통령", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'political_1956_02', year:1956, visible_from:1956, visible_until:1957,
     month:0, day:null, type:'political', priority:2,

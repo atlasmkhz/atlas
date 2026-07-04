@@ -17,7 +17,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['political_1948_02','massacre_1948_01'],
     tags:['political','서울','정부수립','이승만','제헌헌법'],
-    sources:['한국민족문화대백과사전 대한민국 정부수립','위키백과'] },
+    sources:['한국민족문화대백과사전 대한민국 정부수립','위키백과'],
+    content:{ hero:{"url": "assets/images/entity/event/event_political_1948_01_01.webp", "alt": "이승만 초대 대통령 취임", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'massacre_1948_01', year:1948, visible_from:1947, visible_until:1949,
     month:9, day:null, type:'massacre', priority:1, area:true, areaRadius:30000,
@@ -31,7 +32,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['political_1948_01','massacre_1948_02'],
     tags:['massacre','제주','4·3사건','초토화작전','민간인학살'],
-    sources:['제주4·3사건진상조사보고서','한국민족문화대백과사전 제주4·3사건'] },
+    sources:['제주4·3사건진상조사보고서','한국민족문화대백과사전 제주4·3사건'],
+    content:{ hero:{"url": "assets/images/entity/event/event_massacre_1948_01_01.webp", "alt": "제주 4·3사건", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'massacre_1948_02', year:1948, visible_from:1948, visible_until:1949,
     month:9, day:19, type:'massacre', priority:1, area:true, areaRadius:25000,
@@ -45,7 +47,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['massacre_1948_01','plot_1948_01'],
     tags:['massacre','여수','순천','여순사건','숙군'],
-    sources:['한국민족문화대백과사전 여수순천10·19사건','우리역사넷 여수순천사건1948'] },
+    sources:['한국민족문화대백과사전 여수순천10·19사건','우리역사넷 여수순천사건1948'],
+    content:{ hero:{"url": "assets/images/entity/event/event_massacre_1948_02_01.webp", "alt": "여수·순천 10·19사건", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'political_1948_02', year:1948, visible_from:1948, visible_until:1949,
     month:8, day:5, type:'political', priority:2,
@@ -73,7 +76,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['political_1948_01'],
     tags:['person','평양','김구','남북협상','분단'],
-    sources:['한국민족문화대백과사전 남북협상'] },
+    sources:['한국민족문화대백과사전 남북협상'],
+    content:{ hero:{"url": "assets/images/entity/person/person_kim_gu_01.webp", "alt": "김구, 38선 방문", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'plot_1948_01', year:1948, visible_from:1948, visible_until:1948,
     month:10, day:4, type:'plot', priority:2,
@@ -101,7 +105,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['massacre_1948_01','massacre_1948_02','person_1948_03'],
     tags:['person','광주','제주','제임스하우스만','미군고문단'],
-    sources:['위키백과 제임스하우스만','국사편찬위원회 김득중여순사건과제임스하우스만'] },
+    sources:['위키백과 제임스하우스만','국사편찬위원회 김득중여순사건과제임스하우스만'],
+    content:{ hero:{"url": "assets/images/entity/person/person_james_hausman_01.webp", "alt": "제임스 하우스만", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'person_1948_03', year:1948, visible_from:1948, visible_until:1948,
     month:3, day:28, type:'person', priority:1,
@@ -115,7 +120,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['massacre_1948_01'],
     tags:['person','제주','김익렬','김달삼','평화협상'],
-    sources:['나무위키 김익렬','제주의소리 김달삼은백두산을연대장은러키스트라이크를피웠다'] },
+    sources:['나무위키 김익렬','제주의소리 김달삼은백두산을연대장은러키스트라이크를피웠다'],
+    content:{ hero:{"url": "assets/images/entity/person/person_kim_ik_ryeol_01.webp", "alt": "김익렬", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'person_1948_04', year:1948, visible_from:1948, visible_until:1949,
     month:4, day:6, type:'person', priority:2,
@@ -129,7 +135,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['person_1948_03','massacre_1948_01'],
     tags:['person','제주','박진경','암살','30만희생설'],
-    sources:['오마이뉴스 제주43강경진압박진경대령암살사건그날의진실','뉴데일리 제주도민30만희생설은허구'] },
+    sources:['오마이뉴스 제주43강경진압박진경대령암살사건그날의진실','뉴데일리 제주도민30만희생설은허구'],
+    content:{ hero:{"url": "assets/images/entity/person/person_park_jin_gyeong_01.webp", "alt": "박진경 대령", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'person_1948_05', year:1948, visible_from:1947, visible_until:1949,
     month:null, day:null, type:'person', priority:1,
@@ -143,7 +150,8 @@ const EVENTS_1948 = [
     video:null,
     connections:['person_1948_03','person_1948_04','massacre_1951_01'],
     tags:['person','제주','조병옥','강경진압','경무부장'],
-    sources:['나무위키 조병옥','미디어제주 제주43학살책임자조병옥생가앞'] },
+    sources:['나무위키 조병옥','미디어제주 제주43학살책임자조병옥생가앞'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jo_byeong_ok_01.webp", "alt": "조병옥", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'diplomacy_1948_02', year:1948, visible_from:1948, visible_until:1948,
     month:5, day:10, type:'diplomacy', priority:2,

@@ -115,6 +115,7 @@ const EVENTS_1992 = [
     video:null,
     connections:['organization_1946_02'],
     tags:['person','서울','한경직','영락교회','템플턴상','신사참배','서북청년단'],
-    sources:['위키백과 한경직','평화나무 한경직목사와개신교흑역사'] }
+    sources:['위키백과 한경직','평화나무 한경직목사와개신교흑역사'],
+    content:{ hero:{"url": "assets/images/entity/person/person_han_kyung_jik_01.webp", "alt": "한경직(AI 재현 이미지)", "caption": "", "credit": "", "is_ai": true, "source_type": "archive", "image_type": "portrait"} } }
 
 ];

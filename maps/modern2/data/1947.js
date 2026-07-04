@@ -45,7 +45,8 @@ const EVENTS_1947 = [
     video:null,
     connections:['movement_1946_01'],
     tags:['person','서울','여운형','피살','좌우합작'],
-    sources:['한국민족문화대백과사전 모스크바삼상회의 관련 검색'] },
+    sources:['한국민족문화대백과사전 모스크바삼상회의 관련 검색'],
+    content:{ hero:{"url": "assets/images/entity/event/event_person_1947_01_01.webp", "alt": "여운형 피살", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'political_1947_02', year:1947, visible_from:1947, visible_until:1947,
     month:8, day:17, type:'political', priority:1,

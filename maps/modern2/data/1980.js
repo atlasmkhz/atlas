@@ -45,7 +45,8 @@ const EVENTS_1980 = [
     video:null,
     connections:['political_1980_01','organization_1980_01','massacre_1980_02'],
     tags:['massacre','광주','5·18','공수부대','초기진압'],
-    sources:['위키백과 5·18광주민주화운동','우리역사넷 광주민주화운동'] },
+    sources:['위키백과 5·18광주민주화운동','우리역사넷 광주민주화운동'],
+    content:{ hero:{"url": "assets/images/entity/event/event_massacre_1980_01_01.webp", "alt": "5·18 광주", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'massacre_1980_02', year:1980, visible_from:1980, visible_until:1980,
     month:4, day:21, type:'massacre', priority:1, area:true, areaRadius:8000,
@@ -144,7 +145,8 @@ const EVENTS_1980 = [
     video:null,
     connections:[],
     tags:['person','서울','최규하','제10대대통령'],
-    sources:['한국민족문화대백과사전 최규하'] },
+    sources:['한국민족문화대백과사전 최규하'],
+    content:{ hero:{"url": "assets/images/entity/person/person_choi_kyu_hah_01.webp", "alt": "최규하", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'person_1980_07', year:1980, visible_from:1967, visible_until:1980,
     month:0, day:null, type:'person', priority:3,
@@ -158,7 +160,8 @@ const EVENTS_1980 = [
     video:null,
     connections:['economic_1973_04'],
     tags:['person','울산','정주영','현대그룹','중공업'],
-    sources:['한국민족문화대백과사전 정주영'] },
+    sources:['한국민족문화대백과사전 정주영'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jeong_ju_yeong_01.webp", "alt": "정주영", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'person_1980_08', year:1980, visible_from:1965, visible_until:1994,
     month:0, day:null, type:'person', priority:2,

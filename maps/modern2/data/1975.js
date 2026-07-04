@@ -87,7 +87,8 @@ const EVENTS_1975 = [
     video:null,
     connections:['movement_1973_02','person_1974_01'],
     tags:['person','포천','장준하','의문사','약사봉'],
-    sources:['위키백과 장준하의문사사건','오픈아카이브 재야대통령장준하의문사'] },
+    sources:['위키백과 장준하의문사사건','오픈아카이브 재야대통령장준하의문사'],
+    content:{ hero:{"url": "assets/images/entity/person/person_jang_jun_ha_01.webp", "alt": "장준하", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
 
   { id:'plot_1975_02', year:1975, visible_from:1962, visible_until:1987,
     month:11, day:null, type:'plot', priority:1,

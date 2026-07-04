@@ -17,7 +17,8 @@ const EVENTS_1945 = [
     video:null,
     connections:['political_1945_02'],
     tags:['political','전국','8·15해방','광복'],
-    sources:['나무위키 8.15광복','우리역사넷 광복과분단'] },
+    sources:['나무위키 8.15광복','우리역사넷 광복과분단'],
+    content:{ hero:{"url": "assets/images/entity/event/event_political_1945_01_01.webp", "alt": "8·15 해방", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'political_1945_02', year:1945, visible_from:1945, visible_until:1948,
     month:7, day:11, type:'political', priority:1,
@@ -73,7 +74,8 @@ const EVENTS_1945 = [
     video:null,
     connections:['organization_1945_02'],
     tags:['political','모스크바','모스크바3상회의','신탁통치','반탁운동'],
-    sources:['한국민족문화대백과사전 모스크바삼상회의','우리역사넷 광복과분단'] },
+    sources:['한국민족문화대백과사전 모스크바삼상회의','우리역사넷 광복과분단'],
+    content:{ hero:{"url": "assets/images/entity/event/event_political_1945_03_01.webp", "alt": "모스크바 3상회의", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"} } },
 
   { id:'diplomacy_1945_01', year:1945, visible_from:1945, visible_until:1945,
     month:7, day:26, type:'diplomacy', priority:2,
