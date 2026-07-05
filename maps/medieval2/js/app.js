@@ -68,12 +68,8 @@ const DATA = {};
 });
 
 // ── 앱 초기화 (모든 모듈 로드 완료 후 실행) ──
-// 첫 화면 연도. 슬라이더 시작 위치(index.html의 #slider value)와 반드시
-// 같은 값으로 맞춰야 한다 — 둘이 어긋나면 지도/슬라이더는 맞는데 좌상단
-// 큰 연도 숫자·干支·시대부제만 다른 값으로 보이는 버그가 재발한다.
-// 조선 건국년(1392)으로 고정해둔다 — 데이터가 채워지면 다른 대표
-// 연도로 바꿀 수 있다.
-const INITIAL_YEAR = 1392;
+// 챕터 방식이라 "초기 연도" 개념이 없다 — window.onload는 그냥
+// selectReign(0)으로 첫 챕터(태조)부터 시작한다(아래 참고).
 window.onload = () => {
   requestAnimationFrame(() => {
     map.invalidateSize();
@@ -81,7 +77,7 @@ window.onload = () => {
       // ── SEO 페이지 → 지도 진입 (2026-06 추가) ──
       // /maps/modern2/event/{slug} 페이지의 "지도에서 보기" 버튼이
       // atlas.mkhz.kr/maps/modern2/?event={id} 형태로 링크한다. 쿼리에
-      // event가 있으면 기본 진입(INITIAL_YEAR 고정 + 자동 프롤로그)을
+      // event가 있으면 기본 진입(첫 챕터 + 자동 프롤로그)을
       // 건너뛰고, 이미 renderer.js에 구현되어 있던 navigateToEvent(id)를
       // 그대로 호출해 그 사건의 연도·위치로 직접 이동한다. 기존 동작
       // (쿼리가 없는 일반 진입)은 한 글자도 바뀌지 않는다 — 이 분기가
@@ -107,31 +103,23 @@ window.onload = () => {
         return;
       }
       // ── 자료실 글 페이지 → 지도 진입 (archive/**/*.html의 "지도에서
-      // 관련 지역 보기" 버튼용). 자료실 글은 특정 사건 카드(card_ref)에
-      // 연결되지 않은 경우가 많아 ?event=처럼 특정 id로 이동할 수 없다
-      // — 대신 ?lat=&lng=로 좌표만 넘어오면 그 위치로 지도만 이동시킨다
-      // (팝업은 열지 않는다 — 열 사건이 없다). ?year=가 함께 오면 그
-      // 글의 실제 연도로 슬라이더를 맞추되, 이 지도의 유효 범위
-      // (1392~1875) 밖이면 가장 가까운 경계 연도로 clamp한다. 지금
-      // 이 지도에 이 방식으로 링크를 보내는 곳은 없지만(자료실은 아직
-      // modern2에만 있음), 같은 패턴을 유지해 나중에 이 지도용 자료실이
-      // 생기면 그대로 재사용할 수 있게 해둔다. year가 없으면 기존처럼
-      // INITIAL_YEAR로 진입한다.
+      // 관련 지역 보기" 버튼용). ?lat=&lng=로 좌표만 넘어오면 그 위치로
+      // 지도만 이동시킨다(팝업은 열지 않는다 — 열 사건이 없다). ?year=가
+      // 함께 오면 그 연도가 속한 챕터(왕조)를 선택하되, 이 지도의 유효
+      // 범위(1392~1875) 밖이면 가장 가까운 경계 연도로 clamp한다.
       const latFromUrl = parseFloat(params.get('lat'));
       const lngFromUrl = parseFloat(params.get('lng'));
       if (!Number.isNaN(latFromUrl) && !Number.isNaN(lngFromUrl)) {
         const yearFromUrl = parseInt(params.get('year'), 10);
         const clampedYear = Number.isNaN(yearFromUrl)
-          ? INITIAL_YEAR
+          ? REIGNS_MIN_YEAR
           : Math.min(REIGNS_MAX_YEAR, Math.max(REIGNS_MIN_YEAR, yearFromUrl));
-        syncToYear(clampedYear);
+        selectReign(reignIndexForYear(clampedYear), { silent: true });
         window.setTimeout(() => { map.setView([latFromUrl, lngFromUrl], 7, { animate: true }); }, 350);
         return;
       }
-      // syncToYear(timeline.js)가 #yearNum·干支·지도 렌더·시대부제·
-      // occTag·비네트 색조를 한 번에 전부 맞춘다 — 슬라이더를 직접 움직일
-      // 때와 똑같은 경로이므로 둘 사이에 어긋남이 생길 수 없다.
-      syncToYear(INITIAL_YEAR);
+      // 기본 진입: 첫 챕터(태조)부터 시작.
+      selectReign(0);
       // 첫 진입 자동 프롤로그도 데스크탑(>=1024px)에서만. 모바일은 지도를
       // 그대로 보여주고, ⓘ 버튼으로만 시대 개요를 연다.
       if (window.innerWidth >= 1024) {

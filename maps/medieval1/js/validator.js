@@ -45,6 +45,12 @@ function getVisibleEvents(year) {
     });
 }
 
+function getVisibleEventsInRange(startYear, endYear) {
+  return Object.values(DATA)
+    .flat()
+    .filter(e => e.year >= startYear && e.year <= endYear);
+}
+
 // ═══════════════════════════════════════════════════════
 // 검증 항목 1 — 연결(connections) 무결성
 // ═══════════════════════════════════════════════════════

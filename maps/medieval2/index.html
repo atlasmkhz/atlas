@@ -194,8 +194,7 @@
 
 <div class="year-display">
   <div class="reign-label" id="reignLabel">태조 (1392~1398)</div>
-  <div class="year-number" id="yearNum">1392</div>
-  <div class="year-label"><span id="ganji">壬申年</span> &nbsp;·&nbsp; <span id="eventCount" style="color:rgba(232,224,208,0.6);">0 사건</span></div>
+  <div class="year-label"><span id="eventCount" style="color:rgba(232,224,208,0.6);">0 사건</span></div>
   <div class="era-subtitle" id="eraSubtitle">
     <div class="era-text" id="eraText">조선 건국</div>
     <span class="era-info-btn" id="eraBtn">ⓘ</span>
@@ -255,14 +254,15 @@
 </div>
 
 <div class="timeline">
-  <!-- 왕조 세그먼트 띠 — js/reigns.js의 REIGNS 배열로 timeline.js가
-       renderReignBand()에서 이 안을 채운다(비례 폭 + 최소폭 보장).
-       각 세그먼트를 클릭하면 그 왕 재위 시작년으로 슬라이더가 이동한다. -->
+  <!-- 왕조 챕터 내비게이션 — js/reigns.js의 REIGNS 배열로 timeline.js가
+       renderChapterNav()에서 이 안을 채운다. 연도 슬라이더는 없다 —
+       500년을 연 단위로 미세조정할 필요가 없고(모바일에서도 그런
+       조작은 잘 안 됐다), 왕 재위기간 하나가 그대로 하나의 챕터다.
+       가로 스크롤 가능한 버튼 목록이라 터치 환경에서도 그냥 스와이프
+       하며 탭하면 된다. 정확한 연도는 각 사건 카드(정보창) 안에서만
+       표시한다. -->
   <div class="reign-band" id="reignBand"><!-- timeline.js가 채운다 --></div>
-  <!-- value/min/max는 js/reigns.js의 REIGNS_MIN_YEAR/REIGNS_MAX_YEAR와
-       항상 같아야 한다(위 조선 카드 기준 1392~1875). -->
-  <input type="range" id="slider" min="1392" max="1875" value="1392" step="1">
-  <div class="hint">왕조 띠를 눌러 이동 · 슬라이더로 연도 미세 조정 · 점을 누르면 사건이 열립니다</div>
+  <div class="hint">왕조를 눌러 이동 · 그 시대 사건은 지도에 한번에 표시됩니다 · 정확한 연도는 카드에서 확인</div>
 </div>
 
 <!-- ════════════════════════════════════════════════════

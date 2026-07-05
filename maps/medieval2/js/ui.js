@@ -13,17 +13,17 @@
 document.getElementById('layerEvent').addEventListener('change', function() {
   if (window.trackFilterChange) window.trackFilterChange('사건', this.checked);
   if (typeof isSearchActive === 'function' && isSearchActive()) return;
-  safeRender(parseInt(document.getElementById('slider').value));
+  if (typeof renderCurrentChapter === 'function') renderCurrentChapter();
 });
 document.getElementById('layerPerson').addEventListener('change', function() {
   if (window.trackFilterChange) window.trackFilterChange('인물', this.checked);
   if (typeof isSearchActive === 'function' && isSearchActive()) return;
-  safeRender(parseInt(document.getElementById('slider').value));
+  if (typeof renderCurrentChapter === 'function') renderCurrentChapter();
 });
 document.getElementById('layerPolicy').addEventListener('change', function() {
   if (window.trackFilterChange) window.trackFilterChange('배경·정책', this.checked);
   if (typeof isSearchActive === 'function' && isSearchActive()) return;
-  safeRender(parseInt(document.getElementById('slider').value));
+  if (typeof renderCurrentChapter === 'function') renderCurrentChapter();
 });
 
 // ── 시대 부제 설명 카드 (ⓘ 버튼) ──
@@ -79,7 +79,7 @@ document.getElementById('eraCloseBtn').addEventListener('click', function(e){
 // (연도 변경 기준으로 동작해야 하므로, 앱 1회성 load 시점이 아니라 연도가
 //  갱신되는 단일 경로인 updateEra 안에서 여는 것이 맞다.)
 
-// 초기 시대 부제 표시는 app.js의 window.onload → syncToYear(INITIAL_YEAR)가
+// 초기 시대 부제 표시는 app.js의 window.onload → selectReign(0)이
 // 담당한다 (여기서 따로 updateEra()를 호출하면 같은 일을 두 번 하게 되고,
 // 이 스크립트 실행 시점은 window.onload보다 이르므로 오히려 더 부정확하다).
 

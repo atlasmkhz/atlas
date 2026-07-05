@@ -235,39 +235,37 @@
     .era-card .era-close { display:none; }
   }
 
-  .timeline { position:absolute; bottom:var(--bottom-bar-height); left:0; right:0; z-index:600; padding:16px 20px 22px; touch-action:none;
+  .timeline { position:absolute; bottom:var(--bottom-bar-height); left:0; right:0; z-index:600; padding:14px 20px 18px; touch-action:pan-x;
     background:linear-gradient(0deg,rgba(20,17,12,0.95),rgba(20,17,12,0.6) 70%,transparent); }
 
-  /* ── 왕조 띠(reign-band) ── 근대/근현대/현대 지도의 균일한 연도
-     슬라이더 대신, 왕(재위기간)마다 폭이 다른 세그먼트를 보여준다.
-     js/timeline.js의 renderReignBand()가 flex-basis(%)로 폭을 지정해
-     비례 + 최소폭을 동시에 만족시킨다. */
-  .reign-band { position:relative; width:100%; height:22px; margin-bottom:6px; }
-  .reign-seg {
-    position:absolute; top:0; height:100%; min-width:3px;
-    background:rgba(184,152,96,0.14); border:1px solid rgba(184,152,96,0.28);
-    border-radius:2px; cursor:pointer; padding:0;
-    transition:background 0.2s ease, border-color 0.2s ease;
-    overflow:hidden;
+  /* ── 왕조 챕터 내비게이션 ── (조선/중세2와 동일한 구조) */
+  .reign-band {
+    display:flex; gap:6px; overflow-x:auto; overflow-y:hidden;
+    padding-bottom:4px; margin-bottom:6px; scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
   }
-  .reign-seg:hover { background:rgba(184,152,96,0.26); }
-  .reign-seg.active { background:rgba(212,160,74,0.55); border-color:rgba(212,160,74,0.85); }
-  .reign-seg-label {
-    position:absolute; left:3px; top:50%; transform:translateY(-50%);
-    font-size:8px; color:var(--paper-dark); opacity:0.75; white-space:nowrap;
-    letter-spacing:0.2px; pointer-events:none;
+  .reign-band::-webkit-scrollbar { height:4px; }
+  .reign-band::-webkit-scrollbar-thumb { background:rgba(184,152,96,0.35); border-radius:2px; }
+  .reign-chapter-btn {
+    flex:0 0 auto; scroll-snap-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+    min-width:52px; padding:7px 10px; cursor:pointer;
+    background:rgba(184,152,96,0.10); border:1px solid rgba(184,152,96,0.25);
+    border-radius:6px; transition:background 0.15s ease, border-color 0.15s ease;
+    position:relative;
   }
-  .reign-seg.active .reign-seg-label { color:var(--ink); opacity:1; font-weight:700; }
-  .reign-seg[data-continues="1"]::after {
-    content:'⇢'; position:absolute; right:2px; top:50%; transform:translateY(-50%);
-    font-size:9px; color:rgba(184,152,96,0.7);
+  .reign-chapter-btn:hover { background:rgba(184,152,96,0.22); }
+  .reign-chapter-btn.active { background:rgba(212,160,74,0.55); border-color:rgba(212,160,74,0.9); }
+  .reign-chapter-name { font-size:12px; color:var(--paper-dark); white-space:nowrap; font-weight:600; }
+  .reign-chapter-years { font-size:9px; color:var(--paper-dark); opacity:0.6; white-space:nowrap; }
+  .reign-chapter-btn.active .reign-chapter-name,
+  .reign-chapter-btn.active .reign-chapter-years { color:var(--ink); opacity:1; }
+  .reign-chapter-btn[data-continues="1"]::after {
+    content:'⇢'; position:absolute; top:2px; right:3px;
+    font-size:8px; color:rgba(184,152,96,0.8);
   }
 
-  /* ── 왕조 라벨 ── "세종 (1418~1450)" 형태로 상단 연도 숫자 위에
-     표시한다(#reignLabel). syncToYear마다 timeline.js가 갱신한다. */
-  .reign-label { font-size:13px; color:var(--gold); letter-spacing:1px; margin-bottom:2px; font-weight:600; }
-  input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:3px; touch-action:pan-x; background:var(--paper-dark); border-radius:2px; outline:none; opacity:0.8; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:24px; height:24px; border-radius:50%; background:var(--gold); border:3px solid var(--ink); cursor:pointer; }
+  .reign-label { font-size:15px; color:var(--gold); letter-spacing:1px; margin-bottom:2px; font-weight:700; }
   .hint { text-align:center; font-size:10px; color:var(--paper-dark); opacity:0.5; margin-top:9px; }
 
   .leaflet-popup-content-wrapper { background:var(--paper); color:var(--ink); border-radius:6px; max-width:300px; }

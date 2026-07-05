@@ -129,23 +129,12 @@ setTimeout(()=>{ map.invalidateSize(); }, 800);
 // renderer.js 로드가 끝난 뒤에야 safeRender가 존재하므로, 실제 호출은 항상
 // 사용자 인터랙션(줌 변경) 이후에 일어나 안전하다.
 map.on('zoomend', ()=>{
-  const slider = document.getElementById('slider');
-  // 검색이 활성 상태일 때는 연도 기반 렌더로 되돌리지 않는다 — 검색 결과를
-  // fitBounds/setView로 화면에 맞추는 과정에서도 zoomend가 발생하는데,
-  // 이때 safeRender(year)를 그대로 호출하면 검색 결과가 즉시 사라진다.
-  // 루트가 열려있을 때도 동일한 이유로 제외한다 — renderRoute()의
-  // map.fitBounds()가 zoomend를 유발하는데, 이때 safeRender가 실행되면
-  // 방금 clearLayers()로 지운 연도별 마커가 곧바로 다시 그려져 루트
-  // 마커와 겹쳐 보이는 문제가 있었다.
   const routeActive = typeof getActiveRouteId === 'function' && getActiveRouteId();
-  if (slider && !routeActive && !(typeof isSearchActive === 'function' && isSearchActive())) {
-    safeRender(parseInt(slider.value));
+  if (!routeActive && !(typeof isSearchActive === 'function' && isSearchActive())) {
+    if (typeof renderCurrentChapter === 'function') renderCurrentChapter();
   }
-  // 줌 레벨 변화로 minZoom 기준 지명(예: 독도)의 표시 여부가 바뀔 수 있으므로
-  // 라벨도 같이 갱신한다. renderHistoricalLabels는 HISTORICAL_LABELS_ENABLED가
-  // false면 내부에서 즉시 반환되어 무해하다.
-  if (typeof renderHistoricalLabels === 'function' && slider) {
-    renderHistoricalLabels(parseInt(slider.value), map.getZoom());
+  if (typeof renderHistoricalLabels === 'function' && typeof currentReignRange === 'function') {
+    renderHistoricalLabels(currentReignRange()[0], map.getZoom());
   }
 });
 

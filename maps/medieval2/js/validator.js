@@ -45,6 +45,16 @@ function getVisibleEvents(year) {
     });
 }
 
+// ── 챕터(왕조 재위기간) 범위 조회 ──
+// 위 getVisibleEvents(단일 연도, 감쇠 포함)와 달리, 사건 자체의 실제
+// 연도(e.year)가 챕터 범위 안에 있는지만 본다 — 감쇠·lingering 개념이
+// 없는 대신, "이 왕 때 실제로 일어난 사건"만 정확히 모은다.
+function getVisibleEventsInRange(startYear, endYear) {
+  return Object.values(DATA)
+    .flat()
+    .filter(e => e.year >= startYear && e.year <= endYear);
+}
+
 // ═══════════════════════════════════════════════════════
 // 검증 항목 1 — 연결(connections) 무결성
 // ═══════════════════════════════════════════════════════

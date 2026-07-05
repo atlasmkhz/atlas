@@ -159,13 +159,11 @@ const WORLD_TYPE_LABEL = {
   ECONOMY:'경제', TECH:'기술', CULTURE:'문화', IDEA:'사상'
 };
 
-// 현재 화면에 표시 중인 연도. 마커 클릭은 그 연도 화면에서 일어나므로,
-// 슬라이더 값(없으면 yearNum 텍스트)을 신뢰원으로 삼는다.
+// 현재 챕터(왕조 재위기간)의 대표 연도. 마커 클릭은 그 챕터 화면에서
+// 일어나므로, 챕터 시작년을 신뢰원으로 삼는다(챕터 모드에는 "그 순간의
+// 연도" 개념이 없다 — 정확한 연도는 각 사건 카드 안에 있다).
 function currentDisplayYear(){
-  const s = document.getElementById('slider');
-  if (s && s.value !== '') return parseInt(s.value, 10);
-  const yn = document.getElementById('yearNum');
-  if (yn) { const n = parseInt(yn.textContent, 10); if (!isNaN(n)) return n; }
+  if (typeof currentReignRange === 'function') return currentReignRange()[0];
   return null;
 }
 
@@ -532,6 +530,96 @@ function renderYear(year){
   declutterMarkers();
 }
 
+// ── 챕터(왕조 재위기간) 단위 렌더링 ──
+// 예전엔 연도 슬라이더를 한 칸씩 움직일 때마다 renderYear(year) 하나만
+// 그렸는데, 이제는 왕 재위기간 전체(startYear~endYear)에 걸친 사건을
+// 한번에 모두 보여준다. "그 왕 때 있었던 일"이라는 챕터 단위 개념이라
+// visible_from/visible_until(예전의 "점점 흐려지는 효과"용 범위)이 아니라
+// 사건 자체의 실제 연도(e.year)가 이 챕터 범위 안에 있는지로 판단한다.
+// 그래서 투명도 감쇠나 "당해 연도 펄스" 같은, 연 단위 스크럽에서만
+// 의미 있던 효과도 함께 걷어냈다 — 챕터 안의 사건은 전부 동등하게,
+// 항상 100% 밝기로 보여준다.
+function renderRange(startYear, endYear){
+  clearLayers();
+  eventMarkers = [];
+
+  renderWorldEvents(startYear);
+
+  const showEvent = document.getElementById('layerEvent')?.checked ?? true;
+  const showPerson = document.getElementById('layerPerson')?.checked ?? false;
+  const showPolicy = document.getElementById('layerPolicy')?.checked ?? true;
+
+  const visible = getVisibleEventsInRange(startYear, endYear);
+  console.log('렌더 시작(챕터)', startYear, '~', endYear, '· 표시 사건', visible.length);
+
+  const connectable = visible.filter(e=>{
+    if(e.type === 'person') return showPerson;
+    if(e.type === 'policy') return showPolicy;
+    return showEvent;
+  });
+  drawConnections(connectable);
+
+  const ec = document.getElementById('eventCount');
+  if(ec){
+    const totalInRange = Object.values(DATA).flat().filter(ev => ev.year >= startYear && ev.year <= endYear).length;
+    ec.textContent = '표시 ' + connectable.length + ' / ' + totalInRange;
+  }
+
+  visible.forEach((e, index)=>{
+   try {
+    if(e.lat == null || e.lng == null){ console.warn('좌표 없음:', index, e.title_ko); return; }
+    const z = map.getZoom();
+    const imp = getImportance(e);
+    if(z < 5 && imp !== 'global') return;
+    if(z < 6 && imp === 'local') return;
+    if(e.type === 'person' && !showPerson) return;
+    if(e.type === 'policy' && !showPolicy) return;
+    if(e.type !== 'person' && e.type !== 'policy' && !showEvent) return;
+
+    const color = COLORS[e.type];
+
+    if(e.area){
+      const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);
+      circle.on('click', ()=>{
+        if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
+        if(window.trackEventOpen) window.trackEventOpen(e);
+        if(window.openInfoPanel) openInfoPanel(popupHtml(e));
+      });
+      layers.push(circle);
+    }
+
+    // 챕터 모드에서는 감쇠/펄스가 없다 — 전부 동등하게 100% 밝기.
+    const icon = makeMarkerIcon(e.type, { color, opacity:1.0, pulse:false });
+    const m = L.marker([e.lat,e.lng], {icon}).addTo(map);
+    m.on('click', ()=>{
+      if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
+      if(window.trackEventOpen) window.trackEventOpen(e);
+      if(window.openInfoPanel) openInfoPanel(popupHtml(e));
+      if(typeof setSelectRing === 'function'){ try{ setSelectRing(m); }catch(_){} }
+    });
+    attachSelectRing(m);
+    m._origLatLng = [e.lat, e.lng];
+    m._eventColor = color;
+    m._eventId = e.id;
+    eventMarkers.push(m);
+    layers.push(m);
+   } catch(err){
+    console.error('이벤트 렌더 오류:', e.title_ko, err);
+   }
+  });
+  declutterMarkers();
+}
+
+// ── 안전 렌더링 래퍼(챕터 버전) ──
+function safeRenderRange(startYear, endYear) {
+  try {
+    renderRange(startYear, endYear);
+  } catch(err) {
+    console.error('렌더링 오류:', err);
+    alert('오류: ' + err.message);
+  }
+}
+
 // ── 안전 렌더링 래퍼 ──
 // 데이터 오류로 렌더링이 죽어도 전체 앱이 멈추지 않도록 감싼다.
 function safeRender(year) {
@@ -561,23 +649,17 @@ function navigateToEvent(id, opts){
     clearSearch();
   }
 
-  // 루트가 열려있는 동안에는 슬라이더/연도 렌더링을 건드리지 않는다 —
-  // safeRender(year)를 호출하면 그 연도의 모든 일반 사건 마커가 루트
-  // 마커 위에 겹쳐 그려지는 문제가 있었다(루트는 routeLayers[]로 독립
-  // 관리되어 clearLayers() 대상이 아니므로, 새로 그려진 layers[]가
+  // 루트가 열려있는 동안에는 챕터 렌더링을 건드리지 않는다 —
+  // renderCurrentChapter()를 호출하면 그 챕터의 모든 일반 사건 마커가
+  // 루트 마커 위에 겹쳐 그려지는 문제가 있었다(루트는 routeLayers[]로
+  // 독립 관리되어 clearLayers() 대상이 아니므로, 새로 그려진 layers[]가
   // 그대로 남아 루트와 뒤섞여 보인다).
   const routeActive = typeof getActiveRouteId === 'function' && getActiveRouteId();
 
   if (!routeActive) {
-    const slider = document.getElementById('slider');
-    if(slider){
-      slider.value = target.year;
-      const yearNumEl = document.getElementById('yearNum');
-      if(yearNumEl) yearNumEl.textContent = target.year;
-      const ganjiEl = document.getElementById('ganji');
-      if(ganjiEl && typeof getGanji === 'function') ganjiEl.textContent = getGanji(target.year);
-      safeRender(target.year);
-      if (typeof updateEra === 'function') updateEra(target.year);
+    if (typeof reignIndexForYear === 'function' && typeof selectReign === 'function') {
+      const idx = reignIndexForYear(target.year);
+      selectReign(idx, { silent: true });
     }
   }
 

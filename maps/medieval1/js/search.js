@@ -160,9 +160,8 @@ function clearSearch(){
 
   resetToInitialView();
 
-  const slider = document.getElementById('slider');
-  if(slider && typeof safeRender === 'function'){
-    safeRender(parseInt(slider.value));
+  if (typeof renderCurrentChapter === 'function') {
+    renderCurrentChapter();
   }
 }
 
