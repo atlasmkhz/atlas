@@ -41,6 +41,16 @@ function renderCurrentChapter(){
 }
 
 // ── 챕터 내비게이션 렌더링(최초 1회) ──
+// 챕터 버튼 폭을 재위기간에 비례하게 만든다 — 예전 버전(연도 슬라이더가
+// 있던 시절)에는 이걸 하면 슬라이더와 어긋나는 버그가 있었지만, 지금은
+// 슬라이더 자체가 없고 그냥 가로 스크롤 버튼 목록이라 맞출 대상이 없다.
+// 그래서 다시 비례폭으로 돌려도 안전하다. 극단적으로 짧은 재위(인종
+// 8개월 등)만 최소폭으로 보호한다 — 이번엔 그 최소폭을 다른 왕에게서
+// "빌려오지" 않는다(전체 폭이 슬라이더처럼 고정된 100%가 아니라 그냥
+// 옆으로 늘어나면 되므로), 그래서 다른 챕터에 전혀 영향을 주지 않는다.
+const PX_PER_YEAR = 4;       // 왕조 띠에서 1년당 대략적인 폭(px)
+const MIN_CHAPTER_WIDTH = 52; // 탭 가능한 최소 폭(px)
+
 function renderChapterNav(){
   const nav = document.getElementById('reignBand');
   if (!nav) return;
@@ -48,7 +58,10 @@ function renderChapterNav(){
     const displayEnd = r.display_end_year ?? r.end_year;
     const label = r.segment ? `${r.name}(${r.segment})` : r.name;
     const continuesNote = r.continues_in ? ' data-continues="1"' : '';
-    return `<button type="button" class="reign-chapter-btn" data-index="${i}"${continuesNote}>
+    const span = Math.max(displayEnd - r.start_year, 0);
+    const width = Math.max(MIN_CHAPTER_WIDTH, Math.round(span * PX_PER_YEAR));
+    return `<button type="button" class="reign-chapter-btn" data-index="${i}"${continuesNote}
+      style="width:${width}px; flex:0 0 ${width}px;">
       <span class="reign-chapter-name">${label}</span>
       <span class="reign-chapter-years">${r.start_year}~${displayEnd}</span>
     </button>`;

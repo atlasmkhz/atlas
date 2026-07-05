@@ -21,6 +21,11 @@ function renderCurrentChapter(){
   safeRenderRange(start, end);
 }
 
+// 챕터 버튼 폭을 재위기간에 비례하게 만든다 — 슬라이더가 없는 지금은
+// 안전하다(자세한 이유는 중세2/조선의 timeline.js 주석 참고).
+const PX_PER_YEAR = 4;
+const MIN_CHAPTER_WIDTH = 52;
+
 function renderChapterNav(){
   const nav = document.getElementById('reignBand');
   if (!nav) return;
@@ -28,7 +33,10 @@ function renderChapterNav(){
     const displayEnd = r.display_end_year ?? r.end_year;
     const label = r.segment ? `${r.name}(${r.segment})` : r.name;
     const continuesNote = r.continues_in ? ' data-continues="1"' : '';
-    return `<button type="button" class="reign-chapter-btn" data-index="${i}"${continuesNote}>
+    const span = Math.max(displayEnd - r.start_year, 0);
+    const width = Math.max(MIN_CHAPTER_WIDTH, Math.round(span * PX_PER_YEAR));
+    return `<button type="button" class="reign-chapter-btn" data-index="${i}"${continuesNote}
+      style="width:${width}px; flex:0 0 ${width}px;">
       <span class="reign-chapter-name">${label}</span>
       <span class="reign-chapter-years">${r.start_year}~${displayEnd}</span>
     </button>`;
