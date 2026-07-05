@@ -1,0 +1,30 @@
+// data/21_yeongjo.js — 영조 재위 (1724~1776) 시드 데이터
+const EVENTS_YEONGJO = [
+  { id:'policy_1725_01', year:1725, visible_from:1725, visible_until:1776,
+    month:null, day:null, type:'policy', priority:2,
+    title_ko:'탕평책 실시',
+    title_en:'Implementation of the Tangpyeong (Impartiality) Policy',
+    title_ja:'蕩平策の実施',
+    place_ko:'한양',
+    lat:37.5760, lng:126.9769,
+    people:['영조'],
+    summary_ko:'노론과 소론의 극심한 붕당 대립 속에서 즉위한 영조는, 붕당을 초월해 인재를 고르게 등용하겠다는 탕평책을 표방했다. 성균관 앞에 탕평비를 세우고 각 붕당에서 인재를 균형 있게 발탁했지만, 근본적으로 붕당 자체를 없애기보다는 왕권으로 이를 조정하는 방식이었다. 52년이라는 조선 역대 최장 재위 기간 동안 영조는 균역법 시행, 신문고 부활 등 여러 개혁을 추진하며 왕조의 안정을 다졌다.',
+    video:null,
+    connections:[],
+    tags:['policy','한양','영조','탕평책','붕당정치'],
+    sources:['한국민족문화대백과사전 탕평책'] },
+
+  { id:'plot_1762_01', year:1762, visible_from:1762, visible_until:1762,
+    month:6, day:null, type:'plot', priority:1,
+    title_ko:'임오화변 — 사도세자의 죽음',
+    title_en:'The Death of Crown Prince Sado',
+    title_ja:'壬午の禍変 — 思悼世子の死',
+    place_ko:'한양(창경궁)',
+    lat:37.5794, lng:126.9946,
+    people:['영조','사도세자'],
+    summary_ko:'영조와 세자 이선(사도세자)의 관계는 세자의 정신적 불안정과 기행, 이를 둘러싼 노론 벽파의 정치적 공세 속에서 극도로 악화됐다. 1762년 영조는 세자에게 스스로 뒤주에 들어가라 명했고, 세자는 8일 만에 뒤주 안에서 굶어 죽었다. 이 사건은 이후 세자의 아들 정조가 즉위한 뒤에도 노론과 남인·소론 사이의 정치적 갈등의 불씨로 남았으며, 정조는 아버지를 신원하기 위해 화성 축성 등 여러 상징적 조치를 취했다.',
+    video:null,
+    connections:['policy_1725_01'],
+    tags:['plot','한양','사도세자','영조','임오화변'],
+    sources:['한국민족문화대백과사전 사도세자'] }
+];

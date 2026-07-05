@@ -35,8 +35,8 @@
   const ERA_HUB_ITEMS = [
     { key:'prehistory', name:'선사시대', period:'고조선', ready:false, url:null },
     { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해', ready:false, url:null },
-    { key:'medieval1',  name:'중세 1',   period:'고려', ready:false, url:null },
-    { key:'medieval2',  name:'중세 2',   period:'조선', ready:false, url:null },
+    { key:'medieval1',  name:'중세 1',   period:'고려 918–1392', ready:true, url:'../medieval1/index.html' },
+    { key:'medieval2',  name:'중세 2',   period:'조선 1392–1875', ready:true, url:'../medieval2/index.html' },
     { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'../../map.html' },
     { key:'modern2',    name:'근현대',   period:'1945–1993', ready:true, url:'.' },
     { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'../contemporary/index.html' }

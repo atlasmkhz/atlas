@@ -1,0 +1,30 @@
+// data/16_injo.js — 인조 재위 (1623~1649) 시드 데이터
+const EVENTS_INJO = [
+  { id:'plot_1623_01', year:1623, visible_from:1623, visible_until:1623,
+    month:2, day:null, type:'plot', priority:1,
+    title_ko:'인조반정 — 광해군 폐위',
+    title_en:'Injo Coup — Deposition of Gwanghaegun',
+    title_ja:'仁祖反正 — 光海君廃位',
+    place_ko:'한양',
+    lat:37.5760, lng:126.9769,
+    people:['인조','광해군'],
+    summary_ko:'광해군은 명과 후금(청) 사이에서 실리를 취하는 중립 외교를 펼쳤으나, 이는 명에 대한 의리를 저버렸다는 서인 세력의 반발을 샀다. 서인은 능양군(인조)을 앞세워 반정을 일으켜 광해군을 폐위하고 강화도로 유배 보냈다. 새로 즉위한 인조는 친명배금 노선으로 급선회했는데, 이는 곧이어 정묘호란과 병자호란이라는 두 차례의 침략을 불러오는 배경이 됐다.',
+    video:null,
+    connections:['battle_1636_01'],
+    tags:['plot','한양','인조반정','광해군','서인'],
+    sources:['한국민족문화대백과사전 인조반정'] },
+
+  { id:'battle_1636_01', year:1636, visible_from:1636, visible_until:1637,
+    month:11, day:null, type:'battle', priority:1,
+    title_ko:'병자호란 — 삼전도의 굴욕',
+    title_en:'Second Manchu Invasion — The Humiliation at Samjeondo',
+    title_ja:'丙子胡乱 — 三田渡の屈辱',
+    place_ko:'경기 남한산성',
+    lat:37.4783, lng:127.2044,
+    people:['인조'],
+    summary_ko:'국호를 청으로 바꾼 홍타이지는 조선이 신하의 예를 거부하자 12만 대군을 이끌고 직접 침공했다. 인조는 남한산성으로 피신해 45일간 항전했지만 식량이 끊기고 강화도까지 함락되자 결국 성을 나와 항복했다. 인조는 삼전도(지금의 서울 송파)에서 청 황제 홍타이지에게 세 번 절하고 아홉 번 머리를 조아리는 항복 의례(삼궤구고두)를 치렀고, 이는 "삼전도의 굴욕"으로 불리며 조선 역사상 가장 치욕적인 순간으로 기록됐다. 이 전쟁으로 조선은 청의 신하국이 됐고, 소현세자를 포함한 왕자와 수만 명의 백성이 청에 끌려갔다.',
+    video:null,
+    connections:['plot_1623_01'],
+    tags:['battle','남한산성','병자호란','삼전도','청'],
+    sources:['한국민족문화대백과사전 병자호란','위키백과 병자호란'] }
+];

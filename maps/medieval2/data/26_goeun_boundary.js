@@ -1,0 +1,46 @@
+// data/26_goeun_boundary.js — 고종 재위 전반부 (1863~1875) 시드 데이터
+// 이 지도(중세2)는 1875년에서 끊고, 1876년부터는 근대 지도(map.html)가
+// 이어받는다 — reigns.js의 continues_in 필드 참고.
+const EVENTS_GOJONG_BOUNDARY = [
+  { id:'political_1863_01', year:1863, visible_from:1863, visible_until:1873,
+    month:11, day:null, type:'political', priority:1,
+    title_ko:'고종 즉위와 흥선대원군의 집권',
+    title_en:'Enthronement of Gojong and the Rise of the Regent Heungseon',
+    title_ja:'高宗即位と興宣大院君の執権',
+    place_ko:'한양',
+    lat:37.5760, lng:126.9769,
+    people:['고종','흥선대원군'],
+    summary_ko:'철종이 후사 없이 세상을 떠나자, 신정왕후 조씨는 자신과 가까운 흥선군의 둘째 아들 명복(고종)을 왕위에 앉혔다. 고종이 12세의 어린 나이로 즉위하자 생부인 흥선대원군이 10년간 실권을 쥐고 대리 통치했다. 대원군은 안동 김씨의 세도정치를 무너뜨리고 경복궁을 중건했으며, 서양 세력의 통상 요구에는 강경한 쇄국정책으로 맞섰다. 이 노선은 곧 병인양요·신미양요 같은 무력 충돌로 이어졌다.',
+    video:null,
+    connections:[],
+    tags:['political','한양','고종','흥선대원군','세도정치'],
+    sources:['한국민족문화대백과사전 흥선대원군'] },
+
+  { id:'battle_1866_01', year:1866, visible_from:1866, visible_until:1866,
+    month:8, day:null, type:'battle', priority:2,
+    title_ko:'병인양요',
+    title_en:'French Campaign against Korea (1866)',
+    title_ja:'丙寅洋擾',
+    place_ko:'강화도',
+    lat:37.7465, lng:126.4874,
+    people:['흥선대원군'],
+    summary_ko:'프랑스는 조선의 천주교 박해(병인박해)를 구실로 로즈 제독이 이끄는 군함을 보내 강화도를 침공했다. 조선군은 문수산성·정족산성 전투에서 프랑스군을 격퇴했고, 프랑스군은 철수하며 강화도 외규장각의 도서와 문화재를 약탈해갔다. 이 승리는 흥선대원군의 쇄국정책에 대한 자신감을 더욱 굳히는 계기가 됐다.',
+    video:null,
+    connections:['political_1863_01'],
+    tags:['battle','강화도','병인양요','프랑스','흥선대원군'],
+    sources:['한국민족문화대백과사전 병인양요'] },
+
+  { id:'battle_1871_01', year:1871, visible_from:1871, visible_until:1875,
+    month:3, day:null, type:'battle', priority:2,
+    title_ko:'신미양요',
+    title_en:'United States Expedition to Korea (1871)',
+    title_ja:'辛未洋擾',
+    place_ko:'강화도',
+    lat:37.7465, lng:126.4874,
+    people:['흥선대원군'],
+    summary_ko:'1866년 대동강에서 불에 태워진 미국 상선 제너럴셔먼호 사건을 구실로, 미국은 아시아 함대를 보내 강화도를 공격했다. 어재연이 지휘한 조선 수비대는 광성보에서 결사 항전했지만 화력의 열세로 함락됐다. 그러나 조선이 통상 요구에 끝까지 응하지 않자 미군은 결국 물러났고, 흥선대원군은 전국에 착화비를 세워 서양과의 수교를 거부하는 쇄국 의지를 재확인했다. 이 노선은 1875년 대원군이 물러나고 고종이 친정을 시작하면서 서서히 바뀌어, 이듬해 강화도조약으로 이어진다.',
+    video:null,
+    connections:['battle_1866_01'],
+    tags:['battle','강화도','신미양요','미국','어재연'],
+    sources:['한국민족문화대백과사전 신미양요'] }
+];

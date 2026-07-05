@@ -1,0 +1,30 @@
+// data/04_sejong.js — 세종 재위 (1418~1450) 시드 데이터
+const EVENTS_SEJONG = [
+  { id:'political_1418_01', year:1418, visible_from:1418, visible_until:1418,
+    month:7, day:null, type:'political', priority:1,
+    title_ko:'세종 즉위',
+    title_en:'Enthronement of King Sejong',
+    title_ja:'世宗即位',
+    place_ko:'한양',
+    lat:37.5760, lng:126.9769,
+    people:['세종','태종'],
+    summary_ko:'태종은 맏아들 양녕대군을 폐세자하고 셋째 아들 충녕대군을 세자로 세운 뒤 곧바로 왕위를 물려줘, 충녕대군이 세종으로 즉위했다. 태종은 상왕으로 물러난 뒤에도 4년간 군사권을 쥐고 왕권 안정을 뒷받침했다. 세종은 이후 32년간 재위하며 훈민정음 창제, 과학기술 발전, 4군 6진 개척 등으로 조선의 최전성기를 이끌었다.',
+    video:null,
+    connections:[],
+    tags:['political','한양','세종','태종','즉위'],
+    sources:['한국민족문화대백과사전 세종'] },
+
+  { id:'culture_1443_01', year:1443, visible_from:1443, visible_until:1446,
+    month:11, day:null, type:'culture', priority:1,
+    title_ko:'훈민정음 창제',
+    title_en:'Creation of Hangul (Hunminjeongeum)',
+    title_ja:'訓民正音創製',
+    place_ko:'한양(경복궁)',
+    lat:37.5796, lng:126.9770,
+    people:['세종'],
+    summary_ko:'세종은 한자를 모르는 백성들이 자신의 뜻을 글로 표현하지 못하는 현실을 안타깝게 여겨, 집현전 학자들과 함께 새로운 문자를 만드는 작업을 주도했다. 1443년 완성된 훈민정음은 발음 기관의 모양을 본떠 만든 자음과 하늘·땅·사람을 형상화한 모음으로 구성된, 세계적으로도 독창적인 표음문자였다. 1446년 "훈민정음"이라는 이름으로 반포되며 "백성을 가르치는 바른 소리"라는 뜻을 담았다. 일부 유학자들의 반대에도 세종은 이를 관철시켰고, 이 문자는 이후 20세기 들어 "한글"이라는 이름으로 대한민국의 공식 문자가 됐다.',
+    video:null,
+    connections:['political_1418_01'],
+    tags:['culture','한양','세종','훈민정음','한글'],
+    sources:['한국민족문화대백과사전 훈민정음','위키백과 한글'] }
+];

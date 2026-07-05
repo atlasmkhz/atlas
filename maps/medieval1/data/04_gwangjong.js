@@ -1,0 +1,30 @@
+// data/04_gwangjong.js — 광종 재위 (949~975) 시드 데이터
+const EVENTS_GWANGJONG = [
+  { id:'policy_0956_01', year:956, visible_from:956, visible_until:956,
+    month:null, day:null, type:'policy', priority:1,
+    title_ko:'노비안검법 시행',
+    title_en:'Slave Review Act',
+    title_ja:'奴婢按検法の施行',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['광종'],
+    summary_ko:'건국 초기 공을 세운 호족들은 전쟁 중 억울하게 노비가 된 양인을 많이 거두어 사병처럼 부리며 세력을 키웠다. 광종은 이런 부당한 노비를 조사해 양인으로 되돌리는 노비안검법을 시행해, 호족의 경제적·군사적 기반을 약화시키고 왕권을 강화했다. 호족들의 거센 반발을 샀지만, 광종은 이후 과거제 도입과 함께 강력한 숙청을 병행하며 개혁을 밀어붙였다.',
+    video:null,
+    connections:['policy_0958_01'],
+    tags:['policy','개경','광종','노비안검법','왕권강화'],
+    sources:['한국민족문화대백과사전 노비안검법'] },
+
+  { id:'policy_0958_01', year:958, visible_from:958, visible_until:958,
+    month:null, day:null, type:'policy', priority:1,
+    title_ko:'과거제 시행',
+    title_en:'Introduction of the Civil Service Examination',
+    title_ja:'科挙制の施行',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['광종','쌍기'],
+    summary_ko:'후주에서 귀화한 쌍기의 건의를 받아들여, 광종은 시험을 통해 관리를 선발하는 과거제를 처음 도입했다. 이전까지 호족의 혈통이나 공적에 따라 관직이 세습되던 방식에서 벗어나, 유교 경전 등에 대한 학식을 시험해 인재를 뽑는 체제로 전환한 것이다. 이는 호족 중심의 정치 질서를 흔들고 왕에게 충성하는 신진 관료층을 키우는 토대가 됐으며, 이후 조선시대까지 이어지는 과거제의 원형이 됐다.',
+    video:null,
+    connections:['policy_0956_01'],
+    tags:['policy','개경','광종','과거제','쌍기'],
+    sources:['한국민족문화대백과사전 과거제'] }
+];

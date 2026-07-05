@@ -1,0 +1,30 @@
+// data/01_taejo.js — 태조(왕건) 재위 (918~943) 시드 데이터
+const EVENTS_TAEJO = [
+  { id:'political_0918_01', year:918, visible_from:918, visible_until:918,
+    month:5, day:null, type:'political', priority:1,
+    title_ko:'고려 건국 — 왕건 즉위',
+    title_en:'Founding of Goryeo — Wang Geon Enthroned',
+    title_ja:'高麗建国 — 王建即位',
+    place_ko:'송악(개성)',
+    lat:37.9707, lng:126.5615,
+    people:['왕건'],
+    summary_ko:'후고구려(태봉)의 장수였던 왕건은 궁예의 폭정에 반발한 신하들의 추대를 받아 정변을 일으켜 궁예를 몰아내고 왕위에 올랐다. 그는 국호를 고려로 정하고 연호를 천수라 했으며, 이듬해 수도를 송악(개성)으로 옮겼다. 지방 호족들과의 혼인·포섭 정책으로 세력을 넓혀간 왕건은 이후 신라의 항복과 후백제 정벌을 통해 936년 후삼국을 통일했다.',
+    video:null,
+    connections:['political_0936_01'],
+    tags:['political','송악','왕건','고려건국','궁예'],
+    sources:['한국민족문화대백과사전 태조(고려)','위키백과 왕건'] },
+
+  { id:'political_0936_01', year:936, visible_from:936, visible_until:936,
+    month:8, day:null, type:'political', priority:1,
+    title_ko:'후삼국 통일',
+    title_en:'Unification of the Later Three Kingdoms',
+    title_ja:'後三国統一',
+    place_ko:'경북 선산(일리천)',
+    lat:36.2200, lng:128.3200,
+    people:['왕건','견훤'],
+    summary_ko:'신라의 마지막 왕 경순왕이 935년 스스로 고려에 항복한 뒤, 왕건은 후백제와의 최후 결전에 나섰다. 후백제의 견훤이 아들 신검에게 왕위를 빼앗기고 고려에 투항해오자, 왕건은 936년 일리천 전투에서 신검의 군대를 격파하고 후백제를 멸망시켰다. 이로써 신라 말 이래 분열됐던 한반도는 고려에 의해 다시 통일됐다.',
+    video:null,
+    connections:['political_0918_01'],
+    tags:['political','선산','왕건','견훤','후삼국통일'],
+    sources:['한국민족문화대백과사전 후삼국통일'] }
+];
