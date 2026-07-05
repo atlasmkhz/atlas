@@ -104,7 +104,7 @@ const EVENTS_2025 = [
     tags:['organization','서울','뉴라이트','역사왜곡','늘봄학교','여론조작','아동교육'],
     sources:['나무위키 리박스쿨 여론조작 사건','경향신문 리박스쿨 압수수색','경향신문 리박스쿨 수사 정리'] },
 
-  { id:'economic_2025_01', year:2025, visible_from:2015, visible_until:2025,
+  { id:'economic_2025_01', year:2025, visible_from:2025, visible_until:2025,
     month:7, day:17, type:'economic', priority:1,
     title_ko:'이재용, 삼성물산 합병·삼바 회계부정 의혹 대법원 최종 무죄',
     title_en:'Lee Jae-yong Cleared by Supreme Court in Final Ruling',

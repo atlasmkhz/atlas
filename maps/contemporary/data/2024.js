@@ -115,7 +115,7 @@ const EVENTS_2024 = [
     tags:['economic','서울','티몬','위메프','큐텐','정산대란'],
     sources:['나무위키 "큐텐 정산 지연 사태"'] },
 
-  { id:'economic_2024_02', year:2024, visible_from:2010, visible_until:2024,
+  { id:'economic_2024_02', year:2024, visible_from:2024, visible_until:2024,
     month:7, day:23, type:'economic', priority:1,
     title_ko:'김범수 카카오 창업자 구속 — SM엔터 시세조종 의혹',
     title_en:'Kakao Founder Kim Beom-soo Arrested Over Stock Manipulation',

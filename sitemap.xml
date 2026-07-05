@@ -3,7 +3,7 @@
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 430개 + 루트 7개 + 
   근현대(1945~1993) 진입점 1개 + Event 418개 + 루트 8개 + 
-  현대(1994~2025) 진입점 1개 + Event 214개(루트 없음)를 포함한다.
+  현대(1994~2025) 진입점 1개 + Event 217개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
   generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를
@@ -5051,6 +5051,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2016-ulsan-whale-meat</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2017-2017-presidential-election</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5406,12 +5411,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-shincheonji-s-mass</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-south-korea-eliminated</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-starbucks-korea-tank</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-unification-church-money</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
