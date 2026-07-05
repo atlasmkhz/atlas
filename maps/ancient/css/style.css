@@ -61,6 +61,12 @@
     position:absolute; top:calc(var(--top-nav-height) + 12px); right:12px; z-index:700;
     display:flex; flex-direction:column; align-items:flex-end; gap:10px;
     max-width:calc(100vw - 24px);
+    /* 범례(유형)+범례(나라)+레이어를 다 쌓으면 세로 길이가 뷰포트보다
+       길어질 수 있다(스크린샷으로 확인된 문제 — "나라" 필터가 화면
+       아래로 밀려 안 보였다). max-height+overflow로 안전망을 둬서,
+       내용이 넘치면 이 스택 자체가 스크롤되게 한다. */
+    max-height:calc(100vh - var(--top-nav-height) - 24px);
+    overflow-y:auto; overflow-x:hidden;
   }
 
   /* ── 검색 위젯: 기본 접힘, 클릭 시 펼침 ── */
@@ -116,6 +122,11 @@
   .legend-item { display:flex; align-items:center; gap:6px; margin:3px 0; font-size:10px; }
   .legend-icon { display:flex; align-items:center; justify-content:center; width:14px; height:14px; flex-shrink:0; }
   .legend-icon svg { filter:drop-shadow(0 0 1px rgba(0,0,0,0.6)); }
+  /* 나라색 범례 스와치 — 실제 마커의 .atlas-nation-ring과 같은 시각 언어
+     (색 테두리 원)를 그대로 재사용해, 지도 위 고리색과 범례가 항상
+     일치하는 느낌을 준다. */
+  .legend-swatch { display:inline-block; width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+  .nation-swatch { border:2.5px solid; background:transparent; }
 
   /* 줌 컨트롤 위치는 이제 map.js에서 L.control.zoom({position:'bottomleft'})로
      지정한다 — 여기서는 시각적 테마(색상·블러)와 하단 타임라인 바에
@@ -469,6 +480,15 @@
     display:flex; align-items:center; justify-content:center;
     transition:transform 0.12s ease;
   }
+  /* ── 나라색 고리(atlas-nation-ring) ── 유형 아이콘(무슨 일)과 별개로
+     "어느 나라 일이었나"를 항상 표시한다. 선택 링(.atlas-selected::after)
+     보다 한 단계 바깥에 그려서 서로 겹치지 않게 한다. */
+  .atlas-nation-ring {
+    position:absolute; top:-4px; left:-4px; right:-4px; bottom:-4px;
+    border:2.5px solid; border-radius:50%; opacity:0.95; z-index:1;
+    box-shadow:0 0 0 1px rgba(20,17,12,0.85); /* 배경과의 대비 확보 */
+    pointer-events:none;
+  }
   .atlas-marker svg {
     position:relative; z-index:2;
     filter:drop-shadow(0 0 1.5px rgba(0,0,0,0.9)) drop-shadow(0 1px 2px rgba(0,0,0,0.6));
@@ -478,7 +498,7 @@
   /* 선택(팝업 열림): 외곽 링. Leaflet은 팝업이 열린 마커에 별도 클래스를
      주지 않으므로, 마커 요소에 .atlas-selected를 토글해 표시한다(renderer.js). */
   .atlas-marker.atlas-selected::after {
-    content:''; position:absolute; top:-4px; left:-4px; right:-4px; bottom:-4px;
+    content:''; position:absolute; top:-8px; left:-8px; right:-8px; bottom:-8px;
     border:2px solid currentColor; border-radius:50%; opacity:0.9; z-index:1;
   }
   /* 펄스 링: 당해 연도 / 검색 결과. 형태 뒤에서 은은하게. */

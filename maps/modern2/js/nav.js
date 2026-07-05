@@ -33,8 +33,8 @@
   // 디렉토리를 가리키는 url은 전부 'index.html'까지 명시했다(웹서버에
   // 올렸을 때도 동일하게 동작하니 손해가 없다).
   const ERA_HUB_ITEMS = [
-    { key:'prehistory', name:'선사시대', period:'고조선', ready:false, url:null },
-    { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해', ready:false, url:null },
+    { key:'prehistory', name:'선사시대', period:'신화시대~고조선', ready:true, url:'../prehistory/index.html' },
+    { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해 (기원전 37–936)', ready:true, url:'../ancient/index.html' },
     { key:'medieval1',  name:'중세 1',   period:'고려 918–1392', ready:true, url:'../medieval1/index.html' },
     { key:'medieval2',  name:'중세 2',   period:'조선 1392–1875', ready:true, url:'../medieval2/index.html' },
     { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'../../map.html' },

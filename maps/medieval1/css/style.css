@@ -256,7 +256,8 @@
   }
   .reign-chapter-btn:hover { background:rgba(184,152,96,0.22); }
   .reign-chapter-btn.active { background:rgba(212,160,74,0.55); border-color:rgba(212,160,74,0.9); }
-  .reign-chapter-name { font-size:12px; color:var(--paper-dark); white-space:nowrap; font-weight:600; }
+  .reign-chapter-name { font-size:12px; color:var(--paper-dark); white-space:normal; text-align:center; line-height:1.25; font-weight:600; word-break:keep-all; }
+  .reign-chapter-seg { font-size:10px; font-weight:500; opacity:0.75; }
   .reign-chapter-years { font-size:9px; color:var(--paper-dark); opacity:0.6; white-space:nowrap; }
   .reign-chapter-btn.active .reign-chapter-name,
   .reign-chapter-btn.active .reign-chapter-years { color:var(--ink); opacity:1; }

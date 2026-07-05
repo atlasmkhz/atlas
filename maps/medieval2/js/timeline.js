@@ -48,8 +48,8 @@ function renderCurrentChapter(){
 // 8개월 등)만 최소폭으로 보호한다 — 이번엔 그 최소폭을 다른 왕에게서
 // "빌려오지" 않는다(전체 폭이 슬라이더처럼 고정된 100%가 아니라 그냥
 // 옆으로 늘어나면 되므로), 그래서 다른 챕터에 전혀 영향을 주지 않는다.
-const PX_PER_YEAR = 4;       // 왕조 띠에서 1년당 대략적인 폭(px)
-const MIN_CHAPTER_WIDTH = 52; // 탭 가능한 최소 폭(px)
+const PX_PER_YEAR = 3;       // 왕조 띠에서 1년당 폭(px) — 재위기간이 눈에 보이게 비례
+const MIN_CHAPTER_WIDTH = 70; // 탭 가능한 최소 폭(px)
 
 function renderChapterNav(){
   const nav = document.getElementById('reignBand');
@@ -159,6 +159,23 @@ function selectReign(index, opts){
   if (window.closeInfoPanel) closeInfoPanel();
   renderCurrentChapter();
   updateEra(r.order);
+
+  // ── 시대개요(era card) 자동 오픈 — 기존 연도 슬라이더 지도들의
+  // "slider change(연도 확정) 시점마다 자동으로 열기" 동작과 동일한
+  // 자리다. 챕터 버튼 클릭이 그 "연도 확정"에 대응하는 지점이므로
+  // 여기서 연다. silent(초기 진입의 ?year=/?event= 딥링크처럼 사용자가
+  // 직접 조작하지 않은 프로그래밍적 이동)일 때는 열지 않는다 — 모바일도
+  // 기존과 동일하게 제외한다(ⓘ 버튼으로만 수동으로 연다).
+  if (!silent && window.innerWidth >= 1024) {
+    const eraDesc = document.getElementById('eraDesc');
+    if (eraDesc?.textContent?.trim()) {
+      if (typeof window.openEraCard === 'function') {
+        window.openEraCard();
+      } else {
+        document.getElementById('eraCard')?.classList.add('open');
+      }
+    }
+  }
 
   if (!silent && window.trackTimelineMove) {
     window.trackTimelineMove(r.segment ? `${r.name}(${r.segment})` : r.name);

@@ -104,8 +104,8 @@
   // ── 3. 시대 선택 허브 ── 포털에서는 모든 항목이 "실제 이동"이다
   // (자기참조 없음 — 이미 지도 위가 아니므로).
   const ERA_ITEMS = [
-    { key:'prehistory', name:'선사시대', period:'고조선', ready:false, url:null },
-    { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해', ready:false, url:null },
+    { key:'prehistory', name:'선사시대', period:'신화시대~고조선', ready:true, url:'maps/prehistory/index.html' },
+    { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해 (기원전 37–936)', ready:true, url:'maps/ancient/index.html' },
     { key:'medieval1',  name:'중세 1',   period:'고려 918–1392', ready:true, url:'maps/medieval1/index.html' },
     { key:'medieval2',  name:'중세 2',   period:'조선 1392–1875', ready:true, url:'maps/medieval2/index.html' },
     { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'map.html' },
@@ -331,8 +331,23 @@
       series.posts.forEach(post => allPosts.push({ post, series }));
     });
     if (!allPosts.length) { el.innerHTML = ''; return; }
-    const week = getISOWeek(new Date()) + new Date().getFullYear() * 53;
-    const { post, series } = allPosts[week % allPosts.length];
+    // ── 고정 노출(핀) ── 원래는 주차 시드로 전체 글을 순환하는데, 이번에
+    // 그 순환이 지금 시점과 안 맞는 글(이명박 관련)을 골라 보여준 게
+    // 발견됐다. 완전한 순환 로직을 새로 짜기보다, "5·18 북한군 개입설"
+    // (뉴라이트의 역사왜곡을 반박하는 시리즈의 글)을 우선 노출하도록
+    // 핀을 걸었다 — 찾으면 그 글을, 못 찾으면(데이터 구조가 바뀌는 등)
+    // 기존 주차 순환으로 안전하게 되돌아간다.
+    const pinned = allPosts.find(({ post, series }) =>
+      series.id === 'historical_revisionism' && post.id === 'wp_05'
+    );
+    let chosen;
+    if (pinned) {
+      chosen = pinned;
+    } else {
+      const week = getISOWeek(new Date()) + new Date().getFullYear() * 53;
+      chosen = allPosts[week % allPosts.length];
+    }
+    const { post, series } = chosen;
     const href = archivePostUrl(series, post);
     const summary = (post.body_ko || post.claim_ko || '').slice(0, 90) + '…';
     el.innerHTML = `

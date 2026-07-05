@@ -1,0 +1,30 @@
+// data/block3.js — 신석기시대 시드 데이터
+const EVENTS_BLOCK3 = [
+  { id:'culture_neo_01', year:-4000, visible_from:-6000, visible_until:-1500,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'서울 암사동 유적 — 빗살무늬토기와 정착 마을',
+    title_en:'Amsa-dong Site — Comb-pattern Pottery and Settlement',
+    title_ja:'ソウル岩寺洞遺跡 — 櫛目文土器と定着村落',
+    place_ko:'서울 암사동(한강변)',
+    lat:37.5563, lng:127.1286,
+    people:[],
+    summary_ko:'한강변 암사동 일대에서는 기원전 4000년 무렵의 신석기 마을 유적이 대규모로 발굴됐다. 표면에 빗살 같은 무늬를 새긴 빗살무늬토기와, 강가에 지어진 움집 여러 채가 확인돼 이 시기 사람들이 사냥·채집에서 벗어나 강가에 정착해 살았음을 보여준다. 갈아서 날을 세운 간석기, 그물 흔적을 남긴 그물돌 등도 함께 발견돼 어로 활동도 활발했음을 알 수 있다. 암사동 유적은 한반도 신석기 문화를 대표하는 유적으로, 1967년 사적으로 지정됐다.',
+    video:null,
+    connections:[],
+    tags:['culture','서울','암사동','신석기','빗살무늬토기'],
+    sources:['한국민족문화대백과사전 서울 암사동 유적'] },
+
+  { id:'culture_neo_02', year:-4500, visible_from:-6500, visible_until:-2900,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'홍산문화 — 요하 유역의 옥기와 제단',
+    title_en:'Hongshan Culture — Jade Artifacts and Altars of the Liao River Basin',
+    title_ja:'紅山文化 — 遼河流域の玉器と祭壇',
+    place_ko:'뉴허량(요령성 조양·능원 일대)',
+    lat:41.5, lng:119.9,
+    people:[],
+    summary_ko:'내몽골·요령성 일대 요하 유역에서 기원전 4700~2900년경 번성한 홍산문화는 옥으로 정교하게 만든 용·거북 모양 장식(옥저룡 등), 대형 제단과 적석총, 여신을 모신 신전(여신묘) 유적으로 유명하다. 이 문명의 민족적 귀속을 둘러싸고는 세 입장이 있다 — 중국은 최근 이를 "중화문명의 기원"으로 자국사에 편입시키려는 경향을 강화하고 있고, 일부 한국 재야사학계는 반대로 "동이족·한민족의 원류 문명"이라 주장한다. 반면 국내외 주류 고고학계는 신중한 입장이다. 특정 신석기 물질문화(토기 양식, 매장 방식 등)를 수천 년 뒤 문헌에 등장하는 특정 민족·국가와 직접 연결짓는 것은 언어·혈통·정치적 계승관계를 증명할 방법이 없어 고고학만으로 입증되지 않는다는 것이다. 특히 중국의 편입 시도는 홍산문화 발견(1935년 이후) 이후 비교적 최근(1980년대 이후, 2000년대 국가 주도 프로젝트와 함께 강화)에 나타난 정치적 해석이라는 점에서, "원래부터 중국사였다"는 주장의 근거는 약하다.',
+    video:null,
+    connections:['culture_neo_01'],
+    tags:['culture','요하','홍산문화','옥기','동북공정'],
+    sources:['한국민족문화대백과사전 홍산문화','위키백과 훙산 문화'] }
+];

@@ -1,0 +1,30 @@
+// data/block4.js — 청동기시대 시드 데이터
+const EVENTS_BLOCK4 = [
+  { id:'culture_bronze_01', year:-1000, visible_from:-1500, visible_until:-400,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'고인돌 문화 — 거석 무덤과 계급의 등장',
+    title_en:'Dolmen Culture — Megalithic Tombs and Emerging Social Stratification',
+    title_ja:'支石墓文化 — 巨石墓と階級の出現',
+    place_ko:'고창·강화·화순 고인돌 유적',
+    lat:35.4747, lng:126.7014,
+    people:[],
+    summary_ko:'청동기시대 한반도에는 거대한 돌을 이용한 고인돌(지석묘)이 대규모로 만들어졌다. 전북 고창, 인천 강화, 전남 화순의 고인돌 유적에는 수만 기의 고인돌이 밀집해 있어 2000년 유네스코 세계문화유산으로 등재됐다. 고인돌은 만드는 데 많은 인력과 자원이 필요했던 만큼, 이를 세울 수 있었던 지배층과 그렇지 못한 이들 사이에 뚜렷한 계급 차이가 생겨났음을 보여준다. 한반도는 전 세계에서 고인돌이 가장 밀집한 지역으로 꼽힌다.',
+    video:null,
+    connections:[],
+    tags:['culture','고창','고인돌','청동기','계급사회'],
+    sources:['한국민족문화대백과사전 고인돌','위키백과 고창 화순 강화 고인돌 유적'] },
+
+  { id:'culture_bronze_02', year:-800, visible_from:-1000, visible_until:-400,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'비파형동검문화 — 만주와 한반도를 잇는 청동기',
+    title_en:'Liaoning-type Bronze Dagger Culture',
+    title_ja:'琵琶形銅剣文化 — 満州と韓半島を結ぶ青銅器',
+    place_ko:'요동~서북한 일대',
+    lat:39.5, lng:125.5,
+    people:[],
+    summary_ko:'비파(악기) 모양의 독특한 곡선을 가진 비파형동검(요령식동검)은 만주 요령 지역부터 한반도 서북부에 이르는 넓은 지역에서 공통적으로 출토된다. 이는 이 지역들이 하나의 독자적인 청동기 문화권을 이루고 있었음을 보여주며, 이후 세형동검으로 발전하는 과정은 고조선의 성립·발전 시기와 겹쳐 학계에서 그 연관성이 비교적 뚜렷하게 논의된다. 이는 홍산문화처럼 연관성이 불명확한 훨씬 이전 시기의 문화와는 구분해서 봐야 하는 지점이다.',
+    video:null,
+    connections:['culture_bronze_01'],
+    tags:['culture','요동','비파형동검','청동기문화권','고조선'],
+    sources:['한국민족문화대백과사전 비파형동검'] }
+];

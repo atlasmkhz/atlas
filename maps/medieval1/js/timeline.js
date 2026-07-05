@@ -23,21 +23,26 @@ function renderCurrentChapter(){
 
 // 챕터 버튼 폭을 재위기간에 비례하게 만든다 — 슬라이더가 없는 지금은
 // 안전하다(자세한 이유는 중세2/조선의 timeline.js 주석 참고).
-const PX_PER_YEAR = 4;
-const MIN_CHAPTER_WIDTH = 52;
+const PX_PER_YEAR = 3;
+const MIN_CHAPTER_WIDTH = 105; // "충혜왕(2차(복위))" 같은 긴 이름이 있어 조선보다 최소폭을 크게 잡는다
 
 function renderChapterNav(){
   const nav = document.getElementById('reignBand');
   if (!nav) return;
   nav.innerHTML = REIGNS.map((r, i) => {
     const displayEnd = r.display_end_year ?? r.end_year;
-    const label = r.segment ? `${r.name}(${r.segment})` : r.name;
+    // "충렬왕(2차(복위))"처럼 이름+구분이 합쳐지면 11자짜리 한 덩어리가
+    // 되어 띄어쓰기가 없어 CSS 줄바꿈이 걸리지 않는다(겹침 버그의 실제
+    // 원인). 이름과 구분을 처음부터 별도 줄로 나눠 렌더링해 확실하게
+    // 두 줄로 떨어지게 한다.
+    const nameLine = r.name;
+    const segLine = r.segment ? `<br><span class="reign-chapter-seg">${r.segment}</span>` : '';
     const continuesNote = r.continues_in ? ' data-continues="1"' : '';
     const span = Math.max(displayEnd - r.start_year, 0);
     const width = Math.max(MIN_CHAPTER_WIDTH, Math.round(span * PX_PER_YEAR));
     return `<button type="button" class="reign-chapter-btn" data-index="${i}"${continuesNote}
       style="width:${width}px; flex:0 0 ${width}px;">
-      <span class="reign-chapter-name">${label}</span>
+      <span class="reign-chapter-name">${nameLine}${segLine}</span>
       <span class="reign-chapter-years">${r.start_year}~${displayEnd}</span>
     </button>`;
   }).join('');
@@ -141,6 +146,18 @@ function selectReign(index, opts){
   if (window.closeInfoPanel) closeInfoPanel();
   renderCurrentChapter();
   updateEra(r.order);
+
+  // ── 시대개요(era card) 자동 오픈 ── (중세2/조선과 동일한 로직)
+  if (!silent && window.innerWidth >= 1024) {
+    const eraDesc = document.getElementById('eraDesc');
+    if (eraDesc?.textContent?.trim()) {
+      if (typeof window.openEraCard === 'function') {
+        window.openEraCard();
+      } else {
+        document.getElementById('eraCard')?.classList.add('open');
+      }
+    }
+  }
 
   if (!silent && window.trackTimelineMove) {
     window.trackTimelineMove(r.segment ? `${r.name}(${r.segment})` : r.name);

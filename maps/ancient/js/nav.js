@@ -1,15 +1,21 @@
 // ═══════════════════════════════════════════════════════
 // nav.js — 상단 포털 내비게이션 (ATLAS 메뉴 + 시대 선택 허브 + 소개 페이지)
 //
-// 지금 index.html 자체가 "근대(1876~1945)" 지도다. 이 파일은 그 위에
+// 지금 index.html 자체가 "현대(1994~2025)" 지도다. 이 파일은 그 위에
 // 얇은 포털 껍데기를 씌운다:
 //   - 상단 .site-nav: 소개/지도/자료실/루트/프로젝트 5개 메뉴
 //   - "지도" 클릭 → .era-hub(6개 시대 카드)가 열린다
-//       · 근대 카드 클릭 → 허브를 닫고 지금 화면(이 페이지)으로 복귀
-//       · 다른 시대 카드 → 아직 별도 페이지가 없으므로 비활성(.disabled)
+//       · 현대 카드 클릭 → 허브를 닫고 지금 화면(이 페이지)으로 복귀
+//       · 다른 시대 카드 → 근대·근현대는 해당 페이지로 이동, 나머지는
+//         아직 별도 페이지가 없으므로 비활성(.disabled)
 //   - "소개" 클릭 → .intro-page(소개 글)가 열린다. 본문은 index.html에
 //     정적으로 박혀 있다(이 파일은 열기/닫기만 담당).
-//   - 나머지 메뉴(자료실/루트/프로젝트) 클릭 → "준비 중" 토스트
+//   - "자료실" 클릭 → archiveHub(카테고리→하위주제→글 목록 3단계)가
+//     이 페이지 안에서 바로 열린다. archive/*.js가 등록한 시리즈만
+//     "입장 가능"으로 뜨고, 나머지는 "준비 중"으로 잠긴다(자세한 규칙은
+//     아래 ARCHIVE_CATEGORIES/ARCHIVE_SUBCATEGORIES 주석 참고).
+//   - 나머지 메뉴(프로젝트는 openProjectHub 있으면 그쪽으로) 클릭 →
+//     아직 구현 안 된 것만 "준비 중" 토스트
 //
 // 다른 시대 지도가 실제로 만들어지면, ERA_HUB_ITEMS의 해당 항목에서
 // ready:true와 url을 채우는 것만으로 이 허브가 그 페이지로 안내한다.
@@ -21,42 +27,44 @@
   // ── 시대 카드 정의 — 시대가 추가될 때마다 이 배열에 한 항목만 늘리면 된다.
   // ready:false인 항목은 카드가 비활성 처리되고 클릭이 막힌다.
   // url은 ready:true일 때만 사용 — 같은 사이트 내 다른 경로(예: /maps/medieval/)를
-  // 가리키게 될 자리다. 지금은 근대·근현대 두 곳이 ready다. 근대는 지금 이
-  // 페이지이므로 url:'.'(허브만 닫음), 근현대는 하위 디렉토리를 가리킨다.
+  // 가리키게 될 자리다. 지금은 근대·근현대·현대 세 곳이 ready다. 현대는
+  // 지금 이 페이지이므로 url:'.'(허브만 닫음), 근현대는 형제 폴더로
+  // 가는 상대경로(이 파일이 maps/contemporary/js/nav.js 위치이므로
+  // '../modern2/index.html'), 근대는 상위 디렉토리로 돌아가는 상대경로
+  // ('../../index.html')다.
   // file:// 환경(로컬 더블클릭)에서는 디렉토리 경로만 주면 브라우저가
   // index.html을 자동으로 찾아주지 않고 폴더 목록을 보여준다 — 그래서
   // 디렉토리를 가리키는 url은 전부 'index.html'까지 명시했다(웹서버에
   // 올렸을 때도 동일하게 동작하니 손해가 없다).
   const ERA_HUB_ITEMS = [
-    { key:'prehistory', name:'선사시대', period:'신화시대~고조선', ready:true, url:'maps/prehistory/index.html' },
-    { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해 (기원전 37–936)', ready:true, url:'maps/ancient/index.html' },
-    { key:'medieval1',  name:'중세 1',   period:'고려 918–1392', ready:true, url:'maps/medieval1/index.html' },
-    { key:'medieval2',  name:'중세 2',   period:'조선 1392–1875', ready:true, url:'maps/medieval2/index.html' },
-    { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'.' },
-    { key:'modern2',    name:'근현대',   period:'1945–1993', ready:true, url:'maps/modern2/index.html' },
-    { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'maps/contemporary/index.html' }
+    { key:'prehistory', name:'선사시대', period:'신화시대~고조선', ready:true, url:'../prehistory/index.html' },
+    { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해 (기원전 37–936)', ready:true, url:'.' },
+    { key:'medieval1',  name:'중세 1',   period:'고려 918–1392', ready:true, url:'../medieval1/index.html' },
+    { key:'medieval2',  name:'중세 2',   period:'조선 1392–1875', ready:true, url:'../medieval2/index.html' },
+    { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'../../map.html' },
+    { key:'modern2',    name:'근현대',   period:'1945–1993', ready:true, url:'../modern2/index.html' },
+    { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'../contemporary/index.html' }
   ];
+
+  const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };
 
   // ── 루트 목록 — 루트가 늘어날 때마다 이 배열에 항목 하나만 추가한다.
   // routeId는 routes/*.js가 registerRoute()로 등록하는 route.id와 같아야
   // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
   // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
-  const ROUTE_HUB_ITEMS = [
-    { routeId:'hong_beom_do',       name:'홍범도',      period:'1868–2021', tagline:'포수에서 현충원까지', ready:true, thumbnail:null },
-    { routeId:'kim_gu',             name:'백범 김구',    period:'1876–1949', tagline:'상놈의 아들에서 임시정부의 얼굴로', ready:true, thumbnail:null },
-    { routeId:'kim_won_bong',       name:'김원봉',      period:'1898–1958', tagline:'의열단을 만든 사람, 두 번 지워진 이름', ready:true, thumbnail:null },
-    { routeId:'righteous_struggle', name:'의열투쟁',    period:'1908–1932', tagline:'조선의 심장을 겨누다', ready:true, thumbnail:null },
-    { routeId:'japanese_atrocities',name:'일제 만행',   period:'1895–1945', tagline:'50년의 가해 기록', ready:true, thumbnail:null },
-    { routeId:'donghak',            name:'동학',        period:'1860–1919', tagline:'득도에서 우금치까지, 그리고 3·1운동으로', ready:true, thumbnail:null },
-    { routeId:'daegu_gyeongbuk_independence', name:'대구경북 독립운동가', period:'1909–1944', tagline:'"조선의 모스크바"의 시작', ready:true, thumbnail:null },
-  ];
-
-  const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };
+  // 아직 이 지도(현대) 전용 루트가 하나도 없다 — 근현대 지도의 루트를
+  // 복사해오지 않았다(다른 시기 인물·사건이라 그대로 가져올 게 없음).
+  // 나중에 이 지도에 맞는 루트(예: 대통령 재직 시절 발자취 등)가 생기면
+  // routes/xxx.js를 만들고 여기 항목을 추가하면 된다.
+  const ROUTE_HUB_ITEMS = [];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
-  // content/archive/*.js가 window.registerArchiveSeries로 스스로 등록한다.
-  // init() 밖(IIFE 최상단)에서 즉시 정의해야 한다 — index.html에서 이
-  // nav.js를 content/archive/*.js보다 앞에 로드하기 때문이다.
+  // archive/*.js가 로드되면 여기에 시리즈 단위로 등록된다. routeRenderer.js
+  // 의 ROUTE_REGISTRY와 완전히 같은 패턴 — archive/*.js 파일이 이
+  // window.registerArchiveSeries를 호출해 스스로 등록한다. 이 함수는
+  // archive/*.js보다 먼저 로드돼야 하므로(index.html에서 이 nav.js를
+  // archive/*.js보다 앞에 로드한다), 아래처럼 IIFE 최상단(= init() 밖)
+  // 에서 즉시 정의한다.
   const ARCHIVE_REGISTRY = {};
   window.registerArchiveSeries = function (seriesObj) {
     ARCHIVE_REGISTRY[seriesObj.id] = seriesObj;
@@ -80,6 +88,12 @@
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
   // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
+  // 카테고리 안의 하위 주제(subcategory) 카드. seriesIds 배열에 실제로
+  // ARCHIVE_REGISTRY에 등록된 시리즈가 1개 이상 있어야 "입장 가능"으로
+  // 뜬다. 배열이라 여러 시리즈를 한 subcategory 밑에 둘 수 있다 —
+  // subcategory 카드를 누르면 항상 "시리즈 목록" 단계를 거친다(시리즈가
+  // 1개뿐이어도 마찬가지 — subcategory가 시리즈 하나를 그대로
+  // 가리키는 게 아니라 "묶음"이라는 걸 UI로도 분명히 하기 위해서다).
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
@@ -90,69 +104,6 @@
   };
 
   const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동' };
-
-  // 정적 글 페이지 경로 — 지도 구분 없이 사이트 루트의 archive/ 하나다.
-  // 이 파일은 atlas/js/nav.js(사이트 루트)이므로 접두사가 필요 없다.
-  const ARCHIVE_ROOT_PREFIX = '';
-  function archivePostUrl(series, post){
-    const slug = series.id.replace(/_/g, '-');
-    return `${ARCHIVE_ROOT_PREFIX}archive/${slug}/${post.id}.html`;
-  }
-
-  function renderArchiveCategoryCard(item){
-    const statusClass = item.ready ? 'ready' : 'soon';
-    const statusText = item.ready ? '입장 가능' : '준비 중';
-    const disabledClass = item.ready ? '' : ' disabled';
-    return `
-      <button type="button" class="era-card-item${disabledClass}" data-archive-category="${item.key}">
-        <span class="era-card-name">${item.name}</span>
-        <span class="era-card-status ${statusClass}">${statusText}</span>
-      </button>`;
-  }
-
-  function renderArchiveSubcatCard(item){
-    const readyCount = (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length;
-    const ready = readyCount > 0;
-    const statusClass = ready ? 'ready' : 'soon';
-    const statusText = ready ? `${readyCount}개 시리즈` : '준비 중';
-    const disabledClass = ready ? '' : ' disabled';
-    return `
-      <button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}">
-        <span class="era-card-name">${item.name}</span>
-        <span class="era-card-status ${statusClass}">${statusText}</span>
-      </button>`;
-  }
-
-  function renderArchiveSeriesCard(seriesId){
-    const series = ARCHIVE_REGISTRY[seriesId];
-    const ready = !!series;
-    const statusClass = ready ? 'ready' : 'soon';
-    const statusText = ready ? `${series.posts.length}편` : '준비 중';
-    const disabledClass = ready ? '' : ' disabled';
-    const name = series ? series.name : seriesId;
-    return `
-      <button type="button" class="era-card-item${disabledClass}" data-series-id="${seriesId}">
-        <span class="era-card-name">${name}</span>
-        <span class="era-card-status ${statusClass}">${statusText}</span>
-      </button>`;
-  }
-
-  function renderArchivePostRow(post, series){
-    const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
-    const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
-    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : (post.claim_ko || '');
-    const shortSummary = bodyText.length > 72 ? bodyText.slice(0, 72) + '…' : bodyText;
-    const href = archivePostUrl(series, post);
-    return `
-      <a class="archive-list-item" href="${href}">
-        <span class="archive-item-badge">${typeLabel}</span>
-        <span class="archive-item-body">
-          <span class="archive-item-title">${post.title_ko}</span>
-          <span class="archive-item-meta">${dateStr} · ${post.place_ko || ''}</span>
-          <span class="archive-item-summary">${shortSummary}</span>
-        </span>
-      </a>`;
-  }
 
   document.addEventListener('DOMContentLoaded', init);
   if (document.readyState === 'complete' || document.readyState === 'interactive') init();
@@ -232,9 +183,8 @@
 
     // ── 자료실 허브 (archiveHub) ── era-hub와 같은 scrim+lockBodyScroll
     // 패턴을 재사용하되, 카테고리 → 하위주제 → 글 목록 3단계로 들어간다.
-    // modern2/contemporary와 완전히 같은 구조다 — 자료실이 지도 구분
-    //없이 하나로 운영되므로, 이 로직 자체도 모든 지도 nav.js에 동일하게
-    // 있어야 한다.
+    // 앞의 두 단계는 era-hub-grid(.era-card-item 카드)를 그대로 쓰고,
+    // 마지막(글 목록) 단계만 다른 레이아웃(.archive-list)으로 그린다.
     const archiveHub = document.getElementById('archiveHub');
     const archiveHubScrim = document.getElementById('archiveHubScrim');
     const archiveHubClose = document.getElementById('archiveHubClose');
@@ -253,7 +203,7 @@
       if (archiveState.level === 'category') {
         if (archiveHubBack) archiveHubBack.hidden = true;
         if (archiveHubTitle) archiveHubTitle.textContent = '자료실';
-        if (archiveHubSub) archiveHubSub.textContent = '대한민국 역사와 세계사를 기록하는 라이브러리';
+        if (archiveHubSub) archiveHubSub.textContent = '대한민국 현대사와 세계사를 기록하는 라이브러리';
         archiveHubGrid.hidden = false;
         archiveHubList.hidden = true;
         archiveHubGrid.innerHTML = ARCHIVE_CATEGORIES.map(renderArchiveCategoryCard).join('');
@@ -385,6 +335,7 @@
       if (e.key !== 'Escape') return;
       if (eraHub.classList.contains('open')) window.closeEraHub();
       else if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
+      else if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();
       else if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
     });
 
@@ -417,22 +368,24 @@
         if (eraHub.classList.contains('open')) window.closeEraHub();
         window.openIntroPage();
       } else if (key === 'archive') {
-        // 예전엔 이 지도(근대)에 자료실 콘텐츠가 아예 없어서 modern2로
-        // 페이지 자체를 이동시켰다 — 그러면 지금 보던 화면 상태가 다
-        // 날아가고, modern2가 기본 연도(1945)로 열려 "느닷없이 1945로
-        // 이동했다"는 인상을 줬다. 지금은 이 지도(근대)에도 로컬
-        // archiveHub가 있으므로 그걸 연다 — 페이지 이동이 없다.
+        // 이제 이 지도(현대) 전용 자료실 콘텐츠가 있다(archive/
+        // power_accountability.js). 더 이상 modern2로 리다이렉트하지
+        // 않는다 — 예전엔 콘텐츠가 없어서 페이지 전체를 이동시켰는데,
+        // 그러면 지금 보던 연도·화면 상태가 전부 날아간다(다른 페이지로
+        // 완전히 새로 로드되므로). 지금은 다른 오버레이(era-hub 등)와
+        // 같은 방식으로 이 페이지 안에서 archiveHub만 연다 — 지도
+        // 상태는 그대로 유지된다.
         if (eraHub.classList.contains('open')) window.closeEraHub();
-        if (routeHub && routeHub.classList.contains('open')) window.closeRouteHub();
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         window.openArchiveHub();
       } else if (key === 'route') {
-        // 루트 허브 — era-hub와 동일한 패턴으로 먼저 선택 화면을 보여준다.
         if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         window.openRouteHub();
       } else if (key === 'project') {
         if (eraHub.classList.contains('open')) window.closeEraHub();
+        if (archiveHub && archiveHub.classList.contains('open')) window.closeArchiveHub();
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         if (typeof window.openProjectHub === 'function') window.openProjectHub();
         else showComingSoon(NAV_LABELS[key] || key);
@@ -440,6 +393,14 @@
         showComingSoon(NAV_LABELS[key] || key);
       }
     });
+
+    // ── 다른 지도(근대 등)에서 "자료실"을 눌러 넘어온 경우 ──
+    // 그쪽 site-nav가 이 페이지로 ?nav=archive를 붙여 이동시킨다.
+    // 로드 직후 자동으로 자료실 허브를 열어준다(사용자가 "자료실"을
+    // 다시 한 번 누르지 않아도 되게).
+    if (new URLSearchParams(window.location.search).get('nav') === 'archive') {
+      window.openArchiveHub();
+    }
   }
 
   function renderEraCard(item){
@@ -456,17 +417,84 @@
 
   function renderRouteCard(item){
     const statusClass = item.ready ? 'ready' : 'soon';
-    const statusText = item.ready ? '탐험하기' : '준비 중';
+    const statusText = item.ready ? '입장 가능' : '준비 중';
     const disabledClass = item.ready ? '' : ' disabled';
-    const thumbStyle = item.thumbnail ? ` style="background-image:url('${item.thumbnail}');"` : '';
     return `
-      <button type="button" class="era-card-item route-card-item${disabledClass}"
-              data-route-id="${item.routeId}"${thumbStyle}>
+      <button type="button" class="era-card-item${disabledClass}" data-route-id="${item.routeId}">
         <span class="era-card-period">${item.period}</span>
         <span class="era-card-name">${item.name}</span>
-        <span class="era-card-tagline">${item.tagline || ''}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
+  }
+
+  function renderArchiveCategoryCard(item){
+    const statusClass = item.ready ? 'ready' : 'soon';
+    const statusText = item.ready ? '입장 가능' : '준비 중';
+    const disabledClass = item.ready ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-archive-category="${item.key}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderArchiveSubcatCard(item){
+    const readyCount = (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length;
+    const ready = readyCount > 0;
+    const statusClass = ready ? 'ready' : 'soon';
+    const statusText = ready ? `${readyCount}개 시리즈` : '준비 중';
+    const disabledClass = ready ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  function renderArchiveSeriesCard(seriesId){
+    const series = ARCHIVE_REGISTRY[seriesId];
+    const ready = !!series;
+    const statusClass = ready ? 'ready' : 'soon';
+    const statusText = ready ? `${series.posts.length}편` : '준비 중';
+    const disabledClass = ready ? '' : ' disabled';
+    const name = series ? series.name : seriesId;
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-series-id="${seriesId}">
+        <span class="era-card-name">${name}</span>
+        <span class="era-card-status ${statusClass}">${statusText}</span>
+      </button>`;
+  }
+
+  // 정적 글 페이지 경로. build/generate_archive_pages.py(루트)가 실제로
+  // /archive/{series-slug}/{post_id}.html 파일을 사이트 루트 밑에
+  // 만든다 — 지도 구분이 없다(content/archive/*.js가 근대·근현대·현대
+  // 모두에 공유되는 것과 짝을 이룬다). ARCHIVE_ROOT_PREFIX는 "이
+  // 페이지에서 사이트 루트까지 몇 단계 올라가야 하는가"만 나타낸다 —
+  // 이 파일은 maps/contemporary/js/nav.js이므로 두 단계('../../') 다.
+  // .html 확장자를 명시한다 — 클린 URL(확장자 생략)은 배포 플랫폼의
+  // 리다이렉트 규칙에 의존하는데 이 프로젝트엔 그런 설정이 없어서,
+  // 로컬 테스트와 배포 후 둘 다 항상 동작하는 쪽(확장자 포함)을 쓴다.
+  const ARCHIVE_ROOT_PREFIX = '../../';
+  function archivePostUrl(series, post){
+    const slug = series.id.replace(/_/g, '-');
+    return `${ARCHIVE_ROOT_PREFIX}archive/${slug}/${post.id}.html`;
+  }
+
+  function renderArchivePostRow(post, series){
+    const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
+    const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
+    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : (post.claim_ko || '');
+    const shortSummary = bodyText.length > 72 ? bodyText.slice(0, 72) + '…' : bodyText;
+    const href = archivePostUrl(series, post);
+    return `
+      <a class="archive-list-item" href="${href}">
+        <span class="archive-item-badge">${typeLabel}</span>
+        <span class="archive-item-body">
+          <span class="archive-item-title">${post.title_ko}</span>
+          <span class="archive-item-meta">${dateStr} · ${post.place_ko || ''}</span>
+          <span class="archive-item-summary">${shortSummary}</span>
+        </span>
+      </a>`;
   }
 
   // ── "준비 중" 토스트 — 별도 마크업 없이 가볍게 동적으로 띄운다.

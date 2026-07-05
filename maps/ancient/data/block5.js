@@ -1,0 +1,30 @@
+// data/block5.js — 고구려 멸망과 나당전쟁 (660 ~ 676) 시드 데이터
+const EVENTS_BLOCK5 = [
+  { id:'battle_668_01', year:668, visible_from:661, visible_until:668,
+    month:9, day:null, type:'battle', priority:1, nation:'goguryeo',
+    title_ko:'고구려 멸망',
+    title_en:'Fall of Goguryeo',
+    title_ja:'高句麗滅亡',
+    place_ko:'평양',
+    lat:39.0392, lng:125.7625,
+    people:['보장왕','연개소문'],
+    summary_ko:'수·당의 대규모 침공을 여러 차례 막아냈던 고구려였지만, 실권자 연개소문이 죽은 뒤 그의 아들들 사이에 권력다툼이 벌어지며 국력이 급격히 소진됐다. 연남생이 당에 투항하고 연남건이 이를 막지 못하는 등 지배층 내분이 계속되는 가운데, 나당연합군이 평양성을 포위해 668년 결국 함락시켰다. 700년 가까이 이어온 고구려는 이렇게 멸망했다.',
+    video:null,
+    connections:[],
+    tags:['battle','평양','보장왕','연개소문','고구려멸망'],
+    sources:['한국민족문화대백과사전 고구려','위키백과 보장왕'] },
+
+  { id:'battle_675_01', year:675, visible_from:675, visible_until:676,
+    month:9, day:null, type:'battle', priority:1, nation:'silla',
+    title_ko:'매소성·기벌포 전투 — 당군을 몰아내다',
+    title_en:'Battles of Maesoseong and Gibeolpo — Expelling Tang Forces',
+    title_ja:'買肖城・伎伐浦の戦い — 唐軍を撤退させる',
+    place_ko:'매소성(연천)',
+    lat:38.0964, lng:127.0764,
+    people:['문무왕'],
+    summary_ko:'백제·고구려를 멸망시킨 당은 한반도 전체를 지배하려는 의도를 드러내며 옛 백제·고구려 땅에 도독부를 설치했다. 이에 신라는 당군과 정면으로 맞서 675년 매소성에서 당의 20만 대군을 크게 격파했고, 이듬해 금강 하구 기벌포 해전에서도 당의 수군을 물리쳤다. 이 승리로 신라는 대동강 이남에 대한 실질적 지배권을 확립하며 삼국통일 전쟁을 마무리했다.',
+    video:null,
+    connections:['battle_668_01'],
+    tags:['battle','연천','문무왕','매소성','나당전쟁'],
+    sources:['한국민족문화대백과사전 매소성전투','위키백과 나당전쟁'] }
+];
