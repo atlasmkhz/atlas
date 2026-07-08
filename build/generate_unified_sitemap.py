@@ -38,6 +38,7 @@ CONTEMPORARY_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'eve
 # 그대로 스캔해 담으면 된다 — 이 스크립트 입장에서는 차이가 없다.
 MEDIEVAL2_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'medieval2', 'event')
 MEDIEVAL1_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'medieval1', 'event')
+ANCIENT_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'ancient', 'event')
 # 자료실은 더 이상 지도별로 나뉘어 있지 않다 — content/archive/*.js가
 # 근대·근현대·현대 모든 지도에 공유되고(content/youtube_videos.js와
 # 같은 패턴), 정적 출력도 사이트 루트의 archive/ 하나로 통합됐다
@@ -54,6 +55,7 @@ def main():
     contemporary_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(CONTEMPORARY_EVENT_DIR, '*.html')))
     medieval2_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MEDIEVAL2_EVENT_DIR, '*.html')))
     medieval1_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MEDIEVAL1_EVENT_DIR, '*.html')))
+    ancient_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(ANCIENT_EVENT_DIR, '*.html')))
     # archive/는 시리즈별 하위 폴더(archive/{series-slug}/*.html)라
     # event·route와 달리 2단계로 스캔한다. index.html(시리즈 랜딩)과
     # 글 페이지를 구분해서 각각 다른 URL 패턴으로 담는다.
@@ -186,6 +188,21 @@ def main():
         lines.append('    <priority>0.7</priority>')
         lines.append('  </url>')
 
+    # 고대(삼국~남북국시대, 기원전 37~936) 진입점
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/maps/ancient/</loc>')
+    lines.append('    <changefreq>weekly</changefreq>')
+    lines.append('    <priority>0.9</priority>')
+    lines.append('  </url>')
+
+    # 고대 Event (루트는 아직 없음)
+    for slug in ancient_slugs:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/ancient/event/{slug}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.7</priority>')
+        lines.append('  </url>')
+
     # 자료실 시리즈 랜딩 (지도 구분 없이 통합)
     for series_slug in archive_landing:
         lines.append('  <url>')
@@ -207,7 +224,7 @@ def main():
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
 
-    total = (6 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs)
+    total = (7 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs) + len(ancient_slugs)
              + len(main_route_slugs) + len(modern2_route_slugs)
              + len(archive_landing) + len(archive_posts))
     print(f'통합 sitemap.xml 생성 완료: 메인 1 + map.html 1 + 1876-1945 Event {len(main_slugs)} + 루트 {len(main_route_slugs)} + '
@@ -215,6 +232,7 @@ def main():
           f'contemporary 진입점 1 + contemporary Event {len(contemporary_slugs)} + '
           f'medieval2 진입점 1 + medieval2 Event {len(medieval2_slugs)} + '
           f'medieval1 진입점 1 + medieval1 Event {len(medieval1_slugs)} + '
+          f'ancient 진입점 1 + ancient Event {len(ancient_slugs)} + '
           f'자료실 랜딩 {len(archive_landing)} + 자료실 글 {len(archive_posts)} = 총 {total}건')
 
 if __name__ == '__main__':
