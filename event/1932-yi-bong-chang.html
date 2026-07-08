@@ -29,7 +29,52 @@
 <section class="people"><h2>관련 인물</h2><ul class="related-people"><li>이봉창</li><li>김구</li></ul></section>
 <section class="related"><h2>관련 사건</h2><ul class="related-events"><li><a href="/event/1931-formation-korean">한인애국단 결성 (1931)</a></li><li><a href="/event/1932-yun-bong-gil">윤봉길 — 훙커우공원 의거 (1932)</a></li></ul></section>
 <section class="sources"><h2>참고 자료</h2><ul class="sources"><li>우리역사넷 1932년</li><li>우리역사넷 만주사변</li></ul></section>
-<p class="map-cta"><a href="https://atlas.mkhz.kr/map.html?event=righteous_1932_01">지도에서 보기</a></p>
+<p class="map-cta"><a id="mapCta" href="https://atlas.mkhz.kr/map.html?event=righteous_1932_01">이 사건을 지도에서 보기</a></p>
 </article>
+
+<script src="/js/mapShell.js"></script>
+<script>
+(function () {
+  var cta = document.getElementById('mapCta');
+  var article = document.querySelector('article');
+  if (!cta) return;
+
+  cta.addEventListener('click', function (ev) {
+    if (typeof window.ATLAS_loadMapShell !== 'function') return; // 폴백: 원래 링크 그대로 이동
+    ev.preventDefault();
+
+    var eventId = new URL(cta.href, location.href).searchParams.get('event');
+
+    var overlay = document.createElement('div');
+    overlay.id = 'mapLoadingOverlay';
+    overlay.setAttribute('style',
+      'position:fixed;inset:0;background:#1a1612;color:#e8e0d0;' +
+      'display:flex;align-items:center;justify-content:center;' +
+      'font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;' +
+      'font-size:16px;z-index:9999;text-align:center;padding:24px;');
+    overlay.textContent = '지도를 불러오는 중입니다…';
+    document.body.appendChild(overlay);
+    if (article) article.style.display = 'none';
+
+    window.ATLAS_loadMapShell().then(function () {
+      if (typeof map !== 'undefined' && map.invalidateSize) map.invalidateSize();
+      if (typeof navigateToEvent === 'function' && eventId) navigateToEvent(eventId);
+      overlay.remove();
+    }).catch(function (err) {
+      console.error('지도 로드 실패:', err);
+      overlay.innerHTML = '';
+      var msg = document.createElement('div');
+      msg.textContent = '지도를 불러오지 못했습니다.';
+      var retry = document.createElement('a');
+      retry.href = cta.href;
+      retry.textContent = '지도 페이지로 이동';
+      retry.style.cssText = 'display:inline-block;margin-top:16px;color:#c8a827;';
+      overlay.appendChild(msg);
+      overlay.appendChild(retry);
+      if (article) article.style.display = '';
+    });
+  });
+})();
+</script>
 </body>
 </html>

@@ -128,6 +128,57 @@ def load_all_cards_with_content():
             })
     return cards
 
+# ── v63: 지도 하이드레이션 (mapShell) ──────────────────────
+# "이 사건을 지도에서 보기" 클릭 시에만 mapShell.js를 통해 map.html을
+# 그대로 이식(hydrate)한다. location.href/replace를 쓰지 않으므로
+# /event/{slug} URL·canonical·JSON-LD는 항상 그대로 유지된다.
+# 상세 설계 배경: js/mapShell.js 상단 주석 참고.
+def render_map_hydration_block(cta_href):
+    return f"""<script src="/js/mapShell.js"></script>
+<script>
+(function () {{
+  var cta = document.getElementById('mapCta');
+  var article = document.querySelector('article');
+  if (!cta) return;
+
+  cta.addEventListener('click', function (ev) {{
+    if (typeof window.ATLAS_loadMapShell !== 'function') return; // 폴백: 원래 링크 그대로 이동
+    ev.preventDefault();
+
+    var eventId = new URL(cta.href, location.href).searchParams.get('event');
+
+    var overlay = document.createElement('div');
+    overlay.id = 'mapLoadingOverlay';
+    overlay.setAttribute('style',
+      'position:fixed;inset:0;background:#1a1612;color:#e8e0d0;' +
+      'display:flex;align-items:center;justify-content:center;' +
+      'font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;' +
+      'font-size:16px;z-index:9999;text-align:center;padding:24px;');
+    overlay.textContent = '지도를 불러오는 중입니다…';
+    document.body.appendChild(overlay);
+    if (article) article.style.display = 'none';
+
+    window.ATLAS_loadMapShell().then(function () {{
+      if (typeof map !== 'undefined' && map.invalidateSize) map.invalidateSize();
+      if (typeof navigateToEvent === 'function' && eventId) navigateToEvent(eventId);
+      overlay.remove();
+    }}).catch(function (err) {{
+      console.error('지도 로드 실패:', err);
+      overlay.innerHTML = '';
+      var msg = document.createElement('div');
+      msg.textContent = '지도를 불러오지 못했습니다.';
+      var retry = document.createElement('a');
+      retry.href = cta.href;
+      retry.textContent = '지도 페이지로 이동';
+      retry.style.cssText = 'display:inline-block;margin-top:16px;color:#c8a827;';
+      overlay.appendChild(msg);
+      overlay.appendChild(retry);
+      if (article) article.style.display = '';
+    }});
+  }});
+}})();
+</script>"""
+
 def render_html(card, slug, breadcrumb, related_cards, slug_map):
     url = f'{SITE_ROOT}/event/{slug}'
     title_tag = f"{card['title_ko']} ({card['year']}) | ATLAS by MKHZ"
@@ -237,8 +288,10 @@ def render_html(card, slug, breadcrumb, related_cards, slug_map):
 {f'<section class="people"><h2>관련 인물</h2>{people_html}</section>' if people_html else ''}
 {f'<section class="related"><h2>관련 사건</h2>{related_html}</section>' if related_html else ''}
 {f'<section class="sources"><h2>참고 자료</h2>{sources_html}</section>' if sources_html else ''}
-<p class="map-cta"><a href="{SITE_ROOT}/map.html?event={card['id']}">지도에서 보기</a></p>
+<p class="map-cta"><a id="mapCta" href="{SITE_ROOT}/map.html?event={card['id']}">이 사건을 지도에서 보기</a></p>
 </article>
+
+{render_map_hydration_block(f"{SITE_ROOT}/map.html?event={card['id']}")}
 </body>
 </html>"""
 

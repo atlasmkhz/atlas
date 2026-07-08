@@ -29,7 +29,63 @@
 <section class="people"><h2>관련 인물</h2><ul class="related-people"><li>흥선대원군</li><li>고종</li><li>명성황후</li></ul></section>
 <section class="related"><h2>관련 사건</h2><ul class="related-events"><li><a href="/event/1876-treaty-ganghwa">강화도조약 — 닫힌 문이 열리다 (1876)</a></li><li><a href="/event/1882-imo-mutiny">임오군란 — 구식 군인의 봉기 (1882)</a></li></ul></section>
 <section class="sources"><h2>참고 자료</h2><ul class="sources"><li>한국민족문화대백과사전 흥선대원군</li><li>위키백과 흥선대원군</li></ul></section>
-<p class="map-cta"><a href="https://atlas.mkhz.kr/map.html?event=political_1876_02">지도에서 보기</a></p>
+<p class="map-cta"><a id="mapCta" href="https://atlas.mkhz.kr/map.html?event=political_1876_02">이 사건을 지도에서 보기</a></p>
 </article>
+
+<!-- ════════════════════════════════════════════════════
+     v63 프로토타입 — 지도 하이드레이션 (mapShell)
+     "이 사건을 지도에서 보기" 클릭 시에만 로드된다. 정보만 읽고
+     이탈하는 방문자는 이 스크립트도, map.html의 CSS/JS/데이터
+     페이로드(약 1.1~1.2MB)도 전혀 받지 않는다.
+     JS가 꺼져 있거나 mapShell.js 로드에 실패하면 #mapCta는 원래
+     href(map.html?event=...)로 그냥 이동한다 — 점진적 향상(progressive
+     enhancement) 원칙. location.href를 이 스크립트가 직접 호출하는
+     경우는 없다 — canonical/JSON-LD가 가리키는 이 URL 자체가 항상
+     유지된다.
+     ════════════════════════════════════════════════════ -->
+<script src="/js/mapShell.js"></script>
+<script>
+(function () {
+  var cta = document.getElementById('mapCta');
+  var article = document.querySelector('article');
+  if (!cta) return;
+
+  cta.addEventListener('click', function (ev) {
+    if (typeof window.ATLAS_loadMapShell !== 'function') return; // 폴백: 원래 링크 그대로 이동
+    ev.preventDefault();
+
+    var eventId = new URL(cta.href, location.href).searchParams.get('event');
+
+    var overlay = document.createElement('div');
+    overlay.id = 'mapLoadingOverlay';
+    overlay.setAttribute('style',
+      'position:fixed;inset:0;background:#1a1612;color:#e8e0d0;' +
+      'display:flex;align-items:center;justify-content:center;' +
+      'font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;' +
+      'font-size:16px;z-index:9999;text-align:center;padding:24px;');
+    overlay.textContent = '지도를 불러오는 중입니다…';
+    document.body.appendChild(overlay);
+    if (article) article.style.display = 'none';
+
+    window.ATLAS_loadMapShell().then(function () {
+      if (typeof map !== 'undefined' && map.invalidateSize) map.invalidateSize();
+      if (typeof navigateToEvent === 'function' && eventId) navigateToEvent(eventId);
+      overlay.remove();
+    }).catch(function (err) {
+      console.error('지도 로드 실패:', err);
+      overlay.innerHTML = '';
+      var msg = document.createElement('div');
+      msg.textContent = '지도를 불러오지 못했습니다.';
+      var retry = document.createElement('a');
+      retry.href = cta.href;
+      retry.textContent = '지도 페이지로 이동';
+      retry.style.cssText = 'display:inline-block;margin-top:16px;color:#c8a827;';
+      overlay.appendChild(msg);
+      overlay.appendChild(retry);
+      if (article) article.style.display = '';
+    });
+  });
+})();
+</script>
 </body>
 </html>
