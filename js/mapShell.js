@@ -119,6 +119,21 @@
     return Promise.all(promises);
   }
 
+  function ensureBaseHref() {
+    // renderer.js의 popupHtml() 등은 heroImg.url("assets/images/...")
+    // 같은 "상대경로"를 그대로 <img src="...">에 꽂아 넣는다. map.html이
+    // 루트(/)에서 정상 로드될 땐 문제없지만, 이 문서(/event/{slug})는
+    // 경로 깊이가 달라 그 상대경로가 /event/ 기준으로 풀려 404가 난다.
+    // renderer.js를 고치는 대신(= map.html 쪽은 손대지 않는다는 원칙
+    // 유지) <base>로 문서의 URL 해석 기준 자체를 사이트 루트로
+    // 맞춘다 — CSS의 url()은 스타일시트 자신의 위치 기준으로 풀리는
+    // 별도 규칙이라 애초에 영향받지 않는다.
+    if (document.querySelector('base')) return;
+    const base = document.createElement('base');
+    base.href = new URL('/', location.origin).href;
+    document.head.insertBefore(base, document.head.firstChild);
+  }
+
   async function loadMapShell(opts) {
     const mountId = (opts && opts.mountId) || 'mapShellRoot';
 
@@ -132,6 +147,7 @@
     if (loadingPromise) return loadingPromise;
 
     loadingPromise = (async () => {
+      ensureBaseHref();
       const res = await fetch(MAP_SHELL_URL, { credentials: 'same-origin' });
       if (!res.ok) throw new Error('map.html 로드 실패: HTTP ' + res.status);
       const html = await res.text();
