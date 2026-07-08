@@ -1,5 +1,19 @@
 // data/block2.js — 삼국 항쟁 1기 (313 ~ 475) 시드 데이터
 const EVENTS_BLOCK2 = [
+  { id:'political_371_01', year:371, visible_from:369, visible_until:375,
+    month:null, day:null, type:'political', priority:1, nation:'baekje',
+    title_ko:'근초고왕의 전성기 — 평양성 공격과 마한 통합',
+    title_en:'King Geunchogo\'s Golden Age — Attack on Pyongyang and Unification of Mahan',
+    title_ja:'近肖古王の全盛期 — 平壌城攻撃と馬韓統合',
+    place_ko:'한성(서울)',
+    lat:37.5665, lng:126.9780,
+    people:['근초고왕','고국원왕'],
+    summary_ko:'백제 13대 왕 근초고왕은 남쪽으로 마한의 남은 소국들을 대부분 통합해 오늘날 전라도 일대까지 영역을 넓히고, 북쪽으로는 고구려를 직접 공격해 평양성 전투에서 고국원왕을 전사시키는 전과를 올렸다. 이 시기 백제는 삼국 중 가장 넓은 영토와 강한 군사력을 갖춰 전성기를 구가했으며, 중국 동진과 외교 관계를 맺고 왜(일본)에는 칠지도라는 정교한 철제 칼을 하사하는 등 국제적으로도 활발히 교류했다. 다만 이때 백제가 요서·산둥 지역까지 진출했다는 이른바 "백제의 요서경략설"은 중국 사서 일부에만 단편적으로 등장할 뿐 고고학적 물증이 없어, 학계에서는 신중하게 다루거나 무역 거점 정도로 보는 시각이 많다.',
+    video:null,
+    connections:['political_bc18_01'],
+    tags:['political','한성','근초고왕','백제전성기','마한통합'],
+    sources:['한국민족문화대백과사전 근초고왕'] },
+
   { id:'political_391_01', year:391, visible_from:391, visible_until:413,
     month:null, day:null, type:'political', priority:1, nation:'goguryeo',
     title_ko:'광개토대왕 즉위 — 대정복의 시작',

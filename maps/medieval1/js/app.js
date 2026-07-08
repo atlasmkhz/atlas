@@ -79,6 +79,8 @@ const DATA = {};
   (typeof EVENTS_CHUNGMOKWANG !== 'undefined' ? EVENTS_CHUNGMOKWANG : []),
   (typeof EVENTS_CHUNGJEONGWANG !== 'undefined' ? EVENTS_CHUNGJEONGWANG : []),
   (typeof EVENTS_GONGMINWANG !== 'undefined' ? EVENTS_GONGMINWANG : []),
+  (typeof EVENTS_U !== 'undefined' ? EVENTS_U : []),
+  (typeof EVENTS_CHANG !== 'undefined' ? EVENTS_CHANG : []),
   (typeof EVENTS_GONGYANGWANG !== 'undefined' ? EVENTS_GONGYANGWANG : []),
 ].forEach(arr => {
   arr.forEach(e => {

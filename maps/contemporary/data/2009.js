@@ -3,6 +3,21 @@
 
 const EVENTS_2009 = [
 
+  { id:'person_2009_02', year:2009, visible_from:2009, visible_until:2009,
+    month:3, day:7, type:'person', priority:1,
+    place_ko:'경기 분당',
+    lat:37.3826, lng:127.1189,
+    people:['장자연'],
+    title_ko:'장자연 사건',
+    title_en:'The Jang Ja-yeon Case',
+    title_ja:'チャン・ジャヨン事件',
+    allegation_status:'alleged',
+    summary_ko:'신인 배우 장자연이 소속사 대표의 강요로 언론사·기업 관계자 등에게 성접대를 해왔다는 내용을 담은 자필 문건을 남기고 스스로 목숨을 끊었다. 문건에는 특정 인사들의 실명이 다수 포함된 것으로 알려졌지만, 경찰과 검찰 수사에서는 대부분 무혐의 처분되거나 공소시효 만료로 처벌이 이뤄지지 못했다. 이후 2018년 법무부 검찰과거사위원회의 재조사와 2019년 재수사에서도 핵심 의혹의 진실은 명확히 규명되지 못한 채 마무리됐다. 권력형 성범죄와 언론·연예 권력의 유착 의혹을 상징하는 사건으로, 진상규명을 요구하는 목소리는 지금도 이어지고 있다.',
+    video:null,
+    connections:[],
+    tags:['person','분당','장자연','성접대의혹','권력형범죄'],
+    sources:['한국민족문화대백과사전 장자연 사건','위키백과 장자연'] },
+
   { id:'movement_2009_01', year:2009, visible_from:2009, visible_until:2009,
     month:1, day:20, type:'movement', priority:1,
     title_ko:'용산참사',

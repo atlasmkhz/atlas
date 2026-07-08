@@ -5,7 +5,7 @@
 
 const EVENTS_1960 = [
 
-  { id:'movement_1960_01', year:1960, visible_from:1960, visible_until:1960,
+  { id:'movement_1960_00', year:1960, visible_from:1960, visible_until:1960,
     month:2, day:28, type:'movement', priority:1,
     title_ko:'2·28 대구 학생의거 — 4·19의 도화선',
     title_en:'The February 28 Daegu Student Uprising',

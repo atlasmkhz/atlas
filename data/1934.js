@@ -64,4 +64,20 @@ const EVENTS_1934 = [
     tags:['policy','조선국내','경성','농촌진흥운동','동화정책'],
     sources:['한국민족문화대백과사전 일제강점기'] }
 
+,
+
+  { id:'culture_1934_01', year:1934, visible_from:1934, visible_until:1934,
+    month:5, day:7, type:'culture', priority:2,
+    title_ko:'진단학회 창립 — 실증사학의 결집',
+    title_en:'Founding of the Jindan Society — The Positivist School of History',
+    title_ja:'震檀学会創立 — 実証史学の結集',
+    place_ko:'경성',
+    lat:37.5665, lng:126.9780,
+    people:['이병도','손진태'],
+    summary_ko:'이병도·손진태·이윤재 등 국내외에서 근대 역사학을 공부한 학자들은 일본 관학자들의 식민사관에 맞서면서도, 신채호 등 민족주의 사학의 논리적 서술 방식과는 다른 길을 걷고자 진단학회를 창립했다. 이들은 사료 고증에 기반한 실증적 방법론으로 한국사와 인접 지역사를 연구해 학술지 《진단학보》를 발간했으며, 이는 이후 한국 역사학계 주류를 이루는 실증사학의 토대가 됐다. 신채호·박은식의 민족주의 사학, 백남운의 사회경제사학과 더불어 진단학회의 실증사학은 일제강점기 한국사 연구의 세 갈래 흐름 중 하나로 꼽힌다.',
+    video:null,
+    connections:[],
+    tags:['culture','경성','진단학회','이병도','실증사학'],
+    sources:['한국민족문화대백과사전 진단학회'] }
+
 ];

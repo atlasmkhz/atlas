@@ -3,6 +3,21 @@
 
 const EVENTS_2023 = [
 
+  { id:'political_2023_07', year:2023, visible_from:2023, visible_until:2026,
+    month:5, day:17, type:'political', priority:2,
+    place_ko:'경기 수원지방검찰청',
+    lat:37.2636, lng:127.0286,
+    people:['이화영','박상용'],
+    title_ko:'쌍방울 대북송금 수사와 "연어 술파티" 의혹',
+    title_en:'The Ssangyongwul North Korea Remittance Investigation and the "Salmon Party" Allegation',
+    title_ja:'雙龍蔚対北送金捜査と「サーモン酒パーティー」疑惑',
+    allegation_status:'alleged',
+    summary_ko:'쌍방울그룹이 경기도의 스마트팜 지원비와 당시 경기도지사였던 이재명의 방북 비용을 대신 북한에 지급했다는 의혹을 수원지검이 수사하는 과정에서, 담당 검사가 진술을 받아내려고 이화영 전 경기도 평화부지사 등에게 검찰청 안에서 술과 고급 음식을 제공했다는 이른바 "연어 술파티" 의혹이 제기됐다. 담당 검사 박상용은 그런 일이 없었다며 전면 부인했지만, 법무부 특별점검과 서울고검 진상조사단(TF)은 교도관 진술과 출정 기록 등을 근거로 실제 있었던 일이라고 결론지었고 정직 징계가 청구됐다. 이 의혹은 이후 2026년 "조작기소 특검"의 수사 대상에 포함돼, 검찰의 강압적 수사 관행 논란과 정치적 공방이 동시에 진행 중이다.',
+    video:null,
+    connections:['political_2013_06'],
+    tags:['political','수원','쌍방울','이화영','연어술파티'],
+    sources:['오마이뉴스 연어 술파티 의혹','파이낸셜뉴스 박상용 검사 징계'] },
+
   { id:'disaster_2023_01', year:2023, visible_from:2023, visible_until:2023,
     month:7, day:15, type:'disaster', priority:1,
     title_ko:'오송 지하차도 참사',

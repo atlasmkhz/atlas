@@ -26,5 +26,19 @@ const EVENTS_TAEJO = [
     video:null,
     connections:['political_0918_01'],
     tags:['political','선산','왕건','견훤','후삼국통일'],
-    sources:['한국민족문화대백과사전 후삼국통일'] }
+    sources:['한국민족문화대백과사전 후삼국통일'] },
+
+  { id:'culture_0943_01', year:943, visible_from:943, visible_until:943,
+    month:4, day:null, type:'culture', priority:1,
+    title_ko:'훈요십조를 남기다',
+    title_en:'Leaving Behind the Ten Injunctions',
+    title_ja:'訓要十条を残す',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['왕건'],
+    summary_ko:'세상을 떠나기 직전, 왕건은 후대 왕들이 지켜야 할 열 가지 가르침인 훈요십조를 남겼다. 불교를 숭상하되 지나친 사찰 건립은 경계할 것, 서경(평양)을 중시할 것, 거란을 배척할 것, 연등회·팔관회 같은 전통 행사를 소홀히 하지 말 것, 장자 상속을 원칙으로 하되 자질이 부족하면 형제 중에서 왕위를 잇게 할 것 등의 내용을 담고 있다. 이는 호족 연합으로 이룩한 통일 왕조를 안정적으로 이어가려는 왕건의 통치 철학이 응축된 문서로, 고려 왕조 내내 정치적 정당성의 근거로 거듭 인용됐다.',
+    video:null,
+    connections:['political_0936_01'],
+    tags:['culture','개경','훈요십조','왕건','고려'],
+    sources:['한국민족문화대백과사전 훈요십조'] }
 ];

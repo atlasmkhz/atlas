@@ -5,6 +5,21 @@
 
 const EVENTS_2013 = [
 
+  { id:'political_2013_06', year:2013, visible_from:2013, visible_until:2022,
+    month:3, day:null, type:'political', priority:2,
+    place_ko:'강원 원주(별장)',
+    lat:37.3422, lng:127.9200,
+    people:['김학의'],
+    title_ko:'김학의 별장 성접대 의혹',
+    title_en:'The Kim Hak-eui "Villa Entertainment" Scandal',
+    title_ja:'金鶴宜別荘接待疑惑',
+    allegation_status:'acquitted',
+    summary_ko:'김학의가 법무부 차관으로 내정된 직후, 그가 건설업자 윤중천의 강원도 별장에서 여러 차례 성접대를 받는 장면이 담겼다는 동영상의 존재가 알려지며 큰 파문이 일었다. 검찰은 두 차례나 무혐의 처분을 내렸다가 여론의 비판 속에 재수사에 나섰고, 2019년 김학의를 뇌물 혐의로 구속기소했다. 그러나 정작 핵심이었던 성접대 관련 혐의는 공소시효 만료로 면소 처리됐고, 뇌물 혐의도 1심 무죄, 2심 유죄를 오간 끝에 2022년 8월 대법원에서 최종 무죄가 확정되며 사건은 법적으로 종결됐다(별장을 제공한 윤중천은 별도 사건으로 유죄가 확정됐다). 검찰의 부실·봐주기 수사 논란과 함께, 권력형 성범죄 의혹이 사법 절차 안에서 진실 규명에 실패한 대표적 사례로 남았다.',
+    video:null,
+    connections:['person_2009_02'],
+    tags:['political','원주','김학의','별장성접대','검찰수사'],
+    sources:['한국민족문화대백과사전 김학의 사건','위키백과 김학의 별장 성접대 사건'] },
+
   { id:'political_2013_01', year:2013, visible_from:2013, visible_until:2013,
     month:2, day:25, type:'political', priority:1,
     title_ko:'박근혜 대통령 취임',

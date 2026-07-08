@@ -26,5 +26,19 @@ const EVENTS_BLOCK3 = [
     video:null,
     connections:['culture_neo_01'],
     tags:['culture','요하','홍산문화','옥기','동북공정'],
-    sources:['한국민족문화대백과사전 홍산문화','위키백과 훙산 문화'] }
+    sources:['한국민족문화대백과사전 홍산문화','위키백과 훙산 문화'] },
+
+  { id:'culture_neo_03', year:-4000, visible_from:-6000, visible_until:-1500,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'부산 동삼동 패총 — 어로 생활과 원시 신앙',
+    title_en:'Dongsam-dong Shell Mound, Busan — Fishing Life and Primitive Beliefs',
+    title_ja:'釜山東三洞貝塚 — 漁労生活と原始信仰',
+    place_ko:'부산 영도(동삼동)',
+    lat:35.0875, lng:129.0756,
+    people:[],
+    summary_ko:'부산 영도 동삼동에서 발굴된 대규모 조개더미(패총) 유적은 신석기인들이 바닷가에 살며 조개와 물고기를 채취해 먹고 남긴 껍데기와 뼈가 오랜 세월 쌓여 만들어진 것이다. 여기서는 빗살무늬토기와 함께 사람 얼굴을 새긴 조개껍데기(패면), 흑요석으로 만든 도구, 일본 규슈 지역과의 교류를 보여주는 흑요석·조몬토기 등이 함께 출토돼 신석기시대에 이미 바다를 건넌 원거리 교역이 있었음을 보여준다. 사람 얼굴을 새긴 조개껍데기나 짐승 뼈로 만든 장신구 등은, 이 시기 사람들이 자연물에 영적인 힘이 깃들어 있다고 믿는 애니미즘이나 특정 동물을 부족의 수호신으로 섬기는 토테미즘 같은 원시 신앙을 가지고 있었음을 짐작하게 하는 단서로 다뤄진다.',
+    video:null,
+    connections:['culture_neo_01'],
+    tags:['culture','부산','동삼동패총','신석기','원시신앙'],
+    sources:['한국민족문화대백과사전 동삼동패총'] }
 ];

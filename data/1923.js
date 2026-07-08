@@ -186,4 +186,19 @@ const EVENTS_1923 = [
     tags:['person','조선국내','진주','강상호','형평운동'],
     sources:['한국민족문화대백과사전 형평운동','우리역사넷 조선형평사'],
     content:{ hero:{"url": "assets/images/entity/person/person_kang_sang_ho_01.webp", "alt": "강상호", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"}, gallery:[] } }
+,
+
+  { id:'movement_1923_03', year:1923, visible_from:1922, visible_until:1923,
+    month:5, day:1, type:'movement', priority:2,
+    title_ko:'방정환과 어린이날 제정',
+    title_en:'Bang Jeong-hwan and the Establishment of Children\'s Day',
+    title_ja:'方定煥と子供の日制定',
+    place_ko:'경성',
+    lat:37.5665, lng:126.9780,
+    people:['방정환'],
+    summary_ko:'천도교 소년회를 이끌던 방정환은 1922년 5월 1일을 어린이날로 정해 처음 기념행사를 열었고, 이듬해에는 색동회를 조직해 전국적인 어린이날 행사와 잡지 《어린이》 발간을 이끌었다. 그는 "어린이"라는 말을 널리 퍼뜨리며 아이들을 어른에게 종속된 존재가 아니라 독립된 인격체로 존중해야 한다는 소년운동을 펼쳤다. 식민지 현실 속에서 다음 세대를 인격적으로 길러내려 한 이 운동은, 3·1운동 이후 각계각층으로 번진 실력양성·민중계몽 흐름의 한 갈래였다.',
+    video:null,
+    connections:['movement_1923_01'],
+    tags:['movement','경성','방정환','어린이날','소년운동'],
+    sources:['한국민족문화대백과사전 방정환','한국민족문화대백과사전 어린이날'] }
 ];

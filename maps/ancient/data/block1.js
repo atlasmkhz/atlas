@@ -1,5 +1,19 @@
 // data/block1.js — 삼국 정립기 (기원전 37 ~ 313) 시드 데이터
 const EVENTS_BLOCK1 = [
+  { id:'political_42_01', year:42, visible_from:42, visible_until:42,
+    month:3, day:null, type:'political', priority:1, nation:'gaya',
+    title_ko:'가야 연맹 건국 — 김수로왕과 구지가',
+    title_en:'Founding of the Gaya Confederacy — King Suro and the Song of Guji',
+    title_ja:'伽耶連盟建国 — 金首露王と亀旨歌',
+    place_ko:'금관가야(김해)',
+    lat:35.2280, lng:128.8894,
+    people:['김수로왕'],
+    summary_ko:'낙동강 하류 아홉 촌장(구간)이 다스리던 지역에, 하늘에서 내려온 황금알 여섯 개 중 가장 먼저 사람으로 태어난 김수로가 왕으로 추대돼 금관가야를 세웠다는 건국신화가 삼국유사 가락국기에 전한다. 이때 마을 사람들이 "거북아 거북아 머리를 내놓아라"로 시작하는 구지가를 부르며 새 왕의 강림을 기원했다고 한다. 나머지 다섯 알에서 태어난 이들은 각각 대가야·고령가야·성산가야·아라가야·소가야의 시조가 됐다고 전해지며, 이렇게 성립된 가야 연맹은 이후 500년 가까이 낙동강 유역에서 독자적인 철기 문화를 꽃피우다 신라에 차례로 병합된다.',
+    video:null,
+    connections:[],
+    tags:['political','김해','가야','김수로왕','구지가'],
+    sources:['한국민족문화대백과사전 가야','위키백과 김수로왕'] },
+
   { id:'political_bc37_01', year:-37, visible_from:-37, visible_until:-37,
     month:null, day:null, type:'political', priority:1, nation:'goguryeo',
     title_ko:'고구려 건국',

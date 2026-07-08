@@ -198,21 +198,33 @@
   }
 
   // ── 루트 패널 사이드바 HTML ───────────────────────────────────
-  // 웨이포인트 목록을 세로 타임라인으로 보여준다.
+  // 웨이포인트 목록을 세로 타임라인으로 보여준다. wp.summary_ko나
+  // wp.youtube_id가 있는 항목은 제목을 누르면(지도 이동은 항상 그대로
+  // 일어나면서) 그 아래로 설명/영상이 펼쳐진다 — 없는 항목은 기존과
+  // 동일하게 지도 이동만 한다(아코디언 화살표 자체가 안 보인다).
   function buildRoutePanelHtml(route) {
     const wpRows = route.waypoints.map((wp, i) => {
       const typeColor = WP_TYPE_COLOR[wp.type] || route.color;
       const typeLabel = WP_TYPE_LABEL[wp.type] || wp.type;
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
+      const hasDetail = !!(wp.summary_ko || wp.youtube_id);
+      const detailHtml = hasDetail ? `
+        <div class="route-panel-wp-detail" hidden>
+          ${wp.summary_ko ? `<p class="route-panel-wp-summary">${wp.summary_ko}</p>` : ''}
+          ${wp.youtube_id ? `<div class="route-panel-wp-video" data-youtube-id="${wp.youtube_id}"></div>` : ''}
+        </div>` : '';
       return `
-      <li class="route-panel-wp" data-wp-id="${wp.id}"
-          onclick="window.focusRouteWaypoint && window.focusRouteWaypoint('${route.id}','${wp.id}')">
-        <span class="route-panel-dot" style="background:${typeColor};"></span>
-        <div class="route-panel-wp-body">
-          <span class="route-panel-wp-date">${dateStr}</span>
-          <span class="route-panel-wp-title">${wp.title_ko}</span>
-          <span class="route-panel-wp-place">${wp.place_ko}</span>
-        </div>
+      <li class="route-panel-wp${hasDetail ? ' has-detail' : ''}" data-wp-id="${wp.id}">
+        <div class="route-panel-wp-row"
+             onclick="window.handleRoutePanelClick && window.handleRoutePanelClick(event,'${route.id}','${wp.id}')">
+          <span class="route-panel-dot" style="background:${typeColor};"></span>
+          <div class="route-panel-wp-body">
+            <span class="route-panel-wp-date">${dateStr}</span>
+            <span class="route-panel-wp-title">${wp.title_ko}</span>
+            <span class="route-panel-wp-place">${wp.place_ko}</span>
+          </div>
+          ${hasDetail ? '<span class="route-panel-expand-icon" aria-hidden="true"></span>' : ''}
+        </div>${detailHtml}
       </li>`;
     }).join('');
 
@@ -437,6 +449,44 @@
     highlightPanelItem(wpId);
     // fitBounds/setView 애니메이션이 끝난 뒤 깜빡여야 위치가 확실히 보인다.
     window.setTimeout(() => flashRouteMarker(wpId), 350);
+  };
+
+  // ── 사이드 패널 제목 클릭 처리 ────────────────────────────────
+  // 지도 이동(focusRouteWaypoint)은 항상 일어난다. 그 위에 추가로,
+  // 이 웨이포인트에 summary_ko나 youtube_id가 있으면(= 마크업에
+  // .has-detail이 붙어 있으면) 아코디언을 펼치고, 유튜브 iframe은
+  // 펼쳐지는 "그 순간"에만 주입한다 — 웨이포인트 수십 개짜리 루트를
+  // 열자마자 iframe을 전부 만들면 무거워지기 때문에, 실제로 펼친
+  // 항목만 로드한다(한 번 로드되면 접었다 펴도 다시 만들지 않는다).
+  window.handleRoutePanelClick = function (ev, routeId, wpId) {
+    try {
+      window.focusRouteWaypoint(routeId, wpId);
+    } catch (err) {
+      // 지도 이동/스크롤 쪽에서 문제가 생기더라도 아코디언 펼침은
+      // 별개로 계속 동작해야 한다(설명·영상 확인이 더 우선순위 높은
+      // 동작이므로, 지도 쪽 실패가 이걸 막으면 안 된다).
+      console.warn('[route] focusRouteWaypoint 중 오류(아코디언은 계속 진행):', err);
+    }
+
+    const li = ev.currentTarget.closest('.route-panel-wp');
+    if (!li || !li.classList.contains('has-detail')) return;
+
+    const detail = li.querySelector('.route-panel-wp-detail');
+    const isOpen = li.classList.toggle('expanded');
+    if (detail) detail.hidden = !isOpen;
+
+    if (isOpen) {
+      const videoBox = li.querySelector('.route-panel-wp-video');
+      if (videoBox && !videoBox.dataset.loaded) {
+        const ytId = videoBox.getAttribute('data-youtube-id');
+        videoBox.innerHTML =
+          `<iframe width="100%" height="180" src="https://www.youtube.com/embed/${ytId}" `
+          + `title="YouTube video" frameborder="0" loading="lazy" `
+          + `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" `
+          + `allowfullscreen></iframe>`;
+        videoBox.dataset.loaded = '1';
+      }
+    }
   };
 
   // ── 루트 닫기 ────────────────────────────────────────────────

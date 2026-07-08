@@ -103,4 +103,20 @@ const EVENTS_1986 = [
     tags:['science','기흥','64K DRAM','반도체','삼성'],
     sources:['한국민족문화대백과사전 반도체산업'] }
 
+,
+
+  { id:'economic_1986_04', year:1986, visible_from:1986, visible_until:1988,
+    month:0, day:null, type:'economic', priority:2,
+    title_ko:'3저 호황 — 저유가·저금리·저달러가 겹친 성장',
+    title_en:'The "Three Lows" Boom — Low Oil Prices, Low Interest Rates, Low Dollar',
+    title_ja:'三低好況 — 低油価・低金利・低ドルが重なった成長',
+    place_ko:'대한민국',
+    lat:36.5, lng:127.8,
+    people:[],
+    summary_ko:'1980년대 중반 국제 유가가 큰 폭으로 떨어지고, 미국의 금리 인하로 국제 금리도 낮아졌으며, 엔화 강세로 상대적으로 원화 가치가 낮게 유지되는 세 가지 유리한 조건("3저")이 동시에 겹쳤다. 원유를 전량 수입에 의존하던 한국 경제는 이 덕분에 원가 부담이 크게 줄었고, 상대적으로 저렴해진 상품 가격으로 자동차·전자·조선 등 수출 산업이 호황을 누리며 사상 최초로 경상수지 흑자를 기록했다. 이 시기 축적된 경제력은 1988년 서울올림픽 개최와 이후 민주화 이행기 중산층 성장의 물적 기반이 됐다는 평가를 받는다.',
+    video:null,
+    connections:['science_1986_01'],
+    tags:['economic','대한민국','3저호황','경상수지흑자','수출'],
+    sources:['한국민족문화대백과사전 3저호황'] }
+
 ];

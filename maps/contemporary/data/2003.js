@@ -83,4 +83,20 @@ const EVENTS_2003 = [
     tags:['diplomacy','서울','이라크','파병','한미동맹'],
     sources:['한국민족문화대백과사전 이라크 파병','위키백과 자이툰 부대'] }
 
+,
+
+  { id:'diplomacy_2003_02', year:2003, visible_from:2003, visible_until:2008,
+    month:8, day:27, type:'diplomacy', priority:2,
+    title_ko:'6자회담 시작 — 북핵 문제의 다자 협상',
+    title_en:'Beginning of the Six-Party Talks on North Korea\'s Nuclear Program',
+    title_ja:'六者会談開始 — 北朝鮮核問題の多者協議',
+    place_ko:'베이징',
+    lat:39.9042, lng:116.4074,
+    people:[],
+    summary_ko:'북한이 2002년 우라늄 농축 프로그램 의혹으로 제네바 합의를 파기하고 이듬해 핵확산금지조약(NPT)에서 탈퇴하며 2차 북핵 위기가 불거지자, 남북한과 미국·중국·일본·러시아 6개국이 베이징에 모여 북핵 문제 해결을 위한 6자회담을 시작했다. 2005년 9·19 공동성명에서 북한의 핵 포기와 관계 정상화를 맞바꾸는 원칙에 합의하는 등 진전을 보이기도 했지만, 검증 방식을 둘러싼 이견과 북한의 핵실험(2006, 2009)이 반복되며 회담은 실질적 성과 없이 2008년 말 이후 사실상 중단됐다. 이는 이후로도 북핵 문제가 한반도 안보의 핵심 쟁점으로 계속 남는 배경이 된다.',
+    video:null,
+    connections:[],
+    tags:['diplomacy','베이징','6자회담','북핵','9·19공동성명'],
+    sources:['한국민족문화대백과사전 6자회담'] }
+
 ];

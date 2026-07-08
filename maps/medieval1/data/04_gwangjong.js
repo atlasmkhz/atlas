@@ -26,5 +26,19 @@ const EVENTS_GWANGJONG = [
     video:null,
     connections:['policy_0956_01'],
     tags:['policy','개경','광종','과거제','쌍기'],
-    sources:['한국민족문화대백과사전 과거제'] }
+    sources:['한국민족문화대백과사전 과거제'] },
+
+  { id:'political_0960_01', year:960, visible_from:960, visible_until:975,
+    month:null, day:null, type:'political', priority:2,
+    title_ko:'칭제건원과 공신 세력 숙청',
+    title_en:'Imperial Titles, Independent Era Names, and the Purge of Meritorious Officials',
+    title_ja:'称帝建元と功臣勢力粛清',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['광종'],
+    summary_ko:'노비안검법과 과거제로 호족의 기반을 흔들어 놓은 광종은, 스스로를 황제라 칭하고 광덕·준풍이라는 독자 연호를 사용하며 대외적으로도 고려의 위상을 높이려 했다. 왕권 강화에 방해가 될 만한 개국공신과 그 자제들을 잔혹할 정도로 대대적으로 숙청해, 그의 치세 후반에는 살아남은 공신이 얼마 되지 않을 정도였다고 전한다. 이런 강경한 방식은 큰 반발과 후유증을 남겼지만, 결과적으로 왕권을 크게 강화시켜 뒤이은 경종·성종 대에 안정된 국가 체제를 정비할 수 있는 토대를 마련했다.',
+    video:null,
+    connections:['policy_0958_01'],
+    tags:['political','개경','칭제건원','광종','공신숙청'],
+    sources:['한국민족문화대백과사전 광종'] }
 ];

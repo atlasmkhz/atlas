@@ -126,4 +126,20 @@ const EVENTS_1931 = [
     sources:['한국민족문화대백과사전 지청천'],
     content:{ hero:{"url": "assets/images/entity/person/person_ji_cheong_cheon_01.webp", "alt": "지청천", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } }
 
+,
+
+  { id:'movement_1931_02', year:1931, visible_from:1931, visible_until:1934,
+    month:7, day:null, type:'movement', priority:2,
+    title_ko:'브나로드 운동 — 동아일보의 문맹퇴치운동',
+    title_en:'The V-Narod Movement — Dong-A Ilbo\'s Literacy Campaign',
+    title_ja:'ブナロード運動 — 東亜日報の文盲退治運動',
+    place_ko:'조선 전역(농촌)',
+    lat:36.5, lng:127.8,
+    people:[],
+    summary_ko:'"민중 속으로"라는 뜻의 러시아어에서 딴 브나로드 운동은, 동아일보가 방학을 맞은 학생들을 계몽대로 조직해 농촌 곳곳에 보내 한글을 가르치고 근검절약·미신타파 등을 계도한 문맹퇴치운동이었다. 조선일보도 비슷한 시기 문자보급운동을 벌여 "아는 것이 힘, 배워야 산다"는 구호로 한글 교재를 배포했다. 심훈의 소설 《상록수》가 이 운동을 소재로 삼아 널리 알려졌다. 총독부가 1935년 이 운동을 사실상 금지하면서 중단됐지만, 문맹률이 극도로 높았던 식민지 농촌 사회에 한글 보급과 근대적 계몽 의식을 확산시키는 데 기여했다.',
+    video:null,
+    connections:[],
+    tags:['movement','조선국내','브나로드운동','동아일보','문맹퇴치'],
+    sources:['한국민족문화대백과사전 브나로드운동'] }
+
 ];
