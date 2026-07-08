@@ -1,0 +1,30 @@
+// data/05_gyeongjong.js — 경종 재위 (975~981)
+const EVENTS_GYEONGJONG_GORYEO = [
+  { id:'political_0975_01', year:975, visible_from:975, visible_until:975,
+    month:5, day:null, type:'political', priority:1,
+    title_ko:'경종 즉위',
+    title_en:'Enthronement of King Gyeongjong',
+    title_ja:'景宗即位',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['경종','광종'],
+    summary_ko:'노비안검법과 과거제, 잇단 숙청으로 호족 세력을 강하게 억누르며 왕권을 다진 광종이 세상을 떠나자, 아들 경종이 뒤를 이었다. 아버지 대의 격렬한 숙청으로 조정의 인재층이 크게 줄어 있었기에, 경종은 즉위 초 숙청 피해자들의 복수를 허용하는 등 다소 혼란한 정국 수습에 나서야 했다. 짧은 재위 기간이었지만 그가 제정한 전시과는 이후 고려 토지 제도의 근간이 됐다.',
+    video:null,
+    connections:['policy_0958_01'],
+    tags:['political','개경','경종','즉위','광종'],
+    sources:['한국민족문화대백과사전 경종(고려)'] },
+
+  { id:'economic_0976_01', year:976, visible_from:976, visible_until:981,
+    month:11, day:null, type:'economic', priority:1,
+    title_ko:'전시과 제정(시정전시과)',
+    title_en:'Establishment of the Jeonsigwa Land System',
+    title_ja:'田柴科の制定(始定田柴科)',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['경종'],
+    summary_ko:'경종은 관리에게 관직 등급에 따라 농지(전지)와 땔감을 얻는 임야(시지)에 대한 수조권을 지급하는 전시과를 처음 제정했다. 관품뿐 아니라 인품(관리 개인의 공로·성향)까지 반영해 지급 기준을 정한 초기 형태였다는 점에서 시정전시과라 불리며, 이는 이후 목종·문종 대를 거치며 관품 중심으로 점차 정비된다. 이 토지 제도는 고려 관료 체제를 경제적으로 뒷받침하는 근간으로, 조선의 과전법에까지 영향을 미치는 한국 전근대 토지 제도사의 중요한 출발점이 됐다.',
+    video:null,
+    connections:['political_0975_01'],
+    tags:['economic','개경','전시과','경종','토지제도'],
+    sources:['한국민족문화대백과사전 전시과'] }
+];

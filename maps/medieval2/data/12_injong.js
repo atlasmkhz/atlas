@@ -1,0 +1,30 @@
+// data/12_injong.js — 인종 재위 (1544~1545)
+const EVENTS_INJONG = [
+  { id:'political_1544_02', year:1544, visible_from:1544, visible_until:1545,
+    month:11, day:15, type:'political', priority:1,
+    title_ko:'인종 즉위',
+    title_en:'Enthronement of King Injong',
+    title_ja:'仁宗即位',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['인종','중종'],
+    summary_ko:'중종의 맏아들로 20년 넘게 세자 자리를 지켜온 인종은 중종이 승하하자 왕위에 올랐다. 효심이 지극하고 학문을 사랑해 신하들의 기대를 모았지만, 즉위 당시 이미 계모 문정왕후와 그 아들 경원대군(훗날 명종) 세력과의 관계가 편치 않았다. 짧았던 그의 치세는 새 시대에 대한 기대와, 뒤이어 벌어질 외척 간 권력 다툼의 그림자를 동시에 품고 있었다.',
+    video:null,
+    connections:['political_1506_02'],
+    tags:['political','한양','인종','즉위'],
+    sources:['한국민족문화대백과사전 인종(조선)'] },
+
+  { id:'political_1545_01', year:1545, visible_from:1545, visible_until:1545,
+    month:7, day:1, type:'political', priority:1,
+    title_ko:'인종의 승하와 대윤·소윤의 대립',
+    title_en:'Death of Injong and the Daeyun-Soyun Factional Strife',
+    title_ja:'仁宗の崩御と大尹・小尹の対立',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['인종','문정왕후','명종'],
+    summary_ko:'인종은 즉위 8개월 만에 병으로 갑작스레 세상을 떠났고, 후사가 없어 이복동생 경원대군이 명종으로 즉위했다. 인종의 외척(대윤, 윤임 일파)과 명종의 생모 문정왕후를 중심으로 한 외척(소윤, 윤원형 일파)은 오래전부터 왕위 계승을 둘러싸고 대립해 왔는데, 인종의 급작스러운 죽음으로 권력은 곧바로 소윤 쪽으로 넘어갔다. 이 대립 구도는 명종 즉위 직후 벌어지는 을사사화로 이어져, 대윤 세력이 대대적으로 숙청되는 결과를 낳는다.',
+    video:null,
+    connections:['massacre_1545_01'],
+    tags:['political','한양','인종','대윤','소윤'],
+    sources:['한국민족문화대백과사전 인종(조선)'] }
+];

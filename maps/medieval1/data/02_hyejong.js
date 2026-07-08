@@ -1,0 +1,30 @@
+// data/02_hyejong.js — 혜종 재위 (943~945)
+const EVENTS_HYEJONG = [
+  { id:'political_0943_01', year:943, visible_from:943, visible_until:943,
+    month:5, day:null, type:'political', priority:1,
+    title_ko:'혜종 즉위',
+    title_en:'Enthronement of King Hyejong',
+    title_ja:'恵宗即位',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['혜종','왕건'],
+    summary_ko:'태조 왕건의 맏아들 무는 여러 호족 세력의 딸을 아내로 맞은 이복형제들 사이에서 상대적으로 외척 기반이 약했지만, 후삼국 통일 전쟁에서 세운 공을 인정받아 혜종으로 즉위했다. 태조가 지방 호족들과의 혼인을 통해 세력을 규합한 결과, 그가 남긴 왕자들 사이의 왕위 계승 경쟁이 불가피했는데, 혜종의 치세는 이 갈등이 본격적으로 표면화되는 시기였다. 취약한 외척 기반은 결국 왕규의 난이라는 정변 시도로 이어진다.',
+    video:null,
+    connections:['political_0936_01'],
+    tags:['political','개경','혜종','즉위'],
+    sources:['한국민족문화대백과사전 혜종(고려)'] },
+
+  { id:'plot_0945_01', year:945, visible_from:945, visible_until:945,
+    month:9, day:null, type:'plot', priority:1,
+    title_ko:'왕규의 난',
+    title_en:'Rebellion of Wang Gyu',
+    title_ja:'王規の乱',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['왕규','혜종','정종'],
+    summary_ko:'외척 호족 왕규는 자신의 외손자(태조의 다른 아들)를 왕위에 올리기 위해 혜종을 여러 차례 암살하려 했으나 번번이 실패했다. 병약했던 혜종이 끝내 세상을 떠나자, 서경(평양)을 근거지로 한 왕식렴의 군사적 지원을 등에 업은 왕요(정종)가 왕규를 반역죄로 몰아 제거하고 왕위에 올랐다. 이 사건은 태조 사후 호족 세력 간 왕위 계승 다툼이 얼마나 격렬했는지를 보여주며, 이후 광종이 강력한 왕권 강화 정책을 추진하는 배경이 된다.',
+    video:null,
+    connections:['political_0943_01'],
+    tags:['plot','개경','왕규의난','혜종','정종'],
+    sources:['한국민족문화대백과사전 왕규의 난'] }
+];

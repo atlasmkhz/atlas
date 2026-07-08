@@ -1,0 +1,30 @@
+// data/29_chungsukwang.js — 충숙왕 재위 (1313~1330, 1332~1339 복위)
+const EVENTS_CHUNGSUKWANG = [
+  { id:'political_1313_01', year:1313, visible_from:1313, visible_until:1330,
+    month:3, day:null, type:'political', priority:1,
+    title_ko:'충숙왕 즉위와 심왕 옹립 책동',
+    title_en:'Enthronement of King Chungsuk and the Plot to Install a Rival "Prince of Shen"',
+    title_ja:'忠粛王即位と瀋王擁立の策動',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['충숙왕','왕고'],
+    summary_ko:'충선왕의 뒤를 이어 즉위한 충숙왕은 재위 내내 원 황실의 부마이자 요동 지역을 봉지로 받은 심왕(충선왕의 조카 왕고)이 고려 왕위까지 노리는 정치 공작에 시달렸다. 심왕을 지지하는 부원배(원에 빌붙어 사익을 챙기던 친원 세력)들이 원 조정에 충숙왕을 참소하는 일이 반복되면서, 그는 두 차례나 원에 소환돼 국새를 빼앗기는 등 극도로 불안정한 왕위를 이어가야 했다. 이런 심왕 옹립 책동은 원 간섭기 고려 왕권이 원의 정치적 이해관계에 얼마나 취약하게 노출돼 있었는지를 잘 보여준다.',
+    video:null,
+    connections:['culture_1314_01'],
+    tags:['political','개경','충숙왕','심왕','원간섭기'],
+    sources:['한국민족문화대백과사전 충숙왕'] },
+
+  { id:'political_1339_01', year:1339, visible_from:1339, visible_until:1339,
+    month:null, day:null, type:'political', priority:2,
+    title_ko:'충숙왕의 죽음',
+    title_en:'Death of King Chungsuk',
+    title_ja:'忠粛王の死',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['충숙왕','충혜왕'],
+    summary_ko:'아들 충혜왕에게 잠시 양위했다가 그의 실정으로 다시 복위하는 등 굴곡진 재위를 이어가던 충숙왕은 결국 세상을 떠났다. 심왕과의 오랜 왕위 다툼, 원의 잦은 간섭으로 점철된 그의 치세는 원 간섭기 고려 왕실이 처한 구조적 어려움을 압축적으로 보여준다. 그의 죽음으로 아들 충혜왕이 다시 왕위에 오르지만, 충혜왕 역시 아버지 못지않게 순탄치 않은 치세를 겪게 된다.',
+    video:null,
+    connections:['political_1313_01'],
+    tags:['political','개경','충숙왕','죽음','충혜왕'],
+    sources:['한국민족문화대백과사전 충숙왕'] }
+];

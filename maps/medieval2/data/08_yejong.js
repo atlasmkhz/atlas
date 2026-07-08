@@ -1,0 +1,30 @@
+// data/08_yejong.js — 예종 재위 (1468~1469)
+const EVENTS_YEJONG = [
+  { id:'political_1468_01', year:1468, visible_from:1468, visible_until:1468,
+    month:9, day:7, type:'political', priority:1,
+    title_ko:'예종 즉위',
+    title_en:'Enthronement of King Yejong',
+    title_ja:'睿宗即位',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['예종','세조'],
+    summary_ko:'세조의 둘째 아들 예종은 아버지가 병으로 세상을 떠나자 19세의 나이로 즉위했다. 정희왕후(세조의 왕비)가 수렴청정을 맡아 국정을 뒷받침했지만, 예종 자신도 이미 병약했던 데다 즉위 초부터 공신 세력과의 긴장, 남이 옥사 같은 정치적 격변을 겪었다. 재위 기간이 1년을 조금 넘는 데 그쳐 뚜렷한 치적을 남기지는 못했지만, 아버지 세조가 추진하던 경국대전 편찬 사업은 이 시기에도 계속됐다.',
+    video:null,
+    connections:['political_1455_01','plot_1468_02'],
+    tags:['political','한양','예종','즉위'],
+    sources:['한국민족문화대백과사전 예종(조선)'] },
+
+  { id:'plot_1468_02', year:1468, visible_from:1468, visible_until:1468,
+    month:10, day:24, type:'plot', priority:1,
+    title_ko:'남이의 옥',
+    title_en:'The Purge of Nam I',
+    title_ja:'南怡の獄',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['남이','유자광','예종'],
+    summary_ko:'이시애의 난 진압에 큰 공을 세우며 20대에 병조판서까지 오른 남이는 세조의 총애를 받았지만, 세조가 죽고 예종이 즉위하자 훈구 대신들의 견제를 받아 병조판서에서 밀려났다. 그의 출세를 시기하던 유자광은 남이가 지은 시의 한 구절을 역모의 증거로 몰아 고변했고, 예종은 즉위 초 왕권을 위협할 수 있는 요소를 서둘러 제거하려는 뜻에서 이를 받아들여 남이를 처형했다. 이 사건은 훈구 공신 세력이 신진 무장 세력을 견제하며 정치적 입지를 굳히는 계기가 됐고, 남이의 역모 혐의는 후대에도 무고였다는 시각이 우세하다.',
+    video:null,
+    connections:['political_1468_01','battle_1467_01'],
+    tags:['plot','한양','남이','유자광','옥사'],
+    sources:['한국민족문화대백과사전 남이'] }
+];

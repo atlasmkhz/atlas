@@ -1,0 +1,30 @@
+// data/21_huijong.js — 희종 재위 (1204~1211)
+const EVENTS_HUIJONG = [
+  { id:'political_1204_01', year:1204, visible_from:1204, visible_until:1211,
+    month:1, day:null, type:'political', priority:2,
+    title_ko:'희종 즉위',
+    title_en:'Enthronement of King Huijong',
+    title_ja:'熙宗即位',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['희종','최충헌'],
+    summary_ko:'신종의 뒤를 이어 즉위한 희종 역시 최충헌의 뜻에 따라 왕위에 올랐다. 즉위 초에는 최충헌에게 진강후라는 최고 작위를 내리며 우호적인 관계를 유지했지만, 시간이 지나며 최충헌의 전횡에 반감을 품게 됐고 이는 결국 왕이 직접 권신 암살을 시도하는 초유의 사건으로 이어진다.',
+    video:null,
+    connections:['political_1197_01'],
+    tags:['political','개경','희종','즉위','최충헌'],
+    sources:['한국민족문화대백과사전 희종(고려)'] },
+
+  { id:'plot_1211_01', year:1211, visible_from:1211, visible_until:1211,
+    month:12, day:null, type:'plot', priority:1,
+    title_ko:'희종의 최충헌 암살 시도와 폐위',
+    title_en:'Huijong\'s Failed Assassination Attempt on Choe Chung-heon and His Deposition',
+    title_ja:'熙宗の崔忠献暗殺未遂と廃位',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['희종','최충헌'],
+    summary_ko:'최충헌의 전횡에 위협을 느낀 희종은 내시들과 짜고 최충헌을 궁궐로 유인해 암살하려 했으나 계획이 실패로 돌아갔다. 왕이 직접 자신을 죽이려 했다는 사실에 격분한 최충헌은 희종을 폐위시켜 강화도로 유배 보내고 명종의 아들(강종)을 새 왕으로 세웠다. 왕이 직접 실권자 암살을 기도했다가 오히려 폐위당한 이 사건은, 무신정권 아래 왕권이 얼마나 형해화됐는지를 극명하게 보여준다.',
+    video:null,
+    connections:['political_1204_01','political_1211_02'],
+    tags:['plot','개경','희종','최충헌','폐위'],
+    sources:['한국민족문화대백과사전 희종(고려)'] }
+];

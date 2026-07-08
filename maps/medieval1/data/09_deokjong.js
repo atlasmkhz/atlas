@@ -1,0 +1,30 @@
+// data/09_deokjong.js — 덕종 재위 (1031~1034)
+const EVENTS_DEOKJONG = [
+  { id:'political_1031_01', year:1031, visible_from:1031, visible_until:1031,
+    month:5, day:null, type:'political', priority:2,
+    title_ko:'덕종 즉위',
+    title_en:'Enthronement of King Deokjong',
+    title_ja:'徳宗即位',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['덕종','현종'],
+    summary_ko:'거란의 침입을 극복하고 국정을 안정시킨 현종이 세상을 떠나자 맏아들 덕종이 뒤를 이었다. 아버지가 이룬 안정을 바탕으로 즉위했지만 재위 3년 만에 요절해 뚜렷한 치적을 남기기는 어려웠는데, 그럼에도 북방 국경을 영구적으로 방비할 장성 축조를 시작해 이후 정종(靖宗) 대에 완성되는 천리장성의 초석을 놓았다.',
+    video:null,
+    connections:['policy_1029_01'],
+    tags:['political','개경','덕종','즉위','현종'],
+    sources:['한국민족문화대백과사전 덕종(고려)'] },
+
+  { id:'policy_1033_01', year:1033, visible_from:1033, visible_until:1034,
+    month:null, day:null, type:'policy', priority:2,
+    title_ko:'천리장성 축조 시작',
+    title_en:'Beginning of the Construction of the Cheolli Jangseong Wall',
+    title_ja:'千里長城築造開始',
+    place_ko:'평안 압록강 하구',
+    lat:40.1, lng:124.4,
+    people:['덕종','유소'],
+    summary_ko:'거란·여진 등 북방 세력의 거듭된 침입을 근본적으로 막기 위해, 덕종은 압록강 하구에서 동쪽 도련포(함경도)까지 이어지는 대규모 장성을 쌓는 사업을 시작했다. 장군 유소가 축성을 주도한 이 천리장성은 국경 전체를 아우르는 방어선을 구축하려는 구상으로, 공사는 덕종 사후에도 계속돼 정종(靖宗) 대인 1044년에 완성된다. 이는 중국의 만리장성에 견줄 만한 고려의 대표적인 국경 방어 시설로 평가된다.',
+    video:null,
+    connections:['political_1031_01'],
+    tags:['policy','압록강','천리장성','덕종','축성'],
+    sources:['한국민족문화대백과사전 천리장성'] }
+];

@@ -1,0 +1,30 @@
+// data/05_munjong.js — 문종 재위 (1450~1452)
+const EVENTS_MUNJONG = [
+  { id:'political_1450_01', year:1450, visible_from:1450, visible_until:1450,
+    month:2, day:23, type:'political', priority:1,
+    title_ko:'문종 즉위',
+    title_en:'Enthronement of King Munjong',
+    title_ja:'文宗即位',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['문종','세종'],
+    summary_ko:'세종의 맏아들로 20년 넘게 세자로서 대리청정을 맡아온 문종은 세종이 승하하자 왕위에 올랐다. 학문과 병법·과학기술에 두루 밝아 세종 말년의 국정 상당 부분을 이미 실질적으로 이끌어 온 준비된 군주였지만, 즉위 당시 이미 건강이 좋지 않았다. 오랜 세자 생활로 쌓은 능력을 제대로 펼치기도 전에 재위 2년 만에 병으로 세상을 떠나면서, 조선 왕조는 어린 단종의 즉위라는 큰 정치적 시험대에 오르게 된다.',
+    video:null,
+    connections:['political_1452_01'],
+    tags:['political','한양','문종','세종'],
+    sources:['한국민족문화대백과사전 문종(조선)'] },
+
+  { id:'political_1452_01', year:1452, visible_from:1452, visible_until:1452,
+    month:5, day:14, type:'political', priority:1,
+    title_ko:'고명대신 체제 — 김종서·황보인에게 단종을 부탁하다',
+    title_en:'Munjong Entrusts the Young Crown Prince to Regent Ministers',
+    title_ja:'顧命大臣体制 — 端宗を金宗瑞・皇甫仁に託す',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['문종','김종서','황보인','단종'],
+    summary_ko:'자신의 수명이 얼마 남지 않았음을 직감한 문종은 아직 12세에 불과한 세자(단종)의 앞날을 걱정해, 원로 대신인 김종서·황보인 등에게 세자를 잘 보필해 달라고 유언했다. 신뢰할 만한 왕족 어른 없이 대신들에게만 후사를 맡긴 이 선택은, 종친인 수양대군(훗날 세조)의 정치적 야심을 견제할 장치가 부족했다는 점에서 이듬해 벌어질 계유정난의 배경이 됐다. 문종의 우려는 곧 현실이 되어, 김종서를 비롯한 고명대신들은 정변의 첫 희생자가 됐다.',
+    video:null,
+    connections:['political_1450_01'],
+    tags:['political','한양','문종','고명대신','단종'],
+    sources:['한국민족문화대백과사전 문종(조선)'] }
+];

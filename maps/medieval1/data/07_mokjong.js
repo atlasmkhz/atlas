@@ -1,0 +1,30 @@
+// data/07_mokjong.js — 목종 재위 (997~1009)
+const EVENTS_MOKJONG = [
+  { id:'political_0997_01', year:997, visible_from:997, visible_until:1009,
+    month:10, day:null, type:'political', priority:1,
+    title_ko:'목종 즉위와 천추태후의 섭정',
+    title_en:'Enthronement of King Mokjong under the Regency of Empress Cheonchu',
+    title_ja:'穆宗即位と千秋太后の摂政',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['목종','천추태후'],
+    summary_ko:'성종의 뒤를 이어 조카인 목종이 18세로 즉위했는데, 생모인 천추태후가 섭정을 맡으며 실권을 크게 행사했다. 천추태후는 외척인 김치양과의 관계를 통해 권력을 키워갔고, 자신이 낳은 아들을 후계자로 세우려 하면서 왕실 내 갈등이 커졌다. 이런 불안정한 정국은 결국 서북면도순검사 강조가 정변을 일으키는 배경이 된다.',
+    video:null,
+    connections:['policy_0995_01'],
+    tags:['political','개경','목종','천추태후','섭정'],
+    sources:['한국민족문화대백과사전 목종'] },
+
+  { id:'plot_1009_01', year:1009, visible_from:1009, visible_until:1009,
+    month:2, day:null, type:'plot', priority:1,
+    title_ko:'강조의 정변',
+    title_en:'Gang Jo\'s Coup',
+    title_ja:'康兆の政変',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['강조','목종','현종'],
+    summary_ko:'천추태후와 김치양이 자신들의 아들을 왕위에 앉히려 한다는 소문이 돌자, 서북면도순검사 강조는 군사를 이끌고 개경으로 들어와 김치양 일파를 제거하고 목종을 폐위시킨 뒤 살해했다. 강조는 태조의 손자인 대량원군(현종)을 새 왕으로 옹립했는데, 이 정변으로 신하가 왕을 폐위·시해했다는 사실은 이후 거란이 "군신의 의리를 어겼다"는 명분을 내세워 대규모로 침입하는 구실을 제공하게 된다.',
+    video:null,
+    connections:['political_0997_01'],
+    tags:['plot','개경','강조의정변','목종','현종'],
+    sources:['한국민족문화대백과사전 강조의 정변'] }
+];

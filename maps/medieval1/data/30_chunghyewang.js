@@ -1,0 +1,30 @@
+// data/30_chunghyewang.js — 충혜왕 재위 (1330~1332, 1339~1344 복위)
+const EVENTS_CHUNGHYEWANG = [
+  { id:'political_1330_01', year:1330, visible_from:1330, visible_until:1344,
+    month:2, day:null, type:'political', priority:1,
+    title_ko:'충혜왕 즉위와 방탕한 행실',
+    title_en:'Enthronement of King Chunghye and His Dissolute Conduct',
+    title_ja:'忠恵王即位と放蕩な行い',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['충혜왕','충숙왕'],
+    summary_ko:'충숙왕에게서 왕위를 물려받은 충혜왕은 사냥과 연회, 여색에 빠져 국정을 돌보지 않았고 심지어 서모(계모)를 겁탈하는 등 패륜적인 행실로 원 조정에까지 악명이 자자했다. 원은 결국 그를 폐위시켜 충숙왕을 복위시켰다가, 충숙왕 사후 다시 충혜왕을 복위시키는 등 그의 왕위는 오락가락했다. 백성에게 세금을 가혹하게 거둬 자신의 사치에 탕진하는 행태까지 겹치면서, 그의 치세는 원 간섭기 고려 왕권이 얼마나 타락할 수 있는지 보여주는 극단적 사례로 남았다.',
+    video:null,
+    connections:['political_1313_01'],
+    tags:['political','개경','충혜왕','즉위','방탕'],
+    sources:['한국민족문화대백과사전 충혜왕'] },
+
+  { id:'political_1343_01', year:1343, visible_from:1343, visible_until:1344,
+    month:11, day:null, type:'political', priority:1,
+    title_ko:'충혜왕의 원 소환과 유배 중 죽음',
+    title_en:'Chunghye\'s Summons to Yuan and Death in Exile',
+    title_ja:'忠恵王の元召還と流配中の死',
+    place_ko:'중국 게양(광둥)',
+    lat:23.5468, lng:116.3556,
+    people:['충혜왕'],
+    summary_ko:'충혜왕의 폭정과 방탕이 도를 넘자, 원은 마침내 사신을 보내 그를 직접 결박해 원으로 압송하는 초유의 조치를 취했다. 원 조정은 그를 폐위시켜 중국 남부 게양(지금의 광둥성)으로 유배 보냈는데, 충혜왕은 유배지로 가는 도중 악양(岳陽)에서 병으로 세상을 떠났다. 원이 고려왕을 직접 폐위·유배시킬 만큼 강력한 종주권을 행사했다는 사실은, 원 간섭기 고려의 국왕조차 원의 처분에 좌우되는 처지였음을 극명하게 보여준다.',
+    video:null,
+    connections:['political_1330_01'],
+    tags:['political','게양','충혜왕','유배','죽음'],
+    sources:['한국민족문화대백과사전 충혜왕'] }
+];

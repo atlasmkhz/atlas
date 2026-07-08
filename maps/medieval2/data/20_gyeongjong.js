@@ -1,0 +1,30 @@
+// data/20_gyeongjong.js — 경종 재위 (1720~1724)
+const EVENTS_GYEONGJONG = [
+  { id:'political_1720_01', year:1720, visible_from:1720, visible_until:1721,
+    month:6, day:13, type:'political', priority:1,
+    title_ko:'경종 즉위',
+    title_en:'Enthronement of King Gyeongjong',
+    title_ja:'景宗即位',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['경종','숙종'],
+    summary_ko:'생모 장희빈이 사약을 받고 죽는 것을 어린 나이에 지켜봐야 했던 세자는, 숙종이 승하하자 경종으로 즉위했다. 노론은 경종이 병약하고 후사가 없다는 이유로 이복동생 연잉군(훗날 영조)을 세제로 책봉하고 대리청정까지 시키려 했는데, 이는 경종을 지지하던 소론의 강한 반발을 불러일으켰다. 생모의 죽음이라는 트라우마 위에 즉위 초부터 벌어진 이 후계 다툼은, 곧이어 신임옥사라는 유혈 정쟁으로 폭발한다.',
+    video:null,
+    connections:['massacre_1701_01'],
+    tags:['political','한양','경종','즉위'],
+    sources:['한국민족문화대백과사전 경종(조선)'] },
+
+  { id:'plot_1721_01', year:1721, visible_from:1721, visible_until:1722,
+    month:12, day:null, type:'plot', priority:1,
+    title_ko:'신임옥사',
+    title_en:'Sinim Purge of the Noron Faction',
+    title_ja:'辛壬獄事',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['경종','노론4대신'],
+    summary_ko:'연잉군을 세제로 세우고 대리청정을 추진한 노론에 맞서, 소론은 이를 왕권에 대한 도전으로 몰아붙였다. 소론의 고발로 노론 4대신(김창집·이이명·이건명·조태채)이 사사되거나 유배지에서 죽었고, 이 사건에 연루돼 처벌받은 노론 인사가 수백 명에 이르렀다. 신축년과 임인년에 걸쳐 일어났다 해서 신임옥사로 불리는 이 사건으로 소론이 정국을 완전히 장악했지만, 세제였던 연잉군(영조)조차 목숨을 위협받는 처지에 놓이면서 훗날 그가 즉위한 뒤 탕평책을 강하게 밀어붙이는 원체험이 됐다.',
+    video:null,
+    connections:['political_1720_01','policy_1725_01'],
+    tags:['plot','한양','신임옥사','경종','노론'],
+    sources:['한국민족문화대백과사전 신임옥사'] }
+];

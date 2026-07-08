@@ -1,0 +1,30 @@
+// data/33_chungmokwang.js — 충목왕 재위 (1344~1348)
+const EVENTS_CHUNGMOKWANG = [
+  { id:'political_1344_01', year:1344, visible_from:1344, visible_until:1344,
+    month:2, day:null, type:'political', priority:2,
+    title_ko:'충목왕 즉위 — 8세의 어린 왕',
+    title_en:'Enthronement of the Eight-Year-Old King Chungmok',
+    title_ja:'忠穆王即位 — 8歳の幼い王',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['충목왕','충혜왕'],
+    summary_ko:'충혜왕이 유배 도중 세상을 떠나자 겨우 8세였던 아들이 충목왕으로 즉위했다. 어린 왕을 대신해 모후인 덕녕공주가 섭정을 맡았는데, 이 시기 원의 권세가와 결탁한 부원배들의 폐해가 극심해지자 조정에서는 이를 바로잡으려는 개혁 움직임이 다시 일어난다.',
+    video:null,
+    connections:['political_1343_01'],
+    tags:['political','개경','충목왕','즉위','어린왕'],
+    sources:['한국민족문화대백과사전 충목왕'] },
+
+  { id:'policy_1347_01', year:1347, visible_from:1347, visible_until:1348,
+    month:2, day:null, type:'policy', priority:1,
+    title_ko:'정치도감 설치 — 폐정 개혁 시도',
+    title_en:'Establishment of the Jeongchidogam Reform Agency',
+    title_ja:'整治都監設置 — 弊政改革の試み',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['충목왕','왕후'],
+    summary_ko:'원 순제의 지시와 고려 개혁 세력의 요청이 맞물려, 조정은 권세가들의 불법적인 토지 겸병과 부정을 조사·시정하는 정치도감을 설치했다. 그러나 원 황실과 혼인 관계로 얽힌 기황후 일족을 비롯한 권세가들이 조사 대상이 되자 강력한 반발에 부딪혔고, 원 조정이 개입해 활동을 중단시키면서 개혁은 다시 좌절됐다. 충선왕의 전민변정, 이 정치도감으로 이어지는 거듭된 개혁 시도와 좌절은, 원 간섭기 내내 고려 조정이 안고 있던 근본적 모순 — 개혁하려 해도 원과 결탁한 세력의 벽을 넘지 못하는 구조 — 을 잘 보여준다.',
+    video:null,
+    connections:['political_1344_01','policy_1308_01'],
+    tags:['policy','개경','정치도감','충목왕','개혁'],
+    sources:['한국민족문화대백과사전 정치도감'] }
+];

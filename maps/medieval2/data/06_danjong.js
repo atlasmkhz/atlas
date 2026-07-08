@@ -1,0 +1,30 @@
+// data/06_danjong.js — 단종 재위 (1452~1455)
+const EVENTS_DANJONG = [
+  { id:'political_1452_02', year:1452, visible_from:1452, visible_until:1453,
+    month:5, day:18, type:'political', priority:1,
+    title_ko:'단종 즉위',
+    title_en:'Enthronement of the Boy-King Danjong',
+    title_ja:'端宗即位',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['단종','문종'],
+    summary_ko:'문종이 재위 2년 만에 세상을 떠나자, 아직 12세였던 세자가 단종으로 즉위했다. 수렴청정을 해줄 대비도 없이 어린 왕이 홀로 즉위한 상황에서 실질적인 국정은 김종서·황보인 등 고명대신들이 맡아 이끌었다. 그러나 이 권력 공백은 왕족 내에서 가장 강한 야심과 능력을 갖춘 숙부 수양대군에게 좋은 기회로 작용했고, 즉위 이듬해 계유정난이라는 정변으로 이어졌다.',
+    video:null,
+    connections:['political_1452_01','plot_1453_01'],
+    tags:['political','한양','단종','즉위'],
+    sources:['한국민족문화대백과사전 단종(조선)'] },
+
+  { id:'plot_1453_01', year:1453, visible_from:1453, visible_until:1455,
+    month:10, day:10, type:'plot', priority:1,
+    title_ko:'계유정난',
+    title_en:'Gyeyu Coup',
+    title_ja:'癸酉靖難',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['수양대군','김종서','황보인','단종'],
+    summary_ko:'단종의 숙부 수양대군은 어린 조카를 보필하던 고명대신들이 왕족의 권한을 위협한다는 명분을 내세워, 한명회 등 측근과 함께 정변을 일으켰다. 김종서를 그의 집에서 기습해 죽이고, 이어 황보인 등 반대 세력을 대궐로 불러들여 차례로 제거했다. 명목상 왕은 여전히 단종이었지만, 정변 이후 실권은 완전히 수양대군에게 넘어갔고 안평대군(수양의 동생으로 반대파에 연루됐다는 죄목)도 사사되면서 왕실 내 견제 세력마저 사라졌다.',
+    video:null,
+    connections:['political_1452_02','political_1455_01'],
+    tags:['plot','한양','계유정난','수양대군','김종서'],
+    sources:['한국민족문화대백과사전 계유정난','위키백과 계유정난'] }
+];
