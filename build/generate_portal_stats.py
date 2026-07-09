@@ -51,22 +51,35 @@ def count_archive_posts(archive_dir):
 
 
 def main():
-    events_root = count_events(os.path.join(PROJECT_ROOT, 'data'))
-    events_modern2 = count_events(os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'data'))
-    events_contemporary = count_events(os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'data'))
-    total_events = events_root + events_modern2 + events_contemporary
+    # ── 집계 대상 지도 ── 새 지도가 생기면 이 리스트에 한 줄만 추가하면
+    # 된다. 'key'는 아래 events_by_era에 쓰이는 이름, 'data_dir'/'routes_dir'는
+    # PROJECT_ROOT 기준 상대 경로(포털 루트=근대는 최상위 data/routes를 쓴다).
+    MAPS = [
+        {'key': 'root', 'data_dir': 'data', 'routes_dir': 'routes'},
+        {'key': 'prehistory', 'data_dir': 'maps/prehistory/data', 'routes_dir': 'maps/prehistory/routes'},
+        {'key': 'ancient', 'data_dir': 'maps/ancient/data', 'routes_dir': 'maps/ancient/routes'},
+        {'key': 'medieval1', 'data_dir': 'maps/medieval1/data', 'routes_dir': 'maps/medieval1/routes'},
+        {'key': 'medieval2', 'data_dir': 'maps/medieval2/data', 'routes_dir': 'maps/medieval2/routes'},
+        {'key': 'modern2', 'data_dir': 'maps/modern2/data', 'routes_dir': 'maps/modern2/routes'},
+        {'key': 'contemporary', 'data_dir': 'maps/contemporary/data', 'routes_dir': 'maps/contemporary/routes'},
+    ]
 
-    routes_root = count_routes(os.path.join(PROJECT_ROOT, 'routes'))
-    routes_modern2 = count_routes(os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'routes'))
-    routes_contemporary = count_routes(os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'routes'))
-    total_routes = routes_root + routes_modern2 + routes_contemporary
+    events_by_era = {}
+    routes_by_era = {}
+    for m in MAPS:
+        events_by_era[m['key']] = count_events(os.path.join(PROJECT_ROOT, *m['data_dir'].split('/')))
+        routes_by_era[m['key']] = count_routes(os.path.join(PROJECT_ROOT, *m['routes_dir'].split('/')))
+
+    total_events = sum(events_by_era.values())
+    total_routes = sum(routes_by_era.values())
 
     archive_series, total_archive_posts = count_archive_posts(os.path.join(PROJECT_ROOT, 'content', 'archive'))
 
     stats = {
         'events': total_events,
-        'events_by_era': {'root': events_root, 'modern2': events_modern2, 'contemporary': events_contemporary},
+        'events_by_era': events_by_era,
         'routes': total_routes,
+        'routes_by_era': routes_by_era,
         'archive_series': archive_series,
         'archive_posts': total_archive_posts,
         'generated_at': None,  # 아래에서 실제 실행 시각으로 채운다
@@ -86,8 +99,8 @@ def main():
     with open(out_path, 'w', encoding='utf-8') as f:
         f.write(js_out)
 
-    print(f'events: {total_events} (근대 {events_root} / 근현대 {events_modern2} / 현대 {events_contemporary})')
-    print(f'routes: {total_routes} (근대 {routes_root} / 근현대 {routes_modern2} / 현대 {routes_contemporary})')
+    print(f'events: {total_events} ' + ' / '.join(f'{k} {v}' for k, v in events_by_era.items()))
+    print(f'routes: {total_routes} ' + ' / '.join(f'{k} {v}' for k, v in routes_by_era.items()))
     print(f'archive: 시리즈 {archive_series} / 글 {total_archive_posts}')
     print(f'-> {out_path}')
 
