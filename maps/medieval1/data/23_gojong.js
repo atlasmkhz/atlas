@@ -1,5 +1,18 @@
 // data/23_gojong.js — 고종 재위 (1213~1259) 시드 데이터
 const EVENTS_GOJONG_GORYEO = [
+  { id:'battle_1218_01', year:1218, visible_from:1218, visible_until:1219,
+    month:null, day:null, type:'battle', priority:1,
+    title_ko:'강동성 전투 — 김취려와 몽골의 첫 접촉',
+    title_en:'Battle of Gangdong Fortress — Goryeos First Contact with the Mongols',
+    title_ja:'江東城の戦い — 金就礪とモンゴルの初接触',
+    place_ko:'강동성(평양 인근)',
+    lat:39.15, lng:126.05,
+    people:['김취려'],
+    summary_ko:'몽골에 쫓겨 온 거란 유민들이 고려 영내로 밀려들어와 강동성에 웅거하자, 고려 장수 김취려는 몽골·동진국 군대와 연합해 이들을 포위 공격했다. 1219년 강동성이 함락되며 거란 잔당은 진압됐는데, 이 전투는 고려가 몽골 제국과 처음으로 군사적으로 접촉하고 형제의 맹약을 맺은 계기가 됐다. 당시에는 우호적인 첫 만남이었지만, 이후 몽골이 무리한 공물을 요구하고 사신 저고여가 피살되는 사건까지 겹치며 두 나라 관계는 급속히 악화돼 1231년 몽골의 고려 침입으로 이어진다.',
+    video:null,
+    connections:['battle_1231_01'],
+    tags:['battle','강동성','김취려','몽골','거란유종'],
+    sources:['한국민족문화대백과사전 강동성 전투','위키백과 김취려'] },
   { id:'plot_1219_01', year:1219, visible_from:1219, visible_until:1258,
     month:9, day:null, type:'plot', priority:1,
     title_ko:'최우 집권',

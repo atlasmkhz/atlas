@@ -82,5 +82,19 @@ const EVENTS_MYEONGJONG = [
     video:null,
     connections:['political_1545_02'],
     tags:['political','한양','문정왕후','명종','친정'],
-    sources:['한국민족문화대백과사전 명종(조선)'] }
+    sources:['한국민족문화대백과사전 명종(조선)'] },
+
+  { id:'culture_1560_01', year:1560, visible_from:1530, visible_until:1590,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'신사임당과 허난설헌 — 조선의 여성 예술가들',
+    title_en:'Sin Saimdang and Heo Nanseolheon — Women Artists of Joseon',
+    title_ja:'申師任堂と許蘭雪軒 — 朝鮮の女性芸術家たち',
+    place_ko:'강릉(오죽헌)',
+    lat:37.7519, lng:128.8761,
+    people:['신사임당','허난설헌'],
+    summary_ko:'강릉의 사대부가 딸로 태어난 신사임당은 시·글씨·그림에 두루 뛰어났는데, 특히 풀과 벌레를 섬세하게 그린 초충도로 이름을 남겼다. 그는 뛰어난 학자로 성장한 아들 율곡 이이의 어머니로도 널리 알려져 있지만, 그 자신이 당대에 이미 화가·문인으로 인정받은 독자적인 예술가였다. 반세기 뒤 태어난 허난설헌은 오빠 허봉과 동생 허균 사이에서 어려서부터 학문을 익혔고, 여성에게 제약이 많던 시대에 한시로 자신의 재능을 펼쳐 살아서는 인정받지 못했지만 사후 중국과 일본에서까지 그 시가 출간되며 뒤늦게 명성을 얻었다. 두 사람은 유교적 규범 속에서도 각자의 방식으로 예술적 성취를 이룬 조선 시대 여성의 드문 사례로 꼽힌다.',
+    video:null,
+    connections:['culture_1568_01'],
+    tags:['culture','강릉','신사임당','허난설헌','여성예술가'],
+    sources:['한국민족문화대백과사전 신사임당','한국민족문화대백과사전 허난설헌'] }
 ];

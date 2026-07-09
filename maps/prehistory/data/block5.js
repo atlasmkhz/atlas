@@ -94,5 +94,19 @@ const EVENTS_BLOCK5 = [
     video:null,
     connections:[],
     tags:['migration','한반도북부','예맥','북방민족'],
-    sources:['한국민족문화대백과사전 예맥'] }
+    sources:['한국민족문화대백과사전 예맥'] },
+
+  { id:'culture_buyeo_01', year:-200, visible_from:-300, visible_until:-1,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'부여의 건국신화 — 해부루·금와왕·동명왕',
+    title_en:'The Founding Myth of Buyeo — Haeburu, Geumwa, and Dongmyeong',
+    title_ja:'扶余の建国神話 — 解夫婁・金蛙王・東明王',
+    place_ko:'부여(만주 송화강 유역)',
+    lat:45.75, lng:126.65,
+    people:['해부루','금와왕','동명왕'],
+    summary_ko:'부여의 건국과 관련해서는 여러 갈래의 설화가 전한다. 하나는 하늘의 명을 받은 동명이 남쪽으로 내려와 나라를 세웠다는 이야기이고, 다른 하나는 부여 왕 해부루가 재상의 권유로 도읍을 동쪽으로 옮겨 동부여를 세우고 뒤를 이은 금와왕이 태백산 남쪽 우발수에서 유화부인을 만나 데려왔는데, 그 유화부인이 알을 낳고 그 알에서 태어난 아이가 활을 잘 쏜다 하여 주몽이라 불렸다는 이야기다. 금와왕의 아들들이 주몽을 시기해 죽이려 하자 주몽은 남쪽으로 도망쳐 고구려를 세우게 된다. 이런 설화들은 역사적 사실을 그대로 전한다기보다는, 부여와 고구려가 같은 뿌리에서 갈라져 나왔다는 인식과 고구려 지배층이 부여 계통임을 내세우려 한 의도를 함께 반영한 것으로 해석된다.',
+    video:null,
+    connections:['migration_north_01'],
+    tags:['culture','부여','해부루','금와왕','동명왕','건국신화'],
+    sources:['한국민족문화대백과사전 부여','위키백과 동명설화'] }
 ];

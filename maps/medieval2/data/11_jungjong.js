@@ -124,5 +124,19 @@ const EVENTS_JUNGJONG = [
     video:null,
     connections:['policy_1517_01'],
     tags:['battle','통영','사량진왜변','중종','왜구'],
-    sources:['한국민족문화대백과사전 사량진왜변'] }
+    sources:['한국민족문화대백과사전 사량진왜변'] },
+
+  { id:'plot_1531_01', year:1531, visible_from:1524, visible_until:1537,
+    month:null, day:null, type:'plot', priority:2,
+    title_ko:'김안로의 권력 농단과 중종 후반의 정국',
+    title_en:'Kim Allos Abuse of Power in Late King Jungjongs Reign',
+    title_ja:'金安老の権力壟断と中宗後半の政局',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['김안로'],
+    summary_ko:'조광조 등 사림이 기묘사화로 숙청된 후 중종 후반 정국은 척신 세력이 주도했는데, 그중에서도 김안로는 아들이 부마(공주의 남편)가 된 것을 발판으로 권력을 잡았다. 그는 한때 사림계 인사로 조광조 개혁에 동조하는 듯했으나, 실각과 재기를 거치며 오히려 반대파를 무자비하게 숙청하는 인물로 변모했다. 그의 권력 농단은 1537년 문정왕후 폐위를 시도하다 발각돼 사사되면서 끝났지만, 외척과 측근 세력이 번갈아 정국을 주무르는 이런 척신 정치의 패턴은 훗날 명종 대 을사사화로 이어지는 배경이 된다.',
+    video:null,
+    connections:['massacre_1519_01'],
+    tags:['plot','한양','김안로','중종','척신정치'],
+    sources:['한국민족문화대백과사전 김안로'] }
 ];

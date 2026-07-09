@@ -187,5 +187,19 @@ const EVENTS_BLOCK6 = [
     video:null,
     connections:['culture_iron_01','political_byeonhan_01'],
     tags:['culture','창원','다호리','붓','오수전','변한'],
-    sources:['한국민족문화대백과사전 창원 다호리 유적','위키백과 다호리 유적'] }
+    sources:['한국민족문화대백과사전 창원 다호리 유적','위키백과 다호리 유적'] },
+
+  { id:'political_gojoseon_05', year:-1100, visible_from:-1100, visible_until:-194,
+    month:null, day:null, type:'political', priority:2,
+    title_ko:'기자동래설과 기자조선을 둘러싼 논쟁',
+    title_en:'The Gija Migration Legend and Debates over "Gija Joseon"',
+    title_ja:'箕子東来説と箕子朝鮮をめぐる論争',
+    place_ko:'평양(전통적 비정)',
+    lat:39.0392, lng:125.7625,
+    people:['기자'],
+    summary_ko:'중국의 사마천이 쓴 사기 등 후대 문헌에는, 은나라가 주에 멸망하자 은의 왕족이었던 기자가 조선으로 망명해 백성을 교화하고 법을 전했다는 이야기가 전한다. 고려·조선 시대에는 이 전승이 폭넓게 받아들여져 평양에 기자를 모신 사당(숭인전)과 무덤으로 전해지는 유적까지 조성됐고, 유교적 문명국가로서의 자부심을 뒷받침하는 근거로 활용되기도 했다. 그러나 오늘날 학계에서는 기자의 동래를 뒷받침할 고고학적 증거가 없고 은·주 교체기의 관련 기록 자체가 후대에 윤색됐을 가능성이 크다고 보아, 실제 있었던 역사적 사건이라기보다는 중국 중심의 세계관 속에서 형성된 전승으로 보는 시각이 우세하다. 다만 이 전승이 고조선의 국가 체제·법률에 대한 후대의 인식에 오랫동안 영향을 미쳤다는 점에서, 역사적 사실 여부와는 별개로 사상사적으로 다뤄지는 주제다.',
+    video:null,
+    connections:['political_gojoseon_01','political_gojoseon_04'],
+    tags:['political','평양','기자','기자조선','기자동래설'],
+    sources:['한국민족문화대백과사전 기자조선','위키백과 기자'] }
 ];
