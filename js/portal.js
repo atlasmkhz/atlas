@@ -101,6 +101,35 @@
     `;
   }
 
+  // ── 2.5 추천 루트 ── route/*.html + routes/*.js에 흩어진 메타데이터를
+  // 여기 하나로 모았다. 새 루트를 추가하면 이 배열에도 항목을 추가해야
+  // 카드가 뜬다(정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없음).
+  const ROUTE_CARDS = [
+    { path: 'route/hong-beom-do.html', name: '홍범도', tagline: '포수에서 현충원까지', period: '1868~2021', waypoints: 26, color: '#c8a827', image: 'assets/images/entity/person/person_hong_beom_do_01.webp' },
+    { path: 'route/righteous-struggle.html', name: '의열투쟁', tagline: '조선의 심장을 겨누다', period: '1908~1932', waypoints: 21, color: '#b8632f', image: 'assets/images/entity/person/person_kim_won_bong_01.webp' },
+    { path: 'route/kim-gu.html', name: '백범 김구', tagline: '상놈의 아들에서 임시정부의 얼굴로', period: '1876~1949', waypoints: 33, color: '#3a5a8c', image: 'assets/images/entity/person/person_kim_gu_01.webp' },
+    { path: 'route/japanese-atrocities.html', name: '일제 만행 루트', tagline: '50년의 가해 기록', period: '1895~1945', waypoints: 18, color: '#8c1f1f', image: 'assets/images/route/route_japanese_atrocities_hero.webp' },
+    { path: 'maps/modern2/route/korean-war-massacres.html', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 26, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
+    { path: 'maps/modern2/route/korean-war-battles.html', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 15, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
+    { path: 'route/daegu-gyeongbuk-independence.html', name: '대구경북 독립운동가', tagline: '"조선의 모스크바"의 시작', period: '1909~1944', waypoints: 14, color: '#8c3a2e', image: 'assets/images/route/route_daegu_gyeongbuk_independence_hero.webp' },
+  ];
+
+  function renderRoutes() {
+    const el = document.getElementById('portalRoutes');
+    if (!el) return;
+    el.innerHTML = ROUTE_CARDS.map(r => {
+      const bg = r.image
+        ? `background-image:linear-gradient(180deg, rgba(21,19,15,0) 38%, rgba(21,19,15,0.94) 100%), url('${r.image}')`
+        : `background-image:linear-gradient(160deg, ${r.color}, #15130f)`;
+      return `<a class="route-card" href="${r.path}" style="${bg}">
+        <span class="route-card-period">${r.period}</span>
+        <span class="route-card-name">${r.name}</span>
+        <span class="route-card-tagline">${r.tagline}</span>
+        <span class="route-card-meta">📍 ${r.waypoints}개 지점</span>
+      </a>`;
+    }).join('');
+  }
+
   // ── 3. 시대 선택 허브 ── 포털에서는 모든 항목이 "실제 이동"이다
   // (자기참조 없음 — 이미 지도 위가 아니므로).
   const ERA_ITEMS = [
@@ -373,6 +402,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     renderFeatured();
     renderStats();
+    renderRoutes();
     setupEraHub();
     setupArchiveHub();
     setupInfoModal();
@@ -385,6 +415,20 @@
     document.getElementById('portalOpenArchive')?.addEventListener('click', (e) => {
       e.preventDefault();
       window.openArchiveHub();
+    });
+    document.getElementById('portalQuickMap')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.openEraHub();
+    });
+    document.getElementById('portalQuickArchive')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.openArchiveHub();
+    });
+    document.getElementById('portalQuickInfo')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('infoModalScrim')?.classList.add('open');
+      document.getElementById('infoModal')?.classList.add('open');
+      document.body.style.overflow = 'hidden';
     });
   });
 

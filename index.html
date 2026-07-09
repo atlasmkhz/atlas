@@ -22,7 +22,7 @@
 {"@context":"https://schema.org","@type":"WebSite","name":"ATLAS by MKHZ","url":"https://atlas.mkhz.kr/","description":"대한민국 근현대사를 지도 위에서 다시 읽는 프로젝트","inLanguage":"ko"}
 </script>
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/portal.css?v=20260704c">
+<link rel="stylesheet" href="css/portal.css?v=20260709a">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -108,16 +108,50 @@
       <div class="featured-card-sub">매주 새로운 역사 이야기를 만나보세요</div>
       <div id="featuredCard"><p class="featured-empty">불러오는 중…</p></div>
     </div>
+
+    <!-- ── 구축 현황 ── 특집 카드 바로 아래, 사이드바 폭으로 붙인다. -->
+    <div class="stats-card">
+      <div class="stats-card-title">아틀라스 현황</div>
+      <div id="portalStats" class="stats-card-grid"></div>
+      <p class="stats-card-note">과거를 이해하는 가장 좋은 방법은 직접 따라가 보는 것입니다.</p>
+    </div>
   </div>
 </div>
 
-<!-- ── 구축 현황 ── -->
-<div class="portal-stats-bar">
-  <span class="portal-stats-label">구축 현황</span>
-  <div id="portalStats">
-    <div class="stat-item"><span class="stat-num">–</span><span class="stat-label">사건</span></div>
+<!-- ── 추천 루트 ── -->
+<section class="portal-routes">
+  <div class="portal-routes-header">
+    <div>
+      <h2 class="portal-section-title">추천 루트</h2>
+      <p class="portal-section-sub">역사를 따라 떠나는 특별한 여정</p>
+    </div>
   </div>
-</div>
+  <div class="portal-routes-scroll" id="portalRoutes">
+    <p class="featured-empty">불러오는 중…</p>
+  </div>
+</section>
+
+<!-- ── 빠른 접근 ── -->
+<section class="portal-quick">
+  <div class="portal-quick-header">
+    <h2 class="portal-section-title">빠른 접근</h2>
+    <p class="portal-section-sub">원하는 콘텐츠를 바로 만나보세요</p>
+  </div>
+  <div class="portal-quick-grid">
+    <a class="portal-quick-item" href="#" id="portalQuickMap">
+      <span class="portal-quick-icon">🧭</span><span>지도 탐험</span>
+    </a>
+    <a class="portal-quick-item" href="#" id="portalQuickArchive">
+      <span class="portal-quick-icon">📖</span><span>자료실</span>
+    </a>
+    <a class="portal-quick-item" href="#portalRoutes">
+      <span class="portal-quick-icon">🗺️</span><span>추천 루트</span>
+    </a>
+    <a class="portal-quick-item" href="#" id="portalQuickInfo">
+      <span class="portal-quick-icon">ℹ️</span><span>ATLAS 소개</span>
+    </a>
+  </div>
+</section>
 
 <footer class="portal-footer">
   ATLAS는 대한민국 역사를 더 정확하고, 더 입체적으로 기록하기 위한 프로젝트입니다.
