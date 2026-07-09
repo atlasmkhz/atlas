@@ -320,6 +320,37 @@ const YOUTUBE_VIDEOS = [
     thumbnail_override: null,
   },
 
+  {
+    id: 'v_baekje_fall_uija',
+    youtube_id: 'ePf3DauENWk',
+    title: '[AI 판타지 뮤직드라마] 마지막 백제의 노래 - 그들은 뛰어내리지 않았다',
+    description: '삼천궁녀 전설·의자왕 타락설이라는 통념을 부정하고, 웅진성 성주 예식진의 배신과 의자왕의 고독한 투쟁이라는 재평가된 서사를 판타지 뮤직드라마로 재현. 무령왕릉 진묘수·백제 금동대향로·서산 마애삼존불·미륵사지 석탑 등 백제 유물을 함께 조명한다.',
+    published: '2026-07-10',
+    duration: null,
+    playlist: 'atlas_modern',
+    tags: ['백제멸망', '의자왕재평가', '예식진배신', '흑치상지', '금동대향로'],
+    related_events: [],
+    related_events_modern2: [],
+    related_events_ancient: ['battle_660_01'],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+  {
+    id: 'v_baekje_goguryeo_han_river_century',
+    youtube_id: 'AUKa94wpIag',
+    title: '한강은 왜 100년 동안 피로 물들었는가? — 백제·고구려 한강패권기',
+    description: '4세기 근초고왕의 전성기와 고국원왕 전사부터, 5세기 장수왕의 철저한 복수와 475년 한성 함락까지 — 한강을 둘러싼 백제·고구려 100년 쟁탈전을 복원한다. 국립공주박물관 특별전 《한성 475》의 역사적 서사를 다룬다.',
+    published: '2026-07-10',
+    duration: null,
+    playlist: 'atlas_modern',
+    tags: ['백제', '고구려', '한성475', '근초고왕', '장수왕'],
+    related_events: [],
+    related_events_modern2: [],
+    related_events_ancient: ['political_371_01', 'battle_475_01'],
+    related_routes: ['geunchogo_conquest'],
+    thumbnail_override: null,
+  },
+
 ];
 
 if (typeof window !== 'undefined') {

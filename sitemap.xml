@@ -2,7 +2,7 @@
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 433개 + 루트 7개 + 
-  근현대(1945~1993) 진입점 1개 + Event 420개 + 루트 8개 + 
+  근현대(1945~1993) 진입점 1개 + Event 421개 + 루트 8개 + 
   현대(1994~2025) 진입점 1개 + Event 224개(루트 없음) + 
   조선(1392~1875, 중세2) 진입점 1개 + Event 172개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 128개(루트 없음)를 포함한다.
@@ -4229,6 +4229,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/route-korean-war-massacres--wp_26</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-korean-war-massacres--wp_testimonies_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

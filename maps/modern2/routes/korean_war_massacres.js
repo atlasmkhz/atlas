@@ -36,7 +36,7 @@ const ROUTE_KOREAN_WAR_MASSACRES = {
   period: '1947~1953',
   tagline: '제주 3·1절에서 거창까지 — 국가가 국민을 죽인 이름들, 최소 100명 이상 규모의 기록만 모아도 이만큼입니다',
   color: '#5c1f1f',
-  total_waypoints: 26,
+  total_waypoints: 27,
   hero_image: null,
 
   card_refs: [
@@ -130,6 +130,24 @@ const ROUTE_KOREAN_WAR_MASSACRES = {
       stay: null,
       summary_ko: '피난한 임시수도 대전에서, 정부는 전국 경찰과 군에 국민보도연맹원을 예비검속하라는 지시를 하달했다. "인민군 점령지에서 협조할 우려가 있다"는 것이 명분이었다. 이 지시 하나가 향후 두 달간 전국 각지에서 최소 수만 명의 목숨을 앗아가는 학살의 시작점이 됐다. 진실화해위원회는 "당시 경찰 사찰계나 육군 방첩대가 가장 정치적인 기관이었던 점을 고려할 때, 정부 최고위층 어떤 단위에서 체포와 사살을 명령한 것으로 추정된다"고 밝혔다.',
       card_ref: 'plot_1950_01',
+    },
+
+    {
+      id: 'wp_testimonies_01',
+      type: 'tragedy',
+      pinned: true,
+      pinned_badge: '증언 자료',
+      year: 1950, month: null, day: null,
+      title_ko: '증언으로 남은 기록 — 목격자와 유족들의 목소리',
+      place_ko: '경상남도 일대(다수의 목격자·유족 증언)',
+      lat: 35.4, lng: 128.2,
+      stay: null,
+      summary_ko: '국민보도연맹 학살은 전국 각지에서 벌어졌지만, 대부분은 정확한 장소·희생자 수조차 온전히 밝혀지지 않았다. 다큐멘터리스트 구자환(유튜브 채널 다큐몹)은 10년 넘게 현장을 찾아다니며 목격자와 유족들의 목소리를 쇼츠로 기록해왔다 — 특정 지역 하나로 분류하기 어렵거나 여러 지역을 아우르는 증언이 많아, 장소별로 흩어놓는 대신 채널 링크로 한데 모아둔다. 채널 소유자의 게재 허락을 받았다.',
+      external_link: {
+        url: 'https://www.youtube.com/@documob/shorts',
+        label: '다큐몹 채널 쇼츠 전체 보기',
+      },
+      card_ref: null,
     },
 
     {

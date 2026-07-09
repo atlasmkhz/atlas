@@ -88,6 +88,9 @@
     (video.related_events_modern2 || []).forEach(eventId => {
       chips.push(`<a class="video-chip video-chip-event" href="/maps/modern2/?event=${encodeURIComponent(eventId)}">📍 관련 사건(근현대)</a>`);
     });
+    (video.related_events_ancient || []).forEach(eventId => {
+      chips.push(`<a class="video-chip video-chip-event" href="/maps/ancient/?event=${encodeURIComponent(eventId)}">📍 관련 사건(고대)</a>`);
+    });
     return chips.join('');
   }
 

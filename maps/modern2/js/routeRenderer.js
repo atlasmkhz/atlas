@@ -202,16 +202,61 @@
   // wp.youtube_id가 있는 항목은 제목을 누르면(지도 이동은 항상 그대로
   // 일어나면서) 그 아래로 설명/영상이 펼쳐진다 — 없는 항목은 기존과
   // 동일하게 지도 이동만 한다(아코디언 화살표 자체가 안 보인다).
+  // wp.youtube_ids(배열)를 쓰면 한 웨이포인트 안에 영상을 여러 개
+  // 세로로 나열할 수 있다. wp.external_link({url,label})를 쓰면
+  // 영상을 임베드하는 대신 외부 링크(예: 유튜브 채널 쇼츠 페이지)로
+  // 나가는 버튼 하나를 보여준다 — "학살의 기록" 루트의 증언 모음
+  // 웨이포인트처럼, 개별 영상을 일일이 골라 담기보다 채널 전체를
+  // 가리키는 게 더 정직한 경우에 쓴다.
+  // wp.pinned:true로 표시한 웨이포인트는 일반 타임라인 목록에 섞이지
+  // 않고, 히어로 바로 아래 별도의 강조 배너로 always-open 상태로
+  // 뜬다 — 타임라인 27개 중 하나로 묻히면 안 되는(예: 증언 모음처럼
+  // 특정 연도 하나에 딱 붙지 않는) 항목에 쓴다. 지도 위 마커는 평소와
+  // 동일하게 찍힌다(위치가 있다면).
   function buildRoutePanelHtml(route) {
-    const wpRows = route.waypoints.map((wp, i) => {
+    const pinnedWps = route.waypoints.filter(wp => wp.pinned);
+    const listWps = route.waypoints.filter(wp => !wp.pinned);
+
+    const pinnedHtml = pinnedWps.map(wp => {
+      const videoIds = [
+        ...(wp.youtube_id ? [wp.youtube_id] : []),
+        ...(Array.isArray(wp.youtube_ids) ? wp.youtube_ids : []),
+      ];
+      const externalLinkHtml = wp.external_link
+        ? `<a class="route-panel-pinned-link" href="${wp.external_link.url}" target="_blank" rel="noopener">🔗 ${wp.external_link.label || '바로가기'}</a>`
+        : '';
+      return `
+      <div class="route-panel-pinned" data-wp-id="${wp.id}">
+        <div class="route-panel-pinned-row" onclick="window.togglePinnedWaypoint && window.togglePinnedWaypoint(event)">
+          <span class="route-panel-pinned-badge">🎙️ ${wp.pinned_badge || '증언 자료'}</span>
+          <span class="route-panel-pinned-title">${wp.title_ko}</span>
+          <span class="route-panel-pinned-expand-icon" aria-hidden="true"></span>
+        </div>
+        <div class="route-panel-pinned-detail" hidden>
+          ${wp.summary_ko ? `<p class="route-panel-pinned-summary">${wp.summary_ko}</p>` : ''}
+          ${videoIds.map((ytId, vi) => `<div class="route-panel-wp-video" data-youtube-id="${ytId}" data-video-index="${vi}"></div>`).join('')}
+          ${externalLinkHtml}
+        </div>
+      </div>`;
+    }).join('');
+
+    const wpRows = listWps.map((wp, i) => {
       const typeColor = WP_TYPE_COLOR[wp.type] || route.color;
       const typeLabel = WP_TYPE_LABEL[wp.type] || wp.type;
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
-      const hasDetail = !!(wp.summary_ko || wp.youtube_id);
+      const videoIds = [
+        ...(wp.youtube_id ? [wp.youtube_id] : []),
+        ...(Array.isArray(wp.youtube_ids) ? wp.youtube_ids : []),
+      ];
+      const hasDetail = !!(wp.summary_ko || videoIds.length || wp.external_link);
+      const externalLinkHtml = wp.external_link
+        ? `<a class="route-panel-wp-external-link" href="${wp.external_link.url}" target="_blank" rel="noopener">🔗 ${wp.external_link.label || '바로가기'}</a>`
+        : '';
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>
           ${wp.summary_ko ? `<p class="route-panel-wp-summary">${wp.summary_ko}</p>` : ''}
-          ${wp.youtube_id ? `<div class="route-panel-wp-video" data-youtube-id="${wp.youtube_id}"></div>` : ''}
+          ${videoIds.map((ytId, vi) => `<div class="route-panel-wp-video" data-youtube-id="${ytId}" data-video-index="${vi}"></div>`).join('')}
+          ${externalLinkHtml}
         </div>` : '';
       return `
       <li class="route-panel-wp${hasDetail ? ' has-detail' : ''}" data-wp-id="${wp.id}">
@@ -242,6 +287,7 @@
     <p class="route-panel-tagline">${route.tagline || ''}</p>
     <p class="route-panel-hint">지도의 점을 눌러 위치를 확인하세요 · 총 ${route.waypoints.length}개 지점</p>
   </div>
+  ${pinnedHtml}
   <ul class="route-panel-list">${wpRows}</ul>
   <button class="route-panel-close-btn" onclick="window.closeRoute && window.closeRoute()">
     루트 닫기
@@ -458,6 +504,33 @@
   // 펼쳐지는 "그 순간"에만 주입한다 — 웨이포인트 수십 개짜리 루트를
   // 열자마자 iframe을 전부 만들면 무거워지기 때문에, 실제로 펼친
   // 항목만 로드한다(한 번 로드되면 접었다 펴도 다시 만들지 않는다).
+  // ── 고정(pinned) 배너 접기/펼치기 ─────────────────────────────
+  // 히어로 바로 아래 붙는 pinned 웨이포인트는 기본은 배지+제목 한 줄만
+  // 보이는 접힌 상태다 — 공간을 많이 차지하지 않으면서도 타임라인
+  // 27개 중 하나로 묻히지 않고 항상 눈에 띈다. 클릭하면 설명·영상·
+  // 외부 링크가 펼쳐진다(지도 이동은 없다 — 애초에 위치가 느슨한
+  // 자료라 특정 지점으로 이동할 이유가 없다).
+  window.togglePinnedWaypoint = function (ev) {
+    const box = ev.currentTarget.closest('.route-panel-pinned');
+    if (!box) return;
+    const detail = box.querySelector('.route-panel-pinned-detail');
+    const isOpen = box.classList.toggle('expanded');
+    if (detail) detail.hidden = !isOpen;
+
+    if (isOpen) {
+      box.querySelectorAll('.route-panel-wp-video').forEach((videoBox) => {
+        if (videoBox.dataset.loaded) return;
+        const ytId = videoBox.getAttribute('data-youtube-id');
+        videoBox.innerHTML =
+          `<iframe width="100%" height="180" src="https://www.youtube.com/embed/${ytId}" `
+          + `title="YouTube video" frameborder="0" loading="lazy" `
+          + `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" `
+          + `allowfullscreen></iframe>`;
+        videoBox.dataset.loaded = '1';
+      });
+    }
+  };
+
   window.handleRoutePanelClick = function (ev, routeId, wpId) {
     try {
       window.focusRouteWaypoint(routeId, wpId);
@@ -476,8 +549,11 @@
     if (detail) detail.hidden = !isOpen;
 
     if (isOpen) {
-      const videoBox = li.querySelector('.route-panel-wp-video');
-      if (videoBox && !videoBox.dataset.loaded) {
+      // 웨이포인트 하나에 영상이 여러 개(youtube_ids) 있을 수 있으므로
+      // 전부 순회하며 로드한다 — 기존에는 첫 번째 영상 박스 하나만
+      // 처리했다.
+      li.querySelectorAll('.route-panel-wp-video').forEach((videoBox) => {
+        if (videoBox.dataset.loaded) return;
         const ytId = videoBox.getAttribute('data-youtube-id');
         videoBox.innerHTML =
           `<iframe width="100%" height="180" src="https://www.youtube.com/embed/${ytId}" `
@@ -485,7 +561,7 @@
           + `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" `
           + `allowfullscreen></iframe>`;
         videoBox.dataset.loaded = '1';
-      }
+      });
     }
   };
 
