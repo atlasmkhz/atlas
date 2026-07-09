@@ -1095,16 +1095,18 @@ body.route-mode-active [data-route-hidden] {
   padding: 8px 0;
 }
 .route-panel-wp {
+  border-left: 2px solid transparent;
+  position: relative;
+}
+.route-panel-wp-row {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   padding: 9px 14px;
   cursor: pointer;
   transition: background 0.12s;
-  border-left: 2px solid transparent;
-  position: relative;
 }
-.route-panel-wp:hover { background: rgba(184,152,96,0.08); }
+.route-panel-wp-row:hover { background: rgba(184,152,96,0.08); }
 .route-panel-wp.active {
   background: rgba(184,152,96,0.13);
   border-left-color: var(--gold);
@@ -1119,6 +1121,8 @@ body.route-mode-active [data-route-hidden] {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1;
+  min-width: 0;
 }
 .route-panel-wp-date {
   font-size: 10px;
@@ -1134,6 +1138,42 @@ body.route-mode-active [data-route-hidden] {
 .route-panel-wp-place {
   font-size: 10.5px;
   color: #7a7060;
+}
+
+/* 아코디언 — 설명(summary_ko)·유튜브(youtube_id)가 있는 웨이포인트만
+   화살표가 보이고, 제목을 누르면 지도 이동과 함께 펼쳐진다. */
+.route-panel-expand-icon {
+  flex-shrink: 0;
+  width: 14px; height: 14px;
+  margin-top: 3px;
+  opacity: 0.55;
+  transition: transform 0.2s;
+}
+.route-panel-expand-icon::before {
+  content: '\25be';
+  font-size: 11px;
+}
+.route-panel-wp.expanded .route-panel-expand-icon { transform: rotate(180deg); }
+.route-panel-wp-detail {
+  padding: 2px 14px 14px 33px;
+  animation: routePanelDetailIn 0.18s ease;
+}
+.route-panel-wp-summary {
+  font-size: 12px;
+  color: #c9beac;
+  line-height: 1.65;
+  margin: 0 0 8px 0;
+}
+.route-panel-wp-video {
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.3);
+  min-height: 40px;
+}
+.route-panel-wp-video iframe { display: block; border: 0; }
+@keyframes routePanelDetailIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* 닫기 버튼 */

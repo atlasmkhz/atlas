@@ -53,11 +53,12 @@
   // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
   // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
   const ROUTE_HUB_ITEMS = [
-    { routeId: 'gwanggaeto_conquest', name: '광개토대왕 정복루트', period: '391~414', ready: true },
+    { routeId: 'gwanggaeto_conquest', name: '광개토대왕 정복루트', period: '385~414', ready: true },
     { routeId: 'jang_bogo_maritime', name: '장보고 해상무역루트', period: '810년대~846', ready: true },
     { routeId: 'kim_yu_sin_unification', name: '김유신 삼국통일루트', period: '609년경~676', ready: true },
-    { routeId: 'hyecho_pilgrimage', name: '혜초 왕오천축국전 루트', period: '723~727', ready: true },
+    { routeId: 'hyecho_pilgrimage', name: '혜초 왕오천축국전 루트', period: '723~780', ready: true },
     { routeId: 'ancient_history_debates', name: '고대사 논쟁루트', period: '신화시대~오늘날', ready: true },
+    { routeId: 'geunchogo_conquest', name: '근초고왕 정복루트', period: '346~400', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────

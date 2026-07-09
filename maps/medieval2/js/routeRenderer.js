@@ -204,15 +204,24 @@
       const typeColor = WP_TYPE_COLOR[wp.type] || route.color;
       const typeLabel = WP_TYPE_LABEL[wp.type] || wp.type;
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
+      const hasDetail = !!(wp.summary_ko || wp.youtube_id);
+      const detailHtml = hasDetail ? `
+        <div class="route-panel-wp-detail" hidden>
+          ${wp.summary_ko ? `<p class="route-panel-wp-summary">${wp.summary_ko}</p>` : ''}
+          ${wp.youtube_id ? `<div class="route-panel-wp-video" data-youtube-id="${wp.youtube_id}"></div>` : ''}
+        </div>` : '';
       return `
-      <li class="route-panel-wp" data-wp-id="${wp.id}"
-          onclick="window.focusRouteWaypoint && window.focusRouteWaypoint('${route.id}','${wp.id}')">
-        <span class="route-panel-dot" style="background:${typeColor};"></span>
-        <div class="route-panel-wp-body">
-          <span class="route-panel-wp-date">${dateStr}</span>
-          <span class="route-panel-wp-title">${wp.title_ko}</span>
-          <span class="route-panel-wp-place">${wp.place_ko}</span>
-        </div>
+      <li class="route-panel-wp${hasDetail ? ' has-detail' : ''}" data-wp-id="${wp.id}">
+        <div class="route-panel-wp-row"
+             onclick="window.handleRoutePanelClick && window.handleRoutePanelClick(event,'${route.id}','${wp.id}')">
+          <span class="route-panel-dot" style="background:${typeColor};"></span>
+          <div class="route-panel-wp-body">
+            <span class="route-panel-wp-date">${dateStr}</span>
+            <span class="route-panel-wp-title">${wp.title_ko}</span>
+            <span class="route-panel-wp-place">${wp.place_ko}</span>
+          </div>
+          ${hasDetail ? '<span class="route-panel-expand-icon" aria-hidden="true"></span>' : ''}
+        </div>${detailHtml}
       </li>`;
     }).join('');
 
@@ -437,6 +446,34 @@
     highlightPanelItem(wpId);
     // fitBounds/setView 애니메이션이 끝난 뒤 깜빡여야 위치가 확실히 보인다.
     window.setTimeout(() => flashRouteMarker(wpId), 350);
+  };
+
+  window.handleRoutePanelClick = function (ev, routeId, wpId) {
+    try {
+      window.focusRouteWaypoint(routeId, wpId);
+    } catch (err) {
+      console.warn('[route] focusRouteWaypoint \uc911 \uc624\ub958(\uc544\ucf54\ub514\uc5b8\uc740 \uacc4\uc18d \uc9c4\ud589):', err);
+    }
+
+    const li = ev.currentTarget.closest('.route-panel-wp');
+    if (!li || !li.classList.contains('has-detail')) return;
+
+    const detail = li.querySelector('.route-panel-wp-detail');
+    const isOpen = li.classList.toggle('expanded');
+    if (detail) detail.hidden = !isOpen;
+
+    if (isOpen) {
+      const videoBox = li.querySelector('.route-panel-wp-video');
+      if (videoBox && !videoBox.dataset.loaded) {
+        const ytId = videoBox.getAttribute('data-youtube-id');
+        videoBox.innerHTML =
+          `<iframe width="100%" height="180" src="https://www.youtube.com/embed/${ytId}" `
+          + `title="YouTube video" frameborder="0" loading="lazy" `
+          + `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" `
+          + `allowfullscreen></iframe>`;
+        videoBox.dataset.loaded = '1';
+      }
+    }
   };
 
   // ── 루트 닫기 ────────────────────────────────────────────────
