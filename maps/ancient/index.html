@@ -352,10 +352,16 @@
      정의되기 때문이다. content/archive/ 안에 새 시리즈 파일이 추가되면
      여기에도 <script> 태그를 한 줄 추가해야 한다 — 세 지도(및 앞으로
      생길 지도) nav.js의 <script> 목록이 전부 동일해야 한다.
-     아직 이 지도 전용 루트(routes/*.js)가 없다 — nav.js의 ROUTE_HUB_ITEMS는
-     지금 빈 배열이라 "루트" 메뉴를 눌러도 빈 화면만 뜬다(에러 아님).
-     루트가 생기면 routes/xxx.js 파일을 만들고 여기 <script> 태그 한 줄만
-     추가하면 된다(다른 지도와 동일 패턴). -->
+     이 지도 전용 루트(routes/*.js)는 routeRenderer.js보다 뒤,
+     nav.js보다도 뒤에 로드해야 한다 — window.registerRoute가
+     routeRenderer.js에서 정의되기 때문이다. 새 루트가 생기면
+     routes/xxx.js 파일을 추가하고 여기 <script> 태그 한 줄, 그리고
+     js/nav.js의 ROUTE_HUB_ITEMS에 항목 하나를 추가하면 된다. -->
+<script src="routes/gwanggaeto_conquest.js"></script>
+<script src="routes/jang_bogo_maritime.js"></script>
+<script src="routes/kim_yu_sin_unification.js"></script>
+<script src="routes/hyecho_pilgrimage.js"></script>
+<script src="routes/ancient_history_debates.js"></script>
 
 </body>
 </html>

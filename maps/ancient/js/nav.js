@@ -52,11 +52,13 @@
   // routeId는 routes/*.js가 registerRoute()로 등록하는 route.id와 같아야
   // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
   // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
-  // 아직 이 지도(현대) 전용 루트가 하나도 없다 — 근현대 지도의 루트를
-  // 복사해오지 않았다(다른 시기 인물·사건이라 그대로 가져올 게 없음).
-  // 나중에 이 지도에 맞는 루트(예: 대통령 재직 시절 발자취 등)가 생기면
-  // routes/xxx.js를 만들고 여기 항목을 추가하면 된다.
-  const ROUTE_HUB_ITEMS = [];
+  const ROUTE_HUB_ITEMS = [
+    { routeId: 'gwanggaeto_conquest', name: '광개토대왕 정복루트', period: '391~414', ready: true },
+    { routeId: 'jang_bogo_maritime', name: '장보고 해상무역루트', period: '810년대~846', ready: true },
+    { routeId: 'kim_yu_sin_unification', name: '김유신 삼국통일루트', period: '609년경~676', ready: true },
+    { routeId: 'hyecho_pilgrimage', name: '혜초 왕오천축국전 루트', period: '723~727', ready: true },
+    { routeId: 'ancient_history_debates', name: '고대사 논쟁루트', period: '신화시대~오늘날', ready: true },
+  ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
   // archive/*.js가 로드되면 여기에 시리즈 단위로 등록된다. routeRenderer.js
