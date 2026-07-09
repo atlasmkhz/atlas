@@ -60,6 +60,7 @@
     { routeId: 'ancient_history_debates', name: '고대사 논쟁루트', period: '신화시대~오늘날', ready: true },
     { routeId: 'geunchogo_conquest', name: '근초고왕 정복루트', period: '346~400', ready: true },
     { routeId: 'korea_hegemony_history', name: '한반도를 둘러싼 패권의 역사', period: '기원전 108~1953', ready: true },
+    { routeId: 'northern_peoples_history', name: '초원의 후예들', period: '구석기시대~926', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
