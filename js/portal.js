@@ -105,13 +105,13 @@
   // 여기 하나로 모았다. 새 루트를 추가하면 이 배열에도 항목을 추가해야
   // 카드가 뜬다(정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없음).
   const ROUTE_CARDS = [
-    { path: 'route/hong-beom-do.html', name: '홍범도', tagline: '포수에서 현충원까지', period: '1868~2021', waypoints: 26, color: '#c8a827', image: 'assets/images/entity/person/person_hong_beom_do_01.webp' },
-    { path: 'route/righteous-struggle.html', name: '의열투쟁', tagline: '조선의 심장을 겨누다', period: '1908~1932', waypoints: 21, color: '#b8632f', image: 'assets/images/entity/person/person_kim_won_bong_01.webp' },
-    { path: 'route/kim-gu.html', name: '백범 김구', tagline: '상놈의 아들에서 임시정부의 얼굴로', period: '1876~1949', waypoints: 33, color: '#3a5a8c', image: 'assets/images/entity/person/person_kim_gu_01.webp' },
-    { path: 'route/japanese-atrocities.html', name: '일제 만행 루트', tagline: '50년의 가해 기록', period: '1895~1945', waypoints: 18, color: '#8c1f1f', image: 'assets/images/route/route_japanese_atrocities_hero.webp' },
-    { path: 'maps/modern2/route/korean-war-massacres.html', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 26, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
-    { path: 'maps/modern2/route/korean-war-battles.html', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 15, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
-    { path: 'route/daegu-gyeongbuk-independence.html', name: '대구경북 독립운동가', tagline: '"조선의 모스크바"의 시작', period: '1909~1944', waypoints: 14, color: '#8c3a2e', image: 'assets/images/route/route_daegu_gyeongbuk_independence_hero.webp' },
+    { path: 'map.html?route=hong_beom_do', name: '홍범도', tagline: '포수에서 현충원까지', period: '1868~2021', waypoints: 26, color: '#c8a827', image: 'assets/images/entity/person/person_hong_beom_do_01.webp' },
+    { path: 'map.html?route=righteous_struggle', name: '의열투쟁', tagline: '조선의 심장을 겨누다', period: '1908~1932', waypoints: 21, color: '#b8632f', image: 'assets/images/entity/person/person_kim_won_bong_01.webp' },
+    { path: 'map.html?route=kim_gu', name: '백범 김구', tagline: '상놈의 아들에서 임시정부의 얼굴로', period: '1876~1949', waypoints: 33, color: '#3a5a8c', image: 'assets/images/entity/person/person_kim_gu_01.webp' },
+    { path: 'map.html?route=japanese_atrocities', name: '일제 만행 루트', tagline: '50년의 가해 기록', period: '1895~1945', waypoints: 18, color: '#8c1f1f', image: 'assets/images/route/route_japanese_atrocities_hero.webp' },
+    { path: 'maps/modern2/index.html?route=korean_war_massacres', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 26, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
+    { path: 'maps/modern2/index.html?route=korean_war_battles', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 15, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
+    { path: 'map.html?route=daegu_gyeongbuk_independence', name: '대구경북 독립운동가', tagline: '"조선의 모스크바"의 시작', period: '1909~1944', waypoints: 14, color: '#8c3a2e', image: 'assets/images/route/route_daegu_gyeongbuk_independence_hero.webp' },
   ];
 
   function renderRoutes() {
