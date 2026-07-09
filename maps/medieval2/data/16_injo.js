@@ -82,5 +82,19 @@ const EVENTS_INJO = [
     video:null,
     connections:['plot_1623_01'],
     tags:['battle','남한산성','병자호란','삼전도','청'],
-    sources:['한국민족문화대백과사전 병자호란','위키백과 병자호란'] }
+    sources:['한국민족문화대백과사전 병자호란','위키백과 병자호란'] },
+
+  { id:'policy_1635_01', year:1635, visible_from:1635, visible_until:1750,
+    month:null, day:null, type:'policy', priority:1,
+    title_ko:'인조의 영정법 — 전세를 정액화하다',
+    title_en:'King Injos Yeongjeongbeop — Fixing the Land Tax Rate',
+    title_ja:'仁祖の永定法 — 田税の定額化',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['인조'],
+    summary_ko:'양난으로 농경지가 황폐해지고 세종 대의 전분6등법·연분9등법 같은 복잡한 절차로 수취의 어려움이 커지자, 인조는 1635년 풍흉에 관계없이 토지 1결당 쌀 4~6두의 전세를 고정으로 거두는 영정법을 시행했다. 이는 매년 등급을 매기던 번거로운 절차를 없애 조세 행정을 단순화하려는 목적이었으나, 실제로는 지주의 세 부담이 줄어든 반면 농민에게는 여러 명목의 부가세와 운송 비용이 함께 부과돼 부담이 오히려 늘어나는 경우가 많았다. 조세 제도의 이런 개편은 이후 광해군 대 시작된 대동법의 확대, 영조 대 균역법 시행과 함께 조선 후기 삼세(전세·공납·군역) 제도가 재정비돼 가는 흐름의 한 축을 이룬다.',
+    video:null,
+    connections:['policy_1608_02','policy_1750_01'],
+    tags:['policy','한양','영정법','인조','전세'],
+    sources:['한국민족문화대백과사전 영정법'] }
 ];

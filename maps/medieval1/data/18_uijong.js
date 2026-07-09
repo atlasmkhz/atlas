@@ -40,5 +40,19 @@ const EVENTS_UIJONG = [
     video:null,
     connections:['culture_1157_01','plot_1170_01'],
     tags:['plot','장단','보현원','무신정변','정중부'],
-    sources:['한국민족문화대백과사전 무신정변'] }
+    sources:['한국민족문화대백과사전 무신정변'] },
+
+  { id:'culture_1150_01', year:1150, visible_from:1050, visible_until:1250,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'고려청자의 발달 — 순청자에서 상감청자로',
+    title_en:'The Development of Goryeo Celadon',
+    title_ja:'高麗青磁の発達 — 純青磁から象嵌青磁へ',
+    place_ko:'강진',
+    lat:34.6420, lng:126.7669,
+    people:[],
+    summary_ko:'고려는 신라·발해의 전통 기술을 이어받고 송의 자기 기술을 받아들여 독자적인 고려청자를 발전시켰다. 10세기 후반부터 청자를 생산하기 시작해 11세기에는 무늬 없이 비색이라 불리는 은은한 청록빛 유약만으로 승부하는 순청자가 절정을 이뤘고, 12세기 중엽에는 그릇 표면을 파낸 자리에 백토·흑토를 메워 넣어 무늬를 내는 독자적인 상감 기법을 개발해 상감청자로 발전시켰다. 전남 강진과 전북 부안은 대표적인 청자 생산지로, 왕실과 귀족의 생활용품부터 불교 의식용 도구까지 다양한 상감청자가 이곳에서 만들어졌다. 그러나 14세기 원 간섭기에 북방의 기법이 섞여 들면서 상감청자 특유의 정교함은 점차 퇴조해 간다.',
+    video:null,
+    connections:[],
+    tags:['culture','강진','고려청자','상감청자','비색'],
+    sources:['한국민족문화대백과사전 고려청자'] }
 ];

@@ -68,5 +68,19 @@ const EVENTS_CHEOLJONG = [
     video:null,
     connections:['movement_1862_01'],
     tags:['policy','한양','삼정이정청','철종','박규수'],
-    sources:['한국민족문화대백과사전 삼정이정청'] }
+    sources:['한국민족문화대백과사전 삼정이정청'] },
+
+  { id:'culture_1850_01', year:1850, visible_from:1811, visible_until:1876,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'세도정치기의 사회 불안 — 정감록과 미륵신앙',
+    title_en:'Social Unrest under Sedo Politics — The Jeonggamnok and Maitreya Beliefs',
+    title_ja:'勢道政治期の社会不安 — 鄭鑑録と弥勒信仰',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:[],
+    summary_ko:'세도 가문의 부정부패와 삼정의 문란으로 농민의 삶이 파탄에 이르자, 백성들 사이에서는 조선 왕조를 대신할 새로운 세상을 예고하는 예언서 정감록이 널리 퍼졌다. 정감록은 이씨 왕조가 정씨의 새 나라로 교체된다는 내용을 담아 체제에 대한 불만을 우회적으로 표출하는 통로가 됐고, 실제로 홍경래는 정감록의 예언을 봉기의 명분으로 활용하기도 했다. 이와 함께 미래를 예측하는 도참사상, 미륵불이 지상에 내려와 중생을 구원한다는 미륵신앙, 굿을 통해 재앙을 막고 복을 비는 무속신앙도 크게 번성해 각지에서 스스로를 살아있는 미륵불이라 칭하는 이들까지 나타났다. 이런 비기·예언 사상은 새로운 세상을 갈망하는 민중의 정서를 반영하며, 19세기 후반 동학을 비롯한 여러 사회변혁 운동이 대중적 기반을 넓히는 사상적 토양이 됐다.',
+    video:null,
+    connections:['movement_1811_01','organization_1860_01'],
+    tags:['culture','한양','정감록','미륵신앙','세도정치'],
+    sources:['한국민족문화대백과사전 정감록','한국민족문화대백과사전 미륵신앙'] }
 ];

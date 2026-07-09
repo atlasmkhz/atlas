@@ -40,5 +40,19 @@ const EVENTS_TAEJO = [
     video:null,
     connections:['political_0936_01'],
     tags:['culture','개경','훈요십조','왕건','고려'],
-    sources:['한국민족문화대백과사전 훈요십조'] }
+    sources:['한국민족문화대백과사전 훈요십조'] },
+
+  { id:'policy_0940_01', year:940, visible_from:940, visible_until:976,
+    month:null, day:null, type:'policy', priority:2,
+    title_ko:'역분전 지급 — 고려 최초의 토지제도',
+    title_en:'Yeokbunjeon — Goryeo\'s First Land Grant System',
+    title_ja:'役分田支給 — 高麗最初の土地制度',
+    place_ko:'개경',
+    lat:37.9707, lng:126.5615,
+    people:['왕건'],
+    summary_ko:'후삼국을 통일한 태조 왕건은 940년, 통일 전쟁 과정에서 공을 세운 공신과 군인들에게 논공행상 성격으로 토지를 나눠주는 역분전을 시행했다. 관직의 높낮이가 아니라 통일 전쟁에서 세운 공로와 인품을 기준으로 지급했다는 점에서, 이후 관료 체계가 정비되며 관직에 따라 토지를 지급하는 전시과와는 성격이 달랐다. 역분전은 논공행상적 성격의 토지 지급이 관료제에 기반한 체계적인 토지 지급 제도(전시과)로 발전해 가는 첫 단계로 평가된다.',
+    video:null,
+    connections:['political_0918_01','economic_0976_01'],
+    tags:['policy','개경','역분전','태조','토지제도'],
+    sources:['한국민족문화대백과사전 역분전'] }
 ];

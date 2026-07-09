@@ -40,5 +40,19 @@ const EVENTS_SINJONG = [
     video:null,
     connections:['plot_1196_01'],
     tags:['political','개경','신종','즉위','최충헌'],
-    sources:['한국민족문화대백과사전 신종(고려)'] }
+    sources:['한국민족문화대백과사전 신종(고려)'] },
+
+  { id:'culture_1200_01', year:1200, visible_from:1190, visible_until:1232,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'무신집권기의 불교 결사운동 — 수선사와 백련사',
+    title_en:'Buddhist Retreat Societies of the Military Rule Era',
+    title_ja:'武臣政権期の仏教結社運動 — 修禅社と白蓮社',
+    place_ko:'순천 송광사',
+    lat:35.0339, lng:127.3586,
+    people:['지눌','요세'],
+    summary_ko:'무신정권기 불교계의 세속화와 타락을 비판하며, 승려 지눌은 참선을 통한 깨달음(선)과 경전 공부(교)를 함께 닦아야 한다는 정혜쌍수, 단번에 깨달아도 이후 꾸준한 수행이 필요하다는 돈오점수를 내세워 조계종의 사상적 기반을 세우고 순천 송광사를 중심으로 수선사 결사 운동을 이끌었다. 비슷한 시기 천태종의 요세는 극락왕생을 바라며 부처의 이름을 외는 염불 수행을 강조하는 백련결사를 결성했는데, 특별한 교리 지식 없이도 동참할 수 있는 방식이어서 참선이나 독경이 어려웠던 하층민들에게 특히 큰 호응을 얻었다. 두 결사 운동은 지방 세력과 하층민의 지지를 얻으며, 문벌귀족과 밀착했던 이전 시기의 귀족 불교에서 벗어나려는 개혁적 흐름을 대표한다.',
+    video:null,
+    connections:['movement_1198_01'],
+    tags:['culture','순천','지눌','요세','수선사','백련결사'],
+    sources:['한국민족문화대백과사전 지눌','한국민족문화대백과사전 요세'] }
 ];

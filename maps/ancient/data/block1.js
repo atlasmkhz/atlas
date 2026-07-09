@@ -68,5 +68,19 @@ const EVENTS_BLOCK1 = [
     video:null,
     connections:['political_bc37_01'],
     tags:['political','평양','미천왕','낙랑군','한사군'],
-    sources:['한국민족문화대백과사전 낙랑군','위키백과 낙랑군','위키백과 미천왕'] }
+    sources:['한국민족문화대백과사전 낙랑군','위키백과 낙랑군','위키백과 미천왕'] },
+
+  { id:'policy_194_01', year:194, visible_from:179, visible_until:197,
+    month:null, day:null, type:'policy', priority:1, nation:'goguryeo',
+    title_ko:'고국천왕과 진대법 — 부자상속과 빈민구제의 시작',
+    title_en:'King Gogukcheon and the Jindaebeop Relief Loan System',
+    title_ja:'故国川王と賑貸法 — 父子相続と貧民救済の始まり',
+    place_ko:'국내성(집안)',
+    lat:41.1256, lng:126.1936,
+    people:['고국천왕','을파소'],
+    summary_ko:'고구려 9대 왕 고국천왕은 형제상속 대신 부자상속 원칙을 세워 왕위 계승을 안정시켰고, 을파소를 국상(재상)에 등용해 194년 진대법을 실시했다. 진대법은 봄에 곡식이 떨어진 백성에게 국가가 곡식을 빌려주고 가을 수확 후 갚게 하는 제도로, 흉년에 빚 때문에 자영농이 노비로 전락하는 것을 막아 국가의 조세·군역 기반을 지키려는 목적이었다. 이는 훗날 고려의 의창, 조선의 환곡제로 이어지는 국가 주도 빈민구제 제도의 원형으로 꼽힌다. 이 시기 부족적 성격이 강했던 5부도 점차 행정구역으로 재편되기 시작해, 왕권이 부족장 연합체 단계에서 벗어나기 시작했음을 보여준다.',
+    video:null,
+    connections:['political_bc37_01','political_313_01'],
+    tags:['policy','국내성','고국천왕','진대법','을파소'],
+    sources:['한국민족문화대백과사전 진대법','위키백과 고국천왕'] }
 ];

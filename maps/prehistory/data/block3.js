@@ -55,5 +55,19 @@ const EVENTS_BLOCK3 = [
     video:null,
     connections:['culture_neo_01'],
     tags:['culture','시베리아','빗살무늬토기','신석기교류망','아무르강'],
-    sources:['한국민족문화대백과사전 빗살무늬토기','위키백과 빗살무늬토기'] }
+    sources:['한국민족문화대백과사전 빗살무늬토기','위키백과 빗살무늬토기'] },
+
+  { id:'culture_neo_05', year:-3000, visible_from:-3500, visible_until:-1500,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'신석기 농경의 시작 — 봉산 지탑리 유적의 탄화 좁쌀',
+    title_en:'The Dawn of Neolithic Farming — Carbonized Millet at Jitap-ri',
+    title_ja:'新石器農耕の始まり — 鳳山智塔里遺跡の炭化アワ',
+    place_ko:'황해도 봉산(지탑리)',
+    lat:38.70, lng:125.75,
+    people:[],
+    summary_ko:'황해도 봉산 지탑리 유적에서 발견된 탄화된 좁쌀은 한반도 신석기인들이 조·피·수수 같은 잡곡을 실제로 재배했음을 보여주는 대표적인 물증으로 꼽힌다. 돌괭이·돌삽 같은 간석기 농기구와 함께 확인된 이 증거는, 사람들이 자연에서 먹을거리를 구하던 채집·수렵 중심의 생활에서 벗어나 스스로 식량을 생산하는 단계로 접어들었음을 보여주며, 이 전환을 흔히 \"신석기 혁명\"이라 부른다. 다만 농경이 시작된 이후에도 활·창을 이용한 사냥과 그물·작살·뼈낚싯바늘을 이용한 물고기잡이는 여전히 중요한 식량 확보 수단으로 남아 있었다. 이 시기 정착 생활은 가락바퀴로 실을 뽑고 뼈바늘로 옷과 그물을 만드는 원시적 수공업으로도 이어져, 암사동 같은 강가 정착 마을의 생활상을 한층 더 구체적으로 보여준다.',
+    video:null,
+    connections:['culture_neo_01'],
+    tags:['culture','봉산','지탑리','신석기혁명','잡곡농경'],
+    sources:['한국민족문화대백과사전 지탑리 유적','위키백과 신석기 시대'] }
 ];

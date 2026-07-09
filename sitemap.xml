@@ -4,8 +4,8 @@
   메인 페이지 1개 + 1876~1945 Event 433개 + 루트 7개 + 
   근현대(1945~1993) 진입점 1개 + Event 420개 + 루트 8개 + 
   현대(1994~2025) 진입점 1개 + Event 224개(루트 없음) + 
-  조선(1392~1875, 중세2) 진입점 1개 + Event 153개(루트 없음) + 
-  고려(918~1392, 중세1) 진입점 1개 + Event 112개(루트 없음)를 포함한다.
+  조선(1392~1875, 중세2) 진입점 1개 + Event 168개(루트 없음) + 
+  고려(918~1392, 중세1) 진입점 1개 + Event 127개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
   generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를
@@ -5543,6 +5543,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1400-seungjeongwon-and-uigeumbu</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1401-installation-of-the-sinmungo-petition-drum</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5564,6 +5569,16 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1413-implementation-of-the-hopae</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1413-local-administration-in-joseon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1413-the-annals-of-the-joseon-dynasty-and-the</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5683,6 +5698,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1457-the-military-system-of-joseon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1460-beginning-of-the-compilation-of-the</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5754,6 +5774,16 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1485-promulgation-of-the-gyeongguk-daejeon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1485-the-examination-system-and-schools-of</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1485-the-status-system-of-joseon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5878,6 +5908,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1568-yi-hwang-and-yi-i</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1575-the-split-into-the-eastern-and-western</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5943,6 +5978,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1609-the-korean-embassies-to-japan-and-the</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1610-completion-of-the-dongui-bogam-exemplar</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5984,6 +6024,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1627-first-manchu-invasion-of-korea</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1635-king-injos-yeongjeongbeop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6123,6 +6168,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1750-agrarian-reform-silhak</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1750-implementation-of-the-gyunyeok-equalized</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6148,12 +6198,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1778-commerce-oriented-silhak</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1778-promulgation-of-measures-easing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1780-vernacular-novels-and-pansori-in-late</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1785-compilation-of-the-daejeon-tongpyeon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1785-genre-painting-by-kim-hongdo-and-sin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6208,6 +6273,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1816-the-flourishing-of-national-studies</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1834-enthronement-of-king-heonjong-the</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6224,6 +6294,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1849-enthronement-of-king-cheoljong-the</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1850-social-unrest-under-sedo-politics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6323,6 +6398,21 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1050-the-status-of-women-in-goryeo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1050-the-status-system-of-goryeo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1055-choe-chungs-nine-chamber-academy-and-the</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1067-construction-of-heungwangsa-temple</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6374,6 +6464,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1095-rebellion-of-yi-ja-ui-and-the-deposition</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1100-byeongnyeondo-and-international-trade</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6453,6 +6548,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1150-the-development-of-goryeo-celadon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1157-favoritism-toward-civil-officials-and</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6494,6 +6594,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1198-manjeoks-slave-liberation-uprising</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1200-buddhist-retreat-societies-of-the</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6583,12 +6688,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1281-independent-historiography-under-military</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1281-second-mongol-goryeo-invasion-of-japan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1285-spread-of-mongol-fashion</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1290-an-hyang-introduces-neo-confucianism-to</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6678,6 +6793,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1377-jikji</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1380-choe-museons-gunpowder-weapons-and-the</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6734,6 +6854,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/936-unification-of-the-later-three-kingdoms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/940-yeokbunjeon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6818,7 +6943,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/993-king-seongjongs-social-and-economic</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/995-reorganization-of-the-two-chancelleries</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/996-daegan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/996-dobyeongmasa-and-sikmokdogam</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/996-the-central-and-provincial-armies-of</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6828,12 +6973,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/998-king-mokjongs-revised-jeonsigwa-land</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/194-king-gogukcheon-and-the-jindaebeop-relief</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/313-goguryeo-expels-the-lelang-commandery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/356-king-naemul-and-the-age-of-maripgan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6843,7 +7003,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/372-state-building-under-king-sosurim</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/384-king-chimnyu-proclaims-buddhism-the-state</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/391-enthronement-of-king-gwanggaeto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/400-the-golpum-bone-rank-system-of-silla</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/400-the-southern-campaigns-of-king-gwanggaeto</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6858,6 +7038,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/450-the-hwabaek-council-of-silla</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/475-baekje-relocates-the-capital-to-ungjin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6868,7 +7053,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/500-goguryeo-tomb-murals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/500-king-jijeungs-reforms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/500-stone-mound-wooden-chamber-tombs-of-silla</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6903,12 +7098,32 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/562-the-rise-and-fall-of-daegaya</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/601-baekje-buddhist-art</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/612-battle-of-salsu</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/642-the-coup-of-yeon-gaesomun-and-hardline</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/645-battle-of-ansi-fortress</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/645-queen-seondeok-cheomseongdae-and-the</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6939,6 +7154,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/681-king-sinmun-suppresses-the-rebellion-of</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/685-royal-reforms-under-king-sinmun</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6974,6 +7194,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/event/818-king-seon-of-balhaes-golden-age</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/ancient/event/819-the-governing-system-of-balhae</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

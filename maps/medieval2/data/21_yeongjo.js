@@ -82,5 +82,19 @@ const EVENTS_YEONGJO = [
     video:null,
     connections:['policy_1725_01'],
     tags:['plot','한양','사도세자','영조','임오화변'],
-    sources:['한국민족문화대백과사전 사도세자'] }
+    sources:['한국민족문화대백과사전 사도세자'] },
+
+  { id:'culture_1750_02', year:1750, visible_from:1670, visible_until:1836,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'중농학파 실학 — 유형원·이익·정약용의 토지개혁론',
+    title_en:'Agrarian-Reform Silhak — Land Reform Theories of Yu Hyeongwon, Yi Ik, and Jeong Yakyong',
+    title_ja:'中農学派実学 — 柳馨遠・李瀷・丁若鏞の土地改革論',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['유형원','이익','정약용'],
+    summary_ko:'17세기 후반 유형원은 반계수록에서 신분에 따라 차등을 두되 농민에게도 일정한 토지를 나눠줘 자영농을 육성하자는 균전론을 제시하며 농업 중심 개혁론의 선구가 됐다. 그의 사상을 이은 이익은 성호사설에서 한 가정의 최소 생계에 필요한 토지(영업전)의 매매만 금지하고 나머지는 자유롭게 거래하게 하자는 한전론을 주장했으며, 노비제·과거제·양반 문벌제 등 여섯 가지 사회 폐단을 비판했다. 실학을 집대성한 정약용은 여러 가구가 토지를 공동으로 소유해 함께 경작하고 노동량에 따라 수확을 나누는 여전론과, 전국 토지를 국유화해 9분의 1을 조세로 걷는 정전제를 구상했다. 이들은 토지 소유의 불균등이 농민 몰락의 근본 원인이라 보고, 경자유전의 원칙 아래 농민에게 안정적인 경작 기반을 마련해주는 것을 개혁의 핵심으로 삼았다는 공통점을 지닌다.',
+    video:null,
+    connections:['policy_1750_01'],
+    tags:['culture','한양','실학','유형원','이익','정약용','토지개혁'],
+    sources:['한국민족문화대백과사전 실학','한국민족문화대백과사전 정약용'] }
 ];

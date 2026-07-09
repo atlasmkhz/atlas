@@ -68,5 +68,19 @@ const EVENTS_SUKJONG_GORYEO = [
     video:null,
     connections:['culture_1091_01'],
     tags:['culture','개경','의천','숙종','천태종'],
-    sources:['한국민족문화대백과사전 의천'] }
+    sources:['한국민족문화대백과사전 의천'] },
+
+  { id:'economic_1100_01', year:1100, visible_from:1000, visible_until:1200,
+    month:null, day:null, type:'economic', priority:1,
+    title_ko:'벽란도와 국제무역 — 코리아라는 이름의 유래',
+    title_en:'Byeongnyeondo and International Trade',
+    title_ja:'碧瀾渡と国際貿易 — Koreaという名の由来',
+    place_ko:'벽란도(예성강 하구)',
+    lat:37.8867, lng:126.5324,
+    people:[],
+    summary_ko:'개경과 가까운 예성강 하구의 벽란도는 고려 전기 국제 무역항으로 크게 번성했다. 고려는 송과 가장 활발히 교역해 왕실·귀족이 쓰는 비단·약재 등을 수입하고 금·은·인삼 등을 수출했으며, 거란·여진과는 사신 왕래를 이용한 교역을, 일본과는 유황·수은을 들여오고 곡식·서적을 내주는 교역을 벌였다. 특히 대식국(아라비아)의 상인들까지 벽란도를 오가며 향료·수은 등을 거래했는데, 이 과정에서 고려의 이름이 서방 세계에 코리아(Corea)로 알려지게 됐다고 전한다. 벽란도의 번성은 개경이 단순한 정치 중심지를 넘어 동아시아 해상 교역망의 한 축을 이루는 국제도시였음을 보여준다.',
+    video:null,
+    connections:['economic_1102_01'],
+    tags:['economic','벽란도','국제무역','코리아','예성강'],
+    sources:['한국민족문화대백과사전 벽란도'] }
 ];

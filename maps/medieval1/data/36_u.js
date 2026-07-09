@@ -82,5 +82,19 @@ const EVENTS_U = [
     video:null,
     connections:['political_1388_01','political_1388_03'],
     tags:['plot','위화도','위화도회군','이성계','최영'],
-    sources:['한국민족문화대백과사전 위화도 회군','위키백과 위화도 회군'] }
+    sources:['한국민족문화대백과사전 위화도 회군','위키백과 위화도 회군'] },
+
+  { id:'culture_1377_01', year:1377, visible_from:1377, visible_until:1377,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'직지심체요절 — 세계 최고(最古)의 금속활자본',
+    title_en:'Jikji — The Worlds Oldest Extant Book Printed with Movable Metal Type',
+    title_ja:'直指心体要節 — 世界最古の金属活字本',
+    place_ko:'청주 흥덕사',
+    lat:36.6424, lng:127.4890,
+    people:[],
+    summary_ko:'고려는 발달한 목판 인쇄술을 바탕으로 세계 최초로 금속활자를 발명했다. 1234년 제작된 것으로 추정되는 상정고금예문이 가장 이른 금속활자본으로 기록에 전하지만 실물은 남아 있지 않고, 1377년 청주 흥덕사에서 찍어낸 직지심체요절(백운화상초록불조직지심체요절)이 현재 전하는 가장 오래된 금속활자본이다. 이는 구텐베르크의 금속활자 성서(1450년대)보다 70여 년 앞선 것으로, 2001년 유네스코 세계기록유산으로 등재됐다. 다만 두 권 중 상권은 발견되지 않았고 하권만 프랑스 국립도서관에 소장돼 있어, 19세기 말 프랑스 외교관이 수집해 반출한 이 유물의 환수 문제가 오늘날까지 논의되고 있다.',
+    video:null,
+    connections:[],
+    tags:['culture','청주','직지심체요절','금속활자','흥덕사'],
+    sources:['한국민족문화대백과사전 직지심체요절','위키백과 직지심체요절'] }
 ];

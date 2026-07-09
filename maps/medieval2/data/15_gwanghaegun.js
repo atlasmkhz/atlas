@@ -82,5 +82,19 @@ const EVENTS_GWANGHAEGUN = [
     video:null,
     connections:['diplomacy_1619_01'],
     tags:['policy','한양','궁궐중건','광해군','재정'],
-    sources:['한국민족문화대백과사전 광해군'] }
+    sources:['한국민족문화대백과사전 광해군'] },
+
+  { id:'diplomacy_1609_01', year:1609, visible_from:1607, visible_until:1811,
+    month:null, day:null, type:'diplomacy', priority:1,
+    title_ko:'통신사 파견과 기유약조 — 임진왜란 이후 대일관계 복원',
+    title_en:'The Korean Embassies to Japan and the Giyu Treaty',
+    title_ja:'通信使派遣と己酉約条 — 壬辰倭乱後の対日関係復元',
+    place_ko:'부산',
+    lat:35.1044, lng:129.0430,
+    people:[],
+    summary_ko:'임진왜란으로 단절됐던 조일 관계는 새로 들어선 에도 막부가 쇼군의 권위를 인정받고자 조선에 국교 재개를 요청하면서 회복의 계기를 맞았다. 조선은 1607년부터 1811년까지 12차례에 걸쳐 통신사를 일본에 파견해 문물을 교류했는데, 이는 임진왜란의 상처가 남아 있는 상황에서도 외교적 실리를 취한 조치였다. 1609년에는 부산에 왜관을 다시 설치하고 제한된 범위 안에서 무역을 허용하는 기유약조를 체결해, 세견선의 수를 정하는 등 교역 규모를 엄격히 통제했다. 통신사를 통해 전달된 조선의 성리학과 인쇄술은 일본 학문·문화 발전에 적지 않은 영향을 끼쳤고, 이 교류는 이후 19세기 조선의 문호 개방 이전까지 조일 관계의 기본 틀로 유지된다.',
+    video:null,
+    connections:['battle_1598_01'],
+    tags:['diplomacy','부산','통신사','기유약조','에도막부'],
+    sources:['한국민족문화대백과사전 통신사','한국민족문화대백과사전 기유약조'] }
 ];

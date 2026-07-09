@@ -68,5 +68,19 @@ const EVENTS_SUNJO = [
     video:null,
     connections:['political_1804_01'],
     tags:['movement','가산','홍경래의난','순조','평안도'],
-    sources:['한국민족문화대백과사전 홍경래의 난','위키백과 홍경래의 난'] }
+    sources:['한국민족문화대백과사전 홍경래의 난','위키백과 홍경래의 난'] },
+
+  { id:'culture_1816_01', year:1816, visible_from:1778, visible_until:1856,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'국학 연구의 발전 — 안정복·유득공·김정희',
+    title_en:'The Flourishing of National Studies — An Jeongbok, Yu Deukgong, and Kim Jeonghui',
+    title_ja:'国学研究の発展 — 安鼎福・柳得恭・金正喜',
+    place_ko:'한양',
+    lat:37.5796, lng:126.9770,
+    people:['안정복','유득공','김정희'],
+    summary_ko:'실학의 실증적 학풍은 우리 역사와 국토에 대한 독자적 연구로도 이어졌다. 안정복은 동사강목에서 고조선부터 고려까지의 역사를 독자적인 정통론을 세워 체계적으로 정리했다. 유득공은 발해고에서 발해를 처음으로 우리 역사의 일부로 다루며 신라와 발해가 남북에 나란히 있었다는 뜻의 남북국이라는 용어를 처음 사용해, 고려가 남북국사를 편찬하지 않은 것을 아쉬워했다. 금석학을 연구한 김정희는 금석과안록에서 서울 북한산비가 신라 진흥왕의 순수비임을 처음으로 고증해 밝혀냈으며, 제주 유배 시절에는 문인화의 격조를 담은 세한도를 그려 학문과 예술을 함께 인정받았다. 이런 국학 연구는 중국 중심의 역사 인식에서 벗어나 우리 역사와 강역을 독자적으로 재구성하려 한 시도로 평가된다.',
+    video:null,
+    connections:['culture_1750_02'],
+    tags:['culture','한양','안정복','유득공','발해고','김정희'],
+    sources:['한국민족문화대백과사전 유득공','한국민족문화대백과사전 김정희'] }
 ];
