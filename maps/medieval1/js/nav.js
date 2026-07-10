@@ -60,6 +60,7 @@
     { routeId: 'wang_geon_unification', name: '왕건통일루트', period: '875~943', ready: true },
     { routeId: 'goryeo_khitan_war', name: '고려거란전쟁', period: '942~1044', ready: true },
     { routeId: 'goryeo_heritage_sites', name: '고려 문화유산 순례', period: '오늘날 남아있는 유적들', ready: true },
+    { routeId: 'goryeo_rebellions', name: '고려시대 민란·반란 루트', period: '945~1273', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────

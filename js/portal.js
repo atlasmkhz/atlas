@@ -109,7 +109,7 @@
   // ── 2.5 추천 루트 ── route/*.html + routes/*.js에 흩어진 메타데이터를
   // 여기 하나로 모았다. 새 루트를 추가하면 이 배열에도 항목을 추가해야
   // 카드가 뜬다(정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없음).
-  // ── 2.5 추천 루트 ── 전체 31개 루트의 마스터 목록. 매일 이 중 6개를
+  // ── 2.5 추천 루트 ── 전체 36개 루트의 마스터 목록. 매일 이 중 6개를
   // 뽑아 보여준다(아래 renderRoutes에서 날짜 기반으로 선택) — 새
   // 루트를 추가하면 이 배열에도 항목을 추가해야 로테이션 대상이 된다
   // (정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없다).
@@ -152,10 +152,13 @@
     { path: 'maps/medieval1/index.html?route=wang_geon_unification', name: '왕건통일루트', tagline: '송악 호족의 아들에서 고려의 태조로', period: '875~943', waypoints: 12, color: '#3a5a8c', image: null },
     { path: 'maps/medieval1/index.html?route=goryeo_khitan_war', name: '고려거란전쟁', tagline: '낙타를 굶겨 죽인 그날부터 귀주대첩까지, 30년', period: '942~1044', waypoints: 8, color: '#5c2f2f', image: null },
     { path: 'maps/medieval1/index.html?route=goryeo_heritage_sites', name: '고려 문화유산 순례', tagline: '474년 도읍 개경, 그리고 39년의 강화도 항쟁', period: '오늘날 남아있는 유적들', waypoints: 12, color: '#3a5a8c', image: null },
+    { path: 'maps/medieval1/index.html?route=goryeo_rebellions', name: '고려시대 민란·반란 루트', tagline: '왕실의 권력 다툼에서 노비의 신분 해방 외침까지 — 고려 500년을 흔든 반란들', period: '945~1273', waypoints: 11, color: '#4a3a5c', image: null },
 
     // 조선 — maps/medieval2/index.html
     { path: 'maps/medieval2/index.html?route=yi_sun_sin', name: '이순신 루트', tagline: '두 번의 백의종군과 세 번의 결정적 해전, 나라를 지켜낸 53년', period: '1545~1598', waypoints: 11, color: '#1f4a6b', image: null },
     { path: 'maps/medieval2/index.html?route=imjin_war', name: '임진왜란·정유재란 루트', tagline: '7년의 전쟁, 무너진 관군과 일어선 백성 — 부산진에서 노량까지', period: '1592~1598', waypoints: 24, color: '#7a1f1f', image: null },
+    { path: 'maps/medieval2/index.html?route=joseon_rebellions', name: '조선시대 민란·반란 루트', tagline: '수탈에 맞선 백성들, 그리고 체제에 도전한 반란들 — 임꺽정에서 동학까지', period: '1559~1894', waypoints: 10, color: '#5c2f2f', image: null },
+    { path: 'maps/medieval2/index.html?route=joseon_heritage_sites', name: '조선 문화유산 순례', tagline: '5대 궁궐과 종묘사직에서 훈민정음 해례본까지', period: '오늘날 남아있는 유적들', waypoints: 14, color: '#8c6b2e', image: null },
   ];
 
   // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(1970-01-01

@@ -4,8 +4,8 @@
   메인 페이지 1개 + 1876~1945 Event 433개 + 루트 7개 + 
   근현대(1945~1993) 진입점 1개 + Event 421개 + 루트 8개 + 
   현대(1994~2025) 진입점 1개 + Event 224개(루트 없음) + 
-  조선(1392~1875, 중세2) 진입점 1개 + Event 196개(루트 없음) + 
-  고려(918~1392, 중세1) 진입점 1개 + Event 151개(루트 없음)를 포함한다.
+  조선(1392~1875, 중세2) 진입점 1개 + Event 212개(루트 없음) + 
+  고려(918~1392, 중세1) 진입점 1개 + Event 152개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
   generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를
@@ -6443,6 +6443,86 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_12</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_13</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_14</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6484,6 +6564,16 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/route/imjin-war</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/route/joseon-heritage-sites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/route/joseon-rebellions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
@@ -7208,6 +7298,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/route-goryeo-rebellions--wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/route-wang-geon-unification--wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -7259,6 +7354,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/route/goryeo-khitan-war</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/route/goryeo-rebellions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
