@@ -33,6 +33,11 @@
 
   function pickFeaturedVideo(videos) {
     if (!videos || !videos.length) return null;
+    // pinned_featured:true가 있으면(수동 지정) 로테이션을 건너뛰고
+    // 그 영상을 항상 특집으로 노출한다 — 해제하려면 이 필드를 지우면
+    // 원래의 "최근 14일 우선, 아니면 주차 로테이션" 규칙으로 돌아간다.
+    const pinned = videos.find(v => v.pinned_featured);
+    if (pinned) return pinned;
     const now = new Date();
     const recent = videos
       .filter(v => (now - new Date(v.published)) / 86400000 <= RECENT_DAYS)

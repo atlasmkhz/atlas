@@ -1061,6 +1061,7 @@ body.route-mode-active [data-route-hidden] {
 .route-panel-list {
   list-style: none;
   padding: 8px 0;
+  flex-shrink: 0;
 }
 .route-panel-wp {
   border-left: 2px solid transparent;
@@ -1146,6 +1147,9 @@ body.route-mode-active [data-route-hidden] {
   background: linear-gradient(135deg, rgba(212,120,60,0.16), rgba(212,120,60,0.05));
   border: 1px solid rgba(212,120,60,0.45);
   overflow: hidden;
+  flex-shrink: 0; /* .route-panel-wrap이 flex column인데, 이게 없으면
+    내용이 넘칠 때 컨테이너가 스크롤되는 대신 이 박스가 눌려서
+    찌그러진다(모바일에서 "말려들어간다"는 증상으로 나타났던 버그). */
 }
 .route-panel-pinned-row {
   display: flex;

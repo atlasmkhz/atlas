@@ -82,6 +82,7 @@ const YOUTUBE_VIDEOS = [
   {
     id: 'v_hong_beom_do_100y',
     youtube_id: 'IthyNGuvybk',
+    pinned_featured: true,
     title: '[AI 복원] 잊힌 독립군 홍범도 — 100년 전 노래가 깨어나다',
     description: '독립군 홍범도 장군의 잊힌 노래를 AI 복원 기술로 되살린 기록.',
     published: '2025-08-11',
