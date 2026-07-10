@@ -34,18 +34,18 @@
   function pickFeaturedVideo(videos) {
     if (!videos || !videos.length) return null;
     // pinned_featured:true가 있으면(수동 지정) 로테이션을 건너뛰고
-    // 그 영상을 항상 특집으로 노출한다 — 해제하려면 이 필드를 지우면
-    // 원래의 "최근 14일 우선, 아니면 주차 로테이션" 규칙으로 돌아간다.
+    // 그 영상을 항상 특집으로 노출한다.
     const pinned = videos.find(v => v.pinned_featured);
     if (pinned) return pinned;
-    const now = new Date();
-    const recent = videos
-      .filter(v => (now - new Date(v.published)) / 86400000 <= RECENT_DAYS)
-      .sort((a, b) => new Date(b.published) - new Date(a.published));
-    if (recent.length) return recent[0];
+    // 매일 바뀌는 로테이션 — "오늘 날짜(연 단위 일수)"를 영상 개수로
+    // 나눈 나머지로 인덱스를 정한다. 발행일 오래된 순으로 정렬해두면
+    // 같은 날짜에는 항상 같은 영상이 뜨고(새로고침해도 안 바뀜),
+    // 자정이 지나면 다음 영상으로 넘어간다. 영상이 늘어날수록 한 바퀴
+    // 도는 데 걸리는 날짜도 길어진다.
     const sorted = [...videos].sort((a, b) => new Date(a.published) - new Date(b.published));
-    const week = getISOWeek(now) + now.getFullYear() * 53;
-    return sorted[week % sorted.length];
+    const now = new Date();
+    const dayIndex = Math.floor(now.getTime() / 86400000); // 1970-01-01부터 일수
+    return sorted[dayIndex % sorted.length];
   }
 
   function relatedLinks(video) {
@@ -109,20 +109,77 @@
   // ── 2.5 추천 루트 ── route/*.html + routes/*.js에 흩어진 메타데이터를
   // 여기 하나로 모았다. 새 루트를 추가하면 이 배열에도 항목을 추가해야
   // 카드가 뜬다(정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없음).
-  const ROUTE_CARDS = [
-    { path: 'maps/ancient/index.html?route=gwanggaeto_conquest', name: '광개토대왕 정복루트', tagline: '13세 태자에서 18세 정복왕으로 — 거란·백제·후연·가야·왜를 22년에 걸쳐 굴복시키다', period: '385~414', waypoints: 16, color: '#7a2e2e', image: 'maps/ancient/assets/images/route/route_gwanggaeto_conquest_hero.webp' },
-    { path: 'maps/ancient/index.html?route=hyecho_pilgrimage', name: '혜초 왕오천축국전 루트', tagline: '16세에 출가해 뱃길로 인도에 닿고, 페르시아·아랍의 변경까지 넘나든 4년', period: '723~780', waypoints: 21, color: '#b8862f', image: 'maps/ancient/assets/images/route/route_hyecho_pilgrimage_hero.webp' },
+  // ── 2.5 추천 루트 ── 전체 31개 루트의 마스터 목록. 매일 이 중 6개를
+  // 뽑아 보여준다(아래 renderRoutes에서 날짜 기반으로 선택) — 새
+  // 루트를 추가하면 이 배열에도 항목을 추가해야 로테이션 대상이 된다
+  // (정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없다).
+  const MASTER_ROUTES = [
+    // 근대(포털) — map.html
     { path: 'map.html?route=hong_beom_do', name: '홍범도', tagline: '포수에서 현충원까지', period: '1868~2021', waypoints: 26, color: '#c8a827', image: 'assets/images/entity/person/person_hong_beom_do_01.webp' },
     { path: 'map.html?route=righteous_struggle', name: '의열투쟁', tagline: '조선의 심장을 겨누다', period: '1908~1932', waypoints: 21, color: '#b8632f', image: 'assets/images/entity/person/person_kim_won_bong_01.webp' },
     { path: 'map.html?route=kim_gu', name: '백범 김구', tagline: '상놈의 아들에서 임시정부의 얼굴로', period: '1876~1949', waypoints: 33, color: '#3a5a8c', image: 'assets/images/entity/person/person_kim_gu_01.webp' },
     { path: 'map.html?route=japanese_atrocities', name: '일제 만행 루트', tagline: '50년의 가해 기록', period: '1895~1945', waypoints: 18, color: '#8c1f1f', image: 'assets/images/route/route_japanese_atrocities_hero.webp' },
-    { path: 'maps/modern2/index.html?route=korean_war_massacres', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 26, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
+    { path: 'map.html?route=daegu_gyeongbuk_independence', name: '대구경북 독립운동가', tagline: '"조선의 모스크바"의 시작', period: '1909~1944', waypoints: 14, color: '#8c3a2e', image: 'assets/images/route/route_daegu_gyeongbuk_independence_hero.webp' },
+    { path: 'map.html?route=donghak', name: '동학', tagline: '득도에서 우금치까지, 그리고 3·1운동으로', period: '1860~1919', waypoints: 20, color: '#8c6b2e', image: null },
+    { path: 'map.html?route=kim_won_bong', name: '김원봉', tagline: '의열단을 만든 사람, 두 번 지워진 이름', period: '1898~1958', waypoints: 30, color: '#a83232', image: 'assets/images/entity/person/person_kim_won_bong_01.webp' },
+
+    // 근현대 — maps/modern2/index.html
+    { path: 'maps/modern2/index.html?route=syngman_rhee', name: '이승만', tagline: '외교독립론자에서 초대 대통령, 그리고 3·15 부정선거로 쫓겨난 90년', period: '1875~1965', waypoints: 28, color: '#7a5c2e', image: null },
+    { path: 'maps/modern2/index.html?route=kim_il_sung', name: '김일성', tagline: '보천보의 유격대원에서 절대권력자로, 82년의 생애', period: '1912~1994', waypoints: 25, color: '#8c2020', image: null },
+    { path: 'maps/modern2/index.html?route=park_chung_hee', name: '박정희', tagline: '쿠데타로 권력을 잡고 경제를 일으키는 동시에 헌정을 파괴하다, 62년', period: '1917~1979', waypoints: 36, color: '#4a5a3a', image: 'maps/modern2/assets/images/entity/person/person_park_chung_hee_01.webp' },
+    { path: 'maps/modern2/index.html?route=chun_doo_hwan', name: '전두환', tagline: '광주에서 자국민을 향해 총을 쏘라 명령한 사람, 90년', period: '1931~2021', waypoints: 39, color: '#5a3a3a', image: 'maps/modern2/assets/images/entity/person/person_chun_doo_hwan_01.webp' },
+    { path: 'maps/modern2/index.html?route=kim_dae_jung', name: '김대중', tagline: '국가폭력의 최대 피해자가 헌정사 최초의 평화적 정권교체를 이루기까지', period: '1924~2009', waypoints: 29, color: '#2e4a6b', image: null },
+    { path: 'maps/modern2/index.html?route=daegu_gyeongbuk_democracy', name: '대구경북 민주화의 열망', tagline: '"조선의 모스크바"라 불렸던 대구경북의 잊힌 얼굴', period: '1946~1975', waypoints: 5, color: '#2e5a8c', image: null },
+    { path: 'maps/modern2/index.html?route=korean_war_massacres', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 27, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
+    { path: 'maps/modern2/index.html?route=korean_war_battles', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 6, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
+
+    // 고대 — maps/ancient/index.html
+    { path: 'maps/ancient/index.html?route=gwanggaeto_conquest', name: '광개토대왕 정복루트', tagline: '거란·백제·후연·가야·왜를 22년에 걸쳐 굴복시키다', period: '385~414', waypoints: 16, color: '#7a2e2e', image: 'maps/ancient/assets/images/route/route_gwanggaeto_conquest_hero.webp' },
+    { path: 'maps/ancient/index.html?route=jang_bogo_maritime', name: '장보고 해상무역루트', tagline: '당나라 무장에서 청해진의 해상왕으로', period: '810년대~846', waypoints: 5, color: '#1f6b6b', image: 'maps/ancient/assets/images/route/route_jang_bogo_maritime_hero.webp' },
+    { path: 'maps/ancient/index.html?route=kim_yu_sin_unification', name: '김유신 삼국통일루트', tagline: '단석산의 소년 화랑에서 삼국통일의 설계자로', period: '609년경~676', waypoints: 7, color: '#8c1f3a', image: null },
+    { path: 'maps/ancient/index.html?route=hyecho_pilgrimage', name: '혜초 왕오천축국전 루트', tagline: '16세에 출가해 뱃길로 인도에 닿고, 페르시아·아랍의 변경까지', period: '723~780', waypoints: 21, color: '#b8862f', image: 'maps/ancient/assets/images/route/route_hyecho_pilgrimage_hero.webp' },
+    { path: 'maps/ancient/index.html?route=ancient_history_debates', name: '고대사 논쟁루트', tagline: '한사군·낙랑군·임나일본부·환단고기·동북공정, 지금도 계속되는 논쟁', period: '신화시대~오늘날', waypoints: 9, color: '#4a3a2e', image: 'maps/ancient/assets/images/route/route_ancient_history_debates_hero.webp' },
+    { path: 'maps/ancient/index.html?route=geunchogo_conquest', name: '근초고왕 정복루트', tagline: '가야·마한을 흡수하고 고구려 왕을 전사시키다', period: '346~400', waypoints: 9, color: '#2e6b4a', image: 'maps/ancient/assets/images/route/route_geunchogo_conquest_hero.webp' },
+    { path: 'maps/ancient/index.html?route=korea_hegemony_history', name: '한반도를 둘러싼 패권의 역사', tagline: '한사군에서 판문점까지, 2000년 넘는 강대국 각축의 지도', period: '기원전 108~1953', waypoints: 14, color: '#5a3a2e', image: 'maps/ancient/assets/images/route/route_korea_hegemony_history_hero.webp' },
+    { path: 'maps/ancient/index.html?route=northern_peoples_history', name: '초원의 후예들', tagline: '흉노에서 발해까지, 그리고 몽골제국과 오스만까지', period: '구석기시대~926', waypoints: 23, color: '#4a5a3a', image: 'maps/ancient/assets/images/route/route_northern_peoples_history_hero.webp' },
+    { path: 'maps/ancient/index.html?route=goguryeo_heritage_sites', name: '고대 문화유산 순례 ① 고구려', tagline: '졸본에서 한강까지, 오늘날 남아있는 고구려 유적', period: '오늘날 남아있는 유적들', waypoints: 14, color: '#6b4a2e', image: null },
+    { path: 'maps/ancient/index.html?route=baekje_heritage_sites', name: '고대 문화유산 순례 ② 백제', tagline: '한성에서 웅진, 사비까지', period: '오늘날 남아있는 유적들', waypoints: 13, color: '#2e6b4a', image: null },
+    { path: 'maps/ancient/index.html?route=silla_heritage_sites', name: '고대 문화유산 순례 ③ 신라', tagline: '992년 도읍을 옮기지 않은 나라, 경주 전체가 유적', period: '오늘날 남아있는 유적들', waypoints: 12, color: '#8c6b2e', image: null },
+    { path: 'maps/ancient/index.html?route=gaya_heritage_sites', name: '고대 문화유산 순례 ④ 가야', tagline: '대등한 소국들의 연맹, 2023년 유네스코가 인정한 7곳', period: '오늘날 남아있는 유적들', waypoints: 8, color: '#5c8c6b', image: null },
+    { path: 'maps/ancient/index.html?route=balhae_heritage_sites', name: '고대 문화유산 순례 ⑤ 발해', tagline: '다섯 나라 중 가장 멀고, 가장 가기 어려운 곳들', period: '오늘날 남아있는 유적들', waypoints: 6, color: '#4a4a6b', image: null },
+
+    // 고려 — maps/medieval1/index.html
+    { path: 'maps/medieval1/index.html?route=wang_geon_unification', name: '왕건통일루트', tagline: '송악 호족의 아들에서 고려의 태조로', period: '875~943', waypoints: 12, color: '#3a5a8c', image: null },
+    { path: 'maps/medieval1/index.html?route=goryeo_khitan_war', name: '고려거란전쟁', tagline: '낙타를 굶겨 죽인 그날부터 귀주대첩까지, 30년', period: '942~1044', waypoints: 8, color: '#5c2f2f', image: null },
+    { path: 'maps/medieval1/index.html?route=goryeo_heritage_sites', name: '고려 문화유산 순례', tagline: '474년 도읍 개경, 그리고 39년의 강화도 항쟁', period: '오늘날 남아있는 유적들', waypoints: 12, color: '#3a5a8c', image: null },
   ];
+
+  // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(1970-01-01
+  // 기준)"를 시드로 배열을 섞는다. 같은 날에는 새로고침해도 항상 같은
+  // 6개·같은 순서가 나오고, 자정이 지나면 다음 조합으로 넘어간다.
+  function dailyRotationPick(items, count, seed) {
+    // 아주 단순한 결정론적 셔플(선형합동생성기) — 암호학적으로 강할
+    // 필요는 없고, "매일 다른데 하루 안에서는 고정"이라는 조건만
+    // 만족하면 된다.
+    let s = seed;
+    function rand() {
+      s = (s * 1103515245 + 12345) & 0x7fffffff;
+      return s / 0x7fffffff;
+    }
+    const pool = [...items];
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool.slice(0, count);
+  }
 
   function renderRoutes() {
     const el = document.getElementById('portalRoutes');
     if (!el) return;
-    el.innerHTML = ROUTE_CARDS.map(r => {
+    const dayIndex = Math.floor(Date.now() / 86400000);
+    const todaysRoutes = dailyRotationPick(MASTER_ROUTES, 6, dayIndex);
+    el.innerHTML = todaysRoutes.map(r => {
       const bg = r.image
         ? `background-image:linear-gradient(180deg, rgba(21,19,15,0) 38%, rgba(21,19,15,0.94) 100%), url('${r.image}')`
         : `background-image:linear-gradient(160deg, ${r.color}, #15130f)`;
