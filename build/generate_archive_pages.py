@@ -82,6 +82,10 @@ ROOT_PREFIX = '../../'
 # 기준(ROOT_PREFIX)에서 각 지도의 index.html까지 가는 경로다.
 CARD_MAP_PREFIX = {
     'root': f'{ROOT_PREFIX}map.html',
+    'prehistory': f'{ROOT_PREFIX}maps/prehistory/index.html',
+    'ancient': f'{ROOT_PREFIX}maps/ancient/index.html',
+    'medieval1': f'{ROOT_PREFIX}maps/medieval1/index.html',
+    'medieval2': f'{ROOT_PREFIX}maps/medieval2/index.html',
     'modern2': f'{ROOT_PREFIX}maps/modern2/index.html',
     'contemporary': f'{ROOT_PREFIX}maps/contemporary/index.html',
 }

@@ -137,7 +137,7 @@
     { path: 'maps/modern2/index.html?route=democratization_movement', name: '민주화운동', tagline: '독재에 맞선 33년, 거리에서 헌법으로', period: '1960~1993', waypoints: 9, color: '#5c2f2f', image: 'maps/modern2/assets/images/route/route_democratization_movement_hero.webp' },
 
     // 선사 — maps/prehistory/index.html
-    { path: 'maps/prehistory/index.html?route=dolmen_pilgrimage', name: '고인돌 순례 루트', tagline: '세계 고인돌의 40%가 이 땅에 — 청동기시대가 남긴 가장 큰 유산', period: '기원전 1500~기원전 400', waypoints: 8, color: '#7a6a4f', image: null },
+    { path: 'maps/prehistory/index.html?route=dolmen_pilgrimage', name: '고인돌 순례 루트', tagline: '세계 고인돌의 40%가 이 땅에 — 청동기시대가 남긴 가장 큰 유산', period: '기원전 1500~기원전 400', waypoints: 8, color: '#7a6a4f', image: 'maps/prehistory/assets/images/route/route_dolmen_pilgrimage_hero.webp' },
 
     // 고대 — maps/ancient/index.html
     { path: 'maps/ancient/index.html?route=gwanggaeto_conquest', name: '광개토대왕 정복루트', tagline: '거란·백제·후연·가야·왜를 22년에 걸쳐 굴복시키다', period: '385~414', waypoints: 16, color: '#7a2e2e', image: 'maps/ancient/assets/images/route/route_gwanggaeto_conquest_hero.webp' },

@@ -26,7 +26,7 @@ const ROUTE_DOLMEN_PILGRIMAGE = {
   tagline: '세계 고인돌의 40%가 이 땅에 — 청동기시대가 남긴 가장 큰 유산을 찾아가는 답사 루트',
   color: '#7a6a4f',
   total_waypoints: 8,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_dolmen_pilgrimage_hero.webp',
 
   card_refs: ['culture_bronze_01', 'culture_bronze_02'],
 
