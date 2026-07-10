@@ -66,6 +66,7 @@
     { routeId: 'silla_heritage_sites', name: '고대 문화유산 순례 ③ 신라', period: '오늘날 남아있는 유적들', ready: true },
     { routeId: 'gaya_heritage_sites', name: '고대 문화유산 순례 ④ 가야', period: '오늘날 남아있는 유적들', ready: true },
     { routeId: 'balhae_heritage_sites', name: '고대 문화유산 순례 ⑤ 발해', period: '오늘날 남아있는 유적들', ready: true },
+    { routeId: 'buddhism_introduction', name: '불교의 전래 루트', period: '372~8세기', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────

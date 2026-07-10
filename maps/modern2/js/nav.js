@@ -57,6 +57,7 @@
     { routeId:'kim_dae_jung', name:'김대중',                   period:'1924–2009', tagline:'하의도에서 노벨평화상까지', ready:true, thumbnail:null },
     { routeId:'chun_doo_hwan', name:'전두환',                  period:'1931–2021', tagline:'하나회에서 5·18까지', ready:true, thumbnail:null },
     { routeId:'daegu_gyeongbuk_democracy', name:'대구경북 민주화의 열망', period:'1946–1975', tagline:'"야도"에서 "보수의 본진"이 되기까지', ready:true, thumbnail:null },
+    { routeId:'democratization_movement', name:'민주화운동', period:'1960–1993', tagline:'독재에 맞선 33년, 거리에서 헌법으로', ready:true, thumbnail:null },
     // historical_revisionism은 루트에서 제거됐다 — 실제 이동 경로가
     // 아니라 논쟁·사료 중심 콘텐츠라 자료실(Archive)로 옮겼다
     // (archive/historical_revisionism.js, 아래 자료실 섹션 참고).

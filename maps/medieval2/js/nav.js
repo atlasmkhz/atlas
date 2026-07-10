@@ -61,6 +61,11 @@
     { routeId: 'imjin_war', name: '임진왜란·정유재란 루트', period: '1592~1598', ready: true },
     { routeId: 'joseon_rebellions', name: '조선시대 민란·반란 루트', period: '1559~1894', ready: true },
     { routeId: 'joseon_heritage_sites', name: '조선 문화유산 순례', period: '오늘날 남아있는 유적들', ready: true },
+    { routeId: 'hunminjeongeum', name: '훈민정음 루트', period: '1443~오늘날', ready: true },
+    { routeId: 'byeongja_horan', name: '병자호란 루트', period: '1636~1637', ready: true },
+    { routeId: 'silhak', name: '실학 루트', period: '1670~1836', ready: true },
+    { routeId: 'joseon_tongsinsa', name: '조선통신사 루트', period: '1607~1811', ready: true },
+    { routeId: 'joseon_geniuses', name: '조선의 천재들 루트', period: '15세기~19세기', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────

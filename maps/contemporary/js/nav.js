@@ -56,7 +56,10 @@
   // 복사해오지 않았다(다른 시기 인물·사건이라 그대로 가져올 게 없음).
   // 나중에 이 지도에 맞는 루트(예: 대통령 재직 시절 발자취 등)가 생기면
   // routes/xxx.js를 만들고 여기 항목을 추가하면 된다.
-  const ROUTE_HUB_ITEMS = [];
+  const ROUTE_HUB_ITEMS = [
+    { routeId: 'korea_disaster_history', name: '대한민국 재난사 루트', period: '1994~2022', ready: true },
+    { routeId: 'korea_party_history', name: '대한민국 정당사 루트', period: '1945~오늘날', ready: true },
+  ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
   // archive/*.js가 로드되면 여기에 시리즈 단위로 등록된다. routeRenderer.js

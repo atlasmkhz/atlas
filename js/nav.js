@@ -49,6 +49,8 @@
     { routeId:'japanese_atrocities',name:'일제 만행',   period:'1895–1945', tagline:'50년의 가해 기록', ready:true, thumbnail:null },
     { routeId:'donghak',            name:'동학',        period:'1860–1919', tagline:'득도에서 우금치까지, 그리고 3·1운동으로', ready:true, thumbnail:null },
     { routeId:'daegu_gyeongbuk_independence', name:'대구경북 독립운동가', period:'1909–1944', tagline:'"조선의 모스크바"의 시작', ready:true, thumbnail:null },
+    { routeId:'provisional_government', name:'임시정부', period:'1919–1945', tagline:'27년, 다섯 번의 이동, 그리고 끝내 지켜낸 이름', ready:true, thumbnail:null },
+    { routeId:'modern_art_history', name:'근대예술사', period:'1915–1945', tagline:'식민지라는 현실과 새로운 예술 사이', ready:true, thumbnail:null },
   ];
 
   const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };

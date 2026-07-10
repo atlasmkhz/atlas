@@ -109,7 +109,7 @@
   // ── 2.5 추천 루트 ── route/*.html + routes/*.js에 흩어진 메타데이터를
   // 여기 하나로 모았다. 새 루트를 추가하면 이 배열에도 항목을 추가해야
   // 카드가 뜬다(정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없음).
-  // ── 2.5 추천 루트 ── 전체 36개 루트의 마스터 목록. 매일 이 중 6개를
+  // ── 2.5 추천 루트 ── 전체 47개 루트의 마스터 목록. 매일 이 중 6개를
   // 뽑아 보여준다(아래 renderRoutes에서 날짜 기반으로 선택) — 새
   // 루트를 추가하면 이 배열에도 항목을 추가해야 로테이션 대상이 된다
   // (정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없다).
@@ -122,6 +122,8 @@
     { path: 'map.html?route=daegu_gyeongbuk_independence', name: '대구경북 독립운동가', tagline: '"조선의 모스크바"의 시작', period: '1909~1944', waypoints: 14, color: '#8c3a2e', image: 'assets/images/route/route_daegu_gyeongbuk_independence_hero.webp' },
     { path: 'map.html?route=donghak', name: '동학', tagline: '득도에서 우금치까지, 그리고 3·1운동으로', period: '1860~1919', waypoints: 20, color: '#8c6b2e', image: 'assets/images/entity/person/person_jeon_bong_jun_01.webp' },
     { path: 'map.html?route=kim_won_bong', name: '김원봉', tagline: '의열단을 만든 사람, 두 번 지워진 이름', period: '1898~1958', waypoints: 30, color: '#a83232', image: 'assets/images/entity/person/person_kim_won_bong_01.webp' },
+    { path: 'map.html?route=provisional_government', name: '임시정부', tagline: '27년, 다섯 번의 이동, 그리고 끝내 지켜낸 이름', period: '1919~1945', waypoints: 9, color: '#8c3a2e', image: 'assets/images/route/route_provisional_government_hero.webp' },
+    { path: 'map.html?route=modern_art_history', name: '근대예술사', tagline: '식민지라는 현실과 새로운 예술 사이, 시대를 앓거나 시대에 굴복한 이름들', period: '1915~1945', waypoints: 13, color: '#4a3a5c', image: 'assets/images/route/route_modern_art_history_hero.webp' },
 
     // 근현대 — maps/modern2/index.html
     { path: 'maps/modern2/index.html?route=syngman_rhee', name: '이승만', tagline: '외교독립론자에서 초대 대통령, 그리고 3·15 부정선거로 쫓겨난 90년', period: '1875~1965', waypoints: 28, color: '#7a5c2e', image: 'maps/modern2/assets/images/entity/person/person_syngman_rhee_01.webp' },
@@ -132,6 +134,7 @@
     { path: 'maps/modern2/index.html?route=daegu_gyeongbuk_democracy', name: '대구경북 민주화의 열망', tagline: '"조선의 모스크바"라 불렸던 대구경북의 잊힌 얼굴', period: '1946~1975', waypoints: 5, color: '#2e5a8c', image: 'maps/modern2/assets/images/route/route_daegu_gyeongbuk_democracy_hero.webp' },
     { path: 'maps/modern2/index.html?route=korean_war_massacres', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 27, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
     { path: 'maps/modern2/index.html?route=korean_war_battles', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 6, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
+    { path: 'maps/modern2/index.html?route=democratization_movement', name: '민주화운동', tagline: '독재에 맞선 33년, 거리에서 헌법으로', period: '1960~1993', waypoints: 9, color: '#5c2f2f', image: 'maps/modern2/assets/images/route/route_democratization_movement_hero.webp' },
 
     // 고대 — maps/ancient/index.html
     { path: 'maps/ancient/index.html?route=gwanggaeto_conquest', name: '광개토대왕 정복루트', tagline: '거란·백제·후연·가야·왜를 22년에 걸쳐 굴복시키다', period: '385~414', waypoints: 16, color: '#7a2e2e', image: 'maps/ancient/assets/images/route/route_gwanggaeto_conquest_hero.webp' },
@@ -147,6 +150,7 @@
     { path: 'maps/ancient/index.html?route=silla_heritage_sites', name: '고대 문화유산 순례 ③ 신라', tagline: '992년 도읍을 옮기지 않은 나라, 경주 전체가 유적', period: '오늘날 남아있는 유적들', waypoints: 12, color: '#8c6b2e', image: 'maps/ancient/assets/images/route/route_silla_heritage_sites_hero.webp' },
     { path: 'maps/ancient/index.html?route=gaya_heritage_sites', name: '고대 문화유산 순례 ④ 가야', tagline: '대등한 소국들의 연맹, 2023년 유네스코가 인정한 7곳', period: '오늘날 남아있는 유적들', waypoints: 8, color: '#5c8c6b', image: 'maps/ancient/assets/images/route/route_gaya_heritage_sites_hero.webp' },
     { path: 'maps/ancient/index.html?route=balhae_heritage_sites', name: '고대 문화유산 순례 ⑤ 발해', tagline: '다섯 나라 중 가장 멀고, 가장 가기 어려운 곳들', period: '오늘날 남아있는 유적들', waypoints: 6, color: '#4a4a6b', image: 'maps/ancient/assets/images/route/route_balhae_heritage_sites_hero.webp' },
+    { path: 'maps/ancient/index.html?route=buddhism_introduction', name: '불교의 전래 루트', tagline: '중국을 거쳐 온 새로운 사상이 삼국의 통치 이념이 되기까지', period: '372~8세기', waypoints: 8, color: '#4a5c3a', image: 'maps/ancient/assets/images/route/route_buddhism_introduction_hero.webp' },
 
     // 고려 — maps/medieval1/index.html
     { path: 'maps/medieval1/index.html?route=wang_geon_unification', name: '왕건통일루트', tagline: '송악 호족의 아들에서 고려의 태조로', period: '875~943', waypoints: 12, color: '#3a5a8c', image: 'maps/medieval1/assets/images/route/route_wang_geon_unification_hero.webp' },
@@ -159,6 +163,15 @@
     { path: 'maps/medieval2/index.html?route=imjin_war', name: '임진왜란·정유재란 루트', tagline: '7년의 전쟁, 무너진 관군과 일어선 백성 — 부산진에서 노량까지', period: '1592~1598', waypoints: 24, color: '#7a1f1f', image: 'maps/medieval2/assets/images/route/route_imjin_war_hero.webp' },
     { path: 'maps/medieval2/index.html?route=joseon_rebellions', name: '조선시대 민란·반란 루트', tagline: '수탈에 맞선 백성들, 그리고 체제에 도전한 반란들 — 임꺽정에서 동학까지', period: '1559~1894', waypoints: 10, color: '#5c2f2f', image: 'maps/medieval2/assets/images/route/route_joseon_rebellions_hero.webp' },
     { path: 'maps/medieval2/index.html?route=joseon_heritage_sites', name: '조선 문화유산 순례', tagline: '5대 궁궐과 종묘사직에서 훈민정음 해례본까지', period: '오늘날 남아있는 유적들', waypoints: 14, color: '#8c6b2e', image: 'maps/medieval2/assets/images/route/route_joseon_heritage_sites_hero.webp' },
+    { path: 'maps/medieval2/index.html?route=hunminjeongeum', name: '훈민정음 루트', tagline: '스물여덟 글자로 시작된, 지금도 계속되는 문자의 역사', period: '1443~오늘날', waypoints: 12, color: '#2e5a4a', image: 'maps/medieval2/assets/images/route/route_hunminjeongeum_hero.webp' },
+    { path: 'maps/medieval2/index.html?route=byeongja_horan', name: '병자호란 루트', tagline: '47일의 항전, 그리고 삼전도의 굴욕', period: '1636~1637', waypoints: 9, color: '#3a4a5c', image: 'maps/medieval2/assets/images/route/route_byeongja_horan_hero.webp' },
+    { path: 'maps/medieval2/index.html?route=silhak', name: '실학 루트', tagline: '공리공론을 넘어, 백성의 삶과 나라의 부강을 고민한 학풍', period: '1670~1836', waypoints: 8, color: '#5c6b3a', image: 'maps/medieval2/assets/images/route/route_silhak_hero.webp' },
+    { path: 'maps/medieval2/index.html?route=joseon_tongsinsa', name: '조선통신사 루트', tagline: '전쟁의 상처를 넘어, 200년 가까이 이어진 평화 외교', period: '1607~1811', waypoints: 8, color: '#2e6b6b', image: 'maps/medieval2/assets/images/route/route_joseon_tongsinsa_hero.webp' },
+    { path: 'maps/medieval2/index.html?route=joseon_geniuses', name: '조선의 천재들 루트', tagline: '신분과 시대의 제약 속에서도 빛난 조선의 재능들', period: '15세기~19세기', waypoints: 8, color: '#6b4a2e', image: 'maps/medieval2/assets/images/route/route_joseon_geniuses_hero.webp' },
+
+    // 현대 — maps/contemporary/index.html
+    { path: 'maps/contemporary/index.html?route=korea_disaster_history', name: '대한민국 재난사 루트', tagline: '반복된 참사, 그때마다 물었던 "왜 막지 못했는가"', period: '1994~2022', waypoints: 7, color: '#4a4a4a', image: 'maps/contemporary/assets/images/route/route_korea_disaster_history_hero.webp' },
+    { path: 'maps/contemporary/index.html?route=korea_party_history', name: '대한민국 정당사 루트', tagline: '오늘의 여야에서 해방 정국까지, 거꾸로 거슬러 올라가는 두 갈래 계보', period: '1945~오늘날', waypoints: 21, color: '#3a4a6b', image: 'maps/contemporary/assets/images/route/route_korea_party_history_hero.webp' },
   ];
 
   // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(1970-01-01
