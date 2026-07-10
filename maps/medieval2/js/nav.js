@@ -58,6 +58,7 @@
   // routes/xxx.js를 만들고 여기 항목을 추가하면 된다.
   const ROUTE_HUB_ITEMS = [
     { routeId: 'yi_sun_sin', name: '이순신 루트', period: '1545~1598', ready: true },
+    { routeId: 'imjin_war', name: '임진왜란·정유재란 루트', period: '1592~1598', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────

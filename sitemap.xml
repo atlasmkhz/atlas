@@ -4,7 +4,7 @@
   메인 페이지 1개 + 1876~1945 Event 433개 + 루트 7개 + 
   근현대(1945~1993) 진입점 1개 + Event 421개 + 루트 8개 + 
   현대(1994~2025) 진입점 1개 + Event 224개(루트 없음) + 
-  조선(1392~1875, 중세2) 진입점 1개 + Event 179개(루트 없음) + 
+  조선(1392~1875, 중세2) 진입점 1개 + Event 196개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 151개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
@@ -6363,7 +6363,92 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_11</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_13</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_15</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_16</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_17</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_18</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_19</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_21</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_22</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_24</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_01b</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6396,6 +6481,11 @@
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_08</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/route/imjin-war</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/route/yi-sun-sin</loc>

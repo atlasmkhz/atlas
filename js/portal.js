@@ -154,7 +154,8 @@
     { path: 'maps/medieval1/index.html?route=goryeo_heritage_sites', name: '고려 문화유산 순례', tagline: '474년 도읍 개경, 그리고 39년의 강화도 항쟁', period: '오늘날 남아있는 유적들', waypoints: 12, color: '#3a5a8c', image: null },
 
     // 조선 — maps/medieval2/index.html
-    { path: 'maps/medieval2/index.html?route=yi_sun_sin', name: '이순신 루트', tagline: '두 번의 백의종군과 세 번의 결정적 해전, 나라를 지켜낸 53년', period: '1545~1598', waypoints: 10, color: '#1f4a6b', image: null },
+    { path: 'maps/medieval2/index.html?route=yi_sun_sin', name: '이순신 루트', tagline: '두 번의 백의종군과 세 번의 결정적 해전, 나라를 지켜낸 53년', period: '1545~1598', waypoints: 11, color: '#1f4a6b', image: null },
+    { path: 'maps/medieval2/index.html?route=imjin_war', name: '임진왜란·정유재란 루트', tagline: '7년의 전쟁, 무너진 관군과 일어선 백성 — 부산진에서 노량까지', period: '1592~1598', waypoints: 24, color: '#7a1f1f', image: null },
   ];
 
   // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(1970-01-01
