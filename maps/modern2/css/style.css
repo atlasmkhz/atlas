@@ -1017,6 +1017,10 @@ body.route-mode-active [data-route-hidden] {
   flex-direction: column;
   height: 100%;
   min-height: 0; /* flex 자식의 overflow가 제대로 동작하려면 필요 */
+  overflow-y: auto; /* 히어로+고정(pinned) 배너+타임라인을 하나의
+    스크롤 영역으로 묶는다. 예전에는 .route-panel-list 안쪽에만 스크롤이
+    걸려 있었는데, 모바일(패널 높이 55dvh)에서 pinned 배너를 펼치면
+    내용이 화면 밖으로 넘어가도 스크롤할 방법이 없는 버그가 있었다. */
 }
 
 /* 패널 헤더 */
@@ -1056,9 +1060,6 @@ body.route-mode-active [data-route-hidden] {
 /* 웨이포인트 목록 */
 .route-panel-list {
   list-style: none;
-  overflow-y: auto;
-  flex: 1;
-  min-height: 0;
   padding: 8px 0;
 }
 .route-panel-wp {

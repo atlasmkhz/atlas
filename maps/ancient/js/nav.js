@@ -61,6 +61,11 @@
     { routeId: 'geunchogo_conquest', name: '근초고왕 정복루트', period: '346~400', ready: true },
     { routeId: 'korea_hegemony_history', name: '한반도를 둘러싼 패권의 역사', period: '기원전 108~1953', ready: true },
     { routeId: 'northern_peoples_history', name: '초원의 후예들', period: '구석기시대~926', ready: true },
+    { routeId: 'goguryeo_heritage_sites', name: '고대 문화유산 순례 ① 고구려', period: '오늘날 남아있는 유적들', ready: true },
+    { routeId: 'baekje_heritage_sites', name: '고대 문화유산 순례 ② 백제', period: '오늘날 남아있는 유적들', ready: true },
+    { routeId: 'silla_heritage_sites', name: '고대 문화유산 순례 ③ 신라', period: '오늘날 남아있는 유적들', ready: true },
+    { routeId: 'gaya_heritage_sites', name: '고대 문화유산 순례 ④ 가야', period: '오늘날 남아있는 유적들', ready: true },
+    { routeId: 'balhae_heritage_sites', name: '고대 문화유산 순례 ⑤ 발해', period: '오늘날 남아있는 유적들', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
