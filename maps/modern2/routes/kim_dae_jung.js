@@ -35,7 +35,7 @@ const ROUTE_KIM_DAE_JUNG = {
   tagline: '납치되고, 사형선고를 받고, 두 번 쫓겨나고도 끝내 대통령이 된 사람 — 국가폭력의 최대 피해자가 헌정사 최초의 평화적 정권교체를 이루기까지',
   color: '#2e4a6b',
   total_waypoints: 29,
-  hero_image: null,
+  hero_image: 'assets/images/entity/person/person_kim_dae_jung_01.webp',
 
   card_refs: [
     'political_1971_01', 'person_1973_01', 'movement_1976_02', 'political_1980_01',

@@ -38,7 +38,7 @@ const ROUTE_GORYEO_REBELLIONS = {
   tagline: '왕실의 권력 다툼에서 노비의 신분 해방 외침까지 — 고려 500년을 흔든 반란들',
   color: '#4a3a5c',
   total_waypoints: 11,
-  hero_image: null,
+  hero_image: "assets/images/route/route_goryeo_rebellions_hero.webp",
 
   card_refs: ['plot_0945_01', 'plot_1095_01', 'plot_1126_01', 'movement_1135_01', 'plot_1170_02', 'plot_1170_01', 'battle_1174_01', 'movement_1176_01', 'movement_1198_01', 'battle_1270_02'],
 

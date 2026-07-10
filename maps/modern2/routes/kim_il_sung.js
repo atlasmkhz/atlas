@@ -27,7 +27,7 @@ const ROUTE_KIM_IL_SUNG = {
   tagline: '보천보의 유격대원에서 조선민주주의인민공화국의 절대권력자로, 82년의 생애',
   color: '#8c2020',
   total_waypoints: 25,
-  hero_image: null,
+  hero_image: 'assets/images/entity/person/person_kim_il_sung_01.webp',
 
   card_refs: [
     'battle_1950_01', 'person_1968_01', 'political_1968_01', 'massacre_1968_01',

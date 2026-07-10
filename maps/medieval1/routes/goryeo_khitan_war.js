@@ -26,7 +26,7 @@ const ROUTE_GORYEO_KHITAN_WAR = {
   tagline: '낙타를 굶겨 죽인 그날부터 귀주대첩까지 — 거란과 30년에 걸쳐 세 차례 맞붙으며 고려가 자기 몫의 평화를 지켜낸 이야기',
   color: '#5c2f2f',
   total_waypoints: 8,
-  hero_image: null,
+  hero_image: "assets/images/route/route_goryeo_khitan_war_hero.webp",
 
   card_refs: ['battle_0993_01', 'plot_1009_01', 'battle_1010_01', 'battle_1018_01'],
 

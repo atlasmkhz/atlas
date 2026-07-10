@@ -25,7 +25,7 @@ const ROUTE_BAEKJE_HERITAGE_SITES = {
   tagline: '한성에서 웅진, 사비까지 — 세 번 도읍을 옮기며 700년을 이어간 백제가 남긴 왕성·왕릉·사찰터를 찾아가는 답사 루트',
   color: '#2e6b4a',
   total_waypoints: 13,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_baekje_heritage_sites_hero.webp',
 
   card_refs: ['policy_501_01', 'culture_600_01'],
 

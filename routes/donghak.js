@@ -33,7 +33,7 @@ const ROUTE_DONGHAK = {
   tagline: '경주의 몰락 양반이 세운 종교가 30년 만에 전국 농민 봉기가 되고, 처참하게 진압된 뒤에도 천도교로 살아남아 3·1운동으로 이어지기까지',
   color: '#8c6b2e',
   total_waypoints: 20,
-  hero_image: null,
+  hero_image: 'assets/images/entity/person/person_jeon_bong_jun_01.webp',
 
   card_refs: [
     'movement_1892_01', 'movement_1893_01', 'movement_1894_00', 'movement_1894_01',

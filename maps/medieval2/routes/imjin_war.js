@@ -41,7 +41,7 @@ const ROUTE_IMJIN_WAR = {
   tagline: '7년의 전쟁, 무너진 관군과 일어선 백성 — 부산진에서 노량까지',
   color: '#7a1f1f',
   total_waypoints: 24,
-  hero_image: null,
+  hero_image: "assets/images/route/route_imjin_war_hero.webp",
 
   card_refs: ['battle_1592_01', 'battle_1592_02', 'battle_1592_03', 'movement_1592_04', 'diplomacy_1593_01', 'battle_1593_02', 'battle_1597_01', 'battle_1598_01', 'battle_1592_05'],
 

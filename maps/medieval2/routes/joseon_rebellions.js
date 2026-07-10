@@ -41,7 +41,7 @@ const ROUTE_JOSEON_REBELLIONS = {
   tagline: '수탈에 맞선 백성들, 그리고 체제에 도전한 반란들 — 임꺽정에서 동학까지',
   color: '#5c2f2f',
   total_waypoints: 10,
-  hero_image: null,
+  hero_image: "assets/images/route/route_joseon_rebellions_hero.webp",
 
   card_refs: ['movement_1559_01', 'plot_1624_01', 'battle_1728_01', 'movement_1811_01', 'movement_1862_01'],
 

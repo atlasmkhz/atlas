@@ -38,7 +38,7 @@ const ROUTE_JOSEON_HERITAGE_SITES = {
   tagline: '5대 궁궐과 종묘사직에서 훈민정음 해례본까지 — 조선이 남긴 유형·무형·기록유산을 찾아가는 답사 루트',
   color: '#8c6b2e',
   total_waypoints: 14,
-  hero_image: null,
+  hero_image: "assets/images/route/route_joseon_heritage_sites_hero.webp",
 
   card_refs: ['policy_1396_01', 'culture_1443_01', 'culture_1794_01', 'culture_1796_01'],
 

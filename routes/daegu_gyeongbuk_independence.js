@@ -28,7 +28,7 @@ const ROUTE_DAEGU_GYEONGBUK_INDEPENDENCE = {
   tagline: '대한광복회가 결성되고, 3·1운동이 독자적으로 불붙고, 유림과 시인이 목숨을 걸었던 곳 — 지금의 대구경북이 한때 전국에서 가장 뜨거운 항일 거점이었다는 사실',
   color: '#8c3a2e',
   total_waypoints: 14,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_daegu_gyeongbuk_independence_hero.webp',
 
   card_refs: [
     'organization_1915_01', 'movement_1919_05', 'righteous_1921_02',

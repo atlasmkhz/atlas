@@ -29,7 +29,7 @@ const ROUTE_GORYEO_HERITAGE_SITES = {
   tagline: '474년 도읍 개경, 그리고 39년의 강화도 항쟁 — 고려가 남긴 왕궁터·왕릉·대장경을 찾아가는 답사 루트',
   color: '#3a5a8c',
   total_waypoints: 12,
-  hero_image: null,
+  hero_image: "assets/images/route/route_goryeo_heritage_sites_hero.webp",
 
   card_refs: ['policy_1232_01', 'culture_1236_01'],
 

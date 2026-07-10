@@ -30,7 +30,7 @@ const ROUTE_WANG_GEON_UNIFICATION = {
   tagline: '송악 호족의 아들에서 고려의 태조로 — 궁예를 몰아내고, 견훤을 무릎 꿇리고, 신라의 항복을 받아 후삼국을 하나로 묶기까지',
   color: '#3a5a8c',
   total_waypoints: 12,
-  hero_image: null,
+  hero_image: "assets/images/route/route_wang_geon_unification_hero.webp",
 
   card_refs: ['political_0918_01', 'political_0936_01', 'culture_0943_01'],
 

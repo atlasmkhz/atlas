@@ -26,7 +26,7 @@ const ROUTE_DAEGU_GYEONGBUK_DEMOCRACY = {
   tagline: '미군정에 맞선 첫 민중항쟁, 4·19를 촉발한 고등학생들, 유신의 사법살인까지 — "조선의 모스크바"라 불렸던 대구경북의 잊힌 얼굴',
   color: '#2e5a8c',
   total_waypoints: 5,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_daegu_gyeongbuk_democracy_hero.webp',
 
   card_refs: [
     'movement_1946_02', 'movement_1960_01', 'plot_1974_01', 'plot_1975_01',

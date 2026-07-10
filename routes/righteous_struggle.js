@@ -31,7 +31,7 @@ const ROUTE_RIGHTEOUS_STRUGGLE = {
   tagline: '의열단원만이 아니었다 — 스티븐스에서 윤봉길까지, 조직도 이름도 달랐던 이들이 던진 폭탄과 총알의 기록',
   color: '#b8632f',
   total_waypoints: 21,
-  hero_image: 'assets/images/entity/person/person_kim_won_bong_01.webp',
+  hero_image: 'assets/images/route/route_righteous_struggle_hero.webp',
 
   card_refs: [
     'righteous_1908_01', 'organization_1909_01', 'righteous_1909_01', 'person_1910_04',

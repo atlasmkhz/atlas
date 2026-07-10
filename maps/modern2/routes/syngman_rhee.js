@@ -37,7 +37,7 @@ const ROUTE_SYNGMAN_RHEE = {
   tagline: '외교독립론자에서 임시정부 대통령, 임정 탄핵 1호, 초대 대통령, 그리고 3·15 부정선거로 쫓겨난 90년',
   color: '#7a5c2e',
   total_waypoints: 28,
-  hero_image: null,
+  hero_image: 'assets/images/entity/person/person_syngman_rhee_01.webp',
 
   card_refs: [
     'person_1946_01', 'political_1948_01',

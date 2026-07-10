@@ -26,7 +26,7 @@ const ROUTE_JAPANESE_ATROCITIES = {
   tagline: '경복궁에서 하얼빈까지, 상하이에서 마이즈루 앞바다까지 — 제국이 저지른 범죄의 무대들',
   color: '#8c1f1f',
   total_waypoints: 18,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_japanese_atrocities_hero.webp',
 
   card_refs: [
     'plot_1895_01', 'massacre_1919_01', 'massacre_1920_01', 'massacre_1923_01',

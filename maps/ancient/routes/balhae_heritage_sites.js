@@ -24,7 +24,7 @@ const ROUTE_BALHAE_HERITAGE_SITES = {
   tagline: '고구려 유민과 말갈이 함께 세운 다종족 국가, 그 흔적을 찾아가는 길 — 다섯 나라 중 가장 멀고, 가장 가기 어려운 곳들',
   color: '#4a4a6b',
   total_waypoints: 6,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_balhae_heritage_sites_hero.webp',
 
   card_refs: ['political_698_01', 'political_818_01', 'political_926_01'],
 

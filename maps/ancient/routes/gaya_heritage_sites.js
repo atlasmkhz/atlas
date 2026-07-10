@@ -25,7 +25,7 @@ const ROUTE_GAYA_HERITAGE_SITES = {
   tagline: '하나의 나라가 아니라 대등한 소국들의 연맹 — 2023년 유네스코가 인정한 가야고분군 7곳을 찾아가는 답사 루트',
   color: '#5c8c6b',
   total_waypoints: 8,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_gaya_heritage_sites_hero.webp',
 
   card_refs: ['political_532_01', 'political_562_01'],
 

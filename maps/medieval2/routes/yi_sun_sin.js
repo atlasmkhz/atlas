@@ -34,7 +34,7 @@ const ROUTE_YI_SUN_SIN = {
   tagline: '두 번의 백의종군과 세 번의 결정적 해전 — 나라가 무너지던 7년, 바다를 지켜낸 53년의 생애',
   color: '#1f4a6b',
   total_waypoints: 11,
-  hero_image: null,
+  hero_image: "assets/images/route/route_yi_sun_sin_hero.webp",
 
   card_refs: ['battle_1592_02', 'battle_1597_01', 'battle_1598_01'],
 

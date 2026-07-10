@@ -24,7 +24,7 @@ const ROUTE_SILLA_HERITAGE_SITES = {
   tagline: '992년 동안 도읍을 옮기지 않은 유일한 나라 — 경주 시내 전체가 통째로 유적인 신라의 흔적을 따라가는 답사 루트',
   color: '#8c6b2e',
   total_waypoints: 12,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_silla_heritage_sites_hero.webp',
 
   card_refs: ['culture_632_01', 'culture_751_01'],
 

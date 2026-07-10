@@ -24,7 +24,7 @@ const ROUTE_KOREAN_WAR_BATTLES = {
   tagline: '인천상륙작전, 장진호, 다부동 — 3년 1개월, 한반도 전역을 휩쓴 전선의 기록',
   color: '#5a6b8c',
   total_waypoints: 15,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_korean_war_battles_hero.webp',
 
   card_refs: [
     'battle_1950_01', 'person_1950_01', 'battle_1950_02', 'battle_1950_03', 'battle_1950_04',

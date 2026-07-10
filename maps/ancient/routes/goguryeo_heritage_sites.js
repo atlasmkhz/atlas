@@ -36,7 +36,7 @@ const ROUTE_GOGURYEO_HERITAGE_SITES = {
   tagline: '졸본에서 한강까지 — 700년 고구려가 남긴 성터·왕릉·고분벽화를 오늘의 국경을 넘나들며 찾아가는 답사 루트',
   color: '#6b4a2e',
   total_waypoints: 14,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_goguryeo_heritage_sites_hero.webp',
 
   card_refs: ['culture_500_01', 'culture_500_02'],
 

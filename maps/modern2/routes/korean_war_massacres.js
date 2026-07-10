@@ -37,7 +37,7 @@ const ROUTE_KOREAN_WAR_MASSACRES = {
   tagline: '제주 3·1절에서 거창까지 — 국가가 국민을 죽인 이름들, 최소 100명 이상 규모의 기록만 모아도 이만큼입니다',
   color: '#5c1f1f',
   total_waypoints: 27,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_korean_war_massacres_hero.webp',
 
   card_refs: [
     'massacre_1947_01', 'massacre_1948_02', 'massacre_1948_01', 'plot_1950_01',
