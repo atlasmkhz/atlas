@@ -136,6 +136,9 @@
     { path: 'maps/modern2/index.html?route=korean_war_battles', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 6, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
     { path: 'maps/modern2/index.html?route=democratization_movement', name: '민주화운동', tagline: '독재에 맞선 33년, 거리에서 헌법으로', period: '1960~1993', waypoints: 9, color: '#5c2f2f', image: 'maps/modern2/assets/images/route/route_democratization_movement_hero.webp' },
 
+    // 선사 — maps/prehistory/index.html
+    { path: 'maps/prehistory/index.html?route=dolmen_pilgrimage', name: '고인돌 순례 루트', tagline: '세계 고인돌의 40%가 이 땅에 — 청동기시대가 남긴 가장 큰 유산', period: '기원전 1500~기원전 400', waypoints: 8, color: '#7a6a4f', image: null },
+
     // 고대 — maps/ancient/index.html
     { path: 'maps/ancient/index.html?route=gwanggaeto_conquest', name: '광개토대왕 정복루트', tagline: '거란·백제·후연·가야·왜를 22년에 걸쳐 굴복시키다', period: '385~414', waypoints: 16, color: '#7a2e2e', image: 'maps/ancient/assets/images/route/route_gwanggaeto_conquest_hero.webp' },
     { path: 'maps/ancient/index.html?route=jang_bogo_maritime', name: '장보고 해상무역루트', tagline: '당나라 무장에서 청해진의 해상왕으로', period: '810년대~846', waypoints: 5, color: '#1f6b6b', image: 'maps/ancient/assets/images/route/route_jang_bogo_maritime_hero.webp' },
@@ -170,7 +173,7 @@
     { path: 'maps/medieval2/index.html?route=joseon_geniuses', name: '조선의 천재들 루트', tagline: '신분과 시대의 제약 속에서도 빛난 조선의 재능들', period: '15세기~19세기', waypoints: 8, color: '#6b4a2e', image: 'maps/medieval2/assets/images/route/route_joseon_geniuses_hero.webp' },
 
     // 현대 — maps/contemporary/index.html
-    { path: 'maps/contemporary/index.html?route=korea_disaster_history', name: '대한민국 재난사 루트', tagline: '반복된 참사, 그때마다 물었던 "왜 막지 못했는가"', period: '1994~2022', waypoints: 7, color: '#4a4a4a', image: 'maps/contemporary/assets/images/route/route_korea_disaster_history_hero.webp' },
+    { path: 'maps/contemporary/index.html?route=korea_disaster_history', name: '대한민국 재난사 루트', tagline: '반복된 참사, 그때마다 물었던 "왜 막지 못했는가"', period: '1994~2024', waypoints: 9, color: '#4a4a4a', image: 'maps/contemporary/assets/images/route/route_korea_disaster_history_hero.webp' },
     { path: 'maps/contemporary/index.html?route=korea_party_history', name: '대한민국 정당사 루트', tagline: '오늘의 여야에서 해방 정국까지, 거꾸로 거슬러 올라가는 두 갈래 계보', period: '1945~오늘날', waypoints: 21, color: '#3a4a6b', image: 'maps/contemporary/assets/images/route/route_korea_party_history_hero.webp' },
   ];
 
@@ -276,11 +279,11 @@
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
-      { subcat: 'people_study', name: '인물연구', seriesIds: [] },
-      { subcat: 'primary_sources', name: '사료읽기', seriesIds: [] },
+      { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings'] },
     ],
   };
-  const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동' };
+  const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동', person: '인물', document: '사료' };
 
   function archivePostUrl(series, post) {
     const slug = series.id.replace(/_/g, '-');
@@ -335,7 +338,7 @@
     function renderPostRow(post, series) {
       const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
       const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
-      const bodyText = post.format === 'narrative' ? (post.body_ko || '') : (post.claim_ko || '');
+      const bodyText = post.format === 'narrative' ? (post.body_ko || '') : post.format === 'source_reading' ? (post.commentary_ko || '') : (post.claim_ko || '');
       const shortSummary = bodyText.length > 72 ? bodyText.slice(0, 72) + '…' : bodyText;
       const href = archivePostUrl(series, post);
       return `<a class="archive-list-item" href="${href}">

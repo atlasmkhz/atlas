@@ -2,10 +2,10 @@
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 452개 + 루트 9개 + 
-  근현대(1945~1993) 진입점 1개 + Event 424개 + 루트 9개 + 
-  현대(1994~2025) 진입점 1개 + Event 245개(루트 없음) + 
-  조선(1392~1875, 중세2) 진입점 1개 + Event 251개(루트 없음) + 
-  고려(918~1392, 중세1) 진입점 1개 + Event 152개(루트 없음)를 포함한다.
+  근현대(1945~1993) 진입점 1개 + Event 425개 + 루트 9개 + 
+  현대(1994~2025) 진입점 1개 + Event 249개(루트 없음) + 
+  조선(1392~1875, 중세2) 진입점 1개 + Event 254개(루트 없음) + 
+  고려(918~1392, 중세1) 진입점 1개 + Event 154개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
   generate_event_pages.py, generate_route_pages.py 실행 후 이 스크립트를
@@ -4098,6 +4098,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-democratization-movement--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/route-democratization-movement--wp_05</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5473,12 +5478,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-death-corporal-chae</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-fukushima-treated-water</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-hanwha-acquires-daewoo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-jeonse-fraud-crisis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5519,6 +5534,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-impeachment-motion-against</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-jeju-air-flight</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5713,6 +5733,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-korea-party-history--wp_18</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-korea-party-history--wp_19</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5724,6 +5749,66 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-korea-party-history--wp_21</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/route/korea-disaster-history</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/route/korea-party-history</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/route/dolmen-pilgrimage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/prehistory/event/route-dolmen-pilgrimage--wp_08</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6483,6 +6568,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1791-the-sinhae-persecution</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1793-establishment-of-the-jangyongyeong-royal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6564,6 +6654,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1860-choe-je-u-founds-donghak</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1861-kim-jeong-ho-publishes-the-daedongyeojido</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6674,6 +6769,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_11</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -7469,6 +7569,16 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval1/event/1356-king-gongmins-anti-yuan-reforms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1361-the-red-turban-invasions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval1/event/1363-mun-ik-jeom-brings-cotton-to-korea</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -8873,6 +8983,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/erased-names</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/historical-revisionism</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -8881,6 +8996,26 @@
     <loc>https://atlas.mkhz.kr/archive/power-accountability</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/erased-names/kim_won_bong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/erased-names/shin_chae_ho</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/erased-names/yeo_un_hyung</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_01</loc>
@@ -8959,6 +9094,21 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/power-accountability/park_geun_hye_gukjeongnongdan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/hunminjeongeum_preface</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/joseon_revolution_declaration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/march_first_declaration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

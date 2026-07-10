@@ -207,3 +207,39 @@ a { color: #8a6a3a; }
   body { padding: 20px 16px 60px; }
   h1 { font-size: 21px; }
 }
+
+/* ── 사료읽기(source_reading) 전용 ── */
+.post-original {
+  background: rgba(140, 107, 46, 0.07);
+  border-left: 3px solid rgba(140, 107, 46, 0.45);
+  padding: 16px 18px;
+  border-radius: 0 10px 10px 0;
+}
+.post-original h2 { color: #6e5524; }
+.post-original blockquote {
+  margin: 0;
+  font-family: 'Noto Serif KR', 'Nanum Myeongjo', serif;
+  font-size: 1.02em;
+  line-height: 1.85;
+}
+.post-original .source-note {
+  margin-top: 10px;
+  font-size: 0.85em;
+  color: #8a8172;
+}
+
+.post-translation {
+  background: #fff;
+  border: 1px solid rgba(58,53,44,0.1);
+  padding: 16px 18px;
+  border-radius: 12px;
+}
+.post-translation h2 { color: #3a352c; }
+
+.post-commentary {
+  background: rgba(61, 74, 92, 0.06);
+  border-left: 3px solid rgba(61, 74, 92, 0.4);
+  padding: 16px 18px;
+  border-radius: 0 10px 10px 0;
+}
+.post-commentary h2 { color: #3d4a5c; }

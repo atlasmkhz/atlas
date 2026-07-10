@@ -1,5 +1,5 @@
 // routes/korea_disaster_history.js — 대한민국 재난사 루트
-// 1994~2022, 압축 성장의 그늘에서 반복된 대형 참사와, 그때마다
+// 1994~2024, 압축 성장의 그늘에서 반복된 대형 참사와, 그때마다
 // 제기됐던 "안전 불감증"이라는 지적을 시대순으로 잇는 루트.
 //
 // card_ref 메모: 이 루트의 여섯 사건 모두 이미 카드가 있어 연결했다
@@ -17,13 +17,13 @@ const ROUTE_KOREA_DISASTER_HISTORY = {
   id: 'korea_disaster_history',
   name: '대한민국 재난사 루트',
   subject_type: 'event',
-  period: '1994~2022',
+  period: '1994~2024',
   tagline: '반복된 참사, 그때마다 물었던 "왜 막지 못했는가"',
   color: '#4a4a4a',
-  total_waypoints: 7,
+  total_waypoints: 9,
   hero_image: 'assets/images/route/route_korea_disaster_history_hero.webp',
 
-  card_refs: ['disaster_1994_01', 'disaster_1995_02', 'disaster_1999_01', 'disaster_2003_01', 'disaster_2014_01', 'disaster_2022_01'],
+  card_refs: ['disaster_1994_01', 'disaster_1995_02', 'disaster_1999_01', 'disaster_2003_01', 'disaster_2014_01', 'disaster_2022_01', 'disaster_2023_01', 'disaster_2024_01'],
 
   waypoints: [
 
@@ -109,6 +109,30 @@ const ROUTE_KOREA_DISASTER_HISTORY = {
       stay: null,
       summary_ko: '핼러윈을 맞아 좁은 골목에 인파가 대거 몰리며 다중 인파 밀집 사고가 발생했다. 대형 건축물이나 교통수단의 구조적 결함이 아니라 축제성 인파 관리 부재가 원인이었다는 점에서, 이전의 참사들과는 다른 유형의 재난 관리 공백을 드러냈다. 이는 대형 인파가 예상되는 행사에 대한 국가·지자체의 안전관리 책임 범위를 어디까지로 볼 것인가라는 논쟁으로 이어졌다.',
       card_ref: 'disaster_2022_01',
+    },
+
+    {
+      id: 'wp_08',
+      type: 'death',
+      year: 2023, month: 7, day: 15,
+      title_ko: '오송 지하차도 참사',
+      place_ko: '충북 청주(오송)',
+      lat: 36.6247, lng: 127.3132,
+      stay: null,
+      summary_ko: '집중호우로 인근 미호강의 임시 제방이 무너지며 지하차도가 순식간에 침수돼 차량에 타고 있던 시민들이 희생됐다. 홍수경보에도 도로가 통제되지 않았고 신고가 잇따랐음에도 기관 간 대응이 엇갈렸다는 점에서, 기후위기 시대의 극한호우 앞에 재난 대응 체계의 연결고리가 어디서 끊어지는지를 드러낸 사건이었다. 이후 지하차도 진입 차단시설 설치 등 침수 대비 기준이 강화됐다.',
+      card_ref: 'disaster_2023_01',
+    },
+
+    {
+      id: 'wp_09',
+      type: 'death',
+      year: 2024, month: 12, day: 29,
+      title_ko: '무안 제주항공 참사',
+      place_ko: '전남 무안(무안국제공항)',
+      lat: 34.9914, lng: 126.3828,
+      stay: null,
+      summary_ko: '방콕발 여객기가 조류 충돌 뒤 동체착륙을 시도하다 활주로 끝의 콘크리트 둔덕과 충돌해, 국내에서 발생한 항공 사고 가운데 최대 인명 피해를 낳았다. 조류 충돌이라는 촉발 원인 못지않게 "부서지기 쉬운 구조여야 할 시설이 왜 콘크리트 둔덕이었는가"라는 물음이 제기되며, 30년 재난사가 반복해 물어온 질문 — 사고는 우연이라도 피해의 규모는 제도가 결정한다 — 이 다시 확인됐다. 전국 공항의 항행안전시설 개선이 뒤따랐다.',
+      card_ref: 'disaster_2024_01',
     },
 
   ],

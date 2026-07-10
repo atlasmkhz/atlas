@@ -52,7 +52,7 @@ SITE_ROOT = 'https://atlas.mkhz.kr'
 # 이 스크립트가 근대(메인) 앱용인지 근현대(modern2)용인지에 따라
 # URL 경로 접두사가 달라진다. PROJECT_ROOT 안에 'modern2'가 있으면
 # 그쪽으로 판단한다(하드코딩 대신 실제 폴더 구조로 판별).
-PATH_PREFIX = '/maps/' + os.path.basename(PROJECT_ROOT) if os.path.basename(PROJECT_ROOT) in ('modern2', 'ancient', 'medieval1', 'medieval2', 'contemporary') else ''
+PATH_PREFIX = '/maps/' + os.path.basename(PROJECT_ROOT) if os.path.basename(PROJECT_ROOT) in ('modern2', 'ancient', 'medieval1', 'medieval2', 'contemporary', 'prehistory') else ''
 
 
 def esc(s):
@@ -135,7 +135,7 @@ def event_href(slug):
     return f'/{prefix}event/{slug}'
 
 
-def render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path):
+def render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path, event_id_to_slug=None):
     """card_ref가 없는 웨이포인트 전용 페이지 생성 (event 페이지와 같은 톤)."""
     title = f"{wp['title_ko']} — {route['name']} | ATLAS by MKHZ"
     description = make_description(wp.get('summary_ko', ''))
@@ -168,11 +168,19 @@ def render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path):
         ],
     }
 
+    # 이웃 웨이포인트 링크 — 랜딩 페이지와 같은 해석 규칙을 쓴다:
+    # card_ref의 event 페이지가 실재하면 그쪽으로, 아니면(선사처럼
+    # event 페이지가 없는 지도 포함) 웨이포인트 전용 페이지로 잇는다.
+    mapping = event_id_to_slug or {}
+    def _wp_href(w):
+        if w.get('card_ref') and w['card_ref'] in mapping:
+            return event_href(mapping[w['card_ref']])
+        return event_href(waypoint_page_filename(route_slug, w['id']))
     nav_links = []
-    if prev_wp and not prev_wp.get('card_ref'):
-        nav_links.append(f'<a href="{event_href(waypoint_page_filename(route_slug, prev_wp["id"]))}" rel="prev">← {esc(prev_wp["title_ko"])}</a>')
-    if next_wp and not next_wp.get('card_ref'):
-        nav_links.append(f'<a href="{event_href(waypoint_page_filename(route_slug, next_wp["id"]))}" rel="next">{esc(next_wp["title_ko"])} →</a>')
+    if prev_wp:
+        nav_links.append(f'<a href="{_wp_href(prev_wp)}" rel="prev">← {esc(prev_wp["title_ko"])}</a>')
+    if next_wp:
+        nav_links.append(f'<a href="{_wp_href(next_wp)}" rel="next">{esc(next_wp["title_ko"])} →</a>')
 
     html_out = f'''<!DOCTYPE html>
 <html lang="ko">
@@ -307,14 +315,19 @@ def main():
         route_slug = slugify_route_id(route['id'])
         waypoints = route['waypoints']
 
-        null_wps = [w for w in waypoints if not w.get('card_ref')]
+        # card_ref가 있어도 대응하는 event 페이지가 실제로 존재할 때만
+        # 건너뛴다 — event 페이지 생성을 보류한 지도(선사 등)에서는
+        # card_ref 웨이포인트도 전용 페이지를 만들어야 랜딩의 링크가
+        # 깨지지 않는다(랜딩 링크 로직과 같은 조건).
+        null_wps = [w for w in waypoints
+                    if not (w.get('card_ref') and w['card_ref'] in event_id_to_slug)]
         for idx, wp in enumerate(waypoints):
-            if wp.get('card_ref'):
+            if wp.get('card_ref') and wp['card_ref'] in event_id_to_slug:
                 continue
             prev_wp = waypoints[idx - 1] if idx > 0 else None
             next_wp = waypoints[idx + 1] if idx < len(waypoints) - 1 else None
             out_path = os.path.join(EVENT_DIR, waypoint_page_filename(route_slug, wp['id']) + '.html')
-            render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path)
+            render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path, event_id_to_slug)
             total_wp_pages += 1
 
         out_path = os.path.join(ROUTE_OUT_DIR, route_slug + '.html')

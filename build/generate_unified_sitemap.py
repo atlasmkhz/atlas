@@ -30,8 +30,15 @@ MAIN_EVENT_DIR = os.path.join(PROJECT_ROOT, 'event')
 MAIN_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'route')
 MODERN2_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'event')
 MODERN2_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'route')
-# 현대(1994~2025)는 루트(route)가 없고 event만 있다.
+# 현대(1994~2025)는 이제 event와 route 둘 다 있다(재난사·정당사 루트).
 CONTEMPORARY_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'event')
+CONTEMPORARY_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'route')
+# 선사시대는 SEO 이벤트 페이지 생성을 보류한 상태(문서화된 결정)라
+# event/는 스캔하지 않지만, 지도 진입점과 루트 랜딩은 sitemap에 담는다.
+PREHISTORY_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'maps', 'prehistory', 'route')
+# 선사 event/에는 카드용 SEO 페이지는 없지만(생성 보류 결정),
+# 루트 웨이포인트 전용 페이지(route-*--wp_*.html)는 생성되므로 스캔한다.
+PREHISTORY_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'prehistory', 'event')
 # 중세2(조선, 1392~1875)는 이제 event와 route 둘 다 있다.
 MEDIEVAL2_EVENT_DIR = os.path.join(PROJECT_ROOT, 'maps', 'medieval2', 'event')
 MEDIEVAL2_ROUTE_DIR = os.path.join(PROJECT_ROOT, 'maps', 'medieval2', 'route')
@@ -53,6 +60,9 @@ def main():
     main_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MAIN_ROUTE_DIR, '*.html')))
     modern2_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MODERN2_ROUTE_DIR, '*.html')))
     contemporary_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(CONTEMPORARY_EVENT_DIR, '*.html')))
+    contemporary_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(CONTEMPORARY_ROUTE_DIR, '*.html')))
+    prehistory_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(PREHISTORY_ROUTE_DIR, '*.html')))
+    prehistory_event_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(PREHISTORY_EVENT_DIR, '*.html')))
     medieval2_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MEDIEVAL2_EVENT_DIR, '*.html')))
     medieval2_route_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MEDIEVAL2_ROUTE_DIR, '*.html')))
     medieval1_slugs = sorted(os.path.basename(f)[:-5] for f in glob.glob(os.path.join(MEDIEVAL1_EVENT_DIR, '*.html')))
@@ -153,10 +163,42 @@ def main():
     lines.append('    <priority>0.9</priority>')
     lines.append('  </url>')
 
-    # 현대(1994~2025) Event (루트는 아직 없음)
+    # 현대(1994~2025) Event
     for slug in contemporary_slugs:
         lines.append('  <url>')
         lines.append(f'    <loc>{SITE_ROOT}/maps/contemporary/event/{slug}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.7</priority>')
+        lines.append('  </url>')
+
+    # 현대 루트 랜딩
+    for slug in contemporary_route_slugs:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/contemporary/route/{slug}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.75</priority>')
+        lines.append('  </url>')
+
+    # 선사시대 진입점 — event SEO 페이지는 보류 상태지만 지도 자체는
+    # 크롤링돼야 하므로 진입점(과 루트가 생기면 루트 랜딩)을 담는다.
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/maps/prehistory/</loc>')
+    lines.append('    <changefreq>weekly</changefreq>')
+    lines.append('    <priority>0.9</priority>')
+    lines.append('  </url>')
+
+    # 선사 루트 랜딩
+    for slug in prehistory_route_slugs:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/prehistory/route/{slug}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.75</priority>')
+        lines.append('  </url>')
+
+    # 선사 루트 웨이포인트 전용 페이지 (event/ 안에 생성됨)
+    for slug in prehistory_event_slugs:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/prehistory/event/{slug}</loc>')
         lines.append('    <changefreq>monthly</changefreq>')
         lines.append('    <priority>0.7</priority>')
         lines.append('  </url>')
@@ -251,13 +293,15 @@ def main():
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
 
-    total = (7 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs) + len(ancient_slugs)
-             + len(main_route_slugs) + len(modern2_route_slugs)
+    total = (8 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs) + len(ancient_slugs)
+             + len(main_route_slugs) + len(modern2_route_slugs) + len(contemporary_route_slugs)
              + len(medieval2_route_slugs) + len(medieval1_route_slugs) + len(ancient_route_slugs)
+             + len(prehistory_route_slugs) + len(prehistory_event_slugs)
              + len(archive_landing) + len(archive_posts))
     print(f'통합 sitemap.xml 생성 완료: 메인 1 + map.html 1 + 1876-1945 Event {len(main_slugs)} + 루트 {len(main_route_slugs)} + '
           f'modern2 진입점 1 + modern2 Event {len(modern2_slugs)} + modern2 루트 {len(modern2_route_slugs)} + '
-          f'contemporary 진입점 1 + contemporary Event {len(contemporary_slugs)} + '
+          f'contemporary 진입점 1 + contemporary Event {len(contemporary_slugs)} + contemporary 루트 {len(contemporary_route_slugs)} + '
+          f'prehistory 진입점 1 + prehistory 루트 {len(prehistory_route_slugs)} + prehistory 웨이포인트 {len(prehistory_event_slugs)} + '
           f'medieval2 진입점 1 + medieval2 Event {len(medieval2_slugs)} + medieval2 루트 {len(medieval2_route_slugs)} + '
           f'medieval1 진입점 1 + medieval1 Event {len(medieval1_slugs)} + medieval1 루트 {len(medieval1_route_slugs)} + '
           f'ancient 진입점 1 + ancient Event {len(ancient_slugs)} + ancient 루트 {len(ancient_route_slugs)} + '

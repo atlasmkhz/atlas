@@ -250,12 +250,31 @@ def render_post_body(post):
         stages_html = render_stages_section(post.get('stages'))
         legacy_html = render_legacy_section(post.get('legacy_ko'))
         return body_html + stages_html + legacy_html
+    if fmt == 'source_reading':
+        # 사료읽기: 원문 발췌(세로쓰기 아님, pre-line로 행 보존) →
+        # 현대어 풀이 → 해설("왜 이 문장인가") 3단 구조.
+        # original_ko의 \n은 CSS white-space:pre-line로 줄바꿈이 살아난다.
+        parts = []
+        if post.get('original_ko'):
+            note_html = (f'<p class="source-note">{esc(post.get("original_note",""))}</p>'
+                         if post.get('original_note') else '')
+            parts.append(
+                f'<section class="post-original"><h2>원문</h2>'
+                f'<blockquote><p>{esc(post.get("original_ko",""))}</p></blockquote>{note_html}</section>'
+            )
+        if post.get('translation_ko'):
+            parts.append(f'<section class="post-translation"><h2>현대어로 읽기</h2><p>{esc(post.get("translation_ko",""))}</p></section>')
+        if post.get('commentary_ko'):
+            parts.append(f'<section class="post-commentary"><h2>왜 이 문장인가</h2><p>{esc(post.get("commentary_ko",""))}</p></section>')
+        return ''.join(parts)
     return f'<section class="post-body"><p>{esc(post.get("body_ko",""))}</p></section>'
 
 
 def post_plain_summary(post):
     if post.get('format') == 'claim_rebuttal':
         return post.get('claim_ko') or ''
+    if post.get('format') == 'source_reading':
+        return post.get('commentary_ko') or post.get('translation_ko') or ''
     return post.get('body_ko') or ''
 
 

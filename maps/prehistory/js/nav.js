@@ -56,7 +56,9 @@
   // 복사해오지 않았다(다른 시기 인물·사건이라 그대로 가져올 게 없음).
   // 나중에 이 지도에 맞는 루트(예: 대통령 재직 시절 발자취 등)가 생기면
   // routes/xxx.js를 만들고 여기 항목을 추가하면 된다.
-  const ROUTE_HUB_ITEMS = [];
+  const ROUTE_HUB_ITEMS = [
+    { routeId: 'dolmen_pilgrimage', name: '고인돌 순례 루트', period: '기원전 1500~기원전 400, 그리고 오늘', ready: true },
+  ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
   // archive/*.js가 로드되면 여기에 시리즈 단위로 등록된다. routeRenderer.js
@@ -98,12 +100,12 @@
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
-      { subcat: 'people_study', name: '인물연구', seriesIds: [] },
-      { subcat: 'primary_sources', name: '사료읽기', seriesIds: [] },
+      { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings'] },
     ],
   };
 
-  const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동' };
+  const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동', person: '인물', document: '사료' };
 
   document.addEventListener('DOMContentLoaded', init);
   if (document.readyState === 'complete' || document.readyState === 'interactive') init();
@@ -483,7 +485,7 @@
   function renderArchivePostRow(post, series){
     const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
     const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
-    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : (post.claim_ko || '');
+    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : post.format === 'source_reading' ? (post.commentary_ko || '') : (post.claim_ko || '');
     const shortSummary = bodyText.length > 72 ? bodyText.slice(0, 72) + '…' : bodyText;
     const href = archivePostUrl(series, post);
     return `
