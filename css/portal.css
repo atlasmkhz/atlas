@@ -209,14 +209,43 @@ body.portal {
 .portal-quick-header { margin-bottom:16px; }
 .portal-quick-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
 .portal-quick-item {
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  padding:20px 10px; border-radius:12px; text-decoration:none;
-  background:rgba(238,231,216,0.04); border:1px solid rgba(238,231,216,0.1);
-  color:var(--paper); font-size:12.5px; font-weight:700; text-align:center;
-  transition:background 0.15s ease, border-color 0.15s ease;
+  display:flex; flex-direction:row; align-items:center; gap:14px;
+  padding:18px 18px; border-radius:14px; text-decoration:none;
+  background:linear-gradient(165deg, rgba(238,231,216,0.06), rgba(238,231,216,0.02));
+  border:1px solid rgba(238,231,216,0.12);
+  color:var(--paper); text-align:left;
+  transition:transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
-.portal-quick-item:hover { background:rgba(184,152,96,0.12); border-color:rgba(212,181,120,0.5); }
-.portal-quick-icon { font-size:24px; }
+.portal-quick-item:hover {
+  transform:translateY(-3px);
+  background:linear-gradient(165deg, rgba(184,152,96,0.18), rgba(184,152,96,0.05));
+  border-color:rgba(212,181,120,0.55);
+}
+.portal-quick-badge {
+  flex-shrink:0; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  font-size:20px; background:rgba(212,181,120,0.12); border:1px solid rgba(212,181,120,0.28);
+}
+.portal-quick-text { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.portal-quick-label { font-size:13.5px; font-weight:800; letter-spacing:-0.01em; }
+.portal-quick-sub {
+  font-size:10.5px; color:var(--paper-dim); font-weight:600; line-height:1.4;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.portal-quick-item-accent {
+  background:linear-gradient(165deg, rgba(140,74,46,0.22), rgba(140,74,46,0.06));
+  border-color:rgba(196,120,80,0.35);
+}
+.portal-quick-item-accent .portal-quick-badge {
+  background:rgba(196,120,80,0.18); border-color:rgba(196,120,80,0.4);
+}
+.portal-quick-item-accent:hover {
+  background:linear-gradient(165deg, rgba(196,120,80,0.3), rgba(196,120,80,0.08));
+  border-color:rgba(212,150,110,0.6);
+}
+@media (max-width:640px) {
+  .portal-quick-grid { grid-template-columns:1fr 1fr; }
+  .portal-quick-sub { white-space:normal; }
+}
 
 .portal-footer { position:relative; z-index:2; padding:36px 32px 24px; font-size:11px; color:var(--paper-dim); }
 
