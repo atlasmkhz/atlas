@@ -425,10 +425,6 @@ function renderResult(){
       </div>
 
       <div class="cr-actions">
-        <button class="cr-btn cr-btn-kakao" onclick="shareKakao(this)"
-          data-title="${esc(headline.year)}, ${esc(headline.frag)}."
-          data-desc="내 선택은 ${esc(top.f.name)}과(와) ${pct(top.sim)}% 겹쳤다 — 당신의 선택은?"
-        >💬 카톡으로 공유</button>
         <button class="cr-btn cr-btn-primary" onclick="shareResult(this)" data-share="${esc(shareText)}">결과 공유하기</button>
         <button class="cr-btn" onclick="restart()">다시 갈림길에 서기</button>
         <a class="cr-btn" href="../../index.html">ATLAS 지도로 →</a>
@@ -453,36 +449,6 @@ window.restart = function(){
   step = -1; answers.length = 0;
   for(const k of Object.keys(scores)) scores[k]=0;
   renderIntro();
-};
-window.shareKakao = function(btn){
-  if(!window.Kakao || !Kakao.isInitialized()){
-    // SDK 로드 실패 시(네트워크 차단 등) 카톡 앱으로 직접 열리는 스킴으로 폴백.
-    const text = `${btn.dataset.title}\n${btn.dataset.desc}\n\n역사의 갈림길 · ATLAS\nhttps://atlas.mkhz.kr/play/crossroads/`;
-    navigator.clipboard?.writeText(text);
-    alert('카카오 공유 기능을 불러오지 못했습니다. 링크가 복사됐으니 카톡에 직접 붙여넣어 주세요.');
-    return;
-  }
-  Kakao.Share.sendDefault({
-    objectType: 'feed',
-    content: {
-      title: btn.dataset.title,
-      description: btn.dataset.desc,
-      imageUrl: 'https://atlas.mkhz.kr/assets/images/og-image.jpg',
-      link: {
-        mobileWebUrl: 'https://atlas.mkhz.kr/play/crossroads/index.html',
-        webUrl: 'https://atlas.mkhz.kr/play/crossroads/index.html',
-      },
-    },
-    buttons: [
-      {
-        title: '나도 갈림길에 서기',
-        link: {
-          mobileWebUrl: 'https://atlas.mkhz.kr/play/crossroads/index.html',
-          webUrl: 'https://atlas.mkhz.kr/play/crossroads/index.html',
-        },
-      },
-    ],
-  });
 };
 window.shareResult = async function(btn){
   const text = btn.dataset.share;
