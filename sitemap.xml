@@ -3,7 +3,7 @@
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 464개 + 루트 9개 + 
   근현대(1945~1993) 진입점 1개 + Event 440개 + 루트 9개 + 
-  현대(1994~2025) 진입점 1개 + Event 300개(루트 없음) + 
+  현대(1994~2025) 진입점 1개 + Event 315개(루트 없음) + 
   조선(1392~1875, 중세2) 진입점 1개 + Event 267개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 162개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
@@ -6033,6 +6033,81 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_08</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_11</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_12</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_13</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_14</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-hyeonchungwon-paradox--wp_15</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/route-korea-disaster-history--wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6149,6 +6224,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/route/eurasia-railway-dream</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/route/hyeonchungwon-paradox</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
@@ -9553,6 +9633,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/power-accountability</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -9784,6 +9869,61 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/hwandan-gogi/hd_16</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_08</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_09</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_11</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

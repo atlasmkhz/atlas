@@ -1092,6 +1092,14 @@ body.route-mode-active [data-route-hidden] {
   padding: 2px 14px 14px 33px;
   animation: routePanelDetailIn 0.18s ease;
 }
+.route-panel-wp-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 4px 0 10px 0;
+  display: block;
+}
 .route-panel-wp-summary {
   font-size: 12px;
   color: #c9beac;
@@ -1167,6 +1175,14 @@ body.route-mode-active [data-route-hidden] {
   background: rgba(184,152,96,0.12);
   border-radius: 4px;
   display: inline-block;
+}
+.route-wp-image {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: block;
 }
 .route-wp-summary {
   font-size: 13px;

@@ -182,6 +182,9 @@
     const stayHtml = wp.stay
       ? `<p class="route-wp-stay">체류: ${wp.stay}</p>`
       : '';
+    const imageHtml = wp.image
+      ? `<img class="route-wp-image" src="${wp.image}" alt="${wp.title_ko}" loading="lazy">`
+      : '';
 
     return `
 <div class="route-waypoint-popup">
@@ -189,6 +192,7 @@
     <span class="route-wp-badge" style="background:${typeColor};">${typeLabel}</span>
     <span class="route-wp-date">${dateStr}</span>
   </div>
+  ${imageHtml}
   <h2 class="route-wp-title">${wp.title_ko}</h2>
   <p class="route-wp-place">📍 ${wp.place_ko}</p>
   ${stayHtml}
@@ -248,12 +252,13 @@
         ...(wp.youtube_id ? [wp.youtube_id] : []),
         ...(Array.isArray(wp.youtube_ids) ? wp.youtube_ids : []),
       ];
-      const hasDetail = !!(wp.summary_ko || videoIds.length || wp.external_link);
+      const hasDetail = !!(wp.summary_ko || videoIds.length || wp.external_link || wp.image);
       const externalLinkHtml = wp.external_link
         ? `<a class="route-panel-wp-external-link" href="${wp.external_link.url}" target="_blank" rel="noopener">🔗 ${wp.external_link.label || '바로가기'}</a>`
         : '';
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>
+          ${wp.image ? `<img class="route-panel-wp-image" src="${wp.image}" alt="${wp.title_ko}" loading="lazy">` : ''}
           ${wp.summary_ko ? `<p class="route-panel-wp-summary">${wp.summary_ko}</p>` : ''}
           ${videoIds.map((ytId, vi) => `<div class="route-panel-wp-video" data-youtube-id="${ytId}" data-video-index="${vi}"></div>`).join('')}
           ${externalLinkHtml}

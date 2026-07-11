@@ -186,6 +186,7 @@
     { path: 'maps/contemporary/index.html?route=korea_party_history', name: '대한민국 정당사 루트', tagline: '오늘의 여야에서 해방 정국까지, 거꾸로 거슬러 올라가는 두 갈래 계보', period: '1945~오늘날', waypoints: 21, color: '#3a4a6b', image: 'maps/contemporary/assets/images/route/route_korea_party_history_hero.webp' },
     { path: 'maps/contemporary/index.html?route=dokdo_history', name: '독도, 기록의 섬 루트', tagline: '이사부에서 NARA 기밀문서까지 — 1500년의 기록이 증언하는 섬', period: '512~2026', waypoints: 20, color: '#1f5c7a', image: 'maps/contemporary/assets/images/route/route_dokdo_history_hero.webp' },
     { path: 'maps/contemporary/index.html?route=eurasia_railway_dream', name: '대륙철도의 꿈 루트', tagline: '부산에서 파리까지 13,000km — 끊어진 건 단 한 구간뿐이다', period: '1905~현재, 그리고 그 너머', waypoints: 20, color: '#c99a3a', image: 'maps/contemporary/assets/images/route/route_eurasia_railway_dream_hero.webp' },
+    { path: 'maps/contemporary/index.html?route=hyeonchungwon_paradox', name: '현충원의 역설 루트', tagline: '나라를 위해 죽은 이와, 나라를 배신한 이가 같은 언덕에 잠들어 있다', period: '1949~현재', waypoints: 15, color: '#5c5548', image: 'maps/contemporary/assets/images/route/route_hyeonchungwon_hero.webp' },
   ];
 
   // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(kstDayIndex,

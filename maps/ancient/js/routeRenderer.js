@@ -182,6 +182,12 @@
     const stayHtml = wp.stay
       ? `<p class="route-wp-stay">체류: ${wp.stay}</p>`
       : '';
+    // wp.image가 있으면(주로 인물 웨이포인트) 팝업 상단에 작은 초상 썸네일을
+    // 보여준다 — 2026-07-12 추가. 사진이 없는 웨이포인트는 기존과 동일하게
+    // 텍스트만 나온다.
+    const imageHtml = wp.image
+      ? `<img class="route-wp-image" src="${wp.image}" alt="${wp.title_ko}" loading="lazy">`
+      : '';
 
     return `
 <div class="route-waypoint-popup">
@@ -189,6 +195,7 @@
     <span class="route-wp-badge" style="background:${typeColor};">${typeLabel}</span>
     <span class="route-wp-date">${dateStr}</span>
   </div>
+  ${imageHtml}
   <h2 class="route-wp-title">${wp.title_ko}</h2>
   <p class="route-wp-place">📍 ${wp.place_ko}</p>
   ${stayHtml}
@@ -207,9 +214,10 @@
       const typeColor = WP_TYPE_COLOR[wp.type] || route.color;
       const typeLabel = WP_TYPE_LABEL[wp.type] || wp.type;
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
-      const hasDetail = !!(wp.summary_ko || wp.youtube_id);
+      const hasDetail = !!(wp.summary_ko || wp.youtube_id || wp.image);
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>
+          ${wp.image ? `<img class="route-panel-wp-image" src="${wp.image}" alt="${wp.title_ko}" loading="lazy">` : ''}
           ${wp.summary_ko ? `<p class="route-panel-wp-summary">${wp.summary_ko}</p>` : ''}
           ${wp.youtube_id ? `<div class="route-panel-wp-video" data-youtube-id="${wp.youtube_id}"></div>` : ''}
         </div>` : '';
