@@ -59,6 +59,8 @@
   const ROUTE_HUB_ITEMS = [
     { routeId: 'korea_disaster_history', name: '대한민국 재난사 루트', period: '1994~2022', ready: true },
     { routeId: 'korea_party_history', name: '대한민국 정당사 루트', period: '1945~오늘날', ready: true },
+    { routeId: 'dokdo_history', name: '독도, 기록의 섬 루트', period: '512~2026', ready: true },
+    { routeId: 'eurasia_railway_dream', name: '대륙철도의 꿈 루트', period: '1905~현재, 그리고 그 너머', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
@@ -99,10 +101,10 @@
   // 가리키는 게 아니라 "묶음"이라는 걸 UI로도 분명히 하기 위해서다).
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
-      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings'] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
   };
 

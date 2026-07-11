@@ -106,10 +106,10 @@
   // 가리키는 게 아니라 "묶음"이라는 걸 UI로도 분명히 하기 위해서다).
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
-      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings'] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
   };
 

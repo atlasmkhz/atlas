@@ -84,10 +84,10 @@
   // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
-      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings'] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
   };
 

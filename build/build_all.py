@@ -56,12 +56,14 @@ BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BUILD_DIR)
 
 STEPS = [
-    ('1/6 근대(포털) 루트 페이지 생성', ['python3', os.path.join(BUILD_DIR, 'generate_route_pages.py')]),
-    ('2/6 근현대(modern2) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'build', 'generate_route_pages.py')]),
-    ('3/6 고대(ancient) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'ancient', 'build', 'generate_route_pages.py')]),
-    ('4/6 고려(medieval1) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'medieval1', 'build', 'generate_route_pages.py')]),
-    ('5/6 조선(medieval2) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'medieval2', 'build', 'generate_route_pages.py')]),
-    ('6/6 통합 Sitemap 생성', ['python3', os.path.join(BUILD_DIR, 'generate_unified_sitemap.py')]),
+    ('1/8 근대(포털) 루트 페이지 생성', ['python3', os.path.join(BUILD_DIR, 'generate_route_pages.py')]),
+    ('2/8 근현대(modern2) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'modern2', 'build', 'generate_route_pages.py')]),
+    ('3/8 고대(ancient) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'ancient', 'build', 'generate_route_pages.py')]),
+    ('4/8 고려(medieval1) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'medieval1', 'build', 'generate_route_pages.py')]),
+    ('5/8 조선(medieval2) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'medieval2', 'build', 'generate_route_pages.py')]),
+    ('6/8 현대(contemporary) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'build', 'generate_route_pages.py')]),
+    ('7/8 선사(prehistory) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'prehistory', 'build', 'generate_route_pages.py')]),
+    ('8/8 통합 Sitemap 생성', ['python3', os.path.join(BUILD_DIR, 'generate_unified_sitemap.py')]),
 ]
 
 def main():

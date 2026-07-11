@@ -82,7 +82,11 @@ const YOUTUBE_VIDEOS = [
   {
     id: 'v_hong_beom_do_100y',
     youtube_id: 'IthyNGuvybk',
-    pinned_featured: true,
+    // 2026-07-12: pinned_featured 해제. 홍범도 영상 발행(2025-08) 직후
+    // 한시적으로 고정 노출하려던 것이었는데, 이후 계속 남아 있어
+    // "오늘의 특집"이 하루도 로테이션되지 않는 버그의 원인이었다.
+    // 이제 이 영상도 다른 영상들과 함께 정상적으로 날짜 기반
+    // 로테이션(pickFeaturedVideo)에 포함된다.
     title: '[AI 복원] 잊힌 독립군 홍범도 — 100년 전 노래가 깨어나다',
     description: '독립군 홍범도 장군의 잊힌 노래를 AI 복원 기술로 되살린 기록.',
     published: '2025-08-11',

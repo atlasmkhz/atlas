@@ -31,20 +31,29 @@
     return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
   }
 
+  // 한국 시간(KST, UTC+9) 기준 "오늘의 일수"를 계산한다. UTC 기준으로
+  // Math.floor(Date.now()/86400000)를 쓰면 날짜 경계가 한국 자정이
+  // 아니라 한국 시간 오전 9시가 되어버려("UTC 자정 = KST 09시"),
+  // 두목님이 한국 자정 무렵 확인할 때 "24시간이 지나도 안 바뀐다"고
+  // 느끼는 원인이 된다(2026-07-12 확인). +9시간을 더해 KST 자정에
+  // 로테이션이 넘어가도록 보정한다.
+  function kstDayIndex() {
+    return Math.floor((Date.now() + 9 * 3600000) / 86400000);
+  }
+
   function pickFeaturedVideo(videos) {
     if (!videos || !videos.length) return null;
     // pinned_featured:true가 있으면(수동 지정) 로테이션을 건너뛰고
     // 그 영상을 항상 특집으로 노출한다.
     const pinned = videos.find(v => v.pinned_featured);
     if (pinned) return pinned;
-    // 매일 바뀌는 로테이션 — "오늘 날짜(연 단위 일수)"를 영상 개수로
+    // 매일 바뀌는 로테이션 — "오늘 날짜(KST 기준 일수)"를 영상 개수로
     // 나눈 나머지로 인덱스를 정한다. 발행일 오래된 순으로 정렬해두면
     // 같은 날짜에는 항상 같은 영상이 뜨고(새로고침해도 안 바뀜),
-    // 자정이 지나면 다음 영상으로 넘어간다. 영상이 늘어날수록 한 바퀴
-    // 도는 데 걸리는 날짜도 길어진다.
+    // 한국 시간 자정이 지나면 다음 영상으로 넘어간다. 영상이 늘어날수록
+    // 한 바퀴 도는 데 걸리는 날짜도 길어진다.
     const sorted = [...videos].sort((a, b) => new Date(a.published) - new Date(b.published));
-    const now = new Date();
-    const dayIndex = Math.floor(now.getTime() / 86400000); // 1970-01-01부터 일수
+    const dayIndex = kstDayIndex();
     return sorted[dayIndex % sorted.length];
   }
 
@@ -175,11 +184,14 @@
     // 현대 — maps/contemporary/index.html
     { path: 'maps/contemporary/index.html?route=korea_disaster_history', name: '대한민국 재난사 루트', tagline: '반복된 참사, 그때마다 물었던 "왜 막지 못했는가"', period: '1994~2024', waypoints: 9, color: '#4a4a4a', image: 'maps/contemporary/assets/images/route/route_korea_disaster_history_hero.webp' },
     { path: 'maps/contemporary/index.html?route=korea_party_history', name: '대한민국 정당사 루트', tagline: '오늘의 여야에서 해방 정국까지, 거꾸로 거슬러 올라가는 두 갈래 계보', period: '1945~오늘날', waypoints: 21, color: '#3a4a6b', image: 'maps/contemporary/assets/images/route/route_korea_party_history_hero.webp' },
+    { path: 'maps/contemporary/index.html?route=dokdo_history', name: '독도, 기록의 섬 루트', tagline: '이사부에서 NARA 기밀문서까지 — 1500년의 기록이 증언하는 섬', period: '512~2026', waypoints: 20, color: '#1f5c7a', image: 'maps/contemporary/assets/images/route/route_dokdo_history_hero.webp' },
+    { path: 'maps/contemporary/index.html?route=eurasia_railway_dream', name: '대륙철도의 꿈 루트', tagline: '부산에서 파리까지 13,000km — 끊어진 건 단 한 구간뿐이다', period: '1905~현재, 그리고 그 너머', waypoints: 20, color: '#c99a3a', image: 'maps/contemporary/assets/images/route/route_eurasia_railway_dream_hero.webp' },
   ];
 
-  // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(1970-01-01
-  // 기준)"를 시드로 배열을 섞는다. 같은 날에는 새로고침해도 항상 같은
-  // 6개·같은 순서가 나오고, 자정이 지나면 다음 조합으로 넘어간다.
+  // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(kstDayIndex,
+  // 한국 시간 기준)"를 시드로 배열을 섞는다. 같은 날에는 새로고침해도
+  // 항상 같은 6개·같은 순서가 나오고, 한국 시간 자정이 지나면 다음
+  // 조합으로 넘어간다.
   function dailyRotationPick(items, count, seed) {
     // 아주 단순한 결정론적 셔플(선형합동생성기) — 암호학적으로 강할
     // 필요는 없고, "매일 다른데 하루 안에서는 고정"이라는 조건만
@@ -200,7 +212,7 @@
   function renderRoutes() {
     const el = document.getElementById('portalRoutes');
     if (!el) return;
-    const dayIndex = Math.floor(Date.now() / 86400000);
+    const dayIndex = kstDayIndex();
     const todaysRoutes = dailyRotationPick(MASTER_ROUTES, 6, dayIndex);
     el.innerHTML = todaysRoutes.map(r => {
       const bg = r.image
