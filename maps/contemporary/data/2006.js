@@ -83,6 +83,20 @@ const EVENTS_2006 = [
     video:null,
     connections:[],
     tags:['diplomacy','economic','서울','한미FTA'],
-    sources:['한국민족문화대백과사전 한미 자유무역협정','위키백과 한미 자유무역협정'] }
-
+    sources:['한국민족문화대백과사전 한미 자유무역협정','위키백과 한미 자유무역협정'] },
+  { id:'person_2006_01', year:2006, visible_from:1994, visible_until:2006,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'백남준 별세 — 비디오아트의 아버지',
+    title_en:"Nam June Paik, Father of Video Art, Dies",
+    title_ja:'白南準死去 — ビデオアートの父',
+    place_ko:'서울 → 마이애미 (다다익선: 과천)',
+    lat:37.43, lng:127.02,
+    people:['백남준'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'TV 브라운관을 캔버스로 삼아 비디오아트라는 장르 자체를 창시한 백남준이 마이애미에서 별세했다. 1974년 "전자 초고속도로"라는 개념으로 인터넷 시대를 예언했고, 1988년 서울올림픽 때 과천에 세운 1,003대의 모니터 탑 다다익선과 위성 생중계 아트 굿모닝 미스터 오웰로 예술과 기술과 대중을 연결했다. 세계 미술사가 그 이름을 장르의 기원으로 기록하는 몇 안 되는 한국인으로, "예술은 사기다"라는 도발적 선언조차 고정관념을 부수는 그의 예술이었다.',
+    video:null,
+    connections:[],
+    tags:['person','과천','백남준','비디오아트','다다익선'],
+    sources:['한국민족문화대백과사전 백남준','위키백과 백남준'] }
 ];

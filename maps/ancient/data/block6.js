@@ -152,5 +152,18 @@ const EVENTS_BLOCK6 = [
     video:null,
     connections:['culture_686_01'],
     tags:['culture','인도','혜초','왕오천축국전','둔황'],
-    sources:['한국민족문화대백과사전 혜초','한국민족문화대백과사전 왕오천축국전'] }
+    sources:['한국민족문화대백과사전 혜초','한국민족문화대백과사전 왕오천축국전'] },
+  { id:'culture_750_01', year:750, visible_from:740, visible_until:790,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'김생 — 해동서성, 신라의 붓이 경지에 오르다',
+    title_en:'Kim Saeng — The Sage Calligrapher of Silla',
+    title_ja:'金生 — 海東書聖',
+    place_ko:'서라벌 → 충주',
+    lat:37.031, lng:127.881,
+    people:['김생'],
+    summary_ko:'한미한 집안에서 태어나 여든이 넘도록 붓을 놓지 않았다는 김생은 왕희지에 견주어졌던 통일신라 최고의 서예가로, "해동서성(海東書聖)"이라 불렸다. 고려 사신이 그의 글씨를 송의 문인들에게 보이자 왕희지의 진적이 아니냐며 믿지 않았다는 일화가 그의 명성을 전한다. 진품 묵적은 거의 남지 않았지만 그의 글씨를 집자한 낭공대사탑비가 전해져, 통일신라의 문화적 자신감이 글씨에서도 대륙과 겨루는 수준이었음을 증언한다.',
+    video:null,
+    connections:[],
+    tags:['culture','충주','김생','서예','해동서성'],
+    sources:['한국민족문화대백과사전 김생'] }
 ];

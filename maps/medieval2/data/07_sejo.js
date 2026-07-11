@@ -124,5 +124,18 @@ const EVENTS_SEJO = [
     video:null,
     connections:['battle_1592_01'],
     tags:['policy','한양','5위','진관체제','제승방략','속오군'],
-    sources:['한국민족문화대백과사전 진관체제','한국민족문화대백과사전 제승방략'] }
+    sources:['한국민족문화대백과사전 진관체제','한국민족문화대백과사전 제승방략'] },
+  { id:'culture_1465_01', year:1465, visible_from:1456, visible_until:1493,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'김시습 — 생육신의 방랑, 최초의 한문소설을 쓰다',
+    title_en:'Kim Si-seup — The Wandering Genius',
+    title_ja:'金時習 — 放浪の天才、生六臣',
+    place_ko:'경주 금오산 용장사',
+    lat:35.77, lng:129.2,
+    people:['김시습','세조'],
+    summary_ko:'다섯 살에 시를 지어 세종의 칭찬을 받은 신동 김시습은, 수양대군이 조카의 왕위를 빼앗았다는 소식에 읽던 책을 모두 불태우고 머리를 깎은 채 평생 방랑길에 올랐다 — 벼슬을 거부하는 것으로 저항한 생육신의 대표다. 경주 금오산 용장사에 머물며 쓴 금오신화는 한국 최초의 한문소설로, 귀신·용궁·저승을 넘나드는 환상 속에 현실의 부조리를 담았다. 체제 밖을 떠돈 천재의 붓이 조선 소설 문학의 문을 연 셈이다.',
+    video:null,
+    connections:[],
+    tags:['culture','경주','김시습','금오신화','생육신'],
+    sources:['한국민족문화대백과사전 김시습'] }
 ];

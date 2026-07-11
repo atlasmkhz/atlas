@@ -126,7 +126,7 @@ const EVENTS_BLOCK3 = [
     tags:['culture','지안','고분벽화','무용총','각저총'],
     sources:['한국민족문화대백과사전 무용총','한국민족문화대백과사전 각저총'] },
 
-  { id:'culture_500_02', year:500, visible_from:400, visible_until:600,
+  { id:'culture_500_03', year:500, visible_from:400, visible_until:600,
     month:null, day:null, type:'culture', priority:2, nation:'silla',
     title_ko:'신라의 돌무지덧널무덤과 서역 교류',
     title_en:'Stone-Mound Wooden-Chamber Tombs of Silla and Silk Road Contact',

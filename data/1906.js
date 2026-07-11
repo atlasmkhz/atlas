@@ -32,6 +32,18 @@ const EVENTS_1906 = [
     connections:['policy_1905_01','movement_1907_05'],
     tags:['righteous','조선국내','전라도','최익현','을사의병','순국'],
     sources:['우리역사넷 군대해산','한국민족문화대백과사전 최익현'],
-    content:{ hero:{"url": "assets/images/entity/event/event_righteous_1906_01_01.webp", "alt": "최익현 의병 봉기와 순국", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"}, gallery:[] } }
-
+    content:{ hero:{"url": "assets/images/entity/event/event_righteous_1906_01_01.webp", "alt": "최익현 의병 봉기와 순국", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"}, gallery:[] } },
+  { id:'person_1906_01', year:1906, visible_from:1905, visible_until:1908,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'신돌석 — 태백산 호랑이, 최초의 평민 의병장',
+    title_en:'Sin Dol-seok — The Tiger of Taebaek',
+    title_ja:'申乭石 — 太白山の虎、平民義兵将',
+    place_ko:'영해 (영덕)',
+    lat:36.53, lng:129.41,
+    people:['신돌석'],
+    summary_ko:'을사늑약에 항거해 일어난 의병 가운데 신돌석은 양반이 아닌 평민 출신으로 부대를 이끈 최초의 의병장이었다 — 태백산맥을 무대로 한 신출귀몰한 유격전에 일본군은 그를 태백산 호랑이라 불렀다. 3천에 이른 그의 부대는 울진·영해 일대의 일본 세력을 거듭 타격했으나, 13도 창의군이 서울진공작전을 짤 때 평민이라는 이유로 지휘부에서 배제된 것은 의병운동 내부의 신분 한계를 드러낸 장면이었다. 그는 현상금을 노린 옛 부하의 손에 서른 살로 생을 마감했지만, 의병의 주역이 민중으로 넓어지는 전환점이 됐다.',
+    video:null,
+    connections:[],
+    tags:['person','영덕','신돌석','의병','평민의병장'],
+    sources:['한국민족문화대백과사전 신돌석','국가보훈부 공훈전자사료관'] }
 ];

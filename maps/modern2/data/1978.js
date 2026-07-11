@@ -115,6 +115,18 @@ const EVENTS_1978 = [
     video:null,
     connections:[],
     tags:['person','프랑크푸르트','차범근','분데스리가','축구'],
-    sources:['인천투데이 "한국축구 전설 차범근, 독일 분데스리가 데뷔"'] }
-
+    sources:['인천투데이 "한국축구 전설 차범근, 독일 분데스리가 데뷔"'] },
+  { id:'person_1978_03', year:1978, visible_from:1975, visible_until:1978,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'조세희 — 난장이가 쏘아올린 작은 공',
+    title_en:"Cho Se-hui — The Dwarf and the Little Ball",
+    title_ja:'趙世熙 — こびとが打ち上げた小さなボール',
+    place_ko:'서울',
+    lat:37.57, lng:126.98,
+    people:['조세희'],
+    summary_ko:'조세희의 연작소설 난장이가 쏘아올린 작은 공은 재개발로 철거당하는 난장이 일가를 통해, 한강의 기적이라는 성장 신화 뒤에 깔린 도시 빈민과 노동자의 삶을 문학의 한복판으로 끌어왔다. 검열을 피하려 택한 짧고 건조한 환상적 문체는 오히려 현실의 폭력을 더 서늘하게 드러냈고, 이 책은 금서 아닌 금서로 대학가에서 읽히며 한 세대의 사회의식을 길렀다. 작가는 "이 책이 더 이상 읽히지 않는 세상"을 소원했지만, 출간 반세기 가까이 300쇄를 넘긴 사실은 난장이의 시대가 끝나지 않았음을 증언한다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','조세희','난쏘공','노동문학'],
+    sources:['한국민족문화대백과사전 조세희','위키백과 조세희'] }
 ];

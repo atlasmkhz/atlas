@@ -82,5 +82,18 @@ const EVENTS_HYOJONG = [
     video:null,
     connections:['battle_1654_01'],
     tags:['battle','헤이룽장','나선정벌','효종','신류'],
-    sources:['한국민족문화대백과사전 나선정벌'] }
+    sources:['한국민족문화대백과사전 나선정벌'] },
+  { id:'culture_1651_01', year:1651, visible_from:1651, visible_until:1671,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'윤선도 — 어부사시사, 유배와 은둔이 빚은 우리말의 보석',
+    title_en:'Yun Seon-do — The Fisherman Songs of Bogildo',
+    title_ja:'尹善道 — 漁父四時詞',
+    place_ko:'보길도 부용동',
+    lat:34.15, lng:126.53,
+    people:['윤선도'],
+    summary_ko:'평생 세 차례 20년 가까운 유배를 살 만큼 타협을 모르던 정치가 윤선도는, 병자호란의 치욕 이후 세상을 등지고 보길도에 부용동 원림을 지어 은거했다. 그곳에서 지은 어부사시사 40수는 사계절 바다 위 삶을 "지국총 지국총 어사와"의 노 젓는 소리에 실어낸, 우리말 시조가 도달한 가장 맑은 경지로 꼽힌다. 오우가에서 물·돌·솔·대·달을 벗 삼은 그의 노래처럼, 정쟁이 앗아간 시간이 역설적으로 조선 문학 최고의 유산을 빚어낸 것이다.',
+    video:null,
+    connections:[],
+    tags:['culture','보길도','윤선도','어부사시사','시조'],
+    sources:['한국민족문화대백과사전 윤선도'] }
 ];

@@ -16,8 +16,7 @@ import sys
 import json
 import html as html_module
 
-sys.path.insert(0, '/home/claude/seo_build')
-sys.path.insert(0, '/home/claude/work/photos_zip')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from generate_slugs import load_cards, assign_slugs
 from era_breadcrumb import build_breadcrumb, get_era_label, get_breadcrumb_type
@@ -27,8 +26,10 @@ except ImportError:
     MANUAL_SLUG_OVERRIDES = {}
 
 SITE_ROOT = 'https://atlas.mkhz.kr'
-OUT_DIR = '/home/claude/work/photos_zip/event'
-DATA_DIR = '/home/claude/work/photos_zip/data'
+BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BUILD_DIR)
+OUT_DIR = os.path.join(PROJECT_ROOT, 'event')
+DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 
 def esc(s):
     """HTML 출력용 escape. None은 빈 문자열로."""

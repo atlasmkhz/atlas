@@ -163,6 +163,20 @@ const EVENTS_2024 = [
     video:null,
     connections:['disaster_2022_01'],
     tags:['disaster','전남','무안','제주항공','항공사고','안전'],
-    sources:['위키백과 제주항공 2216편 활주로 이탈 사고','연합뉴스 무안 제주항공 참사 보도','항공철도사고조사위원회 예비보고서'] }
-
+    sources:['위키백과 제주항공 2216편 활주로 이탈 사고','연합뉴스 무안 제주항공 참사 보도','항공철도사고조사위원회 예비보고서'] },
+  { id:'person_2024_07', year:2024, visible_from:1994, visible_until:2024,
+    month:7, day:null, type:'person', priority:2,
+    title_ko:'김민기 별세 — 아침이슬, 그리고 뒷것의 삶',
+    title_en:"Kim Min-ki, Voice of a Generation, Dies",
+    title_ja:'金敏基死去 — 朝露の作曲家',
+    place_ko:'서울 (대학로 학전)',
+    lat:37.582, lng:127.004,
+    people:['김민기'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'스물한 살에 만든 노래 아침이슬이 유신 시대 금지곡이 되며 저항의 상징이 됐던 김민기가 별세했다. 정작 그는 "나는 뒷것"이라며 무대 뒤로 물러나, 1991년 대학로에 소극장 학전을 세워 지하철 1호선을 4,000회 공연하고 설경구·김윤석·황정민 같은 배우들을 길러냈다. 그해 3월 폐관한 학전과 넉 달 뒤 그의 죽음에 세대를 넘은 추모가 이어졌다 — 앞에 나서지 않고도 한 시대의 문화를 떠받칠 수 있음을 보여준 생애였다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','김민기','아침이슬','학전'],
+    sources:['한국민족문화대백과사전 김민기','위키백과 김민기'] }
 ];

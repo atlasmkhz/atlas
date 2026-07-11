@@ -138,5 +138,18 @@ const EVENTS_JUNGJONG = [
     video:null,
     connections:['massacre_1519_01'],
     tags:['plot','한양','김안로','중종','척신정치'],
-    sources:['한국민족문화대백과사전 김안로'] }
+    sources:['한국민족문화대백과사전 김안로'] },
+  { id:'culture_1530_01', year:1530, visible_from:1519, visible_until:1546,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'서경덕과 황진이 — 화담의 기철학, 송도의 시인',
+    title_en:'Seo Gyeong-deok and Hwang Jin-i — The Sage and the Poet of Songdo',
+    title_ja:'徐敬徳と黄真伊 — 松都の哲人と詩人',
+    place_ko:'개성 화담',
+    lat:37.99, lng:126.55,
+    people:['서경덕','황진이'],
+    summary_ko:'벼슬길을 마다하고 개성 화담에 은거한 서경덕은 우주의 근원을 기(氣)로 설명하는 독자적 철학을 세워, 스승 없이 홀로 사색으로 일가를 이룬 조선 유학의 이단아였다. 같은 송도의 황진이는 "동짓달 기나긴 밤을 한 허리를 버혀 내여"처럼 시간을 베어 임을 기다리는 파격의 상상력으로 시조 문학의 정점에 올랐고, 뭇 남성을 무너뜨리고도 서경덕만은 흔들지 못해 스승으로 모셨다는 이야기가 전한다. 신분과 성별의 벽이 가장 단단하던 시대에, 송도의 처사와 기생이 나란히 조선 지성사와 문학사에 이름을 남겼다.',
+    video:null,
+    connections:[],
+    tags:['culture','개성','서경덕','황진이','시조'],
+    sources:['한국민족문화대백과사전 서경덕'] }
 ];

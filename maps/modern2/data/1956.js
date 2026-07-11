@@ -103,6 +103,18 @@ const EVENTS_1956 = [
     video:null,
     connections:[],
     tags:['culture','서울','HLKZ-TV','텔레비전방송'],
-    sources:['한국민족문화대백과사전 HLKZTV'] }
-
+    sources:['한국민족문화대백과사전 HLKZTV'] },
+  { id:'person_1956_04', year:1956, visible_from:1950, visible_until:1956,
+    month:null, day:null, type:'person', priority:1,
+    title_ko:'이중섭 — 소를 그린 화가, 담뱃갑 은지에 남긴 가족',
+    title_en:"Lee Jung-seob — The Painter of Bulls",
+    title_ja:'李仲燮 — 牛を描いた画家',
+    place_ko:'서귀포 → 서울',
+    lat:37.567, lng:126.965,
+    people:['이중섭'],
+    summary_ko:'전쟁 피난길에 서귀포 단칸방에서 네 식구가 게를 잡아 연명하던 시절이, 역설적으로 이중섭 예술의 가장 따뜻한 장면들을 낳았다. 일본인 아내와 두 아들을 처가로 떠나보낸 뒤 그는 재료 살 돈이 없어 담뱃갑 은지에 못으로 가족을 새겼고, 힘줄이 불거진 흰 소 연작에 민족의 기개와 자신의 울분을 함께 담았다. 가족과 재회할 날만 기다리다 영양실조와 병고 속에 마흔 살로 무연고자처럼 눈을 감았지만 — 그가 은지에 새긴 그림들은 뉴욕 현대미술관에 소장됐고, 소 그림은 한국 근대미술의 아이콘이 됐다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','이중섭','흰소','은지화'],
+    sources:['한국민족문화대백과사전 이중섭','위키백과 이중섭'] }
 ];

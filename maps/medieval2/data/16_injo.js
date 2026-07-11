@@ -96,5 +96,18 @@ const EVENTS_INJO = [
     video:null,
     connections:['policy_1608_02','policy_1750_01'],
     tags:['policy','한양','영정법','인조','전세'],
-    sources:['한국민족문화대백과사전 영정법'] }
+    sources:['한국민족문화대백과사전 영정법'] },
+  { id:'battle_1636_02', year:1636, visible_from:1633, visible_until:1646,
+    month:null, day:null, type:'battle', priority:2,
+    title_ko:'임경업 — 백마산성의 명장, 두 제국 사이에서 지다',
+    title_en:'Im Gyeong-eop — The General Between Two Empires',
+    title_ja:'林慶業 — 二つの帝国の間で',
+    place_ko:'의주 백마산성',
+    lat:40.15, lng:124.53,
+    people:['임경업','김자점'],
+    summary_ko:'병자호란 때 임경업이 지킨 백마산성은 청군이 감히 치지 못하고 우회했을 만큼 단단했다 — 그러나 그가 성을 지키는 동안 남한산성의 왕은 항복했다. 이후 청의 징병으로 명을 치는 싸움에 끌려가면서도 몰래 명과 내통해 "명을 배신하지 않는다"는 신념을 지키려 한 그의 행보는 국제 현실과 명분 사이에 낀 조선 무장의 딜레마 그 자체였다. 명 망명과 청의 압송 끝에 조선으로 돌아온 그는 김자점의 사주를 받은 형문으로 옥사했고, 민중은 그를 소설과 무속의 신으로 되살려 국가가 버린 장수를 기억했다.',
+    video:null,
+    connections:[],
+    tags:['battle','의주','임경업','병자호란','백마산성'],
+    sources:['한국민족문화대백과사전 임경업'] }
 ];

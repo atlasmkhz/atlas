@@ -112,6 +112,20 @@ const EVENTS_2009 = [
     video:null,
     connections:['science_1996_01'],
     tags:['science','서울','아이폰','스마트폰','KT'],
-    sources:['위키백과 "대한민국의 아이폰 출시"','경향신문 "아이폰 폭발적 인기…스마트폰 지각이동설 시작되나"'] }
-
+    sources:['위키백과 "대한민국의 아이폰 출시"','경향신문 "아이폰 폭발적 인기…스마트폰 지각이동설 시작되나"'] },
+  { id:'person_2009_03', year:2009, visible_from:1968, visible_until:2009,
+    month:2, day:null, type:'person', priority:1,
+    title_ko:'김수환 추기경 선종 — 바보처럼 살다 간 사제',
+    title_en:"Cardinal Kim Sou-hwan Dies",
+    title_ja:'金寿煥枢機卿死去',
+    place_ko:'서울 명동성당',
+    lat:37.563, lng:126.987,
+    people:['김수환'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'한국 최초의 추기경 김수환이 명동성당에서 선종했다. 1987년 6월항쟁 때 경찰 진입을 막으려는 시위대에게 "나를 밟고 넘어가라"며 명동성당 문을 걸어 잠갔던 일화는 종교가 독재에 맞서는 최후의 피난처가 됐던 순간으로 기억된다. 사회적 약자를 향한 발언을 멈추지 않으면서도 스스로를 "바보"라 부르며 낮췄던 그의 선종에 각계각층 40만 인파가 조문했고, 각막 기증으로 두 명이 시력을 되찾았다. 종교 지도자가 정치와 사회 문제에 어디까지 발언해야 하는가라는 질문 앞에서, 그의 삶은 하나의 답으로 오래 인용된다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','김수환','명동성당','6월항쟁'],
+    sources:['한국민족문화대백과사전 김수환','위키백과 김수환'] }
 ];

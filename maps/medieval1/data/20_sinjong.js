@@ -54,5 +54,18 @@ const EVENTS_SINJONG = [
     video:null,
     connections:['movement_1198_01'],
     tags:['culture','순천','지눌','요세','수선사','백련결사'],
-    sources:['한국민족문화대백과사전 지눌','한국민족문화대백과사전 요세'] }
+    sources:['한국민족문화대백과사전 지눌','한국민족문화대백과사전 요세'] },
+  { id:'culture_1200_02', year:1200, visible_from:1197, visible_until:1210,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'지눌 — 정혜결사, 타락한 불교를 산으로 데려가다',
+    title_en:'Jinul — The Retreat Society Reform',
+    title_ja:'知訥 — 定慧結社の仏教改革',
+    place_ko:'조계산 수선사 (순천 송광사)',
+    lat:35.002, lng:127.275,
+    people:['지눌'],
+    summary_ko:'권력과 결탁해 타락해가던 개경 불교를 등지고, 지눌은 뜻을 같이하는 수행자들과 정혜결사를 맺어 조계산 수선사(지금의 송광사)에서 선정과 지혜를 함께 닦는 근본으로 돌아가자는 개혁 운동을 일으켰다. 단박에 깨치되 오래 닦아야 한다는 돈오점수와 선교일치의 가르침은 선종과 교종으로 갈라져 싸우던 고려 불교를 하나의 이론 체계로 통합했다. 무신정변 이후 방향을 잃은 시대에 종교의 자기 개혁이 어떤 모습일 수 있는지 보여준 사건으로, 그의 법맥은 오늘의 조계종으로 이어진다.',
+    video:null,
+    connections:[],
+    tags:['culture','순천','지눌','정혜결사','조계종'],
+    sources:['한국민족문화대백과사전 지눌'] }
 ];

@@ -73,6 +73,18 @@ const EVENTS_1967 = [
     video:null,
     connections:['movement_1967_01'],
     tags:['plot','서울','동백림사건','동베를린','윤이상','천상병','조작사건'],
-    sources:['위키백과 동백림사건','민주화운동사전 동백림사건'] }
-
+    sources:['위키백과 동백림사건','민주화운동사전 동백림사건'] },
+  { id:'person_1967_01', year:1967, visible_from:1956, visible_until:1995,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'윤이상 — 동백림 사건, 세계적 작곡가를 납치한 나라',
+    title_en:"Isang Yun — The Composer and the East Berlin Affair",
+    title_ja:'尹伊桑 — 東ベルリン事件',
+    place_ko:'베를린 → 서울',
+    lat:37.57, lng:126.97,
+    people:['윤이상'],
+    summary_ko:'서베를린에서 활동하며 유럽 현대음악의 정상에 오른 작곡가 윤이상은 1967년 중앙정보부에 의해 서울로 연행돼, 동백림 간첩단 사건의 주모자로 사형까지 구형받았다. 스트라빈스키와 카라얀 등 세계 음악계의 구명 운동 끝에 2년 만에 풀려나 독일로 돌아간 그는 다시는 고국 땅을 밟지 못했고, 상처 속에서도 광주를 애도한 교향시 "광주여 영원히" 등을 쓰며 동양의 정신을 서양 현대음악에 새긴 거장으로 남았다. 사건은 2006년 국정원 과거사위 조사에서 부풀려진 조작으로 확인됐다 — 통영의 바다는 2018년에야 유해로 돌아온 그를 맞았다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','윤이상','동백림사건','현대음악'],
+    sources:['한국민족문화대백과사전 윤이상','위키백과 윤이상'] }
 ];

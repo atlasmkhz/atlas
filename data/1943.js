@@ -105,6 +105,18 @@ const EVENTS_1943 = [
     connections:['person_1943_01','person_1945_01'],
     tags:['person','중국','김창룡','관동군헌병','특무대'],
     sources:['위키백과 김창룡','한국민족문화대백과사전 김창룡','오마이뉴스 일본군 헌병 김구 암살 배후자'],
-    content:{ hero:{"url": "assets/images/entity/person/person_kim_chang_ryong_01.webp", "alt": "김창룡", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"}, gallery:[] } }
-
+    content:{ hero:{"url": "assets/images/entity/person/person_kim_chang_ryong_01.webp", "alt": "김창룡", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"}, gallery:[] } },
+  { id:'person_1943_03', year:1943, visible_from:1934, visible_until:1945,
+    month:null, day:null, type:'person', priority:1,
+    title_ko:'전형필 — 전 재산으로 훈민정음을 지킨 사람',
+    title_en:'Jeon Hyeong-pil — The Guardian of Korean Heritage',
+    title_ja:'全鎣弼 — 文化財を守った澗松',
+    place_ko:'경성 보화각 (성북동)',
+    lat:37.593, lng:126.997,
+    people:['전형필'],
+    summary_ko:'조선 최고 부잣집의 상속자 전형필은 스승 오세창의 가르침에 따라 물려받은 재산을 문화재 수호에 바치기로 하고, 일본으로 빠져나가는 서화와 도자를 기와집 수십 채 값을 치르며 사들였다 — 국내 최초의 사립미술관 보화각(간송미술관)이 그 금고였다. 1943년에는 훈민정음 해례본이 나타났다는 소식에 부르는 값의 열 배를 치르고 사들여, 한글 탄압이 절정이던 시대에 그 원리를 밝힌 유일한 책을 지켜냈고 전쟁 피난길에도 품에서 놓지 않았다. 총 대신 곳간으로 싸운 이 독립운동 덕에 간송 컬렉션의 국보들이 오늘 우리 곁에 남았다.',
+    video:null,
+    connections:[],
+    tags:['person','경성','전형필','간송','훈민정음해례본'],
+    sources:['한국민족문화대백과사전 전형필','국가보훈부 공훈전자사료관'] }
 ];

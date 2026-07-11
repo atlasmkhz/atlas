@@ -79,6 +79,18 @@ const EVENTS_1933 = [
     connections:['political_1933_01','person_1931_01'],
     tags:['person','베이징','지청천','만주철수'],
     sources:['한국민족문화대백과사전 지청천'],
-    content:{ hero:{"url": "assets/images/entity/person/person_ji_cheong_cheon_01.webp", "alt": "지청천", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } }
-
+    content:{ hero:{"url": "assets/images/entity/person/person_ji_cheong_cheon_01.webp", "alt": "지청천", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } },
+  { id:'person_1933_02', year:1933, visible_from:1919, visible_until:1933,
+    month:null, day:null, type:'person', priority:1,
+    title_ko:'남자현 — 손가락을 잘라 혈서를 쓴 독립군의 어머니',
+    title_en:'Nam Ja-hyeon — Mother of the Independence Army',
+    title_ja:'南慈賢 — 独立軍の母',
+    place_ko:'하얼빈',
+    lat:45.8, lng:126.53,
+    people:['남자현'],
+    summary_ko:'의병으로 순국한 남편의 피 묻은 옷을 간직하던 남자현은 마흔일곱에 3·1운동을 보고 만주로 건너가 서로군정서에서 싸우는 독립군을 돌보며 "독립군의 어머니"로 불렸다. 국제연맹 조사단이 하얼빈에 오자 왼손 무명지를 잘라 "조선독립원(朝鮮獨立願)"이라 쓴 혈서와 잘린 손가락을 함께 보내 조선의 뜻을 세계에 전했고, 사이토 총독과 만주국 전권대사 암살을 잇달아 시도했다. 거사 준비 중 체포돼 여섯 달의 혹독한 고문 끝에 단식으로 맞서다 예순한 살로 순국하며 남긴 유언이 "독립은 정신으로 이루어지느니라"였다.',
+    video:null,
+    connections:[],
+    tags:['person','하얼빈','남자현','혈서','서로군정서'],
+    sources:['한국민족문화대백과사전 남자현','국가보훈부 공훈전자사료관'] }
 ];

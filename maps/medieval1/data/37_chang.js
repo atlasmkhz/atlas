@@ -40,5 +40,18 @@ const EVENTS_CHANG = [
     video:null,
     connections:['political_1388_03','political_1392_03'],
     tags:['plot','개경','창왕','폐가입진','이성계'],
-    sources:['한국민족문화대백과사전 창왕'] }
+    sources:['한국민족문화대백과사전 창왕'] },
+  { id:'battle_1389_01', year:1389, visible_from:1389, visible_until:1389,
+    month:null, day:null, type:'battle', priority:2,
+    title_ko:'박위 — 쓰시마를 치다, 왜구의 소굴 정벌',
+    title_en:'Bak Wi — The Tsushima Expedition',
+    title_ja:'朴葳 — 対馬征伐',
+    place_ko:'쓰시마',
+    lat:34.2, lng:129.29,
+    people:['박위'],
+    summary_ko:'수십 년간 고려를 유린한 왜구의 근거지를 뿌리 뽑기 위해, 박위는 전함 100척을 이끌고 바다를 건너 쓰시마를 정벌해 적선 300여 척을 불태우고 끌려갔던 고려 사람 100여 명을 데려왔다. 최영의 홍산, 이성계의 황산, 최무선의 진포로 이어진 왜구 토벌전이 마침내 적의 본거지 타격으로 나아간 것이다. 이 원정은 조선 세종대 이종무의 쓰시마 정벌로 이어지는 선례가 됐고, 방어에서 공세로 전환한 고려 말 국방사의 마지막 장면이 됐다.',
+    video:null,
+    connections:[],
+    tags:['battle','쓰시마','박위','왜구','정벌'],
+    sources:['한국민족문화대백과사전 박위'] }
 ];

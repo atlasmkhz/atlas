@@ -101,6 +101,18 @@ const EVENTS_1959 = [
     video:null,
     connections:['science_1971_03'],
     tags:['person','서울','최형섭','과학기술처','KIST'],
-    sources:['한국민족문화대백과사전 최형섭'] }
-
+    sources:['한국민족문화대백과사전 최형섭'] },
+  { id:'person_1959_04', year:1959, visible_from:1950, visible_until:1959,
+    month:null, day:null, type:'person', priority:1,
+    title_ko:'우장춘 — 씨 없는 수박이 아니라, 굶주림을 끝내려 한 과학자',
+    title_en:"Woo Jang-choon — The Scientist Who Fought Famine, Not Just Bred Seedless Watermelons",
+    title_ja:'禹長春 — 飢えと闘った農学者',
+    place_ko:'부산 (원예시험장)',
+    lat:35.18, lng:129.08,
+    people:['우장춘'],
+    summary_ko:'명성황후 시해에 가담한 우범선의 아들로 일본에서 나고 자란 우장춘은 종의 합성 이론으로 세계 식물육종학계에 이름을 알린 뒤, 광복 후 조국의 초청에 응해 1950년 한국으로 건너왔다. 대중에게는 씨 없는 수박으로 알려져 있지만 그것은 이미 일본에서 확립된 品種을 소개한 것일 뿐 그의 진짜 업적이 아니었다 — 실제 그가 매달린 일은 병충해에 강한 우량 배추·무 품종 개발과 국산 채소 종자 자급 체계 구축으로, 전후 식량난에 시달리던 한국 농업의 기초를 다시 세우는 작업이었다. 아버지의 과거를 짊어진 채 조국에 헌신하다 1959년 세상을 떠난 그의 유해 앞에는 대한민국 문화포장이 놓였다.',
+    video:null,
+    connections:[],
+    tags:['person','부산','우장춘','농학','종의합성'],
+    sources:['한국민족문화대백과사전 우장춘','위키백과 우장춘'] }
 ];

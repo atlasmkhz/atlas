@@ -68,5 +68,18 @@ const EVENTS_INJONG_GORYEO = [
     video:null,
     connections:['movement_1135_01'],
     tags:['culture','개경','삼국사기','김부식','인종'],
-    sources:['한국민족문화대백과사전 삼국사기','위키백과 삼국사기'] }
+    sources:['한국민족문화대백과사전 삼국사기','위키백과 삼국사기'] },
+  { id:'plot_1126_02', year:1126, visible_from:1126, visible_until:1127,
+    month:null, day:null, type:'plot', priority:1,
+    title_ko:'척준경 — 고려 최강의 무인, 두 번 역사를 바꾸다',
+    title_en:'Cheok Jun-gyeong — The Strongest Warrior of Goryeo',
+    title_ja:'拓俊京 — 高麗最強の武人',
+    place_ko:'개경',
+    lat:37.971, lng:126.561,
+    people:['척준경','이자겸','인종'],
+    summary_ko:'여진 정벌에서 성벽을 홀로 넘어 적장을 베는 무용으로 이름을 떨친 척준경은 별무반이 배출한 고려 최강의 무인이었다. 이자겸의 난에서 그는 궁궐에 불을 지르며 반란의 칼이 됐으나, 인종의 밀지를 받자 이번에는 이자겸을 체포해 난을 진압하는 칼이 됐다 — 한 사람의 무력이 두 번이나 정변의 향방을 갈랐던 것이다. 그러나 공신이 된 지 1년 만에 정지상의 탄핵으로 유배됐으니, 칼로 세운 권세가 붓 한 자루에 무너진 그의 말로는 무인의 시대가 오기 전 고려에서 무력이 서 있던 자리를 보여준다.',
+    video:null,
+    connections:[],
+    tags:['plot','개경','척준경','이자겸의난','별무반'],
+    sources:['한국민족문화대백과사전 척준경'] }
 ];

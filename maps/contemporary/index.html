@@ -55,7 +55,7 @@
 <script src="js/analytics.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="css/style.css?v=20260622d" />
+<link rel="stylesheet" href="css/style.css?v=20260711a" />
 </head>
 <body>
 
@@ -133,11 +133,20 @@
   <div class="era-hub-sub">역사와 철학을 영상, 퀴즈, 게임으로 만나보세요</div>
   <div class="project-tabs" id="projectTabs" role="tablist">
     <button type="button" class="project-tab active" data-tab="youtube" role="tab" aria-selected="true">유튜브 갤러리</button>
+    <button type="button" class="project-tab" data-tab="simulation" role="tab" aria-selected="false">역사 시뮬레이션</button>
     <button type="button" class="project-tab" data-tab="quiz" role="tab" aria-selected="false">퀴즈</button>
     <button type="button" class="project-tab" data-tab="minigame" role="tab" aria-selected="false">미니게임</button>
     <button type="button" class="project-tab" data-tab="mystery" role="tab" aria-selected="false">추리게임</button>
   </div>
   <div class="project-panel" id="projectPanelYoutube" data-panel="youtube" role="tabpanel"><!-- projectHub.js가 채운다 --></div>
+  <div class="project-panel" id="projectPanelSimulation" data-panel="simulation" role="tabpanel" hidden>
+    <div class="project-sim-card">
+      <div class="project-sim-kicker">ATLAS 프로젝트 · 역사 시뮬레이션</div>
+      <div class="project-sim-title">역사의 갈림길</div>
+      <p class="project-sim-desc">1592년, 당신이라면 어떤 선택을 했을까요? 열두 번의 실제 역사 딜레마 앞에서 선택해보세요 — 당신의 선택 패턴과 가장 닮은 역사 인물을 찾아드립니다. 성격 검사가 아닌 역사 시뮬레이션입니다.</p>
+      <a class="project-sim-cta" href="../../play/crossroads/index.html" target="_blank" rel="noopener">갈림길에 서기 →</a>
+    </div>
+  </div>
   <div class="project-panel" id="projectPanelQuiz" data-panel="quiz" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
   <div class="project-panel" id="projectPanelMinigame" data-panel="minigame" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
   <div class="project-panel" id="projectPanelMystery" data-panel="mystery" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>

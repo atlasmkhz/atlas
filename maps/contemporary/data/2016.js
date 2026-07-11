@@ -145,6 +145,20 @@ const EVENTS_2016 = [
     video:null,
     connections:[],
     tags:['plot','울산','고래고기','검경갈등','환부'],
-    sources:['위키백과 울산 고래고기 환부 사건','오마이뉴스 "검찰이 감추는 울산 고래고기 환부사건의 전말"'] }
-
+    sources:['위키백과 울산 고래고기 환부 사건','오마이뉴스 "검찰이 감추는 울산 고래고기 환부사건의 전말"'] },
+  { id:'person_2016_01', year:2016, visible_from:1994, visible_until:2016,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'신영복 별세 — 감옥으로부터의 사색, 20년 옥살이가 남긴 성찰',
+    title_en:"Shin Young-bok, Author of Reflections from Prison, Dies",
+    title_ja:'申栄福死去',
+    place_ko:'서울 (성공회대)',
+    lat:37.49, lng:126.82,
+    people:['신영복'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'통일혁명당 사건으로 무기징역을 선고받고 20년 20일을 복역한 신영복이 별세했다. 옥중에서 가족에게 보낸 편지를 묶은 감옥으로부터의 사색은 원한 대신 인간과 관계에 대한 성찰을 담아 시대의 고전이 됐고, 출소 후 성공회대 강단에서 "더불어숲"의 연대 사상을 폈다. 소주 "처음처럼"의 글씨로도 친숙한 그의 붓글씨(쇠귀체)는 옥중에서 익힌 것이니 — 국가폭력의 피해자가 그 시간을 사유와 예술로 바꿔낸 드문 생애였다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','신영복','감옥으로부터의사색','성공회대'],
+    sources:['한국민족문화대백과사전 신영복','위키백과 신영복'] }
 ];

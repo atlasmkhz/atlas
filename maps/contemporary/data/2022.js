@@ -145,6 +145,20 @@ const EVENTS_2022 = [
     video:null,
     connections:[],
     tags:['person','영국','손흥민','축구','프리미어리그'],
-    sources:['위키백과 손흥민','한국일보 "손흥민, 리그 22·23호골…아시아 첫 EPL 득점왕 등극"','코리아넷뉴스 "손흥민, 아시아 선수 첫 EPL 득점왕"'] }
-
+    sources:['위키백과 손흥민','한국일보 "손흥민, 리그 22·23호골…아시아 첫 EPL 득점왕 등극"','코리아넷뉴스 "손흥민, 아시아 선수 첫 EPL 득점왕"'] },
+  { id:'person_2022_04', year:2022, visible_from:1994, visible_until:2022,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'이어령 별세 — 시대의 언어를 만든 지성',
+    title_en:"Lee O-young, Korea's Foremost Cultural Critic, Dies",
+    title_ja:'李御寧死去',
+    place_ko:'서울',
+    lat:37.57, lng:126.98,
+    people:['이어령'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'"흙 속에 저 바람 속에"로 한국 문화론의 문을 열고 초대 문화부 장관으로 한국예술종합학교 설립을 이끈 이어령이 별세했다. 88올림픽 개회식의 굴렁쇠 소년, "디지로그" 개념 등 반세기 동안 시대의 화두를 만들어온 그는 스스로를 "물음표와 느낌표 사이를 산 사람"이라 정리했다. 암 투병을 공개하며 죽음 앞의 사유를 이어간 만년의 글들까지, 문학평론가·언론인·행정가·미래학자를 오간 그 생애 자체가 한국 지성사의 한 장이었다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','이어령','문화부장관','디지로그'],
+    sources:['한국민족문화대백과사전 이어령','위키백과 이어령'] }
 ];

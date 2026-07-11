@@ -74,6 +74,18 @@ const EVENTS_1970 = [
     video:null,
     connections:[],
     tags:['movement','서울','교련반대운동','학원병영화'],
-    sources:['나무위키 민주화운동대한민국'] }
-
+    sources:['나무위키 민주화운동대한민국'] },
+  { id:'person_1970_02', year:1970, visible_from:1937, visible_until:1974,
+    month:null, day:null, type:'person', priority:1,
+    title_ko:'김환기 — 점화, 뉴욕의 밤하늘에 고국을 찍다',
+    title_en:"Kim Whanki — Dot Paintings and the New York Nights",
+    title_ja:'金煥基 — ドット絵とニューヨークの夜空',
+    place_ko:'뉴욕',
+    lat:40.71, lng:-74.01,
+    people:['김환기'],
+    summary_ko:'한국 최초의 추상미술 세대인 김환기는 파리를 거쳐 1963년 뉴욕에 정착한 뒤, 점 하나하나에 그리운 얼굴과 별과 산을 눌러 담는 전면점화(全面點畵) 연작으로 자신의 예술을 완성했다. 1970년 서울신문 문화대상 미술 부문에서 대상을 받은 대표작 "어디서 무엇이 되어 다시 만나랴"는 시인 김광섭의 시구에서 제목을 따온 것으로, 낯선 땅에서 고국과 벗을 그리는 마음을 무수한 점으로 환산한 작품이다. 그의 캔버스는 훗날 한국 미술품 경매 역대 최고가를 여러 차례 갈아치우며, 어느 화가보다 비싼 그림이 실은 향수로 그린 그림이었음을 보여주고 있다.',
+    video:null,
+    connections:[],
+    tags:['person','뉴욕','김환기','전면점화','추상미술'],
+    sources:['한국민족문화대백과사전 김환기','위키백과 김환기'] }
 ];

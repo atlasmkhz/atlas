@@ -82,6 +82,20 @@ const EVENTS_1994 = [
     video:null,
     connections:[],
     tags:['person','LA','박찬호','메이저리그','야구'],
-    sources:['위키백과 박찬호','나무위키 "박찬호/선수 경력"','이랜드뮤지엄 "박찬호의 빅리그 데뷔"'] }
-
+    sources:['위키백과 박찬호','나무위키 "박찬호/선수 경력"','이랜드뮤지엄 "박찬호의 빅리그 데뷔"'] },
+  { id:'person_1994_04', year:1994, visible_from:1994, visible_until:1994,
+    month:null, day:null, type:'person', priority:1,
+    title_ko:'박경리, 대하소설 토지를 25년 만에 완간하다',
+    title_en:"Park Kyong-ni Completes the Epic Land",
+    title_ja:'朴景利、大河小説「土地」完結',
+    place_ko:'원주',
+    lat:37.34, lng:127.92,
+    people:['박경리'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'1969년 집필을 시작한 대하소설 토지가 25년 만에 5부 16권으로 완간됐다. 구한말에서 해방까지 최참판댁 4대와 600여 명의 인물을 통해 한 민족의 반세기를 통째로 담아낸 이 작품은 한국문학이 도달한 가장 큰 스케일로 꼽힌다. 사위 김지하의 투옥 등 시대의 풍파 속에서 원주에 칩거하며 "글 감옥"을 자처한 작가의 생애 자체가 작품과 포개졌고, 토지는 이후 드라마와 만화로 거듭 되살아나며 한국인의 근대 기억의 원형이 됐다.',
+    video:null,
+    connections:[],
+    tags:['person','원주','박경리','토지','대하소설'],
+    sources:['한국민족문화대백과사전 박경리','위키백과 박경리'] }
 ];

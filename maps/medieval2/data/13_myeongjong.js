@@ -96,5 +96,18 @@ const EVENTS_MYEONGJONG = [
     video:null,
     connections:['culture_1568_01'],
     tags:['culture','강릉','신사임당','허난설헌','여성예술가'],
-    sources:['한국민족문화대백과사전 신사임당','한국민족문화대백과사전 허난설헌'] }
+    sources:['한국민족문화대백과사전 신사임당','한국민족문화대백과사전 허난설헌'] },
+  { id:'culture_1555_01', year:1555, visible_from:1545, visible_until:1572,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'조식 — 단성소, 칼을 찬 선비의 직언',
+    title_en:'Jo Sik — The Scholar Who Wore a Sword',
+    title_ja:'曺植 — 剣を帯びた儒学者',
+    place_ko:'산청 (지리산 덕천)',
+    lat:35.28, lng:127.85,
+    people:['조식','명종'],
+    summary_ko:'남명 조식은 평생 벼슬을 거부한 채 지리산 자락에서 경(敬)과 의(義)를 새긴 방울과 칼을 차고 자신을 벼렸다. 명종이 단성현감을 내리자 올린 사직 상소에서 "대비는 깊은 궁궐의 과부요 전하는 어린 고아일 뿐"이라며 문정왕후의 수렴청정을 정면으로 겨눴다 — 목숨을 건 이 단성소는 조선 상소 문학에서 가장 서슬 퍼런 문장으로 꼽힌다. 실천을 앞세운 그의 가르침은 헛되지 않아, 임진왜란이 터지자 곽재우·정인홍 등 남명학파 제자들이 가장 먼저 의병의 칼을 들었다.',
+    video:null,
+    connections:[],
+    tags:['culture','산청','조식','단성소','남명학파'],
+    sources:['한국민족문화대백과사전 조식'] }
 ];

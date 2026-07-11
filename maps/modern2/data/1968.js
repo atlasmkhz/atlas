@@ -171,6 +171,18 @@ const EVENTS_1968 = [
     video:null,
     connections:['economic_1968_04','economic_1973_05'],
     tags:['person','포항','박태준','포스코','제철보국'],
-    sources:['한국민족문화대백과사전 박태준','위키백과 박태준'] }
-
+    sources:['한국민족문화대백과사전 박태준','위키백과 박태준'] },
+  { id:'person_1968_04', year:1968, visible_from:1960, visible_until:1968,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'김수영 — 풀이 눕고 다시 일어서듯',
+    title_en:"Kim Su-yeong — The Poet of Freedom",
+    title_ja:'金洙暎 — 自由の詩人',
+    place_ko:'서울',
+    lat:37.57, lng:126.98,
+    people:['김수영'],
+    summary_ko:'4·19의 감격과 5·16의 좌절을 온몸으로 통과한 김수영은 "어째서 자유에는 피의 냄새가 섞여 있는가"라고 물으며, 시가 현실의 자유를 향한 온몸의 밀고 나감이어야 한다고 믿었다. 죽기 보름 전 쓴 마지막 시 "풀"은 바람보다 먼저 눕고 바람보다 먼저 일어나는 풀로 민중의 생명력을 노래한, 한국 현대시의 가장 유명한 은유가 됐다. 마흔여덟 되던 해 밤길 버스 사고로 갑자기 떠났지만, 참여시와 순수시의 낡은 구분을 부수며 그가 연 길 위에서 이후의 한국 시가 자랐다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','김수영','풀','참여시'],
+    sources:['한국민족문화대백과사전 김수영','위키백과 김수영'] }
 ];

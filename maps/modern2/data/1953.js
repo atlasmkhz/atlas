@@ -73,6 +73,18 @@ const EVENTS_1953 = [
     video:null,
     connections:['massacre_1949_01'],
     tags:['massacre','제주','4·3사건','종결'],
-    sources:['제주4·3사건진상조사보고서'] }
-
+    sources:['제주4·3사건진상조사보고서'] },
+  { id:'person_1953_01', year:1953, visible_from:1953, visible_until:1953,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'황순원, 소나기를 발표하다',
+    title_en:'Hwang Sun-won Publishes "Sonagi" (The Shower)',
+    title_ja:'黄順元「소나기」発表',
+    place_ko:'서울',
+    lat:37.57, lng:126.98,
+    people:['황순원'],
+    summary_ko:'전쟁이 끝나갈 무렵 황순원이 발표한 단편 소나기는 시골 소년과 서울에서 온 소녀의 짧고 순수한 만남과 이별을 절제된 문장으로 그려, 이후 반세기 넘게 한국 교과서에 실리며 한국인이 가장 널리 공유하는 첫사랑의 원형이 됐다. 그는 등단 이래 평생 스캔들이나 유파 논쟁에 휘말리지 않고 오직 문장의 완성도에만 매달린 과작(寡作)의 작가로, 소나기 외에도 카인의 후예·나무들 비탈에 서다 등에서 이념 대립과 전쟁이 인간의 순수를 어떻게 훼손하는지 담담한 문체로 응시했다. 화려한 수사 없이도 문학이 오래 살아남을 수 있음을 그의 문장이 증명한다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','황순원','소나기','전후문학'],
+    sources:['한국민족문화대백과사전 황순원','위키백과 황순원'] }
 ];

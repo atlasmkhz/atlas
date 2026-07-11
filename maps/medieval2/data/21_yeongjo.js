@@ -96,5 +96,18 @@ const EVENTS_YEONGJO = [
     video:null,
     connections:['policy_1750_01'],
     tags:['culture','한양','실학','유형원','이익','정약용','토지개혁'],
-    sources:['한국민족문화대백과사전 실학','한국민족문화대백과사전 정약용'] }
+    sources:['한국민족문화대백과사전 실학','한국민족문화대백과사전 정약용'] },
+  { id:'culture_1751_01', year:1751, visible_from:1740, visible_until:1759,
+    month:null, day:null, type:'culture', priority:1,
+    title_ko:'정선 — 인왕제색도, 조선의 산천을 조선의 눈으로 그리다',
+    title_en:'Jeong Seon — True-View Landscape Painting',
+    title_ja:'鄭敾 — 真景山水の完成',
+    place_ko:'한양 인왕산',
+    lat:37.579, lng:126.963,
+    people:['정선'],
+    summary_ko:'겸재 정선 이전의 산수화는 가보지도 않은 중국의 산을 화보 따라 그리는 관념의 그림이었다 — 그는 금강산과 한강, 인왕산을 직접 발로 밟고 눈으로 본 대로 그려 진경산수라는 조선 고유의 화풍을 완성했다. 일흔여섯에 그린 인왕제색도는 비 갠 뒤 안개 피어오르는 인왕산의 바위 질감을 힘찬 먹으로 눌러 담은 걸작으로, 평생의 벗 이병연의 쾌유를 빌며 그렸다는 사연이 전한다. 우리 땅을 그릴 가치가 있는 풍경으로 발견한 이 시선은 김홍도의 풍속화와 함께 조선 후기 문화 자존의 상징이 됐다.',
+    video:null,
+    connections:[],
+    tags:['culture','한양','정선','진경산수','인왕제색도'],
+    sources:['한국민족문화대백과사전 정선'] }
 ];

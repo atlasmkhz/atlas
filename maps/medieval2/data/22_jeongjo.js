@@ -180,5 +180,18 @@ const EVENTS_JEONGJO = [
     video:null,
     connections:['massacre_1801_01'],
     tags:['political','진산','전주','신해박해','윤지충','천주교'],
-    sources:['한국민족문화대백과사전 신해박해','우리역사넷 진산사건'] }
+    sources:['한국민족문화대백과사전 신해박해','우리역사넷 진산사건'] },
+  { id:'economic_1795_01', year:1795, visible_from:1795, visible_until:1796,
+    month:null, day:null, type:'economic', priority:1,
+    title_ko:'김만덕 — 제주의 거상, 전 재산으로 섬을 살리다',
+    title_en:'Kim Man-deok — The Merchant Who Saved Jeju',
+    title_ja:'金萬徳 — 済州を救った女性豪商',
+    place_ko:'제주',
+    lat:33.51, lng:126.52,
+    people:['김만덕','정조'],
+    summary_ko:'기녀 신분에서 벗어나 객주를 차린 김만덕은 제주 특산물과 육지 물품을 잇는 유통으로 제주 최고의 거상이 됐다. 1795년 대흉년으로 섬 사람들이 굶어 죽어가자 그는 전 재산을 풀어 육지에서 쌀을 사들여 구휼했고, 정조가 소원을 묻자 벼슬도 재물도 아닌 "한양에 가서 임금을 뵙고 금강산을 보고 싶다"고 답했다 — 제주 여인의 출륙이 금지된 시대에 왕이 그 법을 깨고 길을 열어준 것이다. 여성이라는 벽과 섬이라는 벽을 상업으로 넘은 그의 삶은 조선 후기 상업 시대가 낳은 가장 빛나는 인물 서사다.',
+    video:null,
+    connections:[],
+    tags:['economic','제주','김만덕','구휼','거상'],
+    sources:['한국민족문화대백과사전 김만덕'] }
 ];

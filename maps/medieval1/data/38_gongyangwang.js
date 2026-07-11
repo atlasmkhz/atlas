@@ -40,5 +40,18 @@ const EVENTS_GONGYANGWANG = [
     video:null,
     connections:['plot_1392_04'],
     tags:['political','개경','고려멸망','공양왕','정몽주','이성계'],
-    sources:['한국민족문화대백과사전 공양왕'] }
+    sources:['한국민족문화대백과사전 공양왕'] },
+  { id:'culture_1390_01', year:1390, visible_from:1389, visible_until:1392,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'길재 — 두 왕조를 섬기지 않은 마지막 고려인',
+    title_en:'Gil Jae — The Loyalist Who Refused Two Dynasties',
+    title_ja:'吉再 — 二朝に仕えなかった忠臣',
+    place_ko:'선산 금오산 (구미)',
+    lat:36.09, lng:128.31,
+    people:['길재','정몽주'],
+    summary_ko:'이성계의 새 왕조가 눈앞에 다가오자 길재는 벼슬을 버리고 고향 선산으로 내려가, 조선 개국 후 태종이 벼슬을 내려도 "여자에게 두 남편이 없듯 신하에게 두 임금이 없다"며 끝내 거절했다. "오백 년 도읍지를 필마로 돌아드니"로 시작하는 그의 회고가는 망한 왕조를 향한 절의의 노래로 남았다. 그가 금오산 자락에서 길러낸 제자들의 학맥은 김종직과 김굉필을 거쳐 조광조로 이어졌으니 — 조선 사림파의 뿌리는 역설적으로 조선을 거부한 이 고려인에게 닿는다.',
+    video:null,
+    connections:[],
+    tags:['culture','구미','길재','절의','사림'],
+    sources:['한국민족문화대백과사전 길재'] }
 ];

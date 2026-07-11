@@ -54,5 +54,18 @@ const EVENTS_MYEONGJONG = [
     video:null,
     connections:['movement_1176_01','plot_1196_01'],
     tags:['plot','개경','경대승','도방','무신정권'],
-    sources:['한국민족문화대백과사전 경대승'] }
+    sources:['한국민족문화대백과사전 경대승'] },
+  { id:'culture_1193_01', year:1193, visible_from:1190, visible_until:1241,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'이규보 — 동명왕편, 무신의 시대에 서사시를 쓰다',
+    title_en:'Yi Gyu-bo — Poet of the Military Era',
+    title_ja:'李奎報 — 武臣の時代の大文人',
+    place_ko:'개경',
+    lat:37.971, lng:126.561,
+    people:['이규보','최충헌'],
+    summary_ko:'이규보는 스물여섯에 고구려 시조의 일대기를 노래한 장편 서사시 동명왕편을 지어, 중국 중심의 세계관 속에서 "우리 역사도 성인의 역사"라는 자부심을 문학으로 선언했다. 무신정권 아래에서 최씨 정권에 출사해 문필로 입신한 그의 삶은 후대에 어용 시비를 낳았지만, 바로 그 자리에서 그는 몽골 침입기의 외교문서와 팔만대장경 조성의 기원문까지 도맡으며 칼의 시대에 붓의 자리를 지켰다. 문집 동국이상국집은 고려 문학의 최고봉이자 당대 생활사의 보고로 남아 있다.',
+    video:null,
+    connections:[],
+    tags:['culture','개경','이규보','동명왕편','무신정권'],
+    sources:['한국민족문화대백과사전 이규보'] }
 ];

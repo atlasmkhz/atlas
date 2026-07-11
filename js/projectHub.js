@@ -42,6 +42,7 @@
   // ── 탭 전환 ──────────────────────────────────────────────────
   const panels = {
     youtube: document.getElementById('projectPanelYoutube'),
+    simulation: document.getElementById('projectPanelSimulation'),
     quiz: document.getElementById('projectPanelQuiz'),
     minigame: document.getElementById('projectPanelMinigame'),
     mystery: document.getElementById('projectPanelMystery'),

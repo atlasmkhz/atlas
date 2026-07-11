@@ -87,6 +87,18 @@ const EVENTS_1965 = [
     video:null,
     connections:[],
     tags:['person','서울','이병철','삼성그룹','사업보국'],
-    sources:['한국민족문화대백과사전 이병철'] }
-
+    sources:['한국민족문화대백과사전 이병철'] },
+  { id:'person_1965_04', year:1965, visible_from:1953, visible_until:1965,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'박수근 — 가장 가난한 시대를 가장 따뜻하게 그리다',
+    title_en:"Park Soo-keun — Painter of Ordinary Lives",
+    title_ja:'朴壽根 — 庶民を描いた国民画家',
+    place_ko:'서울 창신동',
+    lat:37.574, lng:127.013,
+    people:['박수근'],
+    summary_ko:'정규 미술교육을 받지 못한 박수근은 미군 PX에서 초상화를 그려 생계를 이으며, 퇴근길 창신동 골목의 아기 업은 소녀와 절구질하는 아낙, 앙상한 나목을 화강암 같은 질감의 화면에 담았다. 화려한 것이 하나도 없는 그의 그림은 전후의 가난을 연민이 아니라 존엄으로 그려낸 것이었고, 정작 그는 국전 낙선과 궁핍 속에 쉰한 살로 세상을 떠났다. 사후 그의 작품은 한국 미술품 경매 최고가 기록을 갈아치우며 "국민화가"로 불리게 됐다 — 살아서 가장 가난했던 화가의 역설이다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','박수근','나목','국민화가'],
+    sources:['한국민족문화대백과사전 박수근','위키백과 박수근'] }
 ];

@@ -16,8 +16,7 @@ import sys
 import json
 import html as html_module
 
-sys.path.insert(0, '/home/claude/seo_build_modern2')
-sys.path.insert(0, '/home/claude/work/photos_zip/maps/modern2')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from generate_slugs import load_cards, assign_slugs
 from era_breadcrumb import build_breadcrumb, get_era_label, get_breadcrumb_type
@@ -28,8 +27,10 @@ except ImportError:
 
 SITE_ROOT = 'https://atlas.mkhz.kr'
 PATH_PREFIX = '/maps/modern2'
-OUT_DIR = '/home/claude/work/photos_zip/maps/modern2/event'
-DATA_DIR = '/home/claude/work/photos_zip/maps/modern2/data'
+BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
+MAP_DIR = os.path.dirname(BUILD_DIR)
+OUT_DIR = os.path.join(MAP_DIR, 'event')
+DATA_DIR = os.path.join(MAP_DIR, 'data')
 
 def esc(s):
     """HTML 출력용 escape. None은 빈 문자열로."""

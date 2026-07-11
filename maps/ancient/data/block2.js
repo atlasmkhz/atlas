@@ -180,5 +180,18 @@ const EVENTS_BLOCK2 = [
     video:null,
     connections:['political_356_01','battle_475_01'],
     tags:['diplomacy','경주','눌지왕','나제동맹'],
-    sources:['한국민족문화대백과사전 나제동맹'] }
+    sources:['한국민족문화대백과사전 나제동맹'] },
+  { id:'political_418_01', year:418, visible_from:417, visible_until:419,
+    month:null, day:null, type:'political', priority:2,
+    title_ko:'박제상 — 왕제를 구하고 왜에서 순국하다',
+    title_en:'Bak Je-sang — Loyalty unto Death in Wa',
+    title_ja:'朴堤上 — 倭で殉国した忠臣',
+    place_ko:'서라벌 → 왜 (치술령)',
+    lat:35.616, lng:129.242,
+    people:['박제상','눌지왕'],
+    summary_ko:'눌지왕의 두 아우가 고구려와 왜에 볼모로 잡혀 있자, 박제상은 먼저 고구려에서 복호를 데려온 뒤 왜로 건너가 미사흔을 탈출시키고 자신은 남았다. 정체가 드러나자 왜왕은 신하가 되면 살려주겠다 했으나 그는 "계림의 개돼지가 될지언정 왜국의 신하는 되지 않겠다"며 불에 타 죽는 형을 받았다. 남편을 기다리다 치술령에서 망부석이 됐다는 아내의 전설과 함께, 신라가 기억한 충절의 원형이 됐다.',
+    video:null,
+    connections:[],
+    tags:['political','치술령','박제상','눌지왕','충절'],
+    sources:['한국민족문화대백과사전 박제상'] }
 ];

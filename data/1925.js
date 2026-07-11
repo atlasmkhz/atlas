@@ -150,6 +150,18 @@ const EVENTS_1925 = [
     video:null,
     connections:[],
     tags:['policy','조선국내','경성','식민사관','조선사편수회'],
-    sources:['한국민족문화대백과사전 조선사편수회','우리역사넷 식민사관'] }
-
+    sources:['한국민족문화대백과사전 조선사편수회','우리역사넷 식민사관'] },
+  { id:'person_1925_03', year:1925, visible_from:1922, visible_until:1934,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'김소월 — 진달래꽃, 조선의 슬픔에 리듬을 주다',
+    title_en:'Kim Sowol — Azaleas and the Korean Lyric',
+    title_ja:'金素月 — つつじの花の詩人',
+    place_ko:'정주 → 경성',
+    lat:39.69, lng:125.21,
+    people:['김소월'],
+    summary_ko:'스물세 살의 김소월이 펴낸 시집 진달래꽃은 "나 보기가 역겨워 가실 때에는 말없이 고이 보내 드리우리다"의 반어 속에 이별의 통곡을 눌러 담아, 민요의 가락으로 식민지 조선인의 정한(情恨)을 노래한 한국 서정시의 원점이 됐다. 스승 김억이 알아본 이 천재는 그러나 문단과 생활 어느 쪽에도 뿌리내리지 못했고, 고향에서 사업 실패와 실의 끝에 서른둘에 생을 마감했다. 살아서는 시집 한 권이 전부였던 시인이 죽어서는 한국인이 가장 사랑하는 시인이 된 것이다.',
+    video:null,
+    connections:[],
+    tags:['person','정주','김소월','진달래꽃','서정시'],
+    sources:['한국민족문화대백과사전 김소월','국가보훈부 공훈전자사료관'] }
 ];

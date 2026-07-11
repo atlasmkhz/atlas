@@ -96,5 +96,18 @@ const EVENTS_CHEOLJONG = [
     video:null,
     connections:[],
     tags:['science','한양','김정호','대동여지도','지도'],
-    sources:['한국민족문화대백과사전 대동여지도','국립중앙박물관 대동여지도 목판','우리역사넷 김정호'] }
+    sources:['한국민족문화대백과사전 대동여지도','국립중앙박물관 대동여지도 목판','우리역사넷 김정호'] },
+  { id:'culture_1850_02', year:1850, visible_from:1831, visible_until:1863,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'김삿갓 — 조선을 떠돈 풍자의 붓',
+    title_en:'Kim Satgat — The Wandering Satirist',
+    title_ja:'金笠 — 放浪の風刺詩人',
+    place_ko:'영월 → 전국',
+    lat:37.16, lng:128.47,
+    people:['김병연'],
+    summary_ko:'김병연은 과거 시험에서 홍경래에게 항복한 선천부사를 통렬히 비판하는 답안으로 급제했으나, 그 인물이 자신의 조부임을 뒤늦게 알고는 하늘을 볼 수 없다며 삿갓을 쓰고 평생 방랑길에 올랐다. 전국을 떠돌며 그가 남긴 시는 양반의 허위와 세도정치기의 민중 현실을 해학과 파격으로 찌른 풍자문학의 절정으로, 한시의 형식에 우리말 언어유희를 뒤섞는 파괴적 실험이기도 했다. 몰락한 양반이 시로 시대를 조롱한 그의 삶 자체가, 무너져가던 조선 후기의 자화상이었다.',
+    video:null,
+    connections:[],
+    tags:['culture','영월','김삿갓','풍자','방랑시인'],
+    sources:['한국민족문화대백과사전 김병연'] }
 ];

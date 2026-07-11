@@ -74,6 +74,18 @@ const EVENTS_1958 = [
     video:null,
     connections:['political_1958_01','political_1958_02'],
     tags:['political','서울','2·4보안법파동','국가보안법','자유당'],
-    sources:['위키백과 2·4보안법파동','오마이뉴스 날치기로강화된국가보안법'] }
-
+    sources:['위키백과 2·4보안법파동','오마이뉴스 날치기로강화된국가보안법'] },
+  { id:'person_1958_02', year:1958, visible_from:1947, visible_until:1989,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'함석헌 — 생각하는 백성이라야 산다',
+    title_en:"Ham Seok-heon — The Voice of the Thinking People",
+    title_ja:'咸錫憲 — 考える民こそ生きる',
+    place_ko:'서울',
+    lat:37.57, lng:126.98,
+    people:['함석헌','장준하'],
+    summary_ko:'함석헌이 사상계에 쓴 "생각하는 백성이라야 산다"는 6·25를 하늘의 뜻이 아니라 우리 모두의 책임으로 물은 글로, 이승만 정권은 이 글을 문제 삼아 일흔을 바라보는 그를 구속했다 — 해방 후 첫 필화 사건의 하나였다. 씨알(민중)이 역사의 주인이라는 그의 사상은 이후 한일협정 반대, 유신 반대, 민주화운동의 모든 고비마다 흰 두루마기의 저항으로 이어졌다. 일제와 소련 치하, 그리고 남한의 독재까지 모든 권력에 갇혀본 이 사상가는 폭력 없는 저항의 언어를 한국에 뿌리내린 사람이었다.',
+    video:null,
+    connections:[],
+    tags:['person','서울','함석헌','사상계','씨알사상'],
+    sources:['한국민족문화대백과사전 함석헌','위키백과 함석헌'] }
 ];

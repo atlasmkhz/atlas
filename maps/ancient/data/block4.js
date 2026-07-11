@@ -152,5 +152,18 @@ const EVENTS_BLOCK4 = [
     video:null,
     connections:['culture_632_01','battle_612_01'],
     tags:['diplomacy','경주','진평왕','원광','걸사표'],
-    sources:['한국민족문화대백과사전 진평왕','한국민족문화대백과사전 걸사표'] }
+    sources:['한국민족문화대백과사전 진평왕','한국민족문화대백과사전 걸사표'] },
+  { id:'battle_590_01', year:590, visible_from:590, visible_until:590,
+    month:null, day:null, type:'battle', priority:2,
+    title_ko:'온달 — 바보 온달, 아단성에서 지다',
+    title_en:'Ondal — The Fool Who Became a General',
+    title_ja:'温達 — 阿旦城に散った将軍',
+    place_ko:'아단성 (아차산성 비정, 단양 온달산성설도 있음)',
+    lat:37.554, lng:127.103,
+    people:['온달','평강공주'],
+    summary_ko:'가난한 바보라 놀림받던 온달은 평강공주와 혼인한 뒤 무예를 닦아 후주와의 전쟁에서 선봉으로 공을 세우며 고구려의 장군이 됐다. 신라에 빼앗긴 한강 유역을 되찾겠다며 "계립현과 죽령 서쪽 땅을 회복하지 못하면 돌아오지 않겠다"고 출정했으나 아단성 아래에서 화살에 맞아 전사했다. 관이 움직이지 않다가 공주가 어루만지자 비로소 움직였다는 이야기는, 신분을 넘은 사랑과 좌절된 실지 회복의 꿈을 함께 담은 고구려 최고의 인물 서사로 남았다.',
+    video:null,
+    connections:[],
+    tags:['battle','아차산','온달','평강공주','고구려'],
+    sources:['한국민족문화대백과사전 온달'] }
 ];

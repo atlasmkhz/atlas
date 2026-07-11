@@ -251,6 +251,18 @@ const EVENTS_1919 = [
     connections:['movement_1919_02'],
     tags:['person','만주·간도','오동진','광복군총영','서간도','무장투쟁'],
     sources:['한국민족문화대백과사전 오동진','위키백과 오동진','디지털동작문화대전 오동진'],
-    content:{ hero:{"url": "assets/images/entity/person/person_o_dong_jin_01.webp", "alt": "오동진", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } }
-
+    content:{ hero:{"url": "assets/images/entity/person/person_o_dong_jin_01.webp", "alt": "오동진", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } },
+  { id:'person_1919_07', year:1919, visible_from:1919, visible_until:1920,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'김마리아 — 2·8의 불씨를 품고 현해탄을 건너다',
+    title_en:'Kim Maria — Carrying the Declaration Home',
+    title_ja:'金マリア — 二・八の火種を運んだ人',
+    place_ko:'도쿄 → 경성',
+    lat:37.572, lng:127.0,
+    people:['김마리아'],
+    summary_ko:'도쿄 유학생들의 2·8독립선언에 참여한 김마리아는 선언서를 기모노 띠 속에 숨겨 현해탄을 건너와 국내에 전파하며 3·1운동의 불씨를 날랐다. 만세운동 후 대한민국애국부인회를 재건해 회장으로서 군자금을 모아 임시정부로 보내다 배신자의 밀고로 체포됐고, 모진 고문으로 평생 낫지 않는 병을 얻고도 병보석 중 상하이로 탈출해 임시의정원 최초의 여성 의원이 됐다. "나는 대한의 독립과 결혼했다"는 말대로 살다 간 그의 생애는 고문 후유증이 결국 그를 데려간 1944년, 광복을 한 해 앞두고 끝났다.',
+    video:null,
+    connections:[],
+    tags:['person','경성','김마리아','애국부인회','2·8독립선언'],
+    sources:['한국민족문화대백과사전 김마리아','국가보훈부 공훈전자사료관'] }
 ];

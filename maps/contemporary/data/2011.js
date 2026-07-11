@@ -81,6 +81,20 @@ const EVENTS_2011 = [
     video:null,
     connections:[],
     tags:['political','서울','박원순','서울시장','보궐선거'],
-    sources:['한국민족문화대백과사전 박원순','위키백과 2011년 서울특별시장 보궐선거'] }
-
+    sources:['한국민족문화대백과사전 박원순','위키백과 2011년 서울특별시장 보궐선거'] },
+  { id:'person_2011_01', year:2011, visible_from:1994, visible_until:2011,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'박완서 별세 — 전쟁과 일상을 함께 증언한 작가',
+    title_en:"Park Wan-suh, Chronicler of War and Daily Life, Dies",
+    title_ja:'朴婉緖死去',
+    place_ko:'구리 (아치울)',
+    lat:37.6, lng:127.13,
+    people:['박완서'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'마흔에 나목으로 등단한 박완서가 여든 살로 별세했다. 6·25 때 오빠와 숙부를 잃은 자신의 체험을 평생의 원천으로 삼아 "그 많던 싱아는 누가 다 먹었을까" 등에서 전쟁의 상처를 증언했고, 동시에 중산층의 허위의식과 여성의 삶을 특유의 천연덕스러운 입담으로 해부했다. 대하 서사가 아닌 부엌과 골목의 언어로 현대사를 기록한 그의 문학은 "전쟁을 겪은 자의 증언 의무"라는 스스로의 말처럼, 개인의 기억이 곧 역사임을 보여줬다.',
+    video:null,
+    connections:[],
+    tags:['person','구리','박완서','나목','한국문학'],
+    sources:['한국민족문화대백과사전 박완서','위키백과 박완서'] }
 ];

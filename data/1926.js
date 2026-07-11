@@ -170,6 +170,18 @@ const EVENTS_1926 = [
     connections:['person_1926_03'],
     tags:['person','조선국내','경성','한용운','문학저항','님의침묵'],
     sources:['위키백과 님의 침묵','한국민족문화대백과사전 님의 침묵'],
-    content:{ hero:{"url": "assets/images/entity/person/person_han_yong_un_01.webp", "alt": "한용운", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } }
-
+    content:{ hero:{"url": "assets/images/entity/person/person_han_yong_un_01.webp", "alt": "한용운", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } },
+  { id:'person_1926_05', year:1926, visible_from:1926, visible_until:1937,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'나운규 — 아리랑, 조선 영화가 태어난 날',
+    title_en:'Na Un-gyu — Arirang and the Birth of Korean Cinema',
+    title_ja:'羅雲奎 — 映画アリランの誕生',
+    place_ko:'경성 (단성사)',
+    lat:37.571, lng:126.992,
+    people:['나운규'],
+    summary_ko:'독립운동으로 옥살이를 했던 스물네 살의 나운규가 각본·감독·주연을 도맡은 영화 아리랑이 단성사에서 개봉하자, 미치광이 주인공이 일제의 앞잡이를 낫으로 베는 마지막 장면과 주제가 아리랑에 극장은 눈물과 함성으로 뒤덮였다. 검열을 광인의 환상이라는 장치로 비껴가며 민족의 울분을 스크린에 올린 이 작품으로 조선 영화는 오락을 넘어 예술과 저항의 언어가 됐다. 필름은 남지 않았지만, 그가 영화로 다시 지핀 노래 아리랑은 그대로 민족의 노래가 됐다 — 그는 폐병으로 서른다섯에 요절했다.',
+    video:null,
+    connections:[],
+    tags:['person','경성','나운규','아리랑','조선영화'],
+    sources:['한국민족문화대백과사전 나운규','국가보훈부 공훈전자사료관'] }
 ];

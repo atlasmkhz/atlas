@@ -81,6 +81,20 @@ const EVENTS_2000 = [
     video:null,
     connections:['diplomacy_2000_01'],
     tags:['diplomacy','서울','평양','이산가족','상봉'],
-    sources:['한국민족문화대백과사전 이산가족상봉','위키백과 남북 이산가족 상봉'] }
-
+    sources:['한국민족문화대백과사전 이산가족상봉','위키백과 남북 이산가족 상봉'] },
+  { id:'person_2000_01', year:2000, visible_from:2000, visible_until:2000,
+    month:12, day:null, type:'person', priority:1,
+    title_ko:'김대중, 한국인 최초 노벨평화상 수상',
+    title_en:"Kim Dae-jung Wins the Nobel Peace Prize",
+    title_ja:'金大中、ノーベル平和賞受賞',
+    place_ko:'오슬로',
+    lat:59.91, lng:10.75,
+    people:['김대중'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'사형수에서 대통령이 된 김대중이 민주주의와 인권을 위한 투쟁, 그리고 햇볕정책과 남북정상회담으로 한반도 평화에 기여한 공로로 한국인 최초의 노벨평화상을 받았다. 노벨위원회는 그의 수십 년에 걸친 민주화 투쟁과 동아시아 인권 신장 노력을 함께 들었다. 납치와 사형선고, 수차례의 망명과 연금을 견뎌낸 개인의 생애가 국제사회의 공인을 받은 순간이자, 분단국가 한국의 평화 노력이 세계 무대에서 인정받은 장면이었다.',
+    video:null,
+    connections:[],
+    tags:['person','오슬로','김대중','노벨평화상','햇볕정책'],
+    sources:['한국민족문화대백과사전 김대중','위키백과 김대중'] }
 ];

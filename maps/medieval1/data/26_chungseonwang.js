@@ -40,5 +40,18 @@ const EVENTS_CHUNGSEONWANG = [
     video:null,
     connections:['policy_1308_01'],
     tags:['culture','연경','만권당','충선왕','이제현'],
-    sources:['한국민족문화대백과사전 만권당'] }
+    sources:['한국민족문화대백과사전 만권당'] },
+  { id:'culture_1314_02', year:1314, visible_from:1314, visible_until:1340,
+    month:null, day:null, type:'culture', priority:2,
+    title_ko:'이제현 — 만권당의 유학자, 원 제국 한복판의 고려 지성',
+    title_en:'Yi Je-hyeon — Goryeo Scholar in the Yuan Capital',
+    title_ja:'李斉賢 — 万巻堂の高麗知性',
+    place_ko:'연경 만권당 (베이징)',
+    lat:39.904, lng:116.408,
+    people:['이제현','충선왕'],
+    summary_ko:'충선왕이 원의 수도 연경에 세운 서재 만권당에서, 스물여덟의 이제현은 조맹부 등 원 제국 최고의 문인들과 교유하며 고려 지성의 수준을 제국의 한복판에서 증명했다. 그는 성리학을 본격적으로 고려에 들여온 학자이자, 입성책동 등 고려의 국체를 흔드는 시도가 있을 때마다 논리로 맞서 나라를 지킨 외교관이기도 했다. 역사 비평집 역옹패설과 사서 편찬으로 이어진 그의 학문은 이색과 정몽주로, 다시 조선의 사대부로 이어지는 성리학 계보의 첫머리에 놓인다.',
+    video:null,
+    connections:[],
+    tags:['culture','연경','이제현','만권당','성리학'],
+    sources:['한국민족문화대백과사전 이제현'] }
 ];

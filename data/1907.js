@@ -94,6 +94,18 @@ const EVENTS_1907 = [
     connections:['organization_1911_01'],
     tags:['organization','조선국내','경성','신민회','안창호','비밀결사'],
     sources:['한국민족문화대백과사전 신민회','우리역사넷'],
-    content:{ hero:{"url": "assets/images/entity/event/event_organization_1907_01_01.webp", "alt": "신민회 결성 — 비밀결사의 시작", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"}, gallery:[] } }
-
+    content:{ hero:{"url": "assets/images/entity/event/event_organization_1907_01_01.webp", "alt": "신민회 결성 — 비밀결사의 시작", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"}, gallery:[] } },
+  { id:'person_1907_01', year:1907, visible_from:1895, visible_until:1935,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'윤희순 — 안사람 의병가, 최초의 여성 의병 지도자',
+    title_en:'Yun Hui-sun — The First Woman Righteous Army Leader',
+    title_ja:'尹熙順 — 最初の女性義兵指導者',
+    place_ko:'춘천 → 만주',
+    lat:37.88, lng:127.73,
+    people:['윤희순'],
+    summary_ko:'을미의병 때부터 윤희순은 "아무리 여자인들 나라 사랑 모를쏘냐"로 시작하는 안사람 의병가를 지어 부르며 여성들을 의병 지원에 조직했고, 군자금을 모으고 화약을 만들어 대는 병참의 지휘자가 됐다. 나라가 망하자 일가족을 이끌고 만주로 건너가 노학당을 세워 항일 인재를 길렀으며, 아들이 일제의 고문으로 순국하자 그 열흘 뒤 스스로 곡기를 끊고 생을 마감했다. 의병에서 망명 교육운동까지 40년 — 3대에 걸친 그 집안의 항일은 여성이 독립운동의 후방이 아니라 지도자였음을 증언한다.',
+    video:null,
+    connections:[],
+    tags:['person','춘천','윤희순','여성의병','안사람의병가'],
+    sources:['한국민족문화대백과사전 윤희순','국가보훈부 공훈전자사료관'] }
 ];

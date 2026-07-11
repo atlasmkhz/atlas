@@ -179,6 +179,13 @@ def main():
         lines.append('    <priority>0.75</priority>')
         lines.append('  </url>')
 
+    # 프로젝트 — 역사의 갈림길 (play/crossroads/)
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/play/crossroads/</loc>')
+    lines.append('    <changefreq>monthly</changefreq>')
+    lines.append('    <priority>0.85</priority>')
+    lines.append('  </url>')
+
     # 선사시대 진입점 — event SEO 페이지는 보류 상태지만 지도 자체는
     # 크롤링돼야 하므로 진입점(과 루트가 생기면 루트 랜딩)을 담는다.
     lines.append('  <url>')
@@ -293,7 +300,7 @@ def main():
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
 
-    total = (8 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs) + len(ancient_slugs)
+    total = (9 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs) + len(ancient_slugs)
              + len(main_route_slugs) + len(modern2_route_slugs) + len(contemporary_route_slugs)
              + len(medieval2_route_slugs) + len(medieval1_route_slugs) + len(ancient_route_slugs)
              + len(prehistory_route_slugs) + len(prehistory_event_slugs)

@@ -183,5 +183,18 @@ const EVENTS_1922 = [
     video:null,
     connections:['person_1920_09'],
     tags:['person','조선국내','신의주','박헌영','사회주의'],
-    sources:['위키백과 박헌영','한국사데이터베이스'] }
+    sources:['위키백과 박헌영','한국사데이터베이스'] },
+  { id:'person_1922_05', year:1922, visible_from:1919, visible_until:1936,
+    month:null, day:null, type:'person', priority:2,
+    title_ko:'김경천 — 백마 탄 김장군, 연해주의 전설',
+    title_en:'Kim Gyeong-cheon — The General on the White Horse',
+    title_ja:'金擎天 — 白馬に乗った金将軍',
+    place_ko:'연해주 (블라디보스토크)',
+    lat:43.12, lng:131.89,
+    people:['김경천'],
+    summary_ko:'일본 육군사관학교를 나온 엘리트 기병 장교 김경천은 3·1운동 소식에 보장된 앞길을 버리고 망명해, 신흥무관학교에서 독립군을 가르치고 연해주에서 마적과 일본군을 상대로 백마를 타고 싸웠다 — "백마 탄 김장군"의 전설은 그에게서 나왔다. 그러나 소련 체제가 굳어지자 설 자리를 잃었고, 스탈린 대숙청 때 간첩 혐의를 뒤집어쓰고 수용소에서 생을 마감했다. 일본이 준 출세도, 혁명 조국을 자처한 소련도 그를 지켜주지 않았던 이 생애는 잊혔다가 사후 반세기가 지나서야 복권과 서훈으로 돌아왔다.',
+    video:null,
+    connections:[],
+    tags:['person','연해주','김경천','신흥무관학교','대숙청'],
+    sources:['한국민족문화대백과사전 김경천','국가보훈부 공훈전자사료관'] }
 ];
