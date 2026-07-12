@@ -189,6 +189,12 @@
       ? `<img class="route-wp-image" src="${wp.image}" alt="${wp.title_ko}" loading="lazy">`
       : '';
 
+    // wp.archive_post가 있으면(자료실 시리즈와 연동된 루트) 팝업 하단에
+    // "자료실에서 더 읽기" 링크를 붙인다 — 2026-07-12 환단고기 루트 추가로 도입.
+    const archiveLinkHtml = wp.archive_post
+      ? `<a class="route-wp-archive-link" href="../../archive/${wp.archive_series}/${wp.archive_post}.html">자료실에서 더 읽기 ›</a>`
+      : '';
+
     return `
 <div class="route-waypoint-popup">
   <div class="route-wp-header">
@@ -200,6 +206,7 @@
   <p class="route-wp-place">📍 ${wp.place_ko}</p>
   ${stayHtml}
   <p class="route-wp-summary">${wp.summary_ko || ''}</p>
+  ${archiveLinkHtml}
   <p class="route-wp-from">— ${routeName}</p>
 </div>`;
   }
@@ -211,12 +218,16 @@
       const typeColor = WP_TYPE_COLOR[wp.type] || route.color;
       const typeLabel = WP_TYPE_LABEL[wp.type] || wp.type;
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
-      const hasDetail = !!(wp.summary_ko || wp.youtube_id || wp.image);
+      const hasDetail = !!(wp.summary_ko || wp.youtube_id || wp.image || wp.archive_post);
+      const archiveLinkHtml = wp.archive_post
+        ? `<a class="route-panel-wp-archive-link" href="../../archive/${wp.archive_series}/${wp.archive_post}.html">자료실에서 더 읽기 — ${wp.archive_series_name || '연재'}에서 이 장면 읽기 ›</a>`
+        : '';
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>
           ${wp.image ? `<img class="route-panel-wp-image" src="${wp.image}" alt="${wp.title_ko}" loading="lazy">` : ''}
           ${wp.summary_ko ? `<p class="route-panel-wp-summary">${wp.summary_ko}</p>` : ''}
           ${wp.youtube_id ? `<div class="route-panel-wp-video" data-youtube-id="${wp.youtube_id}"></div>` : ''}
+          ${archiveLinkHtml}
         </div>` : '';
       return `
       <li class="route-panel-wp${hasDetail ? ' has-detail' : ''}" data-wp-id="${wp.id}">

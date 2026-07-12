@@ -58,6 +58,7 @@
   // routes/xxx.js를 만들고 여기 항목을 추가하면 된다.
   const ROUTE_HUB_ITEMS = [
     { routeId: 'dolmen_pilgrimage', name: '고인돌 순례 루트', period: '기원전 1500~기원전 400, 그리고 오늘', ready: true },
+    { routeId: 'hwandan_gogi_journey', name: '환단고기 대장정', period: '기록상 기원전 7197~기원전 238, 그리고 1920년', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────

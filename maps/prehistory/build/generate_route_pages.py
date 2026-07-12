@@ -209,6 +209,7 @@ def render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path, even
 <p class="event-meta">{esc(date_str)} · {esc(wp.get('place_ko', ''))}</p>
 <p class="summary">{esc(wp.get('summary_ko', ''))}</p>
 <section class="route-context"><p>이 사건은 <a href="{SITE_ROOT}{PATH_PREFIX}/route/{route_slug}">{esc(route['name'])}</a> 루트의 한 장면입니다.</p></section>
+{f'<p class="archive-cta"><a href="{SITE_ROOT}/archive/{wp.get("archive_series", route.get("archive_series",""))}/{wp["archive_post"]}">자료실에서 더 읽기</a></p>' if wp.get('archive_post') else ''}
 {f'<nav class="wp-pager">{" | ".join(nav_links)}</nav>' if nav_links else ''}
 <p class="map-cta"><a href="{map_cta_url}">지도에서 보기</a></p>
 </article>
