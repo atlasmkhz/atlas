@@ -52,6 +52,9 @@ CATEGORY_LABELS = {
 SUBCATEGORY_LABELS = {
     'revisionism': '역사왜곡', 'era_study': '시대연구',
     'people_study': '인물연구', 'primary_sources': '사료읽기',
+    # 세계사(world_history) 카테고리 — 2026-07-12 오픈
+    'science_history': '과학사', 'art_history': '미술사',
+    'war_history': '전쟁사', 'world_routes': '세계사 루트',
 }
 SOURCE_TYPE_LABELS = {
     'government': '정부·공공기관', 'court': '판결', 'paper': '논문',

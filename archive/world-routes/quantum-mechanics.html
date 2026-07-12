@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#101418">
+<title>양자역학 루트 — 베를린에서 대전까지 | ATLAS by MKHZ</title>
+<meta name="description" content="양자역학 탄생 100주년 — 1900년 플랑크의 양자 가설에서 솔베이 회의의 세기의 논쟁을 거쳐 오늘 대전의 양자컴퓨터까지, 한 세기의 흐름을 세계지도 위에서 따라간다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/archive/world-routes/quantum-mechanics">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://atlas.mkhz.kr/archive/world-routes/quantum-mechanics">
+<meta property="og:title" content="양자역학 루트 — 베를린에서 대전까지 | ATLAS by MKHZ">
+<meta property="og:description" content="양자역학 탄생 100주년 — 한 세기의 흐름을 세계지도 위에서 따라간다.">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="양자역학 루트 — 베를린에서 대전까지">
+<meta name="twitter:description" content="양자역학 탄생 100주년 — 한 세기의 흐름을 세계지도 위에서 따라간다.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ATLAS", "item": "https://atlas.mkhz.kr/"}, {"@type": "ListItem", "position": 2, "name": "자료실", "item": "https://atlas.mkhz.kr/?nav=archive"}, {"@type": "ListItem", "position": 3, "name": "세계사 루트", "item": "https://atlas.mkhz.kr/archive/world-routes"}, {"@type": "ListItem", "position": 4, "name": "양자역학 루트", "item": "https://atlas.mkhz.kr/archive/world-routes/quantum-mechanics"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4');
+</script>
+<script src="../../js/analytics.js"></script>
+<style>
+/* ── 세계사 루트 전용 스타일 — 지도 SPA(다크 톤 + 골드 악센트)와
+   같은 계열을 쓰되 독립 페이지로 완결. ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: #101418; color: #e8e2d6;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+#map { position: absolute; inset: 0; z-index: 0; background: #101418; }
+
+/* 상단 바 */
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, rgba(16,20,24,.92), rgba(16,20,24,0));
+  pointer-events: none;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.topbar a.back {
+  pointer-events: auto; text-decoration: none;
+  color: #b89860; font-size: 13px; letter-spacing: .3px;
+}
+.topbar .title { font-size: 15px; font-weight: 700; color: #f0ead9; }
+.topbar .subtitle { font-size: 12px; color: #9a927f; }
+
+/* 연도 칩 스트립 */
+.chips {
+  position: absolute; left: 0; right: 0; z-index: 1000;
+  bottom: calc(190px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 6px; overflow-x: auto; padding: 6px 12px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; border: 1px solid rgba(184,152,96,.45);
+  background: rgba(16,20,24,.85); color: #cfc6b2;
+  font-size: 12px; padding: 5px 10px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap;
+}
+.chip.active { background: #b89860; color: #14110b; font-weight: 700; border-color: #b89860; }
+
+/* 하단 카드 패널 */
+.panel {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1001;
+  background: rgba(20, 24, 30, .96);
+  border-top: 1px solid rgba(184,152,96,.35);
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  min-height: 190px;
+  backdrop-filter: blur(6px);
+}
+.panel .meta { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.panel .num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  background: #b89860; color: #14110b; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  align-self: center;
+}
+.panel .year { font-size: 13px; color: #b89860; font-weight: 700; letter-spacing: .5px; }
+.panel .place { font-size: 12px; color: #9a927f; }
+.panel h2 { font-size: 16px; color: #f0ead9; line-height: 1.45; margin: 2px 0 8px; }
+.panel p { font-size: 13.5px; color: #cfc6b2; line-height: 1.7; max-height: 118px; overflow-y: auto; }
+.panel .links { margin-top: 8px; }
+.panel .links a { color: #b89860; font-size: 12.5px; text-decoration: none; border-bottom: 1px solid rgba(184,152,96,.4); }
+.nav-btns { position: absolute; top: 12px; right: 14px; display: flex; gap: 8px; }
+.nav-btns button {
+  border: 1px solid rgba(184,152,96,.5); background: transparent; color: #b89860;
+  width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.nav-btns button:disabled { opacity: .3; cursor: default; }
+.progress { position: absolute; top: 20px; right: 100px; font-size: 12px; color: #9a927f; }
+
+/* 지점 마커 */
+.wp-marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #1d232b; border: 2px solid #b89860;
+  color: #e8e2d6; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.wp-marker.active { background: #b89860; color: #14110b; transform: scale(1.25); z-index: 999; }
+
+@media (min-width: 760px) {
+  .panel { left: auto; right: 18px; bottom: 18px; width: 420px; border: 1px solid rgba(184,152,96,.35); border-radius: 12px; }
+  .chips { bottom: 12px; right: 460px; left: 12px; }
+  .panel p { max-height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="topbar">
+  <a class="back" href="index.html">&larr; 세계사 루트</a>
+  <span class="title">양자역학 루트</span>
+  <span class="subtitle">베를린에서 대전까지, 1900 – 현재 · 탄생 100주년</span>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="panel" id="panel">
+  <div class="nav-btns">
+    <button id="prevBtn" aria-label="이전 지점">&larr;</button>
+    <button id="nextBtn" aria-label="다음 지점">&rarr;</button>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="meta">
+    <span class="num" id="wpNum">1</span>
+    <span class="year" id="wpYear"></span>
+    <span class="place" id="wpPlace"></span>
+  </div>
+  <h2 id="wpTitle"></h2>
+  <p id="wpDesc"></p>
+  <div class="links" id="wpLinks"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  // ── 지점 데이터 — 시간 순서. post: 자료실 「양자역학 100년」 글 id ──
+  const WAYPOINTS = [
+    { year:'1900', place:'독일 베를린', lat:52.5163, lng:13.3777, zoom:5,
+      title:'플랑크의 양자 가설 — "절망의 행동"',
+      desc:'독일물리학회에서 막스 플랑크가 흑체복사 문제를 풀기 위해 에너지가 "양자"라는 덩어리 단위로만 오간다고 가정한다. 본인은 궁여지책이라 여겼지만, 이 균열에서 20세기 물리학 혁명이 시작된다.',
+      post:'planck_1900' },
+    { year:'1905', place:'스위스 베른', lat:46.9480, lng:7.4474, zoom:5,
+      title:'아인슈타인의 기적의 해',
+      desc:'특허청 3급 심사관이던 26세의 아인슈타인이 광양자 가설·브라운 운동·특수상대성이론·E=mc²의 네 논문을 한 해에 쏟아낸다. 빛이 알갱이이기도 하다는 광양자 가설이 양자역학의 진짜 첫걸음이었다.',
+      post:'einstein_1905' },
+    { year:'1911', place:'벨기에 브뤼셀', lat:50.8514, lng:4.3556, zoom:5,
+      title:'제1차 솔베이 회의 — 물리학의 첫 정상회담',
+      desc:'기업가 솔베이의 후원으로 유럽 정상급 물리학자들이 메트로폴 호텔에 모여 "복사와 양자"를 토론한다. 마리 퀴리가 유일한 여성 참석자였다. 답 대신, 고전물리학으로는 안 된다는 위기감이 공유되었다.',
+      post:'solvay_1911' },
+    { year:'1913', place:'덴마크 코펜하겐', lat:55.6805, lng:12.5714, zoom:5,
+      title:'보어의 원자모형 — 원자 속의 양자 도약',
+      desc:'27세의 닐스 보어가 전자는 정해진 궤도만 돌고 궤도 사이를 "도약"할 때 빛을 낸다는 원자모형을 발표, 수소 스펙트럼을 설명해낸다. 그가 세운 코펜하겐 연구소는 양자역학의 수도가 된다.',
+      post:'bohr_1913' },
+    { year:'1924', place:'프랑스 파리 소르본', lat:48.8489, lng:2.3435, zoom:5,
+      title:'드브로이 — 물질도 파동이다',
+      desc:'역사학도 출신의 공작 가문 청년 드브로이가 박사논문에서 묻는다 — 빛이 입자라면, 전자는 왜 파동이면 안 되는가. 아인슈타인이 지지했고, 3년 뒤 전자 회절 실험이 이를 확인한다.',
+      post:'de_broglie_1924' },
+    { year:'1925', place:'독일 헬골란트 섬', lat:54.1833, lng:7.8833, zoom:5,
+      title:'하이젠베르크 — 양자역학의 탄생',
+      desc:'꽃가루 알레르기를 피해 북해의 바위섬으로 요양 온 23세의 하이젠베르크가 "관측되는 것만으로 역학을 다시 세우자"는 착상에 이른다. 2025년 세계가 기념한 양자 100주년의 기준점이다.',
+      post:'heisenberg_1925' },
+    { year:'1926', place:'독일 괴팅겐', lat:51.5413, lng:9.9158, zoom:5,
+      title:'보른의 확률 해석 — 신은 주사위를 던지는가',
+      desc:'막스 보른이 파동함수는 실재하는 물결이 아니라 "입자가 발견될 확률"이라고 해석한다. 자연의 근본 법칙이 확률만을 말한다는 이 선언이 아인슈타인이 평생 거부한 지점이었다.',
+      post:'gottingen_1926' },
+    { year:'1926', place:'스위스 취리히', lat:47.3744, lng:8.5486, zoom:5,
+      title:'슈뢰딩거의 파동방정식',
+      desc:'알프스에서 크리스마스를 보낸 슈뢰딩거가 해를 넘겨 여섯 달 동안 연작 논문으로 파동방정식을 완성한다. 낯선 행렬역학과 같은 산을 반대편에서 오른 것이었다 — 두 이론은 수학적으로 동등했다.',
+      post:'schrodinger_1926' },
+    { year:'1927', place:'덴마크 코펜하겐', lat:55.6870, lng:12.5760, zoom:5,
+      title:'불확정성 원리와 상보성',
+      desc:'보어의 연구소에서 하이젠베르크가 불확정성 원리에 도달한다 — 위치와 운동량은 동시에 정확히 알 수 없고, 이는 기술의 한계가 아니라 자연의 성질이다. 보어의 상보성과 함께 "코펜하겐 해석"의 뼈대가 된다.',
+      post:'heisenberg_1925' },
+    { year:'1927', place:'벨기에 브뤼셀', lat:50.8467, lng:4.3720, zoom:5,
+      title:'제5차 솔베이 회의 — 세기의 논쟁',
+      desc:'참석자 29명 중 17명이 노벨상 수상자. 아침마다 아인슈타인이 양자역학을 무너뜨릴 사고실험을 내놓고, 저녁마다 보어가 반박한다. "신은 주사위를 던지지 않는다" — "신더러 이래라저래라 하지 마시오."',
+      post:'solvay_1927' },
+    { year:'1928', place:'영국 케임브리지', lat:52.2043, lng:0.1149, zoom:5,
+      title:'디랙 방정식 — 수학이 예언한 반물질',
+      desc:'과묵한 폴 디랙이 양자역학과 특수상대성이론을 결합한 방정식에서 반물질의 존재를 순수하게 수학으로 예측한다. 4년 뒤 우주선 사진 속에서 양전자가 실제로 발견된다.',
+      post:'gottingen_1926' },
+    { year:'1935', place:'미국 프린스턴', lat:40.3431, lng:-74.6551, zoom:4,
+      title:'EPR 역설 — 아인슈타인의 마지막 반격',
+      desc:'나치를 피해 미국에 정착한 아인슈타인이 "유령 같은 원격작용"은 불가능하므로 양자역학은 불완전하다고 반격한다. 같은 해 슈뢰딩거는 "얽힘"이라는 이름과 그 유명한 고양이를 내놓는다.',
+      post:'epr_1935' },
+    { year:'1964', place:'스위스 제네바 CERN', lat:46.2330, lng:6.0557, zoom:5,
+      title:'벨 부등식 — 철학, 실험이 되다',
+      desc:'CERN의 존 벨이 휴가 중 쓴 짧은 논문으로, 30년간 검증 불가능한 철학으로 취급되던 아인슈타인-보어 논쟁을 실험으로 판가름할 수 있는 수학으로 바꿔놓는다.',
+      post:'bell_aspect' },
+    { year:'1982', place:'프랑스 파리 오르세', lat:48.6976, lng:2.1873, zoom:5,
+      title:'아스페 실험 — 얽힘은 실재한다',
+      desc:'알랭 아스페가 광자가 날아가는 도중 측정 방향을 바꾸는 정교한 실험으로 벨 부등식이 깨짐을 확인한다. 얽힘은 실재했다. 아스페·클라우저·차일링거는 2022년 노벨상을 받는다.',
+      post:'bell_aspect' },
+    { year:'2019', place:'미국 샌타바버라', lat:34.4140, lng:-119.8489, zoom:4,
+      title:'2차 양자혁명 — 양자컴퓨터의 시대',
+      desc:'구글이 양자 프로세서로 "양자 우월성" 달성을 주장하며 경쟁에 불을 붙인다. 파인만의 1980년대 제안에서 시작된 2차 양자혁명 — 얽힘을 "부려 쓰는" 시대가 열리고 있다.',
+      post:'korea_quantum_today' },
+    { year:'오늘', place:'대한민국 대전', lat:36.3888, lng:127.3720, zoom:5,
+      title:'대전의 실험실 — 한국의 양자과학',
+      desc:'한국표준과학연구원(KRISS)이 국산 초전도 양자컴퓨터를 개발하고, 양자과학기술산업법이 제정되었다. 베를린에서 시작된 100년의 흐름에 한국이 당당한 참가자로 합류했다 — 다음 답의 일부는 한국어로 쓰일 것이다.',
+      post:'korea_quantum_today' },
+  ];
+
+  // ── 지도 ──
+  const map = L.map('map', { zoomControl: false, worldCopyJump: true })
+    .setView([WAYPOINTS[0].lat, WAYPOINTS[0].lng], 5);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 12, minZoom: 2
+  }).addTo(map);
+
+  // 경로선 — 시간 순서를 잇는 점선
+  L.polyline(WAYPOINTS.map(w => [w.lat, w.lng]), {
+    color: '#b89860', weight: 2, opacity: .55, dashArray: '6 8'
+  }).addTo(map);
+
+  // 지점 마커
+  const markers = WAYPOINTS.map((w, i) => {
+    const icon = L.divIcon({ className: '', html: `<div class="wp-marker" data-i="${i}">${i + 1}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+    const m = L.marker([w.lat, w.lng], { icon }).addTo(map);
+    m.on('click', () => go(i));
+    return m;
+  });
+
+  // 연도 칩
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = WAYPOINTS.map((w, i) => `<button class="chip" data-i="${i}">${i + 1}. ${w.year}</button>`).join('');
+  chipsEl.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (b) go(parseInt(b.dataset.i, 10));
+  });
+
+  // ── 패널 렌더 ──
+  let cur = 0;
+  const $ = id => document.getElementById(id);
+  function go(i) {
+    cur = Math.max(0, Math.min(WAYPOINTS.length - 1, i));
+    const w = WAYPOINTS[cur];
+    $('wpNum').textContent = cur + 1;
+    $('wpYear').textContent = w.year;
+    $('wpPlace').textContent = w.place;
+    $('wpTitle').textContent = w.title;
+    $('wpDesc').textContent = w.desc;
+    $('wpLinks').innerHTML = w.post
+      ? `<a href="../quantum-century/${w.post}.html">깊이 읽기 — 「양자역학 100년」 시리즈에서 이 장면 읽기 &rsaquo;</a>` : '';
+    $('progress').textContent = `${cur + 1} / ${WAYPOINTS.length}`;
+    $('prevBtn').disabled = cur === 0;
+    $('nextBtn').disabled = cur === WAYPOINTS.length - 1;
+    document.querySelectorAll('.wp-marker').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    document.querySelectorAll('.chip').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    const activeChip = chipsEl.querySelector('.chip.active');
+    if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    map.flyTo([w.lat, w.lng], w.zoom || 5, { duration: 1.1 });
+    if (window.trackPageView) window.trackPageView('world_route_quantum', `wp_${cur + 1}`);
+  }
+  $('prevBtn').addEventListener('click', () => go(cur - 1));
+  $('nextBtn').addEventListener('click', () => go(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+  });
+
+  go(0);
+})();
+</script>
+</body>
+</html>

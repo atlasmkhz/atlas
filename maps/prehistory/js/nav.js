@@ -85,7 +85,7 @@
   // 세계사가 채워지기 전까진 메뉴에서 숨긴다.
   const ARCHIVE_CATEGORIES = [
     { key: 'history', name: '역사', ready: true },
-    { key: 'world_history', name: '세계사', ready: false },
+    { key: 'world_history', name: '세계사', ready: true },
   ];
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
@@ -102,6 +102,16 @@
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
+    ],
+    // 세계사 카테고리 — 시리즈(과학사)와 별도로 '세계사 루트' 카드는
+    // href 직행 링크다: 세계사 루트는 한국 지도 위 루트가 아니라
+    // archive/world-routes/ 아래의 독립 세계지도 페이지로 운영한다
+    // (2026-07-12 왕두목 결정 — 근대 루트 허브에 섞지 않는다).
+    world_history: [
+      { subcat: 'science_history', name: '과학사', seriesIds: ['quantum_century'] },
+      { subcat: 'world_routes', name: '세계사 루트', href: 'archive/world-routes/index.html' },
+      { subcat: 'art_history', name: '미술사', seriesIds: [] },
+      { subcat: 'war_history', name: '전쟁사', seriesIds: [] },
     ],
   };
 
@@ -292,6 +302,7 @@
       } else if (archiveState.level === 'subcategory') {
         const subs = ARCHIVE_SUBCATEGORIES[archiveState.categoryKey] || [];
         const item = subs.find(it => it.subcat === btn.dataset.archiveSubcat);
+        if (item && item.href) { window.location.href = ARCHIVE_ROOT_PREFIX + item.href; return; }
         const readyCount = item ? (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length : 0;
         if (!item || readyCount === 0) return; // 콘텐츠 없는 "준비 중" 카드
         archiveState = { level: 'serieslist', categoryKey: archiveState.categoryKey, subcat: item.subcat, seriesId: null };
@@ -441,6 +452,13 @@
   }
 
   function renderArchiveSubcatCard(item){
+    if (item.href) { // 직행 링크 카드(세계사 루트 등) — 시리즈 개수 대신 바로가기로 표시
+      return `
+      <button type="button" class="era-card-item" data-archive-subcat="${item.subcat}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ready">바로가기</span>
+      </button>`;
+    }
     const readyCount = (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length;
     const ready = readyCount > 0;
     const statusClass = ready ? 'ready' : 'soon';

@@ -286,14 +286,20 @@
 
   const ARCHIVE_CATEGORIES = [
     { key: 'history', name: '역사', ready: true },
-    { key: 'world_history', name: '세계사', ready: false },
+    { key: 'world_history', name: '세계사', ready: true },
   ];
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability'] },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
-      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings'] },
+      { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
+    ],
+    world_history: [
+      { subcat: 'science_history', name: '과학사', seriesIds: ['quantum_century'] },
+      { subcat: 'world_routes', name: '세계사 루트', href: 'archive/world-routes/index.html' },
+      { subcat: 'art_history', name: '미술사', seriesIds: [] },
+      { subcat: 'war_history', name: '전쟁사', seriesIds: [] },
     ],
   };
   const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동', person: '인물', document: '사료' };
@@ -326,6 +332,12 @@
       </button>`;
     }
     function renderSubcatCard(item) {
+      if (item.href) { // 직행 링크 카드(세계사 루트 등)
+        return `<button type="button" class="era-card-item" data-archive-subcat="${item.subcat}">
+        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-status ready">바로가기</span>
+      </button>`;
+      }
       const readyCount = (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length;
       const ready = readyCount > 0;
       const statusClass = ready ? 'ready' : 'soon';
@@ -432,6 +444,7 @@
       } else if (state.level === 'subcategory') {
         const subs = ARCHIVE_SUBCATEGORIES[state.categoryKey] || [];
         const item = subs.find(it => it.subcat === btn.dataset.archiveSubcat);
+        if (item && item.href) { window.location.href = item.href; return; } // 포털은 사이트 루트 — 접두사 불필요
         const readyCount = item ? (item.seriesIds || []).filter(id => !!ARCHIVE_REGISTRY[id]).length : 0;
         if (!item || readyCount === 0) return;
         state = { level: 'serieslist', categoryKey: state.categoryKey, subcat: item.subcat, seriesId: null };
