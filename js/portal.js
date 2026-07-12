@@ -191,6 +191,7 @@
     { path: 'maps/contemporary/index.html?route=eurasia_railway_dream', name: '대륙철도의 꿈 루트', tagline: '부산에서 파리까지 13,000km — 끊어진 건 단 한 구간뿐이다', period: '1905~현재, 그리고 그 너머', waypoints: 20, color: '#c99a3a', image: 'maps/contemporary/assets/images/route/route_eurasia_railway_dream_hero.webp' },
     { path: 'maps/contemporary/index.html?route=hyeonchungwon_paradox', name: '현충원의 역설 루트', tagline: '나라를 위해 죽은 이와, 나라를 배신한 이가 같은 언덕에 잠들어 있다', period: '1949~현재', waypoints: 15, color: '#5c5548', image: 'maps/contemporary/assets/images/route/route_hyeonchungwon_hero.webp' },
     { path: 'maps/contemporary/index.html?route=contemporary_literature', name: '현대문학 기행', tagline: '내면에서 세계로 — 그리고 마침내 스톡홀름까지 (문학사 3부작 · 완결)', period: '1994~2025', waypoints: 16, color: '#35506b', image: 'maps/contemporary/assets/images/route/route_contemporary_literature_hero.webp' },
+    { path: 'maps/contemporary/index.html?route=cult_and_power', name: '교주와 권력', tagline: '백백교에서 오늘의 정치화된 교회까지 — 종교를 내세운 범죄와 신격화된 권력의 90년', period: '1937~현재', waypoints: 8, color: '#4a3b46', image: 'maps/contemporary/assets/images/route/route_cult_and_power_hero.webp' },
   ];
 
   // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(kstDayIndex,
@@ -295,7 +296,7 @@
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox', 'cult_and_power'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],

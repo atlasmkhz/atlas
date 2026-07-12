@@ -215,12 +215,20 @@
       const typeColor = WP_TYPE_COLOR[wp.type] || route.color;
       const typeLabel = WP_TYPE_LABEL[wp.type] || wp.type;
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
-      const hasDetail = !!(wp.summary_ko || wp.youtube_id || wp.image);
+      const hasDetail = !!(wp.summary_ko || wp.youtube_id || wp.image || wp.archive_post);
+      // wp.archive_post가 있으면 자료실 해당 글로 이어지는 링크를 붙인다
+      // (2026-07-12 교주와 권력 루트 추가로 도입 — 선사시대 환단고기
+      // 루트와 동일 패턴). 이 지도는 maps/contemporary/ 아래라 자료실까지
+      // ../../archive/ 로 올라간다.
+      const archiveLinkHtml = wp.archive_post
+        ? `<a class="route-panel-wp-archive-link" href="../../archive/${wp.archive_series || route.archive_series}/${wp.archive_post}.html">자료실에서 더 읽기 ›</a>`
+        : '';
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>
           ${wp.image ? `<img class="route-panel-wp-image" src="${wp.image}" alt="${wp.title_ko}" loading="lazy">` : ''}
           ${wp.summary_ko ? `<p class="route-panel-wp-summary">${wp.summary_ko}</p>` : ''}
           ${wp.youtube_id ? `<div class="route-panel-wp-video" data-youtube-id="${wp.youtube_id}"></div>` : ''}
+          ${archiveLinkHtml}
         </div>` : '';
       return `
       <li class="route-panel-wp${hasDetail ? ' has-detail' : ''}" data-wp-id="${wp.id}">

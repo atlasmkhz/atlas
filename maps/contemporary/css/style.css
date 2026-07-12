@@ -1163,6 +1163,16 @@ body.route-mode-active [data-route-hidden] {
   min-height: 40px;
 }
 .route-panel-wp-video iframe { display: block; border: 0; }
+.route-panel-wp-archive-link {
+  display: inline-block;
+  font-size: 12px;
+  color: #d9c48f;
+  border-bottom: 1px solid rgba(217,196,143,0.4);
+  text-decoration: none;
+  margin-top: 2px;
+  transition: color .15s, border-color .15s;
+}
+.route-panel-wp-archive-link:hover { color: #f0dfae; border-color: #f0dfae; }
 @keyframes routePanelDetailIn {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }

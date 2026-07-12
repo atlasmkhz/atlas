@@ -63,6 +63,7 @@
     { routeId: 'eurasia_railway_dream', name: '대륙철도의 꿈 루트', period: '1905~현재, 그리고 그 너머', ready: true },
     { routeId: 'hyeonchungwon_paradox', name: '현충원의 역설 루트', period: '1949~현재', ready: true },
     { routeId: 'contemporary_literature', name: '현대문학 기행', period: '1994~2025', ready: true },
+    { routeId: 'cult_and_power', name: '교주와 권력', period: '1937~현재', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
@@ -104,7 +105,7 @@
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox', 'cult_and_power'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
