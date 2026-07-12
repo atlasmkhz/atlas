@@ -147,7 +147,7 @@
 
     // 선사 — maps/prehistory/index.html
     { path: 'maps/prehistory/index.html?route=dolmen_pilgrimage', name: '고인돌 순례 루트', tagline: '세계 고인돌의 40%가 이 땅에 — 청동기시대가 남긴 가장 큰 유산', period: '기원전 1500~기원전 400', waypoints: 8, color: '#7a6a4f', image: 'maps/prehistory/assets/images/route/route_dolmen_pilgrimage_hero.webp' },
-    { path: 'maps/prehistory/index.html?route=hwandan_gogi_journey', name: '환단고기 대장정', tagline: '환국에서 북부여까지 — 상고사 강역을 따라가는 여정, 그리고 청산리까지', period: '기록상 기원전 7197~기원전 238', waypoints: 9, color: '#8a6d3b', image: null },
+    { path: 'maps/prehistory/index.html?route=hwandan_gogi_journey', name: '환단고기 대장정', tagline: '환국에서 북부여까지 — 상고사 강역을 따라가는 여정, 그리고 청산리까지', period: '기록상 기원전 7197~기원전 238', waypoints: 9, color: '#8a6d3b', image: 'maps/prehistory/assets/images/route/route_hwandan_gogi_journey_hero.webp' },
 
     // 고대 — maps/ancient/index.html
     { path: 'maps/ancient/index.html?route=gwanggaeto_conquest', name: '광개토대왕 정복루트', tagline: '거란·백제·후연·가야·왜를 22년에 걸쳐 굴복시키다', period: '385~414', waypoints: 16, color: '#7a2e2e', image: 'maps/ancient/assets/images/route/route_gwanggaeto_conquest_hero.webp' },

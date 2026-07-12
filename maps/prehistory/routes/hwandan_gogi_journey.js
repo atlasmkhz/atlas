@@ -27,7 +27,7 @@ const ROUTE_HWANDAN_GOGI_JOURNEY = {
   tagline: '환국에서 북부여까지 — 환단고기가 전하는 상고사의 강역을 따라가는 여정, 그리고 이 책이 실제로 남긴 흔적',
   color: '#8a6d3b',
   total_waypoints: 9,
-  hero_image: null,
+  hero_image: 'assets/images/route/route_hwandan_gogi_journey_hero.webp',
 
   // 이 루트 전체가 자료실 hwandan_gogi 시리즈 한 편에 연동된다.
   archive_series: 'hwandan_gogi',
