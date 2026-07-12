@@ -97,6 +97,29 @@ window.onload = () => {
         }
         return;
       }
+      // ── 자료실 글 페이지 → 지도 진입 (archive/**/*.html의 \"지도에서
+      // 관련 지역 보기\" 버튼용). 자료실 글은 특정 사건 카드(card_ref)에
+      // 연결되지 않은 경우가 많아 ?event=처럼 특정 id로 이동할 수 없다
+      // — 대신 ?lat=&lng=로 좌표만 넘어오면 그 위치로 지도만 이동시킨다
+      // (팝업은 열지 않는다 — 열 사건이 없다). ?year=가 함께 오면 그
+      // 글의 실제 연도로 슬라이더를 맞추되, 이 지도의 유효 범위
+      // (1876~1945) 밖이면 가장 가까운 경계 연도로 clamp한다. year가
+      // 없으면 기존처럼 INITIAL_YEAR로 진입한다.
+      // (다른 6개 지도의 js/app.js에는 이미 있던 분기인데 이 파일에만
+      // 빠져 있었다 — 2026-07-12 버그 수정: 이 분기가 없으면 자료실의
+      // "지도에서 관련 지역 보기" 링크가 lat/lng을 그냥 무시하고 항상
+      // INITIAL_YEAR(1920) 기본 화면으로 떨어졌다.)
+      const latFromUrl = parseFloat(params.get('lat'));
+      const lngFromUrl = parseFloat(params.get('lng'));
+      if (!Number.isNaN(latFromUrl) && !Number.isNaN(lngFromUrl)) {
+        const yearFromUrl = parseInt(params.get('year'), 10);
+        const clampedYear = Number.isNaN(yearFromUrl)
+          ? INITIAL_YEAR
+          : Math.min(1945, Math.max(1876, yearFromUrl));
+        syncToYear(clampedYear);
+        window.setTimeout(() => { map.setView([latFromUrl, lngFromUrl], 7, { animate: true }); }, 350);
+        return;
+      }
       // syncToYear(timeline.js)가 #yearNum·干支·지도 렌더·시대부제·
       // occTag·비네트 색조를 한 번에 전부 맞춘다 — 슬라이더를 직접 움직일
       // 때와 똑같은 경로이므로 둘 사이에 어긋남이 생길 수 없다.
