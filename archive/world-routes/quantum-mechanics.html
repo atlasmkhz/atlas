@@ -218,7 +218,12 @@ body {
   const map = L.map('map', { zoomControl: false, worldCopyJump: true })
     .setView([WAYPOINTS[0].lat, WAYPOINTS[0].lng], 5);
   L.control.zoom({ position: 'topright' }).addTo(map);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  // dark_nolabels: 국가/도시/바다 명칭 라벨이 없는 순수 지형 타일.
+  // CartoDB dark_all은 동해를 "Sea of Japan(East Sea)" 병기로 표기하는데,
+  // 이는 타일 자체에 래스터로 박힌 라벨이라 우리 쪽 지명 데이터로 고칠 수 없다.
+  // 장소명은 어차피 마커·연도칩·하단 패널에서 우리가 직접 표기하므로
+  // 베이스타일 라벨은 전부 제거하는 편이 정확하고 간단하다.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 12, minZoom: 2
   }).addTo(map);
 
@@ -273,7 +278,11 @@ body {
     if (e.key === 'ArrowRight') go(cur + 1);
   });
 
-  go(0);
+  // 자료실 글(예: planck_1900.html)의 "세계지도 루트에서 이 장면 보기"에서
+  // ?point=post_id로 들어오면 해당 웨이포인트로 바로 진입시킨다.
+  const qp = new URLSearchParams(location.search).get('point');
+  const startIdx = qp ? WAYPOINTS.findIndex(w => w.post === qp) : -1;
+  go(startIdx >= 0 ? startIdx : 0);
 })();
 </script>
 </body>

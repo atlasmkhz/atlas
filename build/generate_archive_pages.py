@@ -333,6 +333,12 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
         map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
         map_cta_url = f"{map_prefix}?event={post['card_ref']}"
         map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 사건 보기</a></p>'
+    elif post.get('world_route'):
+        # 세계사 인물/사건은 한국 지도(root)가 아니라 자료실 내 세계사 루트 페이지로
+        # 보내야 한다. world_route는 archive/world-routes/{slug}.html의 slug이고,
+        # ?point=post['id']로 해당 웨이포인트에 바로 진입시킨다.
+        map_cta_url = f"../world-routes/{post['world_route']}.html?point={post['id']}"
+        map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">세계지도 루트에서 이 장면 보기</a></p>'
     elif post.get('lat') is not None and post.get('lng') is not None:
         year_qs = f"&year={post['year']}" if post.get('year') is not None else ''
         map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
