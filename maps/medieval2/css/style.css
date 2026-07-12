@@ -1294,3 +1294,42 @@ body.route-mode-active [data-route-hidden] {
   .route-panel.open { right: 0; }
 }
 
+
+/* ═══ 중국 왕조 라벨 (js/chinaLayer.js) ═══
+   한반도 사건 위에 얹는 배경 맥락. 한반도 라벨(청백색 계열)과 구분되도록
+   호박/금색 계열로, 클릭 불가(pointer-events:none). tier별로 색을 나눠
+   통일왕조(진한 금색)와 분열기·북방정권(옅은 색·점선 테두리)을 구별한다. */
+.china-label-wrap { background:transparent; border:none; }
+.china-label {
+  display:inline-flex; align-items:baseline; gap:3px;
+  white-space:nowrap; transform:translate(-50%,-50%);
+  pointer-events:none;
+  padding:1px 7px; border-radius:3px;
+  background:rgba(28,22,14,0.55);
+  text-shadow:0 0 5px rgba(10,8,4,0.95);
+  font-weight:600;
+}
+.china-label-name { font-size:13px; letter-spacing:1px; }
+.china-label-hanja { font-size:10px; opacity:0.75; letter-spacing:1px; }
+
+/* 통일왕조 — 진하고 또렷한 금색, 실선 테두리 */
+.china-label-unified {
+  color:#e8c979;
+  border:1px solid rgba(200,160,80,0.55);
+}
+/* 분열기 정권 — 옅은 호박색, 점선 테두리(불안정·병립 느낌) */
+.china-label-divided {
+  color:#cdb58a;
+  border:1px dashed rgba(170,140,90,0.5);
+  font-weight:500;
+}
+.china-label-divided .china-label-name { font-size:12px; }
+/* 북방 정복왕조 — 서늘한 청동색, 점선 테두리 */
+.china-label-nomad {
+  color:#b9c2ad;
+  border:1px dashed rgba(150,160,130,0.5);
+}
+.china-label-nomad .china-label-name { font-size:12px; }
+
+/* 체크박스 스와치(레이어 패널의 중국사 토글 앞 표시) */
+.china-swatch { border-color:#c8a050 !important; }

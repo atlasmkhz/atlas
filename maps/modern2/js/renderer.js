@@ -530,6 +530,8 @@ function renderYear(year){
    }
   });
   declutterMarkers();
+  // 중국 왕조 라벨 레이어도 현재 연도로 갱신 (js/chinaLayer.js)
+  if (typeof renderChinaDynastiesAtYear === 'function') { try { renderChinaDynastiesAtYear(year); } catch(_){} }
 }
 
 // ── 안전 렌더링 래퍼 ──

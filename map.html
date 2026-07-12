@@ -54,7 +54,7 @@
 <script src="js/analytics.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="css/style.css?v=20260712a" />
+<link rel="stylesheet" href="css/style.css?v=20260713a" />
 </head>
 <body>
 
@@ -266,6 +266,7 @@
     <label class="toggle-item"><input type="checkbox" id="layerEvent" checked> 사건</label>
     <label class="toggle-item"><input type="checkbox" id="layerPerson"> 인물</label>
     <label class="toggle-item"><input type="checkbox" id="layerPolicy" checked> 배경·정책</label>
+    <label class="toggle-item"><input type="checkbox" id="layerChina" checked><span class="legend-swatch china-swatch"></span>중국사</label>
     <div class="toggle-sep mobile-only"></div>
     <label class="toggle-item mobile-only"><input type="checkbox" id="autoHideControls" checked> 정보창 열 때 자동 숨김</label>
   </div>
@@ -375,8 +376,10 @@
 <script src="data/world_events.js"></script>
 <script src="data/world_context.js"></script>
 
+<script src="data/china_dynasties.js"></script>
 <script src="js/app.js"></script>
 <script src="js/map.js"></script>
+<script src="js/chinaLayer.js"></script>
 
 <!-- ════════════════════════════════════════════════════
      [실험적, 기본 비활성] 역사 지명 레이어 — historicalLabels.js

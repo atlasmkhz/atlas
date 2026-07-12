@@ -618,6 +618,8 @@ function renderRange(startYear, endYear){
    }
   });
   declutterMarkers();
+  // 중국 왕조 라벨 레이어도 이 챕터 범위로 함께 갱신 (js/chinaLayer.js)
+  if (typeof renderChinaDynasties === 'function') { try { renderChinaDynasties(startYear, endYear); } catch(_){} }
 }
 
 // ── 안전 렌더링 래퍼(챕터 버전) ──
