@@ -62,6 +62,7 @@
     { routeId: 'dokdo_history', name: '독도, 기록의 섬 루트', period: '512~2026', ready: true },
     { routeId: 'eurasia_railway_dream', name: '대륙철도의 꿈 루트', period: '1905~현재, 그리고 그 너머', ready: true },
     { routeId: 'hyeonchungwon_paradox', name: '현충원의 역설 루트', period: '1949~현재', ready: true },
+    { routeId: 'contemporary_literature', name: '현대문학 기행', period: '1994~2025', ready: true },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────

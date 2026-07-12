@@ -133,6 +133,7 @@
     { path: 'map.html?route=kim_won_bong', name: '김원봉', tagline: '의열단을 만든 사람, 두 번 지워진 이름', period: '1898~1958', waypoints: 30, color: '#a83232', image: 'assets/images/entity/person/person_kim_won_bong_01.webp' },
     { path: 'map.html?route=provisional_government', name: '임시정부', tagline: '27년, 다섯 번의 이동, 그리고 끝내 지켜낸 이름', period: '1919~1945', waypoints: 9, color: '#8c3a2e', image: 'assets/images/route/route_provisional_government_hero.webp' },
     { path: 'map.html?route=modern_art_history', name: '근대예술사', tagline: '식민지라는 현실과 새로운 예술 사이, 시대를 앓거나 시대에 굴복한 이름들', period: '1915~1945', waypoints: 13, color: '#4a3a5c', image: 'assets/images/route/route_modern_art_history_hero.webp' },
+    { path: 'map.html?route=modern_literature', name: '근대문학 기행', tagline: '신체시에서 옥중의 시인까지 — 식민지의 모국어로 쓴 37년 (문학사 3부작 · 1부)', period: '1908~1945', waypoints: 20, color: '#35506b', image: 'assets/images/route/route_modern_literature_hero.webp' },
 
     // 근현대 — maps/modern2/index.html
     { path: 'maps/modern2/index.html?route=syngman_rhee', name: '이승만', tagline: '외교독립론자에서 초대 대통령, 그리고 3·15 부정선거로 쫓겨난 90년', period: '1875~1965', waypoints: 28, color: '#7a5c2e', image: 'maps/modern2/assets/images/entity/person/person_syngman_rhee_01.webp' },
@@ -144,6 +145,7 @@
     { path: 'maps/modern2/index.html?route=korean_war_massacres', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 27, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
     { path: 'maps/modern2/index.html?route=korean_war_battles', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 6, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
     { path: 'maps/modern2/index.html?route=democratization_movement', name: '민주화운동', tagline: '독재에 맞선 33년, 거리에서 헌법으로', period: '1960~1993', waypoints: 9, color: '#5c2f2f', image: 'maps/modern2/assets/images/route/route_democratization_movement_hero.webp' },
+    { path: 'maps/modern2/index.html?route=modern2_literature', name: '근현대문학 기행', tagline: '갈라진 모국어 — 분단과 독재의 시대, 문학이 지킨 것들 (문학사 3부작 · 2부)', period: '1945~1993', waypoints: 20, color: '#35506b', image: 'maps/modern2/assets/images/route/route_modern2_literature_hero.webp' },
 
     // 선사 — maps/prehistory/index.html
     { path: 'maps/prehistory/index.html?route=dolmen_pilgrimage', name: '고인돌 순례 루트', tagline: '세계 고인돌의 40%가 이 땅에 — 청동기시대가 남긴 가장 큰 유산', period: '기원전 1500~기원전 400', waypoints: 8, color: '#7a6a4f', image: 'maps/prehistory/assets/images/route/route_dolmen_pilgrimage_hero.webp' },
@@ -188,6 +190,7 @@
     { path: 'maps/contemporary/index.html?route=dokdo_history', name: '독도, 기록의 섬 루트', tagline: '이사부에서 NARA 기밀문서까지 — 1500년의 기록이 증언하는 섬', period: '512~2026', waypoints: 20, color: '#1f5c7a', image: 'maps/contemporary/assets/images/route/route_dokdo_history_hero.webp' },
     { path: 'maps/contemporary/index.html?route=eurasia_railway_dream', name: '대륙철도의 꿈 루트', tagline: '부산에서 파리까지 13,000km — 끊어진 건 단 한 구간뿐이다', period: '1905~현재, 그리고 그 너머', waypoints: 20, color: '#c99a3a', image: 'maps/contemporary/assets/images/route/route_eurasia_railway_dream_hero.webp' },
     { path: 'maps/contemporary/index.html?route=hyeonchungwon_paradox', name: '현충원의 역설 루트', tagline: '나라를 위해 죽은 이와, 나라를 배신한 이가 같은 언덕에 잠들어 있다', period: '1949~현재', waypoints: 15, color: '#5c5548', image: 'maps/contemporary/assets/images/route/route_hyeonchungwon_hero.webp' },
+    { path: 'maps/contemporary/index.html?route=contemporary_literature', name: '현대문학 기행', tagline: '내면에서 세계로 — 그리고 마침내 스톡홀름까지 (문학사 3부작 · 완결)', period: '1994~2025', waypoints: 16, color: '#35506b', image: 'maps/contemporary/assets/images/route/route_contemporary_literature_hero.webp' },
   ];
 
   // 매일 날짜가 바뀌면 다른 6개가 뽑히도록 — "오늘의 일수(kstDayIndex,
