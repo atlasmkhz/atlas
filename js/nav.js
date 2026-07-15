@@ -86,7 +86,7 @@
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox', 'cult_and_power'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
@@ -155,6 +155,41 @@
         <span class="era-card-name">${name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
+  }
+
+  // ── 연작 시리즈 그룹핑: "권력과 책임" 4부작 ──────────────────
+  // 2026-07 두목님 피드백: 시대연구 목록에 4개 시리즈가 개별 카드로
+  // 흩어져 있어 몰입이 끊긴다는 지적. era_study의 seriesIds에서 이
+  // 4개를 만나면 개별 카드 대신 그룹 카드 하나로 묶어 보여주고, 클릭하면
+  // 4부작만 모아 보여주는 중간 단계(storygroup)를 거치게 한다.
+  const STORY_GROUP_IDS = ['punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning'];
+  const STORY_GROUP_KEY = 'power_and_accountability_story';
+  const STORY_GROUP_LABEL = '권력과 책임 (4부작)';
+
+  function renderStoryGroupCard(){
+    const readyCount = STORY_GROUP_IDS.filter(id => !!ARCHIVE_REGISTRY[id]).length;
+    const totalPosts = STORY_GROUP_IDS.reduce((sum, id) => sum + (ARCHIVE_REGISTRY[id] ? ARCHIVE_REGISTRY[id].posts.length : 0), 0);
+    const statusText = readyCount ? `${totalPosts}편 · ${readyCount}부작` : '준비 중';
+    const disabledClass = readyCount ? '' : ' disabled';
+    return `
+      <button type="button" class="era-card-item${disabledClass}" data-story-group="${STORY_GROUP_KEY}">
+        <span class="era-card-name">${STORY_GROUP_LABEL}</span>
+        <span class="era-card-status ${readyCount ? 'ready' : 'soon'}">${statusText}</span>
+      </button>`;
+  }
+
+  // seriesIds 배열을 카드 HTML로 바꾸되, STORY_GROUP_IDS에 속한 항목은
+  // 개별 카드 대신 그룹 카드 하나로(처음 등장할 때 한 번만) 치환한다.
+  function renderSeriesGridWithGroups(seriesIds){
+    let groupInserted = false;
+    return seriesIds.map(id => {
+      if (STORY_GROUP_IDS.includes(id)) {
+        if (groupInserted) return '';
+        groupInserted = true;
+        return renderStoryGroupCard();
+      }
+      return renderArchiveSeriesCard(id);
+    }).join('');
   }
 
   function renderArchivePostRow(post, series){
@@ -298,8 +333,16 @@
         archiveHubList.hidden = true;
         const seriesIds = sub ? (sub.seriesIds || []) : [];
         archiveHubGrid.innerHTML = seriesIds.length
-          ? seriesIds.map(renderArchiveSeriesCard).join('')
+          ? renderSeriesGridWithGroups(seriesIds)
           : '<div class="archive-empty">아직 준비된 시리즈가 없습니다.</div>';
+
+      } else if (archiveState.level === 'storygroup') {
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = STORY_GROUP_LABEL;
+        if (archiveHubSub) archiveHubSub.textContent = '같은 기준으로 여야를 가리지 않고 — 순서대로 읽으시면 좋습니다';
+        archiveHubGrid.hidden = false;
+        archiveHubList.hidden = true;
+        archiveHubGrid.innerHTML = STORY_GROUP_IDS.map(renderArchiveSeriesCard).join('');
 
       } else if (archiveState.level === 'postlist') {
         const series = ARCHIVE_REGISTRY[archiveState.seriesId];
@@ -337,6 +380,10 @@
 
     archiveHubBack?.addEventListener('click', () => {
       if (archiveState.level === 'postlist') {
+        archiveState = archiveState.viaGroup
+          ? { level: 'storygroup', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId: null, viaGroup: true }
+          : { level: 'serieslist', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId: null };
+      } else if (archiveState.level === 'storygroup') {
         archiveState = { level: 'serieslist', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId: null };
       } else if (archiveState.level === 'serieslist') {
         archiveState = { level: 'subcategory', categoryKey: archiveState.categoryKey, subcat: null, seriesId: null };
@@ -367,9 +414,21 @@
         renderArchiveLevel();
 
       } else if (archiveState.level === 'serieslist') {
+        if (btn.dataset.storyGroup) {
+          archiveState = { level: 'storygroup', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId: null };
+          renderArchiveLevel();
+          return;
+        }
         const seriesId = btn.dataset.seriesId;
         if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return; // 콘텐츠 없는 "준비 중" 카드
         archiveState = { level: 'postlist', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId };
+        if (window.trackPageView) window.trackPageView('archive', seriesId);
+        renderArchiveLevel();
+
+      } else if (archiveState.level === 'storygroup') {
+        const seriesId = btn.dataset.seriesId;
+        if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return;
+        archiveState = { level: 'postlist', categoryKey: archiveState.categoryKey, subcat: archiveState.subcat, seriesId, viaGroup: true };
         if (window.trackPageView) window.trackPageView('archive', seriesId);
         renderArchiveLevel();
       }

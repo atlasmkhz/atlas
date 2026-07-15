@@ -243,3 +243,47 @@ a { color: #8a6a3a; }
   border-radius: 0 10px 10px 0;
 }
 .post-commentary h2 { color: #3d4a5c; }
+
+/* ── 연작 시리즈 내비게이션 바 (권력과 책임 4부작) ── */
+/* 2026-07 두목님 피드백: 4개 시리즈가 자료실 목록에 흩어져 몰입이 끊긴다는
+   지적에 따라, 이 그룹에 속한 모든 글/랜딩 페이지 상단에 자동 삽입된다.
+   (build/generate_archive_pages.py의 render_story_group_nav 참조) */
+.story-group-nav {
+  background: rgba(90, 59, 59, 0.06);
+  border: 1px solid rgba(90, 59, 59, 0.18);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+}
+.story-group-nav p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: #6b5252;
+}
+.story-group-nav a {
+  color: #7a4a4a;
+  text-decoration: none;
+}
+.story-group-nav a:hover { text-decoration: underline; }
+.story-group-nav strong {
+  color: #3a2c2c;
+  font-weight: 700;
+}
+
+/* ── 허브 페이지: 부(部) 카드 목록 ── */
+.story-parts { list-style: none; padding: 0; }
+.story-part {
+  border: 1px solid rgba(58,53,44,0.12);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  background: #fff;
+}
+.story-part a { text-decoration: none; }
+.story-part strong {
+  font-size: 16px;
+  color: #3a2c2c;
+}
+.story-part .summary { margin: 6px 0 4px; font-size: 14px; }
+.story-part .wp-date { margin-left: 0; }

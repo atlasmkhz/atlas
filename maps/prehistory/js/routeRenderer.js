@@ -495,12 +495,35 @@
     }
   };
 
+  // ── 주소창 동기화 ────────────────────────────────────────────
+  // 루트를 열고/닫을 때 주소창의 ?route= 쿼리를 함께 갱신한다. 이게
+  // 없으면 지도 안에서 루트 패널을 눌러 연 경우 주소창은 그 지도(시대)의
+  // 기본 URL 그대로라, 그 상태에서 주소를 복사해 공유하면 루트가 아니라
+  // 시대 지도로만 이동하는 문제가 생긴다(2026-07 두목님 리포트).
+  // 뒤로가기 버튼이 매번 패널만 여닫도록 만들지 않기 위해 pushState가
+  // 아닌 replaceState를 쓴다 — 히스토리를 쌓지 않고 현재 URL만 바꾼다.
+  function syncRouteUrl(routeId) {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (routeId) {
+        params.set('route', routeId);
+      } else {
+        params.delete('route');
+        params.delete('wp');
+      }
+      const qs = params.toString();
+      const newUrl = window.location.pathname + (qs ? `?${qs}` : '') + window.location.hash;
+      window.history.replaceState(window.history.state, '', newUrl);
+    } catch (_) { /* URL 갱신 실패는 조용히 무시 — 루트 표시 자체는 정상 동작 */ }
+  }
+
   // ── 루트 닫기 ────────────────────────────────────────────────
   window.closeRoute = function () {
     clearRouteLayers();
     hideRoutePanel();
     exitRouteMode();
     activeRouteId = null;
+    syncRouteUrl(null);
 
     // 루트 진입 시 지웠던 연도별 레이어를 다시 그려 정상 화면으로 복귀.
     if (typeof safeRender === 'function' && typeof currentDisplayYear === 'function') {
@@ -515,6 +538,7 @@
       window.closeRoute();
     } else {
       renderRoute(routeId);
+      syncRouteUrl(routeId);
     }
   };
 

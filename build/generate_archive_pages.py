@@ -95,6 +95,44 @@ CARD_MAP_PREFIX = {
 
 GA_MEASUREMENT_ID = 'G-9C05WN48C4'  # ATLAS GA4 속성 Measurement ID — index.html과 동일
 
+# ── 연작 시리즈 묶음 ──────────────────────────────────────────
+# "권력과 책임" 4부작(처벌의 기록·권력과 시간·잣대의 비대칭·수술대 위의
+# 검찰)은 서로 인용하며 하나의 서사를 이루지만, 자료실 목록에서는 다른
+# 독립 시리즈들과 같은 층위에 흩어져 보여 몰입이 끊긴다는 지적이 있었다
+# (2026-07 두목님 피드백). 이를 보완하기 위해 이 그룹에 속한 시리즈의
+# 모든 페이지(글+랜딩)에 "이 시리즈는 N부작입니다" 내비게이션 바를 자동
+# 삽입한다. 새 시리즈를 이 서사에 추가하려면 아래 리스트에 (id, slug,
+# 짧은이름)만 추가하면 된다 — 다른 코드는 손댈 필요 없다.
+STORY_GROUP_HUB_SLUG = 'power-and-accountability'
+STORY_GROUP_HUB_NAME = '권력과 책임'
+STORY_GROUP = [
+    ('punishment_records',       'punishment-records',        '1부 · 처벌의 기록'),
+    ('power_and_time',           'power-and-time',            '2부 · 권력과 시간'),
+    ('unequal_measures',         'unequal-measures',          '3부 · 잣대의 비대칭'),
+    ('prosecutorial_reckoning',  'prosecutorial-reckoning',    '4부 · 수술대 위의 검찰'),
+]
+STORY_GROUP_IDS = {sid for sid, _, _ in STORY_GROUP}
+
+
+def render_story_group_nav(current_series_id):
+    """current_series_id가 STORY_GROUP에 속하면 4부작 내비게이션 바 HTML을
+    반환하고, 아니면 빈 문자열을 반환한다. 이 함수를 호출하는 모든 페이지
+    (글 페이지·시리즈 랜딩 페이지)는 전부 archive/{series_slug}/ 아래에
+    있으므로, 형제 시리즈 폴더로 가려면 한 단계만 올라가면 된다
+    ('../{other_slug}/index.html') — ROOT_PREFIX(사이트 루트까지)와는
+    다른 깊이다."""
+    if current_series_id not in STORY_GROUP_IDS:
+        return ''
+    items = []
+    items.append(f'<a href="../{STORY_GROUP_HUB_SLUG}/index.html">{esc(STORY_GROUP_HUB_NAME)} 전체보기</a>')
+    for sid, slug, label in STORY_GROUP:
+        href = f'../{slug}/index.html'
+        if sid == current_series_id:
+            items.append(f'<strong>{esc(label)}</strong>')
+        else:
+            items.append(f'<a href="{href}">{esc(label)}</a>')
+    return '<nav class="story-group-nav"><p>' + ' · '.join(items) + '</p></nav>'
+
 
 def ga4_snippet():
     """자료실 정적 페이지용 GA4 스니펫. analytics.js는 상대경로로 연결한다
@@ -245,15 +283,25 @@ def render_legacy_section(legacy_ko):
     return f'<section class="post-legacy"><h2>역사적 평가</h2><p>{esc(legacy_ko)}</p></section>'
 
 
+def render_paragraphs(text):
+    """본문 문자열을 실제 개행(\\n\\n) 기준 단락으로 나눠 <p> 여러 개로 렌더링한다.
+    단락 구분이 없는 문자열은 기존과 동일하게 <p> 하나로 나온다."""
+    text = text or ''
+    paras = [p.strip() for p in text.split('\n\n') if p.strip()]
+    if not paras:
+        return f'<p>{esc(text)}</p>'
+    return ''.join(f'<p>{esc(p)}</p>' for p in paras)
+
+
 def render_post_body(post):
     fmt = post.get('format')
     if fmt == 'claim_rebuttal':
         return (
-            f'<section class="post-claim"><h2>주장</h2><p>{esc(post.get("claim_ko",""))}</p></section>'
-            f'<section class="post-rebuttal"><h2>반박</h2><p>{esc(post.get("rebuttal_ko",""))}</p></section>'
+            f'<section class="post-claim"><h2>주장</h2>{render_paragraphs(post.get("claim_ko",""))}</section>'
+            f'<section class="post-rebuttal"><h2>반박</h2>{render_paragraphs(post.get("rebuttal_ko",""))}</section>'
         )
     if fmt == 'case_tracking':
-        body_html = f'<section class="post-body"><p>{esc(post.get("body_ko",""))}</p></section>'
+        body_html = f'<section class="post-body">{render_paragraphs(post.get("body_ko",""))}</section>'
         stages_html = render_stages_section(post.get('stages'))
         legacy_html = render_legacy_section(post.get('legacy_ko'))
         return body_html + stages_html + legacy_html
@@ -274,7 +322,7 @@ def render_post_body(post):
         if post.get('commentary_ko'):
             parts.append(f'<section class="post-commentary"><h2>왜 이 문장인가</h2><p>{esc(post.get("commentary_ko",""))}</p></section>')
         return ''.join(parts)
-    return f'<section class="post-body"><p>{esc(post.get("body_ko",""))}</p></section>'
+    return f'<section class="post-body">{render_paragraphs(post.get("body_ko",""))}</section>'
 
 
 def post_plain_summary(post):
@@ -369,6 +417,7 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 </head>
 <body>
 <nav class="breadcrumb"><a href="{ROOT_PREFIX}index.html">ATLAS</a> &rsaquo; 자료실 &rsaquo; {esc(category_label)} &rsaquo; <a href="index.html">{esc(series['name'])}</a> &rsaquo; {esc(post['title_ko'])}</nav>
+{render_story_group_nav(series['id'])}
 <article>
 <h1>{esc(post['title_ko'])}</h1>
 <p class="event-meta">{esc(date_str)}{' · ' + esc(post['place_ko']) if post.get('place_ko') else ''}</p>
@@ -450,11 +499,96 @@ def render_series_landing_page(series, series_slug, out_path):
 </head>
 <body>
 <nav class="breadcrumb"><a href="{ROOT_PREFIX}index.html">ATLAS</a> &rsaquo; 자료실 &rsaquo; {esc(category_label)} &rsaquo; {esc(series['name'])}</nav>
+{render_story_group_nav(series['id'])}
 <article>
 <h1>{esc(series['name'])}</h1>
 <p class="event-meta">{esc(series.get('period',''))}</p>
 <p class="summary">{esc(series.get('tagline',''))}</p>
 <section class="series-list"><h2>글 목록 ({len(series['posts'])}편)</h2><ol class="wp-list">{''.join(items)}</ol></section>
+</article>
+</body>
+</html>'''
+
+    with open(out_path, 'w', encoding='utf-8') as f:
+        f.write(html_out)
+
+
+def render_story_hub_page(all_series, out_path):
+    """STORY_GROUP에 속한 시리즈들을 순서대로 소개하는 허브 랜딩 페이지를
+    만든다. 개별 시리즈처럼 posts 목록이 아니라, 시리즈 자체를 목록으로
+    보여준다 — "이게 하나의 4부작 프로젝트다"라는 인상을 주기 위함
+    (2026-07 두목님 피드백: 시대연구 목록에 흩어져 몰입이 끊긴다는 지적)."""
+    series_by_id = {s['id']: s for s in all_series}
+    title = f"{STORY_GROUP_HUB_NAME} | ATLAS by MKHZ 자료실"
+    tagline = "같은 기준으로 여야를 가리지 않고 — 검찰과 사법부가 신뢰를 얻고 잃어온 과정을 네 편으로 나눠 기록한다"
+    description = make_description(tagline)
+    page_url = f"{SITE_ROOT}/archive/{STORY_GROUP_HUB_SLUG}"
+
+    parts_html = []
+    ld_list_items = []
+    for i, (sid, slug, label) in enumerate(STORY_GROUP, start=1):
+        s = series_by_id.get(sid)
+        if not s:
+            continue  # 아직 만들지 않은 부는 건너뛴다 — 허브가 깨지지 않게
+        href = f"{slug}/index.html"
+        n_posts = len(s['posts'])
+        parts_html.append(
+            f'<li class="story-part">'
+            f'<a href="{href}"><strong>{esc(label)}</strong></a>'
+            f'<p class="summary">{esc(s.get("tagline",""))}</p>'
+            f'<p class="wp-date">{n_posts}편 · {esc(s.get("period",""))}</p>'
+            f'</li>'
+        )
+        ld_list_items.append({
+            "@type": "ListItem", "position": i, "name": s['name'],
+            "url": f"{SITE_ROOT}/archive/{slug}",
+        })
+
+    ld_itemlist = {
+        "@context": "https://schema.org", "@type": "ItemList",
+        "name": STORY_GROUP_HUB_NAME, "description": description,
+        "url": page_url, "numberOfItems": len(ld_list_items),
+        "itemListElement": ld_list_items,
+    }
+    ld_breadcrumb = {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "ATLAS", "item": SITE_ROOT + "/"},
+            {"@type": "ListItem", "position": 2, "name": "자료실", "item": f"{SITE_ROOT}/?nav=archive"},
+            {"@type": "ListItem", "position": 3, "name": "역사"},
+            {"@type": "ListItem", "position": 4, "name": STORY_GROUP_HUB_NAME, "item": page_url},
+        ],
+    }
+
+    html_out = f'''<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f4ef">
+<link rel="stylesheet" href="{ROOT_PREFIX}css/archive-article.css">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(description)}">
+<link rel="canonical" href="{page_url}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{page_url}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(description)}">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(description)}">
+<script type="application/ld+json">{json.dumps(ld_itemlist, ensure_ascii=False)}</script>
+<script type="application/ld+json">{json.dumps(ld_breadcrumb, ensure_ascii=False)}</script>
+{ga4_snippet()}
+</head>
+<body>
+<nav class="breadcrumb"><a href="{ROOT_PREFIX}index.html">ATLAS</a> &rsaquo; 자료실 &rsaquo; 역사 &rsaquo; {esc(STORY_GROUP_HUB_NAME)}</nav>
+<article>
+<h1>{esc(STORY_GROUP_HUB_NAME)}</h1>
+<p class="summary">{esc(tagline)}</p>
+<p class="event-meta">이 넷은 서로를 인용하며 하나의 서사를 이룹니다. 순서대로 읽기를 권합니다.</p>
+<section class="series-list"><h2>{len(parts_html)}부작</h2><ol class="wp-list story-parts">{''.join(parts_html)}</ol></section>
 </article>
 </body>
 </html>'''
@@ -490,6 +624,13 @@ def main():
         total_landing += 1
 
         print(f'  ✓ {series["id"]}: 랜딩 1개, 글 {len(posts)}개')
+
+    # ── 연작 허브 페이지 ──
+    hub_dir = os.path.join(ARCHIVE_OUT_DIR, STORY_GROUP_HUB_SLUG)
+    os.makedirs(hub_dir, exist_ok=True)
+    render_story_hub_page(all_series, os.path.join(hub_dir, 'index.html'))
+    total_landing += 1
+    print(f'  ✓ {STORY_GROUP_HUB_SLUG}(허브): 랜딩 1개')
 
     print(f'\n자료실 페이지 생성 완료: 랜딩 {total_landing}개, 글 {total_post_pages}개')
 

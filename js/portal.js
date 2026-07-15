@@ -296,7 +296,7 @@
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'hyeonchungwon_paradox', 'cult_and_power'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power'] },
       { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
@@ -365,6 +365,33 @@
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
     }
+    // ── 연작 시리즈 그룹핑: "권력과 책임" 4부작 (js/nav.js와 동일 로직, 변수명만 포털식) ──
+    const STORY_GROUP_IDS = ['punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning'];
+    const STORY_GROUP_KEY = 'power_and_accountability_story';
+    const STORY_GROUP_LABEL = '권력과 책임 (4부작)';
+
+    function renderStoryGroupCard() {
+      const readyCount = STORY_GROUP_IDS.filter(id => !!ARCHIVE_REGISTRY[id]).length;
+      const totalPosts = STORY_GROUP_IDS.reduce((sum, id) => sum + (ARCHIVE_REGISTRY[id] ? ARCHIVE_REGISTRY[id].posts.length : 0), 0);
+      const statusText = readyCount ? `${totalPosts}편 · ${readyCount}부작` : '준비 중';
+      const disabledClass = readyCount ? '' : ' disabled';
+      return `<button type="button" class="era-card-item${disabledClass}" data-story-group="${STORY_GROUP_KEY}">
+        <span class="era-card-name">${STORY_GROUP_LABEL}</span>
+        <span class="era-card-status ${readyCount ? 'ready' : 'soon'}">${statusText}</span>
+      </button>`;
+    }
+
+    function renderSeriesGridWithGroups(seriesIds) {
+      let groupInserted = false;
+      return seriesIds.map(id => {
+        if (STORY_GROUP_IDS.includes(id)) {
+          if (groupInserted) return '';
+          groupInserted = true;
+          return renderStoryGroupCard();
+        }
+        return renderSeriesCard(id);
+      }).join('');
+    }
     function renderPostRow(post, series) {
       const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
       const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
@@ -404,8 +431,14 @@
         archiveHubGrid.hidden = false; archiveHubList.hidden = true;
         const seriesIds = sub ? (sub.seriesIds || []) : [];
         archiveHubGrid.innerHTML = seriesIds.length
-          ? seriesIds.map(renderSeriesCard).join('')
+          ? renderSeriesGridWithGroups(seriesIds)
           : '<div class="archive-empty">아직 준비된 시리즈가 없습니다.</div>';
+      } else if (state.level === 'storygroup') {
+        if (archiveHubBack) archiveHubBack.hidden = false;
+        if (archiveHubTitle) archiveHubTitle.textContent = STORY_GROUP_LABEL;
+        if (archiveHubSub) archiveHubSub.textContent = '같은 기준으로 여야를 가리지 않고 — 순서대로 읽으시면 좋습니다';
+        archiveHubGrid.hidden = false; archiveHubList.hidden = true;
+        archiveHubGrid.innerHTML = STORY_GROUP_IDS.map(renderSeriesCard).join('');
       } else if (state.level === 'postlist') {
         const series = ARCHIVE_REGISTRY[state.seriesId];
         if (archiveHubBack) archiveHubBack.hidden = false;
@@ -433,7 +466,12 @@
     archiveHubClose?.addEventListener('click', window.closeArchiveHub);
     archiveHubScrim?.addEventListener('click', window.closeArchiveHub);
     archiveHubBack?.addEventListener('click', () => {
-      if (state.level === 'postlist') state = { level: 'serieslist', categoryKey: state.categoryKey, subcat: state.subcat, seriesId: null };
+      if (state.level === 'postlist') {
+        state = state.viaGroup
+          ? { level: 'storygroup', categoryKey: state.categoryKey, subcat: state.subcat, seriesId: null, viaGroup: true }
+          : { level: 'serieslist', categoryKey: state.categoryKey, subcat: state.subcat, seriesId: null };
+      }
+      else if (state.level === 'storygroup') state = { level: 'serieslist', categoryKey: state.categoryKey, subcat: state.subcat, seriesId: null };
       else if (state.level === 'serieslist') state = { level: 'subcategory', categoryKey: state.categoryKey, subcat: null, seriesId: null };
       else if (state.level === 'subcategory') state = { level: 'category', categoryKey: null, subcat: null, seriesId: null };
       render();
@@ -455,19 +493,34 @@
         state = { level: 'serieslist', categoryKey: state.categoryKey, subcat: item.subcat, seriesId: null };
         render();
       } else if (state.level === 'serieslist') {
+        if (btn.dataset.storyGroup) {
+          state = { level: 'storygroup', categoryKey: state.categoryKey, subcat: state.subcat, seriesId: null };
+          render();
+          return;
+        }
         const seriesId = btn.dataset.seriesId;
         if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return;
         state = { level: 'postlist', categoryKey: state.categoryKey, subcat: state.subcat, seriesId };
+        render();
+      } else if (state.level === 'storygroup') {
+        const seriesId = btn.dataset.seriesId;
+        if (!seriesId || !ARCHIVE_REGISTRY[seriesId]) return;
+        state = { level: 'postlist', categoryKey: state.categoryKey, subcat: state.subcat, seriesId, viaGroup: true };
         render();
       }
     });
   }
 
-  // ── 자료실 둘러보기 ── 가짜 예시가 아니라 실제 등록된 글 중 하나를
-  // 보여준다(오늘의 특집과 같은 로테이션 원리 — 날짜 시드로 결정론적
-  // 순환). 인물카드(§5)·루트 데이터는 포털에 안 로드돼 있어서 지금은
-  // 자료실 글만 다룬다 — "추천 사건·인물·루트"까지 채우려면 그 데이터도
-  // 포털에 불러와야 하니 다음 단계로 남긴다.
+  // ── 자료실 둘러보기 ── 실제 등록된 글 중 몇 개를 매일 바꿔가며
+  // 보여준다. 이전에는 주차(getISOWeek) 순환 로직이 있었는데, 순환
+  // 결과가 시점과 안 맞는 글을 골라 보여준 버그(2026-07)가 있어 특정
+  // 글 하나를 영구 고정(pin)해 임시 봉합했었다. 이제 자료실 분량이
+  // 훨씬 늘어(4개 시리즈 24편 추가 등) 그 임시 봉합을 걷어내고, 추천
+  // 루트(renderRoutes)와 완전히 같은 방식 — kstDayIndex + 결정론적
+  // 셔플(dailyRotationPick) — 로 정식 로테이션을 되살렸다. 한국 시간
+  // 자정에 다음 조합으로 넘어가고, 같은 날 새로고침해도 그대로다.
+  const EXPLORE_COUNT = 3;
+
   function renderExplore() {
     const el = document.getElementById('portalExplore');
     if (!el) return;
@@ -476,31 +529,20 @@
       series.posts.forEach(post => allPosts.push({ post, series }));
     });
     if (!allPosts.length) { el.innerHTML = ''; return; }
-    // ── 고정 노출(핀) ── 원래는 주차 시드로 전체 글을 순환하는데, 이번에
-    // 그 순환이 지금 시점과 안 맞는 글(이명박 관련)을 골라 보여준 게
-    // 발견됐다. 완전한 순환 로직을 새로 짜기보다, "5·18 북한군 개입설"
-    // (뉴라이트의 역사왜곡을 반박하는 시리즈의 글)을 우선 노출하도록
-    // 핀을 걸었다 — 찾으면 그 글을, 못 찾으면(데이터 구조가 바뀌는 등)
-    // 기존 주차 순환으로 안전하게 되돌아간다.
-    const pinned = allPosts.find(({ post, series }) =>
-      series.id === 'historical_revisionism' && post.id === 'wp_05'
-    );
-    let chosen;
-    if (pinned) {
-      chosen = pinned;
-    } else {
-      const week = getISOWeek(new Date()) + new Date().getFullYear() * 53;
-      chosen = allPosts[week % allPosts.length];
-    }
-    const { post, series } = chosen;
-    const href = archivePostUrl(series, post);
-    const summary = (post.body_ko || post.claim_ko || '').slice(0, 90) + '…';
-    el.innerHTML = `
-      <a class="portal-explore-card" href="${href}">
-        <span class="portal-explore-badge">${series.name}</span>
-        <div class="portal-explore-title">${post.title_ko}</div>
-        <div class="portal-explore-desc">${summary}</div>
-      </a>`;
+
+    const dayIndex = kstDayIndex();
+    const todays = dailyRotationPick(allPosts, Math.min(EXPLORE_COUNT, allPosts.length), dayIndex);
+
+    el.innerHTML = todays.map(({ post, series }) => {
+      const href = archivePostUrl(series, post);
+      const summary = (post.body_ko || post.claim_ko || '').slice(0, 90) + '…';
+      return `
+        <a class="portal-explore-card" href="${href}">
+          <span class="portal-explore-badge">${series.name}</span>
+          <div class="portal-explore-title">${post.title_ko}</div>
+          <div class="portal-explore-desc">${summary}</div>
+        </a>`;
+    }).join('');
   }
 
   function setupInfoModal() {

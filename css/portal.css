@@ -109,6 +109,7 @@ body.portal {
 
 /* ── 자료실 둘러보기 ── */
 .portal-explore-label { font-size:11.5px; color:var(--paper-dim); font-weight:700; margin-bottom:10px; }
+#portalExplore { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; }
 .portal-explore-card {
   display:block; background:rgba(238,231,216,0.04); border:1px solid rgba(238,231,216,0.1);
   border-radius:12px; padding:14px 16px; text-decoration:none; color:var(--paper);
