@@ -22,6 +22,16 @@
 
 (function () {
 
+  // archive_series 값은 시리즈의 내부 id(밑줄 표기, 예: 'hwandan_gogi')인데
+  // 자료실 URL 슬러그는 밑줄을 하이픈으로 바꾼 형태다(build/generate_
+  // archive_pages.py의 slugify와 동일 규칙). 이 변환을 빠뜨리면 링크가
+  // archive/hwandan_gogi/... 로 만들어져 404("지도를 찾을 수 없습니다")로
+  // 이어진다 — 2026-07 두목님이 발견한 버그. 여기서 한 번만 변환해 재발을
+  // 막는다.
+  function archiveSlug(seriesId) {
+    return (seriesId || '').replace(/_/g, '-');
+  }
+
   // ── 루트 레이어 독립 배열 ──────────────────────────────────
   // clearLayers()(renderer.js)는 이 배열을 절대 건드리지 않는다.
   let routeLayers = [];
@@ -192,7 +202,7 @@
     // wp.archive_post가 있으면(자료실 시리즈와 연동된 루트) 팝업 하단에
     // "자료실에서 더 읽기" 링크를 붙인다 — 2026-07-12 환단고기 루트 추가로 도입.
     const archiveLinkHtml = wp.archive_post
-      ? `<a class="route-wp-archive-link" href="../../archive/${wp.archive_series}/${wp.archive_post}.html">자료실에서 더 읽기 ›</a>`
+      ? `<a class="route-wp-archive-link" href="../../archive/${archiveSlug(wp.archive_series)}/${wp.archive_post}.html">자료실에서 더 읽기 ›</a>`
       : '';
 
     return `
@@ -220,7 +230,7 @@
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
       const hasDetail = !!(wp.summary_ko || wp.youtube_id || wp.image || wp.archive_post);
       const archiveLinkHtml = wp.archive_post
-        ? `<a class="route-panel-wp-archive-link" href="../../archive/${wp.archive_series}/${wp.archive_post}.html">자료실에서 더 읽기 — ${wp.archive_series_name || '연재'}에서 이 장면 읽기 ›</a>`
+        ? `<a class="route-panel-wp-archive-link" href="../../archive/${archiveSlug(wp.archive_series)}/${wp.archive_post}.html">자료실에서 더 읽기 — ${wp.archive_series_name || '연재'}에서 이 장면 읽기 ›</a>`
         : '';
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>

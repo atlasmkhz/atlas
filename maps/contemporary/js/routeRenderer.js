@@ -22,6 +22,14 @@
 
 (function () {
 
+  // archive_series 값은 시리즈의 내부 id(밑줄 표기)인데 자료실 URL
+  // 슬러그는 밑줄을 하이픈으로 바꾼 형태다(build/generate_archive_pages.py의
+  // slugify와 동일 규칙). 변환을 빠뜨리면 링크가 404로 이어진다
+  // (2026-07 두목님이 prehistory에서 발견한 버그, 같은 패턴을 여기도 예방).
+  function archiveSlug(seriesId) {
+    return (seriesId || '').replace(/_/g, '-');
+  }
+
   // ── 루트 레이어 독립 배열 ──────────────────────────────────
   // clearLayers()(renderer.js)는 이 배열을 절대 건드리지 않는다.
   let routeLayers = [];
@@ -221,7 +229,7 @@
       // 루트와 동일 패턴). 이 지도는 maps/contemporary/ 아래라 자료실까지
       // ../../archive/ 로 올라간다.
       const archiveLinkHtml = wp.archive_post
-        ? `<a class="route-panel-wp-archive-link" href="../../archive/${wp.archive_series || route.archive_series}/${wp.archive_post}.html">자료실에서 더 읽기 ›</a>`
+        ? `<a class="route-panel-wp-archive-link" href="../../archive/${archiveSlug(wp.archive_series || route.archive_series)}/${wp.archive_post}.html">자료실에서 더 읽기 ›</a>`
         : '';
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>
