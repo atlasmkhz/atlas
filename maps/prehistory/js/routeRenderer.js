@@ -201,6 +201,12 @@
 
     // wp.archive_post가 있으면(자료실 시리즈와 연동된 루트) 팝업 하단에
     // "자료실에서 더 읽기" 링크를 붙인다 — 2026-07-12 환단고기 루트 추가로 도입.
+    // 주의: 이 함수(buildRouteWaypointHtml)는 현재 아무 곳에서도 호출되지
+    // 않는 죽은 코드다(실제 우측 패널은 buildRoutePanelHtml이 담당). 이
+    // 함수는 route 객체가 아니라 routeName(문자열)만 받으므로 route.
+    // archive_series 폴백을 쓸 수 없다 — 나중에 이 함수를 실제로 쓰게
+    //되면 buildRoutePanelHtml처럼 route 객체를 통째로 넘기도록 시그니처를
+    // 바꿔야 한다.
     const archiveLinkHtml = wp.archive_post
       ? `<a class="route-wp-archive-link" href="../../archive/${archiveSlug(wp.archive_series)}/${wp.archive_post}.html">자료실에서 더 읽기 ›</a>`
       : '';
@@ -230,7 +236,7 @@
       const dateStr = wp.year + (wp.month != null ? `년 ${wp.month}월` : '년');
       const hasDetail = !!(wp.summary_ko || wp.youtube_id || wp.image || wp.archive_post);
       const archiveLinkHtml = wp.archive_post
-        ? `<a class="route-panel-wp-archive-link" href="../../archive/${archiveSlug(wp.archive_series)}/${wp.archive_post}.html">자료실에서 더 읽기 — ${wp.archive_series_name || '연재'}에서 이 장면 읽기 ›</a>`
+        ? `<a class="route-panel-wp-archive-link" href="../../archive/${archiveSlug(wp.archive_series || route.archive_series)}/${wp.archive_post}.html">자료실에서 더 읽기 — ${wp.archive_series_name || route.archive_series_name || '연재'}에서 이 장면 읽기 ›</a>`
         : '';
       const detailHtml = hasDetail ? `
         <div class="route-panel-wp-detail" hidden>
