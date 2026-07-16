@@ -292,12 +292,12 @@
   const ARCHIVE_CATEGORIES = [
     { key: 'history', name: '역사', ready: true },
     { key: 'world_history', name: '세계사', ready: true },
+    { key: 'biographies', name: '인물열전', ready: true },
   ];
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power'] },
-      { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
     world_history: [
@@ -305,6 +305,9 @@
       { subcat: 'world_routes', name: '세계사 루트', href: 'archive/world-routes/index.html' },
       { subcat: 'art_history', name: '미술사', seriesIds: [] },
       { subcat: 'war_history', name: '전쟁사', seriesIds: [] },
+    ],
+    biographies: [
+      { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
     ],
   };
   const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동', person: '인물', document: '사료' };
@@ -368,7 +371,7 @@
     // ── 연작 시리즈 그룹핑: "권력과 책임" 4부작 (js/nav.js와 동일 로직, 변수명만 포털식) ──
     const STORY_GROUP_IDS = ['punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning'];
     const STORY_GROUP_KEY = 'power_and_accountability_story';
-    const STORY_GROUP_LABEL = '권력과 책임 (4부작)';
+    const STORY_GROUP_LABEL = '책임의 계보 (4부작)';
 
     function renderStoryGroupCard() {
       const readyCount = STORY_GROUP_IDS.filter(id => !!ARCHIVE_REGISTRY[id]).length;

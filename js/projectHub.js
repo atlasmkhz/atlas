@@ -92,6 +92,21 @@
     (video.related_events_ancient || []).forEach(eventId => {
       chips.push(`<a class="video-chip video-chip-event" href="/maps/ancient/?event=${encodeURIComponent(eventId)}">📍 관련 사건(고대)</a>`);
     });
+    (video.related_events_prehistory || []).forEach(eventId => {
+      chips.push(`<a class="video-chip video-chip-event" href="/maps/prehistory/?event=${encodeURIComponent(eventId)}">📍 관련 사건(선사)</a>`);
+    });
+    (video.related_events_medieval1 || []).forEach(eventId => {
+      chips.push(`<a class="video-chip video-chip-event" href="/maps/medieval1/?event=${encodeURIComponent(eventId)}">📍 관련 사건(고려·조선전기)</a>`);
+    });
+    (video.related_events_medieval2 || []).forEach(eventId => {
+      chips.push(`<a class="video-chip video-chip-event" href="/maps/medieval2/?event=${encodeURIComponent(eventId)}">📍 관련 사건(조선후기)</a>`);
+    });
+    (video.related_events_contemporary || []).forEach(eventId => {
+      chips.push(`<a class="video-chip video-chip-event" href="/maps/contemporary/?event=${encodeURIComponent(eventId)}">📍 관련 사건(현대)</a>`);
+    });
+    (video.related_archives || []).forEach(archive => {
+      chips.push(`<a class="video-chip video-chip-archive" href="/archive/${encodeURIComponent(archive.series)}/${encodeURIComponent(archive.post)}.html">📚 관련 자료실</a>`);
+    });
     return chips.join('');
   }
 

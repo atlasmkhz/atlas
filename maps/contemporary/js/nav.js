@@ -92,6 +92,7 @@
   const ARCHIVE_CATEGORIES = [
     { key: 'history', name: '역사', ready: true },
     { key: 'world_history', name: '세계사', ready: true },
+    { key: 'biographies', name: '인물열전', ready: true },
   ];
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
@@ -106,7 +107,6 @@
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'dokdo_records'] },
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power'] },
-      { subcat: 'people_study', name: '인물연구', seriesIds: ['erased_names'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
     // 세계사 카테고리 — 시리즈(과학사)와 별도로 '세계사 루트' 카드는
@@ -118,6 +118,9 @@
       { subcat: 'world_routes', name: '세계사 루트', href: 'archive/world-routes/index.html' },
       { subcat: 'art_history', name: '미술사', seriesIds: [] },
       { subcat: 'war_history', name: '전쟁사', seriesIds: [] },
+    ],
+    biographies: [
+      { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
     ],
   };
 
@@ -522,7 +525,7 @@
   // 4부작만 모아 보여주는 중간 단계(storygroup)를 거치게 한다.
   const STORY_GROUP_IDS = ['punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning'];
   const STORY_GROUP_KEY = 'power_and_accountability_story';
-  const STORY_GROUP_LABEL = '권력과 책임 (4부작)';
+  const STORY_GROUP_LABEL = '책임의 계보 (4부작)';
 
   function renderStoryGroupCard(){
     const readyCount = STORY_GROUP_IDS.filter(id => !!ARCHIVE_REGISTRY[id]).length;

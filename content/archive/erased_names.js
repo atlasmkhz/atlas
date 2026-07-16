@@ -1,15 +1,17 @@
 // content/archive/erased_names.js
-// 자료실(Archive) > 역사(history) > 인물연구(people_study)
-// 시리즈: 지워진 이름들 — 기억의 정치가 지운 독립운동가들
+// 자료실(Archive) > 인물열전(biographies) > 한국사 인물(korea_figures)
+//
+// 2026-07-16: 기존 역사(history) > 인물연구(people_study) 서브카테고리에서
+// 독립된 최상위 카테고리 "인물열전"으로 이전했다(두목님 결정 — 사기의
+// 열전처럼 인물을 1급 탐색 축으로 분리). 시리즈 id/slug(erased_names)는
+// 그대로 유지해 기존 URL(archive/erased-names/...)이 안 깨진다 — 바뀐 건
+// category/subcategory 소속뿐이다. 앞으로 추가되는 인물(정약용, 김홍도·
+// 신윤복 등)은 이 시리즈에 새 포스트로 넣거나, 규모가 커지면 이 카테고리
+// 아래 새 시리즈로 분리한다. 세계사 인물(양자역학 백주년의 과학자들 등)은
+// 아직 이 카테고리로 옮기지 않는다 — "세계사 열전"으로 별도 확장은 추후
+// 과제(두목님 결정, 2026-07-16).
 //
 // 스키마는 historical_revisionism.js(narrative 형식)를 따른다.
-// people_study 서브카테고리 관련 메모: docs/power_accountability_roadmap.md
-// §5는 people_study를 "인물카드(대통령·고위공직자·재벌총수 프로필)" 전용으로
-// 잡아뒀지만, seriesIds가 배열이므로 한 서브카테고리에 복수 시리즈가
-// 공존할 수 있다. 이 시리즈(서술형 인물 에세이)와 §5 인물카드(구조화된
-// 프로필, format 별도)는 형식이 달라 섞이지 않는다 — §5가 착수되면
-// people_study.seriesIds에 나란히 추가하면 된다. (2026-07 왕두목 승인
-// 작업에서 결정.)
 //
 // 시리즈 원칙:
 // - 이 시리즈의 주제는 인물의 위인전이 아니라 "지워짐" 자체다 — 누가,
@@ -30,8 +32,8 @@ const ARCHIVE_SERIES_ERASED_NAMES = {
   id: 'erased_names',
   name: '지워진 이름들',
   full_name: '지워진 이름들 — 기억의 정치가 지운 독립운동가들',
-  category: 'history',
-  subcategory: 'people_study',
+  category: 'biographies',
+  subcategory: 'korea_figures',
   period: '1880~현재',
   tagline: '싸운 기록은 남았는데 이름은 지워졌다 — 남과 북, 좌와 우가 각자의 이유로 잊어버린 사람들',
   color: '#3d4a5c',
@@ -69,7 +71,7 @@ const ARCHIVE_SERIES_ERASED_NAMES = {
         people: [
           { title:'신채호', url:'' }, { title:'이승만', url:'' }, { title:'김원봉', url:'' }
         ],
-        archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+        archives: [], books: [], videos: [{ title:'단재 신채호 | 일제강점기 독립운동과 『조선상고사』 AI 복원', url:'https://www.youtube.com/watch?v=Aecqgxg_gro' }], artworks: [], films: [], music: [],
       },
     },
 
@@ -136,6 +138,39 @@ const ARCHIVE_SERIES_ERASED_NAMES = {
         ],
         people: [
           { title:'김원봉', url:'' }, { title:'김구', url:'' }, { title:'노덕술', url:'' }
+        ],
+        archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+      },
+    },
+
+    // ── 4. 최재형 — 연해주 항일운동의 대부, 유해조차 못 찾은 죽음 ──
+    {
+      id: 'choi_jae_hyung',
+      type: 'person',
+      format: 'narrative',
+      year: 1920, month: 4, day: null,
+      title_ko: '최재형 — 연해주 항일운동의 대부, 유해조차 찾지 못했다',
+      place_ko: '러시아 우수리스크',
+      lat: 43.8000, lng: 131.9500,
+      card_ref: 'person_1914_04',
+      card_map: 'root',
+      body_ko: '최재형은 노비인 아버지와 기생인 어머니 사이에서 함경북도 경원의 극빈한 소작농 집안에 태어났다(출생연도는 자료마다 1858년과 1860년으로 엇갈린다). 아홉 살 되던 해 가족과 함께 기근을 피해 연해주로 이주했고, 열한 살에는 형수의 학대를 피해 집을 나와 포시예트 부두를 전전하다 러시아 선원들에게 발탁돼 견습수부로 세계를 돌며 러시아어와 실무를 익혔다. 이후 무역업과 군납업으로 거부를 쌓은 그는 동포들을 직원으로 고용해 절대빈곤에 시달리던 한인들이 스스로 돈을 벌 길을 열어주었고, 한인 마을에 정교회 학교 32개를 세워 교포 유학생을 매년 페테르부르크로 유학 보냈다 — 사람들은 그를 "페치카(따뜻한 난로)"라 불렀다. 연추 한인사회에서 도헌(군수급 공직)에까지 선출될 만큼 러시아 사회 안에서 입지를 다진 그는, 그 부와 지위를 항일운동에 쏟아부었다. 1908년 러시아 지역 항일의병 세력을 통합한 동의회를 조직해 총장을 맡았고, 안중근의 국내진공작전과 하얼빈 의거를 자금·무기·정보로 뒷받침했다 — 안중근이 거사 전 사격 연습을 한 곳이 최재형의 집이었다는 막내딸의 회고가 남아 있다. 1911년에는 권업회를 세워 독립운동을 이어갔으나 일본의 간첩 모함으로 체포됐다가 무혐의로 풀려났고, 이후 러시아 당국이 그와의 거래를 끊으면서 경제적으로도 궁핍해졌다. 1919년 대한민국 임시정부 초대 재무총장으로 선임됐지만 상하이로 부임하지 않고 연해주에 남아 현지 독립운동을 이끌었다. 1920년 4월, 일본군이 연해주 한인사회를 짓밟은 4월참변 당시 우수리스크에서 체포된 그는 재판 없이 총살당했고, 일본 헌병대가 시신을 수습하지 않아 유해는 끝내 찾지 못했다. 1962년 건국훈장 독립장이 추서됐지만 소련 체제 아래 묻혀 있던 그의 활동은 1990년대 후반에야 본격적으로 조명되기 시작했다. 그가 살던 우수리스크의 벽돌집은 2014년 한국 정부가 매입해 2019년 최재형기념관으로 문을 열었다.',
+      claim_ko: null,
+      rebuttal_ko: null,
+      sources: [
+        { type:'archive', name:'한국민족문화대백과사전 — 최재형', publisher:'한국학중앙연구원', author:'', year:'', url:'' },
+        { type:'archive', name:'위키백과 — 최재형(독립운동가)', publisher:'', author:'', year:'', url:'' },
+        { type:'book', name:'최재형 — 시베리아 한인민족운동의 대부', publisher:'역사공간', author:'박환', year:'2008', url:'' },
+        { type:'newspaper', name:'연해주 한국독립운동의 대부 최재형 순국 100년을 소환하다', publisher:'국가보훈부', author:'', year:'2021', url:'' },
+      ],
+      related: {
+        events: [
+          { title:'최재형 — 연해주 한인사회의 페치카 (1914)', url:'../../map.html?event=person_1914_04' },
+          { title:'동의단지회 — 안중근의 단지동맹 (1909)', url:'../../map.html?event=organization_1909_01' },
+          { title:'연해주 4월참변 — 신한촌 사건 (1920)', url:'../../map.html?event=massacre_1920_02' },
+        ],
+        people: [
+          { title:'최재형', url:'' }, { title:'안중근', url:'' }
         ],
         archives: [], books: [], videos: [], artworks: [], films: [], music: [],
       },

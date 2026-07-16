@@ -48,6 +48,7 @@ SITE_ROOT = 'https://atlas.mkhz.kr'
 CATEGORY_LABELS = {
     'history': '역사', 'world_history': '세계사', 'literature': '문학',
     'philosophy': '철학', 'art': '예술', 'architecture': '건축', 'religion': '종교',
+    'biographies': '인물열전',
 }
 SUBCATEGORY_LABELS = {
     'revisionism': '역사왜곡', 'era_study': '시대연구',
@@ -55,6 +56,8 @@ SUBCATEGORY_LABELS = {
     # 세계사(world_history) 카테고리 — 2026-07-12 오픈
     'science_history': '과학사', 'art_history': '미술사',
     'war_history': '전쟁사', 'world_routes': '세계사 루트',
+    # 인물열전(biographies) 카테고리 — 2026-07-16 오픈
+    'korea_figures': '한국사 인물',
 }
 SOURCE_TYPE_LABELS = {
     'government': '정부·공공기관', 'court': '판결', 'paper': '논문',
@@ -104,7 +107,7 @@ GA_MEASUREMENT_ID = 'G-9C05WN48C4'  # ATLAS GA4 속성 Measurement ID — index.
 # 삽입한다. 새 시리즈를 이 서사에 추가하려면 아래 리스트에 (id, slug,
 # 짧은이름)만 추가하면 된다 — 다른 코드는 손댈 필요 없다.
 STORY_GROUP_HUB_SLUG = 'power-and-accountability'
-STORY_GROUP_HUB_NAME = '권력과 책임'
+STORY_GROUP_HUB_NAME = '책임의 계보'
 STORY_GROUP = [
     ('punishment_records',       'punishment-records',        '1부 · 처벌의 기록'),
     ('power_and_time',           'power-and-time',            '2부 · 권력과 시간'),

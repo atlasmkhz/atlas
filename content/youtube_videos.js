@@ -24,6 +24,46 @@
 const YOUTUBE_VIDEOS = [
 
   {
+    id: 'v_kim_hongdo_vs_shin_yunbok',
+    youtube_id: 'XtpELkzX40g',
+    title: '김홍도 vs 신윤복 | 조선 풍속화와 \'미인도\'의 해석 〈그림 속의 나〉',
+    description: '조선 후기 두 거장 김홍도와 신윤복의 풍속화를 AI로 복원해 자아 발견의 여정으로 재해석한 단편영화. 신윤복의 성 정체성에 대한 예술적 재해석을 담았다.',
+    published: '2026-02-13',
+    duration: '4:10',
+    playlist: 'memory_old',
+    tags: ['김홍도', '신윤복', '풍속화', '미인도', 'AI복원', '조선시대'],
+    related_events: [],
+    related_events_modern2: [],
+    related_events_ancient: [],
+    related_events_prehistory: [],
+    related_events_medieval1: [],
+    related_events_medieval2: ['culture_1785_02'],
+    related_events_contemporary: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+
+  {
+    id: 'v_jeong_yakyong_letters',
+    youtube_id: '2S7ugqPhHWs',
+    title: '사람에게 상처받아 마음이 흔들릴 때, 다산 정약용의 문장을 빌려옵니다 (정약용 MV)',
+    description: '유배 18년의 다산 정약용이 남긴 사람과 마음에 관한 사유를, AI로 재현한 역사적 풍경과 음악으로 풀어낸 시네마틱 헌정 영상.',
+    published: '2026-01-01',
+    duration: null,
+    playlist: 'quotes',
+    tags: ['정약용', '다산정약용', '목민심서', '유배', '실학', '위인의문장'],
+    related_events: [],
+    related_events_modern2: [],
+    related_events_ancient: [],
+    related_events_prehistory: [],
+    related_events_medieval1: [],
+    related_events_medieval2: ['massacre_1801_01', 'culture_1750_02', 'culture_1794_01'],
+    related_events_contemporary: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+
+  {
     id: 'v_liberation_tragedy_1',
     youtube_id: 'QjMDBgA3Low',
     title: '[역사 에세이] 광복 후 3년, 우리가 묻어두었던 비극 Part1',
@@ -109,7 +149,8 @@ const YOUTUBE_VIDEOS = [
     tags: ['3.1운동', '기미독립선언서'],
     related_events: ['movement_1919_02'],
     related_events_modern2: [],
-    related_routes: [],
+    related_routes: ['donghak'],
+    related_archives: [{ series: 'source-readings', post: 'march_first_declaration' }],
     thumbnail_override: null,
   },
   {
@@ -152,6 +193,7 @@ const YOUTUBE_VIDEOS = [
     related_events: ['person_1923_01'],
     related_events_modern2: [],
     related_routes: ['righteous_struggle'],
+    related_archives: [{ series: 'erased-names', post: 'shin_chae_ho' }],
     thumbnail_override: null,
   },
   {
@@ -179,7 +221,7 @@ const YOUTUBE_VIDEOS = [
     tags: ['동학농민운동', '우금치전투'],
     related_events: ['battle_1894_01'],
     related_events_modern2: [],
-    related_routes: [],
+    related_routes: ['donghak'],
     thumbnail_override: null,
   },
   {
@@ -216,10 +258,12 @@ const YOUTUBE_VIDEOS = [
   },
 
   // ── 다른 채널 큐레이션 — 궁예(6·10만세운동·조세이탄광), 해담(윤동주·정지용·이육사 시 관련 곡) ──
-  // ⚠️ 순서(보내주신 링크 순서)와 스크린샷 순서를 대응시켜 채웠다 —
-  // 확실하지 않으면 다시 알려주세요, 바로 고치겠습니다. 지시대로
-  // 카드/루트 연결은 하지 않았다(다른 채널 콘텐츠 큐레이션이라 출처만
-  // 명시).
+  // 2026-07-16: 두목님 지시로 전체 영상-카드 연결 감사를 하면서 궁예 2편도
+  // 가장 가까운 카드로 연결했다(6·10만세운동→movement_1926_01, 조세이탄광→
+  // 강제동원 관련 카드 policy_1943_02/03, 정확히 같은 사건 카드는 없어
+  // 최근접 유사 사건으로 연결). 해담 3편(시 낭독곡)은 특정 사건이 아니라
+  // 문학사 루트(modern_literature, modern2_literature)에 걸쳐 있어 아직
+  // 미연결 — 두목님 확인 후 연결 예정.
   {
     id: 'v_gungye_610manse',
     youtube_id: 'ZpCzZAuQr8k',
@@ -229,7 +273,7 @@ const YOUTUBE_VIDEOS = [
     duration: '3:49',
     playlist: 'atlas_modern',
     tags: ['6.10만세운동', '독립운동'],
-    related_events: [],
+    related_events: ['movement_1926_01'],
     related_events_modern2: [],
     related_routes: [],
     thumbnail_override: null,
@@ -243,7 +287,7 @@ const YOUTUBE_VIDEOS = [
     duration: '3:24',
     playlist: 'atlas_modern',
     tags: ['조세이탄광', '강제동원', '일제강점기'],
-    related_events: [],
+    related_events: ['policy_1943_02', 'policy_1943_03'],
     related_events_modern2: [],
     related_routes: [],
     thumbnail_override: null,
@@ -257,9 +301,9 @@ const YOUTUBE_VIDEOS = [
     duration: '4:02',
     playlist: 'memory_old',
     tags: ['이육사', '광야'],
-    related_events: [],
+    related_events: ['person_1944_02'],
     related_events_modern2: [],
-    related_routes: [],
+    related_routes: ['modern_literature'],
     thumbnail_override: null,
   },
   {
@@ -271,9 +315,9 @@ const YOUTUBE_VIDEOS = [
     duration: '3:40',
     playlist: 'memory_old',
     tags: ['윤동주'],
-    related_events: [],
+    related_events: ['person_1945_02'],
     related_events_modern2: [],
-    related_routes: [],
+    related_routes: ['modern_literature'],
     thumbnail_override: null,
   },
   {
@@ -287,13 +331,14 @@ const YOUTUBE_VIDEOS = [
     tags: ['정지용', '향수'],
     related_events: [],
     related_events_modern2: [],
-    related_routes: [],
+    related_routes: ['modern_literature'],
     thumbnail_override: null,
   },
 
   // ── 세월호 ──
-  // 2014년은 근대(1876~1945)·근현대(1945~1993) 어느 지도 범위에도
-  // 들지 않아 연결할 카드가 없다. 지시대로 연결 없이 그대로 올린다.
+  // 2026-07-16 수정: 이전 메모("2014년은 어느 지도 범위에도 안 든다")는
+  // 근대·근현대 두 지도만 기준으로 한 착오였다. 실제로는 현대(contemporary)
+  // 지도가 1994~2024를 커버하며 disaster_2014_01 카드가 이미 존재한다.
   // (추모곡 플레이리스트 편은 제외 — 지시에 따라 이 한 편만 넣는다.)
   {
     id: 'v_sewol_promise',
@@ -306,7 +351,13 @@ const YOUTUBE_VIDEOS = [
     tags: ['세월호'],
     related_events: [],
     related_events_modern2: [],
-    related_routes: [],
+    related_events_ancient: [],
+    related_events_prehistory: [],
+    related_events_medieval1: [],
+    related_events_medieval2: [],
+    related_events_contemporary: ['disaster_2014_01'],
+    related_routes: ['korea_disaster_history'],
+    related_archives: [{ series: 'cult-and-power', post: 'cp_05' }],
     thumbnail_override: null,
   },
 
@@ -321,6 +372,11 @@ const YOUTUBE_VIDEOS = [
     tags: ['흥선대원군', '병인양요', '쇄국정책'],
     related_events: [],
     related_events_modern2: [],
+    related_events_ancient: [],
+    related_events_prehistory: [],
+    related_events_medieval1: [],
+    related_events_medieval2: ['battle_1866_01', 'political_1863_01'],
+    related_events_contemporary: [],
     related_routes: [],
     thumbnail_override: null,
   },
@@ -336,7 +392,7 @@ const YOUTUBE_VIDEOS = [
     tags: ['백제멸망', '의자왕재평가', '예식진배신', '흑치상지', '금동대향로'],
     related_events: [],
     related_events_modern2: [],
-    related_events_ancient: ['battle_660_01'],
+    related_events_ancient: ['battle_660_01', 'movement_660_02'],
     related_routes: [],
     thumbnail_override: null,
   },

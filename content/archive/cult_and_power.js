@@ -136,7 +136,7 @@ const ARCHIVE_SERIES_CULT_AND_POWER = {
       sources: [
         { type:'reference', name:'유병언·청해진해운 관련 수사 및 보도', publisher:'검찰·다수 언론', author:'', year:'2014', url:'' },
       ],
-      related: { events: [], people: [], archives: [], books: [], videos: [], artworks: [], films: [], music: [] },
+      related: { events: [], people: [], archives: [], books: [], videos: [{ title:'잊지 않겠다는 약속: 세월호 참사, 그날의 진심과 우리의 무관심', url:'https://www.youtube.com/watch?v=PiVxckND7Xw' }], artworks: [], films: [], music: [] },
     },
 
     {

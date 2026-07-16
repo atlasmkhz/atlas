@@ -96,7 +96,7 @@ const ARCHIVE_SERIES_SOURCE_READINGS = {
         people: [
           { title:'최남선', url:'' }, { title:'손병희', url:'' }, { title:'한용운', url:'' }
         ],
-        archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+        archives: [], books: [], videos: [{ title:'기미독립선언서 1919 | 3·1운동과 독립운동가 58인 헌정곡', url:'https://www.youtube.com/watch?v=5RmKG_MQAjw' }], artworks: [], films: [], music: [],
       },
     },
 
