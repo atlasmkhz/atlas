@@ -3,7 +3,7 @@
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 478개 + 루트 10개 + 
   근현대(1945~1993) 진입점 1개 + Event 457개 + 루트 10개 + 
-  현대(1994~2025) 진입점 1개 + Event 337개(루트 없음) + 
+  현대(1994~2025) 진입점 1개 + Event 338개(루트 없음) + 
   조선(1392~1875, 중세2) 진입점 1개 + Event 187개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 162개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
@@ -5798,6 +5798,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2022-legoland-crisis-provincial</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2022-nuri-rocket-kslv</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -8928,6 +8933,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/hwandan-gogi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -9243,6 +9253,41 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics/he_01</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics/he_02</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics/he_03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics/he_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics/he_05</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics/he_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/homer-epics/he_07</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/hwandan-gogi/hd_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -9399,6 +9444,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/power-accountability/lee_myung_bak_bbk_das</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/power-accountability/legoland_choi_moon_soon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -9604,6 +9654,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/unequal-measures/um_04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/world-routes/odyssey</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

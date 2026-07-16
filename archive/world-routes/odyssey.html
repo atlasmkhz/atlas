@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#101418">
+<title>오디세우스의 항해 — 트로이에서 이타카까지 | ATLAS by MKHZ</title>
+<meta name="description" content="트로이 목마로 전쟁을 끝낸 오디세우스가 고향 이타카로 돌아가기까지의 10년 항해 — 키클롭스, 세이렌, 스킬라와 카립디스를 지나는 지중해의 여정을 지도 위에서 따라간다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/archive/world-routes/odyssey">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://atlas.mkhz.kr/archive/world-routes/odyssey">
+<meta property="og:title" content="오디세우스의 항해 — 트로이에서 이타카까지 | ATLAS by MKHZ">
+<meta property="og:description" content="트로이에서 이타카까지, 오디세우스의 10년 귀향 항해를 지중해 지도 위에서 따라간다.">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="오디세우스의 항해 — 트로이에서 이타카까지">
+<meta name="twitter:description" content="트로이에서 이타카까지, 오디세우스의 10년 귀향 항해.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ATLAS", "item": "https://atlas.mkhz.kr/"}, {"@type": "ListItem", "position": 2, "name": "자료실", "item": "https://atlas.mkhz.kr/?nav=archive"}, {"@type": "ListItem", "position": 3, "name": "세계사 루트", "item": "https://atlas.mkhz.kr/archive/world-routes"}, {"@type": "ListItem", "position": 4, "name": "오디세우스의 항해", "item": "https://atlas.mkhz.kr/archive/world-routes/odyssey"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4');
+</script>
+<script src="../../js/analytics.js"></script>
+<style>
+/* ── 세계사 루트 전용 스타일 — 지도 SPA(다크 톤 + 골드 악센트)와
+   같은 계열을 쓰되 독립 페이지로 완결. ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: #101418; color: #e8e2d6;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+#map { position: absolute; inset: 0; z-index: 0; background: #101418; }
+
+/* 상단 바 */
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, rgba(16,20,24,.92), rgba(16,20,24,0));
+  pointer-events: none;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.topbar a.back {
+  pointer-events: auto; text-decoration: none;
+  color: #b89860; font-size: 13px; letter-spacing: .3px;
+}
+.topbar .title { font-size: 15px; font-weight: 700; color: #f0ead9; }
+.topbar .subtitle { font-size: 12px; color: #9a927f; }
+
+/* 연도 칩 스트립 */
+.chips {
+  position: absolute; left: 0; right: 0; z-index: 1000;
+  bottom: calc(190px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 6px; overflow-x: auto; padding: 6px 12px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; border: 1px solid rgba(184,152,96,.45);
+  background: rgba(16,20,24,.85); color: #cfc6b2;
+  font-size: 12px; padding: 5px 10px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap;
+}
+.chip.active { background: #b89860; color: #14110b; font-weight: 700; border-color: #b89860; }
+
+/* 하단 카드 패널 */
+.panel {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1001;
+  background: rgba(20, 24, 30, .96);
+  border-top: 1px solid rgba(184,152,96,.35);
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  min-height: 190px;
+  backdrop-filter: blur(6px);
+}
+.panel .meta { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.panel .num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  background: #b89860; color: #14110b; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  align-self: center;
+}
+.panel .year { font-size: 13px; color: #b89860; font-weight: 700; letter-spacing: .5px; }
+.panel .place { font-size: 14px; color: #b89860; font-weight: 700; letter-spacing: .3px; }
+.panel h2 { font-size: 16px; color: #f0ead9; line-height: 1.45; margin: 2px 0 8px; }
+.panel p { font-size: 13.5px; color: #cfc6b2; line-height: 1.7; max-height: 118px; overflow-y: auto; }
+.panel .links { margin-top: 8px; }
+.panel .links a { color: #b89860; font-size: 12.5px; text-decoration: none; border-bottom: 1px solid rgba(184,152,96,.4); }
+.nav-btns { position: absolute; top: 12px; right: 14px; display: flex; gap: 8px; }
+.nav-btns button {
+  border: 1px solid rgba(184,152,96,.5); background: transparent; color: #b89860;
+  width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.nav-btns button:disabled { opacity: .3; cursor: default; }
+.progress { position: absolute; top: 20px; right: 100px; font-size: 12px; color: #9a927f; }
+
+/* 지점 마커 */
+.wp-marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #1d232b; border: 2px solid #b89860;
+  color: #e8e2d6; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.wp-marker.active { background: #b89860; color: #14110b; transform: scale(1.25); z-index: 999; }
+
+@media (min-width: 760px) {
+  .panel { left: auto; right: 18px; bottom: 18px; width: 420px; border: 1px solid rgba(184,152,96,.35); border-radius: 12px; }
+  .chips { bottom: 12px; right: 460px; left: 12px; }
+  .panel p { max-height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="topbar">
+  <a class="back" href="index.html">&larr; 세계사 루트</a>
+  <span class="title">오디세우스의 항해</span>
+  <span class="subtitle">트로이에서 이타카까지 · 오디세이아의 10년 항해</span>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="panel" id="panel">
+  <div class="nav-btns">
+    <button id="prevBtn" aria-label="이전 지점">&larr;</button>
+    <button id="nextBtn" aria-label="다음 지점">&rarr;</button>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="meta">
+    <span class="num" id="wpNum">1</span>
+    <span class="place" id="wpPlace"></span>
+  </div>
+  <h2 id="wpTitle"></h2>
+  <p id="wpDesc"></p>
+  <div class="links" id="wpLinks"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  // ── 지점 데이터 — 항해 순서. post: 자료실 「일리아스와 오디세이아」 글 id ──
+  const WAYPOINTS = [
+    { place:'트로이 (오늘날 튀르키예 히사를리크)', lat:39.9575, lng:26.2389, zoom:6,
+      title:'트로이 함락 — 10년 전쟁의 끝, 10년 항해의 시작',
+      desc:'오디세우스의 목마 계략으로 트로이가 함락되고 전쟁이 끝난다. 다른 영웅들은 곧 고향으로 돌아가지만, 오디세우스의 귀향은 이제부터 또 다른 10년의 시련이 된다. 여기서 그의 배는 서쪽 고향 이타카를 향해 닻을 올린다.',
+      post:'he_04' },
+    { place:'키코네스족의 땅 (트라케 해안)', lat:40.8480, lng:25.8740, zoom:6,
+      title:'첫 약탈과 첫 대가',
+      desc:'귀향길 첫 기착지에서 오디세우스 일행은 키코네스족의 도시를 약탈하지만, 전열을 정비한 원주민의 반격에 여러 부하를 잃는다. 승리에 취해 지체한 대가였다 — 오만이 부르는 재앙이라는, 이 서사시가 거듭 말하는 주제가 여기서 처음 울린다.',
+      post:null },
+    { place:'로토파고이(연꽃 먹는 사람들)의 섬', lat:33.8076, lng:10.8451, zoom:6,
+      title:'망각의 열매 — 집을 잊게 하는 유혹',
+      desc:'로토스라는 열매를 먹은 부하들은 고향도 귀향의 의지도 모두 잊고 그곳에 머물려 한다. 오디세우스는 우는 그들을 억지로 끌어다 배에 묶는다. "집으로 돌아가려는 의지" 자체를 위협하는 첫 시험이었다.',
+      post:'he_05' },
+    { place:'키클롭스의 섬 (시칠리아 부근)', lat:37.7510, lng:14.9930, zoom:6,
+      title:'외눈박이 거인 폴리페모스 — "아무도 아니"의 계략',
+      desc:'외눈박이 거인 폴리페모스의 동굴에 갇혀 부하들이 잡아먹힌다. 오디세우스는 이름을 "아무도 아니"라 속이고 거인의 눈을 멀게 해 탈출한다. 그러나 승리에 취해 자기 진짜 이름을 외친 것이 화근 — 거인의 아버지 포세이돈(바다의 신)의 저주가 이때 시작된다.',
+      post:'he_06' },
+    { place:'아이올로스의 섬 — 바람의 자루', lat:38.4800, lng:14.9600, zoom:6,
+      title:'눈앞의 고향, 그리고 부하들의 실수',
+      desc:'바람의 신 아이올로스가 역풍을 자루에 담아 건네준 덕에 이타카가 눈앞에 보일 만큼 다가온다. 그러나 오디세우스가 잠든 사이, 자루에 보물이 든 줄 안 부하들이 그것을 열어버려 폭풍이 쏟아져 나오고 배는 다시 멀리 밀려난다. 신뢰와 호기심이 부른 좌절이다.',
+      post:null },
+    { place:'키르케의 섬 아이아이에', lat:41.2280, lng:13.0560, zoom:6,
+      title:'마녀 키르케 — 돼지가 된 부하들',
+      desc:'마법사 키르케가 부하들을 돼지로 만든다. 오디세우스는 신의 도움으로 마법을 이겨내고 그들을 되돌리며, 이 섬에서 1년을 머문다. 키르케는 떠나는 그에게 저승에 다녀와 예언자의 말을 들으라는 과제를 준다.',
+      post:null },
+    { place:'저승 입구 (오케아노스의 끝)', lat:38.9000, lng:20.7000, zoom:6,
+      title:'죽은 자들과의 대화',
+      desc:'오디세우스는 세상의 끝에서 저승의 혼령들을 불러낸다. 예언자 테이레시아스는 그가 겪을 시련과 귀향의 조건을 일러준다. 죽은 어머니, 전우 아킬레우스의 혼령도 만난다 — "차라리 가난한 종으로 살지언정 죽은 자들의 왕이 되고 싶지 않다"는 아킬레우스의 말은 삶의 가치를 되새기게 한다.',
+      post:null },
+    { place:'세이렌의 바다', lat:40.6260, lng:14.4770, zoom:7,
+      title:'세이렌의 노래 — 듣되 파멸하지 않는 법',
+      desc:'아름다운 노래로 뱃사람을 홀려 죽이는 세이렌의 바다. 오디세우스는 부하들의 귀를 밀랍으로 막고, 자신은 노래를 듣되 몸을 돛대에 묶게 한다. 치명적 유혹을 알면서도 무너지지 않는 지혜 — "세이렌의 노래"라는 관용어가 여기서 나왔다.',
+      post:'he_06' },
+    { place:'스킬라와 카립디스의 해협 (메시나 해협)', lat:38.2500, lng:15.6300, zoom:8,
+      title:'두 괴물 사이 — 진퇴양난',
+      desc:'한쪽엔 머리 여섯 달린 괴물 스킬라, 다른 쪽엔 모든 것을 삼키는 소용돌이 카립디스. 어느 쪽도 안전하지 않은 좁은 해협에서 오디세우스는 부하 여섯을 잃더라도 배 전체를 지키는 선택을 한다. "스킬라와 카립디스 사이"—두 악 사이의 선택이라는 말의 기원이다.',
+      post:'he_06' },
+    { place:'태양신의 섬 트리나키아', lat:38.1150, lng:15.6500, zoom:7,
+      title:'금지된 소 — 마지막 부하들을 잃다',
+      desc:'굶주린 부하들이 경고를 어기고 태양신 헬리오스의 신성한 소를 잡아먹는다. 분노한 태양신의 저주로 출항 후 벼락이 배를 부수고, 오디세우스만 홀로 살아남는다. 이제 그는 부하도 배도 없이 혼자가 된다.',
+      post:null },
+    { place:'칼립소의 섬 오기기아', lat:35.8600, lng:14.3900, zoom:6,
+      title:'7년의 붙잡힘 — 불멸을 거절하다',
+      desc:'여신 칼립소가 오디세우스를 섬에 붙잡아두고 영원한 젊음과 불멸을 약속하며 남편이 되어달라 한다. 그러나 그는 매일 바닷가에서 고향을 그리며 운다. 신이 될 기회를 마다하고 죽음을 지닌 인간으로서 아내에게 돌아가기를 택하는 것 — 이 서사시가 그리는 인간다움의 정점이다.',
+      post:'he_05' },
+    { place:'파이아케스인의 나라 스케리아', lat:39.6243, lng:19.9217, zoom:7,
+      title:'마지막 손님 — 자기 이야기를 노래하다',
+      desc:'칼립소의 섬을 겨우 떠난 오디세우스는 파이아케스인의 환대를 받는다. 궁정 가인이 트로이 전쟁을 노래하자 그는 눈물을 흘리고, 마침내 자기 정체를 밝히며 그동안의 모든 모험을 직접 이야기한다. 「오디세이아」의 바다 모험 대부분은 사실 여기서 그가 들려주는 회상이다. 파이아케스인들이 그를 배에 태워 마침내 이타카에 데려다준다.',
+      post:null },
+    { place:'이타카 — 고향', lat:38.4194, lng:20.7186, zoom:8,
+      title:'귀환의 완성 — 활, 침대, 그리고 알아봄',
+      desc:'거지로 변장하고 돌아온 오디세우스는 아무도 당기지 못한 자신의 활을 쏘아 구혼자들을 응징한다. 아내 페넬로페는 "옮길 수 없는 침대"의 비밀로 그가 진짜 남편임을 확인하고, 20년 만에 그를 품에 안는다. 도착이 아니라 "서로를 알아보고 질서를 되찾는 것"까지가 진짜 귀향이었다.',
+      post:'he_07' },
+  ];
+
+  // ── 지도 ──
+  const map = L.map('map', { zoomControl: false, worldCopyJump: true })
+    .setView([WAYPOINTS[0].lat, WAYPOINTS[0].lng], 6);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+  // dark_nolabels: 국가/도시/바다 명칭 라벨이 없는 순수 지형 타일.
+  // CartoDB dark_all은 동해를 "Sea of Japan(East Sea)" 병기로 표기하는데,
+  // 이는 타일 자체에 래스터로 박힌 라벨이라 우리 쪽 지명 데이터로 고칠 수 없다.
+  // 장소명은 어차피 마커·연도칩·하단 패널에서 우리가 직접 표기하므로
+  // 베이스타일 라벨은 전부 제거하는 편이 정확하고 간단하다.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 12, minZoom: 2
+  }).addTo(map);
+
+  // 경로선 — 시간 순서를 잇는 점선
+  L.polyline(WAYPOINTS.map(w => [w.lat, w.lng]), {
+    color: '#b89860', weight: 2, opacity: .55, dashArray: '6 8'
+  }).addTo(map);
+
+  // 지점 마커
+  const markers = WAYPOINTS.map((w, i) => {
+    const icon = L.divIcon({ className: '', html: `<div class="wp-marker" data-i="${i}">${i + 1}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+    const m = L.marker([w.lat, w.lng], { icon }).addTo(map);
+    m.on('click', () => go(i));
+    return m;
+  });
+
+  // 연도 칩
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = WAYPOINTS.map((w, i) => `<button class="chip" data-i="${i}">${i + 1}. ${w.place.split(/[(—]/)[0].trim()}</button>`).join('');
+  chipsEl.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (b) go(parseInt(b.dataset.i, 10));
+  });
+
+  // ── 패널 렌더 ──
+  let cur = 0;
+  const $ = id => document.getElementById(id);
+  function go(i) {
+    cur = Math.max(0, Math.min(WAYPOINTS.length - 1, i));
+    const w = WAYPOINTS[cur];
+    $('wpNum').textContent = cur + 1;
+    $('wpPlace').textContent = w.place;
+    $('wpTitle').textContent = w.title;
+    $('wpDesc').textContent = w.desc;
+    $('wpLinks').innerHTML = w.post
+      ? `<a href="../homer-epics/${w.post}.html">깊이 읽기 — 「일리아스와 오디세이아」 시리즈에서 이 장면 읽기 &rsaquo;</a>` : '';
+    $('progress').textContent = `${cur + 1} / ${WAYPOINTS.length}`;
+    $('prevBtn').disabled = cur === 0;
+    $('nextBtn').disabled = cur === WAYPOINTS.length - 1;
+    document.querySelectorAll('.wp-marker').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    document.querySelectorAll('.chip').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    const activeChip = chipsEl.querySelector('.chip.active');
+    if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    map.flyTo([w.lat, w.lng], w.zoom || 5, { duration: 1.1 });
+    if (window.trackPageView) window.trackPageView('world_route_odyssey', `wp_${cur + 1}`);
+  }
+  $('prevBtn').addEventListener('click', () => go(cur - 1));
+  $('nextBtn').addEventListener('click', () => go(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+  });
+
+  // 자료실 글(예: planck_1900.html)의 "세계지도 루트에서 이 장면 보기"에서
+  // ?point=post_id로 들어오면 해당 웨이포인트로 바로 진입시킨다.
+  const qp = new URLSearchParams(location.search).get('point');
+  const startIdx = qp ? WAYPOINTS.findIndex(w => w.post === qp) : -1;
+  go(startIdx >= 0 ? startIdx : 0);
+})();
+</script>
+</body>
+</html>

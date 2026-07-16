@@ -322,7 +322,7 @@
     // 동일한 논리).
     world_history: [
       { subcat: 'civilization_history', name: '문명사', seriesIds: ['quantum_century'] },
-      { subcat: 'spirit_history', name: '정신사', seriesIds: [] },
+      { subcat: 'spirit_history', name: '정신사', seriesIds: ['homer_epics'] },
       { subcat: 'upheaval_history', name: '격변사', seriesIds: [] },
       { subcat: 'world_routes', name: '세계사 루트', href: 'archive/world-routes/index.html' },
     ],
