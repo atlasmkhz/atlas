@@ -53,11 +53,16 @@ CATEGORY_LABELS = {
 SUBCATEGORY_LABELS = {
     'revisionism': '역사왜곡', 'era_study': '시대연구',
     'people_study': '인물연구', 'primary_sources': '사료읽기',
-    # 세계사(world_history) 카테고리 — 2026-07-12 오픈
-    'science_history': '과학사', 'art_history': '미술사',
-    'war_history': '전쟁사', 'world_routes': '세계사 루트',
+    # 세계사(world_history) 카테고리 — 2026-07-16 3갈래 재편(B안)
+    # 문명사(만든 것)·정신사(믿고 사유한 것)·격변사(겨루고 뒤엎은 것).
+    # 구 키(science_history/art_history/war_history)는 이제 갈래가 아니라
+    # 각 갈래 안의 개별 시리즈 주제로 내려간다.
+    'civilization_history': '문명사', 'spirit_history': '정신사',
+    'upheaval_history': '격변사', 'world_routes': '세계사 루트',
     # 인물열전(biographies) 카테고리 — 2026-07-16 오픈
-    'korea_figures': '한국사 인물',
+    'korea_figures': '한국사 인물', 'world_figures': '세계사 인물',
+    # (구 라벨 — 하위호환용으로 남겨둠)
+    'science_history': '과학사', 'art_history': '미술사', 'war_history': '전쟁사',
 }
 SOURCE_TYPE_LABELS = {
     'government': '정부·공공기관', 'court': '판결', 'paper': '논문',

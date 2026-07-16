@@ -111,18 +111,35 @@
       { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['source_readings', 'hwandan_gogi'] },
     ],
-    // 세계사 카테고리 — 시리즈(과학사)와 별도로 '세계사 루트' 카드는
-    // href 직행 링크다: 세계사 루트는 한국 지도 위 루트가 아니라
-    // archive/world-routes/ 아래의 독립 세계지도 페이지로 운영한다
-    // (2026-07-12 왕두목 결정 — 근대 루트 허브에 섞지 않는다).
+    // ── 세계사 카테고리 (2026-07-16 재편, B안: 3갈래 구조) ──────────
+    // ATLAS의 근본 철학: 세계사는 한국사와 분리된 별도 코너가 아니라,
+    // 한국사와 "거미줄처럼" 얽히기 위해 들어온다. 프랑스혁명↔3·1운동,
+    // 이순신↔세계사의 대응 인물, 12·3 내란↔역사 속 친위쿠데타,
+    // E=mc²↔한반도의 나비효과 — 상호작용과 역사의 반복성을 축으로,
+    // 인물·사건·세계사·루트·자료실·유튜브가 하나로 이어지는 것이 목표다
+    // (왕두목 철학, 2026-07-16). 그래서 세계사 콘텐츠는 가급적 한국사
+    // 사건/인물 카드와 related로 연결하고, "그때 우리나라는?" 관점을
+    // 적극적으로 넣는다.
+    //
+    // 3갈래(문명사/정신사/격변사)는 seriesIds를 여러 개 담는 큰 그릇이다.
+    // 새 주제는 성격에 맞는 갈래의 seriesIds에 추가하면 된다:
+    //   - 문명사: 인간이 만든 것 (과학사·미술사·건축·기술·의학…)
+    //   - 정신사: 인간이 믿고 사유한 것 (신화·서사시·종교·경전·철학…)
+    //   - 격변사: 인간이 겨루고 뒤엎은 것 (전쟁사·혁명사·제국·전염병…)
+    // '세계사 루트'는 한국 지도 위 루트가 아니라 archive/world-routes/
+    // 아래 독립 세계지도 페이지로 운영하는 href 직행 링크다(2026-07-12 결정).
+    // 세계사 인물은 이 카테고리가 아니라 biographies(인물열전)로 뺀다
+    // — 인물은 문명/정신/격변 전체를 가로지르는 축이기 때문(한국사 인물과
+    // 동일한 논리).
     world_history: [
-      { subcat: 'science_history', name: '과학사', seriesIds: ['quantum_century'] },
+      { subcat: 'civilization_history', name: '문명사', seriesIds: ['quantum_century'] },
+      { subcat: 'spirit_history', name: '정신사', seriesIds: [] },
+      { subcat: 'upheaval_history', name: '격변사', seriesIds: [] },
       { subcat: 'world_routes', name: '세계사 루트', href: 'archive/world-routes/index.html' },
-      { subcat: 'art_history', name: '미술사', seriesIds: [] },
-      { subcat: 'war_history', name: '전쟁사', seriesIds: [] },
     ],
     biographies: [
       { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
+      { subcat: 'world_figures', name: '세계사 인물', seriesIds: [] },
     ],
   };
 

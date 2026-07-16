@@ -1,5 +1,11 @@
 // content/archive/quantum_century.js
-// 자료실(Archive) > 세계사(world_history) > 과학사(science_history)
+// 자료실(Archive) > 세계사(world_history) > 문명사(civilization_history)
+//   — 문명사 갈래 안의 '과학사' 주제 시리즈다(2026-07-16 재편).
+//
+// 연결 원칙(왕두목 철학, 2026-07-16): 세계사 과학사도 결국 한국사와
+// 얽혀야 한다. 서양 과학사의 결정적 순간에 "그때 우리나라는?"을 함께
+// 다룬다. 예: 아인슈타인 E=mc²과 원자폭탄 → 해방과 분단이라는 한반도의
+// 나비효과. 향후 관련 카드와 related로 연결할 것.
 // 시리즈: 양자역학 100년 — 신은 주사위를 던지는가
 //
 // 자료실 세계사 카테고리의 첫 시리즈. 2025~2027년은 양자역학 탄생
@@ -30,7 +36,7 @@ const ARCHIVE_SERIES_QUANTUM_CENTURY = {
   name: '양자역학 100년',
   full_name: '양자역학 100년 — 신은 주사위를 던지는가',
   category: 'world_history',
-  subcategory: 'science_history',
+  subcategory: 'civilization_history',  // 2026-07-16: science_history → civilization_history(문명사)로 이동. 과학사는 이제 갈래가 아니라 문명사 안의 한 주제다.
   period: '1900~현재',
   tagline: '흑체복사라는 작은 균열에서 시작해 세계관을 뒤집고, 오늘 대전의 실험실까지 이어진 한 세기',
   color: '#2f3f5c',
