@@ -84,7 +84,7 @@
       chips.push(`<a class="video-chip video-chip-route" href="?route=${encodeURIComponent(routeId)}">🧭 관련 루트</a>`);
     });
     (video.related_events || []).forEach(eventId => {
-      chips.push(`<a class="video-chip video-chip-event" href="?event=${encodeURIComponent(eventId)}">📍 관련 사건</a>`);
+      chips.push(`<a class="video-chip video-chip-event" href="/map.html?event=${encodeURIComponent(eventId)}">📍 관련 사건(근대)</a>`);
     });
     (video.related_events_modern2 || []).forEach(eventId => {
       chips.push(`<a class="video-chip video-chip-event" href="/maps/modern2/?event=${encodeURIComponent(eventId)}">📍 관련 사건(근현대)</a>`);
