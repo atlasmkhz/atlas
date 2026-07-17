@@ -662,3 +662,28 @@ function navigateToEvent(id, opts){
   const marker = eventMarkers.find(m => m._eventId === id);
   if(marker && typeof setSelectRing === 'function') setSelectRing(marker);
 }
+
+// ── 자료실 역링크 패치 (2026-07-17) ─────────────────────────────
+// build/generate_archive_backlinks.py 가 만드는 data/archive_backlinks.js
+// (ARCHIVE_BACKLINKS)를 읽어, 사건 카드 팝업 하단에 "자료실에서 자세히
+// 보기" 영역을 덧붙인다. 자료실→지도(card_ref CTA)만 있고 그 역방향이
+// 없던 비대칭을 메우는 기능. popupHtml 본문을 고치지 않고 후위 패치로
+// 감싸는 이유: 7개 지도 renderer.js가 서로 독립 사본이라 내부 구조가
+// 조금씩 다른데, 이 방식이면 모든 지도에 동일 블록을 안전하게 붙일 수
+// 있고 유지보수도 한 곳(이 블록)만 보면 된다.
+(function () {
+  if (typeof popupHtml !== 'function') return;
+  const _origPopupHtml = popupHtml;
+  popupHtml = function (e) {
+    let html = _origPopupHtml(e);
+    try {
+      if (typeof ARCHIVE_BACKLINKS !== 'undefined' && e && ARCHIVE_BACKLINKS[e.id] && ARCHIVE_BACKLINKS[e.id].length) {
+        const links = ARCHIVE_BACKLINKS[e.id].map(function (b) {
+          return '<a href="' + b.url + '" class="pop-archive-link">「' + b.series + '」 — ' + b.title + '</a>';
+        }).join('');
+        html += '<div class="pop-archive"><b>자료실에서 자세히 보기</b>' + links + '</div>';
+      }
+    } catch (_) { /* 역링크 실패는 조용히 무시 — 팝업 본문은 항상 뜬다 */ }
+    return html;
+  };
+})();

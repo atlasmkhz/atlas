@@ -117,6 +117,20 @@ const EVENTS_1937 = [
     connections:['policy_1945_04'],
     tags:['policy','제주','알뜨르비행장','군사화','전시체제'],
     sources:['위키백과 알뜨르 비행장','제주일보 알뜨르비행장은 제주의 한','제주의소리 일제가 만든 비행장 건설 과정'],
-    content:{ hero:{"url": "assets/images/entity/event/event_policy_1937_03_01.webp", "alt": "알뜨르 비행장 — 제주 군사화의 시작", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"}, gallery:[] } }
+    content:{ hero:{"url": "assets/images/entity/event/event_policy_1937_03_01.webp", "alt": "알뜨르 비행장 — 제주 군사화의 시작", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "event"}, gallery:[] } },
+
+  { id:'political_1937_03', year:1937, visible_from:1937, visible_until:1940,
+    month:2, day:16, type:'political', priority:2,
+    title_ko:'백백교 사건 — 수백 명을 암매장한 사교 집단의 실체 발각',
+    title_en:'The Baekbaekgyo Incident — A Cult\'s Mass Murders Exposed',
+    title_ja:'白白教事件 — 数百人を暗埋葬した邪教集団の実態発覚',
+    place_ko:'경기 가평·양평 일대',
+    lat:37.75, lng:127.51,
+    people:['전용해'],
+    summary_ko:'백백교(白白敎)는 동학 계통 백도교에서 갈라져 나온 신흥 종교로, 교주 전용해가 1920~30년대 경기 가평 일대에서 교세를 넓혔다. 교리는 종말론이었다 — 세상이 곧 심판으로 멸망하며, 백백교를 믿고 교단의 피난처로 가야만 살아남는다는 것. 식민지의 궁핍과 불안이 이런 교리가 파고들 틈을 만들었다. 실체는 조직적 범죄였다. 교단은 신도의 재산을 갈취했고, 이탈하거나 비밀을 알게 된 신도를 살해했다. 1937년 2월 수사가 시작되자 경찰은 전국 아지트에서 300구가 넘는 암매장 시신을 발굴했고, 희생자는 350여 명에 이르는 것으로 알려졌다. 전용해는 도주 중 양평 용문산에서 시신으로 발견됐으며, 1940년 재판에서 간부 다수에게 사형이 선고됐다. 일제가 이 사건에 독립운동 탄압용 보안법까지 적용한 점, 우민화 정책 속에 사교를 방치한 식민 당국의 책임은 이 사건의 또 다른 그늘로 남았다.',
+    video:null,
+    connections:[],
+    tags:['political','조선국내','백백교','사교','전용해'],
+    sources:['한국민족문화대백과사전 백백교','위키백과 백백교'] }
 
 ];

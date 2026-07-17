@@ -62,8 +62,12 @@ STEPS = [
     ('4/8 고려(medieval1) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'medieval1', 'build', 'generate_route_pages.py')]),
     ('5/8 조선(medieval2) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'medieval2', 'build', 'generate_route_pages.py')]),
     ('6/8 현대(contemporary) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'contemporary', 'build', 'generate_route_pages.py')]),
-    ('7/8 선사(prehistory) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'prehistory', 'build', 'generate_route_pages.py')]),
-    ('8/8 통합 Sitemap 생성', ['python3', os.path.join(BUILD_DIR, 'generate_unified_sitemap.py')]),
+    ('7/9 선사(prehistory) 루트 페이지 생성', ['python3', os.path.join(PROJECT_ROOT, 'maps', 'prehistory', 'build', 'generate_route_pages.py')]),
+    # 자료실 card_ref → 지도 카드 팝업 역링크 인덱스 (2026-07-17 추가).
+    # 자료실 글에 card_ref를 새로 걸었으면 이 단계가 지도 쪽 역링크까지
+    # 자동으로 갱신한다 — 상세는 generate_archive_backlinks.py 머리주석.
+    ('8/9 자료실 역링크 인덱스 생성', ['python3', os.path.join(BUILD_DIR, 'generate_archive_backlinks.py')]),
+    ('9/9 통합 Sitemap 생성', ['python3', os.path.join(BUILD_DIR, 'generate_unified_sitemap.py')]),
 ]
 
 def main():

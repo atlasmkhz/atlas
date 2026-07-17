@@ -35,7 +35,7 @@ const ROUTE_CULT_AND_POWER = {
   archive_series: 'cult_and_power',
   archive_series_name: '「교주와 권력」',
 
-  card_refs: [],
+  card_refs: ['political_1937_03'],
 
   waypoints: [
 
@@ -47,6 +47,7 @@ const ROUTE_CULT_AND_POWER = {
       place_ko: '경기 가평·양평 일대',
       lat: 37.7500, lng: 127.5100,
       stay: null,
+      card_ref: 'political_1937_03',
       summary_ko: '동학 계통 백도교에서 갈라진 백백교는 종말론으로 신도를 모았고, 재산 갈취와 조직적 살해를 저질렀다. 1937년 수사에서 전국 아지트의 암매장 시신 300여 구가 발굴됐고 희생자는 350여 명에 이르는 것으로 알려졌다. 교주 전용해는 도주 중 용문산에서 시신으로 발견됐고, 1940년 재판에서 간부 다수가 사형을 선고받았다.',
       archive_post: 'cp_02',
     },
