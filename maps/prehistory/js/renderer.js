@@ -531,6 +531,7 @@ function renderYear(year){
   // 중국 왕조 라벨 레이어도 현재 연도로 갱신 (js/chinaLayer.js)
   if (typeof renderChinaDynastiesAtYear === 'function') { try { renderChinaDynastiesAtYear(year); } catch(_){} }
   if (typeof renderArtifactZonesAtYear === 'function') { try { renderArtifactZonesAtYear(year); } catch(_){} }
+  if (typeof renderPowerFieldsAtYear === 'function') { try { renderPowerFieldsAtYear(year); } catch(_){} }
 }
 
 // ── 챕터(왕조 재위기간) 단위 렌더링 ──

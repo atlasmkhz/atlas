@@ -11,6 +11,25 @@
 // 의존: Leaflet(map), data/artifact_zones.js(ARTIFACT_ZONES)
 // ═══════════════════════════════════════════════════════
 
+// 2026-07-18: 색이 흐려 알아보기 어렵다는 피드백 → 전역 강도 보정.
+// blob의 a값을 일괄 증폭하되 0.62를 넘지 않게 눌러서 수채화 느낌은 유지한다.
+const GRADIENT_INTENSITY = 2.3;
+function _boostAlpha(a){ return Math.min(a * GRADIENT_INTENSITY, 0.8); }
+
+
+// ── 빈 시기 안내 ────────────────────────────────────
+// 유물 분포는 기원전 6000년부터, 세력 분포는 기원전 400년부터만
+// 존재한다. 그보다 이른 시기(신화·구석기)에 레이어가 "안 보이는" 것은
+// 정상 동작이지만, 사용자에게는 고장으로 보일 수 있어 안내를 띄운다.
+window._atlasLayerEmpty = window._atlasLayerEmpty || {};
+window._atlasUpdateLayerHint = function () {
+  const el = document.getElementById('layerEmptyHint');
+  if (!el) return;
+  const st = window._atlasLayerEmpty;
+  const anyOn = (document.getElementById('layerArtifact')?.checked) || (document.getElementById('layerPower')?.checked);
+  el.style.display = (anyOn && st.artifact && st.power) ? 'block' : 'none';
+};
+
 let artifactLayerObjs = [];       // 라벨·출토지 마커
 let _artifactLastYear = null;
 let _artifactActiveZones = null;  // 현재 그리는 존들
@@ -63,16 +82,25 @@ function _artifactRedrawCanvas() {
       const p = map.latLngToContainerPoint([b.lat, b.lng]);
       const rPx = _artifactKmToPx(b.lat, b.lng, b.r);
       if (rPx < 1) return;
-      if (p.x < -rPx || p.y < -rPx || p.x > size.x + rPx || p.y > size.y + rPx) return;
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rPx);
-      g.addColorStop(0.0, _artifactHexToRgba(z.color, b.a));
-      g.addColorStop(0.45, _artifactHexToRgba(z.color, b.a * 0.55));
-      g.addColorStop(0.75, _artifactHexToRgba(z.color, b.a * 0.22));
+      // 타원(sx: 진행 방향 늘림 배율, rot: 회전 라디안) — 원형 탈피의 핵심.
+      // 여러 개의 기울어진 타원 워시가 겹치며 수채화 같은 유기적 형상을 만든다.
+      const sx = b.sx || 1, rot = b.rot || 0;
+      const rMax = rPx * Math.max(sx, 1);
+      if (p.x < -rMax || p.y < -rMax || p.x > size.x + rMax || p.y > size.y + rMax) return;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      if (rot) ctx.rotate(rot);
+      if (sx !== 1) ctx.scale(sx, 1);
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rPx);
+      g.addColorStop(0.0, _artifactHexToRgba(z.color, _boostAlpha(b.a)));
+      g.addColorStop(0.45, _artifactHexToRgba(z.color, _boostAlpha(b.a) * 0.6));
+      g.addColorStop(0.75, _artifactHexToRgba(z.color, _boostAlpha(b.a) * 0.26));
       g.addColorStop(1.0, _artifactHexToRgba(z.color, 0));
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, rPx, 0, Math.PI * 2);
+      ctx.arc(0, 0, rPx, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
     });
   });
 }
@@ -155,6 +183,8 @@ function renderArtifactZonesAtYear(year) {
   _artifactActiveZones = active;
   _artifactRedrawCanvas();
   active.forEach(_drawArtifactZoneLabelAndSites);
+  window._atlasLayerEmpty.artifact = (active.length === 0);
+  if (window._atlasUpdateLayerHint) window._atlasUpdateLayerHint();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

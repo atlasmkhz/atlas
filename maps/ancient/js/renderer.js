@@ -586,7 +586,11 @@ function renderRange(startYear, endYear){
     if(e.type !== 'person' && e.type !== 'policy' && !showEvent) return;
 
     const color = COLORS[e.type];
-    const nationColor = e.nation ? NATION_COLORS[e.nation] : null;
+    // 2026-07-18 나라색 고리(ring) 제거 (왕두목 지시): 영토·세력권 수채화
+    // 레이어가 나라 구분을 색면으로 표현하게 되면서, 마커의 원형 고리는
+    // 중복 정보 + 시각적 소음이 됐다. nationColor를 넘기지 않으면
+    // buildMarkerHtml이 고리를 그리지 않는다 (필터 로직과는 무관).
+    const nationColor = null;
 
     if(e.area){
       const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);

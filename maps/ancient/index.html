@@ -55,7 +55,7 @@
 <script src="js/analytics.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="css/style.css?v=20260718c" />
+<link rel="stylesheet" href="css/style.css?v=20260718e" />
 </head>
 <body>
 
@@ -258,22 +258,15 @@
        사이드바가 화면 아래로 넘쳐 나라 필터가 안 보이는 문제가 있었다
        — 범례 자체를 체크박스로 만들어 하나로 합쳤다(id는 그대로
        layerNation_*라 js/ui.js 쪽은 손댈 필요가 없었다). -->
-  <div class="legend nation-legend">
-    <div class="legend-title">범례·필터 (나라)</div>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_goguryeo" checked><span class="legend-swatch nation-swatch" style="border-color:#3b5ba8;"></span>고구려</label>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_baekje" checked><span class="legend-swatch nation-swatch" style="border-color:#2f9e8f;"></span>백제</label>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_silla" checked><span class="legend-swatch nation-swatch" style="border-color:#c9a227;"></span>신라</label>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_gaya" checked><span class="legend-swatch nation-swatch" style="border-color:#d9772e;"></span>가야</label>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_balhae" checked><span class="legend-swatch nation-swatch" style="border-color:#7d4fa0;"></span>발해</label>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_hubaekje" checked><span class="legend-swatch nation-swatch" style="border-color:#7a7a2e;"></span>후백제</label>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_taebong" checked><span class="legend-swatch nation-swatch" style="border-color:#8a4a3a;"></span>태봉</label>
-    <label class="toggle-item nation-toggle-item"><input type="checkbox" id="layerNation_goryeo" checked><span class="legend-swatch nation-swatch" style="border-color:#8a8471;"></span>고려</label>
-  </div>
+  <!-- 2026-07-18 나라 범례·필터 제거 (왕두목 지시): 영토·세력권 수채화
+       레이어 도입 후 나라별 마커 필터는 중복 정보가 됐고 UI만 복잡하게
+       만들었다. renderer.js의 나라 필터 로직은 체크박스 부재 시 전체
+       표시(기본 true)로 동작하므로 UI만 제거해도 안전하다. -->
 
   <div class="layer-toggle">
     <div class="toggle-title">레이어</div>
     <label class="toggle-item"><input type="checkbox" id="layerEvent" checked> 사건</label>
-    <label class="toggle-item"><input type="checkbox" id="layerPerson"> 인물</label>
+    <label class="toggle-item"><input type="checkbox" id="layerPerson" checked> 인물</label>
     <label class="toggle-item"><input type="checkbox" id="layerPolicy" checked> 배경·정책</label>
     <label class="toggle-item"><input type="checkbox" id="layerChina" checked><span class="legend-swatch china-swatch"></span>중국사</label>
     <label class="toggle-item"><input type="checkbox" id="layerTerritory" checked><span class="legend-swatch territory-swatch"></span>영토·세력권</label>
@@ -334,8 +327,8 @@
 <script src="js/app.js"></script>
 <script src="js/map.js"></script>
 <script src="js/chinaLayer.js"></script>
-<script src="data/territory_snapshots.js"></script>
-<script src="js/territoryLayer.js"></script>
+<script src="data/territory_snapshots.js?v=20260718e"></script>
+<script src="js/territoryLayer.js?v=20260718e"></script>
 
 
 <!-- ════════════════════════════════════════════════════
@@ -349,7 +342,7 @@
 <script src="js/validator.js"></script>
 <script src="js/markerIcons.js"></script>
 <script src="data/archive_backlinks.js?v=20260717a"></script>
-<script src="js/renderer.js?v=20260718b"></script>
+<script src="js/renderer.js?v=20260718g"></script>
 <script src="js/infoPanel.js"></script>
 <script src="js/search.js"></script>
 <script src="js/timeline.js"></script>

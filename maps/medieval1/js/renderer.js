@@ -438,7 +438,7 @@ function renderYear(year){
 
   // 세계 사건 마커를 먼저 그린다 — 한국 마커보다 아래(z-order)에 깔려
   // 한국사를 가리지 않는다(우선순위: 한국 마커 > 세계 사건 마커 > 세계 분위기).
-  renderWorldEvents(year);
+  // renderWorldEvents 호출 제거 (2026-07-18): 거란·오대·송 등 세계사건 원형이 세력권 수채화 레이어와 중복·충돌. 데이터(world_events.js)는 보존 — 비원형 표현이 필요해지면 재활용.
 
   const showEvent = document.getElementById('layerEvent')?.checked ?? true;
   const showPerson = document.getElementById('layerPerson')?.checked ?? false;
@@ -534,7 +534,7 @@ function renderRange(startYear, endYear){
   clearLayers();
   eventMarkers = [];
 
-  renderWorldEvents(startYear);
+  // renderWorldEvents 호출 제거 (2026-07-18): 거란·오대·송 등 세계사건 원형이 세력권 수채화 레이어와 중복·충돌. 데이터(world_events.js)는 보존 — 비원형 표현이 필요해지면 재활용.
 
   const showEvent = document.getElementById('layerEvent')?.checked ?? true;
   const showPerson = document.getElementById('layerPerson')?.checked ?? false;
@@ -599,7 +599,8 @@ function renderRange(startYear, endYear){
   });
   declutterMarkers();
   // 중국 왕조 라벨 레이어도 이 챕터 범위로 함께 갱신 (js/chinaLayer.js)
-  if (typeof renderChinaDynasties === 'function') { try { renderChinaDynasties(startYear, endYear); } catch(_){} }
+  // chinaLayer 훅 제거 (2026-07-18): 세력권 레이어와 시각적으로 중복·충돌. 중원 정보는 territory_snapshots의 china 필드로 일원화.
+  if (typeof renderTerritoryForRange === 'function') { try { renderTerritoryForRange(startYear, endYear); } catch(_){} }
 }
 
 function safeRenderRange(startYear, endYear) {

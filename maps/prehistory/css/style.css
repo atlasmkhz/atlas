@@ -1388,7 +1388,45 @@ body.route-mode-active [data-route-hidden] {
   top: 0; left: 0;
   display: block;
   pointer-events: none;
-  mix-blend-mode: screen;
-  opacity: 0.85;
+  /* v3: screen 블렌드 제거 — 색이 하얗게 바래는 부작용. 일반 합성 + 높은 강도로 전환 */
+  opacity: 1;
 }
 .artifact-zone-caveat { color:#8a7f6a; font-size:11px !important; border-top:1px solid rgba(120,110,90,0.3); padding-top:5px; margin-top:6px; }
+
+/* ═══ 세력 분포 레이어 라벨 (powerLayer.js — 고대 지도 territory CSS 이식) ═══ */
+.territory-label-wrap { background:transparent; border:none; }
+.territory-label {
+  display:inline-flex; flex-direction:column; align-items:flex-start;
+  white-space:nowrap; transform:translate(-50%,-50%);
+  padding:2px 8px; border-radius:3px;
+  background:rgba(20,16,10,0.6);
+  text-shadow:0 0 5px rgba(10,8,4,0.95);
+  font-weight:700; line-height:1.25;
+  border-left:3px solid var(--polity-color, #999);
+  cursor:pointer; pointer-events:auto;
+}
+.territory-name { font-size:13.5px; letter-spacing:1px; color:var(--polity-color, #ddd); filter:brightness(1.45); }
+.territory-kind { font-size:9.5px; font-weight:500; opacity:0.8; color:#d8d2c4; letter-spacing:0.5px; }
+.territory-label-influence .territory-name { font-weight:600; font-size:12.5px; }
+.territory-label-commandery .territory-name { font-weight:600; font-size:12px; font-style:italic; }
+
+.territory-popup strong { font-size:14px; }
+.territory-popup p { margin:6px 0 0; font-size:12.5px; line-height:1.55; }
+.territory-popup-caveat { color:#8a7f6a; font-size:11px !important; border-top:1px solid rgba(120,110,90,0.3); padding-top:5px; }
+
+
+.power-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  display: block;
+  pointer-events: none;
+  /* v3: screen 블렌드 제거 — 색이 하얗게 바래는 부작용. 일반 합성 + 높은 강도로 전환 */
+  opacity: 1;
+}
+.power-swatch { border-color:#c8963e !important; }
+
+/* 레이어 빈 시기 안내 */
+.layer-empty-hint {
+  margin-top:5px; font-size:11px; line-height:1.45; color:#b7ad99;
+  border-left:2px solid rgba(200,160,80,0.5); padding-left:7px;
+}

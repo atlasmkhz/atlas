@@ -55,7 +55,7 @@
 <script src="js/analytics.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="css/style.css?v=20260718a" />
+<link rel="stylesheet" href="css/style.css?v=20260718e" />
 </head>
 <body>
 
@@ -254,15 +254,18 @@
   <div class="layer-toggle">
     <div class="toggle-title">레이어</div>
     <label class="toggle-item"><input type="checkbox" id="layerEvent" checked> 사건</label>
-    <label class="toggle-item"><input type="checkbox" id="layerPerson"> 인물</label>
+    <label class="toggle-item"><input type="checkbox" id="layerPerson" checked> 인물</label>
     <label class="toggle-item"><input type="checkbox" id="layerPolicy" checked> 배경·정책</label>
-    <label class="toggle-item"><input type="checkbox" id="layerChina" checked><span class="legend-swatch china-swatch"></span>중국사</label>
+    <!-- 중국사 원형 레이어 제거 (2026-07-18): 영토·세력권 수채화 레이어와 겹쳐 지저분해지는 문제. 중원 왕조 정보는 세력권 레이어의 송·원·명 필드가 담당한다. -->
+    <label class="toggle-item"><input type="checkbox" id="layerTerritory" checked><span class="legend-swatch territory-swatch"></span>세력 분포</label>
     <div class="toggle-sep mobile-only"></div>
     <label class="toggle-item mobile-only"><input type="checkbox" id="autoHideControls" checked> 정보창 열 때 자동 숨김</label>
   </div>
 
 </div>
 
+<div id="territoryChips" class="territory-chips" style="display:none"></div>
+<div id="territoryCaption" class="territory-caption" style="display:none"></div>
 <div class="timeline">
   <div class="reign-band" id="reignBand"><!-- timeline.js가 채운다 --></div>
   <div class="hint">왕조를 눌러 이동 · 그 시대 사건은 지도에 한번에 표시됩니다 · 정확한 연도는 카드에서 확인</div>
@@ -326,10 +329,10 @@
 <script src="data/world_events.js"></script>
 <script src="data/world_context.js"></script>
 
-<script src="data/china_dynasties.js"></script>
 <script src="js/app.js"></script>
 <script src="js/map.js"></script>
-<script src="js/chinaLayer.js"></script>
+<script src="data/territory_snapshots.js?v=20260718f"></script>
+<script src="js/territoryLayer.js?v=20260718e"></script>
 
 
 <!-- ════════════════════════════════════════════════════
@@ -343,7 +346,7 @@
 <script src="js/validator.js"></script>
 <script src="js/markerIcons.js"></script>
 <script src="data/archive_backlinks.js?v=20260717a"></script>
-<script src="js/renderer.js?v=20260717a"></script>
+<script src="js/renderer.js?v=20260718g"></script>
 <script src="js/infoPanel.js"></script>
 <script src="js/search.js"></script>
 <script src="js/timeline.js"></script>

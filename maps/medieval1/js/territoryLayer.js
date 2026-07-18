@@ -1,5 +1,11 @@
 // ═══════════════════════════════════════════════════════
-// js/territoryLayer.js — 세력 분포 레이어 v2 (고대 지도 전용, 챕터형)
+// js/territoryLayer.js — 세력 분포 레이어 (중세1·고려 지도 전용, 재위 챕터형)
+//
+// 고대 지도 v2를 이식하며 두 가지를 개조했다:
+//  1) kind 'annexed'(원 직할령 — 쌍성총관부·동녕부) 태그 추가.
+//  2) 이 지도는 왕 재위 단위 챕터라 구간이 짧다 — 구간에 스냅샷이
+//     없으면 재위 중간값에 가장 가까운 스냅샷을 자동 선택하고,
+//     캡션에 기준 연도를 그대로 노출한다(왜곡 방지).
 //
 // 2026-07-18 v2: 폴리곤 → 수채화 그라데이션(캔버스) 전면 전환.
 // 각 세력은 여러 개의 방사형 그라데이션 blob의 조합으로 그려진다 —
@@ -118,6 +124,7 @@ const _TERRITORY_KIND_TAG = {
   steppe: '<span class="territory-kind">초원·북방 세력</span>',
   china: '<span class="territory-kind">중원 왕조</span>',
   commandery: '<span class="territory-kind">거점 · 학계 논쟁 있음</span>',
+  annexed: '<span class="territory-kind">원 직할령</span>',
 };
 
 function _drawFieldLabel(f) {
@@ -193,9 +200,18 @@ function renderTerritoryForRange(startYear, endYear) {
   const capEl = document.getElementById('territoryCaption');
   const snaps = _snapshotsInRange(startYear, endYear);
 
-  if (!isTerritoryLayerOn() || !snaps.length) {
+  if (!isTerritoryLayerOn()) {
     if (capEl) capEl.style.display = 'none';
     _renderChips([], null);
+    return;
+  }
+  if (!snaps.length) {
+    // 재위 구간에 스냅샷이 없으면 가장 가까운 시점으로 폴백
+    const near = _nearestSnapshot(startYear, endYear);
+    if (!near) { if (capEl) capEl.style.display = 'none'; _renderChips([], null); return; }
+    _territoryActiveYear = near.year;
+    _renderSnapshot(near);
+    _renderChips([near], near.year);
     return;
   }
 
@@ -203,6 +219,17 @@ function renderTerritoryForRange(startYear, endYear) {
   _territoryActiveYear = active.year;
   _renderSnapshot(active);
   _renderChips(snaps, active.year);
+}
+
+// 구간에 스냅샷이 없을 때: 재위 중간값에 가장 가까운 스냅샷으로 폴백
+function _nearestSnapshot(startYear, endYear) {
+  if (typeof TERRITORY_SNAPSHOTS === 'undefined' || !TERRITORY_SNAPSHOTS.length) return null;
+  const mid = (startYear + endYear) / 2;
+  let best = TERRITORY_SNAPSHOTS[0];
+  TERRITORY_SNAPSHOTS.forEach(s => {
+    if (Math.abs(s.year - mid) < Math.abs(best.year - mid)) best = s;
+  });
+  return best;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

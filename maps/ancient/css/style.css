@@ -1416,6 +1416,6 @@ body.route-mode-active [data-route-hidden] {
   top: 0; left: 0;
   display: block;
   pointer-events: none;
-  mix-blend-mode: screen;   /* 어두운 지도 타일 위에서 수채화처럼 발색 */
-  opacity: 0.85;
+  /* v3: screen 블렌드 제거 — 색이 하얗게 바래는 부작용. 일반 합성 + 높은 강도로 전환 */
+  opacity: 1;
 }
