@@ -1350,3 +1350,45 @@ body.route-mode-active [data-route-hidden] {
 .pop-archive-link{display:block;padding:3px 0;color:#5a4d2a;text-decoration:none;line-height:1.45}
 .pop-archive-link:hover{color:#2a2418;text-decoration:underline}
 .info-scroll > .pop-archive{margin-left:18px;margin-right:18px}
+
+/* ═══════════════════════════════════════════════
+   유물 분포권 레이어 (artifactLayer.js) — 2026-07-18 리모델링
+   문화권 폴리곤 + 대표 출토지 다이아몬드 마커.
+   "분포권 ≠ 정치적 영토"를 라벨에 상시 명시한다.
+   ═══════════════════════════════════════════════ */
+.artifact-zone-label-wrap { background:transparent; border:none; }
+.artifact-zone-label {
+  display:inline-flex; flex-direction:column; align-items:flex-start;
+  white-space:nowrap; transform:translate(-50%,-50%);
+  padding:2px 8px; border-radius:3px;
+  background:rgba(20,16,10,0.6);
+  text-shadow:0 0 5px rgba(10,8,4,0.95);
+  line-height:1.25; cursor:pointer; pointer-events:auto;
+  border-left:3px dashed var(--zone-color, #999);
+}
+.artifact-zone-name { font-size:12.5px; font-weight:700; letter-spacing:0.5px; color:var(--zone-color, #ddd); filter:brightness(1.5); }
+.artifact-zone-kind { font-size:9.5px; font-weight:500; opacity:0.8; color:#d8d2c4; }
+
+.artifact-zone-popup strong { font-size:14px; }
+.artifact-zone-popup p { margin:6px 0 0; font-size:12.5px; line-height:1.55; }
+
+.artifact-site-wrap { background:transparent; border:none; }
+.artifact-site {
+  width:9px; height:9px; transform:rotate(45deg);
+  background:var(--zone-color, #999);
+  border:1.5px solid rgba(255,255,240,0.85);
+  box-shadow:0 0 4px rgba(0,0,0,0.6);
+  opacity:0.9;
+}
+.artifact-swatch { border-color:#c8963e !important; }
+
+/* v2 수채화 캔버스 (artifactLayer v2) */
+.artifact-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  display: block;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+.artifact-zone-caveat { color:#8a7f6a; font-size:11px !important; border-top:1px solid rgba(120,110,90,0.3); padding-top:5px; margin-top:6px; }

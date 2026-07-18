@@ -1360,3 +1360,62 @@ body.route-mode-active [data-route-hidden] {
 .pop-archive-link{display:block;padding:3px 0;color:#5a4d2a;text-decoration:none;line-height:1.45}
 .pop-archive-link:hover{color:#2a2418;text-decoration:underline}
 .info-scroll > .pop-archive{margin-left:18px;margin-right:18px}
+
+/* ═══════════════════════════════════════════════
+   영토·세력권 레이어 (territoryLayer.js) — 2026-07-18 리모델링
+   territory(실선·직접지배) / influence(점선·세력권) /
+   commandery(짧은점선·군현거점) 3종 구분.
+   ═══════════════════════════════════════════════ */
+.territory-label-wrap { background:transparent; border:none; }
+.territory-label {
+  display:inline-flex; flex-direction:column; align-items:flex-start;
+  white-space:nowrap; transform:translate(-50%,-50%);
+  padding:2px 8px; border-radius:3px;
+  background:rgba(20,16,10,0.6);
+  text-shadow:0 0 5px rgba(10,8,4,0.95);
+  font-weight:700; line-height:1.25;
+  border-left:3px solid var(--polity-color, #999);
+  cursor:pointer; pointer-events:auto;
+}
+.territory-name { font-size:13.5px; letter-spacing:1px; color:var(--polity-color, #ddd); filter:brightness(1.45); }
+.territory-kind { font-size:9.5px; font-weight:500; opacity:0.8; color:#d8d2c4; letter-spacing:0.5px; }
+.territory-label-influence .territory-name { font-weight:600; font-size:12.5px; }
+.territory-label-commandery .territory-name { font-weight:600; font-size:12px; font-style:italic; }
+
+.territory-popup strong { font-size:14px; }
+.territory-popup p { margin:6px 0 0; font-size:12.5px; line-height:1.55; }
+.territory-popup-caveat { color:#8a7f6a; font-size:11px !important; border-top:1px solid rgba(120,110,90,0.3); padding-top:5px; }
+
+/* 스냅샷 칩 + 캡션 (타임라인 위) */
+.territory-chips {
+  display:flex; gap:6px; flex-wrap:wrap;
+  padding:6px 14px 0;
+}
+.territory-chip {
+  border:1px solid rgba(160,140,100,0.5); border-radius:14px;
+  background:rgba(30,25,16,0.75); color:#cdb58a;
+  font-size:12px; padding:3px 12px; cursor:pointer;
+  transition:all .15s;
+}
+.territory-chip:hover { border-color:#c8a050; color:#e8c979; }
+.territory-chip.active {
+  background:rgba(200,160,80,0.22); border-color:#c8a050;
+  color:#e8c979; font-weight:700;
+}
+.territory-caption {
+  padding:5px 14px 2px; font-size:12px; line-height:1.5; color:#b7ad99;
+}
+.territory-caption strong { color:#e8c979; }
+.territory-caveat { opacity:0.65; font-size:11px; }
+
+.territory-swatch { border-color:#c0392b !important; }
+
+/* v2 수채화 캔버스 (territoryLayer v2) */
+.territory-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  display: block;
+  pointer-events: none;
+  mix-blend-mode: screen;   /* 어두운 지도 타일 위에서 수채화처럼 발색 */
+  opacity: 0.85;
+}
