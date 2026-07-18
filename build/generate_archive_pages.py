@@ -384,18 +384,23 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
     # ?event=로 그 사건 카드로 정확히 이동시킨다. card_map으로 어느
     # 지도 소속인지 표시한다: 'root'는 근대(1876~1945), 'modern2'는
     # 근현대(1945~1993), 'contemporary'는 현대(1994~2025).
-    map_cta_html = ''
+    # 2026-07-18: card_ref(한국 지도 사건카드)와 world_route(세계사 루트)는
+    # 상호배타가 아니다 — 길가메시 시리즈처럼 "그때 한반도는" 연결(card_ref)과
+    # 세계사 루트 웨이포인트(world_route)를 동시에 가진 글은 두 CTA를 모두
+    # 보여준다. elif 체인이라 card_ref가 world_route를 가리던 것을 고쳤다.
+    map_cta_parts = []
     if post.get('card_ref'):
         map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
         map_cta_url = f"{map_prefix}?event={post['card_ref']}"
-        map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 사건 보기</a></p>'
-    elif post.get('world_route'):
+        map_cta_parts.append(f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 사건 보기</a></p>')
+    if post.get('world_route'):
         # 세계사 인물/사건은 한국 지도(root)가 아니라 자료실 내 세계사 루트 페이지로
         # 보내야 한다. world_route는 archive/world-routes/{slug}.html의 slug이고,
         # ?point=post['id']로 해당 웨이포인트에 바로 진입시킨다.
         map_cta_url = f"../world-routes/{post['world_route']}.html?point={post['id']}"
-        map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">세계지도 루트에서 이 장면 보기</a></p>'
-    elif post.get('lat') is not None and post.get('lng') is not None:
+        map_cta_parts.append(f'<p class="map-cta"><a href="{map_cta_url}">세계지도 루트에서 이 장면 보기</a></p>')
+    map_cta_html = ''.join(map_cta_parts)
+    if not map_cta_html and post.get('lat') is not None and post.get('lng') is not None:
         year_qs = f"&year={post['year']}" if post.get('year') is not None else ''
         map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
         map_cta_url = f"{map_prefix}?lat={post['lat']}&lng={post['lng']}{year_qs}"

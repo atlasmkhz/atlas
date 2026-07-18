@@ -39,5 +39,37 @@ const ARCHIVE_BACKLINKS = {
       "series": "일리아스와 오디세이아",
       "title": "페넬로페의 베짜기 — 기다림도 하나의 영웅담이다"
     }
+  ],
+  "culture_neo_01": [
+    {
+      "url": "../../archive/gilgamesh-epic/ge_01.html",
+      "series": "길가메시 서사시",
+      "title": "개관 — 4,500년 전 점토판에 새겨진 인류의 첫 이야기"
+    },
+    {
+      "url": "../../archive/gilgamesh-epic/ge_02.html",
+      "series": "길가메시 서사시",
+      "title": "폭군과 야생인 — 최악의 만남이 최고의 우정이 되기까지"
+    },
+    {
+      "url": "../../archive/gilgamesh-epic/ge_03.html",
+      "series": "길가메시 서사시",
+      "title": "삼나무 숲의 파수꾼 — 문명이 자연과 맞서던 순간"
+    },
+    {
+      "url": "../../archive/gilgamesh-epic/ge_04.html",
+      "series": "길가메시 서사시",
+      "title": "거절당한 여신의 분노 — 우정이 끝나던 날"
+    },
+    {
+      "url": "../../archive/gilgamesh-epic/ge_05.html",
+      "series": "길가메시 서사시",
+      "title": "영원히 사는 유일한 인간을 찾아서 — 대홍수 이야기"
+    },
+    {
+      "url": "../../archive/gilgamesh-epic/ge_06.html",
+      "series": "길가메시 서사시",
+      "title": "빈손의 귀환, 그리고 3천 년 뒤 먼지 속에서 되살아나다"
+    }
   ]
 };

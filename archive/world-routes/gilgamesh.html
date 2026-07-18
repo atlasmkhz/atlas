@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#101418">
+<title>길가메시의 여정 — 우루크에서 세상 끝까지 | ATLAS by MKHZ</title>
+<meta name="description" content="인류가 남긴 가장 오래된 이야기, 길가메시 서사시의 여정을 지도 위에서 따라간다 — 우루크의 성벽에서 삼나무 숲, 대홍수의 현자를 찾아간 세상 끝, 그리고 3천 년 뒤 니네베의 폐허와 런던에서의 재발견까지.">
+<link rel="canonical" href="https://atlas.mkhz.kr/archive/world-routes/gilgamesh">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://atlas.mkhz.kr/archive/world-routes/gilgamesh">
+<meta property="og:title" content="길가메시의 여정 — 우루크에서 세상 끝까지 | ATLAS by MKHZ">
+<meta property="og:description" content="우루크에서 세상 끝까지, 인류 최초의 서사시가 그린 여정과 3천 년 뒤의 재발견을 지도 위에서 따라간다.">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="길가메시의 여정 — 우루크에서 세상 끝까지">
+<meta name="twitter:description" content="인류 최초의 서사시 길가메시의 여정과 재발견의 역사.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ATLAS", "item": "https://atlas.mkhz.kr/"}, {"@type": "ListItem", "position": 2, "name": "자료실", "item": "https://atlas.mkhz.kr/?nav=archive"}, {"@type": "ListItem", "position": 3, "name": "세계사 루트", "item": "https://atlas.mkhz.kr/archive/world-routes"}, {"@type": "ListItem", "position": 4, "name": "길가메시의 여정", "item": "https://atlas.mkhz.kr/archive/world-routes/gilgamesh"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4');
+</script>
+<script src="../../js/analytics.js"></script>
+<style>
+/* ── 세계사 루트 전용 스타일 — 지도 SPA(다크 톤 + 골드 악센트)와
+   같은 계열을 쓰되 독립 페이지로 완결. ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: #101418; color: #e8e2d6;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+#map { position: absolute; inset: 0; z-index: 0; background: #101418; }
+
+/* 상단 바 */
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, rgba(16,20,24,.92), rgba(16,20,24,0));
+  pointer-events: none;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.topbar a.back {
+  pointer-events: auto; text-decoration: none;
+  color: #b89860; font-size: 13px; letter-spacing: .3px;
+}
+.topbar .title { font-size: 15px; font-weight: 700; color: #f0ead9; }
+.topbar .subtitle { font-size: 12px; color: #9a927f; }
+
+/* 연도 칩 스트립 */
+.chips {
+  position: absolute; left: 0; right: 0; z-index: 1000;
+  bottom: calc(190px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 6px; overflow-x: auto; padding: 6px 12px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; border: 1px solid rgba(184,152,96,.45);
+  background: rgba(16,20,24,.85); color: #cfc6b2;
+  font-size: 12px; padding: 5px 10px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap;
+}
+.chip.active { background: #b89860; color: #14110b; font-weight: 700; border-color: #b89860; }
+
+/* 하단 카드 패널 */
+.panel {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1001;
+  background: rgba(20, 24, 30, .96);
+  border-top: 1px solid rgba(184,152,96,.35);
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  min-height: 190px;
+  backdrop-filter: blur(6px);
+}
+.panel .meta { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.panel .num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  background: #b89860; color: #14110b; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  align-self: center;
+}
+.panel .year { font-size: 13px; color: #b89860; font-weight: 700; letter-spacing: .5px; }
+.panel .place { font-size: 14px; color: #b89860; font-weight: 700; letter-spacing: .3px; }
+.panel h2 { font-size: 16px; color: #f0ead9; line-height: 1.45; margin: 2px 0 8px; }
+.panel p { font-size: 13.5px; color: #cfc6b2; line-height: 1.7; max-height: 118px; overflow-y: auto; }
+.panel .links { margin-top: 8px; }
+.panel .links a { color: #b89860; font-size: 12.5px; text-decoration: none; border-bottom: 1px solid rgba(184,152,96,.4); }
+.nav-btns { position: absolute; top: 12px; right: 14px; display: flex; gap: 8px; }
+.nav-btns button {
+  border: 1px solid rgba(184,152,96,.5); background: transparent; color: #b89860;
+  width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.nav-btns button:disabled { opacity: .3; cursor: default; }
+.progress { position: absolute; top: 20px; right: 100px; font-size: 12px; color: #9a927f; }
+
+/* 지점 마커 */
+.wp-marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #1d232b; border: 2px solid #b89860;
+  color: #e8e2d6; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.wp-marker.active { background: #b89860; color: #14110b; transform: scale(1.25); z-index: 999; }
+
+@media (min-width: 760px) {
+  .panel { left: auto; right: 18px; bottom: 18px; width: 420px; border: 1px solid rgba(184,152,96,.35); border-radius: 12px; }
+  .chips { bottom: 12px; right: 460px; left: 12px; }
+  .panel p { max-height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="topbar">
+  <a class="back" href="index.html">&larr; 세계사 루트</a>
+  <span class="title">길가메시의 여정</span>
+  <span class="subtitle">우루크에서 세상 끝까지 · 인류 최초의 서사시, 그리고 3천 년 뒤의 재발견</span>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="panel" id="panel">
+  <div class="nav-btns">
+    <button id="prevBtn" aria-label="이전 지점">&larr;</button>
+    <button id="nextBtn" aria-label="다음 지점">&rarr;</button>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="meta">
+    <span class="num" id="wpNum">1</span>
+    <span class="place" id="wpPlace"></span>
+  </div>
+  <h2 id="wpTitle"></h2>
+  <p id="wpDesc"></p>
+  <div class="links" id="wpLinks"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  // ── 지점 데이터 — 서사시의 여정 순서 + 재발견의 역사.
+  //    post: 자료실 「길가메시 서사시」 글 id.
+  //    신화 속 장소(마슈 산, 죽음의 바다 등)는 실재 위치가 알려진 곳이
+  //    아니므로 상징적 좌표를 쓰고, 본문에 그 사실을 명시한다. ──
+  const WAYPOINTS = [
+    { place:'우루크 (오늘날 이라크 와르카)', lat:31.3225, lng:45.6367, zoom:6,
+      title:'성벽의 도시 — 폭군 길가메시',
+      desc:'여정은 유프라테스강 가의 도시국가 우루크에서 시작한다. 수메르 왕 명부는 길가메시가 기원전 2800~2500년 무렵 이 도시를 다스렸다고 전한다. 서사시 속 그는 3분의 2는 신, 3분의 1은 인간으로 태어난 왕이지만, 처음에는 힘을 제멋대로 휘두르는 폭군이었다. 견디다 못한 백성들의 하소연을 들은 신들이 그에 맞설 존재를 빚기로 하면서 이야기가 움직이기 시작한다. 오늘날 와르카라 불리는 이 유적에서는 실제로 거대한 성벽과 신전 터가 발굴됐다.',
+      post:'ge_01' },
+    { place:'야생의 초원 (우루크 바깥 스텝)', lat:31.90, lng:44.80, zoom:7,
+      title:'엔키두 — 짐승과 함께 살던 야생인',
+      desc:'신들이 빚은 엔키두는 도시 바깥 초원에서 짐승들과 함께 사는 야생의 존재였다. 온몸이 털로 덮인 채 풀을 뜯고 사냥꾼의 덫을 부수던 그는, 우루크에서 온 여인 샴하트를 만나 인간의 삶을 배우고 도시로 향한다. 문명 바깥의 존재가 문명 안으로 들어오는 이 장면은, 도시라는 것이 갓 태어난 시대의 사람들이 "인간이 된다는 것"을 어떻게 생각했는지 보여준다. (정확한 무대가 정해진 곳은 아니어서 우루크 인근 초원 지대를 상징 좌표로 삼았다.)',
+      post:'ge_02' },
+    { place:'우루크 — 두 영웅의 격돌', lat:31.3225, lng:45.6367, zoom:8,
+      title:'싸움으로 시작된 우정',
+      desc:'우루크에 도착한 엔키두는 길가메시와 정면으로 맞붙는다. 힘과 힘이 부딪힌 격돌은 승부 없이 끝나고, 서로의 힘을 인정한 둘은 그 자리에서 둘도 없는 벗이 된다. 이 우정이 폭군을 바꿔놓는다 — 백성을 괴롭히던 왕은 이제 벗과 함께 이름을 남길 모험을 꿈꾸는 영웅이 된다.',
+      post:'ge_02' },
+    { place:'삼나무 숲 (레바논 산맥)', lat:34.2489, lng:36.0333, zoom:6,
+      title:'훔바바 — 문명이 숲을 정복하다',
+      desc:'두 벗의 첫 모험은 멀리 있는 삼나무 숲의 파수꾼 훔바바를 물리치는 것. 표준판 서사시는 이 숲을 레바논의 삼나무 숲으로 그린다. 나무가 귀한 메소포타미아에서 레바논 삼나무는 최고의 건축 자재였다 — 괴물을 무찌르고 얻은 전리품이 다름 아닌 "목재"였다는 사실은, 이 모험이 초기 문명의 자연 정복을 신화의 언어로 옮긴 것임을 짐작하게 한다. 다만 신성한 숲을 훼손한 이 승리는 훗날 비극의 씨앗이 된다.',
+      post:'ge_03' },
+    { place:'우루크 — 하늘의 황소', lat:31.3225, lng:45.6367, zoom:8,
+      title:'거절당한 여신의 분노, 그리고 엔키두의 죽음',
+      desc:'개선한 길가메시에게 여신 이슈타르가 청혼하지만 그는 모욕적으로 거절한다. 분노한 여신이 내려보낸 "하늘의 황소"마저 두 벗이 쓰러뜨리자, 신들의 회의는 결론을 내린다 — 둘 중 하나는 죽어야 한다. 선택된 것은 엔키두였다. 병에 걸려 여러 날을 앓다 숨을 거두는 벗을 지켜보며, 길가메시는 처음으로 깨닫는다. 자신도 언젠가 죽는다는 것을.',
+      post:'ge_04' },
+    { place:'마슈 산 — 세상 끝의 관문 (신화 속 장소)', lat:33.50, lng:40.50, zoom:5,
+      title:'해가 지나다니는 산의 문',
+      desc:'죽음의 공포에 사로잡힌 길가메시는 영생의 비밀을 찾아 세상 끝으로 떠난다. 서사시는 그가 해가 드나드는 쌍둥이 봉우리 "마슈 산"의 문을 지나 인간이 가본 적 없는 어둠의 길을 걸었다고 노래한다. 이곳은 실재 위치가 알려진 곳이 아닌 신화 속 지리다 — 지도 위의 이 지점은 "인간 세계의 경계를 넘는다"는 상징으로만 읽어야 한다.',
+      post:null },
+    { place:'죽음의 바다 (페르시아만 방향, 신화 속 장소)', lat:29.20, lng:48.80, zoom:6,
+      title:'건너면 죽는 물 — 뱃사공 우르샤나비',
+      desc:'어둠의 길 끝에서 길가메시는 닿기만 해도 죽는다는 "죽음의 물"을 만난다. 뱃사공 우르샤나비의 도움으로 이 물을 건너야만 영생을 얻은 유일한 인간에게 갈 수 있다. 학자들은 서사시의 이런 "바다 건너 세상 끝" 이미지의 배경으로 메소포타미아 남쪽의 페르시아만을 흔히 떠올리지만, 이 역시 실제 항로가 아니라 신화의 지리다.',
+      post:null },
+    { place:'우트나피쉬팀의 거처 — 딜문 (바레인 부근 추정)', lat:26.0667, lng:50.5577, zoom:6,
+      title:'대홍수의 생존자 — 영생은 다시 없다',
+      desc:'마침내 만난 우트나피쉬팀은 아주 오래전 신들이 내린 대홍수에서 배를 만들어 살아남고, 그 대가로 영생을 얻은 유일한 인간이었다. 수메르 전승은 홍수의 생존자가 머문 낙원의 땅을 "딜문"이라 불렀고, 학계는 딜문을 오늘날 바레인 일대로 본다. 그러나 그의 답은 냉정했다 — 그 영생은 단 한 번뿐인 특별한 사건이었고, 길가메시에게 같은 길은 없다는 것. 구약성경 노아의 방주와 놀랍도록 닮은 이 대홍수 이야기는 서사시에서 가장 유명한 대목이다.',
+      post:'ge_05' },
+    { place:'귀로의 연못 (신화 속 장소)', lat:30.50, lng:47.80, zoom:7,
+      title:'뱀에게 빼앗긴 회춘의 풀',
+      desc:'우트나피쉬팀이 알려준 마지막 힌트를 따라 길가메시는 바다 깊이 잠수해 젊음을 되찾아주는 풀을 손에 넣는다. 그러나 돌아가는 길, 연못에서 몸을 씻는 사이 뱀이 그 풀을 물고 사라진다. 뱀은 그 자리에서 허물을 벗는다 — 뱀이 허물을 벗으며 다시 젊어지는 듯 보이는 이유를 설명하는 신화적 장면이자, 인간의 손에서 영원이 빠져나가는 순간이다.',
+      post:'ge_06' },
+    { place:'우루크 — 빈손의 귀환', lat:31.3225, lng:45.6367, zoom:8,
+      title:'성벽 앞에서 — 여정이 남긴 답',
+      desc:'영생도 젊음도 얻지 못한 채 길가메시는 우루크로 돌아온다. 그러나 서사시는 이것을 실패로 그리지 않는다. 성벽 앞에 선 그는 깨닫는다 — 사람은 영원히 살 수 없지만, 세운 것과 남긴 이름은 살아남는다는 것을. 죽음을 이기려던 여정이 "어떻게 살 것인가"라는 답으로 돌아온 것이다. 여기서 서사시의 이야기는 끝나고, 이야기 자체의 여정이 시작된다.',
+      post:'ge_06' },
+    { place:'우르 — 홍수층의 증언', lat:30.9625, lng:46.1053, zoom:7,
+      title:'고고학이 만난 대홍수',
+      desc:'서사시의 무대에서 멀지 않은 고대 도시 우르. 20세기 초 영국 고고학자 레너드 울리는 이곳을 깊이 파 내려가다 유물이 전혀 없는 두꺼운 진흙층을 발견하고, 큰 홍수가 도시를 덮쳤던 흔적으로 해석했다. 이 홍수층이 서사시의 "온 세상을 삼킨 홍수" 그 자체라고 단정할 수는 없지만, 두 강 사이의 저지대에서 되풀이된 실제 홍수의 경험이 신화의 재료가 됐을 가능성을 보여주는 물증으로 꼽힌다.',
+      post:'ge_05' },
+    { place:'니네베 — 아슈르바니팔의 도서관', lat:36.3600, lng:43.1500, zoom:6,
+      title:'폐허 속에 잠든 점토판',
+      desc:'서사시의 가장 완전한 판본은 아시리아 왕 아슈르바니팔(기원전 7세기)이 수도 니네베에 세운 왕궁 도서관에 소장돼 있었다. 제국이 무너지며 도서관도 불타 묻혔지만, 역설적으로 그 덕분에 점토판들은 흙 속에서 살아남았다. 1852~53년 무렵 영국 발굴단이 이 도서관 터에서 수만 장의 점토판을 꺼내며, 3천 년 가까이 잠들어 있던 이야기가 깨어날 준비를 마친다.',
+      post:'ge_06' },
+    { place:'런던 — 대영박물관', lat:51.5194, lng:-0.1270, zoom:5,
+      title:'1872년, 이야기가 다시 낭독되다',
+      desc:'니네베의 점토판들은 대영박물관 수장고에서 오래 잠들어 있었다. 그것을 깨운 사람은 인쇄공 출신으로 쐐기문자를 독학한 조지 스미스였다. 1872년 그는 점토판 속에서 대홍수 이야기를 읽어냈고, 그해 12월 런던에서의 발표는 유럽 사회를 뒤흔들었다 — 성경보다 오래된 문명에 노아의 홍수와 꼭 닮은 이야기가 있었다는 사실 때문이었다. 우루크의 왕이 떠났던 여정은, 이렇게 4천 년을 건너 다시 사람들의 입에 오르내리게 됐다.',
+      post:'ge_06' },
+  ];
+
+  // ── 지도 ──
+  const map = L.map('map', { zoomControl: false, worldCopyJump: true })
+    .setView([WAYPOINTS[0].lat, WAYPOINTS[0].lng], 6);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+  // dark_nolabels: 국가/도시/바다 명칭 라벨이 없는 순수 지형 타일.
+  // CartoDB dark_all은 동해를 "Sea of Japan(East Sea)" 병기로 표기하는데,
+  // 이는 타일 자체에 래스터로 박힌 라벨이라 우리 쪽 지명 데이터로 고칠 수 없다.
+  // 장소명은 어차피 마커·연도칩·하단 패널에서 우리가 직접 표기하므로
+  // 베이스타일 라벨은 전부 제거하는 편이 정확하고 간단하다.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 12, minZoom: 2
+  }).addTo(map);
+
+  // 경로선 — 시간 순서를 잇는 점선
+  L.polyline(WAYPOINTS.map(w => [w.lat, w.lng]), {
+    color: '#b89860', weight: 2, opacity: .55, dashArray: '6 8'
+  }).addTo(map);
+
+  // 지점 마커
+  const markers = WAYPOINTS.map((w, i) => {
+    const icon = L.divIcon({ className: '', html: `<div class="wp-marker" data-i="${i}">${i + 1}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+    const m = L.marker([w.lat, w.lng], { icon }).addTo(map);
+    m.on('click', () => go(i));
+    return m;
+  });
+
+  // 연도 칩
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = WAYPOINTS.map((w, i) => `<button class="chip" data-i="${i}">${i + 1}. ${w.place.split(/[(—]/)[0].trim()}</button>`).join('');
+  chipsEl.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (b) go(parseInt(b.dataset.i, 10));
+  });
+
+  // ── 패널 렌더 ──
+  let cur = 0;
+  const $ = id => document.getElementById(id);
+  function go(i) {
+    cur = Math.max(0, Math.min(WAYPOINTS.length - 1, i));
+    const w = WAYPOINTS[cur];
+    $('wpNum').textContent = cur + 1;
+    $('wpPlace').textContent = w.place;
+    $('wpTitle').textContent = w.title;
+    $('wpDesc').textContent = w.desc;
+    $('wpLinks').innerHTML = w.post
+      ? `<a href="../gilgamesh-epic/${w.post}.html">깊이 읽기 — 「길가메시 서사시」 시리즈에서 이 장면 읽기 &rsaquo;</a>` : '';
+    $('progress').textContent = `${cur + 1} / ${WAYPOINTS.length}`;
+    $('prevBtn').disabled = cur === 0;
+    $('nextBtn').disabled = cur === WAYPOINTS.length - 1;
+    document.querySelectorAll('.wp-marker').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    document.querySelectorAll('.chip').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    const activeChip = chipsEl.querySelector('.chip.active');
+    if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    map.flyTo([w.lat, w.lng], w.zoom || 5, { duration: 1.1 });
+    if (window.trackPageView) window.trackPageView('world_route_gilgamesh', `wp_${cur + 1}`);
+  }
+  $('prevBtn').addEventListener('click', () => go(cur - 1));
+  $('nextBtn').addEventListener('click', () => go(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+  });
+
+  // 자료실 글(예: planck_1900.html)의 "세계지도 루트에서 이 장면 보기"에서
+  // ?point=post_id로 들어오면 해당 웨이포인트로 바로 진입시킨다.
+  const qp = new URLSearchParams(location.search).get('point');
+  const startIdx = qp ? WAYPOINTS.findIndex(w => w.post === qp) : -1;
+  go(startIdx >= 0 ? startIdx : 0);
+})();
+</script>
+</body>
+</html>
