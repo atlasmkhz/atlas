@@ -2,9 +2,9 @@
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 478개 + 루트 10개 + 
-  근현대(1945~1993) 진입점 1개 + Event 457개 + 루트 10개 + 
-  현대(1994~2025) 진입점 1개 + Event 338개(루트 없음) + 
-  조선(1392~1875, 중세2) 진입점 1개 + Event 267개(루트 없음) + 
+  근현대(1945~1993) 진입점 1개 + Event 461개 + 루트 10개 + 
+  현대(1994~2025) 진입점 1개 + Event 361개(루트 없음) + 
+  조선(1392~1875, 중세2) 진입점 1개 + Event 187개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 162개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
@@ -2578,6 +2578,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1948-dokdo-in-modern-times</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1948-establishment-republic-korea</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -2819,6 +2824,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1954-formation-constitutional-defense-group</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1954-founding-of-the-unification-church</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3733,6 +3743,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1979-kim-o-rang</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1979-october-26th</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4019,6 +4034,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1987-lee-han-yeol</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1987-the-odaeyang-mass-deaths</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -4893,6 +4913,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/1996-yeongsaenggyo-agadongsan-cases</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/1996-yonsei-university-incident</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4919,6 +4944,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/1997-korean-air-flight</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/1997-supreme-court-upholds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5318,6 +5348,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2009-state-commission-names-1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2009-yongsan-disaster</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5518,6 +5553,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2015-han-myeong-sook</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2015-kang-ki-hoon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2015-mers-outbreak</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5668,6 +5713,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2019-choi-kyung-hwan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2019-government-panel-recommends</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5678,12 +5728,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2019-national-assembly-fast</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2019-publication-anti-japan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2019-world-s-first</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-13-complaints-against</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5713,6 +5773,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-jeon-kwang-hoon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-nth-room-case</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5723,7 +5788,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-shincheonji-daegu-cluster</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-south-korea-s</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2020-yoon-mee-hyang</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5748,6 +5823,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2021-deaths-chun-doo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2021-druking-comment-manipulation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2021-lh-employees-real</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5768,6 +5853,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2022-chung-kyung-sim</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2022-danuri-enters-lunar</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5784,6 +5874,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2022-kakao-service-outage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2022-kangwon-land-hiring</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5828,6 +5923,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-choi-kang-wook</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-controversy-relocation-general</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5854,6 +5954,16 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-jeonse-fraud-crisis</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-jms-jeong-myeong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2023-lee-sang-jik</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5908,7 +6018,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-kim-hye-kyung</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-kim-min-ki</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-lee-jin-sook</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5929,6 +6049,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2025-constitutional-court-removes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2025-former-president-moon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5973,6 +6098,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-hiring-favoritism-allegations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-kim-byung-heon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5984,6 +6114,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-kospi-surpasses-9</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-national-cemetery-act</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -7578,406 +7713,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-byeongja-horan--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_11</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-hunminjeongeum--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_11</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_15</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_16</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_17</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_18</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_19</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_21</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_22</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-imjin-war--wp_24</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-geniuses--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-heritage-sites--wp_14</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-rebellions--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-tongsinsa--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-tongsinsa--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-tongsinsa--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-tongsinsa--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-tongsinsa--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-tongsinsa--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-joseon-tongsinsa--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-silhak--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-silhak--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-silhak--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-silhak--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-silhak--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-silhak--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_01b</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/medieval2/event/route-yi-sun-sin--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/route/byeongja-horan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -9238,651 +8973,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-ancient-history-debates--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-baekje-heritage-sites--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-balhae-heritage-sites--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-balhae-heritage-sites--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-balhae-heritage-sites--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-buddhism-introduction--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-buddhism-introduction--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-buddhism-introduction--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-buddhism-introduction--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-buddhism-introduction--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gaya-heritage-sites--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gaya-heritage-sites--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gaya-heritage-sites--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gaya-heritage-sites--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gaya-heritage-sites--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gaya-heritage-sites--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-geunchogo-conquest--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-geunchogo-conquest--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-geunchogo-conquest--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-geunchogo-conquest--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-geunchogo-conquest--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-geunchogo-conquest--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-geunchogo-conquest--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_11</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-goguryeo-heritage-sites--wp_14</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_11</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_14</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_15</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-gwanggaeto-conquest--wp_16</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_11</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_14</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_15</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_16</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_18</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_19</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_20</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-hyecho-pilgrimage--wp_21</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-jang-bogo-maritime--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-jang-bogo-maritime--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-jang-bogo-maritime--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-kim-yu-sin-unification--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-kim-yu-sin-unification--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-kim-yu-sin-unification--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_11</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-korea-hegemony-history--wp_14</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_06</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_13</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_14</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_15</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_16</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_17</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_18</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_22</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-northern-peoples-history--wp_23</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_01</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_02</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_03</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_04</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_05</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_07</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_08</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_09</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_10</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/maps/ancient/event/route-silla-heritage-sites--wp_12</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://atlas.mkhz.kr/maps/ancient/route/ancient-history-debates</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -10164,6 +9254,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/erased-names/shin_chae_ho</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/erased-names/yang_se_bong</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -3,6 +3,13 @@
 // 직접 편집하지 말 것 — 자료실(content/archive/*.js)의 card_ref를
 // 수정한 뒤 스크립트를 재실행하면 갱신된다.
 const ARCHIVE_BACKLINKS = {
+  "policy_500_01": [
+    {
+      "url": "../../archive/dokdo-records/dk_02.html",
+      "series": "독도, 기록의 섬",
+      "title": "이사부와 우산국 (512) — 나무 사자와 함께 시작된 기록"
+    }
+  ],
   "political_562_01": [
     {
       "url": "../../archive/historical-revisionism/wp_12.html",

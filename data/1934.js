@@ -34,6 +34,20 @@ const EVENTS_1934 = [
     sources:['우리역사넷 지청천','독립운동인명사전'],
     content:{ hero:{"url": "assets/images/entity/person/person_ji_cheong_cheon_01.webp", "alt": "지청천", "caption": "", "credit": "AI 생성 이미지", "is_ai": true, "source_type": "generated", "image_type": "portrait"}, gallery:[] } },
 
+  { id:'person_1934_02', year:1934, visible_from:1934, visible_until:1934,
+    month:9, day:19, type:'person', priority:1,
+    title_ko:'양세봉 — 남만주 최후의 사령관, 밀정의 총탄에 지다',
+    title_en:'Yang Se-bong — The Last Commander in South Manchuria',
+    title_ja:'梁世奉 — 南満州最後の司令官、密偵の銃弾に倒れる',
+    place_ko:'환인현 소황구',
+    lat:41.27, lng:125.36,
+    people:['양세봉'],
+    summary_ko:'만주사변 이후 독립군이 좌우로 갈라져 만주를 떠날 때, 남만주에 남아 일제와 싸운 무장 세력은 양세봉의 조선혁명군뿐이었다. 평북 철산의 소작농 아들로 태어나 3·1운동 이후 무장투쟁에 뛰어든 그는 1932년 초 조선혁명군 총사령이 되어 중국의용군과 한중연합군을 편성했고, 영릉가성 탈환과 흥경성 전투 등에서 승리를 거듭했다 — 연구자들은 그가 이끈 전투를 5년간 80여 차례로 추산한다. 승전은 역으로 일제의 제거 공작을 불렀다. 1934년 9월 19일 밤, 밀정 박창해는 혁명군을 후원하던 중국인을 매수해 한중 합작 논의를 구실로 그를 환인현 소황구 골짜기로 유인했고, 수수밭 매복 속에서 피격된 양세봉은 다음 날 숨을 거두었다. 향년 38세. 일제는 가매장된 그의 묘를 파헤쳐 목을 잘라 통화 시내에 효수했고, 부대원들은 끝내 그의 수급을 찾지 못했다.',
+    video:'sXfwsXNtiHE',
+    connections:['battle_1932_03','battle_1933_03'],
+    tags:['person','남만주','양세봉','조선혁명군','밀정'],
+    sources:['한국독립운동인명사전 양세봉','한국민족문화대백과사전 양세봉'] },
+
   // ══ 독립운동 세력의 재통합 모색 ══
   { id:'political_1934_02', year:1934, visible_from:1932, visible_until:1935,
     month:0, day:null, type:'political', priority:2,

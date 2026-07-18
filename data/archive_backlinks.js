@@ -10,6 +10,23 @@ const ARCHIVE_BACKLINKS = {
       "title": "\"무장투쟁은 불가능한 환상\"? — 봉오동과 청산리가 이미 답했다"
     }
   ],
+  "diplomacy_1877_02": [
+    {
+      "url": "archive/dokdo-records/dk_06.html",
+      "series": "독도, 기록의 섬",
+      "title": "태정관지령 (1877) — 일본 최고 행정기관이 남긴 결정적 문서"
+    },
+    {
+      "url": "archive/dokdo-records/dk_07.html",
+      "series": "독도, 기록의 섬",
+      "title": "1900 칙령 제41호 vs 1905 시마네현 고시 제40호 — 4년 4개월의 차이"
+    },
+    {
+      "url": "archive/dokdo-records/dk_08.html",
+      "series": "독도, 기록의 섬",
+      "title": "강치의 절멸 — 이 섬에서 벌어진 가장 되돌릴 수 없는 일"
+    }
+  ],
   "movement_1919_02": [
     {
       "url": "archive/geonguk-jeonjaeng/gj_03.html",
@@ -41,6 +58,13 @@ const ARCHIVE_BACKLINKS = {
       "url": "archive/erased-names/shin_chae_ho.html",
       "series": "지워진 이름들",
       "title": "신채호 — 나라를 지킨 역사가는 서류상 없는 사람이었다"
+    }
+  ],
+  "person_1934_02": [
+    {
+      "url": "archive/erased-names/yang_se_bong.html",
+      "series": "지워진 이름들",
+      "title": "양세봉 — 남과 북이 함께 기렸기에, 오히려 잊혔다"
     }
   ],
   "policy_1925_03": [

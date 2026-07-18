@@ -1356,6 +1356,7 @@ body.route-mode-active [data-route-hidden] {
 
 /* ── 자료실 역링크 (팝업 하단) — generate_archive_backlinks.py 연동 ── */
 .pop-archive{margin-top:10px;padding-top:8px;border-top:1px solid rgba(184,152,96,.25);font-size:12px}
-.pop-archive b{display:block;margin-bottom:4px;color:#b89860;font-size:11px;letter-spacing:.02em}
-.pop-archive-link{display:block;padding:3px 0;color:#d8c9a8;text-decoration:none;line-height:1.45}
-.pop-archive-link:hover{color:#f0e6cf;text-decoration:underline}
+.pop-archive b{display:block;margin-bottom:5px;color:#4a4030;font-size:11px;letter-spacing:.02em}
+.pop-archive-link{display:block;padding:3px 0;color:#5a4d2a;text-decoration:none;line-height:1.45}
+.pop-archive-link:hover{color:#2a2418;text-decoration:underline}
+.info-scroll > .pop-archive{margin-left:18px;margin-right:18px}

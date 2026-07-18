@@ -82,6 +82,22 @@ const EVENTS_1997 = [
     video:null,
     connections:['economic_1997_03'],
     tags:['political','전국','대선','정권교체','김대중'],
-    sources:['한국민족문화대백과사전 제15대 대통령선거','위키백과 1997년 대한민국 대통령 선거'] }
+    sources:['한국민족문화대백과사전 제15대 대통령선거','위키백과 1997년 대한민국 대통령 선거'] },
+
+  { id:'political_1997_02', year:1997, visible_from:1997, visible_until:1998,
+    month:4, day:17, type:'political', priority:1,
+    title_ko:'전두환·노태우 대법원 확정 — 반란과 내란의 사법적 단죄',
+    title_en:'Supreme Court Upholds Chun and Roh Convictions',
+    title_ja:'全斗煥·盧泰愚 大法院確定判決',
+    place_ko:'서울 (대법원)',
+    lat:37.4926, lng:127.0057,
+    people:['전두환','노태우'],
+    party:'신한국당',
+    allegation_status:'convicted',
+    summary_ko:'1997년 4월 17일 대법원은 12·12 군사반란과 5·17 내란, 비자금 사건에 대해 전두환 무기징역·추징금 2,205억 원, 노태우 징역 17년·추징금 2,628억 원을 확정했다. 군사반란과 내란이 통치행위가 아니라 처벌 대상 범죄임을 최종 확인한 판결로, 두 전직 대통령은 그해 12월 사면됐지만 이 확정판결로 인해 국립묘지법상 안장 자격을 영구히 잃었다. 한편 함께 기소됐던 유학성은 상고심 중 사망해 공소기각으로 재판이 종결됐고, 확정판결이 없다는 이유로 국립대전현충원 장군묘역에 안장됐다 — "확정"이라는 한 단어가 안장의 운명을 가른 것이다.',
+    video:null,
+    connections:['political_1995_02'],
+    tags:['political','서울','전두환','노태우','12·12','대법원'],
+    sources:['위키백과 전두환·노태우 전 대통령 구속 사건','한국민족문화대백과사전 12·12사태'] },
 
 ];

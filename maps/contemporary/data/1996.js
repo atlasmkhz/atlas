@@ -114,6 +114,22 @@ const EVENTS_1996 = [
     video:null,
     connections:[],
     tags:['organization','서울','H.O.T','아이돌','SM엔터테인먼트'],
-    sources:['위키백과 H.O.T.','나무위키 H.O.T.','채널DOC "SM 엔터테인먼트의 역사 5화: H.O.T. 데뷔"'] }
+    sources:['위키백과 H.O.T.','나무위키 H.O.T.','채널DOC "SM 엔터테인먼트의 역사 5화: H.O.T. 데뷔"'] },
+
+  { id:'organization_1996_03', year:1996, visible_from:1996, visible_until:1997,
+    month:null, day:null, type:'organization', priority:2,
+    title_ko:'영생교와 아가동산 — 격리 공동체 사건들',
+    title_en:'Yeongsaenggyo and Agadongsan Cases',
+    title_ja:'永生教とアガ動産 — 隔離共同体事件',
+    place_ko:'경기 여주 일대',
+    lat:37.298, lng:127.637,
+    people:['조희성','김기순'],
+    party:null,
+    allegation_status:null,
+    summary_ko:'1990년대에는 외부와 격리된 신앙 공동체에서 벌어진 사건들이 잇따라 사회 문제가 됐다. "믿으면 죽지 않는다"는 불사 교리를 내세운 영생교(승리제단)의 교주 조희성은 신도 관련 사건으로 기소돼 법적 처벌을 받았고 2004년 수감 중 사망했다. 김기순이 경기 여주에 세운 아가동산은 1990년대 중반 신도·아동에 대한 폭행·사망 및 학대 의혹으로 대대적 수사와 재판을 겪었으나, 핵심 혐의 상당 부분에서 법원이 무죄를 선고해 무엇이 입증됐고 무엇이 입증되지 않았는지를 두고 지금도 평가가 갈린다. 두 사건이 공통으로 드러낸 것은 종교 형식 자체보다 "격리와 정보 차단"이라는 구조의 위험이다 — 신도가 바깥 세계와 단절되면 지도자의 말이 유일한 현실이 되고, 내부의 일은 바깥의 상식으로 검증받지 못한다.',
+    video:null,
+    connections:[],
+    tags:['organization','경기','영생교','아가동산','신흥종교'],
+    sources:['위키백과 영생교','위키백과 아가동산 사건'] },
 
 ];

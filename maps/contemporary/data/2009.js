@@ -127,5 +127,22 @@ const EVENTS_2009 = [
     video:null,
     connections:[],
     tags:['person','서울','김수환','명동성당','6월항쟁'],
-    sources:['한국민족문화대백과사전 김수환','위키백과 김수환'] }
+    sources:['한국민족문화대백과사전 김수환','위키백과 김수환'] },
+
+  { id:'political_2009_03', year:2009, visible_from:2009, visible_until:2010,
+    month:11, day:null, type:'political', priority:2,
+    title_ko:'친일반민족행위진상규명위, 1,005명 공식 발표',
+    title_en:'State Commission Names 1,005 Pro-Japanese Collaborators',
+    title_ja:'親日反民族行為真相糾明委、1005人公式発表',
+    place_ko:'서울',
+    lat:37.5665, lng:126.9780,
+    people:[],
+    party:'한나라당',
+    allegation_status:null,
+    summary_ko:'2005년부터 활동한 대통령 소속 친일반민족행위진상규명위원회는 여야 합의로 제정된 특별법에 근거한 조사 끝에 2009년 11월 1,005명을 친일반민족행위자로 공식 발표했다. 민간 단체의 의견이 아니라 국가기구의 공식 판단이라는 점에서 무게가 다르다. 이 1,005명 가운데 12명이 국립현충원에 안장돼 있다 — 서울현충원에 7명, 대전현충원에 5명으로, 12명 중 11명이 일본군 또는 만주국군 장교 출신이다. 별도로 민족문제연구소의 친일인명사전 기준으로는 현충원 안장자가 63명에 이른다는 민간 집계도 있어, 국가 결정과 민간 연구의 범위 차이 자체가 이후 국립묘지법 개정 논쟁의 출발점이 됐다.',
+    video:null,
+    connections:[],
+    tags:['political','서울','친일반민족행위','현충원','과거사'],
+    sources:['친일반민족행위진상규명위원회 보고서','민족문제연구소 친일인명사전'] },
+
 ];

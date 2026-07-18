@@ -105,6 +105,20 @@ const EVENTS_1979 = [
     connections:['person_1979_04'],
     tags:['person','서울','장태완','12·12군사반란','진압시도'],
     sources:['위키백과 12·12군사반란','시사IN 12·12군사쿠데타와인권유린의현대사'],
-    content:{ hero:{"url": "assets/images/entity/person/person_jang_tae_wan_01.webp", "alt": "장태완", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } }
+    content:{ hero:{"url": "assets/images/entity/person/person_jang_tae_wan_01.webp", "alt": "장태완", "caption": "", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"} } },
+
+  { id:'person_1979_06', year:1979, visible_from:1979, visible_until:1980,
+    month:12, day:13, type:'person', priority:2,
+    title_ko:'김오랑 — 반란군에 맞서다 숨진 소령',
+    title_en:'Kim O-rang — The Major Who Resisted',
+    title_ja:'金五郎 — 反乱軍に抗して斃れた少領',
+    place_ko:'서울 (특전사령부)',
+    lat:37.492, lng:127.115,
+    people:['김오랑','정병주'],
+    summary_ko:'12·12 군사반란의 밤, 특수전사령관 정병주를 체포하러 온 반란군에 맞서 비서실장 김오랑 소령이 권총으로 응전하다 총격에 숨졌다. 그의 유해는 처음 부대 뒷산에 암매장됐다가 뒤늦게 수습됐고, 아내 백영옥은 충격으로 시력을 잃은 뒤 실족사로 세상을 떠났다. 사후 중령으로 추서된 그는 국립서울현충원에 안장됐고 2014년 보국훈장이 추서됐다 — 반란의 밤에 군인의 본분을 지키다 죽은, 이 사건과 관련된 안장 가운데 논란의 여지가 없는 유일한 이름으로 남아 있다.',
+    video:null,
+    connections:['person_1979_03','person_1979_05'],
+    tags:['person','서울','김오랑','12·12','특전사'],
+    sources:['한국민족문화대백과사전 김오랑','위키백과 김오랑'] },
 
 ];

@@ -119,7 +119,7 @@ const EVENTS_1919 = [
     sources:['나무위키 제암리 학살사건','경향신문 제암리 학살사건'] },
 
   { id:'massacre_1919_01', year:1919, visible_from:1919, visible_until:1919,
-    month:3, day:15, type:'massacre', priority:1,
+    month:4, day:15, type:'massacre', priority:1,
     title_ko:'제암리 학살 사건',
     title_en:'The Jeam-ri Massacre',
     title_ja:'堤岩里虐殺事件',
@@ -127,7 +127,7 @@ const EVENTS_1919 = [
     lat:37.108, lng:126.875,
     people:[],
     summary_ko:'3·1운동을 진압하던 일본군은 1919년 4월 15일, 경기도 수원군 제암리에서 만세시위에 참여한 주민들을 교회당에 모아놓고 문을 잠근 뒤 총격을 가하고 불을 질렀다. 이 학살로 29명이 목숨을 잃고 민가 30여 채가 불탔다. 헌병 중위 아리타 도시오가 주도한 이 사건은 조선군 사령관의 강경 진압 명령 아래 자행된, 우발적이 아닌 계획된 보복이었다. 선교사 스코필드가 현장을 사진으로 기록하고 『끌 수 없는 불꽃』을 펴내 일제의 만행을 세계에 알렸다. 평화적 만세운동에 대한 일제의 잔혹한 응답을 상징하는 사건이다.',
-    video:'ggYB7mNkADI',
+    video:null,
     connections:['movement_1919_02','movement_1919_08','massacre_1919_02','person_1919_05'],
     tags:['massacre','조선국내','경기','제암리','학살','3·1운동'],
     sources:['나무위키 제암리 학살사건','위키백과 제암리 학살 사건','국가기록원'],
