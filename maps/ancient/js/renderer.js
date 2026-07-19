@@ -439,7 +439,7 @@ function renderYear(year){
 
   // 세계 사건 마커를 먼저 그린다 — 한국 마커보다 아래(z-order)에 깔려
   // 한국사를 가리지 않는다(우선순위: 한국 마커 > 세계 사건 마커 > 세계 분위기).
-  renderWorldEvents(year);
+  // renderWorldEvents 제거 (2026-07-19): 당·수 등 세계사건 원형은 세력권 레이어의 중원 필드가 색으로 담당.
 
   const showEvent = document.getElementById('layerEvent')?.checked ?? true;
   const showPerson = document.getElementById('layerPerson')?.checked ?? false;
@@ -494,16 +494,7 @@ function renderYear(year){
     }
     const color = COLORS[e.type];
 
-    // 학살: 영역(수채화 느낌 원)
-    if(e.area){
-      const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);
-      circle.on('click', ()=>{
-        if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
-        if(window.trackEventOpen) window.trackEventOpen(e);
-        if(window.openInfoPanel) openInfoPanel(popupHtml(e));
-      });
-      layers.push(circle);
-    }
+    // areaRadius 원형 제거 (2026-07-19): 수채화 분포·세력권 레이어와 중복. 사건 접근은 일반 마커가 담당.
 
     // 점 → 유형 기반 SVG 아이콘 (markerIcons.js)
     // 펄스 애니메이션: 당해 연도 사건에만
@@ -543,7 +534,7 @@ function renderRange(startYear, endYear){
   clearLayers();
   eventMarkers = [];
 
-  renderWorldEvents(startYear);
+  // renderWorldEvents 제거 (2026-07-19): 당·수 등 세계사건 원형은 세력권 레이어의 중원 필드가 색으로 담당.
 
   const showEvent = document.getElementById('layerEvent')?.checked ?? true;
   const showPerson = document.getElementById('layerPerson')?.checked ?? false;
@@ -592,15 +583,7 @@ function renderRange(startYear, endYear){
     // buildMarkerHtml이 고리를 그리지 않는다 (필터 로직과는 무관).
     const nationColor = null;
 
-    if(e.area){
-      const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);
-      circle.on('click', ()=>{
-        if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
-        if(window.trackEventOpen) window.trackEventOpen(e);
-        if(window.openInfoPanel) openInfoPanel(popupHtml(e));
-      });
-      layers.push(circle);
-    }
+    // areaRadius 원형 제거 (2026-07-19): 수채화 분포·세력권 레이어와 중복. 사건 접근은 일반 마커가 담당.
 
     // 챕터 모드에서는 감쇠/펄스가 없다 — 전부 동등하게 100% 밝기.
     const icon = makeMarkerIcon(e.type, { color, opacity:1.0, pulse:false, nationColor });

@@ -75,11 +75,7 @@ function renderSearchResults(results){
     if(e.lat == null || e.lng == null) return;
     const color = COLORS[e.type];
 
-    if(e.area){
-      const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);
-      circle.on('click', ()=>{ if(window.openInfoPanel) openInfoPanel(popupHtml(e)); });
-      layers.push(circle);
-    }
+    // areaRadius 원형 제거 (2026-07-19): 수채화 분포·세력권 레이어와 중복. 사건 접근은 일반 마커가 담당.
 
     const icon = makeMarkerIcon(e.type, { color, opacity:1, pulse:true });
     const m = L.marker([e.lat,e.lng], {icon}).addTo(map);

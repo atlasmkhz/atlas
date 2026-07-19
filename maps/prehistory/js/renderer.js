@@ -576,15 +576,7 @@ function renderRange(startYear, endYear){
 
     const color = COLORS[e.type];
 
-    if(e.area){
-      const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);
-      circle.on('click', ()=>{
-        if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
-        if(window.trackEventOpen) window.trackEventOpen(e);
-        if(window.openInfoPanel) openInfoPanel(popupHtml(e));
-      });
-      layers.push(circle);
-    }
+    // areaRadius 원형 제거 (2026-07-19): 수채화 분포·세력권 레이어와 중복. 사건 접근은 일반 마커가 담당.
 
     // 챕터 모드에서는 감쇠/펄스가 없다 — 전부 동등하게 100% 밝기.
     const icon = makeMarkerIcon(e.type, { color, opacity:1.0, pulse:false });
@@ -608,6 +600,13 @@ function renderRange(startYear, endYear){
   declutterMarkers();
   // 중국 왕조 라벨 레이어도 이 챕터 범위로 함께 갱신 (js/chinaLayer.js)
   if (typeof renderChinaDynasties === 'function') { try { renderChinaDynasties(startYear, endYear); } catch(_){} }
+  // 유물 분포·세력권 수채화 레이어도 챕터 범위로 갱신 (2026-07-19 버그픽스:
+  // 선사 지도는 챕터 모드라 실제 진입점이 renderRange다. 그동안 훅이
+  // renderYear(슬라이더 경로)에만 있어 챕터 버튼으로는 수채화가 안 그려졌다.
+  // 구간의 대표 연도로 endYear를 넘긴다 — 존/필드는 [from,until] 포함
+  // 판정이므로 챕터 끝 연도가 가장 자연스러운 대표값이다.)
+  if (typeof renderArtifactZonesForRange === 'function') { try { renderArtifactZonesForRange(startYear, endYear); } catch(_){} }
+  if (typeof renderPowerFieldsForRange === 'function') { try { renderPowerFieldsForRange(startYear, endYear); } catch(_){} }
 }
 
 // ── 안전 렌더링 래퍼(챕터 버전) ──

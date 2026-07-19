@@ -54,31 +54,42 @@ function _powerRedrawCanvas() {
   ctx.clearRect(0, 0, size.x, size.y);
   if (!_powerActiveFields || !isPowerLayerOn()) return;
 
+  // 존/필드별로 별도 오프스크린 캔버스에 lighten(최대값) 합성으로 블롭을
+  // 그린 뒤, 그 결과만 메인 캔버스에 얹는다. 이렇게 하면 같은 존 안에서
+  // 블롭이 겹쳐도 알파가 누적돼 색이 하얗게 뜨지 않고(최대값만 취함),
+  // 서로 다른 존끼리는 메인 캔버스에서 자연스럽게 겹친다.
   _powerActiveFields.forEach(f => {
-    (f.blobs || []).forEach(b => {
+    const blobs = f.blobs || [];
+    if (!blobs.length) return;
+    const off = document.createElement('canvas');
+    off.width = size.x; off.height = size.y;
+    const octx = off.getContext('2d');
+    octx.globalCompositeOperation = 'lighten';
+    let drew = false;
+    blobs.forEach(b => {
       const p = map.latLngToContainerPoint([b.lat, b.lng]);
       const rPx = _powerKmToPx(b.lat, b.lng, b.r);
       if (rPx < 1) return;
-      // 타원(sx: 진행 방향 늘림 배율, rot: 회전 라디안) — 원형 탈피의 핵심.
-      // 여러 개의 기울어진 타원 워시가 겹치며 수채화 같은 유기적 형상을 만든다.
       const sx = b.sx || 1, rot = b.rot || 0;
       const rMax = rPx * Math.max(sx, 1);
       if (p.x < -rMax || p.y < -rMax || p.x > size.x + rMax || p.y > size.y + rMax) return;
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      if (rot) ctx.rotate(rot);
-      if (sx !== 1) ctx.scale(sx, 1);
-      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rPx);
+      octx.save();
+      octx.translate(p.x, p.y);
+      if (rot) octx.rotate(rot);
+      if (sx !== 1) octx.scale(sx, 1);
+      const g = octx.createRadialGradient(0, 0, 0, 0, 0, rPx);
       g.addColorStop(0.0, _powerHexToRgba(f.color, _powerBoostAlpha(b.a)));
       g.addColorStop(0.45, _powerHexToRgba(f.color, _powerBoostAlpha(b.a) * 0.6));
       g.addColorStop(0.75, _powerHexToRgba(f.color, _powerBoostAlpha(b.a) * 0.26));
       g.addColorStop(1.0, _powerHexToRgba(f.color, 0));
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(0, 0, rPx, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
+      octx.fillStyle = g;
+      octx.beginPath();
+      octx.arc(0, 0, rPx, 0, Math.PI * 2);
+      octx.fill();
+      octx.restore();
+      drew = true;
     });
+    if (drew) ctx.drawImage(off, 0, 0);
   });
 }
 
@@ -128,6 +139,28 @@ function _drawPowerLabel(f) {
 }
 
 /** 슬라이더형 진입점 */
+// 챕터(구간) 진입점 — 구간과 겹치는 모든 필드를 표시 (선사 실제 진입점).
+function renderPowerFieldsForRange(startYear, endYear) {
+  _powerLastYear = endYear;
+  clearPowerFields();
+  if (!isPowerLayerOn()) return;
+  if (typeof POWER_FIELDS === 'undefined') return;
+  _powerEnsureCanvas();
+  // 경계만 맞닿는 인접 시대 존은 제외한다(예: 신석기 챕터 끝 -1500에
+  // 청동기 존이 딱 걸리는 것 방지). 실제 구간이 겹칠 때만 표시.
+  const _span = endYear - startYear;
+  const active = POWER_FIELDS.filter(f => {
+    if (_span <= 0) return f.from <= endYear && f.until >= startYear;
+    return f.from < endYear && f.until > startYear;
+  });
+  _powerActiveFields = active;
+  _powerRedrawCanvas();
+  active.forEach(_drawPowerLabel);
+  window._atlasLayerEmpty = window._atlasLayerEmpty || {};
+  window._atlasLayerEmpty.power = (!_powerActiveFields || _powerActiveFields.length === 0);
+  if (window._atlasUpdateLayerHint) window._atlasUpdateLayerHint();
+}
+
 function renderPowerFieldsAtYear(year) {
   _powerLastYear = year;
   clearPowerFields();

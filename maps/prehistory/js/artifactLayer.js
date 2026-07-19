@@ -77,31 +77,42 @@ function _artifactRedrawCanvas() {
   ctx.clearRect(0, 0, size.x, size.y);
   if (!_artifactActiveZones || !isArtifactLayerOn()) return;
 
+  // 존/필드별로 별도 오프스크린 캔버스에 lighten(최대값) 합성으로 블롭을
+  // 그린 뒤, 그 결과만 메인 캔버스에 얹는다. 이렇게 하면 같은 존 안에서
+  // 블롭이 겹쳐도 알파가 누적돼 색이 하얗게 뜨지 않고(최대값만 취함),
+  // 서로 다른 존끼리는 메인 캔버스에서 자연스럽게 겹친다.
   _artifactActiveZones.forEach(z => {
-    (z.blobs || []).forEach(b => {
+    const blobs = z.blobs || [];
+    if (!blobs.length) return;
+    const off = document.createElement('canvas');
+    off.width = size.x; off.height = size.y;
+    const octx = off.getContext('2d');
+    octx.globalCompositeOperation = 'lighten';
+    let drew = false;
+    blobs.forEach(b => {
       const p = map.latLngToContainerPoint([b.lat, b.lng]);
       const rPx = _artifactKmToPx(b.lat, b.lng, b.r);
       if (rPx < 1) return;
-      // 타원(sx: 진행 방향 늘림 배율, rot: 회전 라디안) — 원형 탈피의 핵심.
-      // 여러 개의 기울어진 타원 워시가 겹치며 수채화 같은 유기적 형상을 만든다.
       const sx = b.sx || 1, rot = b.rot || 0;
       const rMax = rPx * Math.max(sx, 1);
       if (p.x < -rMax || p.y < -rMax || p.x > size.x + rMax || p.y > size.y + rMax) return;
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      if (rot) ctx.rotate(rot);
-      if (sx !== 1) ctx.scale(sx, 1);
-      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rPx);
+      octx.save();
+      octx.translate(p.x, p.y);
+      if (rot) octx.rotate(rot);
+      if (sx !== 1) octx.scale(sx, 1);
+      const g = octx.createRadialGradient(0, 0, 0, 0, 0, rPx);
       g.addColorStop(0.0, _artifactHexToRgba(z.color, _boostAlpha(b.a)));
       g.addColorStop(0.45, _artifactHexToRgba(z.color, _boostAlpha(b.a) * 0.6));
       g.addColorStop(0.75, _artifactHexToRgba(z.color, _boostAlpha(b.a) * 0.26));
       g.addColorStop(1.0, _artifactHexToRgba(z.color, 0));
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(0, 0, rPx, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
+      octx.fillStyle = g;
+      octx.beginPath();
+      octx.arc(0, 0, rPx, 0, Math.PI * 2);
+      octx.fill();
+      octx.restore();
+      drew = true;
     });
+    if (drew) ctx.drawImage(off, 0, 0);
   });
 }
 
@@ -172,6 +183,31 @@ function _drawArtifactZoneLabelAndSites(z) {
 }
 
 /** 슬라이더형 진입점 — 그 해에 해당하는 분포권만 그린다 */
+// 챕터(구간) 진입점 — 구간 [startYear,endYear]과 겹치는 모든 존을 표시.
+// 선사 지도의 실제 진입점이다(renderRange). 존이 [from,until]로 정의되므로
+// 구간과 조금이라도 겹치면 그린다 — 예: 신석기 챕터 어디를 눌러도
+// 빗살무늬토기권이 나온다.
+function renderArtifactZonesForRange(startYear, endYear) {
+  _artifactLastYear = endYear;
+  clearArtifactZones();
+  if (!isArtifactLayerOn()) return;
+  if (typeof ARTIFACT_ZONES === 'undefined') return;
+  _artifactEnsureCanvas();
+  // 경계만 맞닿는 인접 시대 존은 제외한다(예: 신석기 챕터 끝 -1500에
+  // 청동기 존이 딱 걸리는 것 방지). 실제 구간이 겹칠 때만 표시.
+  const _span = endYear - startYear;
+  const active = ARTIFACT_ZONES.filter(z => {
+    if (_span <= 0) return z.from <= endYear && z.until >= startYear;
+    return z.from < endYear && z.until > startYear;
+  });
+  _artifactActiveZones = active;
+  _artifactRedrawCanvas();
+  active.forEach(_drawArtifactZoneLabelAndSites);
+  window._atlasLayerEmpty = window._atlasLayerEmpty || {};
+  window._atlasLayerEmpty.artifact = (active.length === 0);
+  if (window._atlasUpdateLayerHint) window._atlasUpdateLayerHint();
+}
+
 function renderArtifactZonesAtYear(year) {
   _artifactLastYear = year;
   clearArtifactZones();
