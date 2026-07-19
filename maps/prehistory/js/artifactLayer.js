@@ -120,7 +120,7 @@ function _drawArtifactZoneLabelAndSites(z) {
   const labelHtml =
     `<div class="artifact-zone-label" style="--zone-color:${z.color}">` +
       `<span class="artifact-zone-name">${z.name}</span>` +
-      `<span class="artifact-zone-kind">고고학적 분포권 · 정치적 영토 아님</span>` +
+      `<span class="artifact-zone-kind">${z.kind_label || '고고학적 분포권 · 정치적 영토 아님'}</span>` +
     `</div>`;
   const labelIcon = L.divIcon({
     className: 'artifact-zone-label-wrap',

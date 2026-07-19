@@ -23,8 +23,10 @@ const BLOCKS = [
     desc_hint:'기원전 1500~400년경 — 고인돌, 비파형동검, 계급 사회의 등장' },
   { order:5, name:'초기 부족사회', start_year:-400, end_year:-300,
     desc_hint:'국가·민족 개념 이전, 부여·읍루·숙신·예맥 등이 만주·한반도 북부에 느슨하게 거주' },
-  { order:6, name:'고조선의 성립과 발전', start_year:-300, end_year:-37,
-    desc_hint:'신화상 건국연대(기원전 2333)와 고고학적 실체 확인 연대(대략 기원전 4세기)를 구분 — 위만조선까지, 기원전 108년 한에 의한 멸망' },
+  { order:6, name:'고조선의 발전과 위만조선', start_year:-300, end_year:-108,
+    desc_hint:'칭왕과 연과의 전쟁, 위만의 찬탈과 준왕의 남천, 왕검성의 최후 — 신화상 건국연대(기원전 2333)와 고고학적 실체(대략 기원전 4세기)를 구분한다' },
+  { order:7, name:'고조선 이후 — 삼한의 시대', start_year:-108, end_year:-37,
+    desc_hint:'한군현의 설치와 토착 사회의 재편, 유이민의 남하, 마한·진한·변한의 성장 — 삼국 시대의 문턱까지' },
 ];
 
 const BLOCKS_MIN_YEAR = BLOCKS[0].start_year;

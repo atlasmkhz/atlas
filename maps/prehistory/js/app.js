@@ -75,6 +75,7 @@ const DATA = {};
   (typeof EVENTS_BLOCK4 !== 'undefined' ? EVENTS_BLOCK4 : []),
   (typeof EVENTS_BLOCK5 !== 'undefined' ? EVENTS_BLOCK5 : []),
   (typeof EVENTS_BLOCK6 !== 'undefined' ? EVENTS_BLOCK6 : []),
+  (typeof EVENTS_BLOCK7 !== 'undefined' ? EVENTS_BLOCK7 : []),
 ].forEach(arr => {
   arr.forEach(e => {
     if (!DATA[e.year]) DATA[e.year] = [];

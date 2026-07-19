@@ -439,7 +439,7 @@ function renderYear(year){
 
   // 세계 사건 마커를 먼저 그린다 — 한국 마커보다 아래(z-order)에 깔려
   // 한국사를 가리지 않는다(우선순위: 한국 마커 > 세계 사건 마커 > 세계 분위기).
-  renderWorldEvents(year);
+  // renderWorldEvents 제거 (2026-07-18 v3): 상·주·춘추전국 세계사건 원형을 power_fields의 중원 수채화 필드로 대체.
 
   const showEvent = document.getElementById('layerEvent')?.checked ?? true;
   const showPerson = document.getElementById('layerPerson')?.checked ?? false;
@@ -494,16 +494,10 @@ function renderYear(year){
     }
     const color = COLORS[e.type];
 
-    // 학살: 영역(수채화 느낌 원)
-    if(e.area){
-      const circle = L.circle([e.lat,e.lng], {radius:e.areaRadius||50000, color:color, fillColor:color, fillOpacity:0.28, weight:1, opacity:0.5}).addTo(map);
-      circle.on('click', ()=>{
-        if(window.trackPageView) window.trackPageView('card', e.title_ko || e.title_en || e.id);
-        if(window.trackEventOpen) window.trackEventOpen(e);
-        if(window.openInfoPanel) openInfoPanel(popupHtml(e));
-      });
-      layers.push(circle);
-    }
+    // areaRadius 원형 제거 (2026-07-18 v3): 문화권·부족 영역을 표시하던
+    // 반투명 원이 수채화 분포권 레이어와 중복·충돌해 화면을 복잡하게
+    // 만들었다. 사건 접근은 아래의 일반 마커가 계속 담당한다 (원은
+    // 부가 요소였을 뿐, 모든 사건은 항상 마커를 따로 가진다).
 
     // 점 → 유형 기반 SVG 아이콘 (markerIcons.js)
     // 펄스 애니메이션: 당해 연도 사건에만
@@ -547,7 +541,7 @@ function renderRange(startYear, endYear){
   clearLayers();
   eventMarkers = [];
 
-  renderWorldEvents(startYear);
+  // renderWorldEvents 제거 (2026-07-18 v3): 상·주·춘추전국 세계사건 원형을 power_fields의 중원 수채화 필드로 대체.
 
   const showEvent = document.getElementById('layerEvent')?.checked ?? true;
   const showPerson = document.getElementById('layerPerson')?.checked ?? false;
