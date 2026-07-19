@@ -1407,6 +1407,13 @@ body.route-mode-active [data-route-hidden] {
 }
 .territory-name { font-size:13.5px; letter-spacing:1px; color:var(--polity-color, #ddd); filter:brightness(1.45); }
 .territory-kind { font-size:9.5px; font-weight:500; opacity:0.8; color:#d8d2c4; letter-spacing:0.5px; }
+/* 발전단계(군장사회/초기국가/정복국가) 부제 — 이름 옆 작은 배지 */
+.territory-stage {
+  display:inline-block; margin-left:5px; padding:0 5px;
+  font-size:9px; font-weight:600; letter-spacing:0.3px;
+  color:#1a1408; background:rgba(200,180,140,0.85);
+  border-radius:6px; vertical-align:middle;
+}
 .territory-label-influence .territory-name { font-weight:600; font-size:12.5px; }
 .territory-label-commandery .territory-name { font-weight:600; font-size:12px; font-style:italic; }
 

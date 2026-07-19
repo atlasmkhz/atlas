@@ -111,11 +111,23 @@ const _POWER_KIND_TAG = {
   commandery: '<span class="territory-kind">거점 · 학계 논쟁 있음</span>',
 };
 
+// 발전단계론(엘만 서비스) 부제 — f.stage가 있으면 이름 아래 작게 표시한다.
+// 군장사회 → 초기국가 → 정복국가 → 성숙 고대국가로 이어지는 단계 개념.
+// "선사에는 국가·민족이 없거나 미약했으나, 부족연맹보다 한 단계 위의
+// 느슨한 정치체(군장사회·초기국가)는 존재했다"는 관점을 시각화한다.
+const _POWER_STAGE_LABEL = {
+  chiefdom:    '군장사회',
+  early_state: '초기국가',
+  conquest_state: '정복국가',
+};
+
 function _drawPowerLabel(f) {
   const kindTag = _POWER_KIND_TAG[f.kind] || '';
+  const stageTag = f.stage && _POWER_STAGE_LABEL[f.stage]
+    ? `<span class="territory-stage">${_POWER_STAGE_LABEL[f.stage]}</span>` : '';
   const html =
     `<div class="territory-label territory-label-${f.kind}" style="--polity-color:${f.color}">` +
-      `<span class="territory-name">${f.name}</span>${kindTag}` +
+      `<span class="territory-name">${f.name}</span>${stageTag}${kindTag}` +
     `</div>`;
   const icon = L.divIcon({
     className: 'territory-label-wrap',
