@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#101418">
+<title>그리스 신화 성소 순례 — 신들의 무대를 찾아서 | ATLAS by MKHZ</title>
+<meta name="description" content="델포이 신탁, 올림피아, 델로스, 에페소스의 아르테미스 신전 — 그리스 신들이 숭배받던 실제 성소들을 지도 위에서 순례하며, 각 성소의 주인 신을 인물 사전에서 만난다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/archive/world-routes/greek-sanctuaries">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://atlas.mkhz.kr/archive/world-routes/greek-sanctuaries">
+<meta property="og:title" content="그리스 신화 성소 순례 — 신들의 무대를 찾아서 | ATLAS by MKHZ">
+<meta property="og:description" content="델포이·올림피아·델로스·에페소스… 그리스 신들의 성소를 지도 위에서 순례한다.">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="그리스 신화 성소 순례 — 신들의 무대를 찾아서">
+<meta name="twitter:description" content="그리스 신들의 성소를 지도 위에서 순례한다.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ATLAS", "item": "https://atlas.mkhz.kr/"}, {"@type": "ListItem", "position": 2, "name": "자료실", "item": "https://atlas.mkhz.kr/?nav=archive"}, {"@type": "ListItem", "position": 3, "name": "세계사 루트", "item": "https://atlas.mkhz.kr/archive/world-routes"}, {"@type": "ListItem", "position": 4, "name": "그리스 신화 성소 순례", "item": "https://atlas.mkhz.kr/archive/world-routes/greek-sanctuaries"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4');
+</script>
+<script src="../../js/analytics.js"></script>
+<style>
+/* ── 세계사 루트 전용 스타일 — 지도 SPA(다크 톤 + 골드 악센트)와
+   같은 계열을 쓰되 독립 페이지로 완결. ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: #101418; color: #e8e2d6;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+#map { position: absolute; inset: 0; z-index: 0; background: #101418; }
+
+/* 상단 바 */
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, rgba(16,20,24,.92), rgba(16,20,24,0));
+  pointer-events: none;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.topbar a.back {
+  pointer-events: auto; text-decoration: none;
+  color: #b89860; font-size: 13px; letter-spacing: .3px;
+}
+.topbar .title { font-size: 15px; font-weight: 700; color: #f0ead9; }
+.topbar .subtitle { font-size: 12px; color: #9a927f; }
+
+/* 연도 칩 스트립 */
+.chips {
+  position: absolute; left: 0; right: 0; z-index: 1000;
+  bottom: calc(190px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 6px; overflow-x: auto; padding: 6px 12px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; border: 1px solid rgba(184,152,96,.45);
+  background: rgba(16,20,24,.85); color: #cfc6b2;
+  font-size: 12px; padding: 5px 10px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap;
+}
+.chip.active { background: #b89860; color: #14110b; font-weight: 700; border-color: #b89860; }
+
+/* 하단 카드 패널 */
+.panel {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1001;
+  background: rgba(20, 24, 30, .96);
+  border-top: 1px solid rgba(184,152,96,.35);
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  min-height: 190px;
+  backdrop-filter: blur(6px);
+}
+.panel .meta { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.panel .num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  background: #b89860; color: #14110b; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  align-self: center;
+}
+.panel .year { font-size: 13px; color: #b89860; font-weight: 700; letter-spacing: .5px; }
+.panel .place { font-size: 14px; color: #b89860; font-weight: 700; letter-spacing: .3px; }
+.panel h2 { font-size: 16px; color: #f0ead9; line-height: 1.45; margin: 2px 0 8px; }
+.panel p { font-size: 13.5px; color: #cfc6b2; line-height: 1.7; max-height: 118px; overflow-y: auto; }
+.panel .links { margin-top: 8px; }
+.panel .links a { color: #b89860; font-size: 12.5px; text-decoration: none; border-bottom: 1px solid rgba(184,152,96,.4); }
+.nav-btns { position: absolute; top: 12px; right: 14px; display: flex; gap: 8px; }
+.nav-btns button {
+  border: 1px solid rgba(184,152,96,.5); background: transparent; color: #b89860;
+  width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.nav-btns button:disabled { opacity: .3; cursor: default; }
+.progress { position: absolute; top: 20px; right: 100px; font-size: 12px; color: #9a927f; }
+
+/* 지점 마커 */
+.wp-marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #1d232b; border: 2px solid #b89860;
+  color: #e8e2d6; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.wp-marker.active { background: #b89860; color: #14110b; transform: scale(1.25); z-index: 999; }
+
+@media (min-width: 760px) {
+  .panel { left: auto; right: 18px; bottom: 18px; width: 420px; border: 1px solid rgba(184,152,96,.35); border-radius: 12px; }
+  .chips { bottom: 12px; right: 460px; left: 12px; }
+  .panel p { max-height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="topbar">
+  <a class="back" href="index.html">&larr; 세계사 루트</a>
+  <span class="title">그리스 신화 성소 순례</span>
+  <span class="subtitle">신들의 무대를 찾아서 · 델포이에서 파포스까지</span>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="panel" id="panel">
+  <div class="nav-btns">
+    <button id="prevBtn" aria-label="이전 지점">&larr;</button>
+    <button id="nextBtn" aria-label="다음 지점">&rarr;</button>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="meta">
+    <span class="num" id="wpNum">1</span>
+    <span class="place" id="wpPlace"></span>
+  </div>
+  <h2 id="wpTitle"></h2>
+  <p id="wpDesc"></p>
+  <div class="links" id="wpLinks"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  // ── 지점 데이터 — 순례 순서. post: 자료실 「그리스 신화 인물 사전」 인물 id ──
+  const WAYPOINTS = [
+    { place:'델포이 — 세계의 배꼽, 아폴론의 신탁소', lat:38.4824, lng:22.5010, zoom:7,
+      title:'델포이 — 신들이 인간에게 말을 건네던 곳',
+      desc:'그리스인들은 이곳을 세계의 중심, "옴팔로스(배꼽)"라 여겼다. 제우스가 세계의 양 끝에서 독수리 두 마리를 날려 보내 만난 지점이 여기라는 전설이 있다. 아폴론이 거대한 뱀 피톤을 물리치고 세운 이 신탁소는 고대 세계에서 가장 권위 있는 예언의 장소였다 — 왕과 도시들이 전쟁·건국·결혼 같은 중대사를 앞두고 여사제 피티아를 통해 아폴론의 뜻을 물었다. 신전에 새겨졌다는 "너 자신을 알라"는 지금도 울린다. 순례는 이 세계의 배꼽에서 시작한다.',
+      post:'gc_apollo' },
+    { place:'올림피아 — 제우스의 성역, 올림픽의 발상지', lat:37.6383, lng:21.6300, zoom:7,
+      title:'올림피아 — 신들의 왕을 기리는 대제전',
+      desc:'펠로폰네소스 서쪽의 이 성역은 신들의 왕 제우스에게 바쳐진 곳이다. 기원전 776년부터 4년마다 이곳에서 제우스를 기리는 대제전 — 올림피아 경기 — 이 열렸다. 경기 기간에는 그리스 전역의 전쟁이 멈췄다(올림픽 휴전). 신전 안에는 고대 세계 7대 불가사의로 꼽힌 거대한 제우스 상(높이 약 12미터, 상아와 황금)이 있었다. 오늘날 올림픽의 성화가 지금도 이곳에서 채화되어 전 세계로 전해진다.',
+      post:'gc_zeus' },
+    { place:'도도나 — 떡갈나무가 속삭이는 가장 오래된 신탁소', lat:39.5467, lng:20.7876, zoom:7,
+      title:'도도나 — 나뭇잎 소리로 전해진 제우스의 뜻',
+      desc:'그리스 북서부 산중의 도도나는 그리스에서 가장 오래된 신탁소로 여겨진다. 델포이가 아폴론의 것이라면, 이곳은 제우스의 신탁소였다. 사제들은 신성한 떡갈나무의 잎이 바람에 스치는 소리, 나뭇가지에 매단 청동 솥이 울리는 소리로 제우스의 뜻을 읽었다. 자연의 소리 자체가 신의 언어였던 것이다. 오디세우스도 귀향의 길을 여기서 물었다는 이야기가 「오디세이아」에 나온다.',
+      post:'gc_zeus' },
+    { place:'델로스 — 아폴론과 아르테미스가 태어난 섬', lat:37.3958, lng:25.2711, zoom:8,
+      title:'델로스 — 떠다니던 섬 위에서 쌍둥이 신이 태어나다',
+      desc:'에게해 한복판의 작은 섬 델로스는 아폴론과 아르테미스 쌍둥이 남매의 탄생지다. 헤라의 질투로 해산할 땅을 찾지 못해 떠돌던 레토가, 바다 위를 떠다니던 이 섬에서 겨우 두 신을 낳았다는 이야기가 전한다. 이후 델로스는 아폴론 숭배의 중심지가 되어 그리스 전역에서 순례자가 몰려드는 성지가 되었다 — 얼마나 신성하게 여겼던지, 섬에서는 태어나는 것도 죽는 것도 금지되었다.',
+      post:'gc_apollo' },
+    { place:'낙소스 — 디오니소스가 아리아드네를 맞은 섬', lat:37.1036, lng:25.3767, zoom:8,
+      title:'낙소스 — 버림받은 공주와 술의 신',
+      desc:'에게해에서 가장 큰 섬 낙소스는 술과 포도의 신 디오니소스와 얽힌 곳이다. 영웅 테세우스가 미노타우로스를 죽이고 크레타를 탈출할 때 도와준 공주 아리아드네를, 그가 이 섬에 버리고 떠났다. 홀로 남아 슬퍼하던 그녀를 디오니소스가 발견해 아내로 삼았다는 이야기가 전한다. 섬에는 지금도 미완성인 채 남은 거대한 신전 문(포르타라)이 에게해를 향해 서 있다.',
+      post:null },
+    { place:'아테네 — 아테나의 도시, 파르테논 신전', lat:37.9715, lng:23.7267, zoom:9,
+      title:'아테네 — 올리브나무로 얻은 도시',
+      desc:'그리스 문명의 심장 아테네는 지혜의 여신 아테나의 도시다. 이 도시의 수호신 자리를 놓고 아테나와 포세이돈이 겨뤘는데, 포세이돈은 삼지창으로 샘을 냈고 아테나는 올리브나무를 냈다. 시민들이 평화와 번영을 뜻하는 올리브를 택하면서 도시는 아테나의 이름을 얻었다. 아크로폴리스 언덕 위에 그녀를 기려 세운 파르테논 신전은 서양 건축의 원형이자, 지금도 아테네를 굽어보는 그리스의 상징이다.',
+      post:'gc_athena' },
+    { place:'수니온곶 — 에게해를 굽어보는 포세이돈 신전', lat:37.6503, lng:24.0253, zoom:9,
+      title:'수니온곶 — 바다의 신에게 바친 벼랑 끝 신전',
+      desc:'아티카 반도의 남쪽 끝, 에게해로 뚝 떨어지는 벼랑 위에 바다의 신 포세이돈의 신전이 서 있다. 뱃사람들에게 이곳은 고향으로 돌아오는 길에 처음 보이는 육지이자, 떠나는 길에 마지막으로 보이는 그리스 땅이었다 — 그래서 그들은 이 벼랑의 신전에서 바다의 신에게 안전한 항해를 빌었다. 석양이 질 때 흰 대리석 기둥이 물드는 광경으로 유명하다.',
+      post:'gc_poseidon' },
+    { place:'엘레우시스 — 데메테르의 비밀 의식이 열린 성지', lat:38.0403, lng:23.5411, zoom:9,
+      title:'엘레우시스 — 죽음과 재생의 신비',
+      desc:'아테네 서쪽의 엘레우시스는 곡물의 여신 데메테르에게 바쳐진 성지다. 딸 페르세포네를 하데스에게 빼앗기고 헤매던 데메테르가 이곳에서 극진한 대접을 받고 농경과 비밀 의식을 전했다는 곳이다. 여기서 천 년 넘게 이어진 "엘레우시스 비의"는 고대 그리스에서 가장 신성한 밀교 의식으로, 죽음 뒤의 삶에 대한 희망을 다뤘다고 전한다. 입문자는 그 내용을 발설하면 죽음으로 다스려질 만큼 비밀을 지켜야 했기에, 정확한 의식 내용은 지금도 수수께끼로 남아 있다.',
+      post:'gc_demeter' },
+    { place:'에페소스 — 고대 7대 불가사의, 아르테미스 대신전', lat:37.9490, lng:27.3639, zoom:8,
+      title:'에페소스 — 세상에서 가장 웅장했던 여신의 집',
+      desc:'소아시아(오늘날 튀르키예) 서해안의 에페소스에는 사냥과 달의 여신 아르테미스에게 바친 거대한 신전이 있었다. 127개의 대리석 기둥이 떠받친 이 신전은 고대 세계 7대 불가사의로 꼽힐 만큼 웅장해서, "다른 불가사의들도 보았지만 아르테미스 신전만큼 장엄한 것은 없었다"는 고대의 기록이 남아 있다. 이곳의 아르테미스는 그리스 본토의 처녀 사냥꾼과는 조금 다른, 풍요와 다산을 상징하는 동방의 대모신 이미지가 겹쳐 있었다.',
+      post:'gc_artemis' },
+    { place:'크레타 — 크노소스 궁전과 미궁의 전설', lat:35.2978, lng:25.1631, zoom:8,
+      title:'크레타 — 제우스가 자란 섬, 미노타우로스의 미궁',
+      desc:'에게해 남쪽의 큰 섬 크레타는 신화의 여러 실이 얽히는 곳이다. 아기 제우스가 아버지 크로노스를 피해 몰래 자란 섬이 바로 여기다. 또한 반은 사람 반은 황소인 괴물 미노타우로스가 갇혔던 미궁(라비린토스)이 있었다는 크노소스 궁전의 무대이기도 하다 — 실제로 발굴된 크노소스 궁전은 수백 개의 방이 복잡하게 얽힌 거대한 구조라, 미궁 전설이 이 청동기 문명의 기억에서 나왔으리라 여겨진다. 신화가 역사의 파편을 품고 있음을 보여주는 곳이다.',
+      post:'gc_zeus' },
+    { place:'키프로스 파포스 — 아프로디테가 바다에서 오른 해안', lat:34.7571, lng:32.4067, zoom:8,
+      title:'파포스 — 사랑의 여신이 태어난 거품의 바다',
+      desc:'순례의 마지막은 지중해 동쪽 끝 키프로스섬이다. 크로노스가 거세한 우라노스의 몸이 바다에 던져져 인 거품에서, 미와 사랑의 여신 아프로디테가 태어나 이곳 파포스 해안에 닿았다는 이야기가 전한다. 그래서 키프로스는 고대부터 아프로디테 숭배의 중심지였고, 파포스에는 그녀에게 바친 대신전이 있었다. 태초의 폭력(우라노스의 거세)에서 사랑의 여신이 태어났다는 역설 — 그리스 신화가 세계를 바라보는 방식이 이 마지막 성소에 응축되어 있다.',
+      post:'gc_aphrodite' },
+  ];
+
+  // ── 지도 ──
+  const map = L.map('map', { zoomControl: false, worldCopyJump: true })
+    .setView([WAYPOINTS[0].lat, WAYPOINTS[0].lng], 6);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+  // dark_nolabels: 국가/도시/바다 명칭 라벨이 없는 순수 지형 타일.
+  // CartoDB dark_all은 동해를 "Sea of Japan(East Sea)" 병기로 표기하는데,
+  // 이는 타일 자체에 래스터로 박힌 라벨이라 우리 쪽 지명 데이터로 고칠 수 없다.
+  // 장소명은 어차피 마커·연도칩·하단 패널에서 우리가 직접 표기하므로
+  // 베이스타일 라벨은 전부 제거하는 편이 정확하고 간단하다.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 12, minZoom: 2
+  }).addTo(map);
+
+  // 경로선 — 시간 순서를 잇는 점선
+  L.polyline(WAYPOINTS.map(w => [w.lat, w.lng]), {
+    color: '#b89860', weight: 2, opacity: .55, dashArray: '6 8'
+  }).addTo(map);
+
+  // 지점 마커
+  const markers = WAYPOINTS.map((w, i) => {
+    const icon = L.divIcon({ className: '', html: `<div class="wp-marker" data-i="${i}">${i + 1}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+    const m = L.marker([w.lat, w.lng], { icon }).addTo(map);
+    m.on('click', () => go(i));
+    return m;
+  });
+
+  // 연도 칩
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = WAYPOINTS.map((w, i) => `<button class="chip" data-i="${i}">${i + 1}. ${w.place.split(/[(—]/)[0].trim()}</button>`).join('');
+  chipsEl.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (b) go(parseInt(b.dataset.i, 10));
+  });
+
+  // ── 패널 렌더 ──
+  let cur = 0;
+  const $ = id => document.getElementById(id);
+  function go(i) {
+    cur = Math.max(0, Math.min(WAYPOINTS.length - 1, i));
+    const w = WAYPOINTS[cur];
+    $('wpNum').textContent = cur + 1;
+    $('wpPlace').textContent = w.place;
+    $('wpTitle').textContent = w.title;
+    $('wpDesc').textContent = w.desc;
+    $('wpLinks').innerHTML = w.post
+      ? `<a href="../greek-characters/${w.post}.html">이 성소의 주인 — 인물 사전에서 만나기 &rsaquo;</a>` : '';
+    $('progress').textContent = `${cur + 1} / ${WAYPOINTS.length}`;
+    $('prevBtn').disabled = cur === 0;
+    $('nextBtn').disabled = cur === WAYPOINTS.length - 1;
+    document.querySelectorAll('.wp-marker').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    document.querySelectorAll('.chip').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    const activeChip = chipsEl.querySelector('.chip.active');
+    if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    map.flyTo([w.lat, w.lng], w.zoom || 5, { duration: 1.1 });
+    if (window.trackPageView) window.trackPageView('world_route_odyssey', `wp_${cur + 1}`);
+  }
+  $('prevBtn').addEventListener('click', () => go(cur - 1));
+  $('nextBtn').addEventListener('click', () => go(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+  });
+
+  // 자료실 글(예: planck_1900.html)의 "세계지도 루트에서 이 장면 보기"에서
+  // ?point=post_id로 들어오면 해당 웨이포인트로 바로 진입시킨다.
+  const qp = new URLSearchParams(location.search).get('point');
+  const startIdx = qp ? WAYPOINTS.findIndex(w => w.post === qp) : -1;
+  go(startIdx >= 0 ? startIdx : 0);
+})();
+</script>
+</body>
+</html>
