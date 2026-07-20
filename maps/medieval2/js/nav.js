@@ -133,7 +133,7 @@
     // 동일한 논리).
     world_history: [
       { subcat: 'civilization_history', name: '문명사', seriesIds: ['quantum_century'] },
-      { subcat: 'spirit_history', name: '정신사', seriesIds: ['homer_epics', 'gilgamesh_epic'] },
+      { subcat: 'spirit_history', name: '정신사', seriesIds: ['homer_epics', 'gilgamesh_epic', 'greek_myth', 'greek_characters'] },
       { subcat: 'upheaval_history', name: '격변사', seriesIds: [] },
       { subcat: 'world_routes', name: '세계사 루트', href: 'archive/world-routes/index.html' },
     ],
@@ -590,7 +590,7 @@
   function renderArchivePostRow(post, series){
     const typeLabel = ARCHIVE_TYPE_LABEL[post.type] || post.type;
     const dateStr = post.year + (post.month ? `.${String(post.month).padStart(2, '0')}` : '');
-    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : post.format === 'source_reading' ? (post.commentary_ko || '') : (post.claim_ko || '');
+    const bodyText = post.format === 'narrative' ? (post.body_ko || '') : post.format === 'source_reading' ? (post.commentary_ko || '') : post.format === 'character_sheet' ? (post.tagline_ko || post.domain || post.body_ko || '') : (post.claim_ko || '');
     const shortSummary = bodyText.length > 72 ? bodyText.slice(0, 72) + '…' : bodyText;
     const href = archivePostUrl(series, post);
     return `

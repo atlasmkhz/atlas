@@ -287,3 +287,41 @@ a { color: #8a6a3a; }
 }
 .story-part .summary { margin: 6px 0 4px; font-size: 14px; }
 .story-part .wp-date { margin-left: 0; }
+
+/* ═══════════════════════════════════════════════════════
+   인물 사전 (character_sheet 포맷) — 2026-07-19 신설
+   그리스·로마·북유럽 신화 인물 카드에 공용으로 쓰는 스타일.
+   기존 아티클의 세피아 톤을 그대로 계승한다.
+   ═══════════════════════════════════════════════════════ */
+.char-table {
+  width: 100%; border-collapse: collapse; margin: 4px 0 8px;
+  font-size: 15px;
+}
+.char-table th {
+  text-align: left; vertical-align: top;
+  width: 128px; padding: 7px 12px 7px 0;
+  color: #8a6a3a; font-weight: 600; white-space: nowrap;
+  border-bottom: 1px solid rgba(184,152,96,0.18);
+}
+.char-table td {
+  padding: 7px 0; color: #3a352c;
+  border-bottom: 1px solid rgba(184,152,96,0.18);
+}
+.char-info { margin-bottom: 18px; }
+.char-lineage { margin: 18px 0; }
+.char-lineage h2, .char-stories h2, .char-legacy h2 {
+  font-size: 18px; color: #6a655c; margin-bottom: 8px;
+}
+.char-story { margin-bottom: 16px; }
+.char-story h3 {
+  font-size: 15.5px; color: #8a6a3a; margin: 0 0 4px;
+}
+.char-story p { margin: 0; line-height: 1.75; color: #3a352c; }
+.char-legacy {
+  margin-top: 20px; padding: 14px 16px;
+  background: rgba(184,152,96,0.09);
+  border-left: 3px solid rgba(184,152,96,0.5);
+  border-radius: 3px;
+}
+.char-legacy h2 { margin-top: 0; }
+.char-legacy p { margin: 0; line-height: 1.75; color: #55504a; }

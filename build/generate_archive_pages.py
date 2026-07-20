@@ -330,7 +330,71 @@ def render_post_body(post):
         if post.get('commentary_ko'):
             parts.append(f'<section class="post-commentary"><h2>왜 이 문장인가</h2><p>{esc(post.get("commentary_ko",""))}</p></section>')
         return ''.join(parts)
+    if fmt == 'character_sheet':
+        return render_character_sheet(post)
     return f'<section class="post-body">{render_paragraphs(post.get("body_ko",""))}</section>'
+
+
+def render_character_sheet(post):
+    """그리스·로마 신화 인물 사전 카드. 재사용 가능한 범용 인물 시트.
+    필드: roman_name, domain, symbols[], epithets[], sanctuaries[],
+    lineage{parents,consorts,children,siblings}, stories[], legacy_ko."""
+    parts = []
+
+    # 상단 정보 테이블 (로마명·관장·별칭)
+    info_rows = []
+    if post.get('roman_name'):
+        info_rows.append(('로마 이름', esc(post['roman_name'])))
+    if post.get('domain'):
+        info_rows.append(('관장 영역', esc(post['domain'])))
+    if post.get('epithets'):
+        info_rows.append(('별칭·수식어', esc(', '.join(post['epithets']))))
+    if post.get('symbols'):
+        info_rows.append(('상징물', esc(', '.join(post['symbols']))))
+    if post.get('sanctuaries'):
+        info_rows.append(('주요 성역·숭배지', esc(', '.join(post['sanctuaries']))))
+    if info_rows:
+        rows = ''.join(
+            f'<tr><th>{k}</th><td>{v}</td></tr>' for k, v in info_rows
+        )
+        parts.append(f'<section class="char-info"><table class="char-table">{rows}</table></section>')
+
+    # 계보
+    lin = post.get('lineage') or {}
+    lin_rows = []
+    for label, key in [('부모', 'parents'), ('형제자매', 'siblings'),
+                       ('배우자·연인', 'consorts'), ('주요 자녀', 'children')]:
+        vals = lin.get(key)
+        if vals:
+            lin_rows.append(f'<tr><th>{label}</th><td>{esc(", ".join(vals))}</td></tr>')
+    if lin_rows:
+        parts.append(
+            f'<section class="char-lineage"><h2>계보</h2>'
+            f'<table class="char-table">{"".join(lin_rows)}</table></section>'
+        )
+
+    # 소개 본문
+    if post.get('body_ko'):
+        parts.append(f'<section class="post-body">{render_paragraphs(post.get("body_ko",""))}</section>')
+
+    # 주요 일화 (제목+내용 목록)
+    stories = post.get('stories') or []
+    if stories:
+        items = []
+        for s in stories:
+            title = esc(s.get('title', ''))
+            text = esc(s.get('text', ''))
+            items.append(f'<div class="char-story"><h3>{title}</h3><p>{text}</p></div>')
+        parts.append(f'<section class="char-stories"><h2>주요 일화</h2>{"".join(items)}</section>')
+
+    # 오늘 우리 곁에 (문화적 흔적)
+    if post.get('legacy_ko'):
+        parts.append(
+            f'<section class="char-legacy"><h2>오늘 우리 곁에</h2>'
+            f'<p>{esc(post.get("legacy_ko",""))}</p></section>'
+        )
+
+    return ''.join(parts)
 
 
 def post_plain_summary(post):
@@ -338,6 +402,8 @@ def post_plain_summary(post):
         return post.get('claim_ko') or ''
     if post.get('format') == 'source_reading':
         return post.get('commentary_ko') or post.get('translation_ko') or ''
+    if post.get('format') == 'character_sheet':
+        return post.get('tagline_ko') or post.get('domain') or post.get('body_ko') or ''
     return post.get('body_ko') or ''
 
 
