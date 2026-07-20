@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#101418">
+<title>헤라클레스의 12과업 — 속죄에서 신격까지 | ATLAS by MKHZ</title>
+<meta name="description" content="네메아의 사자에서 지하 세계의 케르베로스까지 — 헤라클레스가 죄를 씻기 위해 수행한 열두 과업의 무대를 지도 위에서 따라가며, 그리스 최고 영웅이 신이 되기까지의 여정을 만난다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/archive/world-routes/greek-heracles">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://atlas.mkhz.kr/archive/world-routes/greek-heracles">
+<meta property="og:title" content="헤라클레스의 12과업 — 속죄에서 신격까지 | ATLAS by MKHZ">
+<meta property="og:description" content="네메아의 사자에서 케르베로스까지, 헤라클레스의 열두 과업을 지도 위에서 따라간다.">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="헤라클레스의 12과업 — 속죄에서 신격까지">
+<meta name="twitter:description" content="네메아의 사자에서 케르베로스까지, 헤라클레스의 열두 과업.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ATLAS", "item": "https://atlas.mkhz.kr/"}, {"@type": "ListItem", "position": 2, "name": "자료실", "item": "https://atlas.mkhz.kr/?nav=archive"}, {"@type": "ListItem", "position": 3, "name": "세계사 루트", "item": "https://atlas.mkhz.kr/archive/world-routes"}, {"@type": "ListItem", "position": 4, "name": "헤라클레스의 12과업", "item": "https://atlas.mkhz.kr/archive/world-routes/greek-heracles"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4');
+</script>
+<script src="../../js/analytics.js"></script>
+<style>
+/* ── 세계사 루트 전용 스타일 — 지도 SPA(다크 톤 + 골드 악센트)와
+   같은 계열을 쓰되 독립 페이지로 완결. ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: #101418; color: #e8e2d6;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+#map { position: absolute; inset: 0; z-index: 0; background: #101418; }
+
+/* 상단 바 */
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, rgba(16,20,24,.92), rgba(16,20,24,0));
+  pointer-events: none;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.topbar a.back {
+  pointer-events: auto; text-decoration: none;
+  color: #b89860; font-size: 13px; letter-spacing: .3px;
+}
+.topbar .title { font-size: 15px; font-weight: 700; color: #f0ead9; }
+.topbar .subtitle { font-size: 12px; color: #9a927f; }
+
+/* 연도 칩 스트립 */
+.chips {
+  position: absolute; left: 0; right: 0; z-index: 1000;
+  bottom: calc(190px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 6px; overflow-x: auto; padding: 6px 12px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; border: 1px solid rgba(184,152,96,.45);
+  background: rgba(16,20,24,.85); color: #cfc6b2;
+  font-size: 12px; padding: 5px 10px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap;
+}
+.chip.active { background: #b89860; color: #14110b; font-weight: 700; border-color: #b89860; }
+
+/* 하단 카드 패널 */
+.panel {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1001;
+  background: rgba(20, 24, 30, .96);
+  border-top: 1px solid rgba(184,152,96,.35);
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  min-height: 190px;
+  backdrop-filter: blur(6px);
+}
+.panel .meta { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.panel .num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  background: #b89860; color: #14110b; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  align-self: center;
+}
+.panel .year { font-size: 13px; color: #b89860; font-weight: 700; letter-spacing: .5px; }
+.panel .place { font-size: 14px; color: #b89860; font-weight: 700; letter-spacing: .3px; }
+.panel h2 { font-size: 16px; color: #f0ead9; line-height: 1.45; margin: 2px 0 8px; }
+.panel p { font-size: 13.5px; color: #cfc6b2; line-height: 1.7; max-height: 118px; overflow-y: auto; }
+.panel .links { margin-top: 8px; }
+.panel .links a { color: #b89860; font-size: 12.5px; text-decoration: none; border-bottom: 1px solid rgba(184,152,96,.4); }
+.nav-btns { position: absolute; top: 12px; right: 14px; display: flex; gap: 8px; }
+.nav-btns button {
+  border: 1px solid rgba(184,152,96,.5); background: transparent; color: #b89860;
+  width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.nav-btns button:disabled { opacity: .3; cursor: default; }
+.progress { position: absolute; top: 20px; right: 100px; font-size: 12px; color: #9a927f; }
+
+/* 지점 마커 */
+.wp-marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #1d232b; border: 2px solid #b89860;
+  color: #e8e2d6; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.wp-marker.active { background: #b89860; color: #14110b; transform: scale(1.25); z-index: 999; }
+
+@media (min-width: 760px) {
+  .panel { left: auto; right: 18px; bottom: 18px; width: 420px; border: 1px solid rgba(184,152,96,.35); border-radius: 12px; }
+  .chips { bottom: 12px; right: 460px; left: 12px; }
+  .panel p { max-height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="topbar">
+  <a class="back" href="index.html">&larr; 세계사 루트</a>
+  <span class="title">헤라클레스의 12과업</span>
+  <span class="subtitle">속죄에서 신격까지 · 열두 노역의 지도</span>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="panel" id="panel">
+  <div class="nav-btns">
+    <button id="prevBtn" aria-label="이전 지점">&larr;</button>
+    <button id="nextBtn" aria-label="다음 지점">&rarr;</button>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="meta">
+    <span class="num" id="wpNum">1</span>
+    <span class="place" id="wpPlace"></span>
+  </div>
+  <h2 id="wpTitle"></h2>
+  <p id="wpDesc"></p>
+  <div class="links" id="wpLinks"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  // ── 지점 데이터 — 과업 순서(아폴로도로스 표준). post: 자료실 인물 사전 id ──
+  const WAYPOINTS = [
+    { place:'테베 — 광기의 비극, 그리고 속죄의 시작', lat:38.3211, lng:23.3186, zoom:7,
+      title:'출발점 — 죄를 씻기 위한 열두 과업',
+      desc:'헤라클레스의 고향 테베. 헤라가 불어넣은 광기에 사로잡혀 자기 아내와 자식들을 죽인 그는, 델포이 신탁에 따라 미케네의 왕 에우리스테우스를 12년간 섬기며 열두 과업을 수행하라는 명을 받는다. 비극에서 시작해 신격에 이르는 이 여정의 출발점이다.',
+      post:'gc_heracles' },
+    { place:'① 네메아 — 뚫리지 않는 가죽의 사자', lat:37.8110, lng:22.7110, zoom:8,
+      title:'첫 번째 과업 — 네메아의 사자',
+      desc:'어떤 무기로도 뚫리지 않는 가죽을 가진 거대한 사자. 화살이 통하지 않자 헤라클레스는 동굴로 들어가 맨손으로 사자의 목을 졸라 죽였다. 이후 그는 이 사자 가죽을 벗겨 갑옷처럼 걸치고 다녔다 — 사자 가죽을 쓴 모습이 그의 상징이 된 이유다. 제우스가 이를 기려 사자자리를 만들었다고 전한다.',
+      post:'gc_heracles' },
+    { place:'② 레르나 — 머리가 아홉인 물뱀 히드라', lat:37.5480, lng:22.7180, zoom:8,
+      title:'두 번째 과업 — 레르나의 히드라',
+      desc:'머리 하나를 자르면 둘이 돋아나는 늪의 물뱀 히드라. 헤라클레스는 조카 이올라오스의 도움으로, 목을 자른 자리를 횃불로 지져 새 머리가 돋지 못하게 하고 마침내 처치했다. 그 맹독을 화살에 발라 무서운 무기로 삼았는데, 이 독화살이 훗날 여러 사건의 씨앗이 된다. 다만 남의 도움을 받았다 하여 이 과업은 인정받지 못해, 과업이 열둘로 늘어나는 빌미가 됐다.',
+      post:null },
+    { place:'③ 케리네이아 — 황금 뿔의 사슴', lat:37.9910, lng:22.1170, zoom:8,
+      title:'세 번째 과업 — 케리네이아의 암사슴',
+      desc:'아르테미스 여신에게 바쳐진, 청동 발굽과 황금 뿔을 가진 신성한 사슴. 죽이면 여신의 노여움을 살 터라 다치게 하지 않고 산 채로 잡아야 했다. 헤라클레스는 꼬박 일 년을 쫓은 끝에 사슴을 사로잡았고, 아르테미스에게 사정을 설명해 노여움을 풀었다. 힘이 아니라 인내가 필요한 과업이었다.',
+      post:'gc_artemis' },
+    { place:'④ 에리만토스산 — 거대한 멧돼지', lat:37.9780, lng:21.8330, zoom:8,
+      title:'네 번째 과업 — 에리만토스의 멧돼지',
+      desc:'산을 휩쓸며 사람들을 위협하던 거대한 멧돼지를 산 채로 잡는 과업. 헤라클레스는 멧돼지를 깊은 눈밭으로 몰아 지치게 한 뒤 사로잡았다. 잡은 멧돼지를 어깨에 메고 오자, 겁에 질린 에우리스테우스 왕이 청동 항아리 속에 숨었다는 이야기가 유명하다.',
+      post:null },
+    { place:'⑤ 엘리스 — 30년 묵은 외양간 청소', lat:37.8890, lng:21.3790, zoom:8,
+      title:'다섯 번째 과업 — 아우게이아스의 외양간',
+      desc:'엘리스의 왕 아우게이아스의 외양간에는 수천 마리 소가 있었지만 30년간 청소한 적이 없었다. 헤라클레스는 힘이 아니라 지혜로 풀었다 — 근처 두 강의 물줄기를 끌어들여 하루 만에 외양간을 씻어냈다. 그러나 대가를 받고 한 일이라 하여, 이 과업 역시 인정받지 못했다.',
+      post:null },
+    { place:'⑥ 스팀팔로스 호수 — 청동 괴조 떼', lat:37.8500, lng:22.4670, zoom:8,
+      title:'여섯 번째 과업 — 스팀팔로스의 새',
+      desc:'청동 부리와 깃털을 가진 사나운 새 떼가 호숫가 숲에 들끓었다. 헤라클레스는 아테나 여신이 준 청동 castanet(딱따기)를 울려 새들을 놀라게 해 날아오르게 한 뒤, 히드라의 독화살로 쏘아 떨어뜨렸다. 지혜의 여신이 준 도구가 결정적이었다.',
+      post:'gc_athena' },
+    { place:'⑦ 크레타 — 미쳐 날뛰는 황소', lat:35.2978, lng:25.1631, zoom:7,
+      title:'일곱 번째 과업 — 크레타의 황소',
+      desc:'크레타섬에서 광포하게 날뛰던 거대한 황소를 산 채로 잡는 과업. 헤라클레스는 맨손으로 황소를 제압해 그리스 본토로 끌고 왔다. 이 황소는 훗날 아테네 근처 마라톤 평원에서 다시 날뛰다가 영웅 테세우스에게 잡히니, 여러 영웅의 이야기가 이 황소를 통해 이어진다.',
+      post:null },
+    { place:'⑧ 트라케 — 사람을 먹는 디오메데스의 말', lat:41.1440, lng:25.4030, zoom:7,
+      title:'여덟 번째 과업 — 디오메데스의 식인 말',
+      desc:'트라케의 왕 디오메데스는 자기 암말들에게 사람을 먹여 길렀다. 헤라클레스는 이 사나운 말들을 빼앗고, 오히려 잔혹한 왕 디오메데스를 그 말들에게 먹이로 던졌다. 사람 고기 맛을 잊은 말들은 그제야 온순해졌다고 한다.',
+      post:null },
+    { place:'⑨ 테미스키라 — 아마존 여왕의 허리띠', lat:41.2300, lng:36.9000, zoom:6,
+      title:'아홉 번째 과업 — 히폴리테의 허리띠',
+      desc:'흑해 남안의 여전사 부족 아마존. 그 여왕 히폴리테가 찬 군신 아레스의 허리띠를 가져오는 과업이었다. 히폴리테는 뜻밖에 순순히 허리띠를 내주려 했으나, 헤라가 아마존들을 선동해 싸움이 벌어졌고 결국 헤라클레스는 무력으로 허리띠를 얻었다. 여기서 헤라클레스의 여정은 그리스를 넘어 동방으로 뻗는다.',
+      post:null },
+    { place:'⑩ 에리테이아 — 세 몸의 거인 게리온의 소', lat:36.5300, lng:-6.2900, zoom:5,
+      title:'열 번째 과업 — 게리온의 소 떼',
+      desc:'세상 서쪽 끝(오늘날 스페인 남부)의 섬에 사는, 몸이 셋인 거인 게리온의 붉은 소 떼를 몰고 오는 과업. 서쪽 끝까지 가는 길에 헤라클레스는 거대한 바위산을 갈라 지브롤터 해협을 열었다고 하며, 그 양쪽 바위가 "헤라클레스의 기둥"이라 불린다. 게리온을 히드라의 독화살로 쓰러뜨리고 소 떼를 그리스까지 몰고 오는 대장정이었다.',
+      post:'gc_heracles' },
+    { place:'⑪ 세상 서쪽 끝 — 헤스페리데스의 황금 사과', lat:31.6300, lng:-8.0000, zoom:5,
+      title:'열한 번째 과업 — 황금 사과',
+      desc:'세상 서쪽 끝, 님프 헤스페리데스와 잠들지 않는 용 라돈이 지키는 헤라의 정원에서 황금 사과를 따 오는 과업. 헤라클레스는 하늘을 떠받치던 티탄 아틀라스에게 대신 하늘을 져 줄 테니 사과를 따다 달라 청했다. 이 여정에서 그는 카우카소스에 결박된 프로메테우스를 발견해, 간을 쪼던 독수리를 쏘아 죽이고 그를 풀어 준다 — 앞선 신화의 실이 여기서 이어진다.',
+      post:'gc_prometheus' },
+    { place:'⑫ 저승 입구 타이나론 — 지옥의 개 케르베로스', lat:36.3860, lng:22.4830, zoom:7,
+      title:'열두 번째 과업 — 케르베로스',
+      desc:'마지막 과업은 산 자가 갈 수 없는 곳 — 죽은 자의 나라를 지키는 머리 셋 달린 개 케르베로스를 산 채로 끌고 오는 것이었다. 헤라클레스는 저승의 입구로 알려진 타이나론곶을 통해 지하 세계로 내려가, 하데스의 허락을 받고 맨손으로 케르베로스를 제압해 지상으로 데려왔다. 죽음의 문턱까지 다녀온 이 과업을 끝으로 그는 모든 죄를 씻는다. 인간이 겪을 수 있는 마지막 한계, 죽음마저 넘어선 것이다.',
+      post:'gc_hades' },
+  ];
+
+  // ── 지도 ──
+  const map = L.map('map', { zoomControl: false, worldCopyJump: true })
+    .setView([WAYPOINTS[0].lat, WAYPOINTS[0].lng], 6);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+  // dark_nolabels: 국가/도시/바다 명칭 라벨이 없는 순수 지형 타일.
+  // CartoDB dark_all은 동해를 "Sea of Japan(East Sea)" 병기로 표기하는데,
+  // 이는 타일 자체에 래스터로 박힌 라벨이라 우리 쪽 지명 데이터로 고칠 수 없다.
+  // 장소명은 어차피 마커·연도칩·하단 패널에서 우리가 직접 표기하므로
+  // 베이스타일 라벨은 전부 제거하는 편이 정확하고 간단하다.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 12, minZoom: 2
+  }).addTo(map);
+
+  // 경로선 — 시간 순서를 잇는 점선
+  L.polyline(WAYPOINTS.map(w => [w.lat, w.lng]), {
+    color: '#b89860', weight: 2, opacity: .55, dashArray: '6 8'
+  }).addTo(map);
+
+  // 지점 마커
+  const markers = WAYPOINTS.map((w, i) => {
+    const icon = L.divIcon({ className: '', html: `<div class="wp-marker" data-i="${i}">${i + 1}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+    const m = L.marker([w.lat, w.lng], { icon }).addTo(map);
+    m.on('click', () => go(i));
+    return m;
+  });
+
+  // 연도 칩
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = WAYPOINTS.map((w, i) => `<button class="chip" data-i="${i}">${i + 1}. ${w.place.split(/[(—]/)[0].trim()}</button>`).join('');
+  chipsEl.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (b) go(parseInt(b.dataset.i, 10));
+  });
+
+  // ── 패널 렌더 ──
+  let cur = 0;
+  const $ = id => document.getElementById(id);
+  function go(i) {
+    cur = Math.max(0, Math.min(WAYPOINTS.length - 1, i));
+    const w = WAYPOINTS[cur];
+    $('wpNum').textContent = cur + 1;
+    $('wpPlace').textContent = w.place;
+    $('wpTitle').textContent = w.title;
+    $('wpDesc').textContent = w.desc;
+    $('wpLinks').innerHTML = w.post
+      ? `<a href="../greek-characters/${w.post}.html">인물 사전에서 만나기 &rsaquo;</a>` : '';
+    $('progress').textContent = `${cur + 1} / ${WAYPOINTS.length}`;
+    $('prevBtn').disabled = cur === 0;
+    $('nextBtn').disabled = cur === WAYPOINTS.length - 1;
+    document.querySelectorAll('.wp-marker').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    document.querySelectorAll('.chip').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    const activeChip = chipsEl.querySelector('.chip.active');
+    if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    map.flyTo([w.lat, w.lng], w.zoom || 5, { duration: 1.1 });
+    if (window.trackPageView) window.trackPageView('world_route_odyssey', `wp_${cur + 1}`);
+  }
+  $('prevBtn').addEventListener('click', () => go(cur - 1));
+  $('nextBtn').addEventListener('click', () => go(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+  });
+
+  // 자료실 글(예: planck_1900.html)의 "세계지도 루트에서 이 장면 보기"에서
+  // ?point=post_id로 들어오면 해당 웨이포인트로 바로 진입시킨다.
+  const qp = new URLSearchParams(location.search).get('point');
+  const startIdx = qp ? WAYPOINTS.findIndex(w => w.post === qp) : -1;
+  go(startIdx >= 0 ? startIdx : 0);
+})();
+</script>
+</body>
+</html>

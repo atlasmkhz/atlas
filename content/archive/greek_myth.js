@@ -203,7 +203,7 @@ const ARCHIVE_SERIES_GREEK_MYTH = {
       ],
       related: {
         events: [],
-        people: [ { title:'헤라클레스', url:'' }, { title:'헤시오도스', url:'' } ],
+        people: [ { title:'헤라클레스', url:'../greek-characters/gc_heracles.html' }, { title:'헤시오도스', url:'' } ],
         archives: [], books: [], videos: [], artworks: [], films: [], music: [],
       },
     },
