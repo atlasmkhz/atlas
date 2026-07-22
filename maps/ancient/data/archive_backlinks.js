@@ -10,6 +10,18 @@ const ARCHIVE_BACKLINKS = {
       "title": "개관 — 남의 문자로 우리 노래를 적다"
     }
   ],
+  "culture_hanmun_01": [
+    {
+      "url": "../../archive/classical-literature-hanmun/han_01.html",
+      "series": "한문학",
+      "title": "개관 — 천 년 동안 두 개의 문자로"
+    },
+    {
+      "url": "../../archive/classical-literature-hanmun/han_02.html",
+      "series": "한문학",
+      "title": "최치원 — 당에서 이름을 얻고 신라에서 막히다"
+    }
+  ],
   "culture_hyangga_01": [
     {
       "url": "../../archive/classical-literature-silla/sla_02.html",

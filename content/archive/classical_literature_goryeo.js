@@ -53,7 +53,7 @@ const ARCHIVE_SERIES_CLASSICAL_LIT_GORYEO = {
         events: [
           { title:'고려가요 — 민간의 노래가 궁중으로', url:'../../maps/medieval1/index.html?event=culture_goryeosong_01' },
         ],
-        people: [ ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+        people: [ ], routes: [ { title:'근대문학 기행 (1908~1945)', url:'../../route/modern-literature.html' }, ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
       },
     },
     {
@@ -82,7 +82,7 @@ const ARCHIVE_SERIES_CLASSICAL_LIT_GORYEO = {
         events: [
           { title:'고려가요 — 민간의 노래가 궁중으로', url:'../../maps/medieval1/index.html?event=culture_goryeosong_01' },
         ],
-        people: [ ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+        people: [ ], routes: [ { title:'근대문학 기행 — 김소월 「진달래꽃」으로 이어지는 이별의 계보', url:'../../route/modern-literature.html' }, ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
       },
     },
     {

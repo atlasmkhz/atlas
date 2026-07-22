@@ -57,7 +57,7 @@ const ARCHIVE_SERIES_CLASSICAL_LIT_ANCIENT = {
         events: [
           { title:'고조선의 성립 — 단군신화와 건국 전승', url:'../../maps/prehistory/index.html?event=political_gojoseon_01' },
         ],
-        people: [], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+        people: [], routes: [ { title:'근대문학 기행 (1908~1945) — 신체시에서 옥중의 시인까지', url:'../../route/modern-literature.html' }, ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
       },
     },
 
@@ -198,7 +198,7 @@ const ARCHIVE_SERIES_CLASSICAL_LIT_ANCIENT = {
         events: [
           { title:'정읍사 — 가사가 전하는 유일한 백제 노래', url:'../../maps/ancient/index.html?event=culture_literature_03' },
         ],
-        people: [], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+        people: [], routes: [ { title:'근대문학 기행 — 김소월 「진달래꽃」과 이별의 정한', url:'../../route/modern-literature.html' }, ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
       },
     },
 

@@ -10,6 +10,93 @@ const ARCHIVE_BACKLINKS = {
       "title": "훈민정음 어제 서문 — 쉰네 글자에 담긴 문자 혁명의 이유"
     }
   ],
+  "culture_hanmun_03": [
+    {
+      "url": "../../archive/classical-literature-hanmun/han_04.html",
+      "series": "한문학",
+      "title": "김시습과 금오신화 — 소설이라는 갈래의 시작"
+    }
+  ],
+  "culture_joseonlate_01": [
+    {
+      "url": "../../archive/classical-literature-joseon-late/jsl_01.html",
+      "series": "조선 후기 문학",
+      "title": "개관 — 읽는 사람과 쓰는 사람이 바뀌다"
+    },
+    {
+      "url": "../../archive/classical-literature-joseon-late/jsl_02.html",
+      "series": "조선 후기 문학",
+      "title": "사설시조와 청구영언 — 형식을 깨뜨린 시조"
+    }
+  ],
+  "culture_joseonlate_02": [
+    {
+      "url": "../../archive/classical-literature-joseon-late/jsl_03.html",
+      "series": "조선 후기 문학",
+      "title": "김만중 — 구운몽과 사씨남정기"
+    }
+  ],
+  "culture_joseonlate_03": [
+    {
+      "url": "../../archive/classical-literature-joseon-late/jsl_04.html",
+      "series": "조선 후기 문학",
+      "title": "홍길동전 — 두 개의 타이틀이 흔들리다"
+    }
+  ],
+  "culture_joseonlate_04": [
+    {
+      "url": "../../archive/classical-literature-joseon-late/jsl_05.html",
+      "series": "조선 후기 문학",
+      "title": "판소리 — 열두 마당에서 다섯 마당으로"
+    }
+  ],
+  "culture_joseonlate_05": [
+    {
+      "url": "../../archive/classical-literature-joseon-late/jsl_06.html",
+      "series": "조선 후기 문학",
+      "title": "박지원 — 열하일기와 한문단편"
+    }
+  ],
+  "culture_joseonlit_01": [
+    {
+      "url": "../../archive/classical-literature-joseon-early/jse_01.html",
+      "series": "조선 전기 문학",
+      "title": "개관 — 문자가 생긴 뒤의 문학"
+    },
+    {
+      "url": "../../archive/classical-literature-joseon-early/jse_02.html",
+      "series": "조선 전기 문학",
+      "title": "용비어천가 — 뿌리 깊은 나무"
+    }
+  ],
+  "culture_joseonlit_02": [
+    {
+      "url": "../../archive/classical-literature-joseon-early/jse_03.html",
+      "series": "조선 전기 문학",
+      "title": "하여가와 단심가 — 두 수의 시조가 갈라놓은 것"
+    }
+  ],
+  "culture_joseonlit_03": [
+    {
+      "url": "../../archive/classical-literature-joseon-early/jse_04.html",
+      "series": "조선 전기 문학",
+      "title": "황진이 — 동짓달 기나긴 밤을"
+    }
+  ],
+  "culture_joseonlit_04": [
+    {
+      "url": "../../archive/classical-literature-joseon-early/jse_05.html",
+      "series": "조선 전기 문학",
+      "title": "상춘곡 — 홍진에 묻힌 분네 이 내 생애 어떠한고"
+    }
+  ],
+  "culture_joseonlit_05": [
+    {
+      "url": "../../archive/classical-literature-joseon-early/jse_06.html",
+      "series": "조선 전기 문학",
+      "title": "정철 — 관동별곡과 사미인곡"
+    }
+  ],
   "diplomacy_1693_01": [
     {
       "url": "../../archive/dokdo-records/dk_03.html",

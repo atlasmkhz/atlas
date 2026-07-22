@@ -28,6 +28,11 @@ const ROUTE_MODERN2_LITERATURE = {
 
   card_refs: ['plot_1967_02', 'person_1970_01', 'massacre_1980_01'],
 
+  // 2026-07-22: 고전문학사 5부작(자료실 문학 카테고리)과 상호 연결.
+  related_archives: [
+    { title: '조선 후기 문학 — 사설시조·판소리·소설', url: '../../archive/classical-literature-joseon-late/index.html' },
+    { title: '한국 고전문학사 전체 — 자료실 문학', url: '../../archive/classical-literature-ancient/index.html' },
+  ],
   waypoints: [
 
     {

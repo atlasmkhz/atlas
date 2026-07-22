@@ -42,5 +42,12 @@ const ARCHIVE_BACKLINKS = {
       "series": "고려가요",
       "title": "한림별곡 — 이 광경이 어떠합니까"
     }
+  ],
+  "culture_hanmun_02": [
+    {
+      "url": "../../archive/classical-literature-hanmun/han_03.html",
+      "series": "한문학",
+      "title": "이규보 — 우리 신화를 한문 서사시로"
+    }
   ]
 };

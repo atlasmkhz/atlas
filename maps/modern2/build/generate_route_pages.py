@@ -262,6 +262,19 @@ def render_route_landing_page(route, route_slug, event_id_to_slug, out_path):
         ],
     }
 
+    # 2026-07-22: related_archives — 루트에서 자료실 시리즈로 나가는 통로.
+    # 고전문학사 5부작과 근현대문학 루트 3부작을 상호 연결하기 위해 추가했다.
+    _archives = route.get('related_archives') or []
+    if _archives:
+        _items = ''.join(
+            '<li><a href="%s">%s</a></li>' % (esc(a['url']), esc(a['title']))
+            for a in _archives
+        )
+        archives_html = ('<section class="route-archives"><h2>관련 자료실</h2>'
+                         '<ul class="route-archive-list">%s</ul></section>' % _items)
+    else:
+        archives_html = ''
+
     html_out = f'''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -289,6 +302,7 @@ def render_route_landing_page(route, route_slug, event_id_to_slug, out_path):
 <p class="event-meta">{esc(route.get('period',''))}</p>
 <p class="summary">{esc(route.get('tagline',''))}</p>
 <section class="route-timeline"><h2>타임라인 ({len(route['waypoints'])}개 지점)</h2><ol class="route-wp-list">{''.join(items)}</ol></section>
+{archives_html}
 <p class="map-cta"><a href="{map_cta_url}">지도에서 루트 보기</a></p>
 </article>
 </body>

@@ -38,6 +38,16 @@ const ROUTE_MODERN_LITERATURE = {
   total_waypoints: 20,
   hero_image: 'assets/images/route/route_modern_literature_hero.webp',
 
+  // 2026-07-22: 고전문학사 5부작(자료실 문학 카테고리)과 상호 연결.
+  // 이 루트는 1908년 신체시에서 시작하지만, 그 앞에 2천 년의 국문
+  // 시가사가 있다 — 공무도하가에서 판소리까지가 자료실 쪽에 있다.
+  related_archives: [
+    { title: '상고시가 — 한국문학이 시작된 자리 (고조선~삼국)', url: 'archive/classical-literature-ancient/index.html' },
+    { title: '향가 — 우리 문자가 없던 시대의 우리말 노래 (통일신라)', url: 'archive/classical-literature-silla/index.html' },
+    { title: '고려가요 — 민간의 노래와 사대부의 노래', url: 'archive/classical-literature-goryeo/index.html' },
+    { title: '조선 전기 문학 — 악장·시조·가사', url: 'archive/classical-literature-joseon-early/index.html' },
+    { title: '조선 후기 문학 — 사설시조·판소리·소설', url: 'archive/classical-literature-joseon-late/index.html' },
+  ],
   card_refs: ['person_1925_03', 'person_1926_03', 'person_1926_04', 'movement_1936_02', 'person_1944_02', 'person_1945_02'],
 
   waypoints: [

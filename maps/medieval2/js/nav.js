@@ -156,8 +156,12 @@
       { subcat: 'ancient_literature', name: '상고·삼국', seriesIds: ['classical_literature_ancient'] },
       { subcat: 'silla_literature', name: '통일신라', seriesIds: ['classical_literature_silla'] },
       { subcat: 'goryeo_literature', name: '고려', seriesIds: ['classical_literature_goryeo'] },
-      { subcat: 'joseon_early_literature', name: '조선전기', seriesIds: [] },
-      { subcat: 'joseon_late_literature', name: '조선후기', seriesIds: [] },
+      { subcat: 'joseon_early_literature', name: '조선전기', seriesIds: ['classical_literature_joseon_early'] },
+      { subcat: 'joseon_late_literature', name: '조선후기', seriesIds: ['classical_literature_joseon_late'] },
+      // 한문학 — 2026-07-22 신설. 삼국~조선 전 시대에 걸쳐 있어 시대별
+      // 5갈래 어디에도 넣을 수 없으므로 별도 갈래로 둔다. 국문 시가/소설
+      // 옆에 나란히 있던 또 하나의 문학 전통을 인물 중심으로 관통한다.
+      { subcat: 'hanmun_literature', name: '한문학', seriesIds: ['classical_literature_hanmun'] },
     ],
   };
 

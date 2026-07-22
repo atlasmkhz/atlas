@@ -57,7 +57,7 @@ const ARCHIVE_SERIES_CLASSICAL_LIT_SILLA = {
         events: [
           { title:'원효와 의상 — 통일신라 불교 사상의 정립', url:'../../maps/ancient/index.html?event=culture_686_01' },
         ],
-        people: [ ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
+        people: [ ], routes: [ { title:'근대문학 기행 (1908~1945)', url:'../../route/modern-literature.html' }, ], archives: [], books: [], videos: [], artworks: [], films: [], music: [],
       },
     },
     {

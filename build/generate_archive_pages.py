@@ -65,6 +65,7 @@ SUBCATEGORY_LABELS = {
     'ancient_literature': '상고·삼국', 'silla_literature': '통일신라',
     'goryeo_literature': '고려', 'joseon_early_literature': '조선전기',
     'joseon_late_literature': '조선후기',
+    'hanmun_literature': '한문학',
     # (구 라벨 — 하위호환용으로 남겨둠)
     'science_history': '과학사', 'art_history': '미술사', 'war_history': '전쟁사',
 }
@@ -75,6 +76,11 @@ SOURCE_TYPE_LABELS = {
 }
 RELATED_SECTION_LABELS = [
     ('events', '관련 사건'), ('people', '관련 인물'),
+    # 2026-07-22: 'routes' 추가. 고전문학사 시리즈(문학 카테고리 5갈래)와
+    # 기존 근현대문학 루트 3부작을 상호 연결하기 위한 섹션이다.
+    # 고전 자료실 글 → 근현대 문학 루트로 나가는 통로가 되고,
+    # 루트 쪽에서는 각 루트 파일의 related_archives가 반대 방향을 담당한다.
+    ('routes', '관련 루트'),
     ('archives', '관련 사료'), ('books', '추천 도서'),
     ('videos', '관련 영상'), ('artworks', '관련 미술작품'),
     ('films', '관련 영화'), ('music', '관련 음악'),
