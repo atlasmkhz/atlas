@@ -293,6 +293,8 @@
     { key: 'history', name: '역사', ready: true },
     { key: 'world_history', name: '세계사', ready: true },
     { key: 'biographies', name: '인물열전', ready: true },
+    // 문학(literature) — 2026-07-22 신설. 한국 고전문학사 시대별 갈래.
+    { key: 'literature', name: '문학', ready: true },
   ];
   const ARCHIVE_SUBCATEGORIES = {
     history: [
@@ -329,6 +331,17 @@
     biographies: [
       { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
       { subcat: 'world_figures', name: '세계사 인물', seriesIds: [] },
+    ],
+    // ── 문학 카테고리 (2026-07-22 신설) ─────────────────────────
+    // 시대순 5갈래. 작품·작가는 자료실 글로, 창작·전승의 장소는 지도
+    // 사건 카드로 card_ref 연결한다. nav.js의 동일 블록과 항상 일치해야
+    // 한다(어긋나면 포털과 지도의 자료실이 다르게 보인다).
+    literature: [
+      { subcat: 'ancient_literature', name: '상고·삼국', seriesIds: ['classical_literature_ancient'] },
+      { subcat: 'silla_literature', name: '통일신라', seriesIds: ['classical_literature_silla'] },
+      { subcat: 'goryeo_literature', name: '고려', seriesIds: ['classical_literature_goryeo'] },
+      { subcat: 'joseon_early_literature', name: '조선전기', seriesIds: [] },
+      { subcat: 'joseon_late_literature', name: '조선후기', seriesIds: [] },
     ],
   };
   const ARCHIVE_TYPE_LABEL = { political: '주장·반박', tragedy: '피해 사실', life: '조직·활동', person: '인물', document: '사료' };

@@ -90,6 +90,13 @@
     { key: 'history', name: '역사', ready: true },
     { key: 'world_history', name: '세계사', ready: true },
     { key: 'biographies', name: '인물열전', ready: true },
+    // 문학(literature) — 2026-07-22 신설. 한국 고전문학사를 시대별로
+    // 담는 최상위 갈래. 1차로 상고시가(고조선~삼국 초기)를 열었고,
+    // 통일신라(향가) → 고려(속요·경기체가) → 조선전기(악장·시조·가사)
+    // → 조선후기(사설시조·판소리·소설) 순으로 확장한다. 근현대 문학은
+    // 이미 루트 3부작(근대/근현대/현대문학 기행)이 담당하므로, 이
+    // 카테고리는 고전문학에 집중한다.
+    { key: 'literature', name: '문학', ready: true },
   ];
 
   // 카테고리 안의 하위 주제(subcategory) 카드. seriesId가 있고
@@ -135,6 +142,17 @@
     biographies: [
       { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
       { subcat: 'world_figures', name: '세계사 인물', seriesIds: [] },
+    ],
+    // ── 문학 카테고리 (2026-07-22 신설) ─────────────────────────
+    // 시대순 5갈래. 각 갈래는 그 시대의 대표 갈래(장르)를 담는 그릇이며,
+    // 작품·작가는 자료실 글로, 창작·전승의 장소는 지도 사건 카드로
+    // card_ref 연결한다(문학사를 연표가 아니라 지도 위에서 읽는다).
+    literature: [
+      { subcat: 'ancient_literature', name: '상고·삼국', seriesIds: ['classical_literature_ancient'] },
+      { subcat: 'silla_literature', name: '통일신라', seriesIds: ['classical_literature_silla'] },
+      { subcat: 'goryeo_literature', name: '고려', seriesIds: ['classical_literature_goryeo'] },
+      { subcat: 'joseon_early_literature', name: '조선전기', seriesIds: [] },
+      { subcat: 'joseon_late_literature', name: '조선후기', seriesIds: [] },
     ],
   };
 

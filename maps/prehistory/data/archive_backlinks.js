@@ -40,6 +40,13 @@ const ARCHIVE_BACKLINKS = {
       "title": "페넬로페의 베짜기 — 기다림도 하나의 영웅담이다"
     }
   ],
+  "culture_literature_01": [
+    {
+      "url": "../../archive/classical-literature-ancient/cla_02.html",
+      "series": "상고시가",
+      "title": "공무도하가 — 임이여, 그 물을 건너지 마오"
+    }
+  ],
   "culture_neo_01": [
     {
       "url": "../../archive/gilgamesh-epic/ge_01.html",
@@ -70,6 +77,13 @@ const ARCHIVE_BACKLINKS = {
       "url": "../../archive/gilgamesh-epic/ge_06.html",
       "series": "길가메시 서사시",
       "title": "빈손의 귀환, 그리고 3천 년 뒤 먼지 속에서 되살아나다"
+    }
+  ],
+  "political_gojoseon_01": [
+    {
+      "url": "../../archive/classical-literature-ancient/cla_01.html",
+      "series": "상고시가",
+      "title": "개관 — 네 줄로 시작된 문학사"
     }
   ]
 };

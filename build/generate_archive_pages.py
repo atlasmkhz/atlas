@@ -61,6 +61,10 @@ SUBCATEGORY_LABELS = {
     'upheaval_history': '격변사', 'world_routes': '세계사 루트',
     # 인물열전(biographies) 카테고리 — 2026-07-16 오픈
     'korea_figures': '한국사 인물', 'world_figures': '세계사 인물',
+    # 문학(literature) 카테고리 — 2026-07-22 오픈. 한국 고전문학사 시대순 5갈래.
+    'ancient_literature': '상고·삼국', 'silla_literature': '통일신라',
+    'goryeo_literature': '고려', 'joseon_early_literature': '조선전기',
+    'joseon_late_literature': '조선후기',
     # (구 라벨 — 하위호환용으로 남겨둠)
     'science_history': '과학사', 'art_history': '미술사', 'war_history': '전쟁사',
 }
