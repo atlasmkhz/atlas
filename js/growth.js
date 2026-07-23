@@ -48,14 +48,16 @@
 
   // 시대 목록 — nav.js의 ERA_HUB_ITEMS와 순서·키를 맞춘다.
   // 나무의 가지 7개가 이 순서로 배치된다.
+  // name은 서재에서 사람에게 보이는 이름이다. 지도 허브는 "중세 1/2"로
+  // 부르지만, 책 제목으로는 "고려"·"조선"이 자연스러워 그쪽을 쓴다.
   const ERAS = [
-    { key: 'prehistory',   name: '선사시대', short: '선사' },
-    { key: 'ancient',      name: '고대',     short: '고대' },
-    { key: 'medieval1',    name: '중세 1',   short: '고려' },
-    { key: 'medieval2',    name: '중세 2',   short: '조선' },
-    { key: 'modern',       name: '근대',     short: '근대' },
-    { key: 'modern2',      name: '근현대',   short: '근현대' },
-    { key: 'contemporary', name: '현대',     short: '현대' },
+    { key: 'prehistory',   name: '선사',   short: '선사' },
+    { key: 'ancient',      name: '고대',   short: '고대' },
+    { key: 'medieval1',    name: '고려',   short: '고려' },
+    { key: 'medieval2',    name: '조선',   short: '조선' },
+    { key: 'modern',       name: '근대',   short: '근대' },
+    { key: 'modern2',      name: '근현대', short: '근현대' },
+    { key: 'contemporary', name: '현대',   short: '현대' },
   ];
 
   // ── 성장 단계 ──────────────────────────────────────────────
@@ -97,6 +99,8 @@
       badges: [],            // 집합 — 배지 id (3단계에서 사용)
       reflections: [],       // 20번 성찰 문항 답변 (3단계에서 사용)
       seedEra: null,         // 확정된 씨앗 시대. 한번 정해지면 안 바뀐다.
+      eraFirst: {},          // 시대별 최초 접촉 시각 — 손때 계산용. 병합 시 이른 쪽.
+      lastSeen: {},          // 「오늘의 변화」 계산용 스냅샷
       tutorialSeen: false,   // 4단계 튜토리얼용
     };
   }
@@ -227,23 +231,53 @@
     return true;
   }
 
-  // 이벤트 카드 열람 → 잎
+  // ── 발견 기록 ──────────────────────────────────────────────
+  // 2026-07-24 「내 서재」 도입에 맞춰 시대 귀속을 명시적으로 남긴다.
+  // 각 항목은 "{era}:{id}" 형태로 저장되므로, 나중에 어느 책(시대)을
+  // 채울지 판별할 수 있다. era를 모르면 'unknown'으로 두고 총량에만 반영한다.
+  //
+  // 왕두목 확정 원칙: "조선 책은 조선 것으로만 채워진다."
+  // 현대사를 아무리 읽어도 조선 책은 올라가지 않는다 — 이것이 완독 유도의 핵심.
+
+  // 이벤트 카드 열람
   function recordCard(cardId, eraKey) {
     if (!cardId) return;
     const key = (eraKey || currentEra || 'unknown') + ':' + cardId;
-    if (addToSet(data.cards, key, 5000)) save(data);
+    if (addToSet(data.cards, key, 5000)) { touchEra(eraKey || currentEra); save(data); }
   }
 
-  // 자료실 글 정독 → 꽃
-  function recordArchive(seriesId, postId) {
+  // 자료실 글 정독 (끝까지 스크롤 또는 40초 이상)
+  // eraKey는 글의 card_map에서 온다 — 그 글이 어느 시대 지도에 걸리는지.
+  function recordArchive(seriesId, postId, eraKey) {
     if (!seriesId || !postId) return;
-    if (addToSet(data.archives, seriesId + '/' + postId, 2000)) save(data);
+    const era = eraKey || 'unknown';
+    if (addToSet(data.archives, era + ':' + seriesId + '/' + postId, 2000)) {
+      touchEra(eraKey); save(data);
+    }
   }
 
-  // 루트 방문 → 꽃
-  function recordRoute(routeId) {
+  // 루트 방문
+  function recordRoute(routeId, eraKey) {
     if (!routeId) return;
-    if (addToSet(data.routes, routeId, 500)) save(data);
+    const era = eraKey || currentEra || 'unknown';
+    if (addToSet(data.routes, era + ':' + routeId, 500)) { touchEra(eraKey || currentEra); save(data); }
+  }
+
+  // 배지 획득 (3단계 퀴즈에서 호출)
+  function recordBadge(badgeId, eraKey) {
+    if (!badgeId) return;
+    const era = eraKey || 'unknown';
+    if (addToSet(data.badges, era + ':' + badgeId, 200)) { touchEra(eraKey); save(data, true); }
+  }
+
+  // ── 손때(patina) — 그 시대를 처음 연 날 ─────────────────────
+  // 왕두목 확정: 손때는 "많이 읽은 책"이 아니라 "오래 함께한 책"에 앉는다.
+  // 잉크(읽은 양)와 다른 축이어야 정보가 중복되지 않는다. 시간이 지나야만
+  // 얻어지는 것이라 돈으로도 노력으로도 살 수 없다 — 그래서 애착이 붙는다.
+  function touchEra(eraKey) {
+    if (!eraKey || !data.eraSeconds.hasOwnProperty(eraKey)) return;
+    if (!data.eraFirst) data.eraFirst = {};
+    if (!data.eraFirst[eraKey]) data.eraFirst[eraKey] = new Date().toISOString();
   }
 
   // ── 스크랩 (북마크) ────────────────────────────────────────
@@ -302,6 +336,235 @@
 
   // 개인 페이지의 진행 그래프가 쓰는 요약값.
   // 왕두목 요청: "묘목까지 몇 시간 남았는지" 보이게.
+  // ═══════════════════════════════════════════════════════════
+  // 「내 서재」 — 2026-07-24 왕두목 확정 설계
+  // ═══════════════════════════════════════════════════════════
+  //
+  // 나무를 대체하는 표현. 시대별 책 7권이 서가에 꽂히고, 그 시대의
+  // 지식으로만 채워진다. 설계 원칙은 회의에서 다음과 같이 확정됐다.
+  //
+  // 1) 퍼센트를 보여주지 않는다.
+  //    ATLAS는 완성되는 프로젝트가 아니라 계속 자라는 지도다. 97%를
+  //    보여주면 사람은 나머지 3%를 찾아 헤매고, 탐험이 숙제가 된다.
+  //    잉크 높이만 보이고 숫자는 없다.
+  //
+  // 2) "가득 참"이 없다. 대신 "숙성"이 있다.
+  //    잉크는 초반에 빠르게 차오르다 점점 느려지지만 결코 100%에
+  //    닿지 않는다(점근선). 대신 일정 수준을 넘으면 잉크 색이 계속
+  //    깊어진다 — 양이 아니라 농도가 진해진다. 그래서 콘텐츠가
+  //    추가돼도 사용자의 책이 "줄어들지" 않는다.
+  //
+  // 3) 교차 오염이 없다.
+  //    조선 책은 조선 카드·자료실·루트·배지로만 채워진다. 현대사를
+  //    아무리 읽어도 조선 책은 올라가지 않는다. 이것이 완독 유도의 핵심.
+  //
+  // 4) 두 개의 축.
+  //    잉크 = 얼마나 읽었나 / 손때 = 얼마나 오래 함께했나.
+  //    손때는 시간이 지나야만 얻어지므로 노력으로 앞당길 수 없다.
+
+  // 기여도 가중치 — 사용자에게 절대 노출되지 않는 내부 값.
+  // 시간과 발견이 대등하도록 잡았다(각 30%). 시간만으로 채워지면
+  // 카드 하나 열고 방치하는 것과 정독하는 것이 같아지기 때문이다.
+  const W = { time: 30, card: 30, archive: 25, route: 10, badge: 5 };
+
+  // 각 항목의 "충분한 양" 기준. 이 값에 도달하면 그 항목은 만점에
+  // 가까워진다. 시대별 콘텐츠 양이 크게 다르므로(선사 49장 / 근대 384장)
+  // 절대 개수가 아니라 이 기준으로 정규화한다.
+  const SAT = { timeSec: 5 * 3600, cards: 60, archives: 8, routes: 3, badges: 1 };
+
+  // 점근 곡선 — 초반은 빠르게, 뒤로 갈수록 느리게, 결코 1에 닿지 않는다.
+  // "가득 참"을 없애기 위한 장치다.
+  function ease(v, saturation) {
+    if (v <= 0) return 0;
+    return 1 - Math.exp(-1.6 * (v / saturation));
+  }
+
+  function countByEra(arr, eraKey) {
+    const prefix = eraKey + ':';
+    let n = 0;
+    for (let i = 0; i < arr.length; i++) if (arr[i].indexOf(prefix) === 0) n++;
+    return n;
+  }
+
+  // 한 시대의 기여도(0~1 미만). 사용자에게는 잉크 높이로만 보인다.
+  function eraContribution(eraKey) {
+    const t = data.eraSeconds[eraKey] || 0;
+    const c = countByEra(data.cards, eraKey);
+    const a = countByEra(data.archives, eraKey);
+    const r = countByEra(data.routes, eraKey);
+    const b = countByEra(data.badges, eraKey);
+    const score =
+      W.time * ease(t, SAT.timeSec) +
+      W.card * ease(c, SAT.cards) +
+      W.archive * ease(a, SAT.archives) +
+      W.route * ease(r, SAT.routes) +
+      W.badge * ease(b, SAT.badges);
+    return score / 100;
+  }
+
+  // 숙성도 — 잉크가 어느 정도 찬 뒤부터 색이 깊어지는 정도(0~1).
+  // 상한이 없는 성장을 여기서 흡수한다. 콘텐츠가 늘어도 이 값은
+  // 계속 올라갈 수 있으므로 "더 읽을 이유"가 사라지지 않는다.
+  function eraDepth(eraKey) {
+    const c = countByEra(data.cards, eraKey);
+    const a = countByEra(data.archives, eraKey);
+    const r = countByEra(data.routes, eraKey);
+    const raw = c + a * 6 + r * 12;
+    return Math.min(1, raw / 400);
+  }
+
+  // 손때 — 그 시대를 처음 연 날로부터의 경과(0~1, 1년에 최대).
+  function eraPatina(eraKey) {
+    const first = data.eraFirst && data.eraFirst[eraKey];
+    if (!first) return 0;
+    const days = (Date.now() - new Date(first).getTime()) / 86400000;
+    return Math.min(1, days / 365);
+  }
+
+  // 책등 장식 단계 — 깊이 읽은 사람의 책이 아름다워진다.
+  // 0: 평범 / 1: 얇은 금선 / 2: 문양 / 3: 금박 제목
+  function eraOrnament(eraKey) {
+    const a = countByEra(data.archives, eraKey);
+    const r = countByEra(data.routes, eraKey);
+    const b = countByEra(data.badges, eraKey);
+    const pts = a + r * 3 + b * 5;
+    if (pts >= 24) return 3;
+    if (pts >= 10) return 2;
+    if (pts >= 3) return 1;
+    return 0;
+  }
+
+  // 책등을 눌렀을 때 나오는 한 줄. 진행률 대신 말로 알려준다.
+  function eraLine(eraKey, rank, contribution) {
+    const name = (ERAS.find(e => e.key === eraKey) || {}).name || '';
+    if (contribution <= 0) return '아직 펼쳐보지 않은 책입니다.';
+    if (rank === 0) return `당신은 ${name}에서 가장 오래 머물렀습니다.`;
+    if (contribution < 0.15) return '이제 막 첫 장을 넘겼습니다.';
+    if (contribution < 0.45) return '아직 읽지 않은 이야기가 많이 남아 있습니다.';
+    if (contribution < 0.75) return '이 시대가 조금씩 익숙해지고 있습니다.';
+    return '오래 곁에 둔 책입니다.';
+  }
+
+  // 「오늘의 변화」 — 서재에 들어왔을 때 게이지보다 먼저 보이는 것.
+  // 왕두목 확정: "숫자를 보며 관리하는 게 아니라, 내 서재가 조금씩
+  // 살아 움직이고 있다는 느낌"을 주는 장치.
+  //
+  // 지난 방문 시점의 스냅샷과 지금을 비교해 달라진 것만 문장으로 만든다.
+  // 변화가 없으면 아무것도 표시하지 않는다(빈 상태를 억지로 채우지 않는다).
+  function changes() {
+    const prev = data.lastSeen || {};
+    const out = [];
+    ERAS.forEach(e => {
+      const p = prev[e.key] || {};
+      const c = countByEra(data.cards, e.key);
+      const a = countByEra(data.archives, e.key);
+      const orn = eraOrnament(e.key);
+      const dc = c - (p.cards || 0);
+      const da = a - (p.archives || 0);
+      if (da > 0) out.push(`${e.name} 책에 새로운 ${da}쪽이 더해졌습니다.`);
+      else if (dc >= 5) out.push(`${e.name}에서 ${dc}개의 기록을 발견했습니다.`);
+      if (orn > (p.ornament || 0)) {
+        const label = ['', '금선이 새겨졌습니다', '문양이 나타났습니다', '금박 제목이 새겨졌습니다'][orn];
+        out.push(`${e.name}의 책등에 ${label}.`);
+      }
+    });
+    return out.slice(0, 4);
+  }
+
+  // 현재 상태를 스냅샷으로 저장 — 다음 방문 때 비교 기준이 된다.
+  function markSeen() {
+    const snap = {};
+    ERAS.forEach(e => {
+      snap[e.key] = {
+        cards: countByEra(data.cards, e.key),
+        archives: countByEra(data.archives, e.key),
+        ornament: eraOrnament(e.key),
+      };
+    });
+    data.lastSeen = snap;
+    save(data, true);
+  }
+
+  // 「나의 한국사」 — 처음부터 서재에 있는 책. 사용자가 쓰지 않고
+  // ATLAS가 대신 써준다. 통계가 아니라 일기 형식으로 한 줄씩 쌓인다.
+  function myHistory() {
+    const pages = [];
+    const fmt = (iso) => {
+      const d = new Date(iso);
+      return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
+    };
+    if (data.firstVisit) {
+      pages.push({ n: 1, date: fmt(data.firstVisit),
+        text: '당신은 처음으로 한국사의 서재에 발을 들였습니다.' });
+    }
+    const lib = library();
+    const opened = lib.books.filter(b => b.opened);
+    if (opened.length) {
+      const top = opened.slice().sort((a, b) => b.seconds - a.seconds)[0];
+      pages.push({ n: pages.length + 1, date: null,
+        text: `가장 오래 머문 시대는 ${top.name}입니다.` });
+    }
+    if (lib.openedCount >= 3) {
+      pages.push({ n: pages.length + 1, date: null,
+        text: `${lib.openedCount}권의 책을 펼쳤습니다.` });
+    }
+    if (lib.openedCount === ERAS.length) {
+      pages.push({ n: pages.length + 1, date: null,
+        text: '일곱 권 모두를 펼쳤습니다. 이제 서재가 온전해졌습니다.' });
+    }
+    const totalArchives = data.archives.length;
+    if (totalArchives > 0) {
+      pages.push({ n: pages.length + 1, date: null,
+        text: `자료실의 글 ${totalArchives}편을 끝까지 읽었습니다.` });
+    }
+    if (data.badges.length) {
+      pages.push({ n: pages.length + 1, date: null,
+        text: `첫 번째 배지를 얻었습니다.` });
+    }
+    return pages;
+  }
+
+  // 서재 전체 상태 — namu.js(개인 페이지)가 이 값만 보고 그린다.
+  function library() {
+    const contribs = ERAS.map(e => eraContribution(e.key));
+    const maxIdx = contribs.indexOf(Math.max(...contribs));
+    const books = ERAS.map((e, i) => ({
+      key: e.key,
+      name: e.name,
+      short: e.short,
+      ink: contribs[i],                 // 잉크 높이 (0~1 미만, 숫자 비노출)
+      depth: eraDepth(e.key),           // 잉크 농도 — 상한 없는 성장
+      patina: eraPatina(e.key),         // 손때 — 시간이 지나야만
+      ornament: eraOrnament(e.key),     // 책등 장식 0~3
+      opened: contribs[i] > 0,
+      cards: countByEra(data.cards, e.key),
+      archives: countByEra(data.archives, e.key),
+      routes: countByEra(data.routes, e.key),
+      badges: countByEra(data.badges, e.key),
+      seconds: data.eraSeconds[e.key] || 0,
+      line: eraLine(e.key, contribs[i] > 0 && i === maxIdx ? 0 : 1, contribs[i]),
+    }));
+
+    // 세계의 서 — 서가 위에 눕혀둔 한 권. 한국사 7권과 성격이 달라
+    // 시대에 귀속되지 않는 자료실 글(세계사·문학 일부 등)을 담는다.
+    const worldCount = data.archives.filter(x => x.indexOf('unknown:') === 0).length;
+    const world = {
+      count: worldCount,
+      ink: ease(worldCount, 12),
+      opened: worldCount > 0,
+    };
+
+    return {
+      books: books,
+      world: world,
+      openedCount: books.filter(b => b.opened).length,
+      totalSeconds: data.totalSeconds,
+      firstVisit: data.firstVisit,
+      badges: data.badges.slice(),
+      scrapCount: data.scraps.length,
+    };
+  }
+
   function summary() {
     const total = data.totalSeconds;
     const stage = stageOf(total);
@@ -369,6 +632,13 @@
     out.reflections = [...(a.reflections || []), ...(b.reflections || [])];
     // 씨앗 시대는 먼저 정해진 쪽을 존중한다
     out.seedEra = a.seedEra || b.seedEra || null;
+    // 손때 — 시대별 최초 접촉은 더 이른 쪽을 남긴다
+    out.eraFirst = {};
+    ERAS.forEach(e => {
+      const x = a.eraFirst?.[e.key], y = b.eraFirst?.[e.key];
+      const v = [x, y].filter(Boolean).sort()[0];
+      if (v) out.eraFirst[e.key] = v;
+    });
     out.tutorialSeen = !!(a.tutorialSeen || b.tutorialSeen);
     return out;
   }
@@ -400,6 +670,12 @@
     recordCard: recordCard,
     recordArchive: recordArchive,
     recordRoute: recordRoute,
+    recordBadge: recordBadge,
+    // 「내 서재」 API (2026-07-24)
+    library: library,
+    changes: changes,
+    markSeen: markSeen,
+    myHistory: myHistory,
     addScrap: addScrap,
     removeScrap: removeScrap,
     isScrapped: isScrapped,

@@ -228,3 +228,114 @@
   border-color: var(--gold, #b89860);
 }
 .atlas-namu-badge svg { width: 26px; height: 26px; display: block; }
+
+/* ═══════════════════════════════════════════════════════════
+   「나의 서재」 — 2026-07-24
+   나무(tree)에서 서재(library)로 전환하며 추가한 스타일.
+   기존 .namu-* 클래스는 페이지 골격으로 계속 쓰고,
+   서재 고유 요소만 .lib-* 로 둔다.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 오늘의 변화 ─────────────────────────────────────────── */
+.lib-changes {
+  margin: 4px 0 18px;
+  padding: 14px 16px;
+  background: rgba(184,152,96,.07);
+  border: 1px solid rgba(184,152,96,.2);
+  border-radius: 10px;
+}
+.lib-changes-title {
+  font-size: 12px; color: var(--gold);
+  letter-spacing: .06em; font-weight: 700;
+}
+.lib-changes-list { list-style: none; margin-top: 8px; }
+.lib-changes-list li {
+  font-size: 13px; line-height: 1.7; color: var(--paper);
+  padding-left: 12px; position: relative;
+}
+.lib-changes-list li::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ── 서가 ────────────────────────────────────────────────── */
+.lib-stage {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 8px 0 4px;
+}
+.lib-shelf { width: 100%; max-width: 460px; }
+.atlas-library-svg { width: 100%; height: auto; display: block; }
+
+/* 진묘수 — 서가 옆에 앉아 서재를 지킨다 */
+.lib-guide {
+  position: absolute; right: -4px; bottom: -6px;
+  width: 84px; height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.45));
+}
+@media (max-width: 480px) {
+  .lib-guide { width: 62px; right: -8px; }
+}
+
+/* ── 시대별 책 목록 ──────────────────────────────────────── */
+.lib-books { list-style: none; margin-top: 14px; }
+.lib-book {
+  display: grid;
+  grid-template-columns: 10px 58px 1fr auto;
+  grid-template-areas:
+    "dot name bar meta"
+    ".   line line line";
+  align-items: center;
+  gap: 4px 9px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.lib-book.is-closed { opacity: .4; }
+.lib-book-dot {
+  grid-area: dot;
+  width: 9px; height: 9px; border-radius: 2px;
+}
+.lib-book-name { grid-area: name; font-size: 13px; }
+.lib-book-bar {
+  grid-area: bar; height: 7px; border-radius: 3px;
+  background: rgba(255,255,255,.07); overflow: hidden;
+}
+.lib-book-bar i {
+  display: block; height: 100%; border-radius: 3px;
+  transition: width .6s ease, opacity .6s ease;
+}
+.lib-book-meta {
+  grid-area: meta; font-size: 10.5px; color: var(--gold);
+  letter-spacing: .03em; white-space: nowrap;
+}
+.lib-book-line {
+  grid-area: line;
+  font-size: 11.5px; color: var(--paper-dim); line-height: 1.5;
+  padding-left: 67px;
+}
+@media (max-width: 420px) {
+  .lib-book-line { padding-left: 0; }
+}
+
+/* ── 나의 한국사 ─────────────────────────────────────────── */
+.lib-pages { list-style: none; margin-top: 14px; counter-reset: page; }
+.lib-page {
+  counter-increment: page;
+  position: relative;
+  padding: 10px 0 10px 34px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: 13px; line-height: 1.65;
+}
+.lib-page::before {
+  content: counter(page) '쪽';
+  position: absolute; left: 0; top: 11px;
+  font-size: 10px; color: var(--gold); opacity: .7;
+  letter-spacing: .02em;
+}
+.lib-page-date {
+  display: block; font-size: 10.5px;
+  color: var(--paper-dim); margin-bottom: 2px;
+}
+.lib-page-text { color: var(--paper); opacity: .92; }

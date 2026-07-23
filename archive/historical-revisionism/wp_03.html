@@ -42,7 +42,7 @@
 </article>
 <link rel="stylesheet" href="../../css/namu.css">
 <script src="../../js/growth.js"></script>
-<script src="../../js/tree.js"></script>
+<script src="../../js/library.js"></script>
 <script src="../../js/namuBadge.js"></script>
 <script>
 // 2026-07-22 「나의 역사 나무」 — 자료실 글은 꽃이 된다.
@@ -52,11 +52,12 @@
 (function(){
   var SERIES = "historical_revisionism";
   var POST = "wp_03";
+  var ERA = "modern2";
   var done = false;
   function mark(){
     if (done) return;
     done = true;
-    try { window.AtlasGrowth && window.AtlasGrowth.recordArchive(SERIES, POST); } catch(e){}
+    try { window.AtlasGrowth && window.AtlasGrowth.recordArchive(SERIES, POST, ERA); } catch(e){}
   }
   function nearBottom(){
     var st = window.scrollY || document.documentElement.scrollTop;

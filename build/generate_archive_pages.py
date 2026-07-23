@@ -485,6 +485,9 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
     # 「나의 역사 나무」용 식별자 — JS 문자열 리터럴로 안전하게 넘긴다
     series_id_js = json.dumps(series.get('id', ''), ensure_ascii=False)
     post_id_js = json.dumps(post.get('id', ''), ensure_ascii=False)
+    # card_map = 이 글이 어느 시대 지도에 걸리는가. 「내 서재」에서 어느 책을
+    # 채울지 결정하는 데 쓴다. 없으면 null(특정 시대에 귀속되지 않음).
+    card_map_js = json.dumps(post.get('card_map') or None, ensure_ascii=False)
 
     html_out = f'''<!DOCTYPE html>
 <html lang="ko">
@@ -523,7 +526,7 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 </article>
 <link rel="stylesheet" href="{ROOT_PREFIX}css/namu.css">
 <script src="{ROOT_PREFIX}js/growth.js"></script>
-<script src="{ROOT_PREFIX}js/tree.js"></script>
+<script src="{ROOT_PREFIX}js/library.js"></script>
 <script src="{ROOT_PREFIX}js/namuBadge.js"></script>
 <script>
 // 2026-07-22 「나의 역사 나무」 — 자료실 글은 꽃이 된다.
@@ -533,11 +536,12 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 (function(){{
   var SERIES = {series_id_js};
   var POST = {post_id_js};
+  var ERA = {card_map_js};
   var done = false;
   function mark(){{
     if (done) return;
     done = true;
-    try {{ window.AtlasGrowth && window.AtlasGrowth.recordArchive(SERIES, POST); }} catch(e){{}}
+    try {{ window.AtlasGrowth && window.AtlasGrowth.recordArchive(SERIES, POST, ERA); }} catch(e){{}}
   }}
   function nearBottom(){{
     var st = window.scrollY || document.documentElement.scrollTop;
