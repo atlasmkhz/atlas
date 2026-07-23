@@ -211,7 +211,10 @@
 /* 지도·자료실 어디서든 우상단에 작게 떠 있어서, 나무가 자라는 걸
    계속 보게 만든다. 클릭하면 namu.html로 간다. */
 .atlas-namu-badge {
-  position: fixed; z-index: 900;
+  /* z-index 1210: 지도의 타임라인(600)·범례(600)·레이어토글(600)·
+     검색(700)·정보패널(1150~1205)보다 위에 온다. 처음엔 900으로 뒀는데
+     지도 화면에서 타임라인에 가려 보이지 않았다(2026-07-24 수정). */
+  position: fixed; z-index: 1210;
   right: 12px; bottom: 12px;
   width: 44px; height: 44px;
   display: flex; align-items: center; justify-content: center;
@@ -339,3 +342,17 @@
   color: var(--paper-dim); margin-bottom: 2px;
 }
 .lib-page-text { color: var(--paper); opacity: .92; }
+
+/* 지도 화면 전용 위치 보정.
+   지도에는 하단 전체를 덮는 타임라인(.timeline)과 우하단 레이어 토글
+   (bottom:110px)이 있다. 서재 버튼이 그 위에 겹치지 않도록, 지도
+   페이지에서는 레이어 토글보다 조금 더 위로 올린다.
+   .map-page는 지도 index.html의 body에 붙는 클래스다. */
+.atlas-namu-badge.on-map {
+  bottom: 158px;
+}
+@media (max-width: 768px) {
+  .atlas-namu-badge.on-map {
+    bottom: 168px;
+  }
+}

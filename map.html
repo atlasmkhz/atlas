@@ -55,6 +55,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="css/style.css?v=20260718a" />
+<link rel="stylesheet" href="css/namu.css">
 </head>
 <body>
 
@@ -72,6 +73,10 @@
     <button type="button" class="site-nav-item" data-nav="archive">자료실</button>
     <button type="button" class="site-nav-item" data-nav="route">루트</button>
     <button type="button" class="site-nav-item" data-nav="project">프로젝트</button>
+    <!-- 2026-07-24: 「나의 서재」 메뉴 추가. map.html(근대 지도)은 가장
+         먼저 만들어져 다른 시대 지도와 파일이 분리돼 있는데, 그 탓에
+         서재 시스템 스크립트가 통째로 빠져 있었다. -->
+    <button type="button" class="site-nav-item" data-nav="library">서재</button>
   </div>
 </div>
 
@@ -438,5 +443,8 @@
      여기에도 <script> 태그를 한 줄 추가해야 한다 — 모든 지도 nav.js의
      <script> 목록이 전부 동일해야 한다. -->
 
+<script src="js/growth.js"></script>
+<script src="js/library.js"></script>
+<script src="js/namuBadge.js"></script>
 </body>
 </html>

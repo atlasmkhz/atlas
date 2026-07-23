@@ -554,6 +554,10 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
 }})();
 </script>
+<link rel="stylesheet" href="{ROOT_PREFIX}css/namu.css">
+<script src="{ROOT_PREFIX}js/growth.js"></script>
+<script src="{ROOT_PREFIX}js/library.js"></script>
+<script src="{ROOT_PREFIX}js/namuBadge.js"></script>
 </body>
 </html>'''
 
@@ -632,6 +636,10 @@ def render_series_landing_page(series, series_slug, out_path):
 <p class="summary">{esc(series.get('tagline',''))}</p>
 <section class="series-list"><h2>글 목록 ({len(series['posts'])}편)</h2><ol class="wp-list">{''.join(items)}</ol></section>
 </article>
+<link rel="stylesheet" href="{ROOT_PREFIX}css/namu.css">
+<script src="{ROOT_PREFIX}js/growth.js"></script>
+<script src="{ROOT_PREFIX}js/library.js"></script>
+<script src="{ROOT_PREFIX}js/namuBadge.js"></script>
 </body>
 </html>'''
 
@@ -716,6 +724,10 @@ def render_story_hub_page(all_series, out_path):
 <p class="event-meta">이 넷은 서로를 인용하며 하나의 서사를 이룹니다. 순서대로 읽기를 권합니다.</p>
 <section class="series-list"><h2>{len(parts_html)}부작</h2><ol class="wp-list story-parts">{''.join(parts_html)}</ol></section>
 </article>
+<link rel="stylesheet" href="{ROOT_PREFIX}css/namu.css">
+<script src="{ROOT_PREFIX}js/growth.js"></script>
+<script src="{ROOT_PREFIX}js/library.js"></script>
+<script src="{ROOT_PREFIX}js/namuBadge.js"></script>
 </body>
 </html>'''
 

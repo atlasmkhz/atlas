@@ -318,6 +318,10 @@ def render_html(card, slug, breadcrumb, related_cards, slug_map):
 {f'<section class="sources"><h2>참고 자료</h2>{sources_html}</section>' if sources_html else ''}
 <p class="map-cta"><a href="{SITE_ROOT}{PATH_PREFIX}/?event={card['id']}">지도에서 보기</a></p>
 </article>
+<link rel="stylesheet" href="/css/namu.css">
+<script src="/js/growth.js"></script>
+<script src="/js/library.js"></script>
+<script src="/js/namuBadge.js"></script>
 </body>
 </html>"""
 

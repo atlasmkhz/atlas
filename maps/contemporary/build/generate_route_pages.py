@@ -212,6 +212,10 @@ def render_waypoint_page(route, wp, route_slug, prev_wp, next_wp, out_path, even
 {f'<nav class="wp-pager">{" | ".join(nav_links)}</nav>' if nav_links else ''}
 <p class="map-cta"><a href="{map_cta_url}">지도에서 보기</a></p>
 </article>
+<link rel="stylesheet" href="/css/namu.css">
+<script src="/js/growth.js"></script>
+<script src="/js/library.js"></script>
+<script src="/js/namuBadge.js"></script>
 </body>
 </html>'''
 
@@ -305,6 +309,10 @@ def render_route_landing_page(route, route_slug, event_id_to_slug, out_path):
 {archives_html}
 <p class="map-cta"><a href="{map_cta_url}">지도에서 루트 보기</a></p>
 </article>
+<link rel="stylesheet" href="/css/namu.css">
+<script src="/js/growth.js"></script>
+<script src="/js/library.js"></script>
+<script src="/js/namuBadge.js"></script>
 </body>
 </html>'''
 

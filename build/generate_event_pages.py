@@ -293,6 +293,10 @@ def render_html(card, slug, breadcrumb, related_cards, slug_map):
 </article>
 
 {render_map_hydration_block(f"{SITE_ROOT}/map.html?event={card['id']}")}
+<link rel="stylesheet" href="/css/namu.css">
+<script src="/js/growth.js"></script>
+<script src="/js/library.js"></script>
+<script src="/js/namuBadge.js"></script>
 </body>
 </html>"""
 

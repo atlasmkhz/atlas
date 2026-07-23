@@ -45,20 +45,24 @@
     let opened = 0;
     try { opened = G.library().openedCount; } catch (e) { /* 기본값 유지 */ }
 
-    // 경로 깊이에 따라 namu.html까지의 상대 경로를 계산한다.
-    // maps/{era}/ 아래면 ../../, 사이트 루트면 ./
-    const depth = (location.pathname.match(/\//g) || []).length - 1;
-    const inSub = /\/(maps|archive|route|event|world-routes)\//.test(location.pathname);
-    let prefix = '';
-    if (inSub) {
-      const seg = location.pathname.split('/').filter(Boolean);
-      const idx = seg.findIndex(s => ['maps', 'archive', 'route', 'event', 'world-routes'].includes(s));
-      const up = seg.length - idx - 1;
-      prefix = '../'.repeat(Math.max(1, up));
-    }
+    // namu.html까지의 경로.
+    // 이 배지는 포털·지도·자료실·루트·이벤트 페이지 등 깊이가 제각각인
+    // 곳에 모두 붙으므로, 현재 경로에서 사이트 루트까지 몇 단계 올라가야
+    // 하는지 계산한다. 알려진 하위 폴더(maps/archive/route/event/…)를
+    // 기준으로 삼고, 그 밖이면 파일이 있는 깊이만큼 올라간다.
+    const seg = location.pathname.split('/').filter(Boolean);
+    // 마지막 조각이 파일명이면 제외하고 폴더 깊이만 센다.
+    // (디렉터리 URL로 접근하는 경우 — 예: /route/donghak/ — 도 처리된다)
+    const dirs = (seg.length && seg[seg.length - 1].indexOf('.') !== -1)
+      ? seg.slice(0, -1) : seg.slice();
+    const prefix = dirs.length ? '../'.repeat(dirs.length) : '';
 
     const a = document.createElement('a');
     a.className = 'atlas-namu-badge';
+    // 지도 페이지 여부를 직접 판별해 클래스를 붙인다.
+    // CSS :has()에만 의존하면 구형 브라우저에서 위치 보정이 안 먹는다.
+    // 지도에는 하단 전체를 덮는 타임라인이 있어 버튼이 가려지므로 위로 올린다.
+    if (document.getElementById('map')) a.classList.add('on-map');
     a.href = prefix + 'namu.html';
     a.title = '나의 서재';
     a.setAttribute('aria-label', '나의 서재 보기');

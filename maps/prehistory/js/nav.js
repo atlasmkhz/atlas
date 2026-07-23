@@ -46,7 +46,7 @@
     { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'../contemporary/index.html' }
   ];
 
-  const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트' };
+  const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트', library:'서재' };
 
   // ── 루트 목록 — 루트가 늘어날 때마다 이 배열에 항목 하나만 추가한다.
   // routeId는 routes/*.js가 registerRoute()로 등록하는 route.id와 같아야
@@ -469,6 +469,15 @@
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         if (typeof window.openProjectHub === 'function') window.openProjectHub();
         else showComingSoon(NAV_LABELS[key] || key);
+      } else if (key === 'library') {
+        // 「나의 서재」 — 개인 기록 페이지로 이동한다(2026-07-24 추가).
+        // 오버레이가 아니라 별도 페이지이므로, 나중에 소셜 로그인을
+        // 붙일 때 돌아올 주소가 명확하다는 이점도 있다.
+        // 경로는 현재 문서 깊이에서 사이트 루트까지 되짚어 만든다.
+        const _seg = location.pathname.split('/').filter(Boolean);
+        const _dirs = (_seg.length && _seg[_seg.length - 1].indexOf('.') !== -1)
+          ? _seg.slice(0, -1) : _seg.slice();
+        location.href = (_dirs.length ? '../'.repeat(_dirs.length) : '') + 'namu.html';
       } else {
         showComingSoon(NAV_LABELS[key] || key);
       }
