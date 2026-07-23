@@ -35,7 +35,7 @@ const EVENTS_BLOCK6 = [
     sources:['우리역사넷 사료로 본 한국사 — 고조선의 성장과 변화 (위략 인용)','한국민족문화대백과사전 고조선'] },
 
   { id:'political_gojoseon_08', year:-282, visible_from:-283, visible_until:-240,
-    month:null, day:null, type:'war', priority:1,
+    month:null, day:null, type:'battle', priority:1,
     title_ko:'진개의 침공 — 서쪽 2천여 리를 잃다',
     title_en:'The Invasion of Qin Kai — Losing Two Thousand Li in the West',
     title_ja:'秦開の侵攻 — 西方二千余里を失う',

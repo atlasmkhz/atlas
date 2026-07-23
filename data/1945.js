@@ -193,7 +193,7 @@ const EVENTS_1945 = [
     sources:['제주의소리 제주섬 불바다 피할 수 없는 운명이었을까','디지털제주문화대전 결7호 작전'] },
 
   { id:'international_1945_01', year:1945, visible_from:1945, visible_until:1949,
-    month:7, day:null, type:'international', priority:1,
+    month:7, day:null, type:'diplomacy', priority:1,
     title_ko:'731부대 해체와 미국의 면책 거래',
     title_en:'Dissolution of Unit 731 and the U.S. Immunity Deal',
     title_ja:'731部隊解体と米国の免責取引',

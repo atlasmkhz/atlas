@@ -15,14 +15,21 @@ if (typeof L === 'undefined') {
 const COLORS = {
   battle:'#c44536', righteous:'#8367a8', political:'#3a8261',
   plot:'#b5762a', policy:'#5a6b8c', massacre:'#7a1f1f',
-  person:'#4a9cc8', movement:'#c8a827', migration:'#6d8db4', organization:'#7a8471'
+  person:'#4a9cc8', movement:'#c8a827', migration:'#6d8db4', organization:'#7a8471',
+  // 2026-07-23 추가 — 데이터에는 쓰이는데 여기 정의가 없어서 마커가 색 없이
+  // 흰 원으로만 그려지던 유형들이다(조사시찰단·거문도사건·731부대 면책거래는
+  // international로, 독도 기록은 diplomacy로, 진단학회는 culture로 되어 있었다).
+  // international 타입은 다른 지도에 없는 표기라 diplomacy로 통일했고,
+  // 색상값은 다른 6개 시대 지도와 동일하게 맞춘다.
+  diplomacy:'#2d6a8f', culture:'#a8568f'
 };
 
 // ── 사건 유형별 한글 라벨 (팝업 + 범례에서 공통 사용) ──
 const TYPE_LABEL = {
   battle:'전투', righteous:'의열투쟁', political:'정치·언론',
   plot:'일제 공작', policy:'식민 정책', massacre:'학살',
-  person:'인물 위치', movement:'민중운동', migration:'이동·망명', organization:'조직 결성'
+  person:'인물 위치', movement:'민중운동', migration:'이동·망명', organization:'조직 결성',
+  diplomacy:'외교', culture:'문화'
 };
 
 // ── 干支(육십갑자) 자동 계산 (1864년 甲子년 기준) ──

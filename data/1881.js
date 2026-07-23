@@ -19,7 +19,7 @@ const EVENTS_1881 = [
     sources:['우리역사넷 임오군란','한국민족문화대백과사전 개화정책'] },
 
   { id:'international_1881_01', year:1881, visible_from:1881, visible_until:1882,
-    month:null, day:null, type:'international', priority:1,
+    month:null, day:null, type:'diplomacy', priority:1,
     title_ko:'조사시찰단 파견',
     title_en:'Dispatch of the Gentlemen\'s Observation Mission',
     title_ja:'朝士視察団の派遣',

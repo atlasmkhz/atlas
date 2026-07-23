@@ -19,7 +19,7 @@ const EVENTS_1885 = [
     sources:['금성출판사 갑신정변','위키백과 톈진 조약'] },
 
   { id:'international_1885_02', year:1885, visible_from:1885, visible_until:1887,
-    month:4, day:null, type:'international', priority:1,
+    month:4, day:null, type:'diplomacy', priority:1,
     title_ko:'거문도 사건',
     title_en:'The Geomundo Incident',
     title_ja:'巨文島事件',

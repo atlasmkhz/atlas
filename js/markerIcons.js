@@ -36,6 +36,12 @@ const MARKER_SVG = {
   migration: '<path d="M4 16c3-7 9-9 14-9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M14 4l4 3-4 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="16" r="1.8" fill="currentColor"/>',
   // 조직 결성 — 마름모 결정체
   organization: '<path d="M12 3l7 9-7 9-7-9z" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 8l3.2 4-3.2 4-3.2-4z" fill="currentColor"/>',
+
+  // 2026-07-23 추가 — 루트 지도(1876~1945) 데이터에 diplomacy·culture
+  // 타입 카드가 있는데 아이콘 정의가 없어 마커가 비어 보였다.
+  // 다른 시대 지도(maps/*/js/markerIcons.js)와 같은 도형을 쓴다.
+  diplomacy: '<path d="M4 13l5-1 3 2 3-2 5 1" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="8" r="2.2" fill="currentColor"/><circle cx="18" cy="8" r="2.2" fill="currentColor"/><path d="M6 10.2v2.4M18 10.2v2.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  culture: '<path d="M12 3.5l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6-4.8-3-4.8 3 1.2-5.6-4.2-3.8 5.6-.6z" fill="currentColor"/>',
   // ── 아래 4개는 루트(routeRenderer.js) 전용 웨이포인트 타입을 위해 추가됨.
   //    기존 타입과 겹치지 않는 route 고유 의미(출생·일상·사망·귀환)를
   //    같은 미니멀 픽토그램 스타일로 그린다.
