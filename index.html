@@ -30,6 +30,7 @@
   gtag('js', new Date());
   gtag('config', 'G-9C05WN48C4');
 </script>
+<link rel="stylesheet" href="css/namu.css">
 </head>
 <body class="portal">
 
@@ -39,7 +40,7 @@
 <nav class="portal-nav">
   <div class="portal-nav-menu">
     <button type="button" class="portal-nav-item" id="portalOpenArchive">📖 <span class="label-full">자료실</span></button>
-    <button type="button" class="portal-nav-item" id="portalOpenInfo">ℹ️ <span class="label-full">정보</span></button>
+    <button type="button" class="portal-nav-item" id="portalOpenInfo">ℹ️ <span class="label-full">ATLAS 소개</span></button>
   </div>
 </nav>
 
@@ -159,11 +160,11 @@
         <span class="portal-quick-sub">1592년, 당신이라면?</span>
       </span>
     </a>
-    <a class="portal-quick-item" href="#" id="portalQuickInfo">
-      <span class="portal-quick-badge">ℹ️</span>
+    <a class="portal-quick-item" href="#" id="portalQuickProject">
+      <span class="portal-quick-badge">🎬</span>
       <span class="portal-quick-text">
-        <span class="portal-quick-label">ATLAS 소개</span>
-        <span class="portal-quick-sub">프로젝트 이야기</span>
+        <span class="portal-quick-label">프로젝트</span>
+        <span class="portal-quick-sub">유튜브 · 시뮬레이션 · 퀴즈 · 게임</span>
       </span>
     </a>
   </div>
@@ -193,6 +194,39 @@
   <div class="archive-list" id="archiveHubList" hidden><!-- portal.js가 채운다 --></div>
 </div>
 
+<!-- ── 프로젝트 허브 ──
+     2026-07-23: 포털에도 프로젝트 허브를 추가했다. 지금까지는 시대 지도
+     7개에만 있어서, 포털에서는 프로젝트(유튜브 갤러리·시뮬레이션·퀴즈·
+     미니게임·추리게임)로 바로 갈 방법이 없었다. 빠른 접근 4번째 칸이
+     'ATLAS 소개'였는데, 그건 상단 내비에 이미 있으므로 중복이었다.
+     그 자리를 프로젝트로 바꾸면서 허브 마크업도 함께 들여온다.
+     지도의 것과 동일한 구조이며 play/ 경로만 루트 기준으로 조정했다. -->
+<div class="era-hub-scrim" id="projectHubScrim"></div>
+<div class="era-hub project-hub" id="projectHub" role="dialog" aria-modal="true" aria-label="프로젝트">
+  <button type="button" class="era-hub-close" id="projectHubClose" aria-label="닫기">×</button>
+  <div class="era-hub-title">프로젝트</div>
+  <div class="era-hub-sub">역사와 철학을 영상, 퀴즈, 게임으로 만나보세요</div>
+  <div class="project-tabs" id="projectTabs" role="tablist">
+    <button type="button" class="project-tab active" data-tab="youtube" role="tab" aria-selected="true">유튜브 갤러리</button>
+    <button type="button" class="project-tab" data-tab="simulation" role="tab" aria-selected="false">역사 시뮬레이션</button>
+    <button type="button" class="project-tab" data-tab="quiz" role="tab" aria-selected="false">퀴즈</button>
+    <button type="button" class="project-tab" data-tab="minigame" role="tab" aria-selected="false">미니게임</button>
+    <button type="button" class="project-tab" data-tab="mystery" role="tab" aria-selected="false">추리게임</button>
+  </div>
+  <div class="project-panel" id="projectPanelYoutube" data-panel="youtube" role="tabpanel"><!-- projectHub.js가 채운다 --></div>
+  <div class="project-panel" id="projectPanelSimulation" data-panel="simulation" role="tabpanel" hidden>
+    <div class="project-sim-card">
+      <div class="project-sim-kicker">ATLAS 프로젝트 · 역사 시뮬레이션</div>
+      <div class="project-sim-title">역사의 갈림길</div>
+      <p class="project-sim-desc">1592년, 당신이라면 어떤 선택을 했을까요? 열두 번의 실제 역사 딜레마 앞에서 선택해보세요 — 당신의 선택 패턴과 가장 닮은 역사 인물을 찾아드립니다. 성격 검사가 아닌 역사 시뮬레이션입니다.</p>
+      <a class="project-sim-cta" href="play/crossroads/index.html" target="_blank" rel="noopener">갈림길에 서기 →</a>
+    </div>
+  </div>
+  <div class="project-panel" id="projectPanelQuiz" data-panel="quiz" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMinigame" data-panel="minigame" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+  <div class="project-panel" id="projectPanelMystery" data-panel="mystery" role="tabpanel" hidden><div class="project-soon">준비 중입니다.</div></div>
+</div>
+
 <!-- ── 정보 모달 ── docs/architecture.md 원문 링크 대신, 실제 소개
      텍스트를 담은 모달로 바꿨다(원문 마크다운을 그대로 열면 브라우저가
      꾸며지지 않은 텍스트를 그대로 보여줘서 "이상한 코드처럼" 보였다). -->
@@ -211,6 +245,7 @@
 
 <!-- portal.js가 window.registerArchiveSeries를 정의한다 — 반드시
      content/archive/*.js보다 먼저 로드해야 한다(순서 중요). -->
+<script src="js/projectHub.js"></script>
 <script src="js/portal.js?v=20260715a"></script>
 <script src="content/youtube_videos.js?v=20260712a"></script>
 <script src="content/portal_stats.js"></script>
@@ -240,5 +275,8 @@
 <script src="content/archive/classical_literature_hanmun.js"></script>
 <script src="js/analytics.js"></script>
 
+<script src="js/growth.js"></script>
+<script src="js/tree.js"></script>
+<script src="js/namuBadge.js"></script>
 </body>
 </html>

@@ -245,6 +245,15 @@ function worldPanelHtml(w, year){
 function popupHtml(e){
   const color = COLORS[e.type];
 
+  // 2026-07-22 「나의 역사 나무」 — 카드를 열면 잎이 하나 생긴다.
+  // popupHtml은 renderer/search 등 모든 경로가 거쳐가는 공통 지점이라
+  // 여기 한 곳만 잡으면 카드 열람이 빠짐없이 기록된다.
+  try {
+    if (window.AtlasGrowth && e && e.id) {
+      window.AtlasGrowth.recordCard(e.id);
+    }
+  } catch (_) { /* 기록 실패가 정보창을 막으면 안 된다 */ }
+
   // 대표 이미지 — content.hero(신규)를 우선 사용하고, 없으면 e.image(구버전
   // 단일 필드, 하위호환용으로 유지)를 사용한다. 둘 다 없으면 그 영역 자체가
   // 생성되지 않는다 — 빈 이미지 칸이나 "이미지 없음" placeholder를 보여주지

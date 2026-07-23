@@ -1,0 +1,230 @@
+/* css/namu.css — 「나의 역사 나무」 개인 페이지 스타일
+   2026-07-22. portal.css의 색상 토큰(--ink/--paper/--gold)을 이어받아
+   ATLAS의 다른 페이지와 같은 브랜드로 보이게 한다. 다만 이 페이지는
+   개인의 기록을 보는 곳이라 지도 페이지보다 여백을 넉넉히 준다. */
+
+.namu-page {
+  background: var(--ink);
+  color: var(--paper);
+  min-height: 100vh;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+
+/* ── 상단 바 ─────────────────────────────────────────────── */
+.namu-topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 18px;
+  background: rgba(21, 19, 15, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(184, 152, 96, 0.22);
+}
+.namu-back {
+  color: var(--gold); text-decoration: none;
+  font-size: 14px; letter-spacing: .02em;
+}
+.namu-back:hover { color: var(--gold-bright); }
+.namu-topbar-title { font-size: 14px; color: var(--paper-dim); }
+
+.namu-wrap {
+  max-width: 720px; margin: 0 auto;
+  padding: 24px 18px 72px;
+}
+
+/* ── 나무 ────────────────────────────────────────────────── */
+.namu-hero { text-align: center; padding: 12px 0 8px; }
+
+.namu-tree-stage {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 4px;
+  min-height: 260px;
+}
+.namu-tree { width: 100%; max-width: 340px; }
+.atlas-tree-svg { width: 100%; height: auto; display: block; }
+
+/* 진묘수 — 나무 옆에 서서 안내한다. 이미지가 없으면 onerror로 숨겨진다. */
+.namu-guide {
+  position: absolute; right: 4px; bottom: 6px;
+  width: 92px; height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.45));
+}
+@media (max-width: 480px) {
+  .namu-guide { width: 72px; right: 0; }
+}
+
+.namu-stage-label { margin-top: 6px; }
+.namu-stage-name {
+  display: block; font-size: 22px; font-weight: 700;
+  color: var(--gold-bright); letter-spacing: .04em;
+}
+.namu-stage-sub {
+  display: block; margin-top: 3px;
+  font-size: 12.5px; color: var(--paper-dim);
+}
+
+/* ── 성장 그래프 ─────────────────────────────────────────── */
+.namu-progress { margin: 18px auto 0; max-width: 420px; }
+.namu-progress-track {
+  height: 8px; border-radius: 999px;
+  background: rgba(184, 152, 96, 0.16);
+  overflow: hidden;
+}
+.namu-progress-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, #7d9b6a, var(--gold));
+  border-radius: 999px;
+  transition: width .6s ease;
+}
+.namu-progress-text {
+  margin-top: 8px; font-size: 12.5px; color: var(--paper-dim);
+}
+
+.namu-guide-line {
+  margin: 16px auto 0; max-width: 480px;
+  font-size: 13.5px; line-height: 1.7;
+  color: var(--paper); opacity: .88;
+}
+
+/* ── 요약 숫자 ───────────────────────────────────────────── */
+.namu-stats {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 8px; margin: 28px 0 8px;
+}
+.namu-stat {
+  text-align: center; padding: 12px 4px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(184,152,96,.14);
+  border-radius: 10px;
+}
+.namu-stat b {
+  display: block; font-size: 17px; color: var(--gold-bright);
+  font-weight: 700; line-height: 1.3;
+}
+.namu-stat span {
+  display: block; margin-top: 4px;
+  font-size: 10.5px; color: var(--paper-dim); line-height: 1.35;
+}
+@media (max-width: 560px) {
+  .namu-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── 섹션 공통 ───────────────────────────────────────────── */
+.namu-section { margin-top: 34px; }
+.namu-section h2 {
+  font-size: 15px; color: var(--gold);
+  letter-spacing: .04em; font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(184,152,96,.2);
+}
+.namu-count { color: var(--paper-dim); font-weight: 400; font-size: 13px; }
+.namu-section-note {
+  margin-top: 10px; font-size: 12.5px; line-height: 1.65;
+  color: var(--paper-dim);
+}
+.namu-empty {
+  margin-top: 14px; font-size: 13px; color: var(--paper-dim);
+  padding: 18px; text-align: center;
+  border: 1px dashed rgba(184,152,96,.22); border-radius: 10px;
+}
+
+/* ── 시대별 발자취 ───────────────────────────────────────── */
+.namu-eras { list-style: none; margin-top: 14px; }
+.namu-era {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  font-size: 13px;
+}
+.namu-era.is-unvisited { opacity: .38; }
+.namu-era-dot {
+  width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto;
+}
+.namu-era-name { flex: 0 0 64px; }
+.namu-era-bar {
+  flex: 1 1 auto; height: 6px; border-radius: 999px;
+  background: rgba(255,255,255,.07); overflow: hidden;
+}
+.namu-era-bar i {
+  display: block; height: 100%; border-radius: 999px;
+  transition: width .5s ease;
+}
+.namu-era-time {
+  flex: 0 0 auto; font-size: 11.5px; color: var(--paper-dim);
+  min-width: 62px; text-align: right;
+}
+
+/* ── 스크랩 ──────────────────────────────────────────────── */
+.namu-scraps { list-style: none; margin-top: 14px; }
+.namu-scrap {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.namu-scrap-link {
+  flex: 1 1 auto; display: flex; align-items: baseline; gap: 8px;
+  color: var(--paper); text-decoration: none; min-width: 0;
+}
+.namu-scrap-link:hover .namu-scrap-title { color: var(--gold-bright); }
+.namu-scrap-kind {
+  flex: 0 0 auto; font-size: 10.5px; color: var(--gold);
+  border: 1px solid rgba(184,152,96,.3);
+  border-radius: 4px; padding: 1.5px 5px;
+}
+.namu-scrap-title {
+  font-size: 13px; line-height: 1.45;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.namu-scrap-del {
+  flex: 0 0 auto; width: 26px; height: 26px;
+  background: none; border: none; cursor: pointer;
+  color: var(--paper-dim); font-size: 17px; line-height: 1;
+  border-radius: 6px;
+}
+.namu-scrap-del:hover { color: #d88; background: rgba(255,255,255,.06); }
+
+/* ── 안내 상자 ───────────────────────────────────────────── */
+.namu-note-box p {
+  margin-top: 10px; font-size: 12.5px; line-height: 1.7;
+  color: var(--paper-dim);
+}
+.namu-actions {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
+}
+.namu-btn {
+  display: inline-block; cursor: pointer;
+  padding: 8px 14px; font-size: 12.5px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(184,152,96,.28);
+  border-radius: 8px; color: var(--paper);
+  font-family: inherit;
+}
+.namu-btn:hover { background: rgba(184,152,96,.14); }
+.namu-btn-danger { border-color: rgba(200,110,110,.3); color: #d9a3a3; }
+.namu-btn-danger:hover { background: rgba(200,110,110,.12); }
+.namu-tiny {
+  margin-top: 14px; font-size: 11.5px; color: var(--paper-dim); opacity: .8;
+}
+
+/* ── 헤더 새싹 아이콘 (모든 페이지 공통) ─────────────────── */
+/* 지도·자료실 어디서든 우상단에 작게 떠 있어서, 나무가 자라는 걸
+   계속 보게 만든다. 클릭하면 namu.html로 간다. */
+.atlas-namu-badge {
+  position: fixed; z-index: 900;
+  right: 12px; bottom: 12px;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(21,19,15,.88);
+  border: 1px solid rgba(184,152,96,.3);
+  border-radius: 50%;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 3px 12px rgba(0,0,0,.4);
+  transition: transform .2s ease, border-color .2s ease;
+}
+.atlas-namu-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold, #b89860);
+}
+.atlas-namu-badge svg { width: 26px; height: 26px; display: block; }

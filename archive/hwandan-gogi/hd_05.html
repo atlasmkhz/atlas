@@ -40,5 +40,34 @@
 <nav class="wp-pager"><a href="hd_04.html" rel="prev">← 삼성기 (2) — 나반과 아만, 그리고 수밀이국이라는 수수께끼</a> | <a href="hd_06.html" rel="next">치우천왕 — 탁록의 10년 전쟁, 그리고 정반대로 기록된 승패 →</a></nav>
 <p class="map-cta"><a href="../../maps/prehistory/index.html?lat=41.9&lng=127.5&year=-3897">지도에서 관련 지역 보기</a></p>
 </article>
+<link rel="stylesheet" href="../../css/namu.css">
+<script src="../../js/growth.js"></script>
+<script src="../../js/tree.js"></script>
+<script src="../../js/namuBadge.js"></script>
+<script>
+// 2026-07-22 「나의 역사 나무」 — 자료실 글은 꽃이 된다.
+// 다만 열자마자 세지 않는다. 실제로 읽었을 때만 꽃이 피어야 하므로
+// (1) 글 끝까지 스크롤했거나 (2) 40초 이상 머문 경우에만 기록한다.
+// 짧은 글은 스크롤이 없을 수 있어 두 조건을 OR로 둔다.
+(function(){
+  var SERIES = "hwandan_gogi";
+  var POST = "hd_05";
+  var done = false;
+  function mark(){
+    if (done) return;
+    done = true;
+    try { window.AtlasGrowth && window.AtlasGrowth.recordArchive(SERIES, POST); } catch(e){}
+  }
+  function nearBottom(){
+    var st = window.scrollY || document.documentElement.scrollTop;
+    var vh = window.innerHeight;
+    var dh = document.documentElement.scrollHeight;
+    return (st + vh) >= (dh - 120);
+  }
+  window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
+  setTimeout(mark, 40000);
+  if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+</script>
 </body>
 </html>

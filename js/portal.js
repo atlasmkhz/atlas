@@ -623,11 +623,19 @@
       e.preventDefault();
       window.openArchiveHub();
     });
+    // 2026-07-23: 빠른 접근 4번째 칸을 'ATLAS 소개' → '프로젝트'로 교체.
+    // ATLAS 소개는 상단 내비(portalOpenInfo)에 이미 있어 중복이었다.
+    // projectHub.js가 window.openProjectHub를 노출하므로 그걸 호출한다.
+    // (구 portalQuickInfo 핸들러는 남겨둔다 — 마크업이 되돌아와도 동작하도록)
     document.getElementById('portalQuickInfo')?.addEventListener('click', (e) => {
       e.preventDefault();
       document.getElementById('infoModalScrim')?.classList.add('open');
       document.getElementById('infoModal')?.classList.add('open');
       document.body.style.overflow = 'hidden';
+    });
+    document.getElementById('portalQuickProject')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof window.openProjectHub === 'function') window.openProjectHub();
     });
   });
 

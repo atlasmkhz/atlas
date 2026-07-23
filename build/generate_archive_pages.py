@@ -482,6 +482,10 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
         map_cta_url = f"{map_prefix}?lat={post['lat']}&lng={post['lng']}{year_qs}"
         map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 지역 보기</a></p>'
 
+    # 「나의 역사 나무」용 식별자 — JS 문자열 리터럴로 안전하게 넘긴다
+    series_id_js = json.dumps(series.get('id', ''), ensure_ascii=False)
+    post_id_js = json.dumps(post.get('id', ''), ensure_ascii=False)
+
     html_out = f'''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -517,6 +521,35 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 {f'<nav class="wp-pager">{" | ".join(nav_links)}</nav>' if nav_links else ''}
 {map_cta_html}
 </article>
+<link rel="stylesheet" href="{ROOT_PREFIX}css/namu.css">
+<script src="{ROOT_PREFIX}js/growth.js"></script>
+<script src="{ROOT_PREFIX}js/tree.js"></script>
+<script src="{ROOT_PREFIX}js/namuBadge.js"></script>
+<script>
+// 2026-07-22 「나의 역사 나무」 — 자료실 글은 꽃이 된다.
+// 다만 열자마자 세지 않는다. 실제로 읽었을 때만 꽃이 피어야 하므로
+// (1) 글 끝까지 스크롤했거나 (2) 40초 이상 머문 경우에만 기록한다.
+// 짧은 글은 스크롤이 없을 수 있어 두 조건을 OR로 둔다.
+(function(){{
+  var SERIES = {series_id_js};
+  var POST = {post_id_js};
+  var done = false;
+  function mark(){{
+    if (done) return;
+    done = true;
+    try {{ window.AtlasGrowth && window.AtlasGrowth.recordArchive(SERIES, POST); }} catch(e){{}}
+  }}
+  function nearBottom(){{
+    var st = window.scrollY || document.documentElement.scrollTop;
+    var vh = window.innerHeight;
+    var dh = document.documentElement.scrollHeight;
+    return (st + vh) >= (dh - 120);
+  }}
+  window.addEventListener('scroll', function(){{ if (nearBottom()) mark(); }}, {{passive:true}});
+  setTimeout(mark, 40000);
+  if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+}})();
+</script>
 </body>
 </html>'''
 
