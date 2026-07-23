@@ -476,11 +476,20 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
         map_cta_url = f"../world-routes/{post['world_route']}.html?point={post['id']}"
         map_cta_parts.append(f'<p class="map-cta"><a href="{map_cta_url}">세계지도 루트에서 이 장면 보기</a></p>')
     map_cta_html = ''.join(map_cta_parts)
+    # 2026-07-24 버그 수정 — card_ref도 world_route도 없는 글은 좌표만 보고
+    # 한국 지도로 링크를 만들었는데, 그리스 인물사전처럼 한국 밖 좌표를 가진
+    # 글이 "1920년대 그리스"로 이동하는 문제가 있었다(한국 근대 지도에 그리스
+    # 좌표를 찍으니 당연히 아무것도 없다). 좌표가 한반도 범위 밖이면 이
+    # 폴백 링크를 아예 만들지 않는다 — 잘못된 곳으로 보내느니 링크가 없는
+    # 편이 낫다. 세계사 글은 world_route를 지정해 세계지도 루트로 보낸다.
     if not map_cta_html and post.get('lat') is not None and post.get('lng') is not None:
-        year_qs = f"&year={post['year']}" if post.get('year') is not None else ''
-        map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
-        map_cta_url = f"{map_prefix}?lat={post['lat']}&lng={post['lng']}{year_qs}"
-        map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 지역 보기</a></p>'
+        _la, _ln = post['lat'], post['lng']
+        _in_korea = (33.0 <= _la <= 43.5) and (124.0 <= _ln <= 132.0)
+        if _in_korea:
+            year_qs = f"&year={post['year']}" if post.get('year') is not None else ''
+            map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
+            map_cta_url = f"{map_prefix}?lat={post['lat']}&lng={post['lng']}{year_qs}"
+            map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 지역 보기</a></p>'
 
     # 「나의 역사 나무」용 식별자 — JS 문자열 리터럴로 안전하게 넘긴다
     series_id_js = json.dumps(series.get('id', ''), ensure_ascii=False)
