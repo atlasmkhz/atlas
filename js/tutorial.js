@@ -37,58 +37,158 @@
   const has = (sel) => !!document.querySelector(sel);
 
   // ── 단계 정의 ──────────────────────────────────────────────
+  // 두 갈래로 나뉜다. 포털(index.html)과 지도는 화면 구성이 완전히 달라서
+  // 한 벌의 단계로는 맞출 수 없다 — 포털에는 슬라이더도 마커도 없다.
+  //
   // target: 하이라이트할 요소(없으면 화면 중앙에 말풍선만)
   // when:   이 단계를 보여줄 조건. 없으면 항상 표시
-  const STEPS = [
+  // noHole: 대상이 너무 커서 구멍을 내면 의미가 없을 때(지도 전체 등)
+  // scroll: 하이라이트 전에 그 요소로 스크롤할지(포털은 세로로 길다)
+
+  // 포털이 지금 문서인지 판별한다. 지도에는 #map이 있고 포털에는 없다.
+  const isPortal = () => !document.getElementById('map')
+                      && !!document.querySelector('.portal-hero, .portal-quick');
+
+  // ── 포털용 ──
+  // 왕두목 요청: "포털의 화면 구성 구석구석을 모두 설명해줬으면 좋겠다".
+  // 위에서 아래로 화면 순서를 따라간다 — 히어로 → 시대 선택 → 자료실
+  // 둘러보기 → 오늘의 특집 → 현황 → 추천 루트 → 빠른 접근 → 상단 메뉴.
+  const PORTAL_STEPS = [
     {
-      id: 'hello',
+      id: 'p_hello',
       title: '반갑습니다',
-      body: '저는 진묘수입니다. 천오백 년 전 무령왕릉에서 왕의 잠을 지키던 수호수였지요.\n이제는 이곳에서 당신의 기록을 지킵니다. 잠깐 둘러보실까요?',
+      body: '저는 진묘수입니다. 천오백 년 전 무령왕릉에서 왕의 잠을 지키던 수호수였지요.\n이제는 이곳에서 당신의 기록을 지킵니다. 이 첫 화면부터 함께 둘러볼까요?',
       target: null,
     },
     {
-      id: 'era',
+      id: 'p_cta',
+      title: '지도로 들어가기',
+      body: '망설여지신다면 여기부터 누르세요.\n1876년부터 오늘까지, 근현대의 지도가 바로 열립니다.',
+      target: '#portalOpenMap',
+      scroll: true,
+    },
+    {
+      id: 'p_era',
+      title: '시대를 골라 시작하기',
+      body: '선사시대부터 현대까지 일곱 개의 지도가 있습니다.\n관심 가는 시대가 있다면 여기서 바로 건너뛰셔도 좋아요.',
+      target: '.portal-era-grid',
+      scroll: true,
+    },
+    {
+      id: 'p_explore',
+      title: '자료실 둘러보기',
+      body: '지도가 사건이 일어난 자리라면, 자료실은 그 사건을 깊이 읽는 곳입니다.\n역사·세계사·인물열전·문학까지 200편이 넘는 글이 쌓여 있어요.',
+      target: '.portal-explore',
+      scroll: true,
+    },
+    {
+      id: 'p_featured',
+      title: '오늘의 특집',
+      body: '날마다 다른 이야기를 골라 올려둡니다.\n무엇을 볼지 정하기 어려운 날엔 여기서 시작하셔도 좋습니다.',
+      target: '.featured-card',
+      scroll: true,
+    },
+    {
+      id: 'p_stats',
+      title: '아틀라스 현황',
+      body: '지금까지 쌓인 사건과 글, 루트의 수입니다.\n이 숫자는 계속 늘어납니다 — 이곳은 완성되는 곳이 아니라 자라는 곳이니까요.',
+      target: '.stats-card',
+      scroll: true,
+    },
+    {
+      id: 'p_routes',
+      title: '추천 루트',
+      body: '흩어진 사건을 하나의 여정으로 묶은 것이 루트입니다.\n이순신의 바닷길, 의열단의 발자취처럼 따라 걸으실 수 있어요.',
+      target: '.portal-routes',
+      scroll: true,
+    },
+    {
+      id: 'p_quick',
+      title: '빠른 접근',
+      body: '지도 탐험, 자료실, 역사 시뮬레이션, 그리고 프로젝트.\n프로젝트에는 유튜브 갤러리와 앞으로 열릴 퀴즈·게임이 모여 있습니다.',
+      target: '.portal-quick-grid',
+      scroll: true,
+    },
+    {
+      id: 'p_nav',
+      title: '언제든 여기로',
+      body: '화면 맨 위의 자료실과 ATLAS 소개는 어느 화면에서든 열 수 있습니다.\n안내를 다시 보고 싶으시면 ATLAS 소개 안에서 저를 불러주세요.',
+      target: '.portal-nav-menu',
+      scroll: true,
+    },
+    {
+      id: 'p_library',
+      title: '나의 서재',
+      body: '읽으신 만큼 서재의 책이 채워집니다.\n일곱 권 모두 그 시대의 기록으로만 채워지니, 골고루 읽으실수록 서가가 온전해집니다.',
+      target: '.atlas-namu-badge',
+      when: () => has('.atlas-namu-badge'),
+    },
+    {
+      id: 'p_end',
+      title: '그럼, 시작하실까요',
+      body: '천천히 둘러보세요. 서두를 것 없습니다.\n제가 여기서 기다리고 있겠습니다.',
+      target: null,
+    },
+  ];
+
+  // ── 지도용 ──
+  const MAP_STEPS = [
+    {
+      id: 'm_hello',
+      title: '지도에 오셨군요',
+      body: '저는 진묘수입니다. 이 지도를 어떻게 읽는지 잠깐 알려드릴게요.',
+      target: null,
+    },
+    {
+      id: 'm_era',
       title: '일곱 개의 시대',
       body: '선사시대부터 현대까지, 시대마다 다른 지도가 있습니다.\n여기를 누르면 다른 시대로 건너갈 수 있어요.',
       target: '#eraBtn, [data-nav="map"]',
     },
     {
-      id: 'slider',
+      id: 'm_slider',
       title: '연도를 움직여 보세요',
       body: '아래 막대를 좌우로 움직이면 그 해에 무슨 일이 있었는지 지도가 바뀝니다.',
       target: '#slider',
       when: () => has('#slider'),
     },
     {
-      id: 'marker',
+      id: 'm_marker',
       title: '표식을 눌러 보세요',
       body: '지도 위의 작은 표식 하나하나가 그날의 사건입니다.\n누르면 무슨 일이 있었는지, 누가 있었는지 이야기가 열립니다.',
       target: '#map',
       when: () => has('#map'),
-      // 지도 전체를 하이라이트하면 의미가 없으므로 말풍선만 띄운다
       noHole: true,
     },
     {
-      id: 'archive',
-      title: '자료실',
-      body: '지도가 사건의 좌표라면, 자료실은 그 사건을 깊이 읽는 곳입니다.\n문학·인물·세계사까지 200편이 넘는 글이 있어요.',
-      target: '[data-nav="archive"], #portalQuickArchive',
+      id: 'm_search',
+      title: '찾으시는 것이 있다면',
+      body: '사람 이름이나 사건, 지명으로 바로 찾을 수 있습니다.',
+      target: '#searchWidget, #searchToggleBtn',
+      when: () => has('#searchWidget') || has('#searchToggleBtn'),
     },
     {
-      id: 'route',
+      id: 'm_archive',
+      title: '자료실',
+      body: '지도가 사건의 좌표라면, 자료실은 그 사건을 깊이 읽는 곳입니다.\n문학·인물·세계사까지 200편이 넘는 글이 있어요.',
+      target: '[data-nav="archive"]',
+      when: () => has('[data-nav="archive"]'),
+    },
+    {
+      id: 'm_route',
       title: '루트 — 이야기를 따라 걷기',
       body: '흩어진 사건을 하나의 여정으로 묶은 것이 루트입니다.\n이순신의 바닷길, 의열단의 발자취처럼요.',
       target: '[data-nav="route"]',
       when: () => has('[data-nav="route"]'),
     },
     {
-      id: 'library',
+      id: 'm_library',
       title: '나의 서재',
       body: '읽으신 만큼 서재의 책이 채워집니다.\n일곱 권 모두 그 시대의 기록으로만 채워지니, 골고루 읽으실수록 서가가 온전해집니다.',
       target: '[data-nav="library"], .atlas-namu-badge',
     },
     {
-      id: 'end',
+      id: 'm_end',
       title: '그럼, 시작하실까요',
       body: '천천히 둘러보세요. 서두를 것 없습니다.\n제가 여기서 기다리고 있겠습니다.',
       target: null,
@@ -179,6 +279,27 @@
     panel.classList.add(r.top < window.innerHeight / 2 ? 'at-bottom' : 'at-top');
   }
 
+  // 포털은 세로로 길어서 설명할 요소가 화면 밖에 있는 경우가 많다.
+  // 하이라이트 전에 그 요소를 화면 가운데로 가져온다. 스크롤이 끝난 뒤에
+  // 위치를 재야 정확하므로, 이동 거리에 따라 대기 시간을 준다.
+  function scrollToTarget(step, done) {
+    if (!step.scroll || !step.target) { done(); return; }
+    const el = document.querySelector(step.target);
+    if (!el) { done(); return; }
+    const r = el.getBoundingClientRect();
+    const centered = r.top + r.height / 2;
+    const delta = Math.abs(centered - window.innerHeight / 2);
+    // 이미 화면 중앙 근처면 굳이 움직이지 않는다(불필요한 흔들림 방지)
+    if (delta < window.innerHeight * 0.22) { done(); return; }
+    // 튜토리얼 중에는 body에 overflow:hidden이 걸려 있으므로 잠시 푼다
+    document.body.classList.remove('tut-lock');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => {
+      document.body.classList.add('tut-lock');
+      done();
+    }, 420);
+  }
+
   function go(n) {
     idx = Math.max(0, Math.min(steps.length - 1, n));
     const step = steps[idx];
@@ -189,13 +310,16 @@
       idx >= steps.length - 1 ? '시작하기' : '다음';
     document.getElementById('tutDots').innerHTML =
       steps.map((_, i) => `<i class="${i === idx ? 'on' : ''}"></i>`).join('');
-    highlight(step);
-    placePanel(step);
+    scrollToTarget(step, () => {
+      highlight(step);
+      placePanel(step);
+    });
   }
 
   function open() {
     if (!root) build();
-    steps = STEPS.filter(s => !s.when || s.when());
+    const source = isPortal() ? PORTAL_STEPS : MAP_STEPS;
+    steps = source.filter(s => !s.when || s.when());
     idx = 0;
     root.classList.add('open');
     document.body.classList.add('tut-lock');
