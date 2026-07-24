@@ -55,13 +55,21 @@
   const GOLD_DIM = '#a68a4e';
 
   // 레이아웃 상수 — 한곳에서 관리해야 배경 이미지를 얹을 때 좌표를 맞추기 쉽다
+  // 배경 이미지(assets/images/shelf-bg.jpg)와 좌표를 맞춘 레이아웃.
+  // 배경은 1200x799(비율 1.50)이고 나무 선반 상단이 세로 83% 지점에 있다.
+  // viewBox를 같은 비율(1200x800)로 잡아 배경 위에 그대로 겹칠 수 있게 했다.
+  //
+  // 2026-07-24 배경 도입 전에는 472x216(비율 2.19)이었는데, 그 비율로는
+  // 배경을 얹으면 좌우가 잘리거나 서가가 늘어난다. 배경의 선반 위치가
+  // 이미 정해져 있으므로 거기에 책을 세우는 쪽으로 재배치했다.
   const LAY = {
-    padX: 20,
-    bookW: 36,
-    gap: 5,
-    baseY: 196,        // 서가 바닥(책이 서 있는 선)
-    shelfTopY: 40,     // 위 선반
-    topH: 8,
+    VW: 1200,
+    VH: 800,
+    baseY: 664,        // 나무 선반 상단 — 책이 서 있는 선 (배경의 83% 지점)
+    padX: 150,         // 좌우 여백 (배경의 나무 기둥을 피한다)
+    bookW: 74,
+    gap: 12,
+    guideSpace: 210,   // 오른쪽에 진묘수가 앉을 자리
   };
 
   // 결정적 유사난수 — 인덱스로만 만들어 새로고침해도 같은 모습
@@ -131,14 +139,14 @@
     const W = LAY.bookW;
     const x = LAY.padX + i * (W + LAY.gap);
     // 높이·기울기를 미세하게 흔들어 실제 서가처럼 보이게 한다
-    const H = 124 + jitter(i, 11, 12.9898);
-    const tilt = jitter(i, 1.1, 78.233);
+    const H = 252 + jitter(i, 24, 12.9898);
+    const tilt = jitter(i, 1.0, 78.233);
     const baseY = LAY.baseY;
     const top = baseY - H;
     const c = BOOK[b.key] || BOOK.ancient;
 
     // 손때 — 오래 함께한 책일수록 모서리가 닳아 둥글어지고 채도가 내려간다
-    const r = 2.2 + b.patina * 2.6;
+    const r = 4 + b.patina * 5;
     const fade = b.patina * 0.16;
 
     let g = `<g transform="rotate(${tilt.toFixed(2)} ${(x + W / 2).toFixed(1)} ${baseY})">`;
@@ -146,10 +154,10 @@
     // 아직 펼치지 않은 책 — 빈 자리를 점선으로 남긴다.
     // "여기 아직 책이 없다"가 보여야 완독 유도가 된다.
     if (!b.opened) {
-      const eh = 108;
-      g += `<rect x="${x}" y="${baseY - eh}" width="${W}" height="${eh}" rx="3"
-        fill="rgba(255,255,255,.012)"
-        stroke="rgba(255,255,255,.10)" stroke-width="1" stroke-dasharray="3 5"/>`;
+      const eh = 220;
+      g += `<rect x="${x}" y="${baseY - eh}" width="${W}" height="${eh}" rx="5"
+        fill="rgba(0,0,0,.16)"
+        stroke="rgba(232,214,170,.20)" stroke-width="1.6" stroke-dasharray="7 8"/>`;
       const cx = x + W / 2, cy = baseY - eh / 2;
       g += `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle"
         transform="rotate(-90 ${cx} ${cy})" font-size="10.5"
@@ -171,16 +179,16 @@
     if (inkH > 2) {
       const surfY = baseY - inkH;
       const op = 0.62 + b.depth * 0.38;
-      g += `<path d="M${x} ${surfY + 2.2}
-        Q${x + W * 0.28} ${surfY - 1.6} ${x + W * 0.5} ${surfY + 0.6}
-        Q${x + W * 0.74} ${surfY + 2.6} ${x + W} ${surfY - 0.4}
+      g += `<path d="M${x} ${surfY + 4.4}
+        Q${x + W * 0.28} ${surfY - 3.4} ${x + W * 0.5} ${surfY + 1.2}
+        Q${x + W * 0.74} ${surfY + 5.2} ${x + W} ${surfY - 0.8}
         L${x + W} ${baseY} L${x} ${baseY} Z"
         fill="url(#${UID}-ink-${b.key})" opacity="${op.toFixed(3)}" clip-path="url(#${clip})"/>`;
       // 잉크 표면의 밝은 선 — 수위가 눈에 띄게
-      g += `<path d="M${x} ${surfY + 2.2}
-        Q${x + W * 0.28} ${surfY - 1.6} ${x + W * 0.5} ${surfY + 0.6}
-        Q${x + W * 0.74} ${surfY + 2.6} ${x + W} ${surfY - 0.4}"
-        fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1.1"
+      g += `<path d="M${x} ${surfY + 4.4}
+        Q${x + W * 0.28} ${surfY - 3.4} ${x + W * 0.5} ${surfY + 1.2}
+        Q${x + W * 0.74} ${surfY + 5.2} ${x + W} ${surfY - 0.8}"
+        fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.2"
         clip-path="url(#${clip})"/>`;
     }
 
@@ -194,21 +202,21 @@
 
     // 5) 책등 장식 — 깊이 읽은 사람의 책이 아름다워진다
     if (b.ornament >= 1) {
-      [top + 11, baseY - 11].forEach(yy => {
-        g += `<line x1="${x + 5}" y1="${yy}" x2="${x + W - 5}" y2="${yy}"
-          stroke="${GOLD}" stroke-width="1.1" opacity=".8"/>`;
-        g += `<line x1="${x + 5}" y1="${yy + 2.4}" x2="${x + W - 5}" y2="${yy + 2.4}"
-          stroke="${GOLD_DIM}" stroke-width=".6" opacity=".5"/>`;
+      [top + 24, baseY - 24].forEach(yy => {
+        g += `<line x1="${x + 10}" y1="${yy}" x2="${x + W - 10}" y2="${yy}"
+          stroke="${GOLD}" stroke-width="2.2" opacity=".85"/>`;
+        g += `<line x1="${x + 10}" y1="${yy + 5}" x2="${x + W - 10}" y2="${yy + 5}"
+          stroke="${GOLD_DIM}" stroke-width="1.2" opacity=".55"/>`;
       });
     }
     if (b.ornament >= 2) {
       const my = top + H * 0.36;
       const cx = x + W / 2;
       // 마름모 문양 — 전통 문양의 단순화
+      g += `<path d="M${cx} ${my - 15} l11 11 -11 11 -11 -11 z"
+        fill="none" stroke="${GOLD}" stroke-width="2.2" opacity=".85"/>`;
       g += `<path d="M${cx} ${my - 7} l5 5 -5 5 -5 -5 z"
-        fill="none" stroke="${GOLD}" stroke-width="1.1" opacity=".85"/>`;
-      g += `<path d="M${cx} ${my - 3.4} l2.4 2.4 -2.4 2.4 -2.4 -2.4 z"
-        fill="${GOLD}" opacity=".55"/>`;
+        fill="${GOLD}" opacity=".6"/>`;
     }
 
     // 6) 제목 — 세로쓰기. 금박 단계면 금색.
@@ -217,18 +225,18 @@
     if (b.ornament >= 3) {
       // 금박은 살짝 번지는 느낌
       g += `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle"
-        transform="rotate(-90 ${cx} ${cy})" font-size="12.5" fill="${GOLD_DIM}"
-        letter-spacing="3" opacity=".5" font-weight="700"
+        transform="rotate(-90 ${cx} ${cy})" font-size="26" fill="${GOLD_DIM}"
+        letter-spacing="7" opacity=".5" font-weight="700"
         font-family="-apple-system, 'Apple SD Gothic Neo', sans-serif">${c.label}</text>`;
     }
     g += `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle"
-      transform="rotate(-90 ${cx} ${cy})" font-size="12.5" fill="${titleColor}"
-      letter-spacing="3" font-weight="${b.ornament >= 3 ? 700 : 500}"
+      transform="rotate(-90 ${cx} ${cy})" font-size="26" fill="${titleColor}"
+      letter-spacing="7" font-weight="${b.ornament >= 3 ? 700 : 500}"
       font-family="-apple-system, 'Apple SD Gothic Neo', sans-serif">${c.label}</text>`;
 
     // 7) 테두리
-    g += `<rect x="${x + 0.5}" y="${top + 0.5}" width="${W - 1}" height="${H - 1}" rx="${r}"
-      fill="none" stroke="rgba(0,0,0,.3)" stroke-width="1"/>`;
+    g += `<rect x="${x + 1}" y="${top + 1}" width="${W - 2}" height="${H - 2}" rx="${r}"
+      fill="none" stroke="rgba(0,0,0,.42)" stroke-width="2"/>`;
 
     g += `</g>`;
     return g;
@@ -236,89 +244,89 @@
 
   // ── 세계의 서 — 서가 위에 눕혀둔 한 권 ──────────────────────
   function worldBook(w, x, y) {
-    const W = 84, H = 17;
+    const W = 210, H = 38;
     let g = '';
     if (!w.opened) {
-      g += `<rect x="${x}" y="${y}" width="${W}" height="${H}" rx="2.5"
-        fill="rgba(255,255,255,.012)" stroke="rgba(255,255,255,.10)"
-        stroke-width="1" stroke-dasharray="3 5"/>`;
+      g += `<rect x="${x}" y="${y}" width="${W}" height="${H}" rx="4"
+        fill="rgba(0,0,0,.16)" stroke="rgba(232,214,170,.20)"
+        stroke-width="1.6" stroke-dasharray="7 8"/>`;
       g += `<text x="${x + W / 2}" y="${y + H / 2}" text-anchor="middle" dominant-baseline="middle"
-        font-size="9.5" fill="rgba(255,255,255,.24)" letter-spacing="1.5"
+        font-size="18" fill="rgba(232,214,170,.34)" letter-spacing="4"
         font-family="-apple-system, sans-serif">세계의 서</text>`;
       return g;
     }
-    g += `<clipPath id="${UID}-cw"><rect x="${x}" y="${y}" width="${W}" height="${H}" rx="2.5"/></clipPath>`;
-    g += `<rect x="${x}" y="${y}" width="${W}" height="${H}" rx="2.5" fill="#6d6a86" opacity=".9"/>`;
+    g += `<clipPath id="${UID}-cw"><rect x="${x}" y="${y}" width="${W}" height="${H}" rx="4"/></clipPath>`;
+    g += `<rect x="${x}" y="${y}" width="${W}" height="${H}" rx="4" fill="#6d6a86" opacity=".92"/>`;
     g += `<rect x="${x}" y="${y}" width="${(W * w.ink).toFixed(1)}" height="${H}"
       fill="#39364f" opacity=".85" clip-path="url(#${UID}-cw)"/>`;
     // 책배(페이지 단면) — 눕혀 있으므로 앞쪽이 보인다
-    g += `<rect x="${x}" y="${y + H - 4}" width="${W}" height="4"
+    g += `<rect x="${x}" y="${y + H - 9}" width="${W}" height="9"
       fill="#d8cdb4" opacity=".5" clip-path="url(#${UID}-cw)"/>`;
-    g += `<rect x="${x}" y="${y}" width="${W}" height="${H}" rx="2.5"
+    g += `<rect x="${x}" y="${y}" width="${W}" height="${H}" rx="4"
       fill="url(#${UID}-roomLight)" clip-path="url(#${UID}-cw)"/>`;
-    g += `<line x1="${x + 5}" y1="${y + 3.5}" x2="${x + W - 5}" y2="${y + 3.5}"
-      stroke="${GOLD}" stroke-width=".8" opacity=".6"/>`;
+    g += `<line x1="${x + 12}" y1="${y + 8}" x2="${x + W - 12}" y2="${y + 8}"
+      stroke="${GOLD}" stroke-width="1.6" opacity=".65"/>`;
     g += `<text x="${x + W / 2}" y="${y + H / 2 - 0.5}" text-anchor="middle" dominant-baseline="middle"
-      font-size="9.5" fill="rgba(255,255,255,.86)" letter-spacing="1.5"
+      font-size="18" fill="rgba(255,255,255,.88)" letter-spacing="4"
       font-family="-apple-system, 'Apple SD Gothic Neo', sans-serif">세계의 서</text>`;
-    g += `<rect x="${x + 0.5}" y="${y + 0.5}" width="${W - 1}" height="${H - 1}" rx="2.5"
-      fill="none" stroke="rgba(0,0,0,.3)" stroke-width="1"/>`;
+    g += `<rect x="${x + 1}" y="${y + 1}" width="${W - 2}" height="${H - 2}" rx="4"
+      fill="none" stroke="rgba(0,0,0,.4)" stroke-width="2"/>`;
     return g;
   }
 
   // ── 나의 한국사 — 서가 옆에 세워둔 책 ───────────────────────
   function myBook(pageCount, complete, x, baseY) {
-    const W = 28, H = 96;
+    const W = 58, H = 196;
     const top = baseY - H;
-    let g = `<clipPath id="${UID}-cmy"><rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.4"/></clipPath>`;
-    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.4"
+    let g = `<clipPath id="${UID}-cmy"><rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4"/></clipPath>`;
+    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4"
       fill="${complete ? '#8a7340' : '#4e463b'}"/>`;
-    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.4"
+    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4"
       fill="url(#${UID}-roomLight)" clip-path="url(#${UID}-cmy)"/>`;
-    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.4"
+    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4"
       fill="#fff" filter="url(#${UID}-grain)" opacity=".45" clip-path="url(#${UID}-cmy)"/>`;
     // 책등의 세로 홈
-    g += `<line x1="${x + 4}" y1="${top + 4}" x2="${x + 4}" y2="${baseY - 4}"
-      stroke="rgba(0,0,0,.22)" stroke-width="1"/>`;
+    g += `<line x1="${x + 9}" y1="${top + 9}" x2="${x + 9}" y2="${baseY - 9}"
+      stroke="rgba(0,0,0,.26)" stroke-width="2"/>`;
     if (complete) {
-      [top + 9, baseY - 9].forEach(yy => {
-        g += `<line x1="${x + 4}" y1="${yy}" x2="${x + W - 4}" y2="${yy}"
-          stroke="${GOLD}" stroke-width="1.1" opacity=".9"/>`;
+      [top + 20, baseY - 20].forEach(yy => {
+        g += `<line x1="${x + 9}" y1="${yy}" x2="${x + W - 9}" y2="${yy}"
+          stroke="${GOLD}" stroke-width="2.2" opacity=".9"/>`;
       });
     }
     const cx = x + W / 2, cy = top + H * 0.55;
     g += `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle"
-      transform="rotate(-90 ${cx} ${cy})" font-size="10.5"
-      fill="${complete ? GOLD : 'rgba(255,255,255,.7)'}" letter-spacing="2"
+      transform="rotate(-90 ${cx} ${cy})" font-size="21"
+      fill="${complete ? GOLD : 'rgba(255,255,255,.75)'}" letter-spacing="5"
       font-family="-apple-system, 'Apple SD Gothic Neo', sans-serif">나의 한국사</text>`;
-    g += `<rect x="${x + 0.5}" y="${top + 0.5}" width="${W - 1}" height="${H - 1}" rx="2.4"
-      fill="none" stroke="rgba(0,0,0,.32)" stroke-width="1"/>`;
+    g += `<rect x="${x + 1}" y="${top + 1}" width="${W - 2}" height="${H - 2}" rx="4"
+      fill="none" stroke="rgba(0,0,0,.42)" stroke-width="2"/>`;
     return g;
   }
 
   // ── 배지 수첩 ───────────────────────────────────────────────
   function notebook(badgeCount, x, baseY) {
-    const W = 24, H = 68;
+    const W = 50, H = 140;
     const top = baseY - H;
-    let g = `<clipPath id="${UID}-cnb"><rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.2"/></clipPath>`;
-    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.2" fill="#5c4b3c"/>`;
-    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.2"
+    let g = `<clipPath id="${UID}-cnb"><rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4"/></clipPath>`;
+    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4" fill="#5c4b3c"/>`;
+    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4"
       fill="url(#${UID}-roomLight)" clip-path="url(#${UID}-cnb)"/>`;
-    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="2.2"
+    g += `<rect x="${x}" y="${top}" width="${W}" height="${H}" rx="4"
       fill="#fff" filter="url(#${UID}-grain)" opacity=".45" clip-path="url(#${UID}-cnb)"/>`;
     // 수첩 밴드
-    g += `<rect x="${x}" y="${top + H * 0.55}" width="${W}" height="4"
+    g += `<rect x="${x}" y="${top + H * 0.55}" width="${W}" height="9"
       fill="rgba(0,0,0,.3)" clip-path="url(#${UID}-cnb)"/>`;
     // 표지의 작은 원 — 획득한 배지 수만큼 채워진다
     for (let i = 0; i < 3; i++) {
       const filled = i < Math.min(3, badgeCount);
-      const cyy = top + 13 + i * 12;
-      g += `<circle cx="${x + W / 2}" cy="${cyy}" r="3.6"
+      const cyy = top + 28 + i * 26;
+      g += `<circle cx="${x + W / 2}" cy="${cyy}" r="7.5"
         fill="${filled ? GOLD : 'none'}"
-        stroke="${filled ? 'none' : 'rgba(255,255,255,.22)'}" stroke-width="1"/>`;
+        stroke="${filled ? 'none' : 'rgba(255,255,255,.26)'}" stroke-width="2"/>`;
     }
-    g += `<rect x="${x + 0.5}" y="${top + 0.5}" width="${W - 1}" height="${H - 1}" rx="2.2"
-      fill="none" stroke="rgba(0,0,0,.32)" stroke-width="1"/>`;
+    g += `<rect x="${x + 1}" y="${top + 1}" width="${W - 2}" height="${H - 2}" rx="4"
+      fill="none" stroke="rgba(0,0,0,.42)" stroke-width="2"/>`;
     return g;
   }
 
@@ -342,41 +350,30 @@
     const myPages = opts.myPages || 0;
     const complete = lib.openedCount === lib.books.length;
 
+    const VW = LAY.VW, VH = LAY.VH;
     const shelfW = LAY.bookW * 7 + LAY.gap * 6;
-    const rightX = LAY.padX + shelfW + 16;
-    // 오른쪽에 진묘수가 앉을 자리를 비워둔다. 캐릭터 이미지는 CSS로
-    // 절대배치되므로 SVG에는 그리지 않지만, 여백이 없으면 「나의 한국사」와
-    // 배지 수첩 위에 겹쳐 보인다. 2026-07-24 캐릭터 확정과 함께 조정.
-    const guideSpace = 96;
-    const VW = rightX + 58 + guideSpace;
-    const VH = 216;
+    const rightX = LAY.padX + shelfW + 34;
 
     let body = defs(lib.books);
 
-    // 뒷벽 — 아주 옅게. 배경 이미지를 얹을 때 이 레이어를 걷어내면 된다.
-    body += `<rect x="0" y="0" width="${VW}" height="${VH}" fill="rgba(255,255,255,.014)"/>`;
-    body += `<rect x="0" y="0" width="${VW}" height="${VH}" fill="url(#${UID}-roomLight)"/>`;
-
-    // 위 선반 + 세계의 서
-    body += shelfBoard(LAY.padX - 8, LAY.shelfTopY, shelfW + 16, 6);
-    body += worldBook(lib.world, LAY.padX + 46, LAY.shelfTopY - 17);
+    // 배경 이미지가 뒤에 깔리므로 뒷벽·조명 레이어는 그리지 않는다.
+    // (CSS의 .lib-stage 배경으로 처리 — SVG는 책과 소품만 담당한다)
 
     // 책이 선반에 드리우는 그림자
-    body += `<ellipse cx="${LAY.padX + shelfW / 2}" cy="${LAY.baseY + 1}"
-      rx="${shelfW / 2}" ry="4" fill="rgba(0,0,0,.28)"/>`;
+    body += `<ellipse cx="${LAY.padX + shelfW / 2}" cy="${LAY.baseY + 3}"
+      rx="${shelfW / 2 + 10}" ry="9" fill="rgba(0,0,0,.36)"/>`;
 
     // 책 7권
     lib.books.forEach((b, i) => { body += book(b, i); });
 
-    // 아래 선반
-    body += shelfBoard(LAY.padX - 8, LAY.baseY, shelfW + 16, 7);
-
-    // 오른쪽 — 나의 한국사 + 배지 수첩
-    body += `<ellipse cx="${rightX + 30}" cy="${LAY.baseY + 1}" rx="34" ry="3.6"
-      fill="rgba(0,0,0,.26)"/>`;
+    // 오른쪽 — 나의 한국사 + 배지 수첩 (배경 선반 위에 함께 세운다)
+    body += `<ellipse cx="${rightX + 62}" cy="${LAY.baseY + 3}" rx="72" ry="8"
+      fill="rgba(0,0,0,.32)"/>`;
     body += myBook(myPages, complete, rightX, LAY.baseY);
-    body += notebook((lib.badges || []).length, rightX + 34, LAY.baseY);
-    body += shelfBoard(rightX - 6, LAY.baseY, 72, 7);
+    body += notebook((lib.badges || []).length, rightX + 66, LAY.baseY);
+
+    // 세계의 서 — 서가 위에 눕혀둔 한 권. 배경 상단 선반 자리에 놓는다.
+    body += worldBook(lib.world, LAY.padX + 30, 132);
 
     return `<svg viewBox="0 0 ${VW} ${VH}" xmlns="http://www.w3.org/2000/svg"
       role="img" aria-label="나의 서재" class="atlas-library-svg">${body}</svg>`;

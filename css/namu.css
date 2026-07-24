@@ -263,33 +263,48 @@
 }
 
 /* ── 서가 ────────────────────────────────────────────────── */
+/* 2026-07-24 배경 이미지 도입.
+   .lib-stage가 배경(고지도 벽 + 나무 선반)을 깔고, 그 위에 SVG로 그린
+   책들이 얹힌다. SVG의 viewBox(1200x800)와 배경 이미지 비율(1.50)을
+   똑같이 맞춰뒀기 때문에, 어떤 화면 폭에서도 책이 선반 위에 정확히
+   서 있다. 배경을 바꾸려면 이미지와 js/library.js의 LAY.baseY만
+   같이 조정하면 된다. */
 .lib-stage {
   position: relative;
-  display: flex; align-items: flex-end; justify-content: center;
-  padding: 8px 0 4px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  aspect-ratio: 1200 / 800;
+  background-image: url('../assets/images/shelf-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 60px rgba(0,0,0,.35);
 }
-.lib-shelf { width: 100%; max-width: 460px; }
-.atlas-library-svg { width: 100%; height: auto; display: block; }
+/* aspect-ratio 미지원 브라우저 대비 */
+@supports not (aspect-ratio: 1 / 1) {
+  .lib-stage::before { content: ''; display: block; padding-top: 66.67%; }
+}
 
-/* 진묘수 — 서가 옆에 앉아 서재를 지킨다.
+.lib-shelf {
+  position: absolute; inset: 0;
+}
+.atlas-library-svg { width: 100%; height: 100%; display: block; }
+
+/* 진묘수 — 서가 앞에 앉아 서재를 지킨다.
    무령왕릉 진묘수(국보 162호)를 캐릭터화한 ATLAS의 안내자다.
    무덤을 지키던 수호수가 여기서는 기록을 지킨다.
-
-   이미지가 가로로 넓은 편(약 1.8:1)이고 좌우에 여백이 있어서,
-   폭을 기준으로 잡으면 실제 몸통이 작아 보인다. 그래서 폭을 넉넉히
-   주되 아래로 살짝 내려 서가 바닥선에 앉은 것처럼 배치한다.
+   배경 안쪽에 들어가야 하므로 .lib-stage 기준으로 배치한다.
    이미지 파일이 없으면 img의 onerror가 통째로 숨긴다. */
 .lib-guide {
-  position: absolute; right: -10px; bottom: -14px;
-  width: 132px; height: auto;
+  position: absolute;
+  /* x 900~1170 영역. 배지 수첩(x 840~890)과 겹치지 않게 오른쪽으로 뺀다. */
+  right: 2.5%; bottom: 3%;
+  width: 22.5%; height: auto;
   pointer-events: none;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,.5));
-}
-@media (max-width: 560px) {
-  .lib-guide { width: 104px; right: -14px; bottom: -12px; }
-}
-@media (max-width: 400px) {
-  .lib-guide { width: 88px; right: -16px; bottom: -10px; }
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.6));
+  z-index: 2;
 }
 
 /* ── 시대별 책 목록 ──────────────────────────────────────── */
