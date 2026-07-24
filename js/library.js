@@ -139,7 +139,7 @@
     const W = LAY.bookW;
     const x = LAY.padX + i * (W + LAY.gap);
     // 높이·기울기를 미세하게 흔들어 실제 서가처럼 보이게 한다
-    const H = 252 + jitter(i, 24, 12.9898);
+    const H = 330 + jitter(i, 30, 12.9898);
     const tilt = jitter(i, 1.0, 78.233);
     const baseY = LAY.baseY;
     const top = baseY - H;
@@ -154,7 +154,7 @@
     // 아직 펼치지 않은 책 — 빈 자리를 점선으로 남긴다.
     // "여기 아직 책이 없다"가 보여야 완독 유도가 된다.
     if (!b.opened) {
-      const eh = 220;
+      const eh = 300;
       g += `<rect x="${x}" y="${baseY - eh}" width="${W}" height="${eh}" rx="5"
         fill="rgba(0,0,0,.16)"
         stroke="rgba(232,214,170,.20)" stroke-width="1.6" stroke-dasharray="7 8"/>`;
@@ -373,7 +373,10 @@
     body += notebook((lib.badges || []).length, rightX + 66, LAY.baseY);
 
     // 세계의 서 — 서가 위에 눕혀둔 한 권. 배경 상단 선반 자리에 놓는다.
-    body += worldBook(lib.world, LAY.padX + 30, 132);
+    // 세계의 서 — 책들 바로 위에 눕혀둔다.
+    // 처음엔 y=132(배경 상단 선반)에 뒀는데 책 상단과 280px이나 떨어져
+    // 균형이 깨져 보였다. 책 머리 가까이 내려 한 덩어리로 읽히게 한다.
+    body += worldBook(lib.world, LAY.padX + 190, 248);
 
     return `<svg viewBox="0 0 ${VW} ${VH}" xmlns="http://www.w3.org/2000/svg"
       role="img" aria-label="나의 서재" class="atlas-library-svg">${body}</svg>`;
