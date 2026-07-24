@@ -1,0 +1,146 @@
+/* css/tutorial.css — 진묘수가 안내하는 첫 방문 튜토리얼
+   2026-07-24.
+
+   구조: 어두운 덮개(.tut-scrim) + 구멍(.tut-hole) + 말풍선(.tut-panel).
+   구멍은 실제로 뚫는 게 아니라, 거대한 box-shadow로 주변을 어둡게 만들어
+   그 사각형만 밝아 보이게 하는 방식이다. 지도 UI의 z-index나 DOM을
+   전혀 건드리지 않아 부작용이 없다. */
+
+.tut-root {
+  position: fixed; inset: 0;
+  z-index: 3000;              /* 지도 최상위 UI(1301)보다 확실히 위 */
+  display: none;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+.tut-root.open { display: block; }
+
+/* 스크롤 잠금 — 튜토리얼 중에는 배경이 움직이지 않게 */
+body.tut-lock { overflow: hidden; }
+
+/* 전체를 덮는 어두운 층. 구멍이 있을 때는 .tut-hole이 대신 어둡게 하므로
+   이 층은 투명에 가깝게 두고 클릭 차단 역할만 한다. */
+.tut-scrim {
+  position: absolute; inset: 0;
+  background: rgba(8, 7, 5, .72);
+  transition: opacity .25s ease;
+}
+
+/* 하이라이트 구멍 — 사방으로 퍼지는 그림자가 화면을 덮고,
+   이 사각형 안쪽만 밝게 남는다. */
+.tut-hole {
+  position: fixed;
+  border-radius: 10px;
+  box-shadow: 0 0 0 9999px rgba(8, 7, 5, .74);
+  border: 2px solid rgba(212, 185, 120, .85);
+  pointer-events: none;
+  transition: left .3s cubic-bezier(.4,0,.2,1), top .3s cubic-bezier(.4,0,.2,1),
+              width .3s cubic-bezier(.4,0,.2,1), height .3s cubic-bezier(.4,0,.2,1);
+  animation: tutPulse 2.2s ease-in-out infinite;
+}
+@keyframes tutPulse {
+  0%, 100% { border-color: rgba(212, 185, 120, .85); }
+  50%      { border-color: rgba(212, 185, 120, .35); }
+}
+/* 구멍이 보일 때는 배경 덮개를 투명하게 — 이중으로 어두워지지 않게.
+   :has()는 구형 브라우저 지원이 고르지 않아 JS가 .has-hole을 붙인다. */
+.tut-root.has-hole .tut-scrim { background: transparent; }
+
+/* ── 말풍선 + 진묘수 ─────────────────────────────────────── */
+.tut-panel {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: min(520px, calc(100vw - 32px));
+  display: flex; align-items: flex-end; gap: 0;
+  transition: top .3s ease, bottom .3s ease;
+}
+.tut-panel.at-bottom { bottom: 24px; }
+.tut-panel.at-top    { top: 24px; }
+
+.tut-guide {
+  width: 108px; height: auto;
+  margin-right: -18px; margin-bottom: -6px;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 5px 12px rgba(0,0,0,.55));
+  pointer-events: none;
+}
+
+.tut-bubble {
+  flex: 1 1 auto;
+  background: linear-gradient(180deg, #201c16 0%, #17140f 100%);
+  border: 1px solid rgba(212, 185, 120, .34);
+  border-radius: 14px;
+  padding: 16px 18px 14px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.55);
+}
+
+.tut-title {
+  font-size: 15px; font-weight: 700;
+  color: #d4b978; letter-spacing: .03em;
+  margin-bottom: 7px;
+}
+.tut-body {
+  font-size: 13.5px; line-height: 1.75;
+  color: #eee7d8; opacity: .92;
+  white-space: pre-line;   /* 본문의 \n을 줄바꿈으로 */
+  margin-bottom: 12px;
+}
+
+/* 진행 점 */
+.tut-dots { display: flex; gap: 5px; margin-bottom: 12px; }
+.tut-dots i {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  transition: background .25s ease, width .25s ease;
+}
+.tut-dots i.on { background: #d4b978; width: 16px; border-radius: 3px; }
+
+/* 버튼 */
+.tut-actions { display: flex; align-items: center; justify-content: space-between; }
+.tut-nav { display: flex; gap: 7px; }
+.tut-skip {
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; color: rgba(238,231,216,.5);
+  font-family: inherit; padding: 6px 2px;
+}
+.tut-skip:hover { color: rgba(238,231,216,.8); }
+.tut-btn {
+  cursor: pointer; font-family: inherit;
+  font-size: 12.5px; padding: 7px 15px;
+  border-radius: 8px; border: 1px solid rgba(212,185,120,.3);
+  background: rgba(255,255,255,.05); color: #eee7d8;
+}
+.tut-btn:hover:not(:disabled) { background: rgba(212,185,120,.16); }
+.tut-btn:disabled { opacity: .3; cursor: default; }
+.tut-next {
+  background: rgba(212,185,120,.2);
+  border-color: rgba(212,185,120,.5);
+  color: #f0e4c8; font-weight: 600;
+}
+.tut-next:hover { background: rgba(212,185,120,.32); }
+
+/* ── 모바일 ──────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .tut-panel { width: calc(100vw - 20px); }
+  .tut-panel.at-bottom { bottom: 14px; }
+  .tut-panel.at-top { top: 14px; }
+  .tut-guide { width: 76px; margin-right: -14px; }
+  .tut-bubble { padding: 14px 15px 12px; }
+  .tut-title { font-size: 14px; }
+  .tut-body { font-size: 12.5px; line-height: 1.7; }
+}
+/* 아주 좁은 화면에서는 진묘수를 말풍선 위로 올린다 */
+@media (max-width: 380px) {
+  .tut-panel { flex-direction: column; align-items: flex-start; gap: 0; }
+  .tut-guide { margin: 0 0 -10px 10px; width: 70px; }
+}
+
+
+/* 소개 페이지의 「다시 보기」 버튼 */
+.intro-tut-btn {
+  margin-top: 14px; cursor: pointer;
+  font-family: inherit; font-size: 12.5px;
+  padding: 8px 14px; border-radius: 8px;
+  border: 1px solid rgba(212,185,120,.32);
+  background: rgba(212,185,120,.1); color: #d4b978;
+}
+.intro-tut-btn:hover { background: rgba(212,185,120,.2); }

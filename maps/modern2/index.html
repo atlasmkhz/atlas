@@ -57,6 +57,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="css/style.css?v=20260718a" />
 <link rel="stylesheet" href="../../css/namu.css">
+<link rel="stylesheet" href="../../css/tutorial.css">
 </head>
 <body>
 
@@ -178,6 +179,10 @@
       <li>레이어로 인물·조직·영역 표시</li>
       <li>루트로 시간의 흐름 따라가기</li>
     </ul>
+    <!-- 2026-07-24: 튜토리얼 다시 보기. 첫 방문 때 자동으로 뜨지만
+         건너뛰었거나 나중에 다시 보고 싶은 사람을 위한 통로다.
+         tutorial.js가 window.openTutorial을 노출한다. -->
+    <button type="button" class="intro-tut-btn" id="introTutBtn">진묘수의 안내 다시 보기</button>
   </div>
   <hr class="intro-divider">
   <div class="intro-contact">
@@ -433,5 +438,6 @@
 <script src="../../js/growth.js"></script>
 <script src="../../js/library.js"></script>
 <script src="../../js/namuBadge.js"></script>
+<script src="../../js/tutorial.js"></script>
 </body>
 </html>
