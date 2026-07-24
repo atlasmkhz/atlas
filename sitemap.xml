@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
-  메인 페이지 1개 + 1876~1945 Event 481개 + 루트 10개 + 
-  근현대(1945~1993) 진입점 1개 + Event 461개 + 루트 10개 + 
-  현대(1994~2025) 진입점 1개 + Event 361개(루트 없음) + 
+  메인 페이지 1개 + 1876~1945 Event 482개 + 루트 10개 + 
+  근현대(1945~1993) 진입점 1개 + Event 462개 + 루트 10개 + 
+  현대(1994~2025) 진입점 1개 + Event 364개(루트 없음) + 
   조선(1392~1875, 중세2) 진입점 1개 + Event 278개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 168개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
@@ -1254,6 +1254,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/event/1926-june-10th</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/1926-kaneko-fumiko</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2669,6 +2674,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1949-national-guidance</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1950-ahn-jong-sam</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5178,6 +5188,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2004-death-kim-hyang</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2004-founding-liberty-union</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5708,6 +5723,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2018-won-sei-hoon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2019-2019-gangwon-wildfires</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -6109,6 +6129,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-coupang-data-breach</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-death-lee-hae</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
