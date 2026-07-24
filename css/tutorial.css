@@ -144,3 +144,6 @@ body.tut-lock { overflow: hidden; }
   background: rgba(212,185,120,.1); color: #d4b978;
 }
 .intro-tut-btn:hover { background: rgba(212,185,120,.2); }
+
+/* 포털 푸터의 「다시 보기」 — 소개 모달이 없는 포털용 자리 */
+.portal-footer-actions { margin-top: 12px; }
