@@ -344,7 +344,11 @@
 
     const shelfW = LAY.bookW * 7 + LAY.gap * 6;
     const rightX = LAY.padX + shelfW + 16;
-    const VW = rightX + 70;
+    // 오른쪽에 진묘수가 앉을 자리를 비워둔다. 캐릭터 이미지는 CSS로
+    // 절대배치되므로 SVG에는 그리지 않지만, 여백이 없으면 「나의 한국사」와
+    // 배지 수첩 위에 겹쳐 보인다. 2026-07-24 캐릭터 확정과 함께 조정.
+    const guideSpace = 96;
+    const VW = rightX + 58 + guideSpace;
     const VH = 216;
 
     let body = defs(lib.books);

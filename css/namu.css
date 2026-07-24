@@ -271,15 +271,25 @@
 .lib-shelf { width: 100%; max-width: 460px; }
 .atlas-library-svg { width: 100%; height: auto; display: block; }
 
-/* 진묘수 — 서가 옆에 앉아 서재를 지킨다 */
+/* 진묘수 — 서가 옆에 앉아 서재를 지킨다.
+   무령왕릉 진묘수(국보 162호)를 캐릭터화한 ATLAS의 안내자다.
+   무덤을 지키던 수호수가 여기서는 기록을 지킨다.
+
+   이미지가 가로로 넓은 편(약 1.8:1)이고 좌우에 여백이 있어서,
+   폭을 기준으로 잡으면 실제 몸통이 작아 보인다. 그래서 폭을 넉넉히
+   주되 아래로 살짝 내려 서가 바닥선에 앉은 것처럼 배치한다.
+   이미지 파일이 없으면 img의 onerror가 통째로 숨긴다. */
 .lib-guide {
-  position: absolute; right: -4px; bottom: -6px;
-  width: 84px; height: auto;
+  position: absolute; right: -10px; bottom: -14px;
+  width: 132px; height: auto;
   pointer-events: none;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,.45));
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.5));
 }
-@media (max-width: 480px) {
-  .lib-guide { width: 62px; right: -8px; }
+@media (max-width: 560px) {
+  .lib-guide { width: 104px; right: -14px; bottom: -12px; }
+}
+@media (max-width: 400px) {
+  .lib-guide { width: 88px; right: -16px; bottom: -10px; }
 }
 
 /* ── 시대별 책 목록 ──────────────────────────────────────── */
