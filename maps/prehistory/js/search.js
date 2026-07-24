@@ -18,6 +18,60 @@
 let searchActive = false;
 function isSearchActive(){ return searchActive; }
 
+// ── 통합검색: 다른 시대 안내 (2026-07-25) ──────────────────────
+// 이 지도의 DATA에 없는 검색어라도, 다른 6개 지도 중 하나에 있을 수
+// 있다(예: 이 지도에서 검색했는데 그 카드는 사실 다른 시대에 있다 —
+// 자기 자신은 아래에서 제외됨). data/search_index.js가 미리 만들어둔
+// 경량 통합 인덱스(SEARCH_INDEX, 전역)에서 같은 검색어로 매칭되는 다른
+// 지도의 항목을 찾아 "◯◯ 시대에 있음" 안내+링크만 보여준다. 이 지도
+// 화면에 마커를 그리지는 않는다 — 다른 지도는 완전히 독립된 페이지라
+// 여기서 미리보기를 그릴 방법이 없기 때문이다.
+const THIS_MAP_KEY = 'prehistory';
+
+function matchIndexEntry(entry, qNorm){
+  if(entry.mapKey === THIS_MAP_KEY) return false; // 자기 지도 결과는 이미 위에서 보여줬으니 제외
+  const t = normalize(entry.title_ko || '');
+  if(t.includes(qNorm)) return true;
+  if(Array.isArray(entry.people) && entry.people.some(name => normalize(name || '').includes(qNorm))) return true;
+  return false;
+}
+
+function renderCrossEra(query){
+  const el = document.getElementById('searchCrossEra');
+  if(!el) return;
+  if(typeof SEARCH_INDEX === 'undefined'){ el.innerHTML = ''; return; }
+
+  const qNorm = normalize(query);
+  const matches = SEARCH_INDEX.filter(entry => matchIndexEntry(entry, qNorm));
+
+  if(!matches.length){ el.innerHTML = ''; return; }
+
+  // 같은 인물/사건이 같은 다른 지도에 여러 건 걸릴 수 있으므로
+  // mapLabel 기준으로 묶어서 한 줄씩만 보여준다(너무 길어지지 않도록).
+  const byMap = new Map();
+  matches.forEach(m=>{
+    if(!byMap.has(m.mapKey)) byMap.set(m.mapKey, { mapLabel: m.mapLabel, items: [] });
+    byMap.get(m.mapKey).items.push(m);
+  });
+
+  const lines = [];
+  byMap.forEach(group=>{
+    const first = group.items[0];
+    const extra = group.items.length > 1 ? ` 외 ${group.items.length - 1}건` : '';
+    lines.push(`<a href="${first.url}">${esc(group.mapLabel)}에서 "${esc(first.title_ko)}"${extra} →</a>`);
+  });
+  el.innerHTML = lines.join('');
+}
+
+function esc(s){
+  return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function clearCrossEra(){
+  const el = document.getElementById('searchCrossEra');
+  if(el) el.innerHTML = '';
+}
+
 // 매번 DATA에서 새로 펼친다 — 별도 인덱스를 캐싱하지 않음.
 // (이번 작업의 데이터 규모(수백 건)에서는 매 검색마다 펼쳐도 300ms 목표에
 // 문제없다. 데이터가 수만 건 단위로 커지면 캐싱을 재검토할 것.)
@@ -80,8 +134,11 @@ function renderSearchResults(results){
     const icon = makeMarkerIcon(e.type, { color, opacity:1, pulse:true });
     const m = L.marker([e.lat,e.lng], {icon}).addTo(map);
     m.on('click', ()=>{
-      if(window.openInfoPanel) openInfoPanel(popupHtml(e));
-      if(typeof setSelectRing === 'function'){ try{ setSelectRing(m); }catch(_){} }
+      // 검색 결과 클릭 시 해당 사건의 시기(챕터)로 이동한 뒤 정보창을
+      // 연다(navigateToEvent가 처리) — 검색만으로는 화면이 그대로였던
+      // 문제(2026-07-25 두목님 피드백)를 여기서 고친다.
+      if(typeof navigateToEvent === 'function') navigateToEvent(e.id);
+      else if(window.openInfoPanel) openInfoPanel(popupHtml(e));
     });
     attachSelectRing(m);
     m._origLatLng = [e.lat, e.lng];
@@ -113,6 +170,10 @@ function runSearch(query){
   const results = searchEvents(trimmed);
   const clearBtn = document.getElementById('searchClearBtn');
   if (window.trackSearch) window.trackSearch(trimmed, results.length);
+
+  // 이 지도에 결과가 있든 없든, 다른 시대 안내는 항상 함께 갱신한다 —
+  // 이 지도에 몇 건 있어도 다른 시대에 더 관련된 인물이 있을 수 있다.
+  renderCrossEra(trimmed);
 
   if(!results.length){
     // 결과 없음: 지도는 직전 상태 그대로 유지하고 상태 줄에만 표시한다.
@@ -146,6 +207,7 @@ function runSearch(query){
 function clearSearch(){
   searchActive = false;
   setStatus('', false);
+  clearCrossEra();
 
   const input = document.getElementById('searchInput');
   const clearBtn = document.getElementById('searchClearBtn');

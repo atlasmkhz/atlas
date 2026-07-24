@@ -108,6 +108,19 @@
   .search-status:not(:empty) { padding:0 14px 9px 14px; max-height:20px; }
   .search-status.no-result { color:#e8a0a0; }
 
+  /* 통합검색: 현재 지도에 없고 다른 시대 지도에 있는 결과 안내.
+     (2026-07-25) 마커를 그리지 않고 텍스트 안내+링크만 준다 — 다른
+     지도는 완전히 독립된 페이지라 여기서 미리보기를 그릴 수 없다. */
+  .search-cross-era {
+    font-size:11px; padding:0 14px; max-height:0; overflow:hidden;
+    transition:max-height 150ms ease; display:flex; flex-direction:column; gap:3px;
+  }
+  .search-cross-era:not(:empty) { padding:0 14px 9px 14px; max-height:120px; overflow-y:auto; }
+  .search-cross-era a {
+    color:var(--gold); text-decoration:none; border-bottom:1px dotted rgba(184,152,96,0.5);
+  }
+  .search-cross-era a:hover { color:#fff; border-bottom-color:#fff; }
+
   .legend {
     background:rgba(20,17,12,0.82); border:1px solid rgba(184,152,96,0.3);
     border-radius:6px; padding:9px 11px; backdrop-filter:blur(6px); max-width:140px;
