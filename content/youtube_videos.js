@@ -412,6 +412,21 @@ const YOUTUBE_VIDEOS = [
     thumbnail_override: null,
   },
 
+  {
+    id: 'v_yi_sanghwa',
+    youtube_id: 'AqySclbgTCY',
+    title: '통곡 | 이상화를 노래하다',
+    description: '시인 이상화의 시 「통곡(慟哭)」에서 영감을 받아 새롭게 재해석한 창작곡. 원작이 담고 있는 슬픔과 저항의 정신을 바탕으로, 관동 대학살과 식민지 시대를 살아간 민중의 아픔을 오늘의 언어와 음악으로 다시 노래했다. Cover Song & Video by 해담e — 노래로 시대를 말하다.',
+    published: '2026-07-20',
+    duration: null,
+    playlist: 'atlas_modern',
+    tags: ['이상화', '통곡', '통곡시', '시노래', '창작곡', '관동대학살', '간토대학살', '독립운동', '빼앗긴들에도봄은오는가', '해담e'],
+    related_events: ['person_1926_03', 'massacre_1923_01'],
+    related_events_modern2: [],
+    related_routes: [],
+    thumbnail_override: null,
+  },
+
 ];
 
 if (typeof window !== 'undefined') {

@@ -151,6 +151,24 @@ const ROUTE_KOREAN_WAR_MASSACRES = {
     },
 
     {
+      id: 'wp_memorial_songs_01',
+      type: 'tragedy',
+      pinned: true,
+      pinned_badge: '추모 노래',
+      year: 1950, month: null, day: null,
+      title_ko: '노래로 기억하는 이름들 — 궁예s 채널',
+      place_ko: null,
+      lat: 35.4, lng: 128.2,
+      stay: null,
+      summary_ko: '이름 없이 희생된 이들을 음악으로 기억하는 채널. 역사적 사건과 인물을 노래로 재해석한 작품들을 모아둔다.',
+      external_link: {
+        url: 'https://www.youtube.com/@%EA%B6%81%EC%98%88s',
+        label: '궁예s 채널 바로가기',
+      },
+      card_ref: null,
+    },
+
+    {
       id: 'wp_08',
       type: 'tragedy',
       year: 1950, month: 6, day: 28,
