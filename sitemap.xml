@@ -10328,12 +10328,32 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-eonhae</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/hwandan-gogi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/joseon-revolution-declaration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/march-first-declaration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
@@ -10368,17 +10388,17 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
     <loc>https://atlas.mkhz.kr/archive/unequal-measures</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/world-routes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
@@ -11043,6 +11063,56 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-eonhae/hmje_01_seomun</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-eonhae/hmje_02_yeui</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_01_preface</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_02_jajahae_1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_03_jajahae_2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_04_chosunghae</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_05_jungsunghae</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_06_jongsunghae</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_07_hapjahae_yongjarye</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/hunminjeongeum-haerye/hmjy_08_jeonginji_seo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/hwandan-gogi/hd_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -11174,6 +11244,61 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/hyeonchungwon-paradox/hp_11</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/joseon-revolution-declaration/jrd_01_chapter1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/joseon-revolution-declaration/jrd_02_chapter2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/joseon-revolution-declaration/jrd_03_chapter3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/joseon-revolution-declaration/jrd_04_chapter4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/joseon-revolution-declaration/jrd_05_chapter5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/march-first-declaration/mfd_01_paragraph1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/march-first-declaration/mfd_02_paragraph2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/march-first-declaration/mfd_03_paragraph3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/march-first-declaration/mfd_04_paragraph4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/march-first-declaration/mfd_05_paragraph5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/march-first-declaration/mfd_06_paragraph6_and_pledge</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -11378,56 +11503,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/hunminjeongeum_preface</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/joseon_revolution_declaration</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/march_first_declaration</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_01_purpose</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_02_regime</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_03_dilemma</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_04_responsibility</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_05_torture</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_06_court</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_07_life</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://atlas.mkhz.kr/archive/unequal-measures/um_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -11469,6 +11544,41 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/world-routes/quantum-mechanics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal/yusimin_appeal_01_purpose</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal/yusimin_appeal_02_regime</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal/yusimin_appeal_03_dilemma</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal/yusimin_appeal_04_responsibility</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal/yusimin_appeal_05_torture</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal/yusimin_appeal_06_court</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/yusimin-appeal/yusimin_appeal_07_life</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
