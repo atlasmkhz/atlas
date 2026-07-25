@@ -469,6 +469,15 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
         map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
         map_cta_url = f"{map_prefix}?event={post['card_ref']}"
         map_cta_parts.append(f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 사건 보기</a></p>')
+    if post.get('route_link'):
+        # route_link: { map: 'prehistory', route: 'hwandan_gogi_journey' } 형태로
+        # 지도 루트 직접 진입 링크를 만든다 — card_ref(사건카드 없음)이지만
+        # 루트가 있는 시리즈(환단고기 등)에 사용.
+        rl = post['route_link']
+        map_prefix = CARD_MAP_PREFIX.get(rl.get('map'), CARD_MAP_PREFIX['root'])
+        route_id = rl.get('route', '')
+        map_cta_url = f"{map_prefix}?route={route_id}"
+        map_cta_parts.append(f'<p class="map-cta"><a href="{map_cta_url}">지도에서 루트 보기</a></p>')
     if post.get('world_route'):
         # 세계사 인물/사건은 한국 지도(root)가 아니라 자료실 내 세계사 루트 페이지로
         # 보내야 한다. world_route는 archive/world-routes/{slug}.html의 slug이고,
