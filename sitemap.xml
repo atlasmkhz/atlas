@@ -11393,6 +11393,41 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_01_purpose</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_02_regime</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_03_dilemma</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_04_responsibility</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_05_torture</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_06_court</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/source-readings/yusimin_appeal_07_life</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/unequal-measures/um_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
