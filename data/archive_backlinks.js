@@ -34,9 +34,34 @@ const ARCHIVE_BACKLINKS = {
       "title": "\"이승만 덕분에 3·1운동이 무르익었다\"? — 위임통치 청원이라는 정반대의 기록"
     },
     {
-      "url": "archive/source-readings/march_first_declaration.html",
-      "series": "원문으로 읽는 역사",
-      "title": "기미독립선언서 — 원한이 아니라 문명의 언어로 쓴 독립"
+      "url": "archive/march-first-declaration/mfd_01_paragraph1.html",
+      "series": "기미독립선언서",
+      "title": "기미독립선언서 ① \"오등은 자에 아 조선의 독립국임을 선언하노라\""
+    },
+    {
+      "url": "archive/march-first-declaration/mfd_02_paragraph2.html",
+      "series": "기미독립선언서",
+      "title": "기미독립선언서 ② \"우리 생존권의 박상됨이 무릇 기하이며\" — 십 년의 압제를 되짚다"
+    },
+    {
+      "url": "archive/march-first-declaration/mfd_03_paragraph3.html",
+      "series": "기미독립선언서",
+      "title": "기미독립선언서 ③ \"최대급무가 민족적 독립을 확실케 함이니\" — 이천만 각개가 방촌의 인을 품고"
+    },
+    {
+      "url": "archive/march-first-declaration/mfd_04_paragraph4.html",
+      "series": "기미독립선언서",
+      "title": "기미독립선언서 ④ \"결코 타의 파괴에 재치 안이하도다\" — 원한이 아닌 자기 건설의 선언"
+    },
+    {
+      "url": "archive/march-first-declaration/mfd_05_paragraph5.html",
+      "series": "기미독립선언서",
+      "title": "기미독립선언서 ⑤ \"아아 신천지가 안전에 전개되도다\" — 위력의 시대가 가고 도의의 시대가 온다"
+    },
+    {
+      "url": "archive/march-first-declaration/mfd_06_paragraph6_and_pledge.html",
+      "series": "기미독립선언서",
+      "title": "기미독립선언서 ⑥ \"착수가 곳 성공이라\" — 마지막 문단, 공약삼장, 그리고 서른세 사람의 이름"
     }
   ],
   "person_1914_04": [
@@ -81,9 +106,29 @@ const ARCHIVE_BACKLINKS = {
   ],
   "political_1923_01": [
     {
-      "url": "archive/source-readings/joseon_revolution_declaration.html",
-      "series": "원문으로 읽는 역사",
-      "title": "조선혁명선언 — 가장 과격한 선언문의 가장 인간적인 마지막 문장"
+      "url": "archive/joseon-revolution-declaration/jrd_01_chapter1.html",
+      "series": "조선혁명선언",
+      "title": "조선혁명선언 ① \"강도 일본이 우리의 국호를 없이 하며\" — 무엇을 빼앗겼는가"
+    },
+    {
+      "url": "archive/joseon-revolution-declaration/jrd_02_chapter2.html",
+      "series": "조선혁명선언",
+      "title": "조선혁명선언 ② \"자치를 얻는다 하자\" — 타협론에 대한 정면 반박"
+    },
+    {
+      "url": "archive/joseon-revolution-declaration/jrd_03_chapter3.html",
+      "series": "조선혁명선언",
+      "title": "조선혁명선언 ③ \"우리는 외교, 준비 등의 미몽을 버리고\" — 임시정부 노선에 대한 비판"
+    },
+    {
+      "url": "archive/joseon-revolution-declaration/jrd_04_chapter4.html",
+      "series": "조선혁명선언",
+      "title": "조선혁명선언 ④ \"파괴적 정신이 곧 건설적 주장이라\" — 다섯 가지 파괴와 다섯 가지 건설"
+    },
+    {
+      "url": "archive/joseon-revolution-declaration/jrd_05_chapter5.html",
+      "series": "조선혁명선언",
+      "title": "조선혁명선언 ⑤ \"민중은 우리 혁명의 대본영이다\" — 결론"
     }
   ],
   "political_1925_02": [

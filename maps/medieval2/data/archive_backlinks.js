@@ -5,9 +5,54 @@
 const ARCHIVE_BACKLINKS = {
   "culture_1443_01": [
     {
-      "url": "../../archive/source-readings/hunminjeongeum_preface.html",
-      "series": "원문으로 읽는 역사",
-      "title": "훈민정음 어제 서문 — 쉰네 글자에 담긴 문자 혁명의 이유"
+      "url": "../../archive/hunminjeongeum-eonhae/hmje_01_seomun.html",
+      "series": "훈민정음 언해본",
+      "title": "훈민정음 언해본 ① \"나랏말싸미 듕귁에 달아\" — 어제서문"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-eonhae/hmje_02_yeui.html",
+      "series": "훈민정음 언해본",
+      "title": "훈민정음 언해본 ② 예의 — 스물여덟 자의 소리를 하나하나 풀다"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_01_preface.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ① 어제서문과 예의 — 스물여덟 자를 만든 이유"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_02_jajahae_1.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ② 제자해(상) — 소리와 오행, 그리고 발음기관을 본뜬 글자"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_03_jajahae_2.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ③ 제자해(하) — 하늘·땅·사람을 본뜬 중성, 그리고 초중종성이 만나는 이치"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_04_chosunghae.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ④ 초성해 — 초성은 운서의 자모다"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_05_jungsunghae.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ⑤ 중성해 — 자운의 한가운데서 초성과 종성을 잇는 소리"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_06_jongsunghae.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ⑥ 종성해 — 여덟 자로 충분한 이유"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_07_hapjahae_yongjarye.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ⑦ 합자해와 용자례 — 글자를 합치는 법, 그리고 실제 낱말들"
+    },
+    {
+      "url": "../../archive/hunminjeongeum-haerye/hmjy_08_jeonginji_seo.html",
+      "series": "훈민정음 해례본",
+      "title": "훈민정음 해례본 ⑧ 정인지 서 — \"슬기로운 사람은 하루아침에, 어리석은 사람도 열흘이면\""
     }
   ],
   "culture_hanmun_03": [

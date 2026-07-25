@@ -9663,6 +9663,19 @@ const SEARCH_INDEX = [
     "url": "/maps/modern2/index.html?event=diplomacy_1945_01"
   },
   {
+    "id": "movement_1945_01",
+    "title_ko": "부민관 폭파 의거 — 일제강점기 마지막 의열투쟁",
+    "people": [
+      "유만수",
+      "조문기",
+      "강윤국"
+    ],
+    "year": 1945,
+    "mapKey": "modern2",
+    "mapLabel": "근현대 (1945~1993)",
+    "url": "/maps/modern2/index.html?event=movement_1945_01"
+  },
+  {
     "id": "political_1946_01",
     "title_ko": "제1차 미소공동위원회 결렬",
     "people": [],
