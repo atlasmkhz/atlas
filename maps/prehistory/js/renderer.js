@@ -320,11 +320,15 @@ function popupHtml(e){
 
   let videoHtml = '';
   if(e.video){
-    videoHtml = `<div class="pop-video">
-      <a href="https://www.youtube.com/watch?v=${e.video}" target="_blank" rel="noopener">
-        <img src="https://img.youtube.com/vi/${e.video}/hqdefault.jpg" alt="영상 미리보기" loading="lazy">
+    // video가 문자열이면 배열로 정규화 — 단일/복수 모두 같은 로직으로 처리
+    const videoIds = Array.isArray(e.video) ? e.video : [e.video];
+    const videoItems = videoIds.map(vid => `
+      <a href="https://www.youtube.com/watch?v=${vid}" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/${vid}/hqdefault.jpg" alt="영상 미리보기" loading="lazy">
         <span class="play-badge"></span>
-      </a>
+      </a>`).join('');
+    videoHtml = `<div class="pop-video">
+      ${videoItems}
       <div class="cap">▶ 관련 영상 · 누르면 유튜브로 재생</div>
     </div>`;
   }
