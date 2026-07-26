@@ -17,11 +17,79 @@ const ARCHIVE_BACKLINKS = {
       "title": "신천지 — 코로나, 그리고 확정된 것과 안 된 것"
     }
   ],
+  "economic_2010_02": [
+    {
+      "url": "../../archive/local-debt-chronicle/incheon_debt_songdo_asiad.html",
+      "series": "지방부채 연대기",
+      "title": "인천광역시 — 송도·아시안게임발 부채, 전국 최고 오명"
+    }
+  ],
+  "economic_2010_03": [
+    {
+      "url": "../../archive/local-debt-chronicle/seongnam_moratorium.html",
+      "series": "지방부채 연대기",
+      "title": "성남시 — 이재명의 모라토리엄 선언, 진실공방의 시작"
+    }
+  ],
+  "economic_2010_04": [
+    {
+      "url": "../../archive/local-debt-chronicle/seoul_debt_three_mayors.html",
+      "series": "지방부채 연대기",
+      "title": "서울특별시 — 세 시장에 걸친 부채 증감 공방, D1과 D2의 싸움"
+    }
+  ],
+  "economic_2014_02": [
+    {
+      "url": "../../archive/local-debt-chronicle/taebaek_o2resort_debt.html",
+      "series": "지방부채 연대기",
+      "title": "태백시 — 오투리조트, 지방공기업 최초 법정관리"
+    }
+  ],
+  "economic_2015_02": [
+    {
+      "url": "../../archive/local-debt-chronicle/busan_debt_urban_infra.html",
+      "series": "지방부채 연대기",
+      "title": "부산광역시 — 도시철도·북항 재개발발 부채"
+    }
+  ],
   "economic_2022_03": [
+    {
+      "url": "../../archive/local-debt-chronicle/gangwon_legoland_fiscal_summary.html",
+      "series": "지방부채 연대기",
+      "title": "강원도 — 평창올림픽과 레고랜드, 재정 관점 요약"
+    },
     {
       "url": "../../archive/power-accountability/legoland_choi_moon_soon.html",
       "series": "권력과 책임",
       "title": "레고랜드 사태 — 최문순의 추진과 김진태의 보증거부"
+    }
+  ],
+  "economic_2024_03": [
+    {
+      "url": "../../archive/local-debt-chronicle/gwangju_debt_kang_gi_jung.html",
+      "series": "지방부채 연대기",
+      "title": "광주광역시 — 전국 특·광역시 중 채무비율 최고"
+    }
+  ],
+  "economic_2024_04": [
+    {
+      "url": "../../archive/local-debt-chronicle/daegu_debt_hong_joon_pyo.html",
+      "series": "지방부채 연대기",
+      "title": "대구광역시 — \"부채제로\" 선언 이후의 재증가"
+    }
+  ],
+  "economic_2025_02": [
+    {
+      "url": "../../archive/local-debt-chronicle/yongin_light_rail_debt.html",
+      "series": "지방부채 연대기",
+      "title": "용인시 — 용인경전철, 12년 소송 끝에 확정된 배상 책임"
+    }
+  ],
+  "economic_2026_02": [
+    {
+      "url": "../../archive/local-debt-chronicle/chungbuk_debt_kim_young_hwan.html",
+      "series": "지방부채 연대기",
+      "title": "충청북도 — 민선8기 4년, 부채 3.8배 증가 논란"
     }
   ],
   "organization_1996_03": [

@@ -10363,6 +10363,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/march-first-declaration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -11344,6 +11349,56 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/joseon-sillok/js_12_epilogue</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/busan_debt_urban_infra</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/chungbuk_debt_kim_young_hwan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/daegu_debt_hong_joon_pyo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/gangwon_legoland_fiscal_summary</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/gwangju_debt_kang_gi_jung</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/incheon_debt_songdo_asiad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/seongnam_moratorium</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/seoul_debt_three_mayors</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/taebaek_o2resort_debt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/local-debt-chronicle/yongin_light_rail_debt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

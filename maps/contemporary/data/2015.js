@@ -149,4 +149,20 @@ const EVENTS_2015 = [
     tags:['political','서울','한명숙','정치자금법','대법원'],
     sources:['위키백과 한명숙','한국민족문화대백과사전 한명숙'] },
 
+  { id:'economic_2015_02', year:2015, visible_from:1994, visible_until:2026,
+    month:7, day:null, type:'economic', priority:2,
+    title_ko:'부산·인천·대구·태백, 지방재정위기 주의단체 지정',
+    title_en:'Busan, Incheon, Daegu, and Taebaek Designated Fiscal Risk Zones',
+    title_ja:'釜山・仁川・大邱・太白、地方財政危機注意団体に指定',
+    place_ko:'부산',
+    lat:35.1796, lng:129.0756,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'부산 도시철도 1호선은 1994년 부산교통공단으로 이관됐다가 2006년 부산시로 재이관되는 등 자체예산으로 감당하기 어려운 대형 인프라 사업이었고, 이후 산성터널·에코델타시티·북항 재개발 등이 이어지며 2015년 채무비율 28.1%를 기록했다. 같은 해 7월 행정자치부는 부산·인천(39.9%)·대구·태백을 함께 지방재정위기 주의단체로 지정했다. 도시철도·경제자유구역·관광개발 등 성격은 다르지만, 대형 인프라·개발 사업이 지자체 재정에 구조적 부담을 남긴다는 공통 패턴을 보여준 사례로 꼽힌다.',
+    video:null,
+    connections:['economic_2010_02'],
+    tags:['economic','부산','지방재정위기','도시철도','채무비율'],
+    sources:['행정자치부 지방재정위기 주의단체 지정 보도자료(2015.7)'] }
+
 ];

@@ -111,6 +111,22 @@ const EVENTS_2014 = [
     video:null,
     connections:[],
     tags:['political','뉴욕','대한항공','땅콩회항','갑질'],
-    sources:['한국민족문화대백과사전 땅콩 회항 사건','위키백과 대한항공 086편 회항 사건'] }
+    sources:['한국민족문화대백과사전 땅콩 회항 사건','위키백과 대한항공 086편 회항 사건'] },
+
+  { id:'economic_2014_02', year:2014, visible_from:2004, visible_until:2026,
+    month:8, day:null, type:'economic', priority:2,
+    title_ko:'태백 오투리조트 — 지방공기업 최초 법정관리',
+    title_en:'Taebaek O2 Resort — First Court Receivership for a Local Public Enterprise',
+    title_ja:'太白オーツーリゾート — 地方公企業初の法定管理',
+    place_ko:'강원 태백',
+    lat:37.1641, lng:128.9856,
+    people:[],
+    party:null,
+    allegation_status:null,
+    summary_ko:'석탄산업 쇠퇴에 따른 대체산업으로 태백관광개발공사가 총사업비 4,424억 원 규모의 오투리조트 건설을 추진했다. 그러나 회원권 미분양과 경영난이 겹치며 2014년 8월 지방공기업으로는 최초로 법정관리(회생절차)에 들어갔다. 태백시는 공적자금 약 1,000억 원과 보증채무 약 1,700~2,000억 원을 부담해야 했고, 2016년 2월 시공비의 약 5분의 1 수준인 800억 원에 부영그룹에 매각됐다.',
+    video:null,
+    connections:[],
+    tags:['economic','강원','태백','오투리조트','지방공기업','법정관리'],
+    sources:['나무위키 오투리조트'] }
 
 ];
