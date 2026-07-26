@@ -80,13 +80,14 @@
     }
 
     // maxresdefault.jpg는 원본이 720p 이상으로 업로드된 영상에만 유튜브가
-    // 생성해준다. 낮은 해상도로 올라갔거나 방금 업로드돼 아직 처리되지
-    // 않은 영상은 이 파일이 존재하지 않아 깨진 이미지로 보인다(2026-07-26
-    // 이상화 통곡 사례로 확인). onerror로 항상 존재하는 hqdefault.jpg로
-    // 자동 폴백한다 — projectHub.js의 유튜브 갤러리가 애초에 hqdefault만
-    // 쓰는 이유도 이 때문이다.
-    const thumb = `https://i.ytimg.com/vi/${featured.youtube_id}/maxresdefault.jpg`;
-    const thumbFallback = `https://i.ytimg.com/vi/${featured.youtube_id}/hqdefault.jpg`;
+    // 생성해준다. 문제는 존재하지 않는 maxresdefault를 요청해도 유튜브가
+    // 404가 아니라 120x90 회색 플레이스홀더를 200 OK로 반환한다는 것 —
+    // 그래서 onerror 핸들러로는 이 실패를 못 잡는다(2026-07-26 이상화
+    // 통곡 사례에서 확인: onerror 폴백을 추가했는데도 재배포 후 맥북·폰
+    // 양쪽에서 여전히 안 보임 → 회색 플레이스홀더가 "성공"으로 로드된
+    // 것). 그래서 애초에 항상 실제 프레임이 존재하는 hqdefault.jpg를
+    // 기본으로 쓴다 — projectHub.js의 유튜브 갤러리와 동일한 방식.
+    const thumb = `https://i.ytimg.com/vi/${featured.youtube_id}/hqdefault.jpg`;
     const watchUrl = `https://youtu.be/${featured.youtube_id}`;
     const links = relatedLinks(featured);
     const linksHtml = links.length
@@ -100,7 +101,7 @@
     el.innerHTML = `
       <span class="featured-badge">최신 영상</span>
       <a class="featured-thumb" href="${watchUrl}" target="_blank" rel="noopener">
-        <img src="${thumb}" alt="${featured.title}" loading="lazy" onerror="this.onerror=null;this.src='${thumbFallback}';">
+        <img src="${thumb}" alt="${featured.title}" loading="lazy">
         <span class="featured-play">▶</span>
       </a>
       <h3 class="featured-title">${featured.title}</h3>
