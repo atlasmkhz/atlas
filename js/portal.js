@@ -79,7 +79,14 @@
       return;
     }
 
+    // maxresdefault.jpg는 원본이 720p 이상으로 업로드된 영상에만 유튜브가
+    // 생성해준다. 낮은 해상도로 올라갔거나 방금 업로드돼 아직 처리되지
+    // 않은 영상은 이 파일이 존재하지 않아 깨진 이미지로 보인다(2026-07-26
+    // 이상화 통곡 사례로 확인). onerror로 항상 존재하는 hqdefault.jpg로
+    // 자동 폴백한다 — projectHub.js의 유튜브 갤러리가 애초에 hqdefault만
+    // 쓰는 이유도 이 때문이다.
     const thumb = `https://i.ytimg.com/vi/${featured.youtube_id}/maxresdefault.jpg`;
+    const thumbFallback = `https://i.ytimg.com/vi/${featured.youtube_id}/hqdefault.jpg`;
     const watchUrl = `https://youtu.be/${featured.youtube_id}`;
     const links = relatedLinks(featured);
     const linksHtml = links.length
@@ -93,7 +100,7 @@
     el.innerHTML = `
       <span class="featured-badge">최신 영상</span>
       <a class="featured-thumb" href="${watchUrl}" target="_blank" rel="noopener">
-        <img src="${thumb}" alt="${featured.title}" loading="lazy">
+        <img src="${thumb}" alt="${featured.title}" loading="lazy" onerror="this.onerror=null;this.src='${thumbFallback}';">
         <span class="featured-play">▶</span>
       </a>
       <h3 class="featured-title">${featured.title}</h3>
