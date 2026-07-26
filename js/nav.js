@@ -94,7 +94,7 @@
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power'] },
+      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power', 'local_debt_chronicle'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['hunminjeongeum_haerye', 'hunminjeongeum_eonhae', 'march_first_declaration', 'joseon_revolution_declaration', 'yusimin_appeal', 'samguk_yusa', 'joseon_sillok', 'hwandan_gogi'] },
     ],
     // ── 세계사 카테고리 (2026-07-16 재편, B안: 3갈래 구조) ──────────
