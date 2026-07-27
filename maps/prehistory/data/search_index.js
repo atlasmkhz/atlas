@@ -4184,6 +4184,8 @@ const SEARCH_INDEX = [
     "title_ko": "환단고기와 대종교 — 잃어버린 역사를 되찾으려 한 사람들",
     "people": [
       "나철",
+      "김교헌",
+      "박은식",
       "이유립"
     ],
     "year": -999999,
@@ -9605,6 +9607,44 @@ const SEARCH_INDEX = [
     "url": "/maps/medieval2/index.html?event=battle_1871_01"
   },
   {
+    "id": "political_1907_02b",
+    "title_ko": "순종 즉위 — 허수아비 황제",
+    "people": [
+      "순종",
+      "고종",
+      "이토 히로부미"
+    ],
+    "year": 1907,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=political_1907_02b"
+  },
+  {
+    "id": "policy_1907_01b",
+    "title_ko": "정미7조약과 군대 해산",
+    "people": [
+      "순종",
+      "이토 히로부미"
+    ],
+    "year": 1907,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=policy_1907_01b"
+  },
+  {
+    "id": "political_1910_01b",
+    "title_ko": "한일병합 — 대한제국의 멸망",
+    "people": [
+      "순종",
+      "이완용",
+      "데라우치 마사타케"
+    ],
+    "year": 1910,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=political_1910_01b"
+  },
+  {
     "id": "political_1945_01",
     "title_ko": "8·15 해방",
     "people": [],
@@ -14431,6 +14471,43 @@ const SEARCH_INDEX = [
     "url": "/maps/contemporary/index.html?event=person_2010_03"
   },
   {
+    "id": "economic_2010_02",
+    "title_ko": "인천광역시 부채 급증 — 송도·아시안게임발 재정 부담",
+    "people": [
+      "안상수",
+      "송영길"
+    ],
+    "year": 2010,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2010_02"
+  },
+  {
+    "id": "economic_2010_03",
+    "title_ko": "성남시 모라토리엄 — 이재명의 지급유예 선언",
+    "people": [
+      "이재명",
+      "이대엽"
+    ],
+    "year": 2010,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2010_03"
+  },
+  {
+    "id": "economic_2010_04",
+    "title_ko": "서울시 부채 변천 — 세 시장에 걸친 회계기준 공방",
+    "people": [
+      "이명박",
+      "오세훈",
+      "박원순"
+    ],
+    "year": 2010,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2010_04"
+  },
+  {
     "id": "economic_2011_01",
     "title_ko": "저축은행 영업정지 사태",
     "people": [
@@ -14729,6 +14806,15 @@ const SEARCH_INDEX = [
     "url": "/maps/contemporary/index.html?event=political_2014_03"
   },
   {
+    "id": "economic_2014_02",
+    "title_ko": "태백 오투리조트 — 지방공기업 최초 법정관리",
+    "people": [],
+    "year": 2014,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2014_02"
+  },
+  {
     "id": "political_2015_01",
     "title_ko": "국정교과서 파동",
     "people": [],
@@ -14817,6 +14903,15 @@ const SEARCH_INDEX = [
     "mapKey": "contemporary",
     "mapLabel": "현대 (1994~)",
     "url": "/maps/contemporary/index.html?event=political_2015_04"
+  },
+  {
+    "id": "economic_2015_02",
+    "title_ko": "부산·인천·대구·태백, 지방재정위기 주의단체 지정",
+    "people": [],
+    "year": 2015,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2015_02"
   },
   {
     "id": "political_2016_01",
@@ -15778,6 +15873,28 @@ const SEARCH_INDEX = [
     "url": "/maps/contemporary/index.html?event=political_2024_09"
   },
   {
+    "id": "economic_2024_03",
+    "title_ko": "광주광역시, 특·광역시 중 채무비율 최고 21.93%",
+    "people": [
+      "강기정"
+    ],
+    "year": 2024,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2024_03"
+  },
+  {
+    "id": "economic_2024_04",
+    "title_ko": "대구광역시, \"채무제로\" 선언 이후의 재증가",
+    "people": [
+      "홍준표"
+    ],
+    "year": 2024,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2024_04"
+  },
+  {
     "id": "political_2025_01",
     "title_ko": "헌법재판소, 윤석열 대통령 파면",
     "people": [
@@ -15865,6 +15982,17 @@ const SEARCH_INDEX = [
     "mapKey": "contemporary",
     "mapLabel": "현대 (1994~)",
     "url": "/maps/contemporary/index.html?event=political_2025_07"
+  },
+  {
+    "id": "economic_2025_02",
+    "title_ko": "용인경전철 12년 소송, 대법원 214억 배상 확정",
+    "people": [
+      "이정문"
+    ],
+    "year": 2025,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2025_02"
   },
   {
     "id": "political_2026_04",
@@ -16014,5 +16142,17 @@ const SEARCH_INDEX = [
     "mapKey": "contemporary",
     "mapLabel": "현대 (1994~)",
     "url": "/maps/contemporary/index.html?event=person_2026_01"
+  },
+  {
+    "id": "economic_2026_02",
+    "title_ko": "충청북도 부채 3.8배 증가 — 민선8기 4년의 대차대조",
+    "people": [
+      "김영환",
+      "신용한"
+    ],
+    "year": 2026,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=economic_2026_02"
   }
 ];

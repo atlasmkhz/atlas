@@ -42,9 +42,15 @@ const REIGNS = [
   { order:26, name:'고종',   hanja:'高宗',   start_year:1863, end_year:1907,
     display_end_year:1875,
     continues_in:{ label:'근대 지도(1876~)에서 계속', url:'../../map.html' } },
+  { order:27, name:'순종',   hanja:'純宗',   start_year:1907, end_year:1910,
+    continues_in:{ label:'근대 지도(1876~)에서 이어서 보기', url:'../../map.html' } },
 ];
 
-// 이 지도가 실제로 표시하는 연도 범위(고종은 1875에서 끊는다).
+// 이 지도가 실제로 표시하는 연도 범위. 고종은 1875에서 끊지만, 순종은
+// 조선(대한제국) 왕조의 마지막 왕이므로 계보를 완결하기 위해 재위
+// 전체(1907~1910)를 이 지도의 마지막 챕터로 포함한다 — 다만 1876~1910
+// 구간의 상세 사건은 근대 지도(map.html)가 본래 담당하는 영역이라
+// 순종 챕터도 그쪽으로 안내(continues_in)한다.
 const REIGNS_MIN_YEAR = REIGNS[0].start_year;
 const REIGNS_MAX_YEAR = REIGNS[REIGNS.length - 1].display_end_year ?? REIGNS[REIGNS.length - 1].end_year;
 

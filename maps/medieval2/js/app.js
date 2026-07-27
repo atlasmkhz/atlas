@@ -80,6 +80,7 @@ const DATA = {};
   (typeof EVENTS_HEONJONG !== 'undefined' ? EVENTS_HEONJONG : []),
   (typeof EVENTS_CHEOLJONG !== 'undefined' ? EVENTS_CHEOLJONG : []),
   (typeof EVENTS_GOJONG_BOUNDARY !== 'undefined' ? EVENTS_GOJONG_BOUNDARY : []),
+  (typeof EVENTS_SUNJONG !== 'undefined' ? EVENTS_SUNJONG : []),
 ].forEach(arr => {
   arr.forEach(e => {
     if (!DATA[e.year]) DATA[e.year] = [];

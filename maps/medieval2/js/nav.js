@@ -40,7 +40,7 @@
     { key:'prehistory', name:'선사시대', period:'신화시대~고조선', ready:true, url:'../prehistory/index.html' },
     { key:'ancient',    name:'고대',     period:'고구려·백제·신라·발해 (기원전 37–936)', ready:true, url:'../ancient/index.html' },
     { key:'medieval1',  name:'중세 1',   period:'고려 918–1392', ready:true, url:'../medieval1/index.html' },
-    { key:'medieval2',  name:'중세 2',   period:'조선 1392–1875', ready:true, url:'.' },
+    { key:'medieval2',  name:'중세 2',   period:'조선 1392–1910', ready:true, url:'.' },
     { key:'modern',     name:'근대',     period:'1876–1945', ready:true, url:'../../map.html' },
     { key:'modern2',    name:'근현대',   period:'1945–1993', ready:true, url:'../modern2/index.html' },
     { key:'contemporary',name:'현대',    period:'1994–현재', ready:true, url:'../contemporary/index.html' }

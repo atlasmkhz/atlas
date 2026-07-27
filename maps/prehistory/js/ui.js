@@ -99,27 +99,6 @@ document.getElementById('eraCloseBtn').addEventListener('click', function(e){
 })();
 
 // ── [3] 모바일 첫 진입 1회성 안내 ──
-// 모바일(<1024px)에서만, 'ⓘ 시대 개요' 버튼에 아주 약한 pulse를 2회 준 뒤
-// 정지시킨다. 저장 없음·반복 없음. 사용자가 그 전에 버튼을 누르면 즉시 해제.
-(function(){
-  if (window.innerWidth >= 1024) return;
-  const btn = document.getElementById('eraBtn');
-  if (!btn) return;
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      btn.classList.add('era-hint');
-      const stop = () => btn.classList.remove('era-hint');
-      btn.addEventListener('click', stop, { once:true });
-      // CSS 애니메이션(1.1s × 2회) 종료 후 클래스 제거 — 이후 완전 정지.
-      btn.addEventListener('animationend', () => {
-        // animationend는 반복 1회마다 발생하므로, iteration-count(2) 종료 시점에
-        // 맞춰 약간의 여유를 두고 제거한다.
-        setTimeout(stop, 50);
-      });
-      setTimeout(stop, 2600);   // 안전망: 애니메이션 총 길이 후 강제 정지
-    }, 600);
-  });
-})();
 
 // ── [제거됨] 소개(시작) 팝업 + 지도 하단 고정 푸터(이메일) + 이메일 표시 팝업 ──
 // 첫 진입 시 자동으로 뜨던 소개 팝업과 하단 고정 푸터를 없앴다. 그 안의

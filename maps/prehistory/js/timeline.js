@@ -121,7 +121,7 @@ function selectBlock(index, opts){
   renderCurrentChapter();
   updateEra(b.order);
 
-  if (!silent && window.innerWidth >= 1024) {
+  if (!silent) {
     const eraDesc = document.getElementById('eraDesc');
     if (eraDesc?.textContent?.trim()) {
       if (typeof window.openEraCard === 'function') {

@@ -157,7 +157,7 @@ def render_html(card, slug):
 
     date_str = f"{card['year']}년"
     if card['month'] is not None:
-        date_str += f" {card['month']+1}월"
+        date_str += f" {card['month']}월"
         if card['day'] is not None:
             date_str += f" {card['day']}일"
 

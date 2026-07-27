@@ -137,7 +137,7 @@ window.onload = () => {
       syncToYear(INITIAL_YEAR);
       // 첫 진입 자동 프롤로그도 데스크탑(>=1024px)에서만. 모바일은 지도를
       // 그대로 보여주고, ⓘ 버튼으로만 시대 개요를 연다.
-      if (window.innerWidth >= 1024) {
+      {
         const eraDesc = document.getElementById('eraDesc');
         if (eraDesc?.textContent?.trim()) {
           if (typeof window.openEraCard === 'function') window.openEraCard();

@@ -148,7 +148,7 @@ function selectReign(index, opts){
   updateEra(r.order);
 
   // ── 시대개요(era card) 자동 오픈 ── (중세2/조선과 동일한 로직)
-  if (!silent && window.innerWidth >= 1024) {
+  if (!silent) {
     const eraDesc = document.getElementById('eraDesc');
     if (eraDesc?.textContent?.trim()) {
       if (typeof window.openEraCard === 'function') {

@@ -2,9 +2,9 @@
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
   메인 페이지 1개 + 1876~1945 Event 482개 + 루트 10개 + 
-  근현대(1945~1993) 진입점 1개 + Event 463개 + 루트 10개 + 
+  근현대(1945~1993) 진입점 1개 + Event 475개 + 루트 10개 + 
   현대(1994~2025) 진입점 1개 + Event 364개(루트 없음) + 
-  조선(1392~1875, 중세2) 진입점 1개 + Event 278개(루트 없음) + 
+  조선(1392~1875, 중세2) 진입점 1개 + Event 281개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 168개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
   스캔해 자동 생성한다. 직접 수정하지 말 것 — 각 시기의
@@ -2633,6 +2633,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1948-kim-sung-jip-han</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1948-land-reform</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3203,6 +3208,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1964-lee-mi-ja-s</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1964-national-assembly</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3259,6 +3269,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1966-kim-ki-su</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1966-kim-ki-su-becomes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3334,6 +3349,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1968-park-tae-joon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1968-park-tae-joon-steel</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3588,6 +3608,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1974-shin-joong-hyun-godfather</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1974-youth-culture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3663,12 +3688,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1976-yang-jung-mo-wins</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1977-achieving-10-billion</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1977-benjamin-w-lee</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1977-benjamin-w-lee-korean</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3709,6 +3744,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1978-cha-bum-kun</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1978-cha-bum-kun-debuts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3798,7 +3838,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1980-cho-yong-pil-s</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1980-choi-jong-hyon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1980-choi-jong-hyon-sunkyong</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -4283,6 +4333,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1993-lee-kun-hee-s</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1993-redefining-may</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4614,6 +4669,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/route-korean-war-massacres--wp_26</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/route-korean-war-massacres--wp_memorial_songs_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -7809,6 +7869,21 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/medieval2/event/1871-united-states-expedition-to-korea-1871</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1907-enthronement-of-emperor-sunjong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1907-the-japankorea-treaty-of-1907-and-the</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/medieval2/event/1910-the-japankorea-annexation-treaty</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

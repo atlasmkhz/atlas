@@ -82,7 +82,14 @@ function reignIndexForYear(year){
     const r = REIGNS[i];
     const displayEnd = r.display_end_year ?? r.end_year;
     const isLast = (i === REIGNS.length - 1);
-    if (year >= r.start_year && (isLast ? year <= displayEnd : year < displayEnd)) return i;
+    // display_end_year가 별도로 지정된 항목(현재는 고종만)은 그 경계
+    // 연도 자체를 그 챕터에 포함시킨다(<=) — 아니면 다음 왕 재위 시작과
+    // 경계가 비어 아무 챕터에도 안 걸리는 문제가 생긴다(예: 1875년이
+    // 고종에도 순종에도 안 걸려 마지막 챕터로 잘못 폴백되던 버그).
+    // 그 외 항목은 기존처럼 다음 왕과 시작년이 겹치므로 마지막 항목만
+    // <=, 나머지는 <로 다음 챕터에 넘긴다.
+    const includesEnd = isLast || (r.display_end_year !== undefined);
+    if (year >= r.start_year && (includesEnd ? year <= displayEnd : year < displayEnd)) return i;
   }
   return REIGNS.length - 1;
 }
@@ -119,6 +126,7 @@ const ERA = {
   24:{ text:'세도정치의 심화', desc:'8세에 즉위해 순원왕후가 수렴청정했다. 안동 김씨에 이어 풍양 조씨 세력까지 가세하며 세도정치가 더욱 굳어졌고, 삼정의 문란으로 민생이 피폐해졌다.' },
   25:{ text:'강화도령, 허수아비 왕', desc:'농사짓던 시골에서 갑자기 왕위에 오른 철종은 안동 김씨의 꼭두각시에 지나지 않았다. 삼정의 문란이 극에 달해 임술농민봉기가 전국으로 번졌다.' },
   26:{ text:'흥선대원군의 집권과 쇄국', desc:'12세에 즉위해 생부 흥선대원군이 10년간 실권을 쥐었다. 세도정치를 무너뜨리고 경복궁을 중건했으며, 병인양요·신미양요를 겪으며 강경한 쇄국정책으로 서양 열강에 맞섰다. (이 지도는 1875년에서 끊고, 고종의 나머지 재위는 근대 지도에서 이어진다.)' },
+  27:{ text:'마지막 황제, 나라를 잃다', desc:'헤이그 특사 사건으로 강제 퇴위한 고종의 뒤를 이었으나, 정미7조약과 군대 해산으로 처음부터 실권 없는 황제였다. 1910년 한일병합으로 대한제국이 멸망하며 500년 조선 왕조가 그의 대에서 막을 내렸다. (1876년 이후의 상세 서사는 근대 지도에서 이어진다.)' },
 };
 
 function updateEra(order){
@@ -166,7 +174,7 @@ function selectReign(index, opts){
   // 여기서 연다. silent(초기 진입의 ?year=/?event= 딥링크처럼 사용자가
   // 직접 조작하지 않은 프로그래밍적 이동)일 때는 열지 않는다 — 모바일도
   // 기존과 동일하게 제외한다(ⓘ 버튼으로만 수동으로 연다).
-  if (!silent && window.innerWidth >= 1024) {
+  if (!silent) {
     const eraDesc = document.getElementById('eraDesc');
     if (eraDesc?.textContent?.trim()) {
       if (typeof window.openEraCard === 'function') {
