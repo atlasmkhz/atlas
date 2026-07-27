@@ -366,7 +366,7 @@ function popupHtml(e){
     ${imageHtml}
     <div class="pop-type" style="background:${color}">${TYPE_LABEL[e.type]}</div>
     <div class="pop-title">${e.title_ko}</div>
-    <div class="pop-date">${e.year}년${e.month!=null?' '+(e.month+1)+'월':''}${e.day?' '+e.day+'일':''} · ${e.place_ko}</div>
+    <div class="pop-date">${e.year}년${e.month!=null?' '+(e.month)+'월':''}${e.day?' '+e.day+'일':''} · ${e.place_ko}</div>
     ${durationHtml}
     ${peopleHtml}
     <div class="pop-summary">${e.summary_ko}</div>
