@@ -150,7 +150,7 @@
     { path: 'maps/modern2/index.html?route=chun_doo_hwan', name: '전두환', tagline: '광주에서 자국민을 향해 총을 쏘라 명령한 사람, 90년', period: '1931~2021', waypoints: 39, color: '#5a3a3a', image: 'maps/modern2/assets/images/entity/person/person_chun_doo_hwan_01.webp' },
     { path: 'maps/modern2/index.html?route=kim_dae_jung', name: '김대중', tagline: '국가폭력의 최대 피해자가 헌정사 최초의 평화적 정권교체를 이루기까지', period: '1924~2009', waypoints: 29, color: '#2e4a6b', image: 'maps/modern2/assets/images/entity/person/person_kim_dae_jung_01.webp' },
     { path: 'maps/modern2/index.html?route=daegu_gyeongbuk_democracy', name: '대구경북 민주화의 열망', tagline: '"조선의 모스크바"라 불렸던 대구경북의 잊힌 얼굴', period: '1946~1975', waypoints: 5, color: '#2e5a8c', image: 'maps/modern2/assets/images/route/route_daegu_gyeongbuk_democracy_hero.webp' },
-    { path: 'maps/modern2/index.html?route=korean_war_massacres', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 27, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp' },
+    { path: 'maps/modern2/index.html?route=korean_war_massacres', name: '학살의 기록', tagline: '이승만 정부기 국가폭력 — 제주 3·1절에서 거창까지', period: '1947~1953', waypoints: 27, color: '#5c1f1f', image: 'assets/images/route/route_korean_war_massacres_hero.webp', pinned_portal: true },
     { path: 'maps/modern2/index.html?route=korean_war_battles', name: '한국전쟁 주요 전투', tagline: '38선에서 판문점까지, 3년 1개월의 전선', period: '1950~1953', waypoints: 6, color: '#5a6b8c', image: 'assets/images/route/route_korean_war_battles_hero.webp' },
     { path: 'maps/modern2/index.html?route=democratization_movement', name: '민주화운동', tagline: '독재에 맞선 33년, 거리에서 헌법으로', period: '1960~1993', waypoints: 9, color: '#5c2f2f', image: 'maps/modern2/assets/images/route/route_democratization_movement_hero.webp' },
     { path: 'maps/modern2/index.html?route=modern2_literature', name: '근현대문학 기행', tagline: '갈라진 모국어 — 분단과 독재의 시대, 문학이 지킨 것들 (문학사 3부작 · 2부)', period: '1945~1993', waypoints: 20, color: '#35506b', image: 'maps/modern2/assets/images/route/route_modern2_literature_hero.webp' },
@@ -163,7 +163,7 @@
     { path: 'maps/ancient/index.html?route=gwanggaeto_conquest', name: '광개토대왕 정복루트', tagline: '거란·백제·후연·가야·왜를 22년에 걸쳐 굴복시키다', period: '385~414', waypoints: 16, color: '#7a2e2e', image: 'maps/ancient/assets/images/route/route_gwanggaeto_conquest_hero.webp' },
     { path: 'maps/ancient/index.html?route=jang_bogo_maritime', name: '장보고 해상무역루트', tagline: '당나라 무장에서 청해진의 해상왕으로', period: '810년대~846', waypoints: 5, color: '#1f6b6b', image: 'maps/ancient/assets/images/route/route_jang_bogo_maritime_hero.webp' },
     { path: 'maps/ancient/index.html?route=kim_yu_sin_unification', name: '김유신 삼국통일루트', tagline: '단석산의 소년 화랑에서 삼국통일의 설계자로', period: '609년경~676', waypoints: 7, color: '#8c1f3a', image: 'maps/ancient/assets/images/route/route_kim_yu_sin_unification_hero.webp' },
-    { path: 'maps/ancient/index.html?route=hyecho_pilgrimage', name: '혜초 왕오천축국전 루트', tagline: '16세에 출가해 뱃길로 인도에 닿고, 페르시아·아랍의 변경까지', period: '723~780', waypoints: 21, color: '#b8862f', image: 'maps/ancient/assets/images/route/route_hyecho_pilgrimage_hero.webp' },
+    { path: 'maps/ancient/index.html?route=hyecho_pilgrimage', name: '혜초 왕오천축국전 루트', tagline: '16세에 출가해 뱃길로 인도에 닿고, 페르시아·아랍의 변경까지', period: '723~780', waypoints: 21, color: '#b8862f', image: 'maps/ancient/assets/images/route/route_hyecho_pilgrimage_hero.webp', pinned_portal: true },
     { path: 'maps/ancient/index.html?route=ancient_history_debates', name: '고대사 논쟁루트', tagline: '한사군·낙랑군·임나일본부·환단고기·동북공정, 지금도 계속되는 논쟁', period: '신화시대~오늘날', waypoints: 9, color: '#4a3a2e', image: 'maps/ancient/assets/images/route/route_ancient_history_debates_hero.webp' },
     { path: 'maps/ancient/index.html?route=geunchogo_conquest', name: '근초고왕 정복루트', tagline: '가야·마한을 흡수하고 고구려 왕을 전사시키다', period: '346~400', waypoints: 9, color: '#2e6b4a', image: 'maps/ancient/assets/images/route/route_geunchogo_conquest_hero.webp' },
     { path: 'maps/ancient/index.html?route=korea_hegemony_history', name: '한반도를 둘러싼 패권의 역사', tagline: '한사군에서 판문점까지, 2000년 넘는 강대국 각축의 지도', period: '기원전 108~1953', waypoints: 14, color: '#5a3a2e', image: 'maps/ancient/assets/images/route/route_korea_hegemony_history_hero.webp' },
@@ -227,7 +227,15 @@
     const el = document.getElementById('portalRoutes');
     if (!el) return;
     const dayIndex = kstDayIndex();
-    const todaysRoutes = dailyRotationPick(MASTER_ROUTES, 6, dayIndex);
+    // 2026-07-28: 임시 고정. pinned_portal:true인 루트(학살의 기록,
+    // 혜초 왕오천축국전 루트)는 로테이션과 무관하게 항상 먼저 넣고,
+    // 남은 자리만 나머지 루트 풀에서 매일 로테이션으로 채운다.
+    // 두목님이 고정 해제를 요청하면 각 루트 항목의 pinned_portal:true를
+    // 지우기만 하면 원래의 완전 랜덤 6개 로테이션으로 돌아간다.
+    const pinned = MASTER_ROUTES.filter(r => r.pinned_portal);
+    const rest = MASTER_ROUTES.filter(r => !r.pinned_portal);
+    const remainingCount = Math.max(0, 6 - pinned.length);
+    const todaysRoutes = pinned.concat(dailyRotationPick(rest, remainingCount, dayIndex));
     el.innerHTML = todaysRoutes.map(r => {
       const bg = r.image
         ? `background-image:linear-gradient(180deg, rgba(21,19,15,0) 38%, rgba(21,19,15,0.94) 100%), url('${r.image}')`
