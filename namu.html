@@ -17,6 +17,9 @@
 <nav class="namu-topbar">
   <a href="index.html" class="namu-back">&lsaquo; ATLAS</a>
   <span class="namu-topbar-title">나의 서재</span>
+  <!-- 2026-07-30: 답사 통로. 서재에서 찜한 답사지를 보다가 다른 테마를
+       더 찾아보려면 되돌아갈 길이 있어야 한다. -->
+  <a href="maps/damsa/index.html" class="namu-topbar-link">🥾 답사<span class="nav-new" data-new-key="damsa">NEW</span></a>
 </nav>
 
 <main class="namu-wrap">
@@ -57,12 +60,24 @@
     <ol class="lib-pages" id="myHistoryList"></ol>
   </section>
 
+  <!-- ── 가고 싶은 답사지 ─────────────────────
+       왕두목 확정(2026-07-30): "내 서재에 스크랩(나중 여행과 관심을 위한)".
+       일반 스크랩과 따로 두는 이유 — 답사 스크랩은 "다시 읽을 글"이 아니라
+       "언젠가 갈 곳"이다. 길찾기라는 실행 버튼이 붙고, 주소가 필요하다.
+       섞어두면 목적이 다른 두 목록이 서로를 흐린다.
+       담긴 것이 없으면 섹션 자체가 표시되지 않는다. -->
+  <section class="namu-section" id="damsaBox" hidden>
+    <h2>가고 싶은 답사지 <span class="namu-count" id="damsaCount"></span></h2>
+    <p class="namu-section-note">답사 카드에서 담아둔 곳들입니다. 길찾기를 누르면 카카오맵으로 바로 넘어갑니다.</p>
+    <ul class="namu-damsa-list" id="damsaList"></ul>
+  </section>
+
   <!-- ── 스크랩 ──────────────────────── -->
   <section class="namu-section">
     <h2>스크랩 <span class="namu-count" id="scrapCount"></span></h2>
     <p class="namu-section-note">나중에 다시 보려고 저장해둔 것들입니다.</p>
     <ul class="namu-scraps" id="scrapList"></ul>
-    <p class="namu-empty" id="scrapEmpty" hidden>아직 스크랩한 것이 없습니다. 지도 카드나 자료실 글에서 스크랩 버튼을 눌러보세요.</p>
+    <p class="namu-empty" id="scrapEmpty" hidden>아직 스크랩한 것이 없습니다. 지도 카드·자료실 글·답사 카드에서 스크랩 버튼을 눌러보세요.</p>
   </section>
 
   <!-- ── 안내 ────────────────────────── -->
@@ -82,6 +97,7 @@
 </main>
 
 <script src="js/growth.js"></script>
+<script src="js/newBadge.js"></script>
 <script src="js/library.js"></script>
 <script src="js/seoga.js"></script>
 </body>

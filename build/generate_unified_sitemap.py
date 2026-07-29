@@ -133,6 +133,25 @@ def main():
         lines.append('    <priority>0.75</priority>')
         lines.append('  </url>')
 
+    # ── 답사 카테고리 ────────────────────────────────────────
+    # 시대 지도가 아니라 별도 갈래다. 시대별 사건이 아니라 "지금 갈 수 있는
+    # 장소"를 다루므로 event/route 슬러그 체계를 쓰지 않고 테마 페이지가
+    # 곧 랜딩이 된다. 테마가 늘면 DAMSA_THEME_PAGES에 추가하면 된다.
+    DAMSA_THEME_PAGES = ['dolmen.html']
+
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/maps/damsa/</loc>')
+    lines.append('    <changefreq>weekly</changefreq>')
+    lines.append('    <priority>0.9</priority>')
+    lines.append('  </url>')
+
+    for page in DAMSA_THEME_PAGES:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/maps/damsa/{page}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append('    <priority>0.85</priority>')
+        lines.append('  </url>')
+
     # modern2 진입점
     lines.append('  <url>')
     lines.append(f'    <loc>{SITE_ROOT}/maps/modern2/</loc>')
@@ -300,12 +319,16 @@ def main():
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
 
-    total = (9 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs) + len(ancient_slugs)
+    # 하드코딩된 9(고정 진입점 수)는 갈래가 추가될 때마다 어긋난다.
+    # 실제 <url> 개수를 세는 편이 안전하다.
+    total = sum(1 for l in lines if '<url>' in l)
+    _legacy_total = (9 + len(main_slugs) + len(modern2_slugs) + len(contemporary_slugs) + len(medieval2_slugs) + len(medieval1_slugs) + len(ancient_slugs)
              + len(main_route_slugs) + len(modern2_route_slugs) + len(contemporary_route_slugs)
              + len(medieval2_route_slugs) + len(medieval1_route_slugs) + len(ancient_route_slugs)
              + len(prehistory_route_slugs) + len(prehistory_event_slugs)
              + len(archive_landing) + len(archive_posts))
     print(f'통합 sitemap.xml 생성 완료: 메인 1 + map.html 1 + 1876-1945 Event {len(main_slugs)} + 루트 {len(main_route_slugs)} + '
+          f'답사 {1 + len(DAMSA_THEME_PAGES)} + '
           f'modern2 진입점 1 + modern2 Event {len(modern2_slugs)} + modern2 루트 {len(modern2_route_slugs)} + '
           f'contemporary 진입점 1 + contemporary Event {len(contemporary_slugs)} + contemporary 루트 {len(contemporary_route_slugs)} + '
           f'prehistory 진입점 1 + prehistory 루트 {len(prehistory_route_slugs)} + prehistory 웨이포인트 {len(prehistory_event_slugs)} + '

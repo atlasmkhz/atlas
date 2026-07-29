@@ -793,6 +793,21 @@
   .site-nav-item:hover { background:rgba(184,152,96,0.14); color:var(--paper); }
   .site-nav-item.active { color:var(--gold); font-weight:700; }
 
+  /* ── NEW 배지 (2026-07-30) ──────────────────────────────────
+     새로 생긴 메뉴(지금은 「답사」)에 붙는 표시. 작게, 빨갛게.
+     .site-nav-item이 button이라 span을 그대로 품을 수 있다.
+     답사 테마가 3개 이상 쌓이면 이 배지는 뗀다 — 계속 붙어 있으면
+     "새것"이라는 신호 자체가 죽는다. */
+  .nav-new {
+    display:inline-block; margin-left:4px; vertical-align:2px;
+    font-size:8.5px; font-weight:800; letter-spacing:0.04em;
+    line-height:1.4; color:#fff; background:#d0342c;
+    border-radius:3px; padding:1px 3px 0;
+  }
+  @media (max-width:480px) {
+    .nav-new { font-size:8px; margin-left:3px; padding:1px 2px 0; }
+  }
+
   @media (max-width:480px) {
     .site-nav { padding:0 8px; gap:0; }
     .site-nav-brand { font-size:12px; letter-spacing:1px; margin-right:4px; }

@@ -286,13 +286,22 @@
   function addScrap(item) {
     if (!item || !item.url) return false;
     if (data.scraps.some(s => s.url === item.url)) return false;
-    data.scraps.push({
+    const rec = {
       url: item.url,
       title: item.title || item.url,
-      kind: item.kind || 'page',   // 'card' | 'archive' | 'route' | 'page'
+      kind: item.kind || 'page',   // 'card' | 'archive' | 'route' | 'damsa' | 'page'
       era: item.era || currentEra || null,
       at: new Date().toISOString(),
-    });
+    };
+    // 2026-07-30 답사 스크랩을 붙이면서 두 칸을 열었다.
+    // 답사는 "나중에 갈 곳"을 담는 것이라, 제목만으로는 서재에서 쓸모가
+    // 없다 — 어디인지(note)와 내비 검색어·좌표(extra)가 같이 있어야
+    // 서재에서 바로 길찾기가 된다. 둘 다 선택 칸이므로 기존 스크랩
+    // (카드·자료실·루트)은 아무 영향을 받지 않는다.
+    // merge()는 url을 키로 합치므로 이 칸들도 그대로 살아남는다.
+    if (item.note) rec.note = String(item.note);
+    if (item.extra && typeof item.extra === 'object') rec.extra = item.extra;
+    data.scraps.push(rec);
     if (data.scraps.length > 1000) data.scraps.shift();
     save(data, true);
     return true;

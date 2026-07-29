@@ -1,0 +1,412 @@
+/* maps/damsa/css/damsa.css
+   ─────────────────────────────────────────────────────────────
+   답사 지도 전용 스타일.
+
+   시대 지도(css/style.css)와 톤을 일부러 다르게 잡았다.
+   시대 지도는 어두운 배경으로 무게를 주지만, 답사는 낮에 야외에서
+   폰으로 보는 실용 도구다. 밝은 테마가 기본인 이유가 그것이다.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --d-bg:        #f5f3ef;
+  --d-surface:   #ffffff;
+  --d-ink:       #1c1a17;
+  --d-ink-soft:  #5d5850;
+  --d-ink-faint: #8b857b;
+  --d-line:      #e0dbd2;
+  --d-accent:    #8a5a2b;   /* 흙빛 갈색 — 유적/발굴의 색 */
+  --d-accent-lt: #f0e6d8;
+  --d-shadow:    0 1px 3px rgba(28,26,23,.06), 0 6px 20px rgba(28,26,23,.05);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--d-bg);
+  color: var(--d-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+               "Pretendard", "Noto Sans KR", sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── 상단 바 ───────────────────────────────────────────────── */
+.d-topbar {
+  position: sticky; top: 0; z-index: 900;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 18px;
+  background: rgba(245,243,239,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--d-line);
+}
+.d-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13.5px; font-weight: 700; color: var(--d-ink-soft);
+  padding: 6px 10px; border-radius: 8px;
+}
+.d-back:hover { background: var(--d-accent-lt); color: var(--d-accent); }
+.d-brand { font-size: 15px; font-weight: 800; letter-spacing: -.02em; }
+.d-brand small { font-weight: 600; color: var(--d-ink-faint); margin-left: 6px; font-size: 12px; }
+
+/* ── 히어로 ────────────────────────────────────────────────── */
+.d-hero { padding: 34px 22px 22px; max-width: 1100px; margin: 0 auto; }
+.d-hero h1 { margin: 0 0 8px; font-size: 30px; font-weight: 800; letter-spacing: -.03em; }
+.d-hero p  { margin: 0; font-size: 15px; line-height: 1.7; color: var(--d-ink-soft); max-width: 720px; }
+
+/* ── 출발지 선택 ───────────────────────────────────────────── */
+.d-origin {
+  max-width: 1100px; margin: 0 auto 8px; padding: 0 22px;
+}
+.d-origin-box {
+  background: var(--d-surface); border: 1px solid var(--d-line);
+  border-radius: 14px; padding: 16px 18px; box-shadow: var(--d-shadow);
+}
+.d-origin-label {
+  font-size: 12px; font-weight: 700; color: var(--d-ink-faint);
+  letter-spacing: .02em; margin-bottom: 10px;
+}
+.d-origin-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.d-chip {
+  border: 1px solid var(--d-line); background: #fff;
+  border-radius: 999px; padding: 6px 13px;
+  font-size: 13px; font-weight: 600; color: var(--d-ink-soft);
+  cursor: pointer; transition: all .12s;
+  font-family: inherit;
+}
+.d-chip:hover { border-color: var(--d-accent); color: var(--d-accent); }
+.d-chip.active {
+  background: var(--d-accent); border-color: var(--d-accent);
+  color: #fff;
+}
+.d-origin-hint { margin-top: 10px; font-size: 12px; color: var(--d-ink-faint); line-height: 1.6; }
+
+/* ── 지도 ──────────────────────────────────────────────────── */
+.d-mapwrap { max-width: 1100px; margin: 18px auto; padding: 0 22px; }
+#damsaMap {
+  height: 460px; border-radius: 14px;
+  border: 1px solid var(--d-line); box-shadow: var(--d-shadow);
+  background: #e8e4dd;
+}
+.leaflet-container { font-family: inherit; }
+
+/* ── 마커 ─────────────────────────────────────────────────────
+   2026-07-30 전면 교체.
+
+   예전에는 26px 원이었고, 색 클래스가 붙지 않는 버그까지 겹쳐서
+   배경 없는 흰 테두리 원만 떠 있었다(damsa.js 주석 참고).
+   지금은 물방울 핀 + 번호 + 흰 테두리 + 그림자다.
+
+   색은 카드 태그(저채도 흙빛)와 일부러 다르게 잡았다. 카드는 흰 종이
+   위에 놓이지만 핀은 파스텔 지도 타일 위에 놓인다 — 같은 색을 쓰면
+   묻힌다. 지도 위에서는 채도가 높아야 한다.
+   ───────────────────────────────────────────────────────────── */
+.d-marker-wrap { background: none; border: none; }
+
+.d-marker {
+  position: relative;
+  width: 30px; height: 30px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2.5px solid #fff;
+  box-shadow: 0 3px 8px rgba(20,16,10,.42), 0 0 0 1px rgba(20,16,10,.10);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .13s, box-shadow .13s;
+}
+/* 번호는 핀을 되돌려 세운다 — 45° 기울어진 숫자는 읽히지 않는다 */
+.d-marker span {
+  transform: rotate(45deg);
+  font-size: 13px; font-weight: 800; color: #fff;
+  line-height: 1; letter-spacing: -.02em;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+.leaflet-marker-icon:hover .d-marker {
+  transform: rotate(-45deg) scale(1.14);
+  box-shadow: 0 5px 14px rgba(20,16,10,.5);
+}
+
+.d-marker.intact { background: #1f8a4c; }   /* 유적 온전 — 초록 */
+.d-marker.museum { background: #1565c0; }   /* 기념관·전시관 — 파랑 */
+.d-marker.trace  { background: #dd6b00; }   /* 터·표지석 — 주황 */
+.d-marker.closed { background: #6b6259; }   /* 접근 제한 — 회색 */
+
+/* ── 팝업 ─────────────────────────────────────────────────── */
+.leaflet-popup-content { margin: 0; width: 232px !important; }
+.leaflet-popup-content-wrapper { border-radius: 12px; padding: 0; overflow: hidden; }
+.d-pop { padding: 0 0 11px; }
+.d-pop-thumb {
+  display: block; width: 100%; height: 104px;
+  object-fit: cover; background: #e8e4dd;
+}
+.d-pop-no {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 19px; height: 19px; border-radius: 50%;
+  font-size: 11px; font-weight: 800; color: #fff;
+  margin: 11px 0 0 13px;
+}
+.d-pop-no.intact { background: #1f8a4c; }
+.d-pop-no.museum { background: #1565c0; }
+.d-pop-no.trace  { background: #dd6b00; }
+.d-pop-no.closed { background: #6b6259; }
+.d-pop-name  { font-weight: 800; font-size: 14px; margin: 4px 13px 0; line-height: 1.35; }
+.d-pop-addr  { font-size: 12px; color: #5d5850; line-height: 1.55; margin: 4px 13px 0; }
+.d-pop-nav   { font-size: 12px; color: #8a5a2b; font-weight: 700; margin: 5px 13px 0; }
+.d-pop-more  { margin: 8px 13px 0; }
+.d-pop-more a { font-size: 12px; font-weight: 700; color: #8a5a2b; }
+
+/* ── 권역 섹션 ─────────────────────────────────────────────── */
+.d-main { max-width: 1100px; margin: 0 auto; padding: 0 22px 60px; }
+
+.d-region { margin-top: 40px; }
+.d-region-head {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  padding-bottom: 10px; border-bottom: 2px solid var(--d-ink);
+  margin-bottom: 6px;
+}
+.d-region-name { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.d-region-area { font-size: 13px; color: var(--d-ink-faint); font-weight: 600; }
+.d-region-dist {
+  margin-left: auto; font-size: 13px; font-weight: 700;
+  color: var(--d-accent); background: var(--d-accent-lt);
+  padding: 4px 11px; border-radius: 999px;
+}
+.d-region-pitch { font-size: 14px; line-height: 1.7; color: var(--d-ink-soft); margin: 12px 0 0; }
+.d-region-course {
+  margin-top: 12px; padding: 12px 14px;
+  background: var(--d-accent-lt); border-radius: 10px;
+  font-size: 13px; line-height: 1.65; color: #6b4520; font-weight: 600;
+}
+.d-region-course b { display: block; font-size: 11.5px; letter-spacing: .04em; margin-bottom: 4px; opacity: .7; }
+
+/* ── 장소 카드 ─────────────────────────────────────────────── */
+.d-places { display: grid; gap: 14px; margin-top: 18px; }
+.d-place {
+  background: var(--d-surface); border: 1px solid var(--d-line);
+  border-radius: 14px; padding: 20px 22px; box-shadow: var(--d-shadow);
+}
+.d-place-head { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.d-place-name { font-size: 17.5px; font-weight: 800; letter-spacing: -.02em; margin: 0; }
+.d-place-alias { font-size: 12.5px; color: var(--d-ink-faint); font-weight: 600; margin-top: 3px; }
+.d-place-dist {
+  margin-left: auto; text-align: right; flex-shrink: 0;
+}
+.d-place-dist .km { font-size: 17px; font-weight: 800; color: var(--d-accent); }
+.d-place-dist .hr { display: block; font-size: 12px; color: var(--d-ink-faint); font-weight: 600; margin-top: 1px; }
+
+.d-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; }
+.d-tag {
+  font-size: 11.5px; font-weight: 700; padding: 3px 9px;
+  border-radius: 6px; background: #f3f1ec; color: var(--d-ink-soft);
+}
+.d-tag.survival-intact { background: #e8efe0; color: #4a6b2e; }
+.d-tag.survival-museum { background: #e0eaf0; color: #2e546b; }
+.d-tag.survival-trace  { background: #f0e8dc; color: #6b512e; }
+.d-tag.survival-closed { background: #eceae6; color: #6b665e; }
+.d-tag.unesco { background: #f0e4e4; color: #7a3a3a; }
+
+.d-fields { margin-top: 16px; display: grid; gap: 13px; }
+.d-field-label {
+  font-size: 11.5px; font-weight: 800; letter-spacing: .05em;
+  color: var(--d-ink-faint); margin-bottom: 4px;
+}
+.d-field-body { font-size: 14px; line-height: 1.75; color: #2e2b26; }
+.d-field-body strong { color: var(--d-accent); font-weight: 700; }
+
+.d-caution {
+  margin-top: 14px; padding: 12px 14px;
+  background: #fdf6e8; border-left: 3px solid #c9a227;
+  border-radius: 0 8px 8px 0;
+  font-size: 13.5px; line-height: 1.7; color: #6b5620;
+}
+.d-caution b { display: block; font-size: 11.5px; letter-spacing: .04em; margin-bottom: 3px; }
+
+.d-place-foot {
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--d-line);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.d-addr { font-size: 12.5px; color: var(--d-ink-faint); font-weight: 600; }
+.d-actions { margin-left: auto; display: flex; gap: 7px; flex-wrap: wrap; }
+.d-btn {
+  font-size: 12.5px; font-weight: 700; padding: 7px 13px;
+  border-radius: 8px; border: 1px solid var(--d-line);
+  background: #fff; color: var(--d-ink-soft); cursor: pointer;
+  font-family: inherit; transition: all .12s;
+}
+.d-btn:hover { border-color: var(--d-accent); color: var(--d-accent); background: var(--d-accent-lt); }
+.d-btn-primary { background: var(--d-accent); border-color: var(--d-accent); color: #fff; }
+.d-btn-primary:hover { background: #6f4720; color: #fff; }
+
+.d-verified { font-size: 11px; color: var(--d-ink-faint); margin-top: 10px; }
+
+/* ── 범례 ──────────────────────────────────────────────────── */
+.d-legend {
+  max-width: 1100px; margin: 0 auto; padding: 0 22px;
+  display: flex; gap: 16px; flex-wrap: wrap;
+  font-size: 12px; color: var(--d-ink-soft);
+}
+.d-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.d-legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+/* ── 푸터 ──────────────────────────────────────────────────── */
+.d-footer {
+  border-top: 1px solid var(--d-line); margin-top: 40px;
+  padding: 26px 22px; text-align: center;
+  font-size: 12.5px; color: var(--d-ink-faint); line-height: 1.7;
+}
+
+/* ── 모바일 ────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .d-hero { padding: 24px 16px 16px; }
+  .d-hero h1 { font-size: 24px; }
+  .d-hero p { font-size: 14px; }
+  .d-origin, .d-mapwrap, .d-main, .d-legend { padding-left: 16px; padding-right: 16px; }
+  #damsaMap { height: 320px; }
+  .d-place { padding: 17px 16px; }
+  .d-place-dist { margin-left: 0; text-align: left; width: 100%; margin-top: 6px; }
+  .d-place-dist .hr { display: inline; margin-left: 6px; }
+  .d-region-dist { margin-left: 0; }
+  .d-actions { margin-left: 0; width: 100%; }
+  .d-btn { flex: 1; text-align: center; }
+}
+
+/* ── 내비 검색어 블록 ──────────────────────────────────────────
+   카드의 단위가 주차장으로 바뀌면서 새로 생긴 영역.
+   답사에서 가장 실용적인 정보이므로 시각적으로 가장 강하게 잡는다. */
+.d-nav {
+  margin-top: 16px; padding: 14px 16px;
+  background: linear-gradient(180deg, #fbf6ef, #f7f0e6);
+  border: 1px solid #e6d8c4; border-radius: 12px;
+}
+.d-nav-label {
+  font-size: 11px; font-weight: 800; letter-spacing: .06em;
+  color: #a08050; margin-bottom: 5px;
+}
+.d-nav-query {
+  font-size: 19px; font-weight: 800; letter-spacing: -.02em;
+  color: #6b4520; line-height: 1.35;
+}
+.d-nav-park {
+  margin-top: 7px; font-size: 12.5px; font-weight: 600;
+  color: #8a7355; line-height: 1.5;
+}
+
+/* ── 볼 수 있는 곳 목록 ──────────────────────────────────────── */
+.d-sights { margin-top: 18px; }
+.d-sight-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 9px; }
+.d-sight {
+  display: flex; gap: 9px; align-items: flex-start;
+  font-size: 13.5px; line-height: 1.65; color: #2e2b26;
+}
+.d-sight b { font-weight: 800; }
+.d-sight-dot {
+  flex-shrink: 0; width: 9px; height: 9px; border-radius: 50%;
+  margin-top: 6px;
+}
+.d-sight-dot.intact { background: #7a9a5b; }
+.d-sight-dot.museum { background: #4a7a9a; }
+.d-sight-dot.trace  { background: #9a7a4a; }
+.d-sight-dot.closed { background: #8b857b; }
+
+@media (max-width: 720px) {
+  .d-nav-query { font-size: 17px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   2026-07-30 추가 — 사진 · 번호 배지 · 스크랩 버튼 · NEW 배지
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 유적 사진 ────────────────────────────────────────────────
+   왕두목 확정: "각 유적의 사진이 필수야. 그래야 더 흥미가 생기지."
+   유적지 이름 바로 위, 카드 최상단에 놓는다.
+
+   핵심은 사진 파일이 아직 없을 때의 처리다. 답사 텍스트는 완성돼
+   있어도 사진은 출처를 확인하며 하나씩 채워야 하므로, 없는 동안에도
+   카드가 멀쩡해야 한다. img가 실패하면 damsa.js의 onerror가
+   .is-missing을 달고, 그러면 큰 사진 영역이 얇은 띠 하나로 접힌다.
+   파일을 photos/ 에 넣는 순간 코드 수정 없이 사진이 살아난다.
+   ───────────────────────────────────────────────────────────── */
+.d-photo {
+  position: relative; margin: -20px -22px 16px;
+  background: #ece7de;
+  border-radius: 13px 13px 0 0; overflow: hidden;
+}
+.d-photo img {
+  display: block; width: 100%; aspect-ratio: 16 / 9;
+  object-fit: cover; background: #ece7de;
+}
+.d-photo figcaption {
+  padding: 8px 22px 0;
+  font-size: 12px; line-height: 1.55; color: var(--d-ink-faint);
+}
+.d-photo-cap { font-weight: 600; }
+.d-photo-credit {
+  display: block; margin-top: 2px;
+  font-size: 11px; color: #a8a29a;
+}
+/* 사진이 아직 없을 때 — 얇은 띠로 접는다 */
+.d-photo-fallback { display: none; }
+.d-photo.is-missing {
+  background: repeating-linear-gradient(
+    -45deg, #f1ece3, #f1ece3 7px, #eae4d9 7px, #eae4d9 14px);
+  border-bottom: 1px solid var(--d-line);
+}
+.d-photo.is-missing img,
+.d-photo.is-missing figcaption { display: none; }
+.d-photo.is-missing .d-photo-fallback {
+  display: block; padding: 11px 22px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+  color: #a29a8e;
+}
+
+/* ── 카드 번호 배지 — 지도 핀의 번호와 같은 값 ───────────────── */
+.d-place-no {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 21px; height: 21px; border-radius: 50%;
+  font-size: 12px; font-weight: 800; color: #fff;
+  margin-right: 8px; vertical-align: 2px;
+  background: #6b6259;
+}
+.d-place-no.intact { background: #1f8a4c; }
+.d-place-no.museum { background: #1565c0; }
+.d-place-no.trace  { background: #dd6b00; }
+.d-place-no.closed { background: #6b6259; }
+
+/* ── 스크랩 버튼 ─────────────────────────────────────────────
+   "나중 여행과 관심을 위한" 저장. 담기 전에는 조용하고, 담긴 뒤에는
+   확실히 담겼다고 보여야 한다 — 그래야 다시 눌러 확인하지 않는다. */
+.d-btn-scrap.is-on {
+  background: #f0e6d8; border-color: var(--d-accent);
+  color: #6b4520; font-weight: 800;
+}
+
+/* ── 범례를 핀 모양으로 ──────────────────────────────────────── */
+.d-legend i.pin {
+  width: 12px; height: 12px; border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg); border: 1.5px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+/* ── 답사 상단 바 메뉴 + NEW 배지 ─────────────────────────────
+   답사가 새 갈래이므로 한동안은 "새로 생겼다"는 신호가 필요하다.
+   작고 빨갛게, 그리고 애니메이션은 아주 절제해서. */
+.d-topbar-menu { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.d-topbar-link {
+  font-size: 13px; font-weight: 700; color: var(--d-ink-soft);
+  padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+}
+.d-topbar-link:hover { background: var(--d-accent-lt); color: var(--d-accent); }
+
+.nav-new {
+  display: inline-block; margin-left: 4px; vertical-align: 2px;
+  font-size: 8.5px; font-weight: 800; letter-spacing: .04em;
+  line-height: 1.4; color: #fff; background: #d0342c;
+  border-radius: 3px; padding: 1px 3px 0;
+}
+
+@media (max-width: 720px) {
+  .d-photo { margin: -17px -16px 14px; }
+  .d-photo figcaption { padding-left: 16px; padding-right: 16px; }
+  .d-photo.is-missing .d-photo-fallback { padding-left: 16px; padding-right: 16px; }
+  .d-topbar-link { font-size: 12px; padding: 6px 7px; }
+}

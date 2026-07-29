@@ -93,9 +93,44 @@
       <span class="lib-page-text">${esc(p.text)}</span>
     </li>`).join('');
 
-    // 스크랩
+    // ── 가고 싶은 답사지 (kind:'damsa') ──────────────────────
+    // 2026-07-30. 일반 스크랩에서 답사만 따로 뽑아 위쪽에 놓는다.
+    // 답사 스크랩에는 extra.nav / extra.lat / extra.lng 가 함께 저장돼
+    // 있어서(growth.js addScrap 참고) 서재에서 곧바로 카카오맵 길찾기로
+    // 넘어갈 수 있다. 좌표가 없는 옛 스크랩은 길찾기 버튼만 생략한다.
     const data = G.getData();
-    const scraps = (data.scraps || []).slice().reverse();
+    const allScraps = (data.scraps || []).slice().reverse();
+    const damsaScraps = allScraps.filter(s => s.kind === 'damsa');
+    const dbox = document.getElementById('damsaBox');
+    if (dbox) {
+      if (!damsaScraps.length) {
+        dbox.hidden = true;
+      } else {
+        dbox.hidden = false;
+        document.getElementById('damsaCount').textContent = `(${damsaScraps.length})`;
+        document.getElementById('damsaList').innerHTML = damsaScraps.map(s => {
+          const ex = s.extra || {};
+          const to = (ex.lat && ex.lng)
+            ? `https://map.kakao.com/link/to/${encodeURIComponent(ex.nav || s.title)},${ex.lat},${ex.lng}`
+            : '';
+          return `<li class="namu-damsa">
+            <a href="${esc(s.url)}" class="namu-damsa-main">
+              <span class="namu-damsa-title">${esc(s.title)}</span>
+              ${s.note ? `<span class="namu-damsa-note">${esc(s.note)}</span>` : ''}
+              ${ex.nav ? `<span class="namu-damsa-nav">내비: ${esc(ex.nav)}</span>` : ''}
+            </a>
+            <span class="namu-damsa-actions">
+              ${to ? `<a class="namu-damsa-btn" href="${esc(to)}" target="_blank" rel="noopener">길찾기</a>` : ''}
+              <button type="button" class="namu-scrap-del" data-url="${esc(s.url)}"
+                      aria-label="답사지 삭제">×</button>
+            </span>
+          </li>`;
+        }).join('');
+      }
+    }
+
+    // ── 스크랩 (답사 제외) ───────────────────────────────────
+    const scraps = allScraps.filter(s => s.kind !== 'damsa');
     document.getElementById('scrapCount').textContent = scraps.length ? `(${scraps.length})` : '';
     const list = document.getElementById('scrapList');
     const empty = document.getElementById('scrapEmpty');
@@ -104,7 +139,7 @@
       empty.hidden = false;
     } else {
       empty.hidden = true;
-      const KIND = { card: '사건 카드', archive: '자료실', route: '루트', page: '페이지' };
+      const KIND = { card: '사건 카드', archive: '자료실', route: '루트', damsa: '답사', page: '페이지' };
       list.innerHTML = scraps.map(s => `<li class="namu-scrap">
         <a href="${esc(s.url)}" class="namu-scrap-link">
           <span class="namu-scrap-kind">${esc(KIND[s.kind] || '페이지')}</span>

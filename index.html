@@ -40,6 +40,9 @@
 <!-- ── 상단 내비 ── -->
 <nav class="portal-nav">
   <div class="portal-nav-menu">
+    <!-- 2026-07-30: 포털 상단 내비에도 답사를 올렸다. 아래 '빠른 접근'
+         칸에만 있어서 스크롤해야 보였고, 그래서 안 보였다. -->
+    <a class="portal-nav-item" href="maps/damsa/index.html">🥾 <span class="label-full">답사</span><span class="nav-new" data-new-key="damsa">NEW</span></a>
     <button type="button" class="portal-nav-item" id="portalOpenArchive">📖 <span class="label-full">자료실</span></button>
     <button type="button" class="portal-nav-item" id="portalOpenInfo">ℹ️ <span class="label-full">ATLAS 소개</span></button>
   </div>
@@ -159,6 +162,13 @@
       <span class="portal-quick-text">
         <span class="portal-quick-label">역사 시뮬레이션</span>
         <span class="portal-quick-sub">1592년, 당신이라면?</span>
+      </span>
+    </a>
+    <a class="portal-quick-item portal-quick-item-damsa" href="maps/damsa/index.html">
+      <span class="portal-quick-badge">🥾</span>
+      <span class="portal-quick-text">
+        <span class="portal-quick-label">답사<span class="nav-new" data-new-key="damsa">NEW</span></span>
+        <span class="portal-quick-sub">지금 갈 수 있는 역사의 현장</span>
       </span>
     </a>
     <a class="portal-quick-item" href="#" id="portalQuickProject">
@@ -291,6 +301,7 @@
 <script src="js/analytics.js"></script>
 
 <script src="js/growth.js"></script>
+<script src="js/newBadge.js"></script>
 <script src="js/library.js"></script>
 <script src="js/namuBadge.js"></script>
 <script src="js/tutorial.js"></script>

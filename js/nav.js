@@ -54,7 +54,7 @@
     { routeId:'modern_literature',  name:'근대문학 기행', period:'1908–1945', tagline:'신체시에서 옥중의 시인까지 — 문학사 3부작 1부', ready:true, thumbnail:null },
   ];
 
-  const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트', library:'서재' };
+  const NAV_LABELS = { intro:'소개', map:'지도', archive:'자료실', route:'루트', project:'프로젝트', damsa:'답사', library:'서재' };
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
   // content/archive/*.js가 window.registerArchiveSeries로 스스로 등록한다.
@@ -558,6 +558,14 @@
         if (introPage && introPage.classList.contains('open')) window.closeIntroPage();
         if (typeof window.openProjectHub === 'function') window.openProjectHub();
         else showComingSoon(NAV_LABELS[key] || key);
+      } else if (key === 'damsa') {
+        // 「답사」 — 지금 갈 수 있는 역사의 현장. 시대 지도가 아니라
+        // 별도 갈래(maps/damsa/)이므로 페이지 이동이다.
+        // 경로는 서재와 같은 방식으로 사이트 루트를 되짚어 만든다.
+        const _dseg = location.pathname.split('/').filter(Boolean);
+        const _ddirs = (_dseg.length && _dseg[_dseg.length - 1].indexOf('.') !== -1)
+          ? _dseg.slice(0, -1) : _dseg.slice();
+        location.href = (_ddirs.length ? '../'.repeat(_ddirs.length) : '') + 'maps/damsa/index.html';
       } else if (key === 'library') {
         // 「나의 서재」 — 개인 기록 페이지로 이동한다(2026-07-24 추가).
         // 오버레이가 아니라 별도 페이지이므로, 나중에 소셜 로그인을

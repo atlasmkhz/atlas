@@ -208,7 +208,10 @@ body.portal {
 /* ── 빠른 접근 ── */
 .portal-quick { position:relative; z-index:2; margin:40px 32px 0; }
 .portal-quick-header { margin-bottom:16px; }
-.portal-quick-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+.portal-quick-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:14px; }
+/* 답사 항목이 추가되면서 4열 → 5열. 모바일 2열에서는 답사가 홀로 남으므로
+   전체 너비를 차지하게 해 신규 갈래를 눈에 띄게 한다(아래 미디어쿼리). */
+.portal-quick-item-damsa { border-color:rgba(190,140,80,.45); }
 .portal-quick-item {
   display:flex; flex-direction:row; align-items:center; gap:14px;
   padding:18px 18px; border-radius:14px; text-decoration:none;
@@ -245,6 +248,7 @@ body.portal {
 }
 @media (max-width:640px) {
   .portal-quick-grid { grid-template-columns:1fr 1fr; }
+  .portal-quick-item-damsa { grid-column:1 / -1; }
   .portal-quick-sub { white-space:normal; }
 }
 
@@ -262,6 +266,7 @@ body.portal {
   .portal-nav-item span.label-full { display:none; }
   .stats-card-grid { gap:14px 22px; }
   .portal-quick-grid { grid-template-columns:repeat(2, 1fr); }
+  .portal-quick-item-damsa { grid-column:1 / -1; }
   .route-card { flex-basis:190px; height:250px; }
 }
 
@@ -282,3 +287,15 @@ body.portal {
   box-shadow:0 2px 8px rgba(0,0,0,0.45);
 }
 .portal-explore-card .portal-new-badge { margin-left:6px; }
+
+
+/* ── NEW 배지 (2026-07-30) ────────────────────────────────────
+   새로 생긴 갈래(지금은 「답사」)를 알리는 표시.
+   portal-nav-item은 button과 <a>가 섞이므로 text-decoration도 눌러둔다. */
+.nav-new {
+  display: inline-block; margin-left: 4px; vertical-align: 2px;
+  font-size: 8.5px; font-weight: 800; letter-spacing: .04em;
+  line-height: 1.4; color: #fff; background: #d0342c;
+  border-radius: 3px; padding: 1px 3px 0;
+}
+a.portal-nav-item { text-decoration: none; display: inline-flex; align-items: center; }
