@@ -1357,3 +1357,96 @@ body.controls-hidden .theme-toggle-btn {
 }
 body.map-light .scrap-btn { color:#8a6a24; border-color:rgba(120,96,48,0.5); }
 body.map-light .scrap-btn.is-on { background:#c8a827; color:#241f18; }
+
+
+/* ═══════════════════════════════════════════════════════
+   주간 모드 명암 반전 보완 — 2026-07-29
+   ═══════════════════════════════════════════════════════
+   1차 구현에서는 타일과 우측 컨트롤만 밝게 바꿨는데, 지도 위에 배경
+   없이 얹혀 있는 글자들(연도 숫자, 시대 문구, 사건 수)이 흰색 그대로라
+   밝은 타일에서 보이지 않았다. 여기서 그 글자들을 어두운 쪽으로
+   뒤집고, 상·하단 그라데이션 가림막도 검정→흰색으로 바꿔 낮 화면
+   전체의 명암을 일관되게 맞춘다.
+
+   원칙: 배경이 있는 패널(정보카드 .pop-*)은 원래 종이색이므로 손대지
+   않는다. 건드리는 것은 "지도 위에 직접 떠 있는 요소"와 "1차에서
+   배경만 밝게 바꾼 탓에 글자가 남겨진 요소" 두 가지뿐이다. */
+
+/* ── 상단 제목 영역 ── 어두운 그라데이션 가림막을 밝은 쪽으로 */
+body.map-light .header {
+  background:linear-gradient(180deg, rgba(246,244,239,0.94), rgba(246,244,239,0.4) 75%, transparent);
+}
+body.map-light .title { color:#1e1a14; text-shadow:0 1px 6px rgba(255,255,255,0.9); }
+body.map-light .subtitle { color:#8a6a24; }
+
+/* ── 연도 표시 ── 배경이 없어 타일에 그대로 얹히는 부분 */
+body.map-light .year-number {
+  color:#1e1a14; text-shadow:0 2px 14px rgba(255,255,255,0.95);
+}
+body.map-light .year-label { color:#7a5d1c; }
+/* #eventCount는 HTML에 인라인 style이 박혀 있어 !important가 필요하다 */
+body.map-light #eventCount { color:rgba(40,34,24,0.75) !important; }
+body.map-light .era-text {
+  color:rgba(30,26,20,0.9); text-shadow:0 1px 5px rgba(255,255,255,0.9);
+}
+body.map-light .occupation-tag {
+  color:rgba(150,40,30,0.95); border-color:rgba(150,40,30,0.45);
+  background:rgba(255,255,255,0.55);
+}
+
+/* ── 시대 개요 카드 ── 자동으로 열리는 패널이라 특히 중요 */
+body.map-light .era-card {
+  background:rgba(252,251,248,0.95); border-color:rgba(120,96,48,0.35);
+  color:#241f18;
+}
+body.map-light .era-card #eraDesc,
+body.map-light .era-card p { color:#2a251d; }
+body.map-light .era-close { color:#6a5a3a; }
+body.map-light .era-info-btn {
+  color:#7a5d1c; border-color:rgba(120,96,48,0.5); background:rgba(255,255,255,0.6);
+}
+body.map-light .era-start-btn {
+  background:rgba(184,152,96,0.22); color:#3a2f1c; border-color:rgba(120,96,48,0.45);
+}
+
+/* ── 하단 타임라인 / 챕터 내비 ── */
+body.map-light .timeline {
+  background:linear-gradient(0deg, rgba(246,244,239,0.96), rgba(246,244,239,0.6) 70%, transparent);
+}
+body.map-light .slider-labels { color:#4a4030; opacity:0.75; }
+body.map-light .reign-label { color:#7a5d1c; }
+body.map-light .hint { color:#4a4030; opacity:0.7; }
+body.map-light .reign-chapter-name,
+body.map-light .reign-chapter-years { color:#2f2820; }
+body.map-light .reign-chapter-btn {
+  background:rgba(184,152,96,0.16); border-color:rgba(120,96,48,0.3);
+}
+body.map-light .reign-chapter-btn:hover { background:rgba(184,152,96,0.3); }
+body.map-light .reign-chapter-btn.active {
+  background:rgba(198,150,58,0.75); border-color:rgba(150,110,30,0.95);
+}
+body.map-light .reign-chapter-btn.active .reign-chapter-name,
+body.map-light .reign-chapter-btn.active .reign-chapter-years { color:#1a1610; }
+
+/* ── 검색 위젯 ── 1차에서 배경만 밝게 바꿔 입력 글자가 남았다 */
+body.map-light .search-input { color:#241f18; }
+body.map-light .search-input::placeholder { color:rgba(60,52,40,0.55); }
+body.map-light .search-status { color:#4a4030; }
+body.map-light .search-icon-btn,
+body.map-light .search-x-btn { color:#5a4c34; }
+body.map-light .search-x-btn:hover { color:#1a1610; }
+body.map-light .search-cross-era a { color:#7a5d1c; }
+body.map-light .search-cross-era a:hover { color:#1a1610; border-bottom-color:#1a1610; }
+
+/* ── 지도 위 라벨 마감 ── 주간 모드 보완 (2026-07-29)
+   중국사 라벨은 반투명 어두운 칩을 깔고 있어 밝은 타일에서도 글자가
+   읽히긴 하지만, 칩이 회색으로 떠 보인다. 칩을 더 짙게 눌러 대비를
+   확보한다(글자색은 금색 계열 그대로 두는 편이 왕조 구분에 맞다).
+   지명 핀 점은 흰 점이라 밝은 바탕에서 사라지므로 어둡게 뒤집는다. */
+body.map-light .china-label {
+  background:rgba(28,22,14,0.78); text-shadow:0 0 5px rgba(10,8,4,0.9);
+}
+body.map-light .hist-pin-dot {
+  background:#2b2620; border-color:rgba(255,255,255,0.7);
+  box-shadow:0 0 3px rgba(255,255,255,0.85);
+}
