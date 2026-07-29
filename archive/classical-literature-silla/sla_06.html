@@ -33,6 +33,8 @@
 <article>
 <h1>처용가 — 빼앗긴 것을 어찌하리</h1>
 <p class="event-meta">879 · 개운포(울산) / 서라벌</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="처용가 — 빼앗긴 것을 어찌하리" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>『삼국유사』 권2 처용랑망해사조. 헌강왕이 개운포(開雲浦, 지금의 울산)에 나들이 갔다가 돌아오는 길에 갑자기 구름과 안개가 자욱해져 길을 잃었다. 일관(日官)이 아뢰었다. &quot;동해 용의 조화이니 좋은 일을 해서 풀어야 합니다.&quot; 왕이 용을 위해 근처에 절을 세우라 명하자 구름이 걷혔다. 그래서 그곳을 개운포라 한다.</p><p>동해 용이 기뻐하며 아들 일곱을 거느리고 나타나 왕의 덕을 찬양하며 춤추고 음악을 연주했다. 그중 하나가 왕을 따라 서울로 와 정사를 도왔으니 이름이 처용(處容)이다. 왕은 미녀를 아내로 삼게 하고 급간(級干) 벼슬을 주었다.</p><p>그런데 그 아내가 매우 아름다워 역신(疫神)이 흠모하여, 사람으로 변해 밤에 그 집에 가 몰래 자고 있었다. 처용이 밖에서 돌아와 잠자리에 두 사람이 있는 것을 보고, 노래를 부르고 춤을 추며 물러났다.</p><p>東京明期月良 — 서울 밝은 달에
 夜入伊遊行如可 — 밤들이 노니다가
 入良沙寢矣見昆 — 들어와 자리를 보니
@@ -77,6 +79,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

@@ -33,6 +33,8 @@
 <article>
 <h1>훈민정음 해례본 ② 제자해(상) — 소리와 오행, 그리고 발음기관을 본뜬 글자</h1>
 <p class="event-meta">1446 9월 · 한양 경복궁</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="훈민정음 해례본 ② 제자해(상) — 소리와 오행, 그리고 발음기관을 본뜬 글자" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>天地之道,一隂陽五行而已。坤復之間為太極,而動静之後為隂陽。凡有生類在天地之間者,捨隂陽而何之。故人之聲音,皆有隂陽之理,頋人不察耳。今正音之作,初非智營而力索,但因其聲音而極其理而已。理旣不二,則何得不與天地鬼神同其用也。
 正音二十八字,各象其形而制之。
 初聲凡十七字。牙音ㄱ,象舌根閉喉之形。舌音ㄴ,象舌附上腭之形。脣音ㅁ,象口形。齒音ㅅ,象齒形。喉音ㅇ,象喉形。ㅋ比ㄱ,聲出稍厲,故加畫。ㄴ而ㄷ,ㄷ而ㅌ,ㅁ而ㅂ,ㅂ而ㅍ,ㅅ而ㅈ,ㅈ而ㅊ,ㅇ而ㆆ,ㆆ而ㅎ,其因聲加畫之義皆同,而唯ㆁ為異。半舌音ㄹ,半齒音ㅿ,亦象舌齒之形而異其體,無加劃之義焉。
@@ -77,6 +79,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

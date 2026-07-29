@@ -39,6 +39,8 @@
 <article>
 <h1>기미독립선언서 ④ &quot;결코 타의 파괴에 재치 안이하도다&quot; — 원한이 아닌 자기 건설의 선언</h1>
 <p class="event-meta">1919 3월 1일 · 경성 태화관·탑골공원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="기미독립선언서 ④ &quot;결코 타의 파괴에 재치 안이하도다&quot; — 원한이 아닌 자기 건설의 선언" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>丙子修好條規以來時時種種의金石盟約을食하얏다하야日本의無信을罪하려안이하노라學者는講壇에서政治家는實際에서我祖宗世業을植民地視하고我文民族을土昧人遇하야한갓征服者의快를貪할ᄲᅮᆫ이오我의久遠한社會基礎와卓犖한民族心理를無視한다하야日本의少義함을責하려안이하노라自己를策勵하기에急한吾人은他의怨尤를暇치못하노라現在를綢繆하기에急한吾人은宿昔의懲辯을暇치못하노라今日吾人의所任은다만自己의建設이有할ᄲᅮᆫ이오決코他의破壞에在치안이하도다嚴肅한良心의命令으로써自家의新運命을開拓함이오決코舊怨과一時的感情으로써他를嫉逐排斥함이안이로다舊思想舊勢力에覉縻된日本爲政家의功名的犧牲이된不自然又不合理한錯誤狀態를改善匡正하야自然又合理한政經大原으로歸還케함이로다當初에民族的要求로서出치안이한兩國倂合의結果가畢竟姑息的威壓과差別的不平과統計數字上虛飾의下에서利害相反한兩民族間에永遠히和同할수업는怨溝를去益深造하는今來實積을觀하라勇明果敢으로써舊誤를廓正하고眞正한理解와同情에基本한友好的新局面을打開함이彼此間遠禍召福하는捷徑임을明知할것안인가ᄯᅩ二千萬含憤蓄怨의民을威力으로써拘束함은다만東洋의永久한平和를保障하는所以가안일ᄲᅮᆫ안이라此로因하야東洋安危의主軸인四億萬支那人의日本에對한危懼와猜疑를갈스록濃厚케하야그結果로東洋全局이共倒同亡의悲運을招致할것이明하니今日吾人의朝鮮獨立은朝鮮人으로하야금正當한生榮을遂케하는同時에日本으로하야금邪路로서出하야東洋支持者인重責을全케하는것이며支那로하야금夢寐에도하지못하는不安恐怖로서脫出케하는것이며ᄯᅩ東洋平和로重要한一部를삼는世界平和人類幸福에必要한階段이되게하는것이라이엇지區區한感情上問題ㅣ리오</p></blockquote><p class="source-note">기미독립선언서 원문 제4문단, 선언 전체에서 가장 긴 대목. 일본을 원망하는 데 그치지 않고 &quot;자기 건설&quot;에 집중하겠다는 태도를 밝히며, 한일병합의 부당함과 동양 평화를 위한 독립의 필요성을 논한다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>병자수호조약 이후 때때로 굳게 맺은 갖가지 약속을 배반하였다 하여 일본의 배신을 죄주려는 것이 아닙니다.
 
 일본 제국주의의 학자들은 강단에서, 통치자들은 실생활에서 우리의 선조들이 대대로 닦아 온 찬란한 위업을 식민지로 삼아 문화 민족인 우리를 야만족같이 대우하여 다만 정복자의 쾌감을 탐할 뿐이요, 우리의 오랜 사회 기초와 뛰어난 민족의 성품을 무시한다 해서 일본의 무도함을 꾸짖으려는 것도 아닙니다.
@@ -88,6 +90,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

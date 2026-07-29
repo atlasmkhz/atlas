@@ -18,6 +18,11 @@ function currentReignRange(){
 
 function renderCurrentChapter(){
   const [start, end] = currentReignRange();
+  // 2026-07-28: 지금 보고 있는 왕의 order를 전역에 실어 보낸다.
+  // validator.js의 getVisibleEventsInRange가 이 값으로 "다음 왕에게
+  // 속한 사건"(대표적으로 다음 왕의 즉위 카드)을 걸러낸다 — 챕터 범위
+  // 양끝이 포함이라 경계 연도에서 두 왕이 겹치던 문제의 해결책이다.
+  window.__atlasCurrentReignOrder = currentReign().order;
   safeRenderRange(start, end);
 }
 

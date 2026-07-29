@@ -33,6 +33,8 @@
 <article>
 <h1>국민방위군 사건 — 영화가 한 마디도 하지 않는 이유</h1>
 <p class="event-meta">1951 1월 · 경남 일대</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="국민방위군 사건 — 영화가 한 마디도 하지 않는 이유" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-claim"><h2>주장</h2><p>영화는 6·25 전쟁기를 다루면서 국민방위군 사건을 언급하지 않는다. 침묵 자체가 이 영화의 입장이다.</p></section><section class="post-rebuttal"><h2>반박</h2><p>국민방위군 사건은 이승만 정부가 감출 수 없었던, 당대에 이미 폭로되고 단죄된 사건이다. 1·4후퇴를 앞두고 정부는 만 17~40세 장정 수십만 명을 국민방위군으로 소집해 남쪽으로 도보 이동시켰는데, 그 과정에서 지휘부가 예산과 물자를 조직적으로 횡령했다. 한겨울에 식량도 피복도 지급받지 못한 장정들이 행군 중에 얼어 죽고 굶어 죽었다 — 희생자는 수만 명 규모로 추산되며, 살아남은 이들도 &quot;해골들의 행진&quot;이라 불릴 만큼 참혹한 상태였다. 사건은 국회 조사로 드러났고, 1951년 8월 사령관 김윤근·부사령관 윤익헌 등 지휘부 5명이 사형에 처해졌다. 자기 나라 군대가 자기 나라 장정 수만 명을 부패로 죽게 만든, 전사(戰史)에서 유례를 찾기 어려운 사건이다. 이승만의 전시 지도력을 예찬하는 영화에서 이 사건이 존재할 자리는 없다 — 그래서 지워졌다. 그러나 어떤 지도자의 전쟁 수행을 평가하려면, 그 전쟁에서 그의 정부가 자국민에게 저지른 일도 함께 놓아야 한다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 한국민족문화대백과사전 — 국민방위군사건 <span class="source-meta">(한국학중앙연구원)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 사건</h3><ul><li><a href="../../maps/modern2/index.html?event=plot_1951_01">국민방위군 사건 (1951)</a></li></ul></div><div class="related-group"><h3>관련 인물</h3><ul><li>김윤근</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

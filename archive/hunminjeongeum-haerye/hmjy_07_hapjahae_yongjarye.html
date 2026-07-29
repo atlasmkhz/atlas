@@ -33,6 +33,8 @@
 <article>
 <h1>훈민정음 해례본 ⑦ 합자해와 용자례 — 글자를 합치는 법, 그리고 실제 낱말들</h1>
 <p class="event-meta">1446 9월 · 한양 경복궁</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="훈민정음 해례본 ⑦ 합자해와 용자례 — 글자를 합치는 법, 그리고 실제 낱말들" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>初中終三聲,合而成字。初聲或在中聲之上,或在中聲之左。如君字ㄱ在ㅜ上,業字ㆁ在ㅓ左之類。
 中聲則圓者橫者在初聲之下,ㆍㅡㅗㅛㅜㅠ是也。縱者在初聲之右,ㅣㅏㅑㅓㅕ是也。如呑字ㆍ在ㅌ下,卽字ㅡ在ㅈ下,侵字ㅣ在ㅊ右之類。
 終聲在初中之下。如君字ㄴ在구下,業字ㅂ在ᅌᅥ下之類。
@@ -86,6 +88,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

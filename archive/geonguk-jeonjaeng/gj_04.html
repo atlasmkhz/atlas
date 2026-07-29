@@ -33,6 +33,8 @@
 <article>
 <h1>영화가 임시정부를 지운 이유 — 이승만은 임정에서 탄핵된 유일한 대통령이다</h1>
 <p class="event-meta">1925 3월 · 상하이</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="영화가 임시정부를 지운 이유 — 이승만은 임정에서 탄핵된 유일한 대통령이다" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-claim"><h2>주장</h2><p>영화는 이승만의 독립운동 경력을 길게 조명하면서도 대한민국 임시정부 초대 대통령 시절의 결말 — 탄핵 — 은 다루지 않는다. 임시정부 자체가 서사에서 거의 지워져 있다.</p></section><section class="post-rebuttal"><h2>반박</h2><p>감춘 것에는 이유가 있다. 1925년 3월 임시정부 의정원은 대통령 이승만을 탄핵해 면직하고 박은식을 제2대 임시대통령으로 선출했다. 탄핵 사유는 명확히 기록돼 있다 — 미국에 위임통치를 청원한 사실, 그리고 임지인 상하이에 머문 기간이 6개월에 불과할 만큼 직무를 소홀히 한 점. 임정은 곧이어 대통령제 자체를 폐지하고 국무령 중심 내각책임제로 개헌했다 — 한 사람에게 권력이 쏠리는 구조를 다시 만들지 않겠다는 판단이었다. 헌법 전문이 &quot;3·1운동으로 건립된 대한민국임시정부의 법통&quot;을 계승한다고 명시한 이상, 임시정부는 대한민국의 뿌리다. 그 뿌리에서 탄핵당한 기록은 이승만 개인의 &quot;건국 서사&quot;와 정면으로 충돌하기 때문에, 영화는 임시정부를 조명할수록 불리해진다. 인물의 생애에서 가장 불리한 공적 기록을 통째로 들어내는 것 — 그것이 이 영화의 기본 편집 문법이다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 한국민족문화대백과사전 — 임시정부 대통령 탄핵 <span class="source-meta">(한국학중앙연구원)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 사건</h3><ul><li><a href="../../map.html?event=political_1925_02">임시정부, 이승만 대통령 탄핵 (1925)</a></li><li><a href="../../map.html?event=movement_1919_03">대한민국 임시정부 수립 (1919)</a></li></ul></div><div class="related-group"><h3>관련 인물</h3><ul><li>이승만</li><li>박은식</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

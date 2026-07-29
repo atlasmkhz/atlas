@@ -33,6 +33,8 @@
 <article>
 <h1>유시민 항소이유서 ① 법이 아니라 양심의 이름으로</h1>
 <p class="event-meta">1985 5월 27일 · 서울형사지방법원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="유시민 항소이유서 ① 법이 아니라 양심의 이름으로" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>본 피고인은 우선 이 항소의 목적이 자신의 무죄를 주장하거나 1심 선고형량의 과중함을 호소하는데 있지 않다는 점을 분명히 밝혀두고자 합니다.</p></blockquote><p class="source-note">1985년 5월 27일 유시민(당시 이름 류시민)이 서울형사지방법원 항소 제5부에 제출한 항소이유서 서두. 이 문서는 저작자가 생존해 있어 저작권이 만료되지 않았으므로, 다른 편의 전문 발췌와 달리 이 시리즈에서는 핵심 문장만 짧게 인용한다.</p></section><section class="post-commentary"><h2>왜 이 문장인가</h2><p>이 항소이유서는 감형이나 무죄를 다투는 통상의 항소이유서와 다른 지점에서 출발한다. 첫 문단이 그 목적부터 부인하고 시작한다는 점이 이례적이다 — 무죄 주장도, 형량 완화 호소도 아니라고 스스로 밝힌다. 이어지는 문단들은 자신의 판단 기준이 &quot;인간이 만든 법률&quot;이 아니라 &quot;양심&quot;이라는 점을 밝히고, 폭력행위가 그 사회의 정치·사회·도덕적 수준을 비추는 거울이라는 전제를 세운다. 마지막 문단에서는 이 글에서 정권 대신 &quot;현정권&quot;이라는 단어를 쓰는 이유(제5공화국이 합법성·정통성을 갖추지 못했다고 보기 때문)를 미리 밝혀둔다 — 이는 뒤이은 6개 장 전체가 이 정의 위에서 전개된다는 예고다. 요컨대 이 서두는 항소이유서의 장르 자체를 재정의한다: 이것은 형량을 다투는 글이 아니라, 이 사건이 비추는 시대를 법정에 묻는 글이라는 선언이다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 항소이유서 (1985년 5월 27일, 서울형사지방법원 항소 제5부 제출) <span class="source-meta">(유시민(류시민), 1985)</span></li><li><span class="source-type">[단행본]</span> 아침으로 가는 길 — 항소이유서 수록 <span class="source-meta">(유시민)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li>유시민</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

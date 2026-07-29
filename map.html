@@ -267,6 +267,11 @@
     </div>
   </div>
 
+  <!-- 주간/야간(라이트/다크) 지도 전환 — js/ui.js가 동작을 연결한다.
+       "지도가 어두워 밤에 잘 안 보인다"는 피드백 대응(2026-07-28). -->
+  <button type="button" id="themeToggleBtn" class="theme-toggle-btn"
+          aria-label="지도 밝기 전환" title="지도 밝기 전환">🌙 야간</button>
+
   <div class="legend">
     <div class="legend-title">범례</div>
     <div id="legendItems"><!-- js/markerIcons.js의 renderLegend()가 채운다 (MARKER_SVG·COLORS·TYPE_LABEL 기준 — 항상 실제 마커와 동일하게 유지) --></div>

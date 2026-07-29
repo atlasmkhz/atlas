@@ -39,6 +39,8 @@
 <article>
 <h1>임기를 이긴 재판들 — 판결보다 빨리 끝나는 것들</h1>
 <p class="event-meta">2024 11월 14일 · 서울 대법원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="임기를 이긴 재판들 — 판결보다 빨리 끝나는 것들" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>이 사건들이 보여주는 것은, 재판의 기간이 처벌의 실질적 무게를 정할 수 있다는 것이다.</p><p>국회의원의 임기는 4년이다. 재판이 그보다 오래 걸리면, 유죄가 확정되어 의원직을 상실하더라도 잃을 임기가 남아 있지 않다. 실제로 그렇게 된 사건들이 있다.</p><p>윤미향 전 의원은 2020년 9월 정의기억연대 후원금 횡령 등 혐의로 기소됐고, 대법원 확정 판결(징역 1년 6개월·집행유예 3년)은 2024년 11월 14일에 나왔다 — 기소부터 4년 2개월. 그 사이 4년의 의원 임기는 2024년 5월에 만료됐다. 확정 판결이 상실시킬 의원직이 이미 없었다.</p><p>조국 전 법무부 장관은 2019년 12월~2020년 1월 기소됐고, 확정 판결(징역 2년)은 2024년 12월 12일 — 약 5년 뒤였다. 그 사이 조국은 2024년 3월 조국혁신당을 창당하고 4월 총선에서 비례대표로 당선돼 국회에 입성했다. 확정으로 의원직을 상실했지만, 그것은 재판 중에 새로 얻은 의원직이었다. 기소 당시 심급별 기한이 지켜졌다면 존재할 수 없었던 정치 경력이다.</p><p>최강욱 전 의원은 2020년 1월 기소됐고 확정 판결(징역 8개월·집행유예 2년)은 2023년 9월 — 3년 8개월 뒤였다. 21대 국회 임기 4년의 대부분을 재판 중에 수행했다.</p><p>한명숙 전 총리의 정치자금법 사건은 2010년 7월 기소, 2015년 8월 확정 — 5년 1개월이 걸렸다. 그 사이 2012년 총선에서 비례대표로 당선됐고, 확정 시점에 의원직을 상실했다.</p><p>이 사건들에서 피고인들이 재판을 고의로 지연시켰다고 단정할 근거는 이 글에 없다 — 장기화의 원인은 사건마다 다르고, 증거 다툼이 치열한 사건은 오래 걸리는 것이 자연스럽기도 하다. 기록할 수 있는 것은 결과다: 재판이 임기를 이기면, 유죄 확정의 실질적 효과는 그만큼 줄어든다. 이 지연이 이 사건들에서 유리하게 작용한 쪽은 결과적으로 민주당 계열이었다 — 다음 글에서 다룰 곽상도 전 의원의 항소심처럼, 검찰의 재기소로 재판 자체가 통째로 멈춘 보수 정당 계열의 사건도 존재한다. 지연이 누구에게 유리했는지를 세는 것보다 중요한 질문은, 애초에 재판이 이렇게까지 늘어질 수 있게 만드는 절차상의 빈틈이 무엇인가다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[언론보도]</span> ‘위안부 피해자 후원금 횡령’ 윤미향 전 의원 징역형 집유 확정 <span class="source-meta">(서울신문, 2024)</span></li><li><span class="source-type">[언론보도]</span> <a href="https://www.lawtimes.co.kr/news/203697">조국, 징역 2년 확정…의원직 상실</a> <span class="source-meta">(법률신문, 2024)</span></li><li><span class="source-type">[reference]</span> 대법원 2015.8.20. 선고 전원합의체 판결(한명숙 정치자금법 위반) <span class="source-meta">(대법원, 2015)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li><a href="/archive/punishment-records/">처벌의 기록 — 확정의 기록 I·II(시리즈1)</a></li></ul></div></section>
@@ -74,6 +76,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

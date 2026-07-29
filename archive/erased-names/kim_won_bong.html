@@ -33,6 +33,8 @@
 <article>
 <h1>김원봉 — 남과 북이 한 번씩, 두 번 지워진 이름</h1>
 <p class="event-meta">1948 4월 · 밀양 → 서울 → 평양</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="김원봉 — 남과 북이 한 번씩, 두 번 지워진 이름" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>약산 김원봉은 1919년 겨울 지린에서 열두 명의 동지와 의열단을 결성하고 의백(단장)이 됐다 — 일제가 그의 목에 건 현상금은 김구보다 높았다는 이야기가 전해질 만큼, 1920년대 조선총독부가 가장 두려워한 이름이었다. 폭탄과 총으로 싸우던 그는 개별 의거의 한계를 깨닫고 황푸군관학교에서 군사교육을 받은 뒤 조직 투쟁으로 노선을 바꿨고, 1938년 중국 우한에서 조선의용대를 창설해 중국 관내 최초의 조선인 무장부대를 이끌었다. 1942년에는 조선의용대를 광복군에 편입시키며 임시정부에 합류해 군무부장까지 지냈다. 그러나 해방된 조국은 그를 환영하지 않았다. 1947년 그는 일제 때 독립운동가를 고문하던 친일 경찰 노덕술에게 체포돼 수모를 겪었고 — 사흘을 통곡했다는 증언이 남아 있다 — 좌익 인사 검거 선풍과 여운형 암살로 신변 위협이 커지자 1948년 4월 남북연석회의 참석차 평양으로 간 뒤 돌아오지 않았다. 북에서 그는 국가검열상과 노동상 등 요직을 지냈지만, 그 선택이 두 번째 지워짐의 시작이었다. 1958년 연안파 숙청의 회오리 속에서 그는 모든 직위를 잃고 숙청됐다 — 정확한 사망 시점과 경위조차 확인되지 않는다. 북한의 공식 역사는 항일 무장투쟁의 서사를 김일성 중심으로 다시 쓰며 의열단과 조선의용대의 이름을 지웠고, 남한은 월북과 북한 정권 참여를 이유로 그를 독립유공자 서훈에서 배제해왔다. 의열단 결성 100년이 지난 지금도 서훈 논쟁은 현재진행형이다 — 항일 투쟁 경력과 북한 정권 수립 기여를 어떻게 함께 놓고 판단할 것인가라는, 분단이 남긴 가장 곤란한 질문 하나가 이 이름 위에 그대로 얹혀 있다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[단행본]</span> 약산 김원봉 평전 <span class="source-meta">(김삼웅, 시대의창, 2008)</span></li><li><span class="source-type">[단행본]</span> 김원봉 연구 <span class="source-meta">(염인호, 창작과비평사, 1993)</span></li><li><span class="source-type">[언론보도]</span> &quot;김원봉 서훈 논란, 쟁점은 무엇인가&quot; <span class="source-meta">(한겨레, 2019)</span></li><li><span class="source-type">[기록보존소]</span> 한국민족문화대백과사전 — 김원봉 <span class="source-meta">(한국학중앙연구원)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 사건</h3><ul><li><a href="../../map.html?event=person_1920_02">김원봉 — 의열단 결성·지휘 (1920)</a></li><li><a href="../../map.html?event=political_1927_03">의열단의 노선 전환 (1927)</a></li><li><a href="../../map.html?event=battle_1938_01">조선의용대 창설 (1938)</a></li><li><a href="../../map.html?event=political_1942_01">조선의용대의 광복군 편입과 김원봉의 임정 합류 (1942)</a></li></ul></div><div class="related-group"><h3>관련 인물</h3><ul><li>김원봉</li><li>김구</li><li>노덕술</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

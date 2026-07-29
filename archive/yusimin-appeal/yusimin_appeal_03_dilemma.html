@@ -33,6 +33,8 @@
 <article>
 <h1>유시민 항소이유서 ③ 법과 양심 사이, 빠져나갈 곳 없는 딜레마</h1>
 <p class="event-meta">1985 5월 27일 · 서울형사지방법원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="유시민 항소이유서 ③ 법과 양심 사이, 빠져나갈 곳 없는 딜레마" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>그 누구도 이 상황에서 법과 양심 모두를 지키기란 불가능합니다.</p></blockquote><p class="source-note">항소이유서 3편(사건의 정의와 성격을 다룬 장)의 결론 문장.</p></section><section class="post-commentary"><h2>왜 이 문장인가</h2><p>이 장은 사건 자체를 정의하는 데서 시작한다 — 학생들 사이에서는 &quot;서울대 학원 프락치사건&quot;, 정권과 매스컴에서는 &quot;서울대 외부인 폭행사건&quot; 또는 &quot;서울대 린치사건&quot;으로 불렸다는 명칭의 차이를 짚고, 정권과 학원 간의 &quot;상호적대적 긴장상태&quot;가 형성된 배경(5·16 이후 학생운동사, 6·3사태·민청학련·부마항쟁 등)을 간략히 스케치한다. 이어 이솝우화의 양치기 소년과 중국 주 유왕의 봉화 고사를 나란히 인용해, 정권의 반복된 거짓말이 어떻게 학생들의 근원적 불신을 낳았는지 비유로 설명한다. 그 다음 &quot;정보원 혐의를 받고 있는 자&quot;라는 표현을 통해, 학생들이 실제 정보원이 아니라 그 혐의를 받은 이들을 조사한 것이며, 이는 정보원 여부와 별개로 폭력의 정당성 문제와는 구분해야 한다는 논리를 세운다. 캠퍼스에 상주한 &quot;가짜학생&quot;들의 반사회적 행태를 구체적으로 서술한 뒤, 이 장은 &quot;부도덕한 학원탄압에 대한 저항은 윤리적으로 정당하지만 법률적으로는 침해&quot;라는 근본적 모순으로 수렴한다 — 법과 양심이 상호적대적으로 부딪히는 상황에서는 그 누구도 둘 다를 지킬 수 없다는 이 장의 결론은, 다음 장에서 그가 어느 쪽을 선택했는지에 대한 논거가 된다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 항소이유서 (1985년 5월 27일, 서울형사지방법원 항소 제5부 제출) <span class="source-meta">(유시민(류시민), 1985)</span></li><li><span class="source-type">[단행본]</span> 아침으로 가는 길 — 항소이유서 수록 <span class="source-meta">(유시민)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li>유시민</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

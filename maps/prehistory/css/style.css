@@ -1446,7 +1446,91 @@ body.route-mode-active [data-route-hidden] {
 .power-swatch { border-color:#c8963e !important; }
 
 /* 레이어 빈 시기 안내 */
-.layer-empty-hint {
-  margin-top:5px; font-size:11px; line-height:1.45; color:#b7ad99;
-  border-left:2px solid rgba(200,160,80,0.5); padding-left:7px;
+
+
+/* ═══════════════════════════════════════════════════════
+   주간/야간(라이트/다크) 지도 전환 — 2026-07-28
+   ═══════════════════════════════════════════════════════
+   "지도가 어두워 밤에 잘 안 보인다"는 피드백 대응. 타일 자체는
+   js/map.js가 CARTO light_nolabels로 교체하고, 여기서는 그 위에 얹힌
+   우리 요소들(직접 그린 지명 라벨, 지도 배경색, 비네트)이 밝은 바탕에서
+   묻히지 않도록 색을 뒤집는다. 마커·루트 색상은 원래 채도가 높아
+   양쪽 배경 모두에서 판별되므로 건드리지 않는다. */
+
+.theme-toggle-btn {
+  background:rgba(20,17,12,0.82); border:1px solid rgba(184,152,96,0.3);
+  border-radius:6px; padding:7px 10px; color:var(--paper);
+  font-family:inherit; font-size:10px; letter-spacing:1px; cursor:pointer;
+  backdrop-filter:blur(6px); white-space:nowrap; text-align:center;
 }
+.theme-toggle-btn:hover { background:rgba(40,34,24,0.92); }
+
+/* ── 라이트(주간) 모드 ── */
+body.map-light #map { background:#e8eaec; }
+
+/* 직접 그린 지명: 밝은 바탕에서는 어두운 글자 + 흰 외곽선 */
+body.map-light .hist-label-sea {
+  color:rgba(38,62,86,0.95); text-shadow:0 0 5px rgba(255,255,255,0.95);
+}
+body.map-light .hist-label-city {
+  color:rgba(30,30,34,0.92); text-shadow:0 0 4px rgba(255,255,255,0.95);
+}
+
+/* 비네트는 어두운 화면 전제의 연출이라 밝은 바탕에서는 크게 낮춘다
+   (완전히 끄면 시대별 색조 신호가 사라지므로 흔적만 남긴다). */
+body.map-light .occupation-vignette { opacity:0.28 !important; }
+
+/* 우측 컨트롤(범례·레이어·검색·토글)은 밝은 바탕에서 흰 패널로 */
+body.map-light .legend,
+body.map-light .layer-toggle,
+body.map-light .theme-toggle-btn,
+body.map-light .search-widget .search-toggle-btn,
+body.map-light .search-expand {
+  background:rgba(252,251,248,0.92); border-color:rgba(120,96,48,0.35);
+  color:#241f18;
+}
+body.map-light .legend-title,
+body.map-light .toggle-title { color:#8a6a24; }
+body.map-light .leaflet-control-zoom a {
+  background:rgba(252,251,248,0.92) !important; color:#241f18 !important;
+  border-color:rgba(120,96,48,0.35) !important;
+}
+body.map-light .leaflet-control-zoom a:hover { background:#fff !important; }
+
+/* ═══════════════════════════════════════════════════════
+   범례·레이어 자동 숨김 — 전 시대/전 화면폭 공통 (2026-07-28)
+   ═══════════════════════════════════════════════════════
+   원래 이 규칙은 모바일 @media 안에만 있어서 데스크톱에서는 정보창을
+   열어도 범례·레이어가 그대로 남아 지도를 가렸다. 두목님 요청으로
+   7개 시대 전부, 화면 폭과 무관하게 자동 숨김이 걸리도록 미디어쿼리
+   바깥으로 끌어냈다. (모바일 쪽 기존 규칙은 그대로 둬도 동일 선언이라
+   충돌하지 않는다.) */
+body.info-open .legend,
+body.info-open .layer-toggle,
+body.info-open .theme-toggle-btn { transition:opacity .2s, visibility .2s; }
+
+body.controls-hidden .legend,
+body.controls-hidden .layer-toggle,
+body.controls-hidden .theme-toggle-btn {
+  opacity:0; visibility:hidden; pointer-events:none;
+}
+
+
+/* ── 스크랩 버튼 (2026-07-28) ─────────────────────────────
+   정보카드를 「나의 서재」에 담는 버튼. 담긴 상태는 금색 채움으로
+   구분한다. 저장은 localStorage(growth.js)라 로그인 없이 동작하고,
+   기기 간 동기화는 되지 않는다. */
+.scrap-btn {
+  display:inline-flex; align-items:center; gap:5px;
+  margin:8px 0 2px; padding:5px 11px;
+  background:transparent; color:var(--gold, #c8a827);
+  border:1px solid rgba(184,152,96,0.55); border-radius:999px;
+  font-family:inherit; font-size:11px; font-weight:700; letter-spacing:0.3px;
+  cursor:pointer; transition:background .15s, color .15s, border-color .15s;
+}
+.scrap-btn:hover { background:rgba(184,152,96,0.16); }
+.scrap-btn.is-on {
+  background:var(--gold, #c8a827); color:#15130f; border-color:var(--gold, #c8a827);
+}
+body.map-light .scrap-btn { color:#8a6a24; border-color:rgba(120,96,48,0.5); }
+body.map-light .scrap-btn.is-on { background:#c8a827; color:#241f18; }

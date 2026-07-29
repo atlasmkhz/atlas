@@ -33,6 +33,8 @@
 <article>
 <h1>황조가 — 꾀꼬리는 짝이 있는데</h1>
 <p class="event-meta">-17 · 골천 별궁 일대(고구려 초기 도읍권)</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="황조가 — 꾀꼬리는 짝이 있는데" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>『삼국사기』 권13 고구려본기 유리왕조가 전하는 사연은 이렇다. 유리왕 3년(기원전 17) 겨울 10월, 왕비 송씨(松氏)가 죽었다. 왕은 두 여자를 계실(繼室)로 맞았다. 하나는 골천(鶻川) 사람의 딸 화희(禾姬), 다른 하나는 한나라 사람의 딸 치희(雉姬)였다. 두 여자가 사랑을 다투어 화목하지 않자 왕은 양곡(凉谷)의 동쪽과 서쪽에 두 궁을 지어 따로 살게 했다.</p><p>뒤에 왕이 기산(箕山)으로 사냥을 나가 이레 동안 돌아오지 않은 사이, 두 여자가 다투었다. 화희가 치희를 꾸짖었다. &quot;너는 한가(漢家)의 비첩(婢妾)일 뿐인데 무례함이 어찌 이리 심한가?&quot; 치희는 부끄러워 원한을 품고 도망쳐 돌아갔다. 왕이 이를 듣고 말을 달려 쫓았으나 치희는 노하여 돌아오지 않았다. 왕이 일찍이 나무 밑에 쉬면서 꾀꼬리가 날아 모이는 것을 보고 자신의 처지를 생각하며 이에 느껴 노래를 지었다.</p><p>翩翩黃鳥 — 펄펄 나는 저 꾀꼬리
 雌雄相依 — 암수 서로 정답구나
 念我之獨 — 외로워라 이 내 몸은
@@ -71,6 +73,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

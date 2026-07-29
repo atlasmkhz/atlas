@@ -18,17 +18,14 @@ function _boostAlpha(a){ return Math.min(a * GRADIENT_INTENSITY, 0.8); }
 
 
 // ── 빈 시기 안내 ────────────────────────────────────
-// 유물 분포는 기원전 6000년부터, 세력 분포는 기원전 400년부터만
-// 존재한다. 그보다 이른 시기(신화·구석기)에 레이어가 "안 보이는" 것은
-// 정상 동작이지만, 사용자에게는 고장으로 보일 수 있어 안내를 띄운다.
+// 2026-07-28: 레이어 패널 하단의 긴 안내문(#layerEmptyHint)을 두목님
+// 요청으로 제거했다. 패널을 차지하는 분량에 비해 전달하는 정보가
+// 적었다(유물·세력 분포가 신석기 이후에만 존재한다는 사실은 슬라이더를
+// 옮겨보면 바로 드러난다). 상태 집계(_atlasLayerEmpty)는 다른 곳에서도
+// 참조하므로 남겨두고, 갱신 함수는 호출부를 일일이 걷어내는 대신
+// 안전하게 no-op으로 둔다.
 window._atlasLayerEmpty = window._atlasLayerEmpty || {};
-window._atlasUpdateLayerHint = function () {
-  const el = document.getElementById('layerEmptyHint');
-  if (!el) return;
-  const st = window._atlasLayerEmpty;
-  const anyOn = (document.getElementById('layerArtifact')?.checked) || (document.getElementById('layerPower')?.checked);
-  el.style.display = (anyOn && st.artifact && st.power) ? 'block' : 'none';
-};
+window._atlasUpdateLayerHint = function () { /* 안내문 제거됨 — no-op */ };
 
 let artifactLayerObjs = [];       // 라벨·출토지 마커
 let _artifactLastYear = null;

@@ -264,3 +264,21 @@ body.portal {
   .portal-quick-grid { grid-template-columns:repeat(2, 1fr); }
   .route-card { flex-basis:190px; height:250px; }
 }
+
+/* ── NEW 배지 (2026-07-28) ─────────────────────────────
+   루트·자료실 항목에 updated:'YYYY-MM-DD'를 적어두면 그날부터 일주일간
+   카드 좌상단에 붙는다. 루트 카드는 position:relative 위에 얹히는
+   오버레이라 카드 안쪽 흐름을 건드리지 않고, 자료실 카드는 시리즈
+   이름 배지 옆에 인라인으로 따라붙는다. */
+.portal-new-badge {
+  display:inline-block; background:var(--gold, #c8a827); color:#15130f;
+  font-size:9px; font-weight:900; letter-spacing:0.8px;
+  padding:2px 6px; border-radius:999px; line-height:1.4;
+  vertical-align:middle;
+}
+.route-card { position:relative; }
+.route-card .portal-new-badge {
+  position:absolute; top:10px; right:10px; z-index:2;
+  box-shadow:0 2px 8px rgba(0,0,0,0.45);
+}
+.portal-explore-card .portal-new-badge { margin-left:6px; }

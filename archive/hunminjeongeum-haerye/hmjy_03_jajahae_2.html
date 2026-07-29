@@ -33,6 +33,8 @@
 <article>
 <h1>훈민정음 해례본 ③ 제자해(하) — 하늘·땅·사람을 본뜬 중성, 그리고 초중종성이 만나는 이치</h1>
 <p class="event-meta">1446 9월 · 한양 경복궁</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="훈민정음 해례본 ③ 제자해(하) — 하늘·땅·사람을 본뜬 중성, 그리고 초중종성이 만나는 이치" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>中聲凡十一字。ㆍ舌縮而聲深,天開於子也。形之圓,象乎天也。ㅡ舌小縮而聲不深不淺,地闢於丑也。形之平,象乎地也。ㅣ舌不縮而聲淺,人生於寅也。形之立,象乎人也。此下八聲,一闔一闢。ㅗ與ㆍ同而口蹙,其形則ㆍ與ㅡ合而成,取天地初交之義也。ㅏ與ㆍ同而口張,其形則ㅣ與ㆍ合而成,取天地之用彂於事物待人而成也。ㅜ與ㅡ同而口蹙,其形則ㅡ與ㆍ合而成,亦取天地初交之義也。ㅓ與ㅡ同而口張,其形則ㆍ與ㅣ合而成,亦取天地之用彂於事物待人而成也。ㅛ與ㅗ同而起於ㅣ。ㅑ與ㅏ同而起於ㅣ。ㅠ與ㅜ同而起於ㅣ。ㅕ與ㅓ同而起於ㅣ。
 旴。正音作而天地萬物之理咸備,其神矣㦲。是殆天啓聖心而假手焉者乎。</p></blockquote><p class="source-note">해례본 제자해 후반부. 중성 열한 자가 천(天)·지(地)·인(人) 삼재를 본뜬 원리와, 나머지 여덟 중성이 파생되는 방식을 밝힌다. 이어지는 결(訣, 한시 형태의 요약)은 분량상 생략하고 산문 부분만 싣는다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>중성은 무릇 열한 자이다. ㆍ는 혀가 오그라져 소리가 깊으니, 하늘이 자시(子時)에 열림이다. 모양이 둥근 것은 하늘을 본뜬 것이다. ㅡ는 혀가 조금 오그라져 소리가 깊지도 얕지도 않으니, 땅이 축시(丑時)에 열림이다. 모양이 평평한 것은 땅을 본뜬 것이다. ㅣ는 혀가 오그라지지 않아 소리가 얕으니, 사람이 인시(寅時)에 생겨남이다. 모양이 서 있는 것은 사람을 본뜬 것이다.
 
@@ -73,6 +75,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

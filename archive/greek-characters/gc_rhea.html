@@ -33,6 +33,8 @@
 <article>
 <h1>레아</h1>
 <p class="event-meta">None · 그리스 (크레타섬)</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="레아" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="char-info"><table class="char-table"><tr><th>로마 이름</th><td>옵스(Ops) / 마그나 마테르</td></tr><tr><th>관장 영역</th><td>티탄 여신 — 흐름·안락·모성</td></tr><tr><th>별칭·수식어</th><td>신들의 어머니, 위대한 어머니</td></tr><tr><th>상징물</th><td>사자, 북(팀파논)</td></tr><tr><th>주요 성역·숭배지</th><td>크레타섬, 프리기아(대모신 신앙과 습합)</td></tr></table></section><section class="char-lineage"><h2>계보</h2><table class="char-table"><tr><th>부모</th><td>우라노스(하늘), 가이아(대지)</td></tr><tr><th>형제자매</th><td>티탄 12신</td></tr><tr><th>배우자·연인</th><td>크로노스(오빠이자 남편)</td></tr><tr><th>주요 자녀</th><td>헤스티아, 데메테르, 헤라, 하데스, 포세이돈, 제우스</td></tr></table></section><section class="post-body"><p>레아는 티탄 여신으로, 오빠 크로노스와 결합해 훗날 올림포스 1세대가 될 여섯 신을 낳았다. 그러나 남편이 자식을 태어나는 족족 삼키는 것을 지켜봐야 했다.</p><p>다섯 자식을 잃은 그녀는 여섯째만은 지키기로 결심한다. 가이아의 조언에 따라 몰래 크레타섬에서 제우스를 낳아 숨기고, 남편에게는 돌덩이를 강보에 싸서 건넸다. 크레타의 요정들과 쿠레테스(무장한 정령들)가 아기의 울음소리를 창칼 부딪치는 소리로 감춰 키웠다고 전한다. 이 어머니의 기지가 없었다면 제우스도, 올림포스 신들의 시대도 없었다. 그녀는 신화에서 &quot;폭력적인 권력 다툼 속에서 생명을 지켜내는 모성&quot;을 상징한다.</p></section><section class="char-stories"><h2>주요 일화</h2><div class="char-story"><h3>돌로 남편을 속이다</h3><p>여섯째 제우스를 크레타에 숨기고, 크로노스에게는 돌을 강보에 싸서 건네 삼키게 했다. 이 기지로 제우스가 살아남았다.</p></div></section><section class="char-legacy"><h2>오늘 우리 곁에</h2><p>레아는 소아시아의 대모신(大母神) 키벨레 신앙과 습합되어 &quot;위대한 어머니(마그나 마테르)&quot;로 로마에서 널리 숭배되었다. 토성의 위성 중 하나(레아)에도 그 이름이 남아 있다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 위키백과 — 레아</li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li>크로노스</li><li>제우스</li></ul></div><div class="related-group"><h3>관련 사료</h3><ul><li><a href="../greek-myth/gm_03.html">그리스 신화 — 크로노스의 반란</a></li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

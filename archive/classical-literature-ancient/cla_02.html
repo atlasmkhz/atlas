@@ -33,6 +33,8 @@
 <article>
 <h1>공무도하가 — 임이여, 그 물을 건너지 마오</h1>
 <p class="event-meta">-108 · 조선진(朝鮮津) — 위치 미상의 나루터</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="공무도하가 — 임이여, 그 물을 건너지 마오" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>『고금주』가 전하는 사건은 이렇다. 조선의 나루터 병졸(진졸, 津卒) 곽리자고가 새벽에 일어나 배를 저어 가는데, 머리가 흰 미친 사람(백수광부, 白首狂夫)이 머리를 풀어헤치고 호리병을 든 채 어지러이 물을 건너고 있었다. 아내가 뒤쫓아 외치며 막았으나 다다르기 전에 그는 물에 빠져 죽었다. 아내는 공후(箜篌, 하프처럼 줄을 뜯는 옛 악기)를 타며 「공무도하」의 노래를 지었는데 소리가 심히 구슬펐고, 노래가 끝나자 스스로 물에 몸을 던져 죽었다. 자고가 돌아와 아내 여옥(麗玉)에게 그 광경과 노래를 전하니, 여옥이 슬퍼하며 공후로 그 소리를 본받아 탔고 듣는 자마다 눈물을 흘렸다. 여옥은 그 소리를 이웃 여자 여용(麗容)에게 전했다 — 이것을 일컬어 「공후인(箜篌引)」이라 한다.</p><p>公無渡河 — 임이여 물을 건너지 마오
 公竟渡河 — 임은 결국 물을 건너시네
 墮河而死 — 물에 빠져 죽었으니
@@ -71,6 +73,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

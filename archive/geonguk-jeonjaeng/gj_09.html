@@ -33,6 +33,8 @@
 <article>
 <h1>&quot;친일파 처벌을 잘했다&quot;? — 반민특위를 무너뜨린 것은 이승만 정부였다</h1>
 <p class="event-meta">1949 6월 6일 · 서울 중구</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="&quot;친일파 처벌을 잘했다&quot;? — 반민특위를 무너뜨린 것은 이승만 정부였다" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-claim"><h2>주장</h2><p>영화는 이승만이 친일파 청산에 소극적이지 않았다고 주장한다 — 오히려 현실적 여건 속에서 할 수 있는 처벌을 했다는 것이다.</p></section><section class="post-rebuttal"><h2>반박</h2><p>반민족행위특별조사위원회(반민특위)의 운명이 이 주장을 반박하는 가장 직접적인 기록이다. 1948년 제헌국회는 헌법 부칙에 근거해 반민족행위처벌법을 제정하고 반민특위를 발족시켰다 — 노덕술 등 악질 친일 경찰까지 체포하며 활동은 국민적 지지를 받았다. 이승만 대통령의 대응은 협조가 아니라 방해였다. 그는 특위 활동이 &quot;삼권분립에 위배된다&quot;며 반대 담화를 거듭 발표했고, 노덕술 체포 때는 그의 석방을 직접 요구했다. 1949년 6월 6일에는 중부경찰서 경찰이 반민특위 사무실을 습격해 특경대를 무장해제시키고 조사관들을 연행했다 — 이승만은 외신 인터뷰에서 이 습격을 자신이 지시했다고 밝혔다. 국회프락치사건과 김구 암살이 겹치며 특위는 와해됐고, 공소시효 단축을 거쳐 1년도 안 돼 사실상 해체됐다. 기소 680여 건 중 실형은 소수에 그쳤고 그마저 대부분 곧 풀려났다. 친일 경찰과 관료들은 그대로 이승만 정부의 손발이 됐다 — &quot;pro-Jap이 아니라 pro-job(전직 활용)&quot;이라는 조병옥의 말이 그 논리를 요약한다. 친일 청산의 좌절은 여건의 문제가 아니라 최고 권력자의 선택이었다는 것, 그것이 기록이 말하는 바다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 한국민족문화대백과사전 — 반민족행위특별조사위원회 <span class="source-meta">(한국학중앙연구원)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 사건</h3><ul><li><a href="../../maps/modern2/index.html?event=political_1948_02">반민특위 발족 (1948)</a></li><li><a href="../../maps/modern2/index.html?event=political_1949_01">반민특위 활동 무력화 — 친일 청산의 좌절 (1949)</a></li></ul></div><div class="related-group"><h3>관련 인물</h3><ul><li>이승만</li><li>노덕술</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

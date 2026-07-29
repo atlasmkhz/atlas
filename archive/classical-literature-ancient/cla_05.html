@@ -33,6 +33,8 @@
 <article>
 <h1>정읍사 — 달하 노피곰 도다샤</h1>
 <p class="event-meta">600 · 정촌현(井村縣) 망부석 — 전북 정읍</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="정읍사 — 달하 노피곰 도다샤" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>『고려사』 악지는 이 노래의 유래를 이렇게 적었다. 정읍(井邑) 사람이 행상을 나가 오래도록 돌아오지 않자, 그 아내가 산 바위 위에 올라 남편이 올 길을 바라보며, 그가 밤길을 걷다가 해를 입을까 염려하여 진흙탕물의 더러움에 빗대어 노래를 지었다. 그 곡을 「정읍(井邑)」이라 한다. 『신증동국여지승람』은 여기에 한 줄을 덧붙인다 — 망부석(望夫石)은 정읍현 북쪽 10리에 있고, 후세에 전해오는 고개의 망부석 발자취가 지금도 남아 있다.</p><p>『악학궤범』 권5에 실린 원문은 이렇다.</p><p>(前腔) ᄃᆞᆯ하 노피곰 도ᄃᆞ샤 / 어긔야 머리곰 비취오시라 / 어긔야 어강됴리 / 아으 다롱디리
 (後腔) 全져재 녀러신고요 / 어긔야 즌ᄃᆡ를 드ᄃᆡ욜셰라 / 어긔야 어강됴리
 (過篇) 어느이다 노코시라
@@ -72,6 +74,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

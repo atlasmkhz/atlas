@@ -293,6 +293,8 @@ def render_route_landing_page(route, route_slug, event_id_to_slug, out_path):
 <h1>{esc(route['name'])}</h1>
 <p class="event-meta">{esc(route.get('period',''))}</p>
 <p class="summary">{esc(route.get('tagline',''))}</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="{esc(route['name'])}" data-scrap-kind="route">🔖 서재에 담기</button>
 <section class="route-timeline"><h2>타임라인 ({len(route['waypoints'])}개 지점)</h2><ol class="route-wp-list">{''.join(items)}</ol></section>
 <p class="map-cta"><a href="{map_cta_url}">지도에서 루트 보기</a></p>
 </article>
@@ -300,6 +302,25 @@ def render_route_landing_page(route, route_slug, event_id_to_slug, out_path):
 <script src="/js/growth.js"></script>
 <script src="/js/library.js"></script>
 <script src="/js/namuBadge.js"></script>
+<script>
+// 2026-07-28 스크랩 — 이 루트를 「나의 서재」에 담는다.
+(function(){{
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) {{ btn.style.display = 'none'; return; }}
+  var url = window.location.pathname;
+  function paint(on){{
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }}
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){{
+    paint(G.toggleScrap({{ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'route' }}));
+  }});
+}})();
+</script>
 </body>
 </html>'''
 

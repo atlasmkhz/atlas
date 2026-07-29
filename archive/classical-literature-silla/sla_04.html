@@ -45,6 +45,8 @@
 <article>
 <h1>제망매가 — 한 가지에 나고서도</h1>
 <p class="event-meta">760 · 사천왕사(경주)</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="제망매가 — 한 가지에 나고서도" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>『삼국유사』 권5 월명사도솔가조. 월명사(月明師)가 죽은 누이를 위해 재(齋)를 올리며 향가를 지어 제사하는데, 갑자기 회오리바람이 일어 지전(紙錢)을 날려 서쪽으로 사라지게 했다고 한다.</p><p>生死路隱 — 생사의 길은
 此矣有阿米次肹伊遣 — 여기 있으매 머뭇거리고
 吾隱去內如辭叱都 — 나는 간다는 말도
@@ -87,6 +89,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

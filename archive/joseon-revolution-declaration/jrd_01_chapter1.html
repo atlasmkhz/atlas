@@ -33,6 +33,8 @@
 <article>
 <h1>조선혁명선언 ① &quot;강도 일본이 우리의 국호를 없이 하며&quot; — 무엇을 빼앗겼는가</h1>
 <p class="event-meta">1923 1월 · 베이징</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="조선혁명선언 ① &quot;강도 일본이 우리의 국호를 없이 하며&quot; — 무엇을 빼앗겼는가" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>强盜 日本이 우리의 國號를 없이 하며 우리의 政權을 빼앗으며, 우리 生存的必要 條件을 다 剝脫하엿다. 經濟의 생명인 山林, 川澤, 鐵道, 鑛山, 漁場…… 乃至 小工業原料까지 다 빼앗어 一切의 生産機能을 칼로 버이며 독기로 끊고, 土地稅, 家屋稅, 人口稅, 家畜稅, 百一稅, 地方稅, 酒草稅, 肥料稅, 種子稅, 營業稅, 淸潔稅, 所得稅…… 其他各種雜稅가 逐日 增加하야 血液은 있는 대로 다 빨아가고……(중략)……</p></blockquote><p class="source-note">조선혁명선언 원문 제1장 서두와 경제 착취 실상 부분. 국사편찬위원회 소장 「불령단관계잡건-조선인의 부-재만주의 부」 수록본(일본 외무성 외교사료관 소장)을 저본으로 한 국사편찬위원회 우리역사넷 인용문. 이하 문단 사이 미확보 구간은 원출처와 동일하게 &quot;(중략)&quot;으로 표시한다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>강도 일본이 우리의 나라 이름을 없애며 우리의 정권을 빼앗으며, 우리의 생존에 필요한 조건을 다 박탈하였다. 경제의 생명인 산림, 냇물과 못, 철도, 광산, 어장 (…) 심지어 소공업 원료까지 다 빼앗아 일체의 생산 기능을 칼로 베고 도끼로 끊었으며, 토지세, 가옥세, 인구세, 가축세, 백일세, 지방세, 주초세, 비료세, 종자세, 영업세, 청결세, 소득세 (…) 그 밖의 각종 잡세가 날로 증가하여 있는 대로 다 피를 빨아갔다.
 
 (이하 원문에서, 어지간한 상업가들은 일본 제조품을 조선인에게 매개하는 중간인이 되어 차차 몰락할 뿐이며, 대다수 농민들은 피땀 흘려 농사지어도 제 식구 먹을 것도 남기지 못한 채 일본에 갖다 바치는 소·말 신세가 되고, 그마저도 못하게 되면 서간도·북간도·시베리아로 떠도는 신세가 된다는 서술이 이어진다. 이어 헌병정치·경찰정치로 언론·출판·결사·집회의 자유가 전혀 없는 상태, 일본어를 국어로 가르치는 학교, 왜곡된 역사 교육, 총독 정치를 찬미하는 반일본화한 신문·잡지의 실상을 열거한다.)</p></section>
@@ -70,6 +72,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

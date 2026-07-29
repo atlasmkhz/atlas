@@ -33,6 +33,8 @@
 <article>
 <h1>훈민정음 해례본 ④ 초성해 — 초성은 운서의 자모다</h1>
 <p class="event-meta">1446 9월 · 한양 경복궁</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="훈민정음 해례본 ④ 초성해 — 초성은 운서의 자모다" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>正音初聲,卽韻書之字母也。聲音由此而生,故曰母。如牙音君字初聲是ㄱ,ㄱ與ᅟᅮᆫ而為군。快字初聲是ㅋ,ㅋ與ㅙ而為쾌〮。虯字初聲是ㄲ,ㄲ與ㅠ而為뀨。業字初聲是ㆁ,ㆁ與ᅟᅥᆸ而為ᅌᅥᆸ之類。舌之斗呑𫟛那,脣之彆漂步彌,齒之卽侵慈戌邪,喉之挹虗洪欲,半舌半齒之閭穰,皆倣此。</p></blockquote><p class="source-note">해례본 초성해(初聲解) 산문 부분. 초성이 운서(韻書)의 자모와 같은 개념임을 밝히고, 각 초성이 중성과 결합해 음절을 이루는 예를 든다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>정음의 초성은 곧 운서의 자모이다. 소리가 이로 말미암아 생기므로 어미라 이른다. 어금닛소리인 군(君) 자의 초성은 ㄱ이니, ㄱ과 &#x27;ᅮᆫ&#x27;이 합하여 &#x27;군&#x27;이 된다. 쾌(快) 자의 초성은 ㅋ이니, ㅋ과 &#x27;ㅙ&#x27;가 합하여 &#x27;쾌&#x27;가 된다. 규(虯) 자의 초성은 ㄲ이니, ㄲ과 &#x27;ㅠ&#x27;가 합하여 &#x27;뀨&#x27;가 된다. 업(業) 자의 초성은 ㆁ이니, ㆁ과 &#x27;ᅥᆸ&#x27;이 합하여 &#x27;업&#x27;이 되는 것과 같다. 혓소리의 두(斗)·탄(呑)·담(覃)·나(那), 입술소리의 별(彆)·표(漂)·보(步)·미(彌), 잇소리의 즉(卽)·침(侵)·자(慈)·술(戌)·사(邪), 목구멍소리의 읍(挹)·허(虛)·홍(洪)·욕(欲), 반혓소리·반잇소리의 려(閭)·양(穰)이 모두 이와 같다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 훈민정음 해례본 (국보, 간송미술관 소장) <span class="source-meta">(정인지 외 집현전 학자, 간송미술관, 1446)</span></li><li><span class="source-type">[기록보존소]</span> 위키문헌 — 훈민정음 <span class="source-meta">(위키미디어재단)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 사건</h3><ul><li><a href="../../maps/medieval2/index.html?event=culture_1443_01">훈민정음 창제 (1443)</a></li></ul></div><div class="related-group"><h3>관련 인물</h3><ul><li>세종</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

@@ -325,3 +325,18 @@ a { color: #8a6a3a; }
 }
 .char-legacy h2 { margin-top: 0; }
 .char-legacy p { margin: 0; line-height: 1.75; color: #55504a; }
+
+/* ── 스크랩 버튼 (2026-07-28) ─────────────────────────────
+   자료실 글을 「나의 서재」에 담는 버튼. 지도 정보카드의 같은 이름
+   버튼과 시각적으로 통일한다. 저장은 localStorage(growth.js)라
+   로그인 없이 동작하고, 기기 간 동기화는 되지 않는다. */
+.scrap-btn {
+  display:inline-flex; align-items:center; gap:5px;
+  margin:2px 0 18px; padding:6px 13px;
+  background:transparent; color:#8a6a24;
+  border:1px solid rgba(138,106,36,0.5); border-radius:999px;
+  font-family:inherit; font-size:12px; font-weight:700; letter-spacing:0.3px;
+  cursor:pointer; transition:background .15s, color .15s, border-color .15s;
+}
+.scrap-btn:hover { background:rgba(184,152,96,0.14); }
+.scrap-btn.is-on { background:#c8a827; color:#241f18; border-color:#c8a827; }

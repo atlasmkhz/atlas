@@ -39,6 +39,8 @@
 <article>
 <h1>기미독립선언서 ③ &quot;최대급무가 민족적 독립을 확실케 함이니&quot; — 이천만 각개가 방촌의 인을 품고</h1>
 <p class="event-meta">1919 3월 1일 · 경성 태화관·탑골공원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="기미독립선언서 ③ &quot;최대급무가 민족적 독립을 확실케 함이니&quot; — 이천만 각개가 방촌의 인을 품고" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>噫라舊來의抑鬱을宣暢하려하면時下의苦痛을擺脫하려하면將來의脅威를芟除하려하면民族的良心과國家的廉義의壓縮銷殘을興奮伸張하려하면各個人格의正當한發達을遂하려하면可憐한子弟에게苦恥的財產을遺與치안이하려하면子子孫孫의永久完全한慶福을導迎하려하면最大急務가民族的獨立을確實케함이니二千萬各個가人마다方寸의刃을懷하고人類通性과時代良心이正義의軍과人道의干戈로써護援하는今日吾人은進하야取하매何强을挫치못하랴退하야作하매何志를展치못하랴</p></blockquote><p class="source-note">기미독립선언서 원문 제3문단. 억울함을 떨치기 위한 일곱 가지 조건을 열거한 뒤, 그 모든 것을 위해 &quot;민족적 독립&quot;이 최대급무라는 결론에 이른다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>슬픈 일입니다.
 
 오랜 억울함을 떨치고 일어나려면, 현재의 고통을 헤쳐 벗어나려면, 장래의 위협을 없애려면, 땅에 떨어진 민족의 양심과 국가의 체면과 도리를 떨쳐 얻으려면, 각자의 인격을 정당하게 발전시키려면, 가엾은 아들딸들에게 괴롭고 부끄러운 현실을 물려주지 않으려면, 자자손손에게 영원하고 완전한 행복을 안겨 주려면, 가장 크고 급한 일이 바로 민족의 독립을 확실하게 하는 것입니다.
@@ -78,6 +80,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

@@ -33,6 +33,8 @@
 <article>
 <h1>유시민 항소이유서 ② &quot;새시대&quot;라는 이름의 신유신</h1>
 <p class="event-meta">1985 5월 27일 · 서울형사지방법원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="유시민 항소이유서 ② &quot;새시대&quot;라는 이름의 신유신" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>현정권은 정식출범조차 하기 전에 도덕적으로는 이미 파산한 권력입니다.</p></blockquote><p class="source-note">항소이유서 2편(전체 구성상 두 번째 장) 중 정권 규정 대목의 핵심 문장.</p></section><section class="post-commentary"><h2>왜 이 문장인가</h2><p>이 장은 사건의 배경이 되는 &quot;정권과 학원간의 상호적대적 긴장상태&quot;를 설명하기 위해, 12·12 군사쿠데타와 5·17 광주 진압을 짚은 뒤 곧바로 정권 자체의 정통성 문제로 넘어간다. 제5공화국이 내세운 &quot;새시대&quot;라는 표현을 유신헌법에 형식적 합법성만 덧씌운 것이라 규정하고, &quot;정의&quot;는 소수 군부세력의 강권통치를, &quot;복지&quot;는 있는 자의 쾌락을 뜻하는 말로 재정의한다. 이어 나치 독일·파시스트 이탈리아·군국주의 일본과, 스페인 프랑코 정권, 칠레·아르헨티나 군사정권, 그리고 당시 무너지고 있던 필리핀 마르코스 정권까지 나란히 세워 파시즘 체제의 두 가지 말로(대외 전쟁으로 인한 붕괴, 또는 내부 투쟁으로 인한 자멸)를 제시한다. 마지막으로 12·12 이후 4년간의 구체적 수치(구속 1,300여명, 제적 1,400여명, 강제징집 500명 이상)를 들어 학원탄압의 규모를 밝히고, 1982년 여학생 강제추행 사건 당시 치안 당국자의 국회 답변을 짧게 인용하며 정권의 상습적 거짓말이 학생들의 불신을 낳았다는 결론으로 이 장을 맺는다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 항소이유서 (1985년 5월 27일, 서울형사지방법원 항소 제5부 제출) <span class="source-meta">(유시민(류시민), 1985)</span></li><li><span class="source-type">[단행본]</span> 아침으로 가는 길 — 항소이유서 수록 <span class="source-meta">(유시민)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li>유시민</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

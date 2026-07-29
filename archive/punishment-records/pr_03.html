@@ -33,6 +33,8 @@
 <article>
 <h1>확정의 기록 I — 2015~2019: 총리, 도지사, 부총리</h1>
 <p class="event-meta">2015 8월 20일 · 서울 대법원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="확정의 기록 I — 2015~2019: 총리, 도지사, 부총리" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>2015년 8월 20일, 대법원 전원합의체는 한명숙 전 국무총리(당시 새정치민주연합 의원)에게 징역 2년과 추징금 8억 8,300만 원을 확정했다. 2007년 대선 경선을 앞두고 한신건영 대표 한만호로부터 세 차례에 걸쳐 9억 원의 불법 정치자금을 받은 혐의(정치자금법 위반)였다. 1심은 무죄였으나 2심이 유죄로 뒤집었고, 대법원은 1차 수수분 3억 원에 대해 대법관 13명 전원일치로, 나머지 6억 원에 대해 8 대 5로 유죄를 인정했다. 한명숙은 의원직을 상실하고 실형을 산 첫 전직 국무총리가 됐다. 이 사건은 핵심 증인의 진술 번복과 검찰 수사 방식을 둘러싼 논쟁이 확정 이후에도 이어졌다 — 다만 법적 결론은 위와 같이 확정돼 있다.</p><p>2019년 7월 11일, 대법원은 최경환 전 경제부총리(자유한국당 의원)에게 징역 5년과 벌금 1억 5,000만 원, 추징금 1억 원을 확정했다. 경제부총리 재직 중이던 2014년 10월 국가정보원으로부터 특수활동비 1억 원을 받은 혐의(특정범죄가중처벌법상 뇌물)였다. 법원은 &quot;직무와 관련해 돈을 받았다면 부정행위 여부와 무관하게 뇌물죄가 성립한다&quot;고 판시했다. 최경환은 의원직을 상실했다.</p><p>2019년 9월 9일, 대법원은 안희정 전 충남지사(더불어민주당)에게 징역 3년 6개월을 확정했다. 수행비서에 대한 피감독자간음, 업무상 위력에 의한 추행 등의 혐의였다. 1심은 무죄였으나 2심이 유죄로 뒤집으며 법정구속했고, 대법원은 &quot;도지사라는 지위가 갖는 무형의 힘&quot;이 범행에 사용됐다고 본 원심을 유지했다. 이 판결은 위력에 의한 성폭력 사건에서 피해자 진술의 신빙성을 판단하는 기준을 제시한 판례로 남았다.</p><p>세 사건의 공통 구조가 하나 있다. 하급심과 상급심의 판단이 갈렸다는 것 — 한명숙과 안희정은 1심 무죄가 2심에서 뒤집혔다. 확정 판결이 왜 기준이 되어야 하는지를 보여주는 사례들이기도 하다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[언론보도]</span> <a href="https://www.lawtimes.co.kr/news/154411">국정원서 특활비 1억 받은 최경환 의원 징역 5년 확정</a> <span class="source-meta">(법률신문, 2019)</span></li><li><span class="source-type">[언론보도]</span> ’비서 성폭행’ 안희정 징역 3년6개월 확정 <span class="source-meta">(경기일보, 2019)</span></li><li><span class="source-type">[reference]</span> 대법원 2015.8.20. 선고 전원합의체 판결(한명숙 정치자금법 위반) <span class="source-meta">(대법원, 2015)</span></li></ul></section>
 
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

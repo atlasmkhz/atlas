@@ -535,6 +535,8 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
 <article>
 <h1>{esc(post['title_ko'])}</h1>
 <p class="event-meta">{esc(date_str)}{' · ' + esc(post['place_ko']) if post.get('place_ko') else ''}</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="{esc(post['title_ko'])}" data-scrap-kind="archive">🔖 서재에 담기</button>
 {body_html}
 {sources_html}
 {related_html}
@@ -570,6 +572,25 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
   window.addEventListener('scroll', function(){{ if (nearBottom()) mark(); }}, {{passive:true}});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+}})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){{
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) {{ btn.style.display = 'none'; return; }}
+  var url = window.location.pathname;
+  function paint(on){{
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }}
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){{
+    paint(G.toggleScrap({{ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }}));
+  }});
 }})();
 </script>
 <link rel="stylesheet" href="{ROOT_PREFIX}css/namu.css">

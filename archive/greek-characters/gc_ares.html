@@ -33,6 +33,8 @@
 <article>
 <h1>아레스</h1>
 <p class="event-meta">None · 그리스 (트라케)</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="아레스" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="char-info"><table class="char-table"><tr><th>로마 이름</th><td>마르스(Mars)</td></tr><tr><th>관장 영역</th><td>전쟁 — 특히 맹목적 폭력·유혈·전투의 광기</td></tr><tr><th>별칭·수식어</th><td>전쟁에 미친 자, 도시를 파괴하는 자</td></tr><tr><th>상징물</th><td>창, 투구, 방패, 개, 독수리</td></tr><tr><th>주요 성역·숭배지</th><td>트라케(그의 고향으로 여겨짐), 스파르타</td></tr></table></section><section class="char-lineage"><h2>계보</h2><table class="char-table"><tr><th>부모</th><td>제우스, 헤라</td></tr><tr><th>형제자매</th><td>헤파이스토스, 헤베, 에일레이티아</td></tr><tr><th>배우자·연인</th><td>아프로디테(불륜 관계)</td></tr><tr><th>주요 자녀</th><td>에로스(일부 판본), 하르모니아, 포보스(공포), 데이모스(패주)</td></tr></table></section><section class="post-body"><p>아레스는 제우스와 헤라의 적자로 태어난 전쟁의 신이다. 그러나 같은 전쟁의 신이라도 아테나가 지혜와 전략, 정의로운 방어전을 상징한다면, 아레스는 그 반대편 — 맹목적인 폭력과 살육, 전투 그 자체의 광기를 상징한다. 그래서 그리스인들은 그를 그다지 좋아하지 않았고, 신화 속에서도 아레스는 자주 망신을 당하거나 패배하는 쪽으로 그려진다.</p><p>트로이 전쟁에서 그는 인간 영웅 디오메데스에게 창을 맞고 비명을 지르며 도망쳤고, 아테나와 맞붙어서는 번번이 밀렸다. 미의 여신 아프로디테와 몰래 사랑에 빠졌다가, 그녀의 남편인 대장장이 신 헤파이스토스가 쳐 놓은 보이지 않는 그물에 걸려 다른 신들 앞에서 망신을 당한 이야기도 유명하다. 흥미롭게도 그리스에서는 미움받던 이 신이, 로마로 건너가서는 정반대로 최고의 존숭을 받는 신이 된다 — 로마인들에게 마르스는 로마 건국자 로물루스의 아버지이자, 나라를 지키는 위엄 있는 군신이었다.</p></section><section class="char-stories"><h2>주요 일화</h2><div class="char-story"><h3>아프로디테와의 불륜</h3><p>헤파이스토스의 아내 아프로디테와 사랑에 빠졌다가, 남편이 쳐 놓은 보이지 않는 청동 그물에 함께 걸려 신들 앞에서 웃음거리가 되었다.</p></div><div class="char-story"><h3>트로이에서의 패배</h3><p>트로이 전쟁에서 아테나의 도움을 받은 인간 디오메데스의 창에 찔려 비명을 지르며 올림포스로 도망쳤다.</p></div></section><section class="char-legacy"><h2>오늘 우리 곁에</h2><p>아레스의 로마식 이름 마르스(Mars)는 붉은 행성 화성(Mars)이자 3월(March)의 어원이다 — 로마에서 3월은 전쟁을 재개하는 달이었다. 화요일(로망스어권)도 그의 날이며, &quot;무예·상무(尙武) 정신&quot;을 뜻하는 martial이라는 말도 그에게서 나왔다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 위키백과·나무위키 — 아레스</li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li><a href="../greek-characters/gc_zeus.html">제우스</a></li><li><a href="../greek-characters/gc_hera.html">헤라</a></li><li><a href="../greek-characters/gc_aphrodite.html">아프로디테</a></li></ul></div><div class="related-group"><h3>관련 사료</h3><ul><li><a href="../greek-myth/gm_05.html">그리스 신화 — 올림포스</a></li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

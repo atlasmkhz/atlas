@@ -24,6 +24,8 @@
 <h1>대구경북 민주화의 열망 — &quot;야도&quot;에서 &quot;보수의 본진&quot;이 되기까지</h1>
 <p class="event-meta">1946~1975</p>
 <p class="summary">미군정에 맞선 첫 민중항쟁, 4·19를 촉발한 고등학생들, 유신의 사법살인까지 — &quot;조선의 모스크바&quot;라 불렸던 대구경북의 잊힌 얼굴</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="대구경북 민주화의 열망 — &quot;야도&quot;에서 &quot;보수의 본진&quot;이 되기까지" data-scrap-kind="route">🔖 서재에 담기</button>
 <section class="route-timeline"><h2>타임라인 (5개 지점)</h2><ol class="route-wp-list"><li><a href="/maps/modern2/event/1946-september-general-strike-october-uprising">대구 10월항쟁 — 해방 후 첫 민중항쟁</a> <span class="wp-date">(1946 10월 1일 · 대구 (대구역))</span></li><li><a href="/maps/modern2/event/1960-april-19th">2·28 대구 학생의거 — 4·19의 도화선</a> <span class="wp-date">(1960 2월 28일 · 대구 (경북도청 앞))</span></li><li><a href="/maps/modern2/event/route-daegu-gyeongbuk-democracy--wp_03">여정남 — 경북대에서 전국 학생운동의 구심점이 되다</a> <span class="wp-date">(1968 11월 · 대구 (경북대학교))</span></li><li><a href="/maps/modern2/event/1974-minjuch-nghangny">민청학련 사건 — 유신 반대 학생조직을 겨냥하다</a> <span class="wp-date">(1974 4월 3일 · 대구 (경북대학교))</span></li><li><a href="/maps/modern2/event/1975-prp-revival-case">인혁당재건위 사형 집행 — &quot;사법사상 암흑의 날&quot;</a> <span class="wp-date">(1975 4월 9일 · 서울구치소)</span></li></ol></section>
 
 <p class="map-cta"><a href="https://atlas.mkhz.kr/maps/modern2/?route=daegu_gyeongbuk_democracy">지도에서 루트 보기</a></p>
@@ -32,5 +34,24 @@
 <script src="/js/growth.js"></script>
 <script src="/js/library.js"></script>
 <script src="/js/namuBadge.js"></script>
+<script>
+// 2026-07-28 스크랩 — 이 루트를 「나의 서재」에 담는다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'route' }));
+  });
+})();
+</script>
 </body>
 </html>

@@ -33,6 +33,8 @@
 <article>
 <h1>훈민정음 해례본 ⑧ 정인지 서 — &quot;슬기로운 사람은 하루아침에, 어리석은 사람도 열흘이면&quot;</h1>
 <p class="event-meta">1446 9월 · 한양 경복궁</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="훈민정음 해례본 ⑧ 정인지 서 — &quot;슬기로운 사람은 하루아침에, 어리석은 사람도 열흘이면&quot;" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>有天地自然之聲,則必有天地自然之文。所以古人因聲制字,以通萬物之情,以載三才之道,而後世不能易也。然四方風𡈽區別,聲氣亦隨而異焉。蓋外國之語,有其聲而無其字。假中國文字以通其用,是猶枘鑿之鉏鋙也,豈能達而無礙乎。要皆各隨所處而安,不可强之使同也。吾東方禮樂文章,侔擬華夏。但方言俚語,不與之同。學書者患其旨趣之難曉,治獄者病其曲折之難通。昔新羅薛聡,始作吏讀,官府民間,至今行之。然皆假字而用,或澁或窒,非但鄙陋無稽而已,至於言語之間,則不能達其萬一焉,癸亥冬。我殿下創制正音二十八字,略揭例義以示之,名曰訓民正音。象形而字倣古篆,因聲而音叶七調。三極之義。二氣之妙。莫不該括。以二十八字而轉換無窮,簡而要,精而通。故智者不終朝而㑹,愚者可浹旬而學。以是解書,可以知其義。以是聽訟,可以得其情。字韻則清濁之能辨,樂歌則律呂之克諧。無所用而不備,無所往而不達。雖風聲鶴戾,雞鳴狗吠,皆可得而書矣,遂命詳加解釋,以喩諸人。於是,與集賢殿應敎,副校理彭年叔舟,修撰三問,敦寧府注簿希顔,行集賢殿副修撰善老等,謹作諸解及例,以敍其梗槩。庶使觀者不師而自悟。若其淵源精義之妙,則非等之所能彂揮也。恭惟我殿下,天縱之聖,制度施為超越百王。正音之作,無所祖述,而成於自然。豈以其至理之無所不在,而非人為之私也。夫東方有國,不為不久,而開物成務之大智,蓋有待於今日也欤。正統十一年九月上澣。資憲大夫禮曺判書集賢殿大提學知春秋館事世子右賓客臣鄭麟趾拜手稽首謹書</p></blockquote><p class="source-note">해례본을 맺는 정인지(鄭麟趾)의 서(序) 전문. 집현전 학자 8인(정인지·최항·박팽년·신숙주·성삼문·강희안·이개·이선로) 중 정인지가 대표로 쓴 발문으로, 창제 배경과 해례 작업에 참여한 학자들의 이름을 밝히고 세종을 기린다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>천지자연의 소리가 있으면 반드시 천지자연의 글이 있어야 한다. 그러므로 옛사람이 소리에 따라 글자를 만들어 만물의 뜻을 통하게 하고 삼재(三才)의 도리를 실었으니, 후세 사람이 능히 바꿀 수 없다. 그러나 사방의 풍토가 구별되매 성기(聲氣)도 따라서 다르다. 대개 외국의 말은 그 소리는 있으나 그 글자가 없어, 중국의 문자를 빌려서 통용하니 이는 마치 둥근 자루가 네모난 구멍에 들어맞지 않는 것과 같으니 어찌 능히 통달하여 막힘이 없겠는가. 요컨대 모두 각기 처한 바에 따라 편안해야지, 억지로 같게 할 수는 없는 것이다.
 
 우리 동방의 예악과 문장이 중화와 견줄 만하나, 다만 방언과 속된 말이 중국과 같지 않다. 그리하여 글을 배우는 자는 그 뜻을 깨닫기 어려움을 근심하고, 옥사를 다스리는 자는 그 곡절을 통하기 어려움을 괴로워했다. 옛날 신라의 설총이 처음으로 이두를 만들어 관청과 민간에서 지금까지 쓰고 있으나, 모두 한자를 빌려 쓰기 때문에 혹은 어렵고 혹은 막혀서, 비루하고 근거 없을 뿐만 아니라 언어 사이에서는 그 만분의 일도 통할 수 없었다.
@@ -78,6 +80,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

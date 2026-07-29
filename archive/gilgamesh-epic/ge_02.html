@@ -33,6 +33,8 @@
 <article>
 <h1>폭군과 야생인 — 최악의 만남이 최고의 우정이 되기까지</h1>
 <p class="event-meta">-2700 · 우루크</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="폭군과 야생인 — 최악의 만남이 최고의 우정이 되기까지" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>서사시가 그리는 초반의 길가메시는 영웅이 아니라 폭군이다. 3분의 2는 신, 3분의 1은 인간이라는 그는 보통 사람을 훌쩍 넘는 거인 같은 몸에 누구도 대적할 수 없는 힘을 가졌지만, 그 힘을 제멋대로 휘둘렀다. 백성들은 그의 횡포에 지쳐 신들에게 하소연했고, 신들은 길가메시에 맞설 존재를 만들기로 한다. 그렇게 탄생한 것이 엔키두다.</p><p>엔키두는 사람이 아니라 짐승과 함께 초원에서 살아가는 야생의 존재로 창조됐다. 온몸이 털로 덮여 있고, 짐승들과 함께 풀을 뜯으며 사냥꾼의 덫을 부수던 그를 인간 세상으로 이끈 것은 우루크에서 온 여인 샴하트였다. 엔키두는 그녀와 함께 지내며 점차 짐승의 삶에서 벗어나 인간의 지혜를 얻고, 마침내 우루크로 향한다.</p><p>두 사람의 첫 만남은 우정이 아니라 격돌이었다. 힘과 힘이 부딪히는 싸움 끝에 승부는 나지 않았지만, 서로의 힘을 인정한 둘은 그 자리에서 둘도 없는 벗이 된다. 그리고 이 우정이 폭군 길가메시를 바꾸어 놓는다. 엔키두를 만난 뒤 길가메시는 백성을 괴롭히던 왕에서, 함께 모험을 떠나는 영웅으로 변해간다. 「길가메시 서사시」가 그리는 것은 결국 초인적인 힘을 가진 자가 우정을 통해 처음으로 자기 자신 바깥의 존재를 진심으로 아끼는 법을 배우는 이야기이기도 하다.</p><p>【그때 한반도는】 길가메시와 엔키두가 힘을 겨루던 이 시기, 한반도의 신석기 문화는 혼자만의 것이 아니었다. 빗살무늬토기를 만드는 기술과 양식은 바이칼호 인근에서 시작해 아무르강 유역, 연해주, 만주를 거쳐 한반도까지 이어지는 넓은 교류망 위에 있었다. 서로 다른 지역의 사람들이 강과 해안을 따라 오가며 기술과 생활양식을 나누고 있었던 셈이다. 낯선 존재였던 엔키두가 우루크와 만나 하나가 되었듯, 신석기시대 동북아시아에서도 서로 다른 지역의 사람들이 이미 크고 작은 방식으로 만나고 있었다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 위키백과 — 길가메시, 엔키두</li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 사건</h3><ul><li><a href="../../maps/prehistory/index.html?event=culture_neo_04">빗살무늬토기권 — 시베리아에서 한반도까지 이어진 신석기 교류망</a></li></ul></div><div class="related-group"><h3>관련 인물</h3><ul><li>길가메시</li><li>엔키두</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

@@ -24,6 +24,8 @@
 <h1>불교의 전래 루트</h1>
 <p class="event-meta">372~8세기</p>
 <p class="summary">중국을 거쳐 온 새로운 사상이 삼국의 통치 이념이 되기까지</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="불교의 전래 루트" data-scrap-kind="route">🔖 서재에 담기</button>
 <section class="route-timeline"><h2>타임라인 (8개 지점)</h2><ol class="route-wp-list"><li><a href="/maps/ancient/event/372-state-building-under-king-sosurim">고구려, 삼국 중 가장 먼저 불교를 받아들이다</a> <span class="wp-date">(372 · 국내성)</span></li><li><a href="/maps/ancient/event/384-king-chimnyu-proclaims-buddhism-the-state">백제, 남조를 통해 불교를 받아들이다</a> <span class="wp-date">(384 · 한성(위례성))</span></li><li><a href="/maps/ancient/event/route-buddhism-introduction--wp_03">고구려·백제 불교의 확산 — 국가 사찰이 세워지다</a> <span class="wp-date">(400 · 평양)</span></li><li><a href="/maps/ancient/event/route-buddhism-introduction--wp_04">신라, 고구려를 거쳐 뒤늦게 불교를 접하다</a> <span class="wp-date">(450 · 경주)</span></li><li><a href="/maps/ancient/event/517-king-beopheungs-legal-code-and-official">이차돈의 순교 — 신라, 마침내 불교를 공인하다</a> <span class="wp-date">(527 · 경주)</span></li><li><a href="/maps/ancient/event/route-buddhism-introduction--wp_06">황룡사 구층목탑 — 불교로 나라를 지키다</a> <span class="wp-date">(645 · 경주(황룡사지))</span></li><li><a href="/maps/ancient/event/route-buddhism-introduction--wp_07">원효와 의상 — 대중 속으로 들어간 불교</a> <span class="wp-date">(686 · 경주)</span></li><li><a href="/maps/ancient/event/route-buddhism-introduction--wp_08">불국사와 석굴암 — 불교 예술의 정점</a> <span class="wp-date">(774 · 경주(불국사·석굴암))</span></li></ol></section>
 <p class="map-cta"><a href="https://atlas.mkhz.kr/maps/ancient/?route=buddhism_introduction">지도에서 루트 보기</a></p>
 </article>
@@ -31,5 +33,24 @@
 <script src="/js/growth.js"></script>
 <script src="/js/library.js"></script>
 <script src="/js/namuBadge.js"></script>
+<script>
+// 2026-07-28 스크랩 — 이 루트를 「나의 서재」에 담는다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'route' }));
+  });
+})();
+</script>
 </body>
 </html>

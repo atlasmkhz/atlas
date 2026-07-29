@@ -24,6 +24,8 @@
 <h1>고대 문화유산 순례 ⑤ 발해</h1>
 <p class="event-meta">오늘날 남아있는 유적들</p>
 <p class="summary">고구려 유민과 말갈이 함께 세운 다종족 국가, 그 흔적을 찾아가는 길 — 다섯 나라 중 가장 멀고, 가장 가기 어려운 곳들</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="고대 문화유산 순례 ⑤ 발해" data-scrap-kind="route">🔖 서재에 담기</button>
 <section class="route-timeline"><h2>타임라인 (6개 지점)</h2><ol class="route-wp-list"><li><a href="/maps/ancient/event/698-founding-of-balhae">동모산(구국) — 발해가 시작된 곳</a> <span class="wp-date">(698 · 돈화시(지린성))</span></li><li><a href="/maps/ancient/event/route-balhae-heritage-sites--wp_02">육정산 고분군 — 정혜공주묘</a> <span class="wp-date">(780 · 돈화시(지린성))</span></li><li><a href="/maps/ancient/event/route-balhae-heritage-sites--wp_03">용두산 고분군 — 정효공주묘</a> <span class="wp-date">(792 · 화룡시(지린성))</span></li><li><a href="/maps/ancient/event/818-king-seon-of-balhaes-golden-age">상경용천부 — 해동성국의 수도</a> <span class="wp-date">(818 · 닝안시(헤이룽장성))</span></li><li><a href="/maps/ancient/event/926-fall-of-balhae">발해 멸망 — 마지막 수도가 함락되다</a> <span class="wp-date">(926 · 상경성(닝안시))</span></li><li><a href="/maps/ancient/event/route-balhae-heritage-sites--wp_06">발해 유물은 어디서 볼 수 있나</a> <span class="wp-date">(2026 · 국립중앙박물관(서울))</span></li></ol></section>
 <p class="map-cta"><a href="https://atlas.mkhz.kr/maps/ancient/?route=balhae_heritage_sites">지도에서 루트 보기</a></p>
 </article>
@@ -31,5 +33,24 @@
 <script src="/js/growth.js"></script>
 <script src="/js/library.js"></script>
 <script src="/js/namuBadge.js"></script>
+<script>
+// 2026-07-28 스크랩 — 이 루트를 「나의 서재」에 담는다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'route' }));
+  });
+})();
+</script>
 </body>
 </html>

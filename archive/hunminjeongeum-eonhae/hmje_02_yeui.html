@@ -51,6 +51,8 @@
 <article>
 <h1>훈민정음 언해본 ② 예의 — 스물여덟 자의 소리를 하나하나 풀다</h1>
 <p class="event-meta">1459 · 한양</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="훈민정음 언해본 ② 예의 — 스물여덟 자의 소리를 하나하나 풀다" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>ㄱᄂᆞᆫ〮牙ᅌᅡᆼᅙᅳᆷ이〮니〮如ᅀᅧᆼㄷ字ᄍᆞᆼ〮버ᇙ〮셔ᇰᄒᆞ니〮並뼈ᇰ〮ᄒᆞ면〮如ᅀᅧᆼ뀨ᇢㅸ字ᄍᆞᆼ〮버ᇙ〮셔ᇰᄒᆞ니〮라〮
 ㄱᄂᆞᆫ〮엄〯쏘리〮니〮君ㄷ字ᄍᆞᆼ〮처〮ᅀᅥᆷ펴〮아〮나〮ᄂᆞᆫ소리〮ᄀᆞ〮ᄐᆞ니〮ᄀᆞᆯᄫᅡ〮쓰〮면〮虯뀨ᇢㅸ字ᄍᆞᆼ〮처〮ᅀᅥᆷ펴〮아〮나〮ᄂᆞᆫ소리〮ᄀᆞ〮ᄐᆞ〮니라〮
 
@@ -122,6 +124,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

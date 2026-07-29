@@ -52,6 +52,39 @@ function getGanji(year){
 // 쓰므로 DATA의 키가 연도든 왕 이름이든 상관없이 그대로 동작한다.
 // 새 왕의 데이터 파일을 추가할 때는: (1) data/NN_이름.js 파일 생성,
 // (2) index.html에 <script> 추가, (3) 아래 배열에 그 EVENTS_* 변수명 추가.
+// 데이터 배열(참조) → REIGNS order 매핑. 파일명 NN_ 번호 기준.
+const REIGN_ORDER_BY_SOURCE = new Map(
+  [
+    [typeof EVENTS_TAEJO !== 'undefined' ? EVENTS_TAEJO : null, 1],
+    [typeof EVENTS_JEONGJONG !== 'undefined' ? EVENTS_JEONGJONG : null, 2],
+    [typeof EVENTS_TAEJONG !== 'undefined' ? EVENTS_TAEJONG : null, 3],
+    [typeof EVENTS_SEJONG !== 'undefined' ? EVENTS_SEJONG : null, 4],
+    [typeof EVENTS_MUNJONG !== 'undefined' ? EVENTS_MUNJONG : null, 5],
+    [typeof EVENTS_DANJONG !== 'undefined' ? EVENTS_DANJONG : null, 6],
+    [typeof EVENTS_SEJO !== 'undefined' ? EVENTS_SEJO : null, 7],
+    [typeof EVENTS_YEJONG !== 'undefined' ? EVENTS_YEJONG : null, 8],
+    [typeof EVENTS_SEONGJONG !== 'undefined' ? EVENTS_SEONGJONG : null, 9],
+    [typeof EVENTS_YEONSANGUN !== 'undefined' ? EVENTS_YEONSANGUN : null, 10],
+    [typeof EVENTS_JUNGJONG !== 'undefined' ? EVENTS_JUNGJONG : null, 11],
+    [typeof EVENTS_INJONG !== 'undefined' ? EVENTS_INJONG : null, 12],
+    [typeof EVENTS_MYEONGJONG !== 'undefined' ? EVENTS_MYEONGJONG : null, 13],
+    [typeof EVENTS_SEONJO !== 'undefined' ? EVENTS_SEONJO : null, 14],
+    [typeof EVENTS_GWANGHAEGUN !== 'undefined' ? EVENTS_GWANGHAEGUN : null, 15],
+    [typeof EVENTS_INJO !== 'undefined' ? EVENTS_INJO : null, 16],
+    [typeof EVENTS_HYOJONG !== 'undefined' ? EVENTS_HYOJONG : null, 17],
+    [typeof EVENTS_HYEONJONG !== 'undefined' ? EVENTS_HYEONJONG : null, 18],
+    [typeof EVENTS_SUKJONG !== 'undefined' ? EVENTS_SUKJONG : null, 19],
+    [typeof EVENTS_GYEONGJONG !== 'undefined' ? EVENTS_GYEONGJONG : null, 20],
+    [typeof EVENTS_YEONGJO !== 'undefined' ? EVENTS_YEONGJO : null, 21],
+    [typeof EVENTS_JEONGJO !== 'undefined' ? EVENTS_JEONGJO : null, 22],
+    [typeof EVENTS_SUNJO !== 'undefined' ? EVENTS_SUNJO : null, 23],
+    [typeof EVENTS_HEONJONG !== 'undefined' ? EVENTS_HEONJONG : null, 24],
+    [typeof EVENTS_CHEOLJONG !== 'undefined' ? EVENTS_CHEOLJONG : null, 25],
+    [typeof EVENTS_GOJONG_BOUNDARY !== 'undefined' ? EVENTS_GOJONG_BOUNDARY : null, 26],
+    [typeof EVENTS_SUNJONG !== 'undefined' ? EVENTS_SUNJONG : null, 27],
+  ].filter(([arr]) => arr !== null)
+);
+
 const DATA = {};
 [
   (typeof EVENTS_TAEJO !== 'undefined' ? EVENTS_TAEJO : []),
@@ -82,7 +115,22 @@ const DATA = {};
   (typeof EVENTS_GOJONG_BOUNDARY !== 'undefined' ? EVENTS_GOJONG_BOUNDARY : []),
   (typeof EVENTS_SUNJONG !== 'undefined' ? EVENTS_SUNJONG : []),
 ].forEach(arr => {
+  // 2026-07-28: 사건이 "어느 왕의 데이터 파일에서 왔는지"를 태깅한다.
+  // DATA는 연도 기준으로 재편성되기 때문에 출처(왕) 정보가 사라지는데,
+  // 그 탓에 챕터 렌더링에 버그가 있었다 — 챕터 범위가 [start, end] 양끝
+  // 포함이고 앞 왕의 end_year와 다음 왕의 start_year가 같은 해라서, 앞
+  // 왕의 챕터에 다음 왕의 즉위 카드까지 함께 떴다(예: 태조 챕터에 정종
+  // 즉위가 중복 표시).
+  //
+  // 주의: 배열 순서(index)로 order를 매기면 안 된다. 복위(2차 재위)가
+  // 있는 왕은 REIGNS에 두 항목이 있지만 데이터 파일은 하나뿐이라
+  // 개수가 어긋나기 때문이다(고려: REIGNS 38 vs 데이터 34 — order
+  // 27·28·31·32가 비어 있다). 그래서 데이터 파일명 앞의 번호(NN_)가
+  // 곧 REIGNS의 order라는 사실을 이용해 아래 표로 명시적으로 잇는다.
+  // 새 왕 데이터를 추가하면 이 표에도 한 줄 추가할 것.
+  const order = REIGN_ORDER_BY_SOURCE.get(arr);
   arr.forEach(e => {
+    if (order !== undefined) e._reignOrder = order;
     if (!DATA[e.year]) DATA[e.year] = [];
     DATA[e.year].push(e);
   });

@@ -128,3 +128,34 @@ document.getElementById('eraCloseBtn').addEventListener('click', function(e){
 // 관리하던 "오늘 하루 열지 않기" 노출 제어도 더 이상 필요 없다 — 소개
 // 페이지는 사용자가 직접 메뉴를 눌러야 열리므로 자동 노출 자체가 없다.
 
+
+
+// ═══════════════════════════════════════════════════════
+// 주간/야간(라이트/다크) 지도 전환 — 2026-07-28
+// ═══════════════════════════════════════════════════════
+// "지도가 어두워 밤에 잘 안 보인다"는 사용자 피드백에 대응. 실제 전환은
+// js/map.js가 노출하는 window.setMapTheme()이 담당하고(타일 URL 교체 +
+// body.map-light 클래스), 여기서는 버튼의 표시와 클릭만 연결한다.
+// 선택은 localStorage에 저장되어 다음 방문·다른 시대 지도에도 유지된다.
+(function(){
+  const btn = document.getElementById('themeToggleBtn');
+  if (!btn) return;
+
+  function label(theme){
+    // 버튼에는 "지금 눌렀을 때 어떻게 되는지"가 아니라 "현재 상태"를
+    // 적는다 — 야간 지도를 보는 중이면 🌙 야간.
+    return theme === 'light' ? '☀️ 주간' : '🌙 야간';
+  }
+
+  function current(){
+    return (typeof window.getMapTheme === 'function') ? window.getMapTheme() : 'dark';
+  }
+
+  btn.textContent = label(current());
+
+  btn.addEventListener('click', () => {
+    const next = current() === 'light' ? 'dark' : 'light';
+    if (typeof window.setMapTheme === 'function') window.setMapTheme(next);
+    btn.textContent = label(next);
+  });
+})();

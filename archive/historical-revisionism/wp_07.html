@@ -33,6 +33,8 @@
 <article>
 <h1>교과서포럼 결성과 대안교과서</h1>
 <p class="event-meta">2005 1월 25일 · 서울</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="교과서포럼 결성과 대안교과서" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>뉴라이트 계열 학자들이 &quot;기존 역사교과서가 좌편향됐다&quot;며 교과서포럼을 결성했다. 2008년에는 식민지 근대화론·이승만 국부론·박정희 산업화 영웅론을 담은 《대안교과서 한국근·현대사》를 펴냈다. 이 책은 한국사 전공자가 편집진에 한 명도 없었고, 김구를 깎아내리는 왜곡 서술(그를 &quot;일본 상인을 군인으로 오인해 살해했다&quot;고 표현) 등으로 역사학계 전반의 강한 비판을 받았으며 정식 교과서 검정도 통과하지 못했다. 그러나 이 단체의 핵심 인사들은 이후 한국현대사학회로 이름을 바꿔 활동을 이어갔고, 2011년에는 교육과정에서 &quot;민주주의&quot;라는 용어를 &quot;자유민주주의&quot;로 바꾸는 데 성공하는 등 제도권에 지속적으로 영향력을 행사해왔다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[단행본]</span> 《대안교과서 한국근·현대사》 <span class="source-meta">(교과서포럼, 2008)</span></li></ul></section>
 
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

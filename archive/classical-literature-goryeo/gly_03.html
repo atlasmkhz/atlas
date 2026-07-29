@@ -33,6 +33,8 @@
 <article>
 <h1>청산별곡 — 살어리 살어리랏다</h1>
 <p class="event-meta">1250 · 고려 개경(개성)</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="청산별곡 — 살어리 살어리랏다" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>『악장가사』·『악학편고』·『시용향악보』에 전하는 8연 짜리 노래다. 고려가요 가운데 「서경별곡」과 함께 문학성이 가장 뛰어나다고 평가받는다. 지은이와 연대 모두 미상이다.</p><p>살어리 살어리랏다 쳥산(靑山)애 살어리랏다
 멀위랑 ᄃᆞ래랑 먹고 쳥산애 살어리랏다
 얄리얄리 얄랑셩 얄라리 얄라</p><p>우러라 우러라 새여 자고 니러 우러라 새여
@@ -78,6 +80,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

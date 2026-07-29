@@ -33,6 +33,8 @@
 <article>
 <h1>이승만 국부론과 건국절 논쟁</h1>
 <p class="event-meta">2006 · 서울</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="이승만 국부론과 건국절 논쟁" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-claim"><h2>주장</h2><p>뉴라이트 진영은 대한민국의 역사가 1919년 임시정부 수립이 아니라 1948년 8월 15일 정부 수립에서 시작됐다고 보고, 광복절을 &quot;건국절&quot;로 대체하자고 주장해왔다. 이 논리 아래 이승만은 &quot;건국의 아버지(국부)&quot;로 재조명됐다.</p></section><section class="post-rebuttal"><h2>반박</h2><p>이 주장은 대한민국 헌법 전문과 정면으로 배치된다. 헌법 전문은 &quot;우리 대한국민은 3·1운동으로 건립된 대한민국임시정부의 법통 … 을 계승&quot;한다고 명시하고 있다 — 즉 헌법 스스로가 1919년을 건국의 기점으로 삼고 있다. 1948년은 그 임시정부의 법통을 이어받은 정부가 &quot;수립&quot;된 해이지, 국가가 &quot;건국&quot;된 해가 아니다. &quot;건국절&quot; 주장은 결과적으로 일제강점기 내내 존재했던 임시정부와 무장독립투쟁의 역사적 의미를 축소하고, 그 자리에 이승만 1인의 정부 수립 서사를 채워 넣는 효과를 낳는다. 이승만은 초대 대통령이자 독립운동가였다는 공적과, 임시정부에서 최초로 탄핵당한 인물이자 부정선거·국가폭력으로 쫓겨난 인물이라는 과가 함께 있는 복합적 인물이다 — &quot;국부&quot;라는 신화화된 칭호는 이 복잡성을 지워버린다. 건국절 제정 시도는 2006년 이후 여러 차례 추진됐으나 독립운동가 후손 단체·야당 등의 거센 반발로 실패했다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[정부·공공기관]</span> 대한민국헌법 전문 <span class="source-meta">(대한민국)</span></li></ul></section>
 
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

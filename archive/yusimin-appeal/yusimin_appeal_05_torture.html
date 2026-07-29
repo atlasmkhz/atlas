@@ -33,6 +33,8 @@
 <article>
 <h1>유시민 항소이유서 ⑤ 고문으로 짜낸 자백, 날조된 공소사실</h1>
 <p class="event-meta">1985 5월 27일 · 서울형사지방법원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="유시민 항소이유서 ⑤ 고문으로 짜낸 자백, 날조된 공소사실" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>경찰은 본 피고인들이 폭행법을 위반하였다는 증거를 바로 그 폭행법을 위반하여 짜낸 것입니다.</p></blockquote><p class="source-note">항소이유서 5편(경찰·검찰 수사 비판 장) 중 고문 수사를 지적한 대목.</p></section><section class="post-commentary"><h2>왜 이 문장인가</h2><p>이 장은 검찰이 경찰 발표를 뒷받침하는 데만 급급했다는 지적으로 시작해, 사건 발생 한 달 뒤 관악경찰서 수사관들이 두 학생(김도형·손택만)에게 가혹행위를 가해 공소사실에 부합하는 허위자백을 얻어냈다는 사실을 구체적으로 적시한다. 폭력행위처벌법 위반 혐의의 증거 자체가 그 법을 위반한 고문으로 만들어졌다는 역설을 지적한 뒤, &quot;법 앞의 평등&quot; 문제로 논의를 확장한다 — 학생을 고문한 경찰관이 처벌받은 사례는 들어본 적이 없다는 점과, 1984년 5월 광주항쟁 추모집회 후 귀가하던 임산부가 경찰의 발길질에 태아를 사산했음에도 검찰이 수사조차 개시하지 않은 사례를 대비시킨다. 다만 이 장은 정권 비판에 머무르지 않는다 — 후반부에서는 학생들의 폭행 자체는 &quot;비폭력주의에서 명백히 이탈한 행위&quot;라 규정하고, 폭행 당사자들이 스스로 책임지지 않은 점도 &quot;윤리적 결함&quot;이라 인정한다. 그러면서 폭행과 무관한 총학생회장 이정우가 스스로 모든 책임을 떠안고 항소를 포기한 일을 &quot;아름다운 행위&quot;로 평가하며, 자신이 감금에 찬동하고 직접 조사에 관여한 부분은 &quot;법률을 어긴 것은 틀림없는 사실이며 그에 따른 책임이라면 흔쾌히 감수할 것&quot;이라 밝힌다 — 인정할 책임과 부인할 책임의 경계를 스스로 정밀하게 긋는 대목이다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 항소이유서 (1985년 5월 27일, 서울형사지방법원 항소 제5부 제출) <span class="source-meta">(유시민(류시민), 1985)</span></li><li><span class="source-type">[단행본]</span> 아침으로 가는 길 — 항소이유서 수록 <span class="source-meta">(유시민)</span></li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li>유시민</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

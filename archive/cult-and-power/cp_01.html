@@ -33,6 +33,8 @@
 <article>
 <h1>프롤로그 — &quot;사이비냐&quot;가 아니라 &quot;무슨 일이 있었나&quot;</h1>
 <p class="event-meta">1937 · 대한민국</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="프롤로그 — &quot;사이비냐&quot;가 아니라 &quot;무슨 일이 있었나&quot;" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>어떤 종교가 참이고 어떤 종교가 거짓인지, 무엇이 정통이고 무엇이 이단·사이비인지 — 그것은 신학의 물음이고, 이 시리즈가 답하려는 질문이 아니다. 여기서 따라가는 것은 훨씬 구체적이고 세속적인 것이다: 종교의 형식을 빌려 실제로 어떤 범죄가 저질러졌고, 법은 그것을 어떻게 판단했으며, 신격화된 지도자의 권력이 사람과 사회에 어떤 상처를 남겼는가.</p><p>한국 근현대사에는 이 물음을 피할 수 없게 만드는 사건들이 있다. 일제강점기 수백 명을 암매장한 백백교, 1987년 서른두 명이 한 공장 천장에서 숨진 채 발견된 오대양, 대법원이 교주의 성범죄에 유죄를 확정한 JMS. 이들은 &quot;믿음이 틀렸다&quot;는 이유가 아니라 &quot;사람을 죽이거나 착취한&quot; 범죄로 역사에 남았다.</p><p>동시에 조심해야 할 것도 있다. 신흥 종교라고 모두 범죄집단인 것은 아니며, &quot;사이비&quot;라는 낙인은 때로 정당한 신앙까지 매도하는 도구가 되기도 한다. 그래서 이 시리즈는 단정의 언어를 아낀다. 확정판결이 있으면 그것을, 수사 결과가 있으면 그것을, 무죄가 난 혐의는 무죄임을 그대로 적는다. 그리고 하나의 공통된 구조에 주목한다 — 지도자가 신으로 격상되고, 신도의 판단력이 무력화되며, 그 권력이 재산·성·때로는 생명, 그리고 표(票)로까지 뻗어가는 구조. 교주와 권력의 이야기다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[reference]</span> 한국민족문화대백과사전 「신종교」 항목 <span class="source-meta">(한국학중앙연구원)</span></li></ul></section>
 
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

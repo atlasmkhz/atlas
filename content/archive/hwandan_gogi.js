@@ -33,6 +33,8 @@ const ARCHIVE_SERIES_HWANDAN_GOGI = {
   full_name: '환단고기, 무엇을 말하는가 — 내용·논쟁·그리고 이 책이 실제로 한 일',
   category: 'history',
   subcategory: 'primary_sources',
+  // 2026-07-28: 대종교/환단고기 계통 구분 서술 전면 수정 — NEW 배지용.
+  updated: '2026-07-28',
   period: '1911(편찬 주장)~현재',
   tagline: '논쟁은 유명한데 내용은 아무도 모르는 책 — 환단고기가 실제로 무엇을 기록하고 있는지, 위서 논쟁의 양쪽 논거는 무엇인지, 그리고 이 책이 독립전쟁의 시대에 실제로 무엇을 했는지',
   color: '#4a3c6e',

@@ -47,20 +47,25 @@
     else panel.style.transform = 'translateY(100%)';
   }
 
-  // 정보창이 열리는 동안 다른 컨트롤들의 상태를 바꾼다(모바일).
+  // 정보창이 열리는 동안 다른 컨트롤들의 상태를 바꾼다.
+  // 2026-07-28: 자동 숨김을 데스크탑까지 확대. 이전에는 데스크탑에서
+  // 범례·레이어를 숨기지 않고 옆으로 비키기만 해서, 정보창을 열어도
+  // 화면 오른쪽이 계속 컨트롤로 덮여 있었다. 두목님 요청으로 7개 시대
+  // 전부, 화면 폭과 무관하게 자동 숨김이 걸리도록 통일했다.
+  // (설정 체크박스 autoHideControls로 끌 수 있는 것은 그대로 유지.)
   function syncControlsForOpen(open){
     document.body.classList.toggle('info-open', open);
-    if(isDesktop()){
-      // 데스크탑: 범례·레이어는 숨기지 않고 패널만큼 옆으로 비킨다.
-      document.body.classList.toggle('info-open-desktop', open);
-      document.body.classList.toggle('controls-shift', open);
-      document.body.classList.remove('controls-hidden');
-      return;
-    }
-    // 모바일: 설정에 따라 범례·레이어 자동 숨김
     const hide = open && autoHideEnabled();
     document.body.classList.toggle('controls-hidden', hide);
+    if(isDesktop()){
+      // 데스크탑은 패널이 우측에 고정되므로, 숨기지 않기로 설정한
+      // 경우에도 남은 컨트롤이 패널에 가리지 않도록 옆으로 비킨다.
+      document.body.classList.toggle('info-open-desktop', open);
+      document.body.classList.toggle('controls-shift', open);
+      return;
+    }
     document.body.classList.remove('info-open-desktop');
+    document.body.classList.remove('controls-shift');
   }
 
   // 모바일에서 정보창 열림 동안 지도 드래그/줌을 잠근다(지도 위 탐험 충돌 방지).
@@ -194,6 +199,20 @@
   if(closeBtn) closeBtn.addEventListener('click', close);
   if(scrim) scrim.addEventListener('click', close);
 
+  // ── 지도 바탕 클릭으로 닫기 (2026-07-28) ──────────────
+  // 이전에는 × 버튼(또는 모바일 scrim/ESC)으로만 닫을 수 있었다.
+  // Leaflet의 map 'click'은 마커·팝업 등 인터랙티브 레이어를 클릭한
+  // 경우에는 발생하지 않고 빈 바탕을 눌렀을 때만 발생하므로, 이걸
+  // 그대로 닫기 신호로 쓰면 "다른 마커를 눌러 카드를 갈아타는" 동작을
+  // 방해하지 않는다. 데스크탑은 정보창이 열려도 지도를 계속 조작할 수
+  // 있으니 특히 이 경로가 자연스럽고, 모바일은 지도가 잠겨 있어
+  // 실질적으로 scrim이 먼저 받는다(중복 호출돼도 close는 멱등).
+  if(typeof map !== 'undefined' && map && typeof map.on === 'function'){
+    map.on('click', ()=>{
+      if(state !== 'closed') close();
+    });
+  }
+
   // ESC로 닫기(접근성)
   document.addEventListener('keydown', e=>{
     if(e.key === 'Escape' && state !== 'closed') close();
@@ -218,12 +237,32 @@
     autoHideBox.checked = autoHideEnabled();
     autoHideBox.addEventListener('change', ()=>{
       setAutoHide(autoHideBox.checked);
-      // 정보창이 열려 있으면 즉시 반영
-      if(state !== 'closed' && !isDesktop()){
+      // 정보창이 열려 있으면 즉시 반영 (2026-07-28: 데스크탑 포함)
+      if(state !== 'closed'){
         document.body.classList.toggle('controls-hidden', autoHideBox.checked);
       }
     });
   }
+
+  // ── 스크랩 버튼 위임 처리 (2026-07-28) ────────────────
+  // 카드 HTML은 마커를 누를 때마다 새로 그려지므로, 버튼마다 리스너를
+  // 붙이면 계속 새로 쌓인다. 정보창 컨테이너 한 곳에서 위임으로 받는다.
+  scroll.addEventListener('click', (ev)=>{
+    const btn = ev.target.closest('.scrap-btn');
+    if(!btn) return;
+    ev.preventDefault();
+    const G = window.AtlasGrowth;
+    if(!G || !G.toggleScrap) return;
+    const url = btn.dataset.scrapUrl;
+    const on = G.toggleScrap({
+      url: url,
+      title: btn.dataset.scrapTitle || url,
+      kind: btn.dataset.scrapKind || 'card',
+    });
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  });
 
   // 전역 공개 — renderer.js가 마커 클릭에서 호출
   window.openInfoPanel = open;

@@ -33,6 +33,8 @@
 <article>
 <h1>훈민정음 해례본 ⑤ 중성해 — 자운의 한가운데서 초성과 종성을 잇는 소리</h1>
 <p class="event-meta">1446 9월 · 한양 경복궁</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="훈민정음 해례본 ⑤ 중성해 — 자운의 한가운데서 초성과 종성을 잇는 소리" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>中聲者,居字韻之中,合初終而成音。如呑字中聲是ㆍ,ㆍ居ㅌㄴ之間而為ᄐᆞᆫ。卽字中聲是ㅡ,ㅡ居ㅈㄱ之間而為즉。侵字中聲是ㅣ,ㅣ居ㅊㅁ之間而為침之類。洪𫟛君業欲穰戌彆,皆倣此。
 二字合用者,ㅗ與ㅏ同出於ㆍ,故合而為ㅘ。ㅛ與ㅑ又同出於ㅣ,故合而為ㆇ。ㅜ與ㅓ同出於ㅡ,故合而為ㅝ。ㅠ與ㅕ又同出於ㅣ,故合而為ㆊ。以其同出而為類,故相合而不悖也。一字中聲之與ㅣ相合者十,ㆎㅢㅚㅐㅟㅔㆉㅒㆌㅖ是也。二字中聲之與ㅣ相合者四,ㅙㅞㆈㆋ是也。ㅣ於深淺闔闢之聲,並能相隨者,以其舌展聲淺而便於開口也。亦可見人之參贊開物而無所不通也。</p></blockquote><p class="source-note">해례본 중성해(中聲解) 산문 부분. 중성이 초성·종성과 결합해 음절을 이루는 원리, 그리고 중성끼리 합쳐지는 이중모음(ㅘ, ㅝ 등)의 조합 규칙을 밝힌다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>중성이란 자운의 한가운데 자리하여 초성과 종성을 합해 소리를 이룬다. 탄(呑) 자의 중성은 ㆍ이니, ㆍ가 ㅌ과 ㄴ 사이에 있어 &#x27;ᄐᆞᆫ&#x27;이 된다. 즉(卽) 자의 중성은 ㅡ이니, ㅡ가 ㅈ과 ㄱ 사이에 있어 &#x27;즉&#x27;이 된다. 침(侵) 자의 중성은 ㅣ이니, ㅣ가 ㅊ과 ㅁ 사이에 있어 &#x27;침&#x27;이 되는 것과 같다. 홍(洪)·담(覃)·군(君)·업(業)·욕(欲)·양(穰)·술(戌)·별(彆)도 모두 이와 같다.
 
@@ -71,6 +73,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

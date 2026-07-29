@@ -39,6 +39,8 @@
 <article>
 <h1>기미독립선언서 ② &quot;우리 생존권의 박상됨이 무릇 기하이며&quot; — 십 년의 압제를 되짚다</h1>
 <p class="event-meta">1919 3월 1일 · 경성 태화관·탑골공원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="기미독립선언서 ② &quot;우리 생존권의 박상됨이 무릇 기하이며&quot; — 십 년의 압제를 되짚다" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>舊時代의遺物인侵略主義强權主義의犧牲을作하야有史以來累千年에처음으로異民族箝制의痛苦를嘗한지今에十年을過한지라我生存權의剝喪됨이무릇幾何ㅣ며心靈上發展의障礙됨이무릇幾何ㅣ며民族的尊榮의毁損됨이무릇幾何ㅣ며新銳와獨創으로써世界文의大潮流에寄與補裨할奇緣을遺失함이무릇幾何ㅣ뇨</p></blockquote><p class="source-note">기미독립선언서 원문 제2문단. 을사늑약(1905)과 경술국치(1910)로 이어진 강점의 결과, 조선인이 잃은 것들을 네 개의 수사의문문으로 짚는다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>낡은 시대의 유물인 침략주의와 강권주의의 희생이 되어 유사 이래 수천년 만에 처음으로 다른 민족의 압제에 뼈아픈 고통을 당한 지 이미 십 년이 지났습니다.
 
 그동안 우리의 생존권을 빼앗겨 잃은 것이 그 얼마이며, 정신상 발전에 장애를 받은 것이 그 얼마이며, 민족의 존엄과 영광에 손상을 입은 것이 그 얼마이며, 새롭고 날카로운 기운과 독창력으로 세계 문화에 이바지하고 보탤 기회를 잃은 것이 그 얼마이겠습니까!</p></section>
@@ -76,6 +78,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

@@ -31,6 +31,13 @@ const MAP_MODE = {
   world: {
     description: '활성화됨(코드 분기 적용 중). 라벨 없는 타일(dark_nolabels) + 직접 라벨링 구조. 브라우저 렌더링 실측은 미검증 — 위 주석 참고.',
     tile: 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+    // 2026-07-28: 야간/주간 모드. "지도가 어두워 밤에 잘 안 보인다"는
+    // 피드백에 대응해 라이트 타일을 추가했다. CARTO는 dark_nolabels와
+    // 완전히 같은 규격의 light_nolabels를 제공하므로 URL 한 줄 교체로
+    // 전환된다(타일 소스의 한계가 아니었다). 라벨 없는 버전을 쓰는 것은
+    // 다크와 동일한 이유 — 지명은 historicalLabels.js가 전담해
+    // "일본해" 등 외부 표기가 끼어들 여지를 원천 차단하기 위해서다.
+    tileLight: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
     boundsRestricted: false
   }
 };
@@ -157,7 +164,22 @@ map.on('zoomend', ()=>{
 //   환경(cartocdn.com 네트워크 차단)에서 확인하지 못했다. MAP_MODE.current를
 //   'world'로 바꿔 실행하는 것은 사용자가 직접 브라우저에서 시도해야 한다.
 const activeTileUrl = MAP_MODE[MAP_MODE.current].tile;
-L.tileLayer(activeTileUrl, {
+
+// ── 주간/야간(라이트/다크) 모드 ──────────────────────────
+// 저장된 선호가 있으면 그것을, 없으면 다크(기존 기본값)를 쓴다.
+// body.map-light 클래스가 함께 토글되어 CSS(css/style.css)의 라벨·배경
+// 색상 보정이 걸린다. 전환은 타일 레이어의 setUrl만 바꾸므로 마커·루트·
+// 라벨 등 그 위에 얹힌 레이어는 전혀 다시 그리지 않는다.
+const ATLAS_THEME_KEY = 'atlas_map_theme';
+function atlasSavedTheme(){
+  try { return localStorage.getItem(ATLAS_THEME_KEY) === 'light' ? 'light' : 'dark'; }
+  catch(_){ return 'dark'; }
+}
+const __initialTheme = atlasSavedTheme();
+const __tileDarkUrl  = MAP_MODE[MAP_MODE.current].tile;
+const __tileLightUrl = MAP_MODE[MAP_MODE.current].tileLight || __tileDarkUrl;
+
+const baseTileLayer = L.tileLayer(__initialTheme === 'light' ? __tileLightUrl : activeTileUrl, {
   maxZoom:11,
   subdomains:'abcd',
   crossOrigin:true,
@@ -165,6 +187,17 @@ L.tileLayer(activeTileUrl, {
   // noWrap 제거됨 — Leaflet 기본 세계 wrap 사용. 가로로 계속 이동하면 타일이
   // 자연스럽게 반복되어 동/서 양방향 모두 끊김 없이 이동 가능하다.
 }).addTo(map);
+
+// 전역 전환 함수 — ui.js의 토글 버튼이 호출한다.
+window.setMapTheme = function(theme){
+  const light = (theme === 'light');
+  baseTileLayer.setUrl(light ? __tileLightUrl : __tileDarkUrl);
+  document.body.classList.toggle('map-light', light);
+  try { localStorage.setItem(ATLAS_THEME_KEY, light ? 'light' : 'dark'); } catch(_){}
+};
+window.getMapTheme = atlasSavedTheme;
+// 초기 클래스 반영(저장된 선호가 light인 경우)
+if (__initialTheme === 'light') document.body.classList.add('map-light');
 
 // ═══════════════════════════════════════════════════════
 // 동해/독도 표기 보정 — MAP_MODE에 따라 구현 방식이 갈린다.

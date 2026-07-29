@@ -369,6 +369,7 @@ function popupHtml(e){
     ${imageHtml}
     <div class="pop-type" style="background:${color}">${TYPE_LABEL[e.type]}</div>
     <div class="pop-title">${e.title_ko}</div>
+    ${scrapButtonHtml(e)}
     <div class="pop-date">${e.year}년${e.month!=null?' '+(e.month)+'월':''}${e.day?' '+e.day+'일':''} · ${e.place_ko}</div>
     ${durationHtml}
     ${peopleHtml}
@@ -629,3 +630,34 @@ function navigateToEvent(id, opts){
     return html;
   };
 })();
+
+// ── 스크랩 버튼 (2026-07-28) ─────────────────────────────
+// 정보카드를 「나의 서재」에 담는 버튼. 저장 자체는 growth.js가 이미
+// 갖고 있던 API(toggleScrap/isScrapped)를 그대로 쓰고, 여기서는 버튼
+// 마크업만 만든다. 실제 클릭 처리는 infoPanel.js가 위임(delegation)으로
+// 받는다 — 카드 HTML이 매번 새로 그려지므로 개별 바인딩은 새는 지점이
+// 되기 쉽다.
+// URL은 사건의 정적 페이지가 아니라 "이 지도에서 이 카드를 연 상태"로
+// 되돌아오는 딥링크(?event=id)를 쓴다. 서재에서 눌렀을 때 지도 맥락째
+// 복원되는 편이 이 프로젝트의 성격에 맞는다.
+function scrapEventUrl(e){
+  try{
+    const u = new URL(window.location.href);
+    u.searchParams.set('event', e.id);
+    u.hash = '';
+    return u.pathname + u.search;
+  }catch(_){ return window.location.pathname + '?event=' + encodeURIComponent(e.id); }
+}
+
+function scrapButtonHtml(e){
+  if (!e || !e.id) return '';
+  const url = scrapEventUrl(e);
+  const on = !!(window.AtlasGrowth && window.AtlasGrowth.isScrapped &&
+                window.AtlasGrowth.isScrapped(url));
+  const label = on ? '서재에 담김' : '서재에 담기';
+  return `<button type="button" class="scrap-btn${on ? ' is-on' : ''}"
+    data-scrap-url="${url}"
+    data-scrap-title="${String(e.title_ko || '').replace(/"/g,'&quot;')}"
+    data-scrap-kind="card"
+    aria-pressed="${on}">${on ? '📚' : '🔖'} ${label}</button>`;
+}

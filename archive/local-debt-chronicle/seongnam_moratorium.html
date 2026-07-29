@@ -33,6 +33,8 @@
 <article>
 <h1>성남시 — 이재명의 모라토리엄 선언, 진실공방의 시작</h1>
 <p class="event-meta">2010 7월 12일 · 경기 성남</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="성남시 — 이재명의 모라토리엄 선언, 진실공방의 시작" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-body"><p>전임 이대엽(한나라당·보수) 시장 재임 중 판교택지개발 특별회계 자금이 일반회계로 전용됐다. 뒤이어 취임한 이재명(민주당 계열·진보) 성남시장은 2010년 7월 12일 기자회견에서 채무지불유예(모라토리엄)를 선언했다 — 한국토지주택공사(LH)·국토해양부에 내야 할 공동공공사업비 2,300억 원과 초과수익부담금 2,900억 원(합계 5,200억 원)에 비해 판교특별회계 가용재원이 681억 원에 불과하다는 것이 근거였다. 판교특별회계 전입금 5,400억 원과 시청사 부지 잔금 등 미편성 법적의무금 1,885억 원을 더해 비공식부채 7,285억 원으로 계산됐다.</p><p>성남시는 2014년 1월 27일, 3년 6개월간의 초긴축 재정 끝에 모라토리엄 졸업을 선언했다.</p></section><section class="post-stages"><h2>사법·행정 처리 경과</h2><ol><li><span class="stage-date">2004~2010</span><span class="stage-name">판교특별회계 자금 전용</span> <span class="stage-institution">— 이대엽(한나라당·보수, 성남시장)</span><span class="stage-detail">판교택지개발 특별회계를 일반회계로 전용</span></li><li><span class="stage-date">2010-07</span><span class="stage-name">시장 교체</span> <span class="stage-institution">— 성남시</span><span class="stage-detail">이재명(민주당 계열·진보) 취임</span></li><li><span class="stage-date">2010-07-12</span><span class="stage-name">모라토리엄(지급유예) 선언</span> <span class="stage-institution">— 이재명(성남시장)</span><span class="stage-detail">LH·국토해양부 대상 5,200억 원 채무 대비 가용재원 681억 원</span></li><li><span class="stage-date">2010~2014</span><span class="stage-name">긴축재정 실시</span> <span class="stage-institution">— 성남시</span><span class="stage-detail">3년 6개월간 초긴축</span></li><li><span class="stage-date">2014-01-27</span><span class="stage-name">모라토리엄 졸업 선언</span> <span class="stage-institution">— 성남시</span><span class="stage-result">졸업 선언</span></li></ol></section><section class="post-legacy"><h2>역사적 평가</h2><p>이 사건은 확정된 사법적 결론이 아니라 진행 중인 진실공방으로 다뤄야 한다. 성남시(이재명)는 감사원 「지방행정 감사백서」(2013.1)를 근거로 모라토리엄의 정당성을 주장해왔다. 반면 국토해양부 실무자와 감사원 담당자는 &quot;조기정산 공문이나 일시상환 요구가 없었고, 백서는 성남시측 주장을 인용했을 뿐&quot;이라고 밝혔으며, 원희룡(당시 국토해양부 관계) 등 야당 측은 &quot;정치적 퍼포먼스에 가까웠다&quot;고 주장한다. 5,400억 원 조달 과정에서 발행된 지방채의 연간 이자 부담(약 47억 원)이 실제로 발생한 비용이라는 점은 양측 모두 인정하는 사실관계다. 모라토리엄이 실제 법적 파산 상태였는지, 정치적 상징 행위였는지는 이 자료실 카드에서 결론을 내리지 않고 양측 주장을 병기한다.</p></section>
 <section class="post-sources"><h2>출처</h2><ul><li><span class="source-type">[기록보존소]</span> 성남시 모라토리엄 — 나무위키</li></ul></section>
 <section class="post-related"><h2>관련 콘텐츠</h2><div class="related-group"><h3>관련 인물</h3><ul><li>이대엽</li><li>이재명</li></ul></div></section>
@@ -68,6 +70,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

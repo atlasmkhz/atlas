@@ -33,6 +33,8 @@
 <article>
 <h1>조선혁명선언 ④ &quot;파괴적 정신이 곧 건설적 주장이라&quot; — 다섯 가지 파괴와 다섯 가지 건설</h1>
 <p class="event-meta">1923 1월 · 베이징</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="조선혁명선언 ④ &quot;파괴적 정신이 곧 건설적 주장이라&quot; — 다섯 가지 파괴와 다섯 가지 건설" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>……(중략)…… 그러나 破壞만 하려고 破壞하는 것이 안이라 建設하려고 破壞하는 것이니, 만일 建設할 줄을 모르면 破壞할 줄도 모를지며, 破壞할 줄을 모르면 建設할 줄도 모를지니라. 建設과 破壞가 다만 形式上에서 보아 區別될 뿐이오 精神上에서는 破壞가 곳 建設이니 이를테면 우리가 日本勢力을 破壞하려는 것이, 第一은 異族統治를 破壞하자 함이다. 왜? 〈朝鮮〉이란 그 우에 〈日本〉이란 異族 그것이 專制하야 있으니, 異族專制의 밑에 있는 朝鮮은 固有的 朝鮮이 안이니, 固有的 朝鮮을 發見하기 爲하야 異族統治를 破壞함이니라. 第二는 特權階級을 破壞하자 함이다. 왜? 〈朝鮮民衆〉이란 그 우에 總督이니 무엇이니 하는 强盜團의 特權階級이 壓迫하야 있으니, 特權階級의 壓迫 밑에 있는 朝鮮民衆은 自由的 朝鮮民衆이 안이니, 自由的 朝鮮民衆을 發見하기 爲하야 特權階級을 打破함이니라.……(중략)……다시 말하자면 〈固有的 朝鮮의〉〈自由的 朝鮮民衆의〉〈民衆的 經濟의〉〈民衆的 社會의〉〈民衆的 文化의〉朝鮮을 建設하기 爲하야 〈異族統治의〉〈掠奪制度의〉〈社會的 不平等의〉〈奴隷的 文化思想의〉 現象을 打破함이니라. 그런즉 破壞的 精神이 곳 建設的 主張이라.</p></blockquote><p class="source-note">조선혁명선언 원문 제4장. 의열단의 파괴 노선이 무목적 파괴가 아니라 &quot;건설을 위한 파괴&quot;임을 논증하는 이 선언 전체의 이론적 핵심부. 5파괴(이족통치·특권계급·경제약탈제도·사회적불평등·노예적문화사상)와 5건설(고유적조선·자유적조선민중·민중적경제·민중적사회·민중적문화)의 대응 구조를 담는다.</p></section><section class="post-translation"><h2>현대어로 읽기</h2><p>(…) 그러나 파괴만 하려고 파괴하는 것이 아니라 건설하려고 파괴하는 것이니, 만일 건설할 줄 모르면 파괴할 줄도 모를 것이며, 파괴할 줄 모르면 건설할 줄도 모를 것이다. 건설과 파괴가 다만 형식상으로 구별될 뿐이요 정신상으로는 파괴가 곧 건설이니, 이를테면 우리가 일본 세력을 파괴하려는 것의 첫째는 이민족 통치를 파괴하자 함이다. 왜? 〈조선〉이란 그 위에 〈일본〉이라는 이민족이 군림하고 있으니, 이민족 전제 아래 있는 조선은 고유한 조선이 아니니, 고유한 조선을 되찾기 위하여 이민족 통치를 파괴하는 것이다. 둘째는 특권계급을 파괴하자 함이다. 왜? 〈조선민중〉이란 그 위에 총독이니 무엇이니 하는 강도단의 특권계급이 짓누르고 있으니, 특권계급의 압박 아래 있는 조선민중은 자유로운 조선민중이 아니니, 자유로운 조선민중을 되찾기 위하여 특권계급을 타파하는 것이다.
 
 (원문은 이어 셋째 경제약탈제도 파괴 — &quot;약탈제도 밑의 경제는 민중이 자기 생활을 위해 조직한 경제가 아니라 강도의 살을 찌우기 위해 조직한 경제이니 파괴한다&quot; — 와, 넷째 사회적 불평등 파괴 — &quot;약자 위에 강자, 천한 자 위에 귀한 자를 두는 사회는 서로 약탈하고 질투하다가 결국 다수 민중의 행복을 해칠 뿐이니 파괴한다&quot; — 그리고 다섯째 노예적 문화사상 파괴에 대한 논증을 잇는다.)
@@ -72,6 +74,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

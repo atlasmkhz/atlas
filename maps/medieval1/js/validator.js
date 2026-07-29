@@ -46,9 +46,23 @@ function getVisibleEvents(year) {
 }
 
 function getVisibleEventsInRange(startYear, endYear) {
+  // 2026-07-28: 챕터 경계 중복 수정.
+  // 챕터 범위는 [start_year, end_year] 양끝 포함인데, 앞 왕의 end_year와
+  // 다음 왕의 start_year가 같은 해다(예: 태조 1392~1398, 정종 1398~1400).
+  // 그래서 연도만으로 거르면 앞 왕의 챕터에 다음 왕의 즉위 카드가 함께
+  // 떴다. 사건에 태깅된 출처(_reignOrder, app.js에서 부여)로 "지금 보고
+  // 있는 왕보다 뒤의 왕에게 속한 사건"을 제외해 이를 없앤다.
+  // 다음 왕의 즉위는 다음 챕터에서 정상적으로 표시된다.
+  // _reignOrder가 없는 데이터(구버전/다른 지도)는 종전대로 통과시킨다.
+  const limit = window.__atlasCurrentReignOrder;
   return Object.values(DATA)
     .flat()
-    .filter(e => e.year >= startYear && e.year <= endYear);
+    .filter(e => {
+      if (e.year < startYear || e.year > endYear) return false;
+      if (typeof limit === 'number' && typeof e._reignOrder === 'number'
+          && e._reignOrder > limit) return false;
+      return true;
+    });
 }
 
 // ═══════════════════════════════════════════════════════

@@ -33,6 +33,8 @@
 <article>
 <h1>기미독립선언서 ⑥ &quot;착수가 곳 성공이라&quot; — 마지막 문단, 공약삼장, 그리고 서른세 사람의 이름</h1>
 <p class="event-meta">1919 3월 1일 · 경성 태화관·탑골공원</p>
+<button type="button" class="scrap-btn" id="scrapBtn"
+        data-scrap-title="기미독립선언서 ⑥ &quot;착수가 곳 성공이라&quot; — 마지막 문단, 공약삼장, 그리고 서른세 사람의 이름" data-scrap-kind="archive">🔖 서재에 담기</button>
 <section class="post-original"><h2>원문</h2><blockquote><p>吾等이玆에奮하도다良心이我와同存하며眞理가我와幷進하는도다男女老少업시陰鬱한古巢로서活潑히來하야萬彙羣象으로더부러欣快한復活을成遂하게되도다千百世祖靈이吾等을陰佑하며全世界氣運이吾等을外護하나니着手가곳成功이라다만前頭의光明으로驀進할ᄯᅡ름인뎌
 
 公約三章
@@ -92,6 +94,25 @@
   window.addEventListener('scroll', function(){ if (nearBottom()) mark(); }, {passive:true});
   setTimeout(mark, 40000);
   if (document.documentElement.scrollHeight <= window.innerHeight + 120) setTimeout(mark, 8000);
+})();
+
+// 2026-07-28 스크랩 — 이 글을 「나의 서재」에 담는다.
+// 저장은 growth.js의 toggleScrap(localStorage)을 그대로 쓴다.
+(function(){
+  var btn = document.getElementById('scrapBtn');
+  if (!btn) return;
+  var G = window.AtlasGrowth;
+  if (!G || !G.toggleScrap) { btn.style.display = 'none'; return; }
+  var url = window.location.pathname;
+  function paint(on){
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '📚 서재에 담김' : '🔖 서재에 담기';
+  }
+  paint(!!(G.isScrapped && G.isScrapped(url)));
+  btn.addEventListener('click', function(){
+    paint(G.toggleScrap({ url: url, title: btn.dataset.scrapTitle || document.title, kind: 'archive' }));
+  });
 })();
 </script>
 <link rel="stylesheet" href="../../css/namu.css">

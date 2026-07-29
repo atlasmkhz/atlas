@@ -46,6 +46,46 @@ function getGanji(year){
 // ── 사건 데이터 자동 등록 (왕 단위 파일 → 연도별로 재편성) ──
 // 새 왕의 데이터 파일을 추가할 때는: (1) data/NN_이름.js 파일 생성,
 // (2) index.html에 <script> 추가, (3) 아래 배열에 그 EVENTS_* 변수명 추가.
+// 데이터 배열(참조) → REIGNS order 매핑. 파일명 NN_ 번호 기준.
+const REIGN_ORDER_BY_SOURCE = new Map(
+  [
+    [typeof EVENTS_TAEJO !== 'undefined' ? EVENTS_TAEJO : null, 1],
+    [typeof EVENTS_HYEJONG !== 'undefined' ? EVENTS_HYEJONG : null, 2],
+    [typeof EVENTS_JEONGJONG_GORYEO !== 'undefined' ? EVENTS_JEONGJONG_GORYEO : null, 3],
+    [typeof EVENTS_GWANGJONG !== 'undefined' ? EVENTS_GWANGJONG : null, 4],
+    [typeof EVENTS_GYEONGJONG_GORYEO !== 'undefined' ? EVENTS_GYEONGJONG_GORYEO : null, 5],
+    [typeof EVENTS_SEONGJONG_GORYEO !== 'undefined' ? EVENTS_SEONGJONG_GORYEO : null, 6],
+    [typeof EVENTS_MOKJONG !== 'undefined' ? EVENTS_MOKJONG : null, 7],
+    [typeof EVENTS_HYEONJONG_GORYEO !== 'undefined' ? EVENTS_HYEONJONG_GORYEO : null, 8],
+    [typeof EVENTS_DEOKJONG !== 'undefined' ? EVENTS_DEOKJONG : null, 9],
+    [typeof EVENTS_JEONGJONG2 !== 'undefined' ? EVENTS_JEONGJONG2 : null, 10],
+    [typeof EVENTS_MUNJONG_GORYEO !== 'undefined' ? EVENTS_MUNJONG_GORYEO : null, 11],
+    [typeof EVENTS_SUNJONG_GORYEO !== 'undefined' ? EVENTS_SUNJONG_GORYEO : null, 12],
+    [typeof EVENTS_SEONJONG_GORYEO !== 'undefined' ? EVENTS_SEONJONG_GORYEO : null, 13],
+    [typeof EVENTS_HEONJONG_GORYEO !== 'undefined' ? EVENTS_HEONJONG_GORYEO : null, 14],
+    [typeof EVENTS_SUKJONG_GORYEO !== 'undefined' ? EVENTS_SUKJONG_GORYEO : null, 15],
+    [typeof EVENTS_YEJONG_GORYEO !== 'undefined' ? EVENTS_YEJONG_GORYEO : null, 16],
+    [typeof EVENTS_INJONG_GORYEO !== 'undefined' ? EVENTS_INJONG_GORYEO : null, 17],
+    [typeof EVENTS_UIJONG !== 'undefined' ? EVENTS_UIJONG : null, 18],
+    [typeof EVENTS_MYEONGJONG !== 'undefined' ? EVENTS_MYEONGJONG : null, 19],
+    [typeof EVENTS_SINJONG !== 'undefined' ? EVENTS_SINJONG : null, 20],
+    [typeof EVENTS_HUIJONG !== 'undefined' ? EVENTS_HUIJONG : null, 21],
+    [typeof EVENTS_GANGJONG !== 'undefined' ? EVENTS_GANGJONG : null, 22],
+    [typeof EVENTS_GOJONG_GORYEO !== 'undefined' ? EVENTS_GOJONG_GORYEO : null, 23],
+    [typeof EVENTS_WONJONG !== 'undefined' ? EVENTS_WONJONG : null, 24],
+    [typeof EVENTS_CHUNGNYEOLWANG !== 'undefined' ? EVENTS_CHUNGNYEOLWANG : null, 25],
+    [typeof EVENTS_CHUNGSEONWANG !== 'undefined' ? EVENTS_CHUNGSEONWANG : null, 26],
+    [typeof EVENTS_CHUNGSUKWANG !== 'undefined' ? EVENTS_CHUNGSUKWANG : null, 29],
+    [typeof EVENTS_CHUNGHYEWANG !== 'undefined' ? EVENTS_CHUNGHYEWANG : null, 30],
+    [typeof EVENTS_CHUNGMOKWANG !== 'undefined' ? EVENTS_CHUNGMOKWANG : null, 33],
+    [typeof EVENTS_CHUNGJEONGWANG !== 'undefined' ? EVENTS_CHUNGJEONGWANG : null, 34],
+    [typeof EVENTS_GONGMINWANG !== 'undefined' ? EVENTS_GONGMINWANG : null, 35],
+    [typeof EVENTS_U !== 'undefined' ? EVENTS_U : null, 36],
+    [typeof EVENTS_CHANG !== 'undefined' ? EVENTS_CHANG : null, 37],
+    [typeof EVENTS_GONGYANGWANG !== 'undefined' ? EVENTS_GONGYANGWANG : null, 38],
+  ].filter(([arr]) => arr !== null)
+);
+
 const DATA = {};
 [
   (typeof EVENTS_TAEJO !== 'undefined' ? EVENTS_TAEJO : []),
@@ -83,7 +123,22 @@ const DATA = {};
   (typeof EVENTS_CHANG !== 'undefined' ? EVENTS_CHANG : []),
   (typeof EVENTS_GONGYANGWANG !== 'undefined' ? EVENTS_GONGYANGWANG : []),
 ].forEach(arr => {
+  // 2026-07-28: 사건이 "어느 왕의 데이터 파일에서 왔는지"를 태깅한다.
+  // DATA는 연도 기준으로 재편성되기 때문에 출처(왕) 정보가 사라지는데,
+  // 그 탓에 챕터 렌더링에 버그가 있었다 — 챕터 범위가 [start, end] 양끝
+  // 포함이고 앞 왕의 end_year와 다음 왕의 start_year가 같은 해라서, 앞
+  // 왕의 챕터에 다음 왕의 즉위 카드까지 함께 떴다(예: 태조 챕터에 정종
+  // 즉위가 중복 표시).
+  //
+  // 주의: 배열 순서(index)로 order를 매기면 안 된다. 복위(2차 재위)가
+  // 있는 왕은 REIGNS에 두 항목이 있지만 데이터 파일은 하나뿐이라
+  // 개수가 어긋나기 때문이다(고려: REIGNS 38 vs 데이터 34 — order
+  // 27·28·31·32가 비어 있다). 그래서 데이터 파일명 앞의 번호(NN_)가
+  // 곧 REIGNS의 order라는 사실을 이용해 아래 표로 명시적으로 잇는다.
+  // 새 왕 데이터를 추가하면 이 표에도 한 줄 추가할 것.
+  const order = REIGN_ORDER_BY_SOURCE.get(arr);
   arr.forEach(e => {
+    if (order !== undefined) e._reignOrder = order;
     if (!DATA[e.year]) DATA[e.year] = [];
     DATA[e.year].push(e);
   });
