@@ -161,6 +161,18 @@
   // 루트를 추가하면 이 배열에도 항목을 추가해야 로테이션 대상이 된다
   // (정적 사이트라 디렉터리 목록을 js에서 자동으로 읽을 수 없다).
   const MASTER_ROUTES = [
+    // 2026-07-30 등록. 두 가지를 처음에 놓쳤다.
+    //   (1) pinned_portal:true — 매일 순환(dailyRotationPick)에 맡기면
+    //       오늘 화면에 아예 안 뜰 수 있다. 노출이 충분히 되면(며칠 뒤)
+    //       이 줄을 빼서 일반 순환으로 돌리면 된다.
+    //   (2) updated 필드 — 포털 루트 카드는 이미 자체 NEW 배지 시스템이
+    //       있다(newBadgeHtml → isRecentlyUpdated, 위쪽 참고). 새로 만든
+    //       js/newBadge.js(조회 횟수 기반)는 지도 상단 메뉴용이고, 이
+    //       포털 카드는 그 시스템을 안 쓴다. updated 날짜가 없으면
+    //       isRecentlyUpdated가 무조건 false를 돌려줘 배지가 영영 안 뜬다.
+    // 히어로 이미지 2026-07-30 추가 — Midjourney v8.2, 인물 얼굴 특정
+    // 없이 뒷모습 실루엣으로 처리(실존 인물 얼굴 묘사 금지 원칙 준수).
+    { path: 'armed_struggle.html', name: '항일무장투쟁', tagline: '독립군은 하나가 아니었다', period: '1911~1945', waypoints: 65, color: '#c8963c', image: 'assets/images/route/route_armed_struggle_hero.webp', pinned_portal: true, updated: '2026-07-30' },
     // 근대(포털) — map.html
     { path: 'map.html?route=hong_beom_do', name: '홍범도', tagline: '포수에서 현충원까지', period: '1868~2021', waypoints: 26, color: '#c8a827', image: 'assets/images/entity/person/person_hong_beom_do_01.webp' },
     { path: 'map.html?route=righteous_struggle', name: '의열투쟁', tagline: '조선의 심장을 겨누다', period: '1908~1932', waypoints: 21, color: '#b8632f', image: 'assets/images/route/route_righteous_struggle_hero.webp' },

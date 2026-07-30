@@ -42,6 +42,12 @@
   // 한다. ready:false 카드는 회색 처리되고 클릭이 막힌다(era-hub와 동일
   // 규칙). thumbnail은 카드 배경 이미지 — 없으면 카드 색상만 표시.
   const ROUTE_HUB_ITEMS = [
+    // 2026-07-30 「항일무장투쟁」 — 기존 루트와 형식이 다르다.
+    // 기존 루트는 한 주체가 순서대로 이동한 '동선'이지만, 이것은
+    // 하단 연표를 끌며 그 해의 현황을 보는 '시간축' 뷰어다.
+    // 단체가 100곳으로 늘어도 루트는 계속 이 하나다 —
+    // 데이터(armed_groups.js + armed_group_events.js)만 늘어난다.
+    { routeId:'armed_struggle', name:'항일무장투쟁', period:'1911–1945', tagline:'독립군은 하나가 아니었다 — 연표를 끌어 그 해의 만주를 본다', ready:true, thumbnail:null, href:'armed_struggle.html' },
     { routeId:'hong_beom_do',       name:'홍범도',      period:'1868–2021', tagline:'포수에서 현충원까지', ready:true, thumbnail:null },
     { routeId:'kim_gu',             name:'백범 김구',    period:'1876–1949', tagline:'상놈의 아들에서 임시정부의 얼굴로', ready:true, thumbnail:null },
     { routeId:'kim_won_bong',       name:'김원봉',      period:'1898–1958', tagline:'의열단을 만든 사람, 두 번 지워진 이름', ready:true, thumbnail:null },
@@ -323,6 +329,16 @@
       if (!btn || btn.classList.contains('disabled')) return;
       const item = ROUTE_HUB_ITEMS.find(it => it.routeId === btn.dataset.routeId);
       if (!item || !item.ready) return;
+      // href가 있으면 별도 페이지로 보낸다. 「항일무장투쟁」처럼 기존
+      // 루트 렌더러(순서 있는 waypoint 재생)와 형식이 다른 루트를 위한
+      // 확장이다. routeRenderer.js를 고치지 않고 붙이기 위한 분기다.
+      if (item.href) {
+        const _seg = location.pathname.split('/').filter(Boolean);
+        const _dirs = (_seg.length && _seg[_seg.length - 1].indexOf('.') !== -1)
+          ? _seg.slice(0, -1) : _seg.slice();
+        location.href = (_dirs.length ? '../'.repeat(_dirs.length) : '') + item.href;
+        return;
+      }
       window.closeRouteHub();
       if (typeof window.openRoute === 'function') window.openRoute(item.routeId);
     });

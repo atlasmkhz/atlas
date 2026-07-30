@@ -152,6 +152,20 @@ def main():
         lines.append('    <priority>0.85</priority>')
         lines.append('  </url>')
 
+    # ── 항일무장단체 계보 (2026-07-30 신설) ──────────────────
+    # 사건이 아니라 '단체'를 다루는 갈래. 전체 계보를 한 장으로 보는
+    # 단일 페이지이므로 event/route 슬러그 체계를 쓰지 않는다.
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/armed_struggle.html</loc>')
+    lines.append('    <changefreq>monthly</changefreq>')
+    lines.append('    <priority>0.85</priority>')
+    lines.append('  </url>')
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/armed_groups.html</loc>')
+    lines.append('    <changefreq>monthly</changefreq>')
+    lines.append('    <priority>0.85</priority>')
+    lines.append('  </url>')
+
     # modern2 진입점
     lines.append('  <url>')
     lines.append(f'    <loc>{SITE_ROOT}/maps/modern2/</loc>')

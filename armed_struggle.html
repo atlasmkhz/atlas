@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>항일무장투쟁 — 시간으로 보는 독립군 | ATLAS by MKHZ</title>
+<meta name="description" content="1911년부터 1945년까지, 항일무장단체가 어떻게 생겨나고 합쳐지고 갈라지고 사라졌는지를 시간 순으로 봅니다. 하단 연표를 끌면 그 해에 존재했던 부대와 그 해에 벌어진 일이 지도 위에 나타납니다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/armed_struggle.html">
+<meta property="og:title" content="항일무장투쟁 — 시간으로 보는 독립군">
+<meta property="og:description" content="독립군은 하나가 아니었다. 연표를 끌어 그 해의 만주를 본다.">
+<meta property="og:url" content="https://atlas.mkhz.kr/armed_struggle.html">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+
+<style>
+  :root {
+    --ink:#14110c; --paper:#f2ede3; --paper-dim:#b8b0a2;
+    --gold:#b89860; --gold-bright:#d8b878; --line:rgba(184,152,96,0.22);
+    --bar-h:132px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--ink); color:var(--paper); overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; }
+
+  .as-topbar {
+    position:absolute; top:0; left:0; right:0; height:48px; z-index:900;
+    display:flex; align-items:center; gap:12px; padding:0 16px;
+    background:rgba(20,17,12,0.94); border-bottom:1px solid var(--line);
+    backdrop-filter:blur(8px);
+  }
+  .as-back { font-size:13px; font-weight:700; color:var(--gold); text-decoration:none; }
+  .as-brand { font-size:13.5px; font-weight:800; letter-spacing:0.6px; }
+  .as-brand small { font-weight:400; color:var(--paper-dim); font-size:11px; margin-left:6px; }
+  .as-topbar-menu { margin-left:auto; display:flex; gap:3px; }
+  .as-link {
+    font-size:12.5px; font-weight:700; color:var(--paper-dim);
+    text-decoration:none; padding:6px 9px; border-radius:8px; white-space:nowrap;
+  }
+  .as-link:hover { background:rgba(184,152,96,0.14); color:var(--paper); }
+
+  #map { position:absolute; top:48px; left:0; right:0; bottom:var(--bar-h); background:#1b1a17; }
+
+  /* ── 하단 연표 바 ──────────────────────────────────────────
+     왕두목 확정: "하단슬라이드바를 설치해서 독립 전쟁의 역사만 따로."
+     기존 지도의 .timeline과 같은 자리를 쓰되, 이 페이지 전용이다. */
+  .as-bar {
+    position:absolute; bottom:0; left:0; right:0; height:var(--bar-h); z-index:900;
+    background:rgba(20,17,12,0.96); border-top:1px solid var(--line);
+    backdrop-filter:blur(8px); padding:11px 20px 14px;
+  }
+  .as-bar-head { display:flex; align-items:baseline; gap:12px; margin-bottom:7px; }
+  .as-year { font-size:26px; font-weight:800; color:var(--gold-bright); line-height:1; }
+  .as-year-note { font-size:12px; color:var(--paper-dim); }
+  .as-count { margin-left:auto; font-size:12px; color:var(--paper-dim); }
+  .as-count b { color:var(--gold); }
+
+  /* 사건 밀도 막대 — 1920년이 왜 정점인지가 눈에 보인다 */
+  .as-density { display:flex; align-items:flex-end; gap:1px; height:22px; margin-bottom:3px; }
+  .as-density span {
+    flex:1; background:rgba(184,152,96,0.26); border-radius:1px 1px 0 0;
+    min-height:2px; transition:background .15s;
+  }
+  .as-density span.on { background:var(--gold-bright); }
+
+  .as-slider { width:100%; -webkit-appearance:none; appearance:none; background:none; height:22px; }
+  .as-slider::-webkit-slider-runnable-track {
+    height:3px; background:rgba(184,152,96,0.3); border-radius:2px;
+  }
+  .as-slider::-webkit-slider-thumb {
+    -webkit-appearance:none; width:17px; height:17px; border-radius:50%;
+    background:var(--gold-bright); border:2px solid var(--ink);
+    margin-top:-7px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.5);
+  }
+  .as-slider::-moz-range-track { height:3px; background:rgba(184,152,96,0.3); border-radius:2px; }
+  .as-slider::-moz-range-thumb {
+    width:17px; height:17px; border-radius:50%; background:var(--gold-bright);
+    border:2px solid var(--ink); cursor:pointer;
+  }
+  .as-ticks { display:flex; justify-content:space-between; font-size:10px; color:#8a8276; margin-top:1px; }
+
+  /* ── 좌측 사건 패널 ── */
+  .as-panel {
+    position:absolute; top:60px; left:12px; width:290px; z-index:800;
+    max-height:calc(100vh - var(--bar-h) - 76px); overflow-y:auto;
+    background:rgba(20,17,12,0.9); border:1px solid var(--line);
+    border-radius:11px; padding:13px 15px; backdrop-filter:blur(7px);
+  }
+  .as-panel h2 {
+    font-size:10.5px; letter-spacing:1.4px; color:var(--gold);
+    font-weight:700; margin-bottom:9px;
+  }
+  .as-ev { padding:8px 0; border-bottom:1px solid rgba(184,152,96,0.12); cursor:pointer; }
+  .as-ev:last-child { border-bottom:none; }
+  .as-ev:hover .as-ev-t { color:var(--gold-bright); }
+  .as-ev-t { font-size:13px; font-weight:700; line-height:1.4; }
+  .as-ev-g { font-size:11px; color:var(--gold); margin-top:2px; }
+  .as-ev-d { font-size:11.5px; color:var(--paper-dim); line-height:1.6; margin-top:3px; }
+  .as-empty { font-size:12px; color:#8a8276; line-height:1.7; }
+
+  /* ── 우측 범례 ── */
+  .as-legend {
+    position:absolute; top:60px; right:12px; z-index:800;
+    background:rgba(20,17,12,0.9); border:1px solid var(--line);
+    border-radius:11px; padding:11px 13px; backdrop-filter:blur(7px);
+    font-size:11px; color:var(--paper-dim); max-width:150px;
+  }
+  .as-legend div { display:flex; align-items:center; gap:6px; margin:4px 0; }
+  .as-legend i { width:10px; height:10px; border-radius:50%; flex:none; }
+  .as-legend hr { border:none; border-top:1px solid var(--line); margin:8px 0; }
+
+  /* ── 마커 ── */
+  .as-m { border-radius:50%; border:2px solid rgba(255,255,255,0.85);
+          box-shadow:0 2px 7px rgba(0,0,0,0.55); transition:opacity .25s; }
+  /* ★ 해체된 단체는 사라지지 않고 흐리게 남는다 (왕두목 확정 2번)
+     1921년 자유시참변 이후 만주가 비는 것이 이 콘텐츠의 핵심 메시지인데,
+     완전히 지우면 "원래 없었던 것"처럼 보인다. 빈자리가 보여야 한다. */
+  .as-m.gone { opacity:0.2; border-style:dashed; border-color:rgba(255,255,255,0.4); }
+  .as-m.evt { box-shadow:0 0 0 5px rgba(216,184,120,0.35), 0 2px 8px rgba(0,0,0,0.6); }
+
+  .as-detail {
+    position:absolute; left:12px; bottom:calc(var(--bar-h) + 10px); width:290px; z-index:850;
+    background:rgba(20,17,12,0.95); border:1px solid var(--gold);
+    border-radius:11px; padding:13px 15px; backdrop-filter:blur(7px); display:none;
+  }
+  .as-detail.on { display:block; }
+  .as-d-n { font-size:15px; font-weight:800; }
+  .as-d-p { font-size:11.5px; color:var(--paper-dim); margin-top:3px; line-height:1.6; }
+  .as-d-r { font-size:11.5px; margin-top:7px; line-height:1.6; }
+  .as-d-r b { color:var(--gold); font-weight:700; }
+  .as-d-x {
+    position:absolute; top:8px; right:10px; background:none; border:none;
+    color:var(--paper-dim); font-size:17px; cursor:pointer; line-height:1;
+  }
+
+  @media (max-width:760px) {
+    .as-panel { position:absolute; top:auto; bottom:calc(var(--bar-h) + 8px);
+                left:8px; right:8px; width:auto; max-height:150px; }
+    .as-legend { display:none; }
+    .as-detail { left:8px; right:8px; width:auto; bottom:calc(var(--bar-h) + 8px); }
+    .as-brand small { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="as-topbar">
+  <a class="as-back" href="index.html">&lsaquo; ATLAS</a>
+  <span class="as-brand">항일무장투쟁<small>시간으로 보는 독립군</small></span>
+  <span class="as-topbar-menu">
+    <a class="as-link" href="armed_groups.html">계보도</a>
+    <a class="as-link" href="map.html">지도</a>
+  </span>
+</nav>
+
+<div id="map"></div>
+
+<aside class="as-panel">
+  <h2 id="asPanelTitle">이 해에 일어난 일</h2>
+  <div id="asEvents"></div>
+</aside>
+
+<aside class="as-legend" id="asLegend"></aside>
+
+<div class="as-detail" id="asDetail">
+  <button type="button" class="as-d-x" id="asDetailX" aria-label="닫기">&times;</button>
+  <div id="asDetailBody"></div>
+</div>
+
+<div class="as-bar">
+  <div class="as-bar-head">
+    <span class="as-year" id="asYear">1920</span>
+    <span class="as-year-note" id="asYearNote"></span>
+    <span class="as-count" id="asCount"></span>
+  </div>
+  <div class="as-density" id="asDensity"></div>
+  <input type="range" class="as-slider" id="asSlider" min="1911" max="1945" value="1920" step="1"
+         aria-label="연도 선택">
+  <div class="as-ticks" id="asTicks"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data/armed_groups.js"></script>
+<script src="data/armed_group_events.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  const D = window.ARMED_GROUPS;
+  const EV = window.ARMED_GROUP_EVENTS || {};
+  if (!D || !window.L) return;
+  const G = D.groups;
+  const byId = {};
+  G.forEach(g => { byId[g.id] = g; });
+
+  const Y0 = 1911, Y1 = 1945;
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // 모든 사건을 연도별로 모아둔다
+  const evByYear = {};
+  Object.keys(EV).forEach(gid => {
+    EV[gid].forEach(e => {
+      (evByYear[e.year] = evByYear[e.year] || []).push(Object.assign({ gid }, e));
+    });
+  });
+
+  // ── 지도 ──────────────────────────────────────────────────
+  const map = L.map('map', { zoomControl: true, attributionControl: false })
+    .setView([43.2, 128.0], 5);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+    { subdomains: 'abcd', maxZoom: 12 }).addTo(map);
+
+  const markers = {};
+  const lineLayer = L.layerGroup().addTo(map);
+
+  G.forEach(g => {
+    const col = (D.lineages[g.lineage] || {}).color || '#8a8276';
+    const size = g.kind === 'coalition' ? 13 : 17;
+    const m = L.marker([g.lat, g.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: '<div class="as-m" data-g="' + g.id + '" style="width:' + size +
+              'px;height:' + size + 'px;background:' + col + '"></div>',
+        iconSize: [size, size], iconAnchor: [size / 2, size / 2],
+      }),
+      title: g.name,
+    });
+    m.on('click', () => showGroup(g.id));
+    markers[g.id] = m;
+  });
+
+  // ── 연도 렌더링 ───────────────────────────────────────────
+  function activeAt(g, y) {
+    const end = g.dissolved || Y1;
+    return g.founded <= y && y <= end;
+  }
+
+  function render(y) {
+    const events = (evByYear[y] || []).slice();
+
+    // 마커 — 살아있으면 선명, 해체됐으면 흐리게 남긴다
+    G.forEach(g => {
+      const m = markers[g.id];
+      const born = g.founded <= y;
+      if (!born) { map.removeLayer(m); return; }
+      if (!map.hasLayer(m)) m.addTo(map);
+      const el = m.getElement() && m.getElement().querySelector('.as-m');
+      if (!el) return;
+      el.classList.toggle('gone', !activeAt(g, y));
+      el.classList.toggle('evt', events.some(e => e.gid === g.id));
+    });
+
+    // 계보선 — 그 해까지 이미 일어난 관계만 그린다.
+    // 미래의 통합을 미리 그리면 시간축의 의미가 사라진다.
+    lineLayer.clearLayers();
+    G.forEach(g => {
+      (g.successors || []).forEach(sid => {
+        const t = byId[sid];
+        if (!t || t.founded > y || g.founded > y) return;
+        L.polyline([[g.lat, g.lng], [t.lat, t.lng]], {
+          color: 'rgba(184,152,96,0.45)', weight: 1.4, dashArray: null,
+        }).addTo(lineLayer);
+      });
+      (g.coalitions || []).forEach(cid => {
+        const t = byId[cid];
+        if (!t || t.founded > y || g.founded > y) return;
+        L.polyline([[g.lat, g.lng], [t.lat, t.lng]], {
+          color: 'rgba(184,152,96,0.55)', weight: 1.4, dashArray: '4 4',
+        }).addTo(lineLayer);
+      });
+    });
+
+    // 숫자
+    const alive = G.filter(g => activeAt(g, y) && g.kind !== 'coalition').length;
+    document.getElementById('asYear').textContent = y;
+    document.getElementById('asCount').innerHTML =
+      '활동 중 <b>' + alive + '</b>곳 · 이 해의 사건 <b>' + events.length + '</b>건';
+
+    const notes = {
+      1920: '간도 출병과 경신참변 — 부대가 가장 많았던 해',
+      1921: '자유시참변 — 이 뒤로 만주가 비어간다',
+      1929: '3부 통합운동',
+      1931: '만주사변',
+      1940: '한국광복군 창설',
+    };
+    document.getElementById('asYearNote').textContent = notes[y] || '';
+
+    // 사건 목록
+    const box = document.getElementById('asEvents');
+    if (!events.length) {
+      box.innerHTML = '<p class="as-empty">이 해에 기록된 사건이 없습니다. ' +
+        '연표를 끌어 다른 해를 보세요.</p>';
+    } else {
+      events.sort((a, b) => (a.month || 0) - (b.month || 0));
+      box.innerHTML = events.map(e =>
+        '<div class="as-ev" data-g="' + e.gid + '">' +
+        '<div class="as-ev-t">' + (e.month ? e.month + '월 · ' : '') + esc(e.title) + '</div>' +
+        '<div class="as-ev-g">' + esc((byId[e.gid] || {}).name || '') + ' · ' + esc(e.place) + '</div>' +
+        '<div class="as-ev-d">' + esc(e.desc) + '</div></div>').join('');
+    }
+
+    // 밀도 막대
+    document.querySelectorAll('.as-density span').forEach(s => {
+      s.classList.toggle('on', +s.dataset.y === y);
+    });
+  }
+
+  // ── 단체 상세 ─────────────────────────────────────────────
+  const detail = document.getElementById('asDetail');
+  function showGroup(id) {
+    const g = byId[id];
+    if (!g) return;
+    const lin = D.lineages[g.lineage] || {};
+    document.getElementById('asDetailBody').innerHTML =
+      '<div class="as-d-n">' + esc(g.name) + '</div>' +
+      '<div class="as-d-p">' + g.founded + (g.dissolved ? '~' + g.dissolved : '~') +
+        ' · ' + esc(lin.label || '') + '<br>' + esc(g.base) + '</div>' +
+      (g.commanders && g.commanders.length
+        ? '<div class="as-d-r"><b>지휘관</b> ' + esc(g.commanders.join(', ')) + '</div>' : '') +
+      (g.battles && g.battles.length
+        ? '<div class="as-d-r"><b>주요 전투</b> ' + esc(g.battles.join(', ')) + '</div>' : '') +
+      '<div class="as-d-r"><b>전신</b> ' +
+        esc((g.predecessors || []).map(i => (byId[i] || {}).name).filter(Boolean).join(', ') || '—') +
+      '</div>' +
+      '<div class="as-d-r"><b>후신</b> ' +
+        esc((g.successors || []).map(i => (byId[i] || {}).name).filter(Boolean).join(', ') || '—') +
+      '</div>' +
+      '<div class="as-d-r" style="margin-top:9px"><a href="armed_groups.html" ' +
+        'style="color:var(--gold);font-weight:700">계보도에서 보기 →</a></div>';
+    detail.classList.add('on');
+    map.panTo([g.lat, g.lng], { animate: true });
+  }
+  document.getElementById('asDetailX').addEventListener('click',
+    () => detail.classList.remove('on'));
+  document.getElementById('asEvents').addEventListener('click', e => {
+    const el = e.target.closest('.as-ev');
+    if (el) showGroup(el.dataset.g);
+  });
+
+  // ── 범례 ──────────────────────────────────────────────────
+  document.getElementById('asLegend').innerHTML =
+    Object.keys(D.lineages).map(k =>
+      '<div><i style="background:' + D.lineages[k].color + '"></i>' +
+      esc(D.lineages[k].label) + '</div>').join('') +
+    '<hr><div style="opacity:.55"><i style="background:#8a8276;opacity:.3;' +
+      'border:1px dashed #999"></i>해체됨</div>';
+
+  // ── 밀도 막대 + 눈금 ──────────────────────────────────────
+  let maxN = 1;
+  for (let y = Y0; y <= Y1; y++) maxN = Math.max(maxN, (evByYear[y] || []).length);
+  let dens = '';
+  for (let y = Y0; y <= Y1; y++) {
+    const n = (evByYear[y] || []).length;
+    dens += '<span data-y="' + y + '" title="' + y + '년 ' + n + '건" style="height:' +
+            Math.round(3 + (n / maxN) * 19) + 'px"></span>';
+  }
+  document.getElementById('asDensity').innerHTML = dens;
+  document.getElementById('asTicks').innerHTML =
+    [1911, 1920, 1930, 1940, 1945].map(y => '<span>' + y + '</span>').join('');
+
+  document.querySelector('.as-density').addEventListener('click', e => {
+    if (!e.target.dataset.y) return;
+    const y = +e.target.dataset.y;
+    document.getElementById('asSlider').value = y;
+    render(y);
+  });
+
+  const slider = document.getElementById('asSlider');
+  slider.addEventListener('input', () => render(+slider.value));
+
+  render(1920);
+  window.AtlasArmedStruggle = { render: render, showGroup: showGroup, evByYear: evByYear };
+})();
+</script>
+</body>
+</html>

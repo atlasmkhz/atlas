@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>항일무장단체 계보 — ATLAS by MKHZ</title>
+<meta name="description" content="1919년 3·1운동 이후 만주·연해주·중국 관내에서 활동한 항일무장단체 16곳의 창설·통합·분열 계보를 한 장으로 봅니다. 지휘관·거점·주요 전투·계통을 함께 정리했습니다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/armed_groups.html">
+<meta property="og:title" content="항일무장단체 계보 — ATLAS by MKHZ">
+<meta property="og:description" content="독립군은 하나가 아니었다. 창설과 통합, 분열의 계보를 한 장으로.">
+<meta property="og:url" content="https://atlas.mkhz.kr/armed_groups.html">
+<meta property="og:type" content="article">
+
+<style>
+  :root {
+    --ink:#14110c; --ink-soft:#241f18; --paper:#f2ede3; --paper-dim:#b8b0a2;
+    --gold:#b89860; --gold-bright:#d8b878; --line:rgba(184,152,96,0.22);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--ink); color:var(--paper); min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',
+                'Noto Sans KR',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; }
+
+  /* ── 상단 바 ── */
+  .ag-topbar {
+    position:sticky; top:0; z-index:100;
+    display:flex; align-items:center; gap:12px;
+    padding:11px 18px; background:rgba(20,17,12,0.95);
+    border-bottom:1px solid var(--line); backdrop-filter:blur(8px);
+  }
+  .ag-back { font-size:13px; font-weight:700; color:var(--gold); text-decoration:none; }
+  .ag-back:hover { color:var(--gold-bright); }
+  .ag-brand { font-size:14px; font-weight:800; letter-spacing:1px; }
+  .ag-brand small {
+    display:block; font-size:10.5px; font-weight:400;
+    color:var(--paper-dim); letter-spacing:0.5px; margin-top:1px;
+  }
+  .ag-topbar-menu { margin-left:auto; display:flex; gap:4px; }
+  .ag-topbar-link {
+    font-size:12.5px; font-weight:700; color:var(--paper-dim);
+    text-decoration:none; padding:6px 10px; border-radius:8px; white-space:nowrap;
+  }
+  .ag-topbar-link:hover { background:rgba(184,152,96,0.14); color:var(--paper); }
+
+  /* ── 머리글 ── */
+  .ag-head { max-width:1180px; margin:0 auto; padding:30px 20px 18px; }
+  .ag-title { font-size:25px; font-weight:800; letter-spacing:-0.4px; }
+  .ag-sub { margin-top:9px; font-size:14px; line-height:1.75; color:var(--paper-dim); }
+  .ag-sub b { color:var(--paper); font-weight:700; }
+
+  /* ── 범례 ── */
+  .ag-legend {
+    max-width:1180px; margin:0 auto; padding:0 20px 14px;
+    display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center;
+    font-size:12px; color:var(--paper-dim);
+  }
+  .ag-legend i {
+    display:inline-block; width:11px; height:11px; border-radius:3px;
+    margin-right:5px; vertical-align:-1px;
+  }
+  .ag-legend-rel { display:flex; gap:14px; align-items:center; }
+  .ag-legend-rel span { display:flex; align-items:center; gap:5px; }
+  .ag-legend-rel svg { display:block; }
+
+  /* ── 계보도 ── */
+  .ag-chart-wrap {
+    max-width:1180px; margin:0 auto; padding:0 20px 30px;
+    overflow-x:auto;
+  }
+  .ag-chart { display:block; min-width:900px; }
+  .ag-node rect {
+    stroke-width:1.5; rx:7;
+    transition:opacity .18s, stroke-width .18s;
+    cursor:pointer;
+  }
+  .ag-node text { pointer-events:none; }
+  .ag-node-name { font-size:12.5px; font-weight:700; fill:#fff; }
+  .ag-node-year { font-size:10px; fill:rgba(255,255,255,0.72); }
+  .ag-node:hover rect { stroke-width:3; }
+  .ag-edge { fill:none; stroke:rgba(184,152,96,0.34); stroke-width:1.6; }
+  .ag-edge.coalition { stroke-dasharray:4 4; stroke:rgba(184,152,96,0.5); }
+  .ag-axis-line { stroke:rgba(184,152,96,0.14); stroke-width:1; }
+  .ag-axis-label { font-size:10.5px; fill:rgba(184,176,162,0.75); }
+  .ag-region-label {
+    font-size:11px; font-weight:700; fill:var(--gold);
+    letter-spacing:1px; text-transform:none;
+  }
+  /* 계보 강조 — 선택한 단체의 계보만 남기고 나머지를 흐린다.
+     16개 계보선을 한꺼번에 보면 실타래가 되기 때문이다. */
+  .ag-chart.focused .ag-node { opacity:0.2; }
+  .ag-chart.focused .ag-node.on { opacity:1; }
+  .ag-chart.focused .ag-edge { opacity:0.07; }
+  .ag-chart.focused .ag-edge.on { opacity:1; stroke:var(--gold-bright); stroke-width:2.4; }
+
+  /* ── 상세 ── */
+  .ag-detail {
+    max-width:1180px; margin:0 auto 40px; padding:0 20px;
+  }
+  .ag-detail-inner {
+    border:1px solid var(--line); border-radius:12px; padding:20px 22px;
+    background:rgba(255,255,255,0.026);
+  }
+  .ag-detail-hint { font-size:13px; color:var(--paper-dim); }
+  .ag-d-name { font-size:19px; font-weight:800; }
+  .ag-d-tags { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
+  .ag-d-tag {
+    font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px;
+    border:1px solid var(--line); color:var(--paper-dim);
+  }
+  .ag-d-sum { margin-top:13px; font-size:14px; line-height:1.8; }
+  .ag-d-grid {
+    margin-top:16px; display:grid; gap:11px 22px;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  }
+  .ag-d-row { font-size:13px; line-height:1.65; }
+  .ag-d-k {
+    display:block; font-size:10.5px; font-weight:700; letter-spacing:1px;
+    color:var(--gold); margin-bottom:2px;
+  }
+  .ag-d-note {
+    margin-top:14px; padding:10px 13px; border-radius:9px;
+    background:rgba(184,152,96,0.09); border:1px solid var(--line);
+    font-size:12.5px; line-height:1.7; color:var(--paper-dim);
+  }
+  .ag-d-verify {
+    margin-top:10px; padding:10px 13px; border-radius:9px;
+    background:rgba(181,84,74,0.12); border:1px solid rgba(181,84,74,0.3);
+    font-size:12.5px; line-height:1.7; color:#e8b8b2;
+  }
+  .ag-clear {
+    margin-top:14px; font-size:12px; font-weight:700; color:var(--gold);
+    background:none; border:1px solid var(--line); border-radius:8px;
+    padding:7px 13px; cursor:pointer; font-family:inherit;
+  }
+  .ag-clear:hover { background:rgba(184,152,96,0.14); }
+
+  .ag-foot {
+    max-width:1180px; margin:0 auto; padding:0 20px 60px;
+    font-size:12px; line-height:1.85; color:#8a8276;
+  }
+  .ag-foot b { color:var(--paper-dim); }
+
+  @media (max-width:640px) {
+    .ag-title { font-size:20px; }
+    .ag-head { padding:22px 16px 14px; }
+    .ag-legend, .ag-chart-wrap, .ag-detail, .ag-foot { padding-left:16px; padding-right:16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="ag-topbar">
+  <a class="ag-back" href="index.html">&lsaquo; ATLAS</a>
+  <span class="ag-brand">항일무장단체 계보
+    <small>독립군은 하나가 아니었다</small></span>
+  <span class="ag-topbar-menu">
+    <a class="ag-topbar-link" href="map.html">지도</a>
+    <a class="ag-topbar-link" href="namu.html">내 서재</a>
+  </span>
+</nav>
+
+<header class="ag-head">
+  <h1 class="ag-title">항일무장단체 계보</h1>
+  <p class="ag-sub">
+    1919년 3·1운동 이후 만주·연해주·중국 관내에서 활동한 무장단체 <b>16곳</b>과
+    연합 지휘부 <b>1곳</b>입니다. 이들은 따로 생겨나 합쳐지고 갈라지고 다시
+    합쳐졌습니다. <b>단체를 누르면 그 계보만 남습니다.</b>
+  </p>
+</header>
+
+<div class="ag-legend" id="agLegend"></div>
+
+<div class="ag-chart-wrap">
+  <svg class="ag-chart" id="agChart" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<section class="ag-detail">
+  <div class="ag-detail-inner" id="agDetail">
+    <p class="ag-detail-hint">단체를 누르면 창설·해체 시기, 지휘관, 거점, 주요 전투와 계보 관계가 여기 표시됩니다.</p>
+  </div>
+</section>
+
+<footer class="ag-foot">
+  <p><b>편집 기준.</b> 널리 돌아다니는 단체 목록에는 같은 조직이 두 번 오르거나
+  표준 조직명이 아닌 것이 섞여 있는 경우가 있습니다. 이 총람은
+  <b>북로군정서와 대한군정서를 하나로</b>(같은 조직입니다),
+  <b>광복군 국내정진군과 OSS 합동 국내침투공작대를 한국광복군 항목 안에서</b>
+  다뤘고, 출처가 확인되지 않는 명칭은 넣지 않았습니다.</p>
+  <p style="margin-top:10px"><b>2차 확장 예정.</b> 동북항일연군과 사할린의용대는
+  해석이 갈리는 축이므로 별도 서술 기준을 세워 다룹니다.</p>
+  <p style="margin-top:10px"><b>좌표·연도.</b> 단체의 거점은 대개 현(縣) 단위
+  근사치입니다. 사령부가 여러 차례 옮겨 다닌 경우가 많아 전적지처럼 정밀하게
+  특정되지 않습니다. 붉은 표시가 붙은 항목은 자료 간 차이가 있어 확인이
+  필요한 지점입니다.</p>
+</footer>
+
+<script src="data/armed_groups.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  const D = window.ARMED_GROUPS;
+  if (!D) return;
+  const G = D.groups;
+  const byId = {};
+  G.forEach(g => { byId[g.id] = g; });
+
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // ── 배치 ──────────────────────────────────────────────────
+  // 세로축은 시간(창설연도), 가로축은 권역. 이렇게 두면 계보선이
+  // 자연스럽게 아래로 흐르면서, 부대가 어느 권역에서 어느 권역으로
+  // 옮겨 갔는지도 같이 읽힌다 — 서간도에서 시작한 줄기가 남만주로
+  // 내려오고, 북간도 줄기가 연해주로 빠졌다가 북만으로 돌아오는 것.
+  const REGION_ORDER = ['bukgando', 'maritime', 'bukman', 'seogando', 'guannei'];
+  const Y0 = 1919, Y1 = 1946;
+  const COL_W = 208, ROW_H = 27, PAD_L = 62, PAD_T = 34, NODE_W = 176, NODE_H = 40;
+
+  const width = PAD_L + REGION_ORDER.length * COL_W + 20;
+  const height = PAD_T + (Y1 - Y0) * ROW_H + 60;
+
+  function yOf(year) { return PAD_T + (year - Y0) * ROW_H; }
+
+  // 같은 권역·같은 연도에 여러 단체가 있으면 가로로 살짝 흩는다.
+  // 1920년 북간도처럼 밀집한 구간이 실제로 있고, 그 밀집이 이 총람의
+  // 메시지이므로 겹쳐 숨기지 않고 나란히 보여준다.
+  const placed = {};
+  G.forEach(g => {
+    const ci = REGION_ORDER.indexOf(g.region);
+    const key = g.region + ':' + g.founded;
+    const n = placed[key] = (placed[key] || 0);
+    placed[key] = n + 1;
+    g._x = PAD_L + (ci < 0 ? 0 : ci) * COL_W + (n % 2) * 16;
+    g._y = yOf(g.founded) + Math.floor(n / 2) * (NODE_H + 5);
+  });
+
+  // ── 그리기 ────────────────────────────────────────────────
+  const svg = document.getElementById('agChart');
+  svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+  svg.setAttribute('width', width);
+  svg.setAttribute('height', height);
+
+  const parts = [];
+
+  // 연도 격자
+  for (let y = Y0; y <= Y1; y++) {
+    if (y % 2) continue;
+    parts.push('<line class="ag-axis-line" x1="' + (PAD_L - 10) + '" y1="' + yOf(y) +
+               '" x2="' + (width - 14) + '" y2="' + yOf(y) + '"/>');
+    parts.push('<text class="ag-axis-label" x="6" y="' + (yOf(y) + 4) + '">' + y + '</text>');
+  }
+  // 권역 머리글
+  REGION_ORDER.forEach((r, i) => {
+    const rg = D.regions[r];
+    if (!rg) return;
+    parts.push('<text class="ag-region-label" x="' + (PAD_L + i * COL_W) +
+               '" y="' + (PAD_T - 14) + '">' + esc(rg.label) + '</text>');
+  });
+
+  // 관계선 — 계보(실선)와 연합(점선)을 형태로 구분한다
+  const edges = [];
+  G.forEach(g => {
+    (g.successors || []).forEach(sid => {
+      const t = byId[sid];
+      if (t) edges.push({ from: g, to: t, kind: 'lineage' });
+    });
+    (g.coalitions || []).forEach(cid => {
+      const t = byId[cid];
+      if (t) edges.push({ from: g, to: t, kind: 'coalition' });
+    });
+  });
+  edges.forEach((e, i) => {
+    const x1 = e.from._x + NODE_W / 2, y1 = e.from._y + NODE_H;
+    const x2 = e.to._x + NODE_W / 2, y2 = e.to._y;
+    const my = (y1 + y2) / 2;
+    const d = 'M' + x1 + ' ' + y1 + ' C' + x1 + ' ' + my + ' ' + x2 + ' ' + my +
+              ' ' + x2 + ' ' + y2;
+    parts.push('<path class="ag-edge ' + e.kind + '" d="' + d +
+               '" data-from="' + e.from.id + '" data-to="' + e.to.id + '"/>');
+  });
+
+  // 단체 상자
+  G.forEach(g => {
+    const col = (D.lineages[g.lineage] || {}).color || '#8a8276';
+    const yr = g.founded + (g.dissolved ? '~' + g.dissolved : '~');
+    const dash = g.kind === 'coalition' ? ' stroke-dasharray="5 3"' : '';
+    parts.push(
+      '<g class="ag-node" data-id="' + g.id + '" tabindex="0" role="button">' +
+      '<rect x="' + g._x + '" y="' + g._y + '" width="' + NODE_W + '" height="' + NODE_H +
+      '" fill="' + col + '" fill-opacity="0.82" stroke="' + col + '"' + dash + '/>' +
+      '<text class="ag-node-name" x="' + (g._x + 11) + '" y="' + (g._y + 18) + '">' +
+      esc(g.name) + '</text>' +
+      '<text class="ag-node-year" x="' + (g._x + 11) + '" y="' + (g._y + 32) + '">' +
+      esc(yr) + (g.kind === 'coalition' ? ' · 연합 지휘부' : '') + '</text>' +
+      '</g>');
+  });
+  svg.innerHTML = parts.join('');
+
+  // ── 범례 ──────────────────────────────────────────────────
+  const leg = Object.keys(D.lineages).map(k =>
+    '<span><i style="background:' + D.lineages[k].color + '"></i>' +
+    esc(D.lineages[k].label) + '</span>').join('');
+  document.getElementById('agLegend').innerHTML = leg +
+    '<span class="ag-legend-rel">' +
+    '<span><svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" ' +
+      'stroke="rgba(184,152,96,0.6)" stroke-width="1.8"/></svg>계보(통합·개편)</span>' +
+    '<span><svg width="26" height="8"><line x1="0" y1="4" x2="26" y2="4" ' +
+      'stroke="rgba(184,152,96,0.7)" stroke-width="1.8" stroke-dasharray="4 4"/></svg>' +
+      '연합 작전</span></span>';
+
+  // ── 계보 추적 ─────────────────────────────────────────────
+  // 위로도 아래로도 끝까지 따라간다. 한 단체를 눌렀을 때 "이 부대는
+  // 어디서 와서 어디로 갔는가"가 통째로 보여야 의미가 있다.
+  function trace(id) {
+    const on = new Set([id]);
+    (function up(i) {
+      const g = byId[i]; if (!g) return;
+      [...(g.predecessors || []), ...(g.members || [])].forEach(p => {
+        if (!on.has(p)) { on.add(p); up(p); }
+      });
+    })(id);
+    (function down(i) {
+      const g = byId[i]; if (!g) return;
+      [...(g.successors || []), ...(g.coalitions || [])].forEach(s => {
+        if (!on.has(s)) { on.add(s); down(s); }
+      });
+    })(id);
+    return on;
+  }
+
+  const detail = document.getElementById('agDetail');
+
+  function relNames(ids) {
+    if (!ids || !ids.length) return '—';
+    return ids.map(i => (byId[i] || {}).name || i).join(', ');
+  }
+
+  function show(id) {
+    const g = byId[id];
+    if (!g) return;
+    const on = trace(id);
+
+    svg.classList.add('focused');
+    svg.querySelectorAll('.ag-node').forEach(n =>
+      n.classList.toggle('on', on.has(n.dataset.id)));
+    svg.querySelectorAll('.ag-edge').forEach(p =>
+      p.classList.toggle('on', on.has(p.dataset.from) && on.has(p.dataset.to)));
+
+    const lin = D.lineages[g.lineage] || {};
+    const rg = D.regions[g.region] || {};
+    const rows = [
+      ['활동 기간', g.founded + (g.dissolved ? ' ~ ' + g.dissolved : ' ~') +
+        (g.foundedNote ? '<br><span style="color:#8a8276">창설: ' + esc(g.foundedNote) + '</span>' : '') +
+        (g.dissolvedNote ? '<br><span style="color:#8a8276">해체: ' + esc(g.dissolvedNote) + '</span>' : '')],
+      ['거점', esc(g.base) + '<br><span style="color:#8a8276">' + esc(rg.label || '') +
+        ' · 좌표 ' + (g.coordPrecision === 'site' ? '유적 수준' :
+                      g.coordPrecision === 'city' ? '도시 근사' : '현 단위 근사') + '</span>'],
+      ['지휘관', esc((g.commanders || []).join(', ') || '—')],
+      ['주요 전투', (g.battles || []).length ? esc(g.battles.join(', ')) :
+        '<span style="color:#8a8276">기록된 대규모 전투 없음</span>'],
+      ['전신', esc(relNames(g.predecessors))],
+      ['후신', esc(relNames(g.successors))],
+    ];
+    if ((g.members || []).length) rows.push(['참여 부대', esc(relNames(g.members))]);
+    if ((g.coalitions || []).length) rows.push(['연합 참여', esc(relNames(g.coalitions))]);
+    if ((g.alsoKnown || []).length) rows.push(['다른 이름', esc(g.alsoKnown.join(', '))]);
+    rows.push(['근거', esc(g.basis || '—')]);
+
+    detail.innerHTML =
+      '<div class="ag-d-name">' + esc(g.name) + '</div>' +
+      '<div class="ag-d-tags">' +
+        '<span class="ag-d-tag" style="border-color:' + (lin.color || '') + ';color:' +
+          (lin.color || '') + '">' + esc(lin.label || '') + '</span>' +
+        '<span class="ag-d-tag">' + esc(rg.label || '') + '</span>' +
+        (g.kind === 'coalition' ? '<span class="ag-d-tag">연합 지휘부</span>' : '') +
+      '</div>' +
+      '<p class="ag-d-sum">' + esc(g.summary || '') + '</p>' +
+      '<div class="ag-d-grid">' +
+        rows.map(r => '<div class="ag-d-row"><span class="ag-d-k">' + r[0] +
+                      '</span>' + r[1] + '</div>').join('') +
+      '</div>' +
+      (g.note ? '<div class="ag-d-note">' + esc(g.note) + '</div>' : '') +
+      (g.verify ? '<div class="ag-d-verify">확인 필요 — ' +
+        esc(g.verifyNote || '자료 간 서술 차이가 있는 항목입니다.') + '</div>' : '') +
+      '<button type="button" class="ag-clear" id="agClear">전체 계보 다시 보기</button>';
+
+    document.getElementById('agClear').addEventListener('click', clear);
+  }
+
+  function clear() {
+    svg.classList.remove('focused');
+    svg.querySelectorAll('.on').forEach(n => n.classList.remove('on'));
+    detail.innerHTML = '<p class="ag-detail-hint">단체를 누르면 창설·해체 시기, ' +
+      '지휘관, 거점, 주요 전투와 계보 관계가 여기 표시됩니다.</p>';
+  }
+
+  svg.addEventListener('click', e => {
+    const n = e.target.closest('.ag-node');
+    if (n) show(n.dataset.id);
+  });
+  svg.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const n = e.target.closest('.ag-node');
+    if (n) { e.preventDefault(); show(n.dataset.id); }
+  });
+
+  window.AtlasArmedGroups = { show: show, clear: clear, trace: trace, data: D };
+})();
+</script>
+</body>
+</html>

@@ -62,6 +62,14 @@
       views: 4,        // 왕두목 확정 "3~5회" 중간값
       maxDays: 45,
     },
+    // ※ 「항일무장투쟁」(armed_struggle) NEW 배지는 여기 없다 — 실수로
+    // 한 번 등록했다가 뺐다. 포털 메인의 루트 카드는 이미 자체 배지
+    // 시스템(js/portal.js의 newBadgeHtml/isRecentlyUpdated, updated
+    // 날짜 필드 기반)을 쓰고 있어서, 이 조회-횟수 배지를 거기 붙이려던
+    // 셀렉터([data-route-id=...])는 애초에 그 페이지에 존재하지도 않는
+    // 속성이었다 — data-route-id는 지도 페이지의 루트 허브(js/nav.js)
+    // 카드에만 있다. 두 시스템을 헷갈렸다. 지도 상단 메뉴처럼
+    // data-nav 버튼에 붙는 항목만 여기 등록한다.
   ];
 
   const STORAGE_KEY = 'atlas_newbadge_v1';
