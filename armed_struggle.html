@@ -83,9 +83,13 @@
   .as-ticks { display:flex; justify-content:space-between; font-size:10px; color:#8a8276; margin-top:1px; }
 
   /* ── 좌측 사건 패널 ── */
+  /* 오른쪽 세로 스택 — 범례가 위, 사건 패널이 그 아래.
+     2026-07-30 왼쪽에서 옮겨왔다. 왼쪽은 Leaflet 줌 컨트롤(+/-) 자리라
+     패널이 그 위를 덮어 글씨를 가렸다. 다른 지도들도 정보 칸이
+     오른쪽이라 일관성 면에서도 오른쪽이 맞다. */
   .as-panel {
-    position:absolute; top:60px; left:12px; width:290px; z-index:800;
-    max-height:calc(100vh - var(--bar-h) - 76px); overflow-y:auto;
+    position:absolute; top:150px; right:12px; width:290px; z-index:800;
+    max-height:calc(100vh - var(--bar-h) - 168px); overflow-y:auto;
     background:rgba(20,17,12,0.9); border:1px solid var(--line);
     border-radius:11px; padding:13px 15px; backdrop-filter:blur(7px);
   }
@@ -120,9 +124,27 @@
      완전히 지우면 "원래 없었던 것"처럼 보인다. 빈자리가 보여야 한다. */
   .as-m.gone { opacity:0.2; border-style:dashed; border-color:rgba(255,255,255,0.4); }
   .as-m.evt { box-shadow:0 0 0 5px rgba(216,184,120,0.35), 0 2px 8px rgba(0,0,0,0.6); }
+  /* 사건 클릭 시 그 지점에 찍히는 핀 — 단체 마커와 확실히 구분되게 */
+  .as-evpin {
+    width:21px; height:21px; border-radius:50%;
+    background:rgba(216,184,120,0.22); border:2px solid var(--gold-bright);
+    box-shadow:0 0 0 6px rgba(216,184,120,0.16), 0 2px 9px rgba(0,0,0,0.6);
+    animation:asPulse 1.6s ease-out infinite;
+  }
+  @keyframes asPulse {
+    0%   { box-shadow:0 0 0 3px rgba(216,184,120,0.34), 0 2px 9px rgba(0,0,0,0.6); }
+    70%  { box-shadow:0 0 0 13px rgba(216,184,120,0), 0 2px 9px rgba(0,0,0,0.6); }
+    100% { box-shadow:0 0 0 3px rgba(216,184,120,0), 0 2px 9px rgba(0,0,0,0.6); }
+  }
+  @media (prefers-reduced-motion:reduce) { .as-evpin { animation:none; } }
+  .as-d-here {
+    font-size:11px; font-weight:700; color:var(--gold);
+    background:rgba(184,152,96,0.12); border:1px solid var(--line);
+    border-radius:7px; padding:5px 8px; margin-bottom:8px; line-height:1.5;
+  }
 
   .as-detail {
-    position:absolute; left:12px; bottom:calc(var(--bar-h) + 10px); width:290px; z-index:850;
+    position:absolute; right:12px; bottom:calc(var(--bar-h) + 10px); width:290px; z-index:850;
     background:rgba(20,17,12,0.95); border:1px solid var(--gold);
     border-radius:11px; padding:13px 15px; backdrop-filter:blur(7px); display:none;
   }
@@ -141,6 +163,9 @@
                 left:8px; right:8px; width:auto; max-height:150px; }
     .as-legend { display:none; }
     .as-detail { left:8px; right:8px; width:auto; bottom:calc(var(--bar-h) + 8px); }
+    /* 모바일은 화면이 좁아 줌 컨트롤과 패널이 다시 부딪힌다.
+       패널을 하단 전체폭으로 눕혔으므로 줌 컨트롤만 위로 올려 피한다. */
+    .leaflet-control-zoom { margin-top:8px !important; }
     .as-brand small { display:none; }
   }
 </style>
@@ -208,6 +233,28 @@
     });
   });
 
+  // ★ 단체의 '등장 시점'은 founded가 아니라 가장 이른 사건이다
+  //
+  // 왕두목 지적: "1911년 북로군정서를 클릭하면 그 위치가 표시되어야
+  // 하는데 위치가 나오질 않는다."
+  //
+  // 원인은 founded 값의 성격이었다. 북로군정서의 founded는 1919년인데,
+  // 이건 '대한군정서로 개칭한 해'다. 그 뿌리인 중광단 결성은 1911년이고
+  // 사건 데이터에도 1911년으로 들어 있다. 서로군정서도 마찬가지로
+  // founded 1919(한족회 편성)지만 경학사·신흥강습소는 1911년이다.
+  //
+  // 즉 두 단체는 founded 이전에 이미 존재했다. 마커를 founded 기준으로만
+  // 띄우니 1911년 사건을 눌러도 지도에 아무것도 없었다.
+  // 사건이 있다는 것 자체가 그 해에 그 조직이 활동했다는 뜻이므로,
+  // 가장 이른 사건 연도를 등장 시점으로 삼는다.
+  const firstYearOf = {};
+  G.forEach(g => {
+    const ev = EV[g.id] || [];
+    firstYearOf[g.id] = ev.length
+      ? Math.min(g.founded, ...ev.map(e => e.year))
+      : g.founded;
+  });
+
   // ── 지도 ──────────────────────────────────────────────────
   const map = L.map('map', { zoomControl: true, attributionControl: false })
     .setView([43.2, 128.0], 5);
@@ -216,6 +263,7 @@
 
   const markers = {};
   const lineLayer = L.layerGroup().addTo(map);
+  let evPin = null;   // 사건 클릭 시 그 지점에 찍는 임시 핀
 
   G.forEach(g => {
     const col = (D.lineages[g.lineage] || {}).color || '#8a8276';
@@ -229,23 +277,25 @@
       }),
       title: g.name,
     });
-    m.on('click', () => showGroup(g.id));
+    m.on('click', () => { if (evPin) { map.removeLayer(evPin); evPin = null; }
+                          showGroup(g.id); });
     markers[g.id] = m;
   });
 
   // ── 연도 렌더링 ───────────────────────────────────────────
   function activeAt(g, y) {
     const end = g.dissolved || Y1;
-    return g.founded <= y && y <= end;
+    return firstYearOf[g.id] <= y && y <= end;
   }
 
   function render(y) {
+    if (evPin) { map.removeLayer(evPin); evPin = null; }
     const events = (evByYear[y] || []).slice();
 
     // 마커 — 살아있으면 선명, 해체됐으면 흐리게 남긴다
     G.forEach(g => {
       const m = markers[g.id];
-      const born = g.founded <= y;
+      const born = firstYearOf[g.id] <= y;
       if (!born) { map.removeLayer(m); return; }
       if (!map.hasLayer(m)) m.addTo(map);
       const el = m.getElement() && m.getElement().querySelector('.as-m');
@@ -260,14 +310,14 @@
     G.forEach(g => {
       (g.successors || []).forEach(sid => {
         const t = byId[sid];
-        if (!t || t.founded > y || g.founded > y) return;
+        if (!t || firstYearOf[t.id] > y || firstYearOf[g.id] > y) return;
         L.polyline([[g.lat, g.lng], [t.lat, t.lng]], {
           color: 'rgba(184,152,96,0.45)', weight: 1.4, dashArray: null,
         }).addTo(lineLayer);
       });
       (g.coalitions || []).forEach(cid => {
         const t = byId[cid];
-        if (!t || t.founded > y || g.founded > y) return;
+        if (!t || firstYearOf[t.id] > y || firstYearOf[g.id] > y) return;
         L.polyline([[g.lat, g.lng], [t.lat, t.lng]], {
           color: 'rgba(184,152,96,0.55)', weight: 1.4, dashArray: '4 4',
         }).addTo(lineLayer);
@@ -297,7 +347,8 @@
     } else {
       events.sort((a, b) => (a.month || 0) - (b.month || 0));
       box.innerHTML = events.map(e =>
-        '<div class="as-ev" data-g="' + e.gid + '">' +
+        '<div class="as-ev" data-g="' + e.gid + '" data-lat="' + e.lat +
+        '" data-lng="' + e.lng + '" data-place="' + esc(e.place) + '">' +
         '<div class="as-ev-t">' + (e.month ? e.month + '월 · ' : '') + esc(e.title) + '</div>' +
         '<div class="as-ev-g">' + esc((byId[e.gid] || {}).name || '') + ' · ' + esc(e.place) + '</div>' +
         '<div class="as-ev-d">' + esc(e.desc) + '</div></div>').join('');
@@ -311,7 +362,7 @@
 
   // ── 단체 상세 ─────────────────────────────────────────────
   const detail = document.getElementById('asDetail');
-  function showGroup(id) {
+  function showGroup(id, atEvent) {
     const g = byId[id];
     if (!g) return;
     const lin = D.lineages[g.lineage] || {};
@@ -331,14 +382,39 @@
       '</div>' +
       '<div class="as-d-r" style="margin-top:9px"><a href="armed_groups.html" ' +
         'style="color:var(--gold);font-weight:700">계보도에서 보기 →</a></div>';
+    // 사건에서 들어온 경우 그 사건의 장소를 상세 맨 위에 덧붙인다.
+    if (atEvent && !isNaN(atEvent.lat)) {
+      const body = document.getElementById('asDetailBody');
+      body.insertAdjacentHTML('afterbegin',
+        '<div class="as-d-here">이 사건이 일어난 곳 · ' + esc(atEvent.place) + '</div>');
+    }
     detail.classList.add('on');
-    map.panTo([g.lat, g.lng], { animate: true });
+    // 사건 위치가 주어지면 그쪽으로, 아니면 단체 본거지로.
+    if (!atEvent || isNaN(atEvent.lat)) map.panTo([g.lat, g.lng], { animate: true });
   }
   document.getElementById('asDetailX').addEventListener('click',
     () => detail.classList.remove('on'));
+  // 사건을 누르면 '그 사건이 일어난 곳'으로 간다.
+  // 단체 본거지로 보내면 어색하다 — 청산리 전투를 눌렀는데 왕청현
+  // 본거지로 가버리면 그 사건의 장소가 어디였는지 알 수 없다.
+  // 부대는 옮겨 다녔고, 사건마다 좌표가 따로 있는 이유가 그것이다.
   document.getElementById('asEvents').addEventListener('click', e => {
     const el = e.target.closest('.as-ev');
-    if (el) showGroup(el.dataset.g);
+    if (!el) return;
+    const lat = parseFloat(el.dataset.lat), lng = parseFloat(el.dataset.lng);
+    showGroup(el.dataset.g, { lat: lat, lng: lng, place: el.dataset.place });
+    if (!isNaN(lat) && !isNaN(lng)) {
+      if (evPin) map.removeLayer(evPin);
+      evPin = L.marker([lat, lng], {
+        icon: L.divIcon({
+          className: '',
+          html: '<div class="as-evpin"></div>',
+          iconSize: [21, 21], iconAnchor: [10.5, 10.5],
+        }),
+        zIndexOffset: 1000,
+      }).addTo(map);
+      map.setView([lat, lng], Math.max(map.getZoom(), 6), { animate: true });
+    }
   });
 
   // ── 범례 ──────────────────────────────────────────────────
