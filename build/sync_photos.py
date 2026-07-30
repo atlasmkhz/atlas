@@ -75,7 +75,6 @@ import io
 import json
 import os
 import re
-import subprocess
 import sys
 import unicodedata
 from datetime import date
@@ -127,34 +126,241 @@ def tokens_of(*texts):
     return out
 
 
+# ── 한글 → 로마자 ────────────────────────────────────────────
+# 왕두목님 첫 실행에서 한국 유적 전부 "후보 0장"이 나왔다. 원인은
+# 위키미디어 커먼즈가 한국 유적 사진을 로마자 제목으로 저장하기
+# 때문이다 — "Ganghwa Dolmen", "Bugeunri Dolmen" 식이다. 한글로
+# 검색하면 하나도 안 걸린다.
+#
+# 그래서 (1) 검색어를 로마자로도 만들고, (2) 신원 확인 토큰도 로마자로
+# 대조한다. 표를 손으로 관리하지 않고 변환기를 두는 이유는, 앞으로
+# 「기억의 현장」·「조선 왕릉」이 붙어도 그대로 동작해야 하기 때문이다.
+#
+# 문화체육관광부 국어의 로마자 표기법을 음절 단위로만 적용한다.
+# 자음 동화(죽림리 → Jungnim-ri)까지는 반영하지 않는다 — 검색어
+# 용도라 대부분 맞으면 충분하고, 규칙을 다 넣으면 오히려 깨지기 쉽다.
+_RR_INITIAL = ['g','kk','n','d','tt','r','m','b','pp','s','ss','','j','jj',
+               'ch','k','t','p','h']
+_RR_MEDIAL = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe',
+              'yo','u','wo','we','wi','yu','eu','ui','i']
+_RR_FINAL = ['','k','k','k','n','n','n','t','l','k','m','l','l','l','p','l',
+             'm','p','p','t','t','ng','t','t','k','t','p','h']
+
+
+def rr(text):
+    """한글을 로마자로 옮긴다. 한글이 아닌 글자는 그대로 둔다."""
+    out = []
+    for ch in nfc(text or ''):
+        code = ord(ch) - 0xAC00
+        if 0 <= code < 11172:
+            out.append(_RR_INITIAL[code // 588])
+            out.append(_RR_MEDIAL[(code % 588) // 28])
+            out.append(_RR_FINAL[code % 28])
+        else:
+            out.append(ch)
+    return ''.join(out).lower()
+
+
+# 음절 단위 변환으로는 안 맞는 지명들. 자음 동화가 일어나는 경우다.
+# 누락된 유적이 생기면 여기에 한 줄 추가하면 된다.
+RR_ALIASES = {
+    '죽림리': ['jungnimri', 'jungnim'],
+    '효산리': ['hyosanri', 'hyosan'],
+    '대신리': ['daesinri', 'daesin'],
+    '부근리': ['bugeunri', 'bugeun'],
+    '오상리': ['osangri', 'osang'],
+    '도산리': ['dosanri', 'dosan'],
+    '지석묘': ['dolmen'],
+    '고인돌': ['dolmen'],
+}
+
+# 검색어로 쓸 가치가 낮은 토큰 — 시설명은 사진 제목에 거의 안 쓰인다.
+# (첫 실행에서 '강화자연사박물관 dolmen', '133기 dolmen' 같은 무의미한
+#  검색어가 만들어졌다. 정작 필요한 '부근리'는 뒤로 밀려 있었다.)
+LOW_VALUE = ('박물관', '안내소', '테마파크', '문화공원', '체험장', '공원',
+             '열차', '모로모로', '코스', '유적지')
+
+
+def rr_all(token):
+    """토큰의 로마자 표기 후보들."""
+    out = [rr(token)]
+    for a in RR_ALIASES.get(nfc(token), []):
+        if a not in out:
+            out.append(a)
+    return out
+
+
+def search_rank(token):
+    """검색어로서의 가치. 낮을수록 먼저 쓴다.
+
+    지명(…리·…골·…바위)이 사진 제목에 실제로 등장하는 단어다.
+    숫자가 든 토큰('133기')과 시설명은 뒤로 보낸다.
+    """
+    t = nfc(token)
+    if re.search(r'[0-9~]', t):
+        return 90
+    if any(w in t for w in LOW_VALUE):
+        return 50
+    if t.endswith(('리', '골', '바위', '동')):
+        return 0
+    return 20 + abs(len(t) - 3)
+
+
+def in_hay(token, hay, hay_rr):
+    """토큰이 후보 제목에 있는지 — 한글과 로마자 양쪽으로 본다."""
+    if norm(token) in hay:
+        return True
+    for t in rr_all(token):
+        if len(t) >= 4 and t in hay_rr:
+            return True
+    return False
+
+
+# ── 한국 유적인지 ─────────────────────────────────────────────
+# 첫 실행에서 테마 대표 사진으로 스페인 갈리시아의 고인돌
+# ("Dolmen.001 - Castelo de San Antón.jpg")이 채택됐다. 제목에
+# "Dolmen"만 있으면 통과하도록 기준을 풀어놨던 탓이다.
+# 고인돌은 전 세계에 있으므로 주제어만으로는 부족하다 — 한국이라는
+# 증거를 반드시 요구한다.
+KOREA_MARKS = ['한국', '대한민국', 'korea', 'korean', 'joseon',
+               'ganghwa', 'gochang', 'hwasun', 'incheon', 'jeolla',
+               'jeollabuk', 'jeollanam', 'gyeonggi']
+
+
+def looks_korean(cand, extra_marks=()):
+    hay = norm(' '.join(filter(None, [cand.get('title'), cand.get('place'),
+                                      cand.get('keyword')])))
+    low = hay.lower()
+    if re.search(r'[\uac00-\ud7a3]', hay):     # 한글이 들어 있으면 통과
+        return True
+    for m in list(KOREA_MARKS) + list(extra_marks):
+        if m.lower() in low:
+            return True
+    return False
+
+
 # ════════════════════════════════════════════════════════════
 # 대상 목록 — themes.js가 단일 출처다
 # ════════════════════════════════════════════════════════════
-def load_targets():
-    """themes.js를 node로 평가해 JSON으로 받는다.
+def _js_str(block, field):
+    """블록 안에서  field: '값'  형태를 하나 뽑는다."""
+    m = re.search(r"\b%s\s*:\s*'((?:[^'\\\\]|\\\\.)*)'" % re.escape(field), block)
+    if not m:
+        return ''
+    return m.group(1).replace("\\'", "'").replace('\\\\', '\\')
 
-    themes.js를 파이썬 정규식으로 파싱하지 않는 이유: 데이터가 단일
-    출처여야 한다는 원칙(generate_damsa_seo.js 주석 참고). 파서를 두 개
-    두면 언젠가 어긋난다.
+
+def _js_num(block, field):
+    m = re.search(r"\b%s\s*:\s*(-?[\d.]+)" % re.escape(field), block)
+    return float(m.group(1)) if m else None
+
+
+def _slice_balanced(text, start, open_ch, close_ch):
+    """start 위치의 여는 괄호부터 짝이 맞는 닫는 괄호까지 잘라낸다.
+    문자열 리터럴 안의 괄호는 세지 않는다."""
+    depth = 0
+    i = start
+    quote = None
+    while i < len(text):
+        c = text[i]
+        if quote:
+            if c == '\\':
+                i += 2
+                continue
+            if c == quote:
+                quote = None
+        elif c in ("'", '"'):
+            quote = c
+        elif c == open_ch:
+            depth += 1
+        elif c == close_ch:
+            depth -= 1
+            if depth == 0:
+                return text[start:i + 1]
+        i += 1
+    return text[start:]
+
+
+def load_targets():
+    """themes.js에서 사진이 필요한 자리 목록을 읽는다.
+
+    ── 왜 파이썬으로 직접 읽는가 ────────────────────────────────
+    처음에는 `node -e`로 themes.js를 실제로 평가해서 JSON으로 받았다.
+    데이터가 단일 출처여야 한다는 원칙에는 그게 가장 깔끔하다.
+
+    그런데 왕두목님 맥북에는 Node가 없었고(FileNotFoundError: 'node'),
+    사진 몇 장 받으려고 Node를 설치하게 만드는 건 말이 안 된다.
+    이 프로젝트의 다른 node 스크립트들은 전부 Claude 쪽에서 돌려
+    ZIP으로 넘기므로, 왕두목님 환경에 Node가 있어야 할 이유가 없다.
+
+    그래서 파이썬만으로 읽는다. themes.js의 형식은 이 프로젝트가
+    직접 정한 것이라(photo 블록도 여기서 생성했다) 구조가 안정적이다.
+    파서를 두 개 두는 셈이라 원칙에서는 후퇴지만, 읽는 항목이
+    id·name·navQuery·좌표·photo.src·sights 이름 여섯 개뿐이라
+    어긋날 여지가 작다.
+    ─────────────────────────────────────────────────────────────
     """
-    script = (
-        'global.window={};'
-        'require(%s);'
-        'const out=[];'
-        'for (const t of window.DAMSA_THEMES){'
-        '  if(t.photo&&t.photo.src) out.push({id:t.id+"__theme",theme:t.id,'
-        '    name:t.title,nav:t.title,photo:t.photo.src,isTheme:true});'
-        '  for(const p of t.places||[]){'
-        '    if(!p.photo||!p.photo.src) continue;'
-        '    out.push({id:p.id,theme:t.id,name:p.name,nav:p.navQuery||p.name,'
-        '      address:p.address||"",lat:p.lat,lng:p.lng,photo:p.photo.src,'
-        '      sights:(p.sights||[]).map(s=>s.name),isTheme:false});'
-        '  }'
-        '}'
-        'console.log(JSON.stringify(out));'
-    ) % json.dumps(THEMES_JS)
-    raw = subprocess.check_output(['node', '-e', script], cwd=ROOT)
-    return json.loads(raw.decode('utf-8'))
+    src = io.open(THEMES_JS, encoding='utf-8').read()
+    out = []
+
+    # 테마 단위로 자른다. 최상위 배열의 요소마다 `id: '...'`가 하나씩 있다.
+    arr_start = src.index('[', src.index('window.DAMSA_THEMES'))
+    body = _slice_balanced(src, arr_start, '[', ']')
+
+    for m in re.finditer(r"\n\s{2,4}\{\s*\n\s*id:\s*'([a-z0-9_\-]+)'", body):
+        theme_id = m.group(1)
+        block = _slice_balanced(body, body.index('{', m.start()), '{', '}')
+
+        theme_photo = ''
+        pm = re.search(r'photo:\s*\{', block)
+        if pm:
+            pblock = _slice_balanced(block, block.index('{', pm.start()), '{', '}')
+            theme_photo = _js_str(pblock, 'src')
+        title = _js_str(block, 'title')
+        if theme_photo:
+            out.append({'id': theme_id + '__theme', 'theme': theme_id,
+                        'name': title, 'nav': title, 'photo': theme_photo,
+                        'isTheme': True, 'sights': []})
+
+        # places 배열만 떼어낸다 — regions에도 id가 있으므로 반드시 필요하다.
+        pl = re.search(r'\n\s*places:\s*\[', block)
+        if not pl:
+            continue
+        places_block = _slice_balanced(block, block.index('[', pl.start()), '[', ']')
+
+        # 각 place는 `id: '...'`로 시작한다. sights 안에는 id가 없다.
+        marks = [pm2.start() for pm2 in re.finditer(r"\bid:\s*'[a-z0-9_\-]+'", places_block)]
+        for i, pos in enumerate(marks):
+            nxt = marks[i + 1] if i + 1 < len(marks) else len(places_block)
+            pb = places_block[pos:nxt]
+            pid = _js_str(pb, 'id')
+
+            photo = ''
+            pm3 = re.search(r'photo:\s*\{', pb)
+            if pm3:
+                photo = _js_str(_slice_balanced(pb, pb.index('{', pm3.start()),
+                                                '{', '}'), 'src')
+            if not photo:
+                continue      # 사진 자리가 없는 카드는 대상이 아니다
+
+            sights = []
+            sm = re.search(r'sights:\s*\[', pb)
+            if sm:
+                sb = _slice_balanced(pb, pb.index('[', sm.start()), '[', ']')
+                sights = re.findall(r"\bname:\s*'((?:[^'\\\\]|\\\\.)*)'", sb)
+
+            # place의 name은 sights보다 앞에 있다. sights 이름과 섞이지
+            # 않도록 sights 블록 이전 구간에서만 찾는다.
+            head = pb[:sm.start()] if sm else pb
+            out.append({
+                'id': pid, 'theme': theme_id,
+                'name': _js_str(head, 'name'),
+                'nav': _js_str(head, 'navQuery') or _js_str(head, 'name'),
+                'address': _js_str(head, 'address'),
+                'lat': _js_num(head, 'lat'), 'lng': _js_num(head, 'lng'),
+                'photo': photo, 'sights': sights, 'isTheme': False,
+            })
+    return out
 
 
 def add_distinctive(targets):
@@ -208,11 +414,12 @@ def score_candidate(target, cand):
     """
     hay = norm(' '.join(filter(None, [cand.get('title'), cand.get('place'),
                                       cand.get('keyword')])))
+    hay_rr = hay.lower()      # 이미 로마자인 제목은 그대로 대조된다
     reasons = []
     score = 0
 
-    # 지명 토큰
-    hit = [tok for tok in target['tokens'] if norm(tok) in hay]
+    # 지명 토큰 — 한글·로마자 양쪽으로 본다
+    hit = [tok for tok in target['tokens'] if in_hay(tok, hay, hay_rr)]
     score += 3 * len(hit)
     if hit:
         reasons.append('지명 일치 %s' % '·'.join(sorted(hit)))
@@ -236,7 +443,7 @@ def score_candidate(target, cand):
     # 이 때문에 맞는 사진도 더러 놓친다(예: 부근리는 점골과 지번을 공유해
     # 어느 쪽으로도 확정할 수 없어 양쪽 다 보류된다). 그건 감수한다 —
     # 빈 자리는 audit에 남아 눈에 보이지만, 틀린 사진은 안 보인다.
-    own = [tok for tok in target['distinctive'] if norm(tok) in hay]
+    own = [tok for tok in target['distinctive'] if in_hay(tok, hay, hay_rr)]
     if target['distinctive']:
         if own:
             score += 4
@@ -246,7 +453,8 @@ def score_candidate(target, cand):
             return -99, reasons
 
     # ★ 남의 변별 토큰이 있으면 즉시 탈락시킨다
-    intruder = [tok for tok in target['others_distinctive'] if norm(tok) in hay]
+    intruder = [tok for tok in target['others_distinctive']
+                if in_hay(tok, hay, hay_rr)]
     if intruder:
         score -= 10
         reasons.append('다른 답사지 토큰 %s(-10)' % '·'.join(sorted(intruder)))
@@ -260,31 +468,179 @@ def score_candidate(target, cand):
 
 
 def pick_best(target, candidates):
-    """가장 좋은 후보 하나를 고른다. ACCEPT_SCORE 미달이면 None."""
+    """가장 좋은 후보 하나를 고른다. 문턱 미달이면 None.
+
+    ★ 테마 대표 사진은 판정 기준이 다르다 (dry-run에서 발견한 구멍)
+      테마 이름은 '고인돌' 하나뿐이라 지명 토큰이 0개다. 그래서 아무리
+      좋은 후보가 와도 점수가 2점(주제어만)에서 멈추고, theme-dolmen.jpg는
+      영원히 비어 있게 된다.
+      그런데 테마 카드에 필요한 건 '특정 유적의 사진'이 아니라 '대표성 있는
+      고인돌 사진'이다 — 신원 확인이 애초에 필요 없는 자리다. 그래서
+      테마는 주제어만 확인하고, 권역 이름(강화·고창·화순)이 붙어 있으면
+      가산점을 준다.
+    """
     scored = []
     for c in candidates:
         s, why = score_candidate(target, c)
+        if target.get('isTheme'):
+            hay = norm(' '.join(filter(None, [c.get('title'), c.get('place')])))
+            low = hay.lower()
+            has_subject = any(norm(w) in hay for w in SUBJECT_SYNONYMS) or \
+                'dolmen' in low
+            if not has_subject:
+                s, why = -99, ['주제어 없음']
+            elif not looks_korean(c):
+                # ★ 첫 실행에서 스페인 고인돌이 채택된 지점이다.
+                s, why = -99, ['한국 유적이라는 증거 없음 — 해외 고인돌로 보임']
+            else:
+                s = 5 + sum(1 for rg, en in (('강화', 'ganghwa'), ('고창', 'gochang'),
+                                             ('화순', 'hwasun'))
+                            if norm(rg) in hay or en in low)
+                why = ['테마 대표 — 한국 고인돌 확인']
         scored.append((s, why, c))
     scored.sort(key=lambda x: -x[0])
     if not scored:
         return None, [], '후보 없음'
     top_score, top_why, top = scored[0]
+    # 테마는 동점이어도 무방하다 — 어느 고인돌 사진이든 대표가 된다.
+    if target.get('isTheme'):
+        return ((top, top_score, top_why), scored, None) if top_score >= 5 \
+            else (None, scored, '주제어가 확인되는 후보 없음')
     if top_score < ACCEPT_SCORE:
         return None, scored, ('최고점 %d < 기준 %d — 확신 부족으로 건너뜀'
                               % (top_score, ACCEPT_SCORE))
-    # 1·2위가 붙어 있으면 사람이 봐야 한다(둘 중 뭘 골라도 위험)
+    # ★ "동점이면 무조건 보류"는 너무 거칠었다 (첫 실행 로그에서 드러남)
+    #
+    # 커먼즈는 위키미디어 카테고리 단위로 검색되므로, 같은 유적을 다른
+    # 각도에서 찍은 사진 여러 장이 똑같은 토큰을 맞혀 나란히 동점을
+    # 받는 일이 흔하다. 이건 위험한 동점이 아니라 "어느 걸 써도 맞는"
+    # 동점이다. 오상리·죽림리·효산리·대신리가 전부 이 이유로 멀쩡한
+    # 사진을 놓치고 보류됐다.
+    #
+    # 위험한 동점은 따로 있다 — 서로 다른 답사지를 가리키는 후보 두 개가
+    # 우연히 같은 점수를 받는 경우(부근리처럼 두 카드가 지번을 공유할 때).
+    # 그래서 "동점인가"가 아니라 "동점인 후보들이 서로 다른 곳을 말하고
+    # 있는가"를 본다 — 제목에서 서로 안 겹치는 변별 토큰이 있으면 위험한
+    # 동점, 실질적으로 같은 대상(제목이 겹치거나 변별 토큰이 없음)이면
+    # 그냥 최고점을 채택한다.
     if len(scored) > 1 and scored[1][0] >= top_score:
-        return None, scored, '동점 후보가 있어 판단 보류'
+        tied = [c for sc, _, c in scored if sc >= top_score]
+        own_hit_titles = set()
+        for c in tied:
+            hay = norm(' '.join(filter(None, [c.get('title'), c.get('place')])))
+            hay_rr = hay.lower()
+            hit = tuple(sorted(tok for tok in target['distinctive']
+                               if in_hay(tok, hay, hay_rr)))
+            own_hit_titles.add(hit)
+        if len(own_hit_titles) > 1:
+            return None, scored, '동점 후보들이 서로 다른 곳을 가리켜 판단 보류'
+        # 실질적으로 같은 대상 — 최고점 하나를 그냥 쓴다.
     return (top, top_score, top_why), scored, None
 
 
 # ════════════════════════════════════════════════════════════
 # 출처별 후보 수집 (네트워크)
 # ════════════════════════════════════════════════════════════
+DEBUG = False
+
+
+# ── 인증키 처리 ───────────────────────────────────────────────
+# data.go.kr은 인증키를 두 형태로 준다.
+#   · 일반 인증키(Decoding) : 원본.  예)  abc+de/fg==
+#   · 일반 인증키(Encoding) : URL 인코딩본. 예) abc%2Bde%2Ffg%3D%3D
+#
+# requests는 params로 넘긴 값을 자동으로 URL 인코딩한다. 그래서 Encoding
+# 키를 그대로 넘기면 이중 인코딩이 되어 401(SERVICE_KEY_IS_NOT_REGISTERED)이
+# 난다. 반대로 어떤 API는 Encoding만 받는다고 알려져 있다.
+#
+# 왕두목님이 "둘 중 뭘 복사해야 하지"로 헤매지 않도록, 어느 쪽을 넣어도
+# 되게 만든다: %가 보이면 원본으로 되돌려 놓는다.
+def normalize_key(raw):
+    import urllib.parse
+    k = (raw or '').strip().strip('"').strip("'")
+    if '%' in k:
+        dec = urllib.parse.unquote(k)
+        if dec != k:
+            return dec, True
+    return k, False
+
+
+def check_key(raw):
+    """인증키가 실제로 동작하는지 한 번만 호출해서 확인한다.
+
+    비개발자에게 401 원문을 보여주는 건 도움이 안 된다. 되는지 안 되는지,
+    안 되면 무엇을 하면 되는지만 한국말로 알려준다.
+    """
+    key, was_encoded = normalize_key(raw)
+    if not key:
+        print('✘ 인증키가 설정되지 않았습니다.')
+        print('  터미널에 이렇게 넣어주세요:')
+        print('    export DATA_GO_KR_KEY="복사한_인증키"')
+        return 1
+    print('인증키 확인 중… (앞 6자리: %s…, 길이 %d)' % (key[:6], len(key)))
+    if was_encoded:
+        print('  · Encoding 키를 넣으신 것 같아 원본 형태로 되돌렸습니다. 괜찮습니다.')
+
+    ok = []
+    for name, url, params in (
+        ('국문 관광정보(장소 검색)',
+         'http://apis.data.go.kr/B551011/KorService2/searchKeyword2',
+         {'keyword': '강화 고인돌'}),
+        ('관광사진(포토코리아)',
+         'http://apis.data.go.kr/B551011/PhotoGalleryService1/galleryList1',
+         {'keyword': '고인돌', 'arrange': 'A'}),
+    ):
+        base = {'serviceKey': key, 'MobileOS': 'ETC', 'MobileApp': 'ATLAS',
+                '_type': 'json', 'numOfRows': 3, 'pageNo': 1}
+        base.update(params)
+        try:
+            r = _get(url, base, timeout=20)
+            txt = r.text
+            if 'SERVICE_KEY_IS_NOT_REGISTERED' in txt or 'SERVICE ACCESS DENIED' in txt:
+                print('  ✘ %-22s 인증키가 아직 등록되지 않았습니다.' % name)
+                continue
+            if 'LIMITED_NUMBER_OF_SERVICE' in txt:
+                print('  ✘ %-22s 오늘 호출 한도를 넘겼습니다. 내일 다시.' % name)
+                continue
+            try:
+                body = r.json().get('response', {}).get('body', {})
+                cnt = body.get('totalCount', '?')
+            except Exception:
+                print('  ? %-22s 응답을 읽지 못했습니다. --debug로 확인 필요.' % name)
+                continue
+            print('  ✔ %-22s 정상 (검색 결과 %s건)' % (name, cnt))
+            ok.append(name)
+        except Exception as e:
+            print('  ✘ %-22s 연결 실패: %s' % (name, e))
+
+    print()
+    if len(ok) == 2:
+        print('두 창구 모두 정상입니다. 이제 이걸 실행하세요:')
+        print('  python3 build/sync_photos.py --dry-run')
+        return 0
+    if ok:
+        print('한 곳만 됩니다. 안 되는 쪽은 활용신청이 아직 안 된 것일 수 있습니다.')
+        print('그래도 진행은 가능합니다:  python3 build/sync_photos.py --dry-run')
+        return 0
+    print('둘 다 실패했습니다. 아래를 확인해 주세요.')
+    print('  1) 발급 직후에는 1시간쯤 활성화가 안 될 수 있습니다. 기다려 보세요.')
+    print('  2) data.go.kr 마이페이지 > 데이터활용 > 오픈API >')
+    print('     활용신청 현황에서 두 API가 "승인" 상태인지 확인하세요.')
+    print('  3) 인증키를 다시 복사해 붙여 보세요(앞뒤 공백 주의).')
+    return 1
+
+
 def _get(url, params=None, timeout=20):
     import requests
     r = requests.get(url, params=params, timeout=timeout,
-                     headers={'User-Agent': 'ATLAS-by-MKHZ/1.0 (photo sync)'})
+                     headers={'User-Agent': 'ATLAS-by-MKHZ/1.0 (https://atlas.mkhz.kr; photo sync)'})
+    if DEBUG:
+        # ★ 왕두목님 환경에서만 실제 API를 부를 수 있으므로, 응답 모양이
+        #   내 예상과 다를 때 이 출력을 그대로 붙여주시면 한 번에 고칠 수
+        #   있다. TourAPI는 버전이 오르며 필드·오퍼레이션명이 바뀌어 왔다.
+        print('    [debug] %s → HTTP %s' % (url.rsplit('/', 1)[-1], r.status_code))
+        body = r.text[:900].replace('\n', ' ')
+        print('    [debug] %s' % body)
     r.raise_for_status()
     return r
 
@@ -373,18 +729,64 @@ def cands_phoko(target, key):
     return out
 
 
+def commons_queries(target):
+    """커먼즈에 던질 검색어들을 만든다.
+
+    한글 검색어만으로는 0장이 나온다(왕두목님 첫 실행에서 확인).
+    커먼즈의 한국 유적 파일은 로마자 제목이 대부분이므로 로마자
+    조합을 함께 던진다. 여러 검색어의 결과는 뒤에서 합쳐서 채점한다.
+    """
+    qs = [target['nav']]                       # 한글 원문도 남긴다
+    toks = sorted(target.get('distinctive') or target['tokens'],
+                  key=lambda t: (search_rank(t), -len(t)))
+    region = None
+    for rg in ('강화', '고창', '화순'):
+        if rg in nfc(target['name']) or rg in nfc(target.get('nav') or ''):
+            region = rg
+            break
+    for tok in toks[:2]:
+        if search_rank(tok) >= 50:      # 시설명·숫자는 검색어로 쓰지 않는다
+            continue
+        for r in rr_all(tok)[:2]:
+            if len(r) < 4:
+                continue
+            qs.append('%s dolmen' % r)
+            if region:
+                qs.append('%s %s dolmen' % (rr(region), r))
+    if region:
+        qs.append('%s dolmen' % rr(region))
+        qs.append('%s dolmen site' % rr(region))
+    if target.get('isTheme'):
+        qs += ['Korea dolmen', 'Korean dolmen site', 'Ganghwa dolmen',
+               'Gochang dolmen', 'Hwasun dolmen']
+    seen, out = set(), []
+    for q in qs:
+        if q and q not in seen:
+            seen.add(q)
+            out.append(q)
+    return out[:6]          # 너무 많이 던지면 느리고 커먼즈에도 실례다
+
+
 def cands_commons(target):
     """위키미디어 커먼즈 — 인증키 불필요. 라이선스·저작자를 함께 받는다."""
-    out = []
-    try:
-        r = _get('https://commons.wikimedia.org/w/api.php', {
-            'action': 'query', 'format': 'json', 'generator': 'search',
-            'gsrnamespace': 6, 'gsrsearch': target['nav'], 'gsrlimit': 20,
-            'prop': 'imageinfo', 'iiprop': 'url|extmetadata',
-            'iiurlwidth': MAX_WIDTH,
-        })
-        pages = (r.json().get('query') or {}).get('pages') or {}
+    out, seen = [], set()
+    for q in commons_queries(target):
+        try:
+            r = _get('https://commons.wikimedia.org/w/api.php', {
+                'action': 'query', 'format': 'json', 'generator': 'search',
+                'gsrnamespace': 6, 'gsrsearch': q, 'gsrlimit': 15,
+                'prop': 'imageinfo', 'iiprop': 'url|extmetadata',
+                'iiurlwidth': MAX_WIDTH,
+            })
+            pages = (r.json().get('query') or {}).get('pages') or {}
+        except Exception as e:
+            print('    ! 커먼즈 실패(%s): %s' % (q, e))
+            continue
         for pg in pages.values():
+            title = pg.get('title', '')
+            if title in seen:
+                continue
+            seen.add(title)
             info = (pg.get('imageinfo') or [{}])[0]
             meta = info.get('extmetadata') or {}
 
@@ -392,25 +794,29 @@ def cands_commons(target):
                 return re.sub(r'<[^>]+>', '',
                               (meta.get(k) or {}).get('value', '') or '')
             lic = mv('LicenseShortName')
-            # 상업적 이용 금지·변경 금지는 걸러낸다 — ATLAS는 웹 서비스다
-            if 'NoDeriv' in lic or 'ND' == lic or 'NonCommercial' in lic or 'NC' in lic:
+            # 상업적 이용 금지·변경 금지는 걸러낸다 — ATLAS는 웹 서비스이고,
+            # 사진을 16:9로 자르므로 '변경 금지'도 위반이 된다.
+            lic_tokens = set(re.split(r'[\s\-/,]+', lic.upper()))
+            if lic_tokens & {'NC', 'ND', 'NONCOMMERCIAL', 'NODERIVS',
+                             'NODERIVATIVES'}:
+                continue
+            if not lic:      # 라이선스를 못 읽은 것도 버린다
                 continue
             url = info.get('thumburl') or info.get('url')
             if not url:
                 continue
             author = mv('Artist')
             out.append({
-                'title': pg.get('title', '').replace('File:', ''),
+                'title': title.replace('File:', ''),
                 'place': mv('ObjectName'),
+                'keyword': q,
                 'url': url,
                 'source': 'commons',
-                'source_id': pg.get('title', ''),
+                'source_id': title,
                 'author': author,
-                'license': lic or 'Wikimedia Commons',
+                'license': lic,
                 'credit': ('%s / Wikimedia Commons (%s)' % (author, lic)).strip(' /'),
             })
-    except Exception as e:
-        print('    ! 커먼즈 실패: %s' % e)
     return out
 
 
@@ -425,7 +831,10 @@ def download(url, dest):
         img = img.convert('RGB')
     if img.width > MAX_WIDTH:
         h = round(img.height * MAX_WIDTH / img.width)
-        img = img.resize((MAX_WIDTH, h), Image.LANCZOS)
+        # Pillow 10에서 상수가 Image.Resampling으로 옮겨졌다.
+        # 구버전·신버전 모두에서 동작하도록 안전하게 집는다.
+        resample = getattr(getattr(Image, 'Resampling', Image), 'LANCZOS', 1)
+        img = img.resize((MAX_WIDTH, h), resample)
     img.save(dest, 'JPEG', quality=JPEG_QUALITY, optimize=True,
              progressive=True)
     return img.size, os.path.getsize(dest)
@@ -454,9 +863,15 @@ def patch_credit(place_id, credit):
 
 # ════════════════════════════════════════════════════════════
 def sync(args):
-    key = os.environ.get('DATA_GO_KR_KEY', '').strip()
-    if not key and not args.dry_run:
-        print('! DATA_GO_KR_KEY 환경변수가 없습니다. 커먼즈만 사용합니다.')
+    key, was_encoded = normalize_key(os.environ.get('DATA_GO_KR_KEY', ''))
+    if key:
+        print('인증키 사용 (앞 6자리 %s…)%s'
+              % (key[:6], ' — Encoding 키를 원본으로 되돌렸습니다' if was_encoded else ''))
+    else:
+        print('! 인증키가 없어 위키미디어 커먼즈만 사용합니다.')
+        print('  한국관광공사 사진을 쓰려면 아래를 먼저 실행해 확인하세요:')
+        print('    export DATA_GO_KR_KEY="발급받은_인증키"')
+        print('    python3 build/sync_photos.py --check-key')
 
     targets = add_distinctive(load_targets())
     os.makedirs(PHOTO_DIR, exist_ok=True)
@@ -623,6 +1038,11 @@ def self_test():
         ('dolmen-gochang-museum', '고창 죽림리 지석묘군'),
         ('dolmen-hwasun-daesin', '화순 고인돌 유적 핑매바위'),
         ('dolmen-ganghwa-osangri', '강화 오상리 고인돌군'),
+        # 테마 대표 — 특정 유적이 아니라 '고인돌 사진이면 무엇이든' 정답이다.
+        # 그래서 기대값을 집합으로 둔다(어느 것이 뽑혀도 통과).
+        ('dolmen__theme', {'강화 부근리 지석묘', '강화 점골 고인돌',
+                           '고창 죽림리 지석묘군', '강화 오상리 고인돌군',
+                           '화순 고인돌 유적 핑매바위'}),
     ]
 
     print('\n■ 매칭 시험 — 오염 후보(화순적벽·고창읍성·운주사)를 섞어 넣었다\n')
@@ -631,11 +1051,12 @@ def self_test():
         t = by_id[pid]
         best, scored, why = pick_best(t, MOCK)
         got = best[0]['title'] if best else None
-        ok = (got == expect)
+        ok = (got in expect) if isinstance(expect, set) else (got == expect)
         if not ok:
             fails += 1
         print('  %s %-36s' % ('✔' if ok else '✘', t['name'][:34]))
-        print('      기대: %s' % (expect or '(보류)'))
+        print('      기대: %s' % ('고인돌 사진 아무것이나' if isinstance(expect, set)
+                                 else (expect or '(보류)')))
         print('      결과: %s%s' % (got or '(보류)',
               '' if best else ' — %s' % why))
 
@@ -661,9 +1082,17 @@ def main():
     ap.add_argument('--dry-run', action='store_true', help='내려받지 않고 판정만')
     ap.add_argument('--force', action='store_true', help='기존 파일도 교체')
     ap.add_argument('--self-test', action='store_true', help='네트워크 없이 매칭 검증')
+    ap.add_argument('--check-key', action='store_true',
+                    help='인증키가 동작하는지만 확인한다')
+    ap.add_argument('--debug', action='store_true',
+                    help='API 원문 응답을 출력한다(필드명이 바뀌었을 때 진단용)')
     args = ap.parse_args()
+    global DEBUG
+    DEBUG = args.debug
     if args.self_test:
         sys.exit(self_test())
+    if args.check_key:
+        sys.exit(check_key(os.environ.get('DATA_GO_KR_KEY', '')))
     sync(args)
 
 
