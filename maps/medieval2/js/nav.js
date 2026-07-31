@@ -70,7 +70,7 @@
     // 동선이 아니라 계보이므로 지도 위 웨이포인트가 아니라 시간축
     // 다이어그램으로 그린다(항일무장투쟁과 같은 href 직행 방식).
     // 데이터는 data/joseon_factions.js 하나만 늘어난다.
-    { routeId: 'joseon_factions', name: '조선 붕당 계보도', period: '1455~1863', tagline: '서인 동인 남인 노론 소론 — 어디서 갈라져 어디로 갔는가', ready: true, thumbnail: null, href: '../../joseon_factions.html' },
+    { routeId: 'joseon_factions', name: '조선 붕당 계보도', period: '1455~1863', tagline: '서인 동인 남인 노론 소론 — 어디서 갈라져 어디로 갔는가', ready: true, thumbnail: null, href: 'joseon_factions.html' },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
@@ -256,6 +256,21 @@
       if (!btn || btn.classList.contains('disabled')) return;
       const item = ROUTE_HUB_ITEMS.find(it => it.routeId === btn.dataset.routeId);
       if (!item || !item.ready) return;
+      // 2026-07-31 이식: href가 있으면 별도 페이지로 보낸다.
+      // 「조선 붕당 계보도」처럼 기존 루트 렌더러(순서 있는 waypoint
+      // 재생)와 형식이 다른 루트를 위한 분기다 — routeRenderer.js를
+      // 고치지 않고 붙이기 위한 확장이며, 원래 루트(js/nav.js)에만
+      // 있던 것을 지도 6곳에 모두 옮겼다(없는 지도에 href 루트를
+      // 등록하면 아무 반응 없이 먹통이 되는 함정이 있었다).
+      // href는 '사이트 루트 기준' 경로로 쓴다 — 아래에서 현재 문서
+      // 깊이만큼 '../'를 붙여준다.
+      if (item.href) {
+        const _seg = location.pathname.split('/').filter(Boolean);
+        const _dirs = (_seg.length && _seg[_seg.length - 1].indexOf('.') !== -1)
+          ? _seg.slice(0, -1) : _seg.slice();
+        location.href = (_dirs.length ? '../'.repeat(_dirs.length) : '') + item.href;
+        return;
+      }
       window.closeRouteHub();
       if (typeof window.openRoute === 'function') window.openRoute(item.routeId);
     });

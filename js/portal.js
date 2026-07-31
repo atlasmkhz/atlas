@@ -233,7 +233,7 @@
     { path: 'maps/medieval2/index.html?route=silhak', name: '실학 루트', tagline: '공리공론을 넘어, 백성의 삶과 나라의 부강을 고민한 학풍', period: '1670~1836', waypoints: 8, color: '#5c6b3a', image: 'maps/medieval2/assets/images/route/route_silhak_hero.webp' },
     { path: 'maps/medieval2/index.html?route=joseon_tongsinsa', name: '조선통신사 루트', tagline: '전쟁의 상처를 넘어, 200년 가까이 이어진 평화 외교', period: '1607~1811', waypoints: 8, color: '#2e6b6b', image: 'maps/medieval2/assets/images/route/route_joseon_tongsinsa_hero.webp' },
     { path: 'maps/medieval2/index.html?route=joseon_geniuses', name: '조선의 천재들 루트', tagline: '신분과 시대의 제약 속에서도 빛난 조선의 재능들', period: '15세기~19세기', waypoints: 8, color: '#6b4a2e', image: 'maps/medieval2/assets/images/route/route_joseon_geniuses_hero.webp' },
-    { path: 'joseon_factions.html', name: '조선 붕당 계보도', tagline: '3백 년의 이합집산을 한 장으로', period: '1455~1863', waypoints: 11, color: '#6b5b3e', image: 'assets/images/route/route_joseon_factions_hero.webp', updated: '2026-07-31' },
+    { path: 'joseon_factions.html', name: '조선 붕당 계보도', tagline: '3백 년의 이합집산을 한 장으로', period: '1455~1863', waypoints: 11, color: '#6b5b3e', image: null, updated: '2026-07-31' },  // ← 대표 이미지 생성 후 'assets/images/route/route_joseon_factions_hero.webp'로 교체
 
     // 현대 — maps/contemporary/index.html
     { path: 'maps/contemporary/index.html?route=korea_disaster_history', name: '대한민국 재난사 루트', tagline: '반복된 참사, 그때마다 물었던 "왜 막지 못했는가"', period: '1994~2024', waypoints: 9, color: '#4a4a4a', image: 'maps/contemporary/assets/images/route/route_korea_disaster_history_hero.webp' },
@@ -358,7 +358,12 @@
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power', 'local_debt_chronicle'] },
+      // ── 시대연구 2분할 (2026-07-31) ─────────────────────────────
+      // ⚠️ 이 taxonomy는 nav.js 7개 사본과 반드시 같아야 한다.
+      // 포털(portal.js)이 8번째 사본이라는 점을 놓치기 쉽다 —
+      // 실제로 이 블록을 빠뜨려 포털 자료실에만 새 분류가 안 뜬 적이 있다.
+      { subcat: 'era_study_premodern', name: '전근대 시대연구', seriesIds: ['joseon_faction_history'] },
+      { subcat: 'era_study', name: '근현대 시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power', 'local_debt_chronicle'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['hunminjeongeum_haerye', 'hunminjeongeum_eonhae', 'march_first_declaration', 'joseon_revolution_declaration', 'yusimin_appeal', 'samguk_yusa', 'joseon_sillok', 'constitution_full', 'hwandan_gogi'] },
     ],
     // ── 세계사 카테고리 (2026-07-16 재편, B안: 3갈래 구조) ──────────
