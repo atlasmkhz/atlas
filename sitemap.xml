@@ -10383,6 +10383,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/constitution-preamble</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -10684,6 +10689,86 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/classical-literature-silla/sla_06</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_01_chong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_02_rights_dignity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_03_rights_freedom</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_04_rights_claim</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_05_rights_social</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_06_rights_limit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_07_assembly_1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_08_assembly_2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_09_president</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_10_executive</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_11_court</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_12_constitutional_court</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_13_election_local</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_14_economy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_15_amendment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_16_supplementary</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
