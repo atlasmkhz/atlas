@@ -248,7 +248,9 @@ body.portal {
 }
 @media (max-width:640px) {
   .portal-quick-grid { grid-template-columns:1fr 1fr; }
-  .portal-quick-item-damsa { grid-column:1 / -1; }
+  /* 홀수 개일 때 마지막 칸이 남으므로 그 칸만 전체 폭을 쓴다.
+     예전에는 답사에 고정돼 있어 가운데 칸만 넓어져 어색했다. */
+  .portal-quick-item:last-child { grid-column:1 / -1; }
   .portal-quick-sub { white-space:normal; }
 }
 
@@ -266,7 +268,7 @@ body.portal {
   .portal-nav-item span.label-full { display:none; }
   .stats-card-grid { gap:14px 22px; }
   .portal-quick-grid { grid-template-columns:repeat(2, 1fr); }
-  .portal-quick-item-damsa { grid-column:1 / -1; }
+  .portal-quick-item:last-child { grid-column:1 / -1; }
   .route-card { flex-basis:190px; height:250px; }
 }
 

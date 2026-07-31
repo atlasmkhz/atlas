@@ -10388,11 +10388,6 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
     <loc>https://atlas.mkhz.kr/archive/cult-and-power</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -10693,6 +10688,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_00_preamble</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_01_chong</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -10769,56 +10769,6 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/constitution-full/ck_16_supplementary</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_00_intro</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_01_subject</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_02_provisional</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_03_april19</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_04_mission</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_05_unity</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_06_order</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_07_equality</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_08_world</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://atlas.mkhz.kr/archive/constitution-preamble/cp_09_closing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
