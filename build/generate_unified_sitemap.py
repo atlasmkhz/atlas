@@ -166,6 +166,13 @@ def main():
     lines.append('    <priority>0.85</priority>')
     lines.append('  </url>')
 
+    # 조선 붕당 계보도(2026-07-31 신설) — armed_struggle와 같은 독립 페이지
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/joseon_factions.html</loc>')
+    lines.append('    <changefreq>monthly</changefreq>')
+    lines.append('    <priority>0.8</priority>')
+    lines.append('  </url>')
+
     # modern2 진입점
     lines.append('  <url>')
     lines.append(f'    <loc>{SITE_ROOT}/maps/modern2/</loc>')

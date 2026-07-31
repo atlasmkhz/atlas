@@ -8616,6 +8616,20 @@ const SEARCH_INDEX = [
     "url": "/maps/medieval2/index.html?event=culture_joseonlit_05"
   },
   {
+    "id": "massacre_1589_01",
+    "title_ko": "기축옥사 — 정여립 모반 사건",
+    "people": [
+      "정여립",
+      "정철",
+      "선조",
+      "최영경"
+    ],
+    "year": 1589,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=massacre_1589_01"
+  },
+  {
     "id": "policy_1608_02",
     "title_ko": "대동법 시행(경기도)",
     "people": [
@@ -9058,6 +9072,32 @@ const SEARCH_INDEX = [
     "mapKey": "medieval2",
     "mapLabel": "중세2 (조선)",
     "url": "/maps/medieval2/index.html?event=culture_joseonlate_02"
+  },
+  {
+    "id": "political_1684_01",
+    "title_ko": "회니시비 — 노론과 소론의 분당",
+    "people": [
+      "송시열",
+      "윤증",
+      "박세채",
+      "윤선거"
+    ],
+    "year": 1684,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=political_1684_01"
+  },
+  {
+    "id": "massacre_1689_02",
+    "title_ko": "송시열 사사 — 서인 영수의 죽음",
+    "people": [
+      "송시열",
+      "숙종"
+    ],
+    "year": 1689,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=massacre_1689_02"
   },
   {
     "id": "political_1720_01",

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조선 붕당 계보도 — 어디서 갈라져 어디로 갔는가 | ATLAS by MKHZ</title>
+<meta name="description" content="훈구와 사림에서 세도정치까지, 조선 3백 년 정치 세력의 분화와 통합과 소멸을 한 장의 계보도로 봅니다. 각 붕당의 학맥·지역 기반·영수와 집권 시기를 시간축 위에서 한눈에 확인할 수 있습니다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/joseon_factions.html">
+<meta property="og:title" content="조선 붕당 계보도 — 어디서 갈라져 어디로 갔는가">
+<meta property="og:description" content="서인 동인 남인 노론 소론, 3백 년의 이합집산을 한 장으로.">
+<meta property="og:url" content="https://atlas.mkhz.kr/joseon_factions.html">
+<meta property="og:type" content="article">
+<style>
+  :root{
+    --ink:#14110c; --paper:#f2ede3; --dim:#b8b0a2;
+    --gold:#b89860; --gold-hi:#d8b878; --line:rgba(184,152,96,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--ink);color:var(--paper);
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  .jf-top{position:sticky;top:0;z-index:900;height:48px;display:flex;align-items:center;
+    gap:12px;padding:0 16px;background:rgba(20,17,12,.94);border-bottom:1px solid var(--line);
+    backdrop-filter:blur(8px)}
+  .jf-back{font-size:13px;font-weight:700;color:var(--gold);text-decoration:none}
+  .jf-brand{font-size:13.5px;font-weight:800;letter-spacing:.6px}
+  .jf-brand small{font-weight:400;color:var(--dim);font-size:11px;margin-left:6px}
+  .jf-menu{margin-left:auto;display:flex;gap:3px}
+  .jf-link{font-size:12.5px;font-weight:700;color:var(--dim);text-decoration:none;
+    padding:6px 9px;border-radius:8px;white-space:nowrap}
+  .jf-link:hover{background:rgba(184,152,96,.14);color:var(--paper)}
+
+  .jf-wrap{max-width:1180px;margin:0 auto;padding:22px 16px 60px}
+  .jf-title{font-size:25px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
+  .jf-sub{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:18px}
+
+  /* 연도 스크러버 */
+  .jf-scrub{background:rgba(255,255,255,.03);border:1px solid var(--line);
+    border-radius:12px;padding:13px 16px 15px;margin-bottom:16px}
+  .jf-scrub-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .jf-year{font-size:26px;font-weight:800;color:var(--gold-hi);line-height:1}
+  .jf-ruling{font-size:13.5px;color:var(--dim)}
+  .jf-ruling b{color:var(--paper)}
+  .jf-slider{width:100%;-webkit-appearance:none;appearance:none;background:none;height:22px}
+  .jf-slider::-webkit-slider-runnable-track{height:3px;background:rgba(184,152,96,.3);border-radius:2px}
+  .jf-slider::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;
+    background:var(--gold-hi);border:2px solid var(--ink);margin-top:-7px;cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,.5)}
+  .jf-slider::-moz-range-track{height:3px;background:rgba(184,152,96,.3);border-radius:2px}
+  .jf-slider::-moz-range-thumb{width:17px;height:17px;border-radius:50%;background:var(--gold-hi);
+    border:2px solid var(--ink);cursor:pointer}
+
+  /* 계보도 */
+  .jf-chart{background:rgba(255,255,255,.02);border:1px solid var(--line);
+    border-radius:12px;padding:10px 4px;overflow-x:auto}
+  .jf-chart svg{display:block;min-width:900px}
+  .jf-band{cursor:pointer}
+  .jf-band:hover .jf-band-hit{opacity:.14}
+  .jf-name{font-size:13px;font-weight:800;fill:var(--paper);pointer-events:none}
+  .jf-axis{font-size:11px;fill:#8d8579}
+  .jf-evt{font-size:10.5px;fill:#a99f8c;cursor:pointer}
+  .jf-evt:hover{fill:var(--gold-hi)}
+
+  .jf-legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 2px 0;font-size:12.5px;color:var(--dim)}
+  .jf-legend i{display:inline-block;width:22px;height:9px;border-radius:2px;
+    margin-right:6px;vertical-align:middle}
+  .jf-legend .sw-r{background:var(--gold);opacity:1}
+  .jf-legend .sw-s{background:var(--gold);opacity:.5}
+  .jf-legend .sw-o{background:var(--gold);opacity:.18}
+
+  .jf-note{margin-top:14px;font-size:12.5px;color:#8d8579;line-height:1.75;
+    border-left:2px solid var(--line);padding-left:12px}
+
+  /* 상세 패널 */
+  .jf-panel{position:fixed;right:0;top:48px;bottom:0;width:min(400px,92vw);z-index:950;
+    background:rgba(24,21,16,.985);border-left:1px solid var(--line);
+    backdrop-filter:blur(10px);overflow-y:auto;padding:20px 22px 40px;
+    transform:translateX(102%);transition:transform .22s ease}
+  .jf-panel.on{transform:none}
+  .jf-close{position:absolute;top:12px;right:14px;background:none;border:none;
+    color:var(--dim);font-size:22px;cursor:pointer;line-height:1}
+  .jf-p-name{font-size:21px;font-weight:800;margin-bottom:2px}
+  .jf-p-lin{font-size:12.5px;font-weight:700;margin-bottom:14px}
+  .jf-p-row{display:flex;gap:10px;font-size:13.5px;line-height:1.7;
+    padding:7px 0;border-top:1px solid rgba(184,152,96,.13)}
+  .jf-p-row dt{flex:0 0 62px;color:#8d8579;font-weight:700}
+  .jf-p-row dd{flex:1;color:var(--paper)}
+  .jf-p-sum{margin-top:14px;font-size:14px;line-height:1.85;color:#ddd5c6}
+  .jf-p-links{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+  .jf-p-links a{display:block;padding:11px 13px;border-radius:9px;font-size:13.5px;
+    font-weight:700;text-decoration:none;background:rgba(184,152,96,.12);
+    border:1px solid rgba(184,152,96,.28);color:var(--gold-hi)}
+  .jf-p-links a:hover{background:rgba(184,152,96,.2)}
+  .jf-p-links a span{display:block;font-weight:400;font-size:12px;color:var(--dim);margin-top:2px}
+  .jf-phases{margin-top:16px;font-size:12.5px}
+  .jf-phases div{display:flex;gap:8px;padding:4px 0;color:#b8b0a2}
+  .jf-phases b{color:var(--paper);font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="jf-top">
+  <a class="jf-back" href="maps/medieval2/index.html">← 조선 지도</a>
+  <div class="jf-brand">ATLAS <small>조선 붕당 계보도</small></div>
+  <div class="jf-menu">
+    <a class="jf-link" href="archive/joseon-faction-history/index.html">자료실</a>
+    <a class="jf-link" href="index.html">포털</a>
+  </div>
+</div>
+
+<div class="jf-wrap">
+  <h1 class="jf-title">조선 붕당 계보도</h1>
+  <p class="jf-sub">
+    훈구와 사림에서 세도정치까지, 3백 년 동안 갈라지고 합쳐지고 사라진 정치 세력의 계보입니다.
+    막대를 누르면 그 붕당의 학맥·기반·영수와 자료실 글, 지도 사건 카드로 이어집니다.
+  </p>
+
+  <div class="jf-scrub">
+    <div class="jf-scrub-head">
+      <div class="jf-year" id="jfYear">1575</div>
+      <div class="jf-ruling" id="jfRuling"></div>
+    </div>
+    <input type="range" class="jf-slider" id="jfSlider" min="1455" max="1863" value="1575" step="1">
+  </div>
+
+  <div class="jf-chart"><svg id="jfSvg" xmlns="http://www.w3.org/2000/svg"></svg></div>
+
+  <div class="jf-legend">
+    <div><i class="sw-r"></i>집권 — 정국 주도</div>
+    <div><i class="sw-s"></i>참여 — 조정에 있으나 주도권은 상대에게</div>
+    <div><i class="sw-o"></i>실각 — 축출되었으나 세력은 남아 있음</div>
+  </div>
+
+  <p class="jf-note">
+    붕당의 실제 권력은 한양 조정 한 곳에 있었습니다. 아래 상세에 적힌 영남·기호 같은 기반은
+    학맥과 서원의 인적 네트워크이지 그 지역을 통치했다는 뜻이 아닙니다.
+    또한 계보의 갈라짐은 입장의 분화이지 지리적 이동이 아니어서, 이 계보는 지도가 아니라
+    시간축 위에 그렸습니다.
+  </p>
+</div>
+
+<aside class="jf-panel" id="jfPanel">
+  <button class="jf-close" id="jfClose" aria-label="닫기">×</button>
+  <div id="jfPanelBody"></div>
+</aside>
+
+<script src="maps/medieval2/data/joseon_factions.js"></script>
+<script>
+(function(){
+  var D = window.JOSEON_FACTIONS;
+  var F = D.factions, L = D.lineages, EV = D.events;
+  var Y0 = 1455, Y1 = 1863;
+
+  // ── 레이아웃 ───────────────────────────────────────────────
+  var PAD_L = 96, PAD_R = 22, PAD_T = 30, ROW = 40, BAR = 19, EVT_H = 46;
+  var W = 1140, PLOT = W - PAD_L - PAD_R;
+  var H = PAD_T + F.length * ROW + EVT_H + 16;
+  var x = function(y){ return PAD_L + (y - Y0) / (Y1 - Y0) * PLOT; };
+  var rowY = function(i){ return PAD_T + i * ROW; };
+  var idx = {}; F.forEach(function(f,i){ idx[f.id] = i; });
+  var byId = {}; F.forEach(function(f){ byId[f.id] = f; });
+
+  var OP = { ruling: 1, sharing: .5, out: .18 };
+  var esc = function(s){ return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+
+  // ── SVG 그리기 ─────────────────────────────────────────────
+  var p = [];
+  p.push('<svg id="jfSvgInner" viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg">');
+
+  // 연도 눈금
+  for (var yy = 1450; yy <= 1860; yy += 50) {
+    if (yy < Y0) continue;
+    p.push('<line x1="'+x(yy)+'" y1="'+(PAD_T-12)+'" x2="'+x(yy)+'" y2="'+(H-EVT_H-8)+
+           '" stroke="rgba(184,152,96,0.10)" stroke-width="1"/>');
+    p.push('<text class="jf-axis" x="'+x(yy)+'" y="'+(PAD_T-17)+'" text-anchor="middle">'+yy+'</text>');
+  }
+
+  // 계보 연결선 (분화·계승) — 먼저 그려서 막대 아래에 깔린다
+  F.forEach(function(f){
+    (f.successors || []).forEach(function(sid){
+      var t = byId[sid]; if (!t) return;
+      var x1 = x(t.founded), y1 = rowY(idx[f.id]) + BAR/2, y2 = rowY(idx[sid]) + BAR/2;
+      p.push('<path d="M'+x1+' '+y1+' C'+(x1+16)+' '+y1+' '+(x1+16)+' '+y2+' '+(x1+30)+' '+y2+
+             '" fill="none" stroke="rgba(184,152,96,0.42)" stroke-width="1.4"/>');
+    });
+  });
+
+  // 붕당 막대
+  F.forEach(function(f, i){
+    var col = (L[f.lineage] || {}).color || '#8a8276';
+    var yTop = rowY(i);
+    p.push('<g class="jf-band" data-id="'+f.id+'">');
+    p.push('<rect class="jf-band-hit" x="0" y="'+(yTop-7)+'" width="'+W+'" height="'+(BAR+14)+
+           '" fill="#fff" opacity="0"/>');
+    // 전체 존속 구간(옅은 밑바탕)
+    p.push('<rect x="'+x(f.founded)+'" y="'+yTop+'" width="'+Math.max(2,x(f.dissolved)-x(f.founded))+
+           '" height="'+BAR+'" rx="3" fill="'+col+'" opacity="0.12"/>');
+    // 시기별 상태
+    (f.phases || []).forEach(function(ph){
+      var w = Math.max(2, x(ph.until) - x(ph.from));
+      p.push('<rect x="'+x(ph.from)+'" y="'+yTop+'" width="'+w+'" height="'+BAR+
+             '" rx="3" fill="'+col+'" opacity="'+OP[ph.status]+'"/>');
+    });
+    // 이름
+    p.push('<text class="jf-name" x="'+(PAD_L-10)+'" y="'+(yTop+BAR-5)+'" text-anchor="end">'+
+           esc(f.name)+'</text>');
+    p.push('</g>');
+  });
+
+  // 분기 사건 표식
+  var lane = 0;
+  EV.forEach(function(e){
+    var ex = x(e.year);
+    p.push('<line x1="'+ex+'" y1="'+(PAD_T-6)+'" x2="'+ex+'" y2="'+(H-EVT_H-4)+
+           '" stroke="rgba(216,184,120,0.16)" stroke-width="1" stroke-dasharray="2 3"/>');
+    var ty = H - EVT_H + 12 + (lane % 3) * 13;
+    lane++;
+    p.push('<text class="jf-evt" data-evt="'+esc(e.archive)+'" data-card="'+esc(e.card_ref)+
+           '" x="'+ex+'" y="'+ty+'" text-anchor="middle">'+esc(e.label)+'</text>');
+  });
+
+  // 연도 표시선
+  p.push('<line id="jfMark" x1="'+x(1575)+'" y1="'+(PAD_T-14)+'" x2="'+x(1575)+'" y2="'+(H-EVT_H-4)+
+         '" stroke="#d8b878" stroke-width="1.6" opacity="0.85"/>');
+  p.push('</svg>');
+  document.getElementById('jfSvg').outerHTML = p.join('');
+
+  // ── 연도 스크러버 ──────────────────────────────────────────
+  var slider = document.getElementById('jfSlider');
+  var mark = document.getElementById('jfMark');
+  function renderYear(y){
+    document.getElementById('jfYear').textContent = y;
+    if (mark) { mark.setAttribute('x1', x(y)); mark.setAttribute('x2', x(y)); }
+    var ruling = [], leaders = [];
+    F.forEach(function(f){
+      (f.phases || []).forEach(function(ph){
+        // 마지막 구간은 끝 해를 포함한다(1863년이 빈칸으로 보이지 않게).
+        var last = ph.until === f.dissolved;
+        if (ph.status === 'ruling' && ph.from <= y && (y < ph.until || (last && y === ph.until))) {
+          ruling.push(f.name);
+          (f.leaders || []).slice(0, 2).forEach(function(n){
+            if (leaders.indexOf(n) < 0) leaders.push(n);
+          });
+        }
+      });
+    });
+    document.getElementById('jfRuling').innerHTML = ruling.length
+      ? '집권 <b>' + esc(ruling.join(' · ')) + '</b>'
+        + (leaders.length ? ' <span style="opacity:.72">— ' + esc(leaders.join(', ')) + '</span>' : '')
+      : '<span style="opacity:.6">이 해에 뚜렷한 주도 세력이 기록되지 않음</span>';
+  }
+  slider.addEventListener('input', function(){ renderYear(+slider.value); });
+  renderYear(1575);
+
+  // ── 상세 패널 ──────────────────────────────────────────────
+  var panel = document.getElementById('jfPanel');
+  var body = document.getElementById('jfPanelBody');
+  var ST = { ruling: '집권', sharing: '참여', out: '실각' };
+
+  function openFaction(id){
+    var f = byId[id]; if (!f) return;
+    var lin = L[f.lineage] || {};
+    var h = [];
+    h.push('<div class="jf-p-name">' + esc(f.name) + '</div>');
+    h.push('<div class="jf-p-lin" style="color:' + (lin.color || '#b8b0a2') + '">' +
+           esc(lin.label || '') + '</div>');
+    h.push('<dl>');
+    h.push('<div class="jf-p-row"><dt>존속</dt><dd>' + f.founded + '~' + f.dissolved + '</dd></div>');
+    if (f.foundedNote)
+      h.push('<div class="jf-p-row"><dt>성립</dt><dd>' + esc(f.foundedNote) + '</dd></div>');
+    if (f.dissolvedNote)
+      h.push('<div class="jf-p-row"><dt>소멸</dt><dd>' + esc(f.dissolvedNote) + '</dd></div>');
+    h.push('<div class="jf-p-row"><dt>기반</dt><dd>' + esc(f.base) + '</dd></div>');
+    h.push('<div class="jf-p-row"><dt>영수</dt><dd>' + esc((f.leaders || []).join(', ')) + '</dd></div>');
+    var pre = (f.predecessors || []).map(function(i){ return (byId[i] || {}).name; }).filter(Boolean);
+    var suc = (f.successors || []).map(function(i){ return (byId[i] || {}).name; }).filter(Boolean);
+    h.push('<div class="jf-p-row"><dt>갈라져 나옴</dt><dd>' + esc(pre.join(', ') || '—') + '</dd></div>');
+    h.push('<div class="jf-p-row"><dt>갈라져 감</dt><dd>' + esc(suc.join(', ') || '—') + '</dd></div>');
+    h.push('</dl>');
+    h.push('<div class="jf-p-sum">' + esc(f.summary) + '</div>');
+
+    if ((f.phases || []).length) {
+      h.push('<div class="jf-phases">');
+      f.phases.forEach(function(ph){
+        h.push('<div><b>' + ph.from + '~' + ph.until + '</b> ' + (ST[ph.status] || ph.status) + '</div>');
+      });
+      h.push('</div>');
+    }
+
+    h.push('<div class="jf-p-links">');
+    if (f.archive)
+      h.push('<a href="archive/joseon-faction-history/' + esc(f.archive) +
+             '.html">자료실에서 읽기<span>조선 붕당사 시리즈</span></a>');
+    if (f.card_ref)
+      h.push('<a href="maps/medieval2/index.html?event=' + esc(f.card_ref) +
+             '">지도에서 보기<span>조선 지도 사건 카드</span></a>');
+    h.push('</div>');
+
+    body.innerHTML = h.join('');
+    panel.classList.add('on');
+  }
+
+  document.addEventListener('click', function(ev){
+    var band = ev.target.closest ? ev.target.closest('.jf-band') : null;
+    if (band) { openFaction(band.getAttribute('data-id')); return; }
+    var evt = ev.target.closest ? ev.target.closest('.jf-evt') : null;
+    if (evt) {
+      var a = evt.getAttribute('data-evt');
+      if (a && a !== 'null') location.href = 'archive/joseon-faction-history/' + a + '.html';
+      return;
+    }
+  });
+  document.getElementById('jfClose').addEventListener('click', function(){
+    panel.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>

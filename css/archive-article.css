@@ -340,3 +340,49 @@ a { color: #8a6a3a; }
 }
 .scrap-btn:hover { background:rgba(184,152,96,0.14); }
 .scrap-btn.is-on { background:#c8a827; color:#241f18; border-color:#c8a827; }
+
+/* ── 붕당 논쟁(faction_debate) — 2026-07-31 신설 ────────────────
+   조선 붕당사 시리즈 전용. 두 세력의 입장을 나란히 놓고, 판정 대신
+   "나였다면"을 묻는 구조. 색은 각 카드의 --fd 변수로 세력마다 다르다. */
+.post-factions .fd-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+@media (max-width: 640px) {
+  .post-factions .fd-grid { grid-template-columns: 1fr; }
+}
+.fd-card {
+  background: #fff; border: 1px solid rgba(58,53,44,0.12);
+  border-top: 3px solid var(--fd, #8a8276);
+  padding: 15px 17px; border-radius: 10px;
+}
+.fd-card h3 {
+  font-size: 16px; margin: 0 0 4px; color: var(--fd, #3a352c); letter-spacing: -0.2px;
+}
+.fd-card .fd-leaders {
+  font-size: 13px; color: #6b6455; margin: 0 0 10px; font-weight: 600;
+}
+.fd-card p { font-size: 15px; line-height: 1.75; }
+.fd-card .fd-basis {
+  margin-top: 10px; padding-top: 10px; font-size: 13.5px; color: #5d574a;
+  border-top: 1px dashed rgba(58,53,44,0.18);
+}
+.fd-card .fd-basis b { color: var(--fd, #3a352c); }
+
+.post-outcome {
+  background: #fff; border: 1px solid rgba(58,53,44,0.1);
+  padding: 18px 20px; border-radius: 12px;
+}
+.post-question {
+  background: rgba(184, 152, 96, 0.09);
+  border-left: 3px solid rgba(184, 152, 96, 0.6);
+  padding: 16px 18px; border-radius: 0 10px 10px 0;
+}
+.post-question h2 { color: #8a6a20; }
+.post-question p { font-size: 15.5px; }
+
+.post-mirror {
+  background: rgba(60, 74, 107, 0.06);
+  border-left: 3px solid rgba(60, 74, 107, 0.4);
+  padding: 16px 18px; border-radius: 0 10px 10px 0;
+}
+.post-mirror h2 { color: #3a4a6b; }

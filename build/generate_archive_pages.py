@@ -311,8 +311,51 @@ def render_paragraphs(text):
     return ''.join(f'<p>{esc(p)}</p>' for p in paras)
 
 
+def render_faction_debate(post):
+    """조선 붕당사 전용. 하나의 쟁점을 두 세력의 입장으로 나란히 놓고,
+    옳고 그름을 재판하는 대신 "나였다면 어느 쪽에 섰겠는가"를 묻는다.
+    (왕두목 기획, 2026-07-31: "누가 옳고 그름을 이야기하는게 아닌
+    나였다면 어떤 선택을 했을까 라는 질문으로 이어지는게 더 유익하다.")
+
+    필드: background_ko / positions[] / outcome_ko / question_ko / mirror_ko
+      positions[] = { faction, color, leaders[], argument_ko, basis_ko }
+    """
+    parts = []
+    if post.get('background_ko'):
+        parts.append(f'<section class="post-body">{render_paragraphs(post["background_ko"])}</section>')
+
+    positions = post.get('positions') or []
+    if positions:
+        cards = []
+        for p in positions:
+            leaders = ', '.join(p.get('leaders') or [])
+            leaders_html = f'<p class="fd-leaders">{esc(leaders)}</p>' if leaders else ''
+            basis_html = (f'<p class="fd-basis"><b>근거</b> {esc(p["basis_ko"])}</p>'
+                          if p.get('basis_ko') else '')
+            cards.append(
+                f'<div class="fd-card" style="--fd:{esc(p.get("color", "#8a8276"))}">'
+                f'<h3>{esc(p.get("faction", ""))}</h3>{leaders_html}'
+                f'{render_paragraphs(p.get("argument_ko", ""))}{basis_html}</div>'
+            )
+        parts.append(f'<section class="post-factions"><h2>두 개의 입장</h2>'
+                     f'<div class="fd-grid">{"".join(cards)}</div></section>')
+
+    if post.get('outcome_ko'):
+        parts.append(f'<section class="post-outcome"><h2>결과</h2>'
+                     f'{render_paragraphs(post["outcome_ko"])}</section>')
+    if post.get('question_ko'):
+        parts.append(f'<section class="post-question"><h2>나였다면</h2>'
+                     f'{render_paragraphs(post["question_ko"])}</section>')
+    if post.get('mirror_ko'):
+        parts.append(f'<section class="post-mirror"><h2>오늘의 거울</h2>'
+                     f'{render_paragraphs(post["mirror_ko"])}</section>')
+    return ''.join(parts)
+
+
 def render_post_body(post):
     fmt = post.get('format')
+    if fmt == 'faction_debate':
+        return render_faction_debate(post)
     if fmt == 'claim_rebuttal':
         return (
             f'<section class="post-claim"><h2>주장</h2>{render_paragraphs(post.get("claim_ko",""))}</section>'

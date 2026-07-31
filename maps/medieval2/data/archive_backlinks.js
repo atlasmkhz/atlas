@@ -158,5 +158,96 @@ const ARCHIVE_BACKLINKS = {
       "series": "독도, 기록의 섬",
       "title": "지도 위의 독도 — 파리의 당빌, 에도의 하야시, 그리고 리앙쿠르호"
     }
+  ],
+  "massacre_1498_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_01_sarim.html",
+      "series": "조선 붕당사",
+      "title": "붕당 이전 — 사림은 네 번 도륙당하고 살아남았다"
+    }
+  ],
+  "massacre_1589_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_03_nambuk.html",
+      "series": "조선 붕당사",
+      "title": "기축옥사와 남북분당 — 천 명이 죽고 동인이 둘로 갈라졌다"
+    }
+  ],
+  "plot_1623_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_05_injo.html",
+      "series": "조선 붕당사",
+      "title": "인조반정 이후 — 서인이 남인을 남겨둔 이유"
+    }
+  ],
+  "plot_1680_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_07_hwanguk.html",
+      "series": "조선 붕당사",
+      "title": "환국의 시대 — 14년에 세 번 뒤집힌 정권"
+    }
+  ],
+  "plot_1721_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_09_sinim.html",
+      "series": "조선 붕당사",
+      "title": "신임옥사 — 후계자를 정하는 일이 목숨을 건 싸움이 되다"
+    }
+  ],
+  "plot_1762_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_11_imo.html",
+      "series": "조선 붕당사",
+      "title": "임오화변 — 사도세자는 왜 뒤주에서 죽었는가"
+    }
+  ],
+  "policy_1725_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_10_tangpyeong.html",
+      "series": "조선 붕당사",
+      "title": "영조의 탕평 — 싸움을 멈추게 하는 것과 옳고 그름을 가리는 것"
+    }
+  ],
+  "policy_1776_02": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_12_jeongjo.html",
+      "series": "조선 붕당사",
+      "title": "정조의 준론탕평 — 아버지를 죽인 자들과 함께 다스리다"
+    }
+  ],
+  "political_1575_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_02_dongseo.html",
+      "series": "조선 붕당사",
+      "title": "동서분당 — 인사권 하나가 3백 년을 갈랐다"
+    }
+  ],
+  "political_1613_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_04_gwanghae.html",
+      "series": "조선 붕당사",
+      "title": "광해군과 북인 — 실리외교와 폐모살제 사이"
+    }
+  ],
+  "political_1659_02": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_06_yesong.html",
+      "series": "조선 붕당사",
+      "title": "예송논쟁 — 왕은 사대부와 같은 규칙을 따르는가"
+    }
+  ],
+  "political_1684_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_08_noso.html",
+      "series": "조선 붕당사",
+      "title": "회니시비 — 스승과 제자가 갈라서자 당이 갈라졌다"
+    }
+  ],
+  "political_1804_01": [
+    {
+      "url": "../../archive/joseon-faction-history/bd_13_sedo.html",
+      "series": "조선 붕당사",
+      "title": "세도정치 — 붕당이 사라지자 더 나빠졌다"
+    }
   ]
 };

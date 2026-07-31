@@ -108,7 +108,19 @@
   const ARCHIVE_SUBCATEGORIES = {
     history: [
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records'] },
-      { subcat: 'era_study', name: '시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power', 'local_debt_chronicle'] },
+      // ── 시대연구 2분할 (2026-07-31, 왕두목 지시) ────────────────
+      // 왕두목 지적: "지금 있는 시대연구는 주로 현대시대연구이네."
+      // 확인 결과 기존 era_study 8개 시리즈 전부가 현대사였다(6개가
+      // 1988년 이후 시작, 가장 이른 것도 1930년대). 이름은 시대연구인데
+      // 실제로는 현대 권력 비판 연구였던 셈이다. 반면 전근대는
+      // 사료읽기(삼국유사·조선왕조실록·훈민정음)에 원문 읽기만 있고
+      // 주제 연구가 들어갈 자리가 없었다 — 조선 붕당사가 그 빈칸이다.
+      //
+      // era_study 키는 그대로 두고 표시명만 바꾼다. 자료실 URL은
+      // 시리즈 slug 기준(archive/{slug}/)이라 카테고리를 옮겨도 링크가
+      // 깨지지 않는다(인물열전 신설 때 검증된 방식).
+      { subcat: 'era_study_premodern', name: '전근대 시대연구', seriesIds: ['joseon_faction_history'] },
+      { subcat: 'era_study', name: '근현대 시대연구', seriesIds: ['power_accountability', 'punishment_records', 'power_and_time', 'unequal_measures', 'prosecutorial_reckoning', 'hyeonchungwon_paradox', 'cult_and_power', 'local_debt_chronicle'] },
       { subcat: 'primary_sources', name: '사료읽기', seriesIds: ['hunminjeongeum_haerye', 'hunminjeongeum_eonhae', 'march_first_declaration', 'joseon_revolution_declaration', 'yusimin_appeal', 'samguk_yusa', 'joseon_sillok', 'constitution_full', 'hwandan_gogi'] },
     ],
     // ── 세계사 카테고리 (2026-07-16 재편, B안: 3갈래 구조) ──────────
