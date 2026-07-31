@@ -87,11 +87,18 @@
      2026-07-30 왼쪽에서 옮겨왔다. 왼쪽은 Leaflet 줌 컨트롤(+/-) 자리라
      패널이 그 위를 덮어 글씨를 가렸다. 다른 지도들도 정보 칸이
      오른쪽이라 일관성 면에서도 오른쪽이 맞다. */
+  /* 오른쪽 세로 스택 컨테이너 — 범례와 사건 패널을 하나로 묶어
+     flex column으로 쌓는다. 범례 항목 수가 몇 개든(지금 5개) 겹칠
+     여지가 없다 — 다음 요소는 항상 이전 요소 바로 아래에서 시작한다. */
+  .as-right-stack {
+    position:absolute; top:60px; right:12px; bottom:calc(var(--bar-h) + 10px);
+    width:290px; z-index:800;
+    display:flex; flex-direction:column; gap:10px;
+  }
   .as-panel {
-    position:absolute; top:150px; right:12px; width:290px; z-index:800;
-    max-height:calc(100vh - var(--bar-h) - 168px); overflow-y:auto;
     background:rgba(20,17,12,0.9); border:1px solid var(--line);
     border-radius:11px; padding:13px 15px; backdrop-filter:blur(7px);
+    overflow-y:auto; min-height:0;   /* flex 자식이 넘칠 때 자체 스크롤 */
   }
   .as-panel h2 {
     font-size:10.5px; letter-spacing:1.4px; color:var(--gold);
@@ -107,10 +114,10 @@
 
   /* ── 우측 범례 ── */
   .as-legend {
-    position:absolute; top:60px; right:12px; z-index:800;
     background:rgba(20,17,12,0.9); border:1px solid var(--line);
     border-radius:11px; padding:11px 13px; backdrop-filter:blur(7px);
-    font-size:11px; color:var(--paper-dim); max-width:150px;
+    font-size:11px; color:var(--paper-dim);
+    flex:none;   /* 범례는 내용만큼만 — 늘어나는 쪽은 패널 */
   }
   .as-legend div { display:flex; align-items:center; gap:6px; margin:4px 0; }
   .as-legend i { width:10px; height:10px; border-radius:50%; flex:none; }
@@ -159,9 +166,10 @@
   }
 
   @media (max-width:760px) {
-    .as-panel { position:absolute; top:auto; bottom:calc(var(--bar-h) + 8px);
-                left:8px; right:8px; width:auto; max-height:150px; }
+    .as-right-stack { position:absolute; top:auto; bottom:calc(var(--bar-h) + 8px);
+                       left:8px; right:8px; width:auto; }
     .as-legend { display:none; }
+    .as-panel { max-height:150px; }
     .as-detail { left:8px; right:8px; width:auto; bottom:calc(var(--bar-h) + 8px); }
     /* 모바일은 화면이 좁아 줌 컨트롤과 패널이 다시 부딪힌다.
        패널을 하단 전체폭으로 눕혔으므로 줌 컨트롤만 위로 올려 피한다. */
@@ -183,12 +191,13 @@
 
 <div id="map"></div>
 
-<aside class="as-panel">
-  <h2 id="asPanelTitle">이 해에 일어난 일</h2>
-  <div id="asEvents"></div>
-</aside>
-
-<aside class="as-legend" id="asLegend"></aside>
+<div class="as-right-stack">
+  <aside class="as-legend" id="asLegend"></aside>
+  <aside class="as-panel">
+    <h2 id="asPanelTitle">이 해에 일어난 일</h2>
+    <div id="asEvents"></div>
+  </aside>
+</div>
 
 <div class="as-detail" id="asDetail">
   <button type="button" class="as-d-x" id="asDetailX" aria-label="닫기">&times;</button>

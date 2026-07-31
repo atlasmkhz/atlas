@@ -219,25 +219,36 @@
   // 내려오고, 북간도 줄기가 연해주로 빠졌다가 북만으로 돌아오는 것.
   const REGION_ORDER = ['bukgando', 'maritime', 'bukman', 'seogando', 'guannei'];
   const Y0 = 1919, Y1 = 1946;
-  const COL_W = 208, ROW_H = 27, PAD_L = 62, PAD_T = 34, NODE_W = 176, NODE_H = 40;
+  const COL_W = 208, ROW_H = 40, PAD_L = 62, PAD_T = 34, NODE_W = 176, NODE_H = 40;
+  const NODE_GAP = 6;   // 겹칠 때 상자 사이 최소 간격
 
   const width = PAD_L + REGION_ORDER.length * COL_W + 20;
-  const height = PAD_T + (Y1 - Y0) * ROW_H + 60;
 
   function yOf(year) { return PAD_T + (year - Y0) * ROW_H; }
 
-  // 같은 권역·같은 연도에 여러 단체가 있으면 가로로 살짝 흩는다.
+  // ── 겹침 해소 ─────────────────────────────────────────────
+  // 같은 권역(열) 안에서, 시간 순으로 놓다가 이전 상자와 겹치면
+  // 그 상자 바로 아래로 밀어낸다. '고정된 연도 위치'를 살짝 어겨서라도
+  // '읽을 수 있는 상태'를 우선한다 — 그래도 순서는 시간 순으로 유지되고,
+  // 얼마나 밀렸는지는 옆의 연결선(edge)이 원래 연도 지점에서 출발하므로
+  // 시각적으로 드러난다.
   // 1920년 북간도처럼 밀집한 구간이 실제로 있고, 그 밀집이 이 총람의
-  // 메시지이므로 겹쳐 숨기지 않고 나란히 보여준다.
-  const placed = {};
+  // 메시지이므로 숨기지 않는다 — 다만 세로로 펼쳐서 겹치지 않게 한다.
+  const placed = {};   // 권역별 '지금까지 배치된 마지막 y'
   G.forEach(g => {
     const ci = REGION_ORDER.indexOf(g.region);
-    const key = g.region + ':' + g.founded;
-    const n = placed[key] = (placed[key] || 0);
-    placed[key] = n + 1;
-    g._x = PAD_L + (ci < 0 ? 0 : ci) * COL_W + (n % 2) * 16;
-    g._y = yOf(g.founded) + Math.floor(n / 2) * (NODE_H + 5);
+    g._x = PAD_L + (ci < 0 ? 0 : ci) * COL_W;
+    const naturalY = yOf(g.founded);
+    const lastBottom = placed[g.region];
+    g._y = (lastBottom != null && naturalY < lastBottom)
+      ? lastBottom + NODE_GAP
+      : naturalY;
+    placed[g.region] = g._y + NODE_H;
   });
+
+  // 전체 높이 — 연도 격자용 높이와, 밀림으로 실제 늘어난 높이 중 큰 쪽.
+  const maxNodeBottom = Math.max(0, ...G.map(g => g._y + NODE_H));
+  const height = Math.max(PAD_T + (Y1 - Y0) * ROW_H + 60, maxNodeBottom + 40);
 
   // ── 그리기 ────────────────────────────────────────────────
   const svg = document.getElementById('agChart');
@@ -247,9 +258,9 @@
 
   const parts = [];
 
-  // 연도 격자
+  // 연도 격자 — 세로 간격이 넓어졌으니(ROW_H 40px) 매년 표시해도
+  // 촘촘하지 않다. 2년 간격이던 것을 매년으로 바꿔 가독성을 올렸다.
   for (let y = Y0; y <= Y1; y++) {
-    if (y % 2) continue;
     parts.push('<line class="ag-axis-line" x1="' + (PAD_L - 10) + '" y1="' + yOf(y) +
                '" x2="' + (width - 14) + '" y2="' + yOf(y) + '"/>');
     parts.push('<text class="ag-axis-label" x="6" y="' + (yOf(y) + 4) + '">' + y + '</text>');
