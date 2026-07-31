@@ -70,7 +70,12 @@
     // 동선이 아니라 계보이므로 지도 위 웨이포인트가 아니라 시간축
     // 다이어그램으로 그린다(항일무장투쟁과 같은 href 직행 방식).
     // 데이터는 data/joseon_factions.js 하나만 늘어난다.
-    { routeId: 'joseon_factions', name: '조선 붕당 계보도', period: '1455~1863', tagline: '서인 동인 남인 노론 소론 — 어디서 갈라져 어디로 갔는가', ready: true, thumbnail: null, href: 'joseon_factions.html' },
+    { routeId: 'joseon_factions', name: '조선 붕당 계보도', period: '1455~1863', tagline: '서인 동인 남인 노론 소론 — 어디서 갈라져 어디로 갔는가', ready: true, thumbnail: null, updated: '2026-07-31', href: 'joseon_factions.html' },
+    // 2026-08-01 「조선 사상가 분포도」 — 계보도와 마찬가지로 형식이 다르다.
+    // 이건 이동 동선이 아니라 '누가 어디에서 살았는가'의 분포이고,
+    // 유배를 간 사람만 그 동선을 선으로 덧그린다. 조선 지도의
+    // routeRenderer는 웨이포인트 사이 선을 그리지 않으므로 별도 페이지로 뺐다.
+    { routeId: 'joseon_thinkers', name: '조선 사상가 분포도', period: '1243~1877', tagline: '안향에서 최한기까지 — 사상에도 지도가 있다', ready: true, thumbnail: null, updated: '2026-08-01', href: 'joseon_thinkers.html' },
   ];
 
   // ── 자료실(Archive) 레지스트리 ──────────────────────────────
@@ -163,6 +168,10 @@
     ],
     biographies: [
       { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
+      // 2026-08-01 신설. 인물열전 안에 사상가 갈래를 따로 둔다 —
+      // 「조선 사상사」는 생애보다 '무엇을 생각했고 그 대가로 무엇을
+      // 치렀는가'가 축이라 한국사 인물과 성격이 다르다.
+      { subcat: 'thinkers', name: '사상가', seriesIds: ['joseon_thought_history'] },
       { subcat: 'world_figures', name: '세계사 인물', seriesIds: [] },
     ],
     // ── 문학 카테고리 (2026-07-22 신설) ─────────────────────────
@@ -551,12 +560,28 @@
       </button>`;
   }
 
+  // 2026-07-31 이식: 새로 올린 루트에 7일간 NEW 배지를 붙인다.
+  // 포털(js/portal.js)에는 같은 규칙이 있었는데 루트 허브에는 배지
+  // 기능 자체가 없어서, 지도에서 루트를 봐도 새 항목을 알 수 없었다.
+  // ROUTE_HUB_ITEMS 항목에 updated:'YYYY-MM-DD'만 적으면 되고,
+  // 기간이 지나면 저절로 사라지므로 따로 걷어낼 필요가 없다.
+  const ROUTE_NEW_BADGE_DAYS = 7;
+  function routeNewBadge(dateStr){
+    if (!dateStr) return '';
+    const t = Date.parse(dateStr + 'T00:00:00+09:00');
+    if (Number.isNaN(t)) return '';
+    const elapsed = Date.now() - t;
+    return (elapsed >= 0 && elapsed < ROUTE_NEW_BADGE_DAYS * 86400000)
+      ? '<span class="era-card-new">NEW</span>' : '';
+  }
+
   function renderRouteCard(item){
     const statusClass = item.ready ? 'ready' : 'soon';
     const statusText = item.ready ? '입장 가능' : '준비 중';
     const disabledClass = item.ready ? '' : ' disabled';
     return `
       <button type="button" class="era-card-item${disabledClass}" data-route-id="${item.routeId}">
+        ${routeNewBadge(item.updated)}
         <span class="era-card-period">${item.period}</span>
         <span class="era-card-name">${item.name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>

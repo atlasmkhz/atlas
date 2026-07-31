@@ -153,6 +153,10 @@
     ],
     biographies: [
       { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
+      // 2026-08-01 신설. 인물열전 안에 사상가 갈래를 따로 둔다 —
+      // 「조선 사상사」는 생애보다 '무엇을 생각했고 그 대가로 무엇을
+      // 치렀는가'가 축이라 한국사 인물과 성격이 다르다.
+      { subcat: 'thinkers', name: '사상가', seriesIds: ['joseon_thought_history'] },
       { subcat: 'world_figures', name: '세계사 인물', seriesIds: [] },
     ],
     // ── 문학 카테고리 (2026-07-22 신설) ─────────────────────────
@@ -541,12 +545,28 @@
       </button>`;
   }
 
+  // 2026-07-31 이식: 새로 올린 루트에 7일간 NEW 배지를 붙인다.
+  // 포털(js/portal.js)에는 같은 규칙이 있었는데 루트 허브에는 배지
+  // 기능 자체가 없어서, 지도에서 루트를 봐도 새 항목을 알 수 없었다.
+  // ROUTE_HUB_ITEMS 항목에 updated:'YYYY-MM-DD'만 적으면 되고,
+  // 기간이 지나면 저절로 사라지므로 따로 걷어낼 필요가 없다.
+  const ROUTE_NEW_BADGE_DAYS = 7;
+  function routeNewBadge(dateStr){
+    if (!dateStr) return '';
+    const t = Date.parse(dateStr + 'T00:00:00+09:00');
+    if (Number.isNaN(t)) return '';
+    const elapsed = Date.now() - t;
+    return (elapsed >= 0 && elapsed < ROUTE_NEW_BADGE_DAYS * 86400000)
+      ? '<span class="era-card-new">NEW</span>' : '';
+  }
+
   function renderRouteCard(item){
     const statusClass = item.ready ? 'ready' : 'soon';
     const statusText = item.ready ? '입장 가능' : '준비 중';
     const disabledClass = item.ready ? '' : ' disabled';
     return `
       <button type="button" class="era-card-item${disabledClass}" data-route-id="${item.routeId}">
+        ${routeNewBadge(item.updated)}
         <span class="era-card-period">${item.period}</span>
         <span class="era-card-name">${item.name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>

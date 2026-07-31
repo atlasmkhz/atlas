@@ -182,11 +182,15 @@ window.JOSEON_FACTIONS = {
       lat: 36.3504, lng: 127.3845,
       leaders: ['송시열', '권상하', '김창집', '김조순'],
       predecessors: ['fc_seoin'], successors: ['fc_byeokpa', 'fc_sipa'],
+      // 1762년 이후 노론은 시파·벽파로 갈려 그쪽이 정국의 전면에 서고,
+      // 19세기에는 실체가 외척 가문으로 옮겨간다. 이 구간까지 노론을
+      // '집권'으로 두면 갈라져 나간 세력과 늘 겹쳐 판독이 흐려진다.
       phases: [{ from: 1683, until: 1689, status: 'ruling' },
                { from: 1689, until: 1694, status: 'out' },
                { from: 1694, until: 1721, status: 'ruling' },
                { from: 1721, until: 1724, status: 'out' },
-               { from: 1724, until: 1863, status: 'ruling' }],
+               { from: 1724, until: 1762, status: 'ruling' },
+               { from: 1762, until: 1863, status: 'sharing' }],
       summary: '회니시비에서 송시열을 지지한 쪽. 주자학의 절대적 권위와 대의명분을 내세웠고 충청 기호 지역에 기반이 두터웠다. 경종 대 신임옥사로 4대신이 처형되는 타격을 입었으나 영조 즉위로 되살아났고, 이후 조선이 망할 때까지 사실상의 집권 세력으로 남는다. 다만 19세기에 이르면 그 실체는 붕당이 아니라 몇몇 외척 가문으로 옮겨간다.',
       archive: 'bd_08_noso', card_ref: 'political_1684_01',
       verify: false,

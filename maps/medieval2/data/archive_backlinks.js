@@ -55,6 +55,20 @@ const ARCHIVE_BACKLINKS = {
       "title": "훈민정음 해례본 ⑧ 정인지 서 — \"슬기로운 사람은 하루아침에, 어리석은 사람도 열흘이면\""
     }
   ],
+  "culture_1709_01": [
+    {
+      "url": "../../archive/joseon-thought-history/th_13_gangwha.html",
+      "series": "조선 사상사",
+      "title": "정제두 — 강화도로 물러나 양명학을 학파로 세우다"
+    }
+  ],
+  "culture_1857_01": [
+    {
+      "url": "../../archive/joseon-thought-history/th_17_choehangi.html",
+      "series": "조선 사상사",
+      "title": "최한기 — 마지막 종합, 그리고 남은 질문"
+    }
+  ],
   "culture_hanmun_03": [
     {
       "url": "../../archive/classical-literature-hanmun/han_04.html",
@@ -166,11 +180,37 @@ const ARCHIVE_BACKLINKS = {
       "title": "붕당 이전 — 사림은 네 번 도륙당하고 살아남았다"
     }
   ],
+  "massacre_1519_01": [
+    {
+      "url": "../../archive/joseon-thought-history/th_04_dohak.html",
+      "series": "조선 사상사",
+      "title": "김종직과 조광조 — 도학정치, 4년 만에 끝난 실험"
+    }
+  ],
   "massacre_1589_01": [
     {
       "url": "../../archive/joseon-faction-history/bd_03_nambuk.html",
       "series": "조선 붕당사",
       "title": "기축옥사와 남북분당 — 천 명이 죽고 동인이 둘로 갈라졌다"
+    },
+    {
+      "url": "../../archive/joseon-thought-history/th_09_jeongyeorip.html",
+      "series": "조선 사상사",
+      "title": "정여립 — 천하는 공물인데 어찌 정해진 주인이 있겠는가"
+    }
+  ],
+  "massacre_1618_01": [
+    {
+      "url": "../../archive/joseon-thought-history/th_10_heogyun.html",
+      "series": "조선 사상사",
+      "title": "허균 — 두려워해야 할 것은 호민이다"
+    }
+  ],
+  "massacre_1801_01": [
+    {
+      "url": "../../archive/joseon-thought-history/th_16_jeongyagyong.html",
+      "series": "조선 사상사",
+      "title": "정약용 — 18년 유배지에서 나라를 다시 설계하다"
     }
   ],
   "plot_1623_01": [
@@ -185,6 +225,11 @@ const ARCHIVE_BACKLINKS = {
       "url": "../../archive/joseon-faction-history/bd_07_hwanguk.html",
       "series": "조선 붕당사",
       "title": "환국의 시대 — 14년에 세 번 뒤집힌 정권"
+    },
+    {
+      "url": "../../archive/joseon-thought-history/th_12_yunhyu.html",
+      "series": "조선 사상사",
+      "title": "윤휴와 박세당 — 주자를 고쳐 쓴 대가"
     }
   ],
   "plot_1721_01": [
@@ -213,6 +258,11 @@ const ARCHIVE_BACKLINKS = {
       "url": "../../archive/joseon-faction-history/bd_12_jeongjo.html",
       "series": "조선 붕당사",
       "title": "정조의 준론탕평 — 아버지를 죽인 자들과 함께 다스리다"
+    },
+    {
+      "url": "../../archive/joseon-thought-history/th_15_bukhak.html",
+      "series": "조선 사상사",
+      "title": "홍대용·박지원·박제가 — 오랑캐에게 배우자"
     }
   ],
   "political_1575_01": [
@@ -220,6 +270,11 @@ const ARCHIVE_BACKLINKS = {
       "url": "../../archive/joseon-faction-history/bd_02_dongseo.html",
       "series": "조선 붕당사",
       "title": "동서분당 — 인사권 하나가 3백 년을 갈랐다"
+    },
+    {
+      "url": "../../archive/joseon-thought-history/th_07_yiyi.html",
+      "series": "조선 사상사",
+      "title": "이이 — 고치지 않으면 망한다"
     }
   ],
   "political_1613_01": [
@@ -227,6 +282,11 @@ const ARCHIVE_BACKLINKS = {
       "url": "../../archive/joseon-faction-history/bd_04_gwanghae.html",
       "series": "조선 붕당사",
       "title": "광해군과 북인 — 실리외교와 폐모살제 사이"
+    },
+    {
+      "url": "../../archive/joseon-thought-history/th_08_jeongingong.html",
+      "series": "조선 사상사",
+      "title": "정인홍 — 남명의 칼을 들고 조정에 선 사람"
     }
   ],
   "political_1659_02": [

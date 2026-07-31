@@ -143,6 +143,10 @@
     ],
     biographies: [
       { subcat: 'korea_figures', name: '한국사 인물', seriesIds: ['erased_names'] },
+      // 2026-08-01 신설. 인물열전 안에 사상가 갈래를 따로 둔다 —
+      // 「조선 사상사」는 생애보다 '무엇을 생각했고 그 대가로 무엇을
+      // 치렀는가'가 축이라 한국사 인물과 성격이 다르다.
+      { subcat: 'thinkers', name: '사상가', seriesIds: ['joseon_thought_history'] },
       { subcat: 'world_figures', name: '세계사 인물', seriesIds: [] },
     ],
     // ── 문학 카테고리 (2026-07-22 신설) ─────────────────────────
@@ -621,6 +625,17 @@
       </button>`;
   }
 
+  // 2026-07-31: 새 루트에 7일간 NEW 배지(포털과 같은 규칙).
+  const ROUTE_NEW_BADGE_DAYS = 7;
+  function routeNewBadge(dateStr){
+    if (!dateStr) return '';
+    const t = Date.parse(dateStr + 'T00:00:00+09:00');
+    if (Number.isNaN(t)) return '';
+    const elapsed = Date.now() - t;
+    return (elapsed >= 0 && elapsed < ROUTE_NEW_BADGE_DAYS * 86400000)
+      ? '<span class="era-card-new">NEW</span>' : '';
+  }
+
   function renderRouteCard(item){
     const statusClass = item.ready ? 'ready' : 'soon';
     const statusText = item.ready ? '탐험하기' : '준비 중';
@@ -629,6 +644,7 @@
     return `
       <button type="button" class="era-card-item route-card-item${disabledClass}"
               data-route-id="${item.routeId}"${thumbStyle}>
+        ${routeNewBadge(item.updated)}
         <span class="era-card-period">${item.period}</span>
         <span class="era-card-name">${item.name}</span>
         <span class="era-card-tagline">${item.tagline || ''}</span>

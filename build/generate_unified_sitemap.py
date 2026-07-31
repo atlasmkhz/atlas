@@ -172,6 +172,11 @@ def main():
     lines.append('    <changefreq>monthly</changefreq>')
     lines.append('    <priority>0.8</priority>')
     lines.append('  </url>')
+    lines.append('  <url>')
+    lines.append(f'    <loc>{SITE_ROOT}/joseon_thinkers.html</loc>')
+    lines.append('    <changefreq>monthly</changefreq>')
+    lines.append('    <priority>0.8</priority>')
+    lines.append('  </url>')
 
     # modern2 진입점
     lines.append('  <url>')

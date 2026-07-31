@@ -8723,6 +8723,19 @@ const SEARCH_INDEX = [
     "url": "/maps/medieval2/index.html?event=culture_joseonlate_03"
   },
   {
+    "id": "massacre_1618_01",
+    "title_ko": "허균 처형 — 호민론을 쓴 대가",
+    "people": [
+      "허균",
+      "광해군",
+      "이이첨"
+    ],
+    "year": 1618,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=massacre_1618_01"
+  },
+  {
     "id": "plot_1623_01",
     "title_ko": "인조반정 — 광해군 폐위",
     "people": [
@@ -9098,6 +9111,33 @@ const SEARCH_INDEX = [
     "mapKey": "medieval2",
     "mapLabel": "중세2 (조선)",
     "url": "/maps/medieval2/index.html?event=massacre_1689_02"
+  },
+  {
+    "id": "massacre_1680_02",
+    "title_ko": "윤휴 사사 — 주자를 고쳐 쓴 사문난적",
+    "people": [
+      "윤휴",
+      "송시열",
+      "숙종"
+    ],
+    "year": 1680,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=massacre_1680_02"
+  },
+  {
+    "id": "culture_1709_01",
+    "title_ko": "정제두 강화 이거 — 강화학파의 시작",
+    "people": [
+      "정제두",
+      "이광사",
+      "이긍익",
+      "이건창"
+    ],
+    "year": 1709,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=culture_1709_01"
   },
   {
     "id": "political_1720_01",
@@ -9611,6 +9651,17 @@ const SEARCH_INDEX = [
     "mapKey": "medieval2",
     "mapLabel": "중세2 (조선)",
     "url": "/maps/medieval2/index.html?event=culture_joseonlate_04"
+  },
+  {
+    "id": "culture_1857_01",
+    "title_ko": "최한기의 기학 — 조선 사상의 마지막 종합",
+    "people": [
+      "최한기"
+    ],
+    "year": 1857,
+    "mapKey": "medieval2",
+    "mapLabel": "중세2 (조선)",
+    "url": "/maps/medieval2/index.html?event=culture_1857_01"
   },
   {
     "id": "political_1863_01",

@@ -1561,3 +1561,15 @@ body.map-light .hist-pin-dot {
   background:#2b2620; border-color:rgba(255,255,255,0.7);
   box-shadow:0 0 3px rgba(255,255,255,0.85);
 }
+
+/* ── 루트 허브 NEW 배지 (2026-07-31) ─────────────────────────
+   포털(portal.css .portal-new-badge)과 같은 7일 규칙. 루트 허브에는
+   배지 자체가 없어 지도에서 새 루트를 알아볼 수 없던 것을 보완한다. */
+.era-card-item { position: relative; }
+.era-card-new {
+  position: absolute; top: 8px; right: 8px; z-index: 2;
+  display: inline-block; background: #d0342c; color: #fff;
+  font-size: 9px; font-weight: 900; letter-spacing: 0.8px;
+  padding: 2px 6px; border-radius: 999px; line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}

@@ -311,6 +311,44 @@ def render_paragraphs(text):
     return ''.join(f'<p>{esc(p)}</p>' for p in paras)
 
 
+def render_thinker(post):
+    """조선 사상사 전용. 한 사상가를 생애 → 핵심 사상 → 당대의 역할 →
+    논쟁 → 오늘 읽기 순으로 세운다.
+    (왕두목 기획, 2026-08-01: "이들이 누구고 어떤 생각과 철학을 가졌으며
+    당대 어떤 역할들을 했는지 정리하면 좋을 것 같아.")
+
+    필드: life_ko / core_ko / role_ko / controversy_ko / today_ko
+      + thinker_meta = { years, school, place, works[] }
+    """
+    parts = []
+    m = post.get('thinker_meta') or {}
+    if m:
+        rows = []
+        for label, key in (('생몰', 'years'), ('학파', 'school'),
+                           ('연고', 'place')):
+            if m.get(key):
+                rows.append(f'<div class="tk-row"><dt>{label}</dt>'
+                            f'<dd>{esc(m[key])}</dd></div>')
+        if m.get('works'):
+            rows.append('<div class="tk-row"><dt>주요 저술</dt>'
+                        f'<dd>{esc(", ".join(m["works"]))}</dd></div>')
+        if rows:
+            parts.append(f'<section class="post-thinker-meta"><dl>{"".join(rows)}</dl></section>')
+
+    for cls, title, key in (
+        ('post-body',        '생애',        'life_ko'),
+        ('post-core',        '핵심 사상',   'core_ko'),
+        ('post-role',        '당대의 역할', 'role_ko'),
+        ('post-controversy', '논쟁',        'controversy_ko'),
+        ('post-today',       '오늘 읽기',   'today_ko'),
+    ):
+        if post.get(key):
+            head = '' if cls == 'post-body' else f'<h2>{title}</h2>'
+            parts.append(f'<section class="{cls}">{head}'
+                         f'{render_paragraphs(post[key])}</section>')
+    return ''.join(parts)
+
+
 def render_faction_debate(post):
     """조선 붕당사 전용. 하나의 쟁점을 두 세력의 입장으로 나란히 놓고,
     옳고 그름을 재판하는 대신 "나였다면 어느 쪽에 섰겠는가"를 묻는다.
@@ -354,6 +392,8 @@ def render_faction_debate(post):
 
 def render_post_body(post):
     fmt = post.get('format')
+    if fmt == 'thinker':
+        return render_thinker(post)
     if fmt == 'faction_debate':
         return render_faction_debate(post)
     if fmt == 'claim_rebuttal':

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조선 사상가 분포도 — 누가 어디에서 살았는가 | ATLAS by MKHZ</title>
+<meta name="description" content="안향에서 최한기까지 조선 사상가 27명이 나고 자라고 가르친 곳을 전국 지도 한 장에 담았습니다. 유배를 간 사람은 그 동선까지 함께 보여줍니다. 학파별로 걸러 보면 영남과 기호의 지역색이 드러납니다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/joseon_thinkers.html">
+<meta property="og:title" content="조선 사상가 분포도 — 누가 어디에서 살았는가">
+<meta property="og:description" content="사상에도 지도가 있다. 27명의 연고지와 유배 동선.">
+<meta property="og:url" content="https://atlas.mkhz.kr/joseon_thinkers.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://atlas.mkhz.kr/assets/images/route/route_joseon_thinkers_hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --ink:#14110c; --paper:#f2ede3; --dim:#b8b0a2;
+    --gold:#b89860; --gold-hi:#d8b878; --line:rgba(184,152,96,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:var(--ink);color:var(--paper);overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  .tk-top{position:absolute;top:0;left:0;right:0;z-index:900;height:48px;
+    display:flex;align-items:center;gap:12px;padding:0 14px;
+    background:rgba(20,17,12,.94);border-bottom:1px solid var(--line);
+    backdrop-filter:blur(8px)}
+  .tk-back{font-size:13px;font-weight:700;color:var(--gold);text-decoration:none;white-space:nowrap}
+  .tk-brand{font-size:13.5px;font-weight:800;letter-spacing:.6px;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .tk-brand small{font-weight:400;color:var(--dim);font-size:11px;margin-left:6px}
+  .tk-menu{margin-left:auto;display:flex;gap:3px}
+  .tk-link{font-size:12.5px;font-weight:700;color:var(--dim);text-decoration:none;
+    padding:6px 9px;border-radius:8px;white-space:nowrap}
+  .tk-link:hover{background:rgba(184,152,96,.14);color:var(--paper)}
+
+  #map{position:absolute;top:48px;left:0;right:0;bottom:0;background:#0e0c09}
+
+  /* 학파 필터 */
+  .tk-filter{position:absolute;top:58px;left:10px;z-index:800;
+    max-width:min(280px,58vw);max-height:calc(100% - 120px);overflow-y:auto;
+    background:rgba(20,17,12,.9);border:1px solid var(--line);border-radius:11px;
+    padding:9px 10px;backdrop-filter:blur(8px)}
+  .tk-filter h2{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.5px;
+    margin-bottom:7px;text-transform:none}
+  .tk-chip{display:flex;align-items:center;gap:7px;width:100%;text-align:left;
+    background:none;border:none;color:var(--paper);font-size:12px;font-weight:600;
+    padding:5px 6px;border-radius:7px;cursor:pointer;line-height:1.35;
+    font-family:inherit}
+  .tk-chip:hover{background:rgba(184,152,96,.13)}
+  .tk-chip.off{opacity:.34}
+  .tk-chip i{width:11px;height:11px;border-radius:50%;flex:0 0 11px;
+    border:1.5px solid rgba(255,255,255,.35)}
+  .tk-filter-foot{margin-top:7px;padding-top:7px;border-top:1px solid var(--line);
+    font-size:11px;color:#7d766a;line-height:1.55}
+
+  .tk-toggle{position:absolute;top:58px;left:10px;z-index:801;display:none;
+    background:rgba(20,17,12,.92);border:1px solid var(--line);color:var(--paper);
+    font-size:12px;font-weight:700;padding:8px 11px;border-radius:9px;cursor:pointer;
+    font-family:inherit}
+
+  /* 마커 */
+  .tk-pin{border-radius:50%;border:2px solid rgba(20,17,12,.85);
+    box-shadow:0 2px 7px rgba(0,0,0,.55)}
+  .tk-label{position:absolute;left:50%;transform:translateX(-50%);top:17px;
+    font-size:10.5px;font-weight:800;color:#fff;white-space:nowrap;
+    text-shadow:0 1px 3px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.8);pointer-events:none}
+
+  /* 상세 패널 */
+  .tk-panel{position:absolute;right:0;top:48px;bottom:0;width:min(392px,92vw);z-index:950;
+    background:rgba(24,21,16,.985);border-left:1px solid var(--line);
+    backdrop-filter:blur(10px);overflow-y:auto;padding:20px 22px 40px;
+    transform:translateX(102%);transition:transform .22s ease}
+  .tk-panel.on{transform:none}
+  .tk-close{position:absolute;top:12px;right:14px;background:none;border:none;
+    color:var(--dim);font-size:22px;cursor:pointer;line-height:1}
+  .tk-p-name{font-size:22px;font-weight:800;margin-bottom:2px}
+  .tk-p-years{font-size:12.5px;color:var(--dim);margin-bottom:3px;font-variant-numeric:tabular-nums}
+  .tk-p-school{font-size:12.5px;font-weight:700;margin-bottom:14px}
+  .tk-p-one{font-size:15px;line-height:1.8;color:#ddd5c6;
+    padding:13px 15px;background:rgba(255,255,255,.04);border-radius:10px;
+    border-left:3px solid var(--gold)}
+  .tk-p-row{display:flex;gap:10px;font-size:13.5px;line-height:1.7;
+    padding:8px 0;border-top:1px solid rgba(184,152,96,.13)}
+  .tk-p-row dt{flex:0 0 54px;color:#8d8579;font-weight:700}
+  .tk-p-row dd{flex:1;color:var(--paper)}
+  .tk-exiles{margin-top:16px}
+  .tk-exiles h3{font-size:12px;color:#c46a5a;font-weight:800;margin-bottom:7px;letter-spacing:.4px}
+  .tk-exiles div{font-size:13px;line-height:1.65;color:#b8b0a2;padding:6px 0;
+    border-top:1px dashed rgba(196,106,90,.28)}
+  .tk-exiles b{color:var(--paper);font-weight:700}
+  .tk-p-links{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+  .tk-p-links a{display:block;padding:11px 13px;border-radius:9px;font-size:13.5px;
+    font-weight:700;text-decoration:none;background:rgba(184,152,96,.12);
+    border:1px solid rgba(184,152,96,.28);color:var(--gold-hi)}
+  .tk-p-links a:hover{background:rgba(184,152,96,.2)}
+  .tk-p-links a span{display:block;font-weight:400;font-size:12px;color:var(--dim);margin-top:2px}
+
+  @media (max-width:640px){
+    .tk-filter{display:none;top:96px;max-width:74vw}
+    .tk-filter.open{display:block}
+    .tk-toggle{display:block}
+  }
+</style>
+</head>
+<body>
+
+<div class="tk-top">
+  <a class="tk-back" href="maps/medieval2/index.html">← 조선 지도</a>
+  <div class="tk-brand">ATLAS <small>조선 사상가 분포도</small></div>
+  <div class="tk-menu">
+    <a class="tk-link" href="archive/joseon-thought-history/index.html">자료실</a>
+    <a class="tk-link" href="index.html">포털</a>
+  </div>
+</div>
+
+<button class="tk-toggle" id="tkToggle">학파 ▾</button>
+
+<div id="map"></div>
+
+<div class="tk-filter" id="tkFilter">
+  <h2>학파 — 눌러서 켜고 끄기</h2>
+  <div id="tkChips"></div>
+  <div class="tk-filter-foot">
+    점은 그 사람이 나고 자라고 가르친 곳입니다.<br>
+    붉은 점선은 유배 동선입니다.
+  </div>
+</div>
+
+<aside class="tk-panel" id="tkPanel">
+  <button class="tk-close" id="tkClose" aria-label="닫기">×</button>
+  <div id="tkPanelBody"></div>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="maps/medieval2/data/joseon_thinkers.js"></script>
+<script>
+(function(){
+  var D = window.JOSEON_THINKERS;
+  var T = D.thinkers, S = D.schools;
+  var esc = function(s){ return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+
+  var map = L.map('map', { zoomControl: true, attributionControl: false })
+    .setView([36.6, 127.8], 7);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 11, subdomains: 'abcd', crossOrigin: true, errorTileUrl: ''
+  }).addTo(map);
+
+  // 학파별 표시 상태
+  var on = {};
+  Object.keys(S).forEach(function(k){ on[k] = true; });
+
+  var layers = [];   // { school, marker, lines[] }
+
+  function pinIcon(color, name){
+    return L.divIcon({
+      className: '',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7],
+      html: '<div style="position:relative"><div class="tk-pin" style="width:14px;height:14px;' +
+            'background:' + color + '"></div><div class="tk-label">' + esc(name) + '</div></div>'
+    });
+  }
+
+  T.forEach(function(t){
+    var col = (S[t.school] || {}).color || '#8a8276';
+    var m = L.marker([t.lat, t.lng], { icon: pinIcon(col, t.name) }).addTo(map);
+    m.on('click', function(){ openThinker(t.id); });
+
+    // 유배 동선 — 붉은 점선. 기점은 연고지.
+    var lines = [];
+    var from = [t.lat, t.lng];
+    (t.exiles || []).forEach(function(e){
+      var line = L.polyline([from, [e.lat, e.lng]], {
+        color: e.kind === 'death' ? '#9a4fa0' : '#c44536',
+        weight: 2, opacity: 0.72, dashArray: '5 6', interactive: false
+      }).addTo(map);
+      var dot = L.circleMarker([e.lat, e.lng], {
+        radius: 4, color: '#c44536', weight: 1.5,
+        fillColor: '#c44536', fillOpacity: 0.75
+      }).addTo(map);
+      dot.bindTooltip(t.name + ' — ' + e.to + ' (' + e.year + ')',
+        { direction: 'top', className: 'tk-tt' });
+      lines.push(line, dot);
+      from = [e.lat, e.lng];   // 이배(移配)는 이어서 그린다
+    });
+
+    layers.push({ school: t.school, marker: m, lines: lines });
+  });
+
+  function applyFilter(){
+    layers.forEach(function(L2){
+      var show = on[L2.school];
+      if (show) {
+        if (!map.hasLayer(L2.marker)) map.addLayer(L2.marker);
+        L2.lines.forEach(function(l){ if (!map.hasLayer(l)) map.addLayer(l); });
+      } else {
+        if (map.hasLayer(L2.marker)) map.removeLayer(L2.marker);
+        L2.lines.forEach(function(l){ if (map.hasLayer(l)) map.removeLayer(l); });
+      }
+    });
+  }
+
+  // 학파 칩
+  var chips = document.getElementById('tkChips');
+  chips.innerHTML = Object.keys(S).map(function(k){
+    var n = T.filter(function(t){ return t.school === k; }).length;
+    if (!n) return '';
+    return '<button type="button" class="tk-chip" data-school="' + k + '">' +
+           '<i style="background:' + S[k].color + '"></i>' +
+           esc(S[k].label) + ' <span style="opacity:.55">' + n + '</span></button>';
+  }).join('');
+  chips.addEventListener('click', function(e){
+    var b = e.target.closest('.tk-chip'); if (!b) return;
+    var k = b.getAttribute('data-school');
+    on[k] = !on[k];
+    b.classList.toggle('off', !on[k]);
+    applyFilter();
+  });
+
+  document.getElementById('tkToggle').addEventListener('click', function(){
+    document.getElementById('tkFilter').classList.toggle('open');
+  });
+
+  // ── 상세 패널 ──────────────────────────────────────────────
+  var panel = document.getElementById('tkPanel');
+  var body = document.getElementById('tkPanelBody');
+
+  function openThinker(id){
+    var t = T.find(function(x){ return x.id === id; }); if (!t) return;
+    var sc = S[t.school] || {};
+    var h = [];
+    h.push('<div class="tk-p-name">' + esc(t.name) + '</div>');
+    h.push('<div class="tk-p-years">' + esc(t.years) + '</div>');
+    h.push('<div class="tk-p-school" style="color:' + (sc.color || '#b8b0a2') + '">' +
+           esc(sc.label || '') + '</div>');
+    h.push('<div class="tk-p-one">' + esc(t.one_line) + '</div>');
+    h.push('<dl><div class="tk-p-row"><dt>연고</dt><dd>' + esc(t.base) +
+           (t.precise === false ? ' <span style="color:#8d8579">(활동 근거지 중심 — 생가터 미상)</span>' : '') +
+           '</dd></div></dl>');
+
+    if ((t.exiles || []).length) {
+      h.push('<div class="tk-exiles"><h3>유배 · 이동</h3>');
+      t.exiles.forEach(function(e){
+        h.push('<div><b>' + e.year + ' ' + esc(e.to) + '</b><br>' + esc(e.note) + '</div>');
+      });
+      h.push('</div>');
+    }
+
+    h.push('<div class="tk-p-links">');
+    if (t.archive)
+      h.push('<a href="archive/joseon-thought-history/' + esc(t.archive) +
+             '.html">자료실에서 읽기<span>조선 사상사 시리즈</span></a>');
+    if (t.card_ref)
+      h.push('<a href="maps/medieval2/index.html?event=' + esc(t.card_ref) +
+             '">지도에서 보기<span>조선 지도 사건 카드</span></a>');
+    h.push('</div>');
+
+    body.innerHTML = h.join('');
+    panel.classList.add('on');
+  }
+
+  document.getElementById('tkClose').addEventListener('click', function(){
+    panel.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>
