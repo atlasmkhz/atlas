@@ -277,11 +277,16 @@ body.portal {
    카드 좌상단에 붙는다. 루트 카드는 position:relative 위에 얹히는
    오버레이라 카드 안쪽 흐름을 건드리지 않고, 자료실 카드는 시리즈
    이름 배지 옆에 인라인으로 따라붙는다. */
+/* 2026-07-31 색 교체 — 금색이라 카드의 금빛 톤에 묻혀 안 보인다는
+   지적(왕두목: "항일무장투쟁에 NEW 배지가 눈에 띄지 않는다"). 상단
+   메뉴의 .nav-new와 같은 빨강으로 통일한다 — 이 프로젝트에서 '새 것'을
+   나타내는 색은 하나로 고정하는 것이 맞다. 색이 두 개면 사람이 매번
+   "이건 새 것 맞나?"를 다시 판단해야 한다. */
 .portal-new-badge {
-  display:inline-block; background:var(--gold, #c8a827); color:#15130f;
+  display:inline-block; background:#d0342c; color:#fff;
   font-size:9px; font-weight:900; letter-spacing:0.8px;
   padding:2px 6px; border-radius:999px; line-height:1.4;
-  vertical-align:middle;
+  vertical-align:middle; box-shadow:0 1px 4px rgba(0,0,0,0.35);
 }
 .route-card { position:relative; }
 .route-card .portal-new-badge {

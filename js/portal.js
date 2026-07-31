@@ -447,8 +447,15 @@
       const statusClass = ready ? 'ready' : 'soon';
       const statusText = ready ? `${readyCount}개 시리즈` : '준비 중';
       const disabledClass = ready ? '' : ' disabled';
+      // 이 카테고리(예: 「사료읽기」) 안에 최근 갱신된 시리즈가 하나라도
+      // 있으면 배지를 올린다. 개별 편이 아니라 시리즈 단위 updated로
+      // 판단한다 — 그래야 "이 안에 새 게 있다"는 신호가 과장되지 않는다.
+      const hasNew = (item.seriesIds || []).some(id => {
+        const s = ARCHIVE_REGISTRY[id];
+        return s && isRecentlyUpdated(s.updated);
+      });
       return `<button type="button" class="era-card-item${disabledClass}" data-archive-subcat="${item.subcat}">
-        <span class="era-card-name">${item.name}</span>
+        <span class="era-card-name">${item.name}${hasNew ? '<span class="portal-new-badge">NEW</span>' : ''}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
     }
@@ -459,8 +466,14 @@
       const statusText = ready ? `${series.posts.length}편` : '준비 중';
       const disabledClass = ready ? '' : ' disabled';
       const name = series ? series.name : seriesId;
+      // 2026-07-31: 시리즈 목록 단계(예: 「대한민국헌법읽기」)에는 NEW 배지가
+      // 전혀 없었다. 개별 글 카드와 루트 카드에만 붙어 있었다 —
+      // "사료읽기 > 대한민국헌법읽기"처럼 몇 단계 들어가야 보이는
+      // 자료실 구조에서는 그 전 단계(시리즈 선택 화면)에서부터 새 것임을
+      // 알려야 한다. series.updated를 그대로 쓴다.
+      const badge = ready ? newBadgeHtml(series.updated) : '';
       return `<button type="button" class="era-card-item${disabledClass}" data-series-id="${seriesId}">
-        <span class="era-card-name">${name}</span>
+        <span class="era-card-name">${name}${badge}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
     }

@@ -384,6 +384,10 @@ const ARCHIVE_SERIES_CONSTITUTION_FULL = {
   tagline: '1987년 10월 29일에 고쳐져 1988년 2월 25일부터 오늘까지 우리를 규율해 온 법. 전문(前文)부터 부칙까지 처음부터 끝까지 읽는다',
   color: '#4a5f7a',
   hero_image: null,
+  // NEW 배지 — js/portal.js의 newBadgeHtml/isRecentlyUpdated가 이 날짜
+  // 기준 7일간(NEW_BADGE_DAYS) 빨간 NEW를 띄운다. 최신화할 때마다
+  // 이 값을 오늘 날짜로 갱신하면 된다.
+  updated: '2026-07-31',
 
   posts: [
 """)
