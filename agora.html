@@ -16,12 +16,14 @@
   :root{
     --ink:#14110c; --paper:#f2ede3; --dim:#b8b0a2;
     --gold:#b89860; --gold-hi:#d8b878; --line:rgba(184,152,96,0.22);
+    --agree:#7a9a4b; --disagree:#b5544a; --neutral:#6b8fd4;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--ink);color:var(--paper);
     font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
     -webkit-font-smoothing:antialiased;line-height:1.5}
   a{color:inherit}
+  button{font-family:inherit}
 
   .ag-top{position:sticky;top:0;z-index:900;height:48px;display:flex;align-items:center;
     gap:12px;padding:0 14px;background:rgba(20,17,12,.94);
@@ -30,14 +32,18 @@
   .ag-brand{font-size:13.5px;font-weight:800;letter-spacing:.6px;white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis}
   .ag-brand small{font-weight:400;color:var(--dim);font-size:11px;margin-left:6px}
-  .ag-menu{margin-left:auto;display:flex;gap:3px}
+  .ag-menu{margin-left:auto;display:flex;align-items:center;gap:3px}
   .ag-link{font-size:12.5px;font-weight:700;color:var(--dim);text-decoration:none;
-    padding:6px 9px;border-radius:8px;white-space:nowrap}
+    padding:6px 9px;border-radius:8px;white-space:nowrap;background:none;border:none;cursor:pointer}
   .ag-link:hover{background:rgba(184,152,96,.14);color:var(--paper)}
+  .ag-user{display:flex;align-items:center;gap:8px;padding-left:8px;margin-left:4px;
+    border-left:1px solid var(--line)}
+  .ag-user-name{font-size:12.5px;font-weight:700;color:var(--gold-hi);white-space:nowrap;
+    max-width:100px;overflow:hidden;text-overflow:ellipsis}
 
   .ag-wrap{max-width:860px;margin:0 auto;padding:30px 18px 70px}
 
-  .ag-hero{margin-bottom:26px}
+  .ag-hero{margin-bottom:22px}
   .ag-eyebrow{font-size:11.5px;font-weight:800;color:var(--gold);letter-spacing:2px;
     margin-bottom:10px}
   .ag-title{font-size:29px;font-weight:800;letter-spacing:-.6px;line-height:1.32;
@@ -45,33 +51,113 @@
   .ag-lead{font-size:15.5px;color:#ddd5c6;line-height:1.9}
   .ag-lead em{color:var(--paper);font-style:normal;font-weight:700}
 
-  .ag-notice{margin:24px 0 32px;padding:18px 20px;border-radius:13px;
-    background:linear-gradient(150deg,rgba(107,143,212,.13),rgba(20,17,12,.2));
-    border:1px solid rgba(107,143,212,.3)}
-  .ag-notice-tag{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:1.2px;
-    color:#14110c;background:var(--gold-hi);padding:3px 9px;border-radius:999px;
-    margin-bottom:10px}
-  .ag-notice h2{font-size:17px;font-weight:800;margin-bottom:9px;letter-spacing:-.3px}
-  .ag-notice p{font-size:14.5px;line-height:1.85;color:#c9c1b2}
-  .ag-notice p+p{margin-top:10px}
+  .ag-authbox{margin:22px 0;padding:20px;border-radius:14px;
+    background:rgba(255,255,255,.03);border:1px solid var(--line)}
+  .ag-authbox h2{font-size:15px;font-weight:800;margin-bottom:11px}
+  .ag-oauth-row{display:flex;flex-wrap:wrap;gap:9px}
+  .ag-oauth-btn{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;
+    color:var(--ink);border:none;border-radius:10px;padding:11px 18px;cursor:pointer;
+    transition:transform .1s ease,opacity .15s ease}
+  .ag-oauth-btn:hover{opacity:.9}
+  .ag-oauth-btn:active{transform:scale(.98)}
+  .ag-oauth-btn.google{background:#fff}
+  .ag-oauth-btn.kakao{background:#fee500}
+  .ag-oauth-btn.naver{background:#03c75a;color:#fff}
+  .ag-oauth-btn svg{width:18px;height:18px;flex:0 0 18px}
 
-  .ag-sec-title{font-size:12px;font-weight:800;color:var(--dim);letter-spacing:1.2px;
-    margin:0 2px 12px}
+  .ag-modal-scrim{position:fixed;inset:0;z-index:1000;background:rgba(10,8,5,.72);
+    display:none;align-items:center;justify-content:center;padding:20px}
+  .ag-modal-scrim.on{display:flex}
+  .ag-modal{width:100%;max-width:420px;background:#1c1811;border:1px solid var(--line);
+    border-radius:16px;padding:26px}
+  .ag-modal h2{font-size:18px;font-weight:800;margin-bottom:9px}
+  .ag-modal p{font-size:13.5px;color:#b8b0a2;line-height:1.75;margin-bottom:18px}
+  .ag-modal input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px;font-size:15px;color:var(--paper);margin-bottom:8px}
+  .ag-modal input:focus{outline:none;border-color:var(--gold)}
+  .ag-modal-err{font-size:12.5px;color:var(--disagree);min-height:18px;margin-bottom:10px}
+  .ag-modal-actions{display:flex;justify-content:flex-end;gap:9px}
+  .ag-btn-primary{background:var(--gold-hi);color:var(--ink);border:none;font-weight:800;
+    font-size:14px;padding:10px 18px;border-radius:9px;cursor:pointer}
+  .ag-btn-primary:disabled{opacity:.5;cursor:default}
+  .ag-btn-ghost{background:none;color:var(--dim);border:1px solid var(--line);font-weight:700;
+    font-size:14px;padding:10px 16px;border-radius:9px;cursor:pointer}
 
-  .ag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:12px}
-  .ag-card{position:relative;background:rgba(255,255,255,.03);
-    border:1px solid var(--line);border-radius:12px;padding:16px 17px;
-    border-top:3px solid var(--bc,#8a8276);opacity:.86}
-  .ag-card-badge{position:absolute;top:12px;right:13px;font-size:10px;font-weight:800;
-    color:#8d8579;background:rgba(255,255,255,.06);padding:3px 8px;border-radius:999px;
-    letter-spacing:.5px}
-  .ag-card-icon{font-size:20px;line-height:1;margin-bottom:9px}
-  .ag-card-name{font-size:16px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px}
-  .ag-card-desc{font-size:13px;line-height:1.75;color:#a99f8c}
-  .ag-card-tags{margin-top:11px;display:flex;flex-wrap:wrap;gap:5px}
-  .ag-tag{font-size:10.5px;font-weight:700;color:var(--bc,#b8b0a2);
-    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
-    padding:3px 8px;border-radius:999px}
+  .ag-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;margin:26px 0 18px;
+    -ms-overflow-style:none;scrollbar-width:none}
+  .ag-tabs::-webkit-scrollbar{display:none}
+  .ag-tab{flex:0 0 auto;display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;
+    color:var(--dim);background:rgba(255,255,255,.03);border:1px solid var(--line);
+    padding:9px 15px;border-radius:999px;cursor:pointer;white-space:nowrap}
+  .ag-tab.on{background:var(--bc,var(--gold));color:var(--ink);border-color:transparent}
+  .ag-tab-count{font-size:11px;opacity:.7}
+
+  .ag-composer{display:none;margin-bottom:24px;padding:18px;border-radius:14px;
+    background:rgba(255,255,255,.03);border:1px solid var(--line)}
+  .ag-composer.on{display:block}
+  .ag-composer input[type=text]{width:100%;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);border-radius:9px;padding:11px 13px;font-size:15px;
+    color:var(--paper);margin-bottom:9px}
+  .ag-composer textarea{width:100%;min-height:110px;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);border-radius:9px;padding:11px 13px;font-size:14.5px;
+    color:var(--paper);line-height:1.7;resize:vertical;font-family:inherit;margin-bottom:9px}
+  .ag-composer input:focus,.ag-composer textarea:focus{outline:none;border-color:var(--gold)}
+  .ag-composer-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .ag-composer-hint{font-size:12px;color:#7d766a}
+  .ag-write-toggle{display:block;width:100%;text-align:left;margin-bottom:24px;
+    background:rgba(255,255,255,.025);border:1px dashed var(--line);border-radius:14px;
+    padding:14px 17px;color:var(--dim);font-size:14px;font-weight:600;cursor:pointer}
+  .ag-write-toggle:hover{border-color:var(--gold);color:var(--paper)}
+
+  .ag-empty{padding:50px 20px;text-align:center;color:#7d766a;font-size:14px;
+    border:1px dashed var(--line);border-radius:14px}
+  .ag-post{border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden;
+    background:rgba(255,255,255,.02)}
+  .ag-post-head{display:flex;align-items:center;gap:9px;padding:15px 17px 0}
+  .ag-badge{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;
+    color:var(--ink);background:var(--bc,var(--gold))}
+  .ag-post-nick{font-size:12.5px;font-weight:700;color:var(--gold-hi)}
+  .ag-post-time{font-size:11.5px;color:#7d766a;margin-left:auto}
+  .ag-post-title{font-size:16.5px;font-weight:800;padding:9px 17px 4px;letter-spacing:-.2px}
+  .ag-post-target{font-size:12px;color:var(--dim);padding:0 17px 4px;display:flex;
+    align-items:center;gap:5px}
+  .ag-post-target a{color:var(--gold);text-decoration:none}
+  .ag-post-body{font-size:14.5px;line-height:1.85;color:#ddd5c6;padding:6px 17px 15px;
+    white-space:pre-wrap;word-break:break-word}
+  .ag-post-foot{display:flex;align-items:center;gap:14px;padding:0 17px 15px}
+  .ag-cbtn{display:flex;align-items:center;gap:6px;background:none;border:none;
+    color:#8d8579;font-size:13px;font-weight:600;cursor:pointer;padding:4px 0}
+  .ag-cbtn:hover{color:var(--paper)}
+
+  .ag-comments{border-top:1px solid var(--line);padding:14px 17px 16px;display:none}
+  .ag-comments.on{display:block}
+  .ag-comment{display:flex;gap:9px;padding:9px 0;border-bottom:1px dashed rgba(184,152,96,.12)}
+  .ag-comment:last-of-type{border-bottom:none}
+  .ag-comment-body{flex:1}
+  .ag-comment-head{display:flex;align-items:center;gap:7px;margin-bottom:3px;flex-wrap:wrap}
+  .ag-comment-nick{font-size:12.5px;font-weight:700;color:var(--gold-hi)}
+  .ag-stance{font-size:10px;font-weight:800;padding:1px 7px;border-radius:999px}
+  .ag-stance.agree{background:rgba(122,154,75,.18);color:var(--agree)}
+  .ag-stance.disagree{background:rgba(181,84,74,.18);color:var(--disagree)}
+  .ag-stance.neutral{background:rgba(107,143,212,.18);color:var(--neutral)}
+  .ag-comment-time{font-size:11px;color:#7d766a}
+  .ag-comment-text{font-size:13.5px;line-height:1.75;color:#ddd5c6;white-space:pre-wrap;
+    word-break:break-word}
+  .ag-comment-form{margin-top:12px}
+  .ag-stance-row{display:flex;gap:6px;margin-bottom:8px}
+  .ag-stance-pick{flex:1;font-size:12.5px;font-weight:700;padding:8px 0;border-radius:8px;
+    border:1px solid var(--line);background:none;color:#8d8579;cursor:pointer;text-align:center}
+  .ag-stance-pick.on.agree{background:rgba(122,154,75,.18);border-color:var(--agree);color:var(--agree)}
+  .ag-stance-pick.on.disagree{background:rgba(181,84,74,.18);border-color:var(--disagree);color:var(--disagree)}
+  .ag-stance-pick.on.neutral{background:rgba(107,143,212,.18);border-color:var(--neutral);color:var(--neutral)}
+  .ag-comment-form textarea{width:100%;min-height:60px;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:13.5px;
+    color:var(--paper);line-height:1.65;resize:vertical;font-family:inherit;margin-bottom:8px}
+  .ag-comment-form textarea:focus{outline:none;border-color:var(--gold)}
+
+  .ag-signin-nudge{font-size:12.5px;color:#7d766a;padding:10px 0}
+  .ag-signin-nudge button{background:none;border:none;color:var(--gold);font-weight:700;
+    cursor:pointer;font-size:12.5px;padding:0}
 
   .ag-rules{margin-top:34px;padding:20px;background:rgba(255,255,255,.025);
     border:1px solid var(--line);border-radius:13px}
@@ -86,24 +172,20 @@
     display:flex;align-items:center;justify-content:center}
   .ag-rules li b{color:var(--paper);font-weight:700}
 
-  .ag-login{margin-top:22px;padding:18px 20px;background:rgba(255,255,255,.02);
-    border:1px dashed var(--line);border-radius:13px}
-  .ag-login h2{font-size:14.5px;font-weight:800;margin-bottom:9px}
-  .ag-login p{font-size:13.5px;line-height:1.8;color:#a99f8c;margin-bottom:12px}
-  .ag-login-row{display:flex;flex-wrap:wrap;gap:8px}
-  .ag-oauth{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;
-    color:#8d8579;background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.09);padding:9px 14px;border-radius:9px}
-  .ag-oauth i{width:9px;height:9px;border-radius:50%;display:inline-block}
-
   .ag-foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
     font-size:12.5px;color:#7d766a;line-height:1.8}
-  .ag-foot a{color:var(--gold);text-decoration:none;font-weight:600}
+  .ag-foot a{color:var(--gold);text-decoration:none}
+
+  .ag-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:#1c1811;border:1px solid var(--gold);color:var(--paper);font-size:13.5px;
+    font-weight:600;padding:12px 20px;border-radius:10px;opacity:0;pointer-events:none;
+    transition:opacity .2s ease,transform .2s ease;z-index:1100;max-width:90vw;text-align:center}
+  .ag-toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
   @media (max-width:640px){
     .ag-wrap{padding:24px 15px 56px}
     .ag-title{font-size:24px}
-    .ag-grid{grid-template-columns:1fr}
+    .ag-user-name{max-width:64px}
   }
 </style>
 </head>
@@ -112,9 +194,10 @@
 <div class="ag-top">
   <a class="ag-back" href="index.html">← 포털</a>
   <div class="ag-brand">ATLAS <small>광장</small></div>
-  <div class="ag-menu">
+  <div class="ag-menu" id="agTopMenu">
     <a class="ag-link" href="faq.html">FAQ</a>
     <a class="ag-link" href="map.html">지도</a>
+    <span id="agAuthSlot"></span>
   </div>
 </div>
 
@@ -130,102 +213,54 @@
     </p>
   </header>
 
-  <div class="ag-notice">
-    <div class="ag-notice-tag">준비 중</div>
-    <h2>아직 문을 열지 않았습니다</h2>
-    <p>
-      구글·카카오·네이버 로그인 심사를 진행하고 있습니다.
-      세 가지가 모두 준비되면 한 번에 열 예정입니다 —
-      쓰고 싶은데 로그인 방법이 없어 돌아서는 일이 없도록 하기 위해서입니다.
-    </p>
-    <p>
-      그때까지 어떤 이야기를 나눌 수 있을지 아래에 미리 정리해 두었습니다.
-    </p>
-  </div>
+  <section class="ag-authbox" id="agAuthBox">
+    <h2>참여하려면 로그인이 필요합니다</h2>
+    <div class="ag-oauth-row">
+      <button class="ag-oauth-btn google" onclick="agSignIn('google')">
+        <svg viewBox="0 0 48 48"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-3.1-.4-4.6H24v9h11.8c-.5 2.7-2.1 5-4.4 6.6v5.5h7.1c4.2-3.9 6.6-9.6 6.6-16.5z"/><path fill="#34A853" d="M24 46c6 0 11-2 14.6-5.4l-7.1-5.5c-2 1.3-4.5 2.1-7.5 2.1-5.8 0-10.7-3.9-12.4-9.1H4.3v5.7C7.9 41.1 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.6 28.1c-.4-1.3-.7-2.7-.7-4.1s.2-2.8.7-4.1v-5.7H4.3C2.8 17.1 2 20.4 2 24s.8 6.9 2.3 9.8l7.3-5.7z"/><path fill="#EA4335" d="M24 10.6c3.3 0 6.2 1.1 8.5 3.3l6.3-6.3C34.9 4.1 30 2 24 2 15.4 2 7.9 6.9 4.3 14.1l7.3 5.7c1.7-5.2 6.6-9.2 12.4-9.2z"/></svg>
+        구글로 시작하기
+      </button>
+      <button class="ag-oauth-btn kakao" onclick="agSignIn('kakao')">
+        <svg viewBox="0 0 20 20"><path fill="#391B1B" d="M10 2C5.03 2 1 5.14 1 9c0 2.5 1.68 4.7 4.2 5.94-.18.68-.66 2.5-.76 2.9-.12.48.18.47.38.34.16-.1 2.5-1.7 3.52-2.4.53.08 1.08.12 1.66.12 4.97 0 9-3.14 9-7s-4.03-7-9-7z"/></svg>
+        카카오로 시작하기
+      </button>
+      <button class="ag-oauth-btn naver" onclick="agSignIn('naver')">
+        <svg viewBox="0 0 20 20"><path fill="#fff" d="M11.4 10.8L7.2 4.5H4v11h3.6V9.2l4.2 6.3h3.2v-11h-3.6v6.3z"/></svg>
+        네이버로 시작하기
+      </button>
+    </div>
+  </section>
 
-  <h2 class="ag-sec-title">게시판</h2>
-  <div class="ag-grid">
+  <button class="ag-write-toggle" id="agWriteToggle" onclick="agToggleComposer()">
+    ✏️ 무엇을 나누고 싶으신가요? — 눌러서 글쓰기
+  </button>
 
-    <div class="ag-card" style="--bc:#c8963c">
-      <span class="ag-card-badge">준비 중</span>
-      <div class="ag-card-icon">🔍</div>
-      <div class="ag-card-name">제보</div>
-      <div class="ag-card-desc">
-        틀린 연도, 잘못된 지명, 오탈자. 사소해 보여도 알려주시면 고칩니다.
-        지도 카드든 자료실 글이든 좋습니다.
+  <section class="ag-composer" id="agComposer">
+    <div class="ag-tabs" id="agBoardPick" style="margin-top:0"></div>
+    <input type="text" id="agTitleInput" placeholder="제목">
+    <textarea id="agBodyInput" placeholder="내용을 적어주세요. 제보라면 어느 지도의 어느 카드인지, 어느 자료실 글인지 함께 적어주시면 훨씬 빨리 고칠 수 있습니다."></textarea>
+    <div class="ag-composer-foot">
+      <span class="ag-composer-hint" id="agComposerHint"></span>
+      <div style="display:flex;gap:8px">
+        <button class="ag-btn-ghost" onclick="agToggleComposer()">취소</button>
+        <button class="ag-btn-primary" id="agSubmitBtn" onclick="agSubmitPost()">올리기</button>
       </div>
     </div>
+  </section>
 
-    <div class="ag-card" style="--bc:#7a9a4b">
-      <span class="ag-card-badge">준비 중</span>
-      <div class="ag-card-icon">💡</div>
-      <div class="ag-card-name">제안</div>
-      <div class="ag-card-desc">
-        이 사건도 넣었으면, 이 인물이 빠졌다, 우리 지역에 이런 유적이 있다.
-        사진이나 자료를 제보해 주셔도 좋습니다.
-      </div>
-    </div>
+  <div class="ag-tabs" id="agTabs"></div>
 
-    <div class="ag-card" style="--bc:#6b8fd4">
-      <span class="ag-card-badge">준비 중</span>
-      <div class="ag-card-icon">⚖️</div>
-      <div class="ag-card-name">토론</div>
-      <div class="ag-card-desc">
-        서술에 동의하지 않으실 수 있습니다. 다른 해석이 있을 수 있고요.
-        댓글에 입장을 밝히고 이야기를 이어갈 수 있습니다.
-      </div>
-      <div class="ag-card-tags">
-        <span class="ag-tag">찬성</span>
-        <span class="ag-tag">반대</span>
-        <span class="ag-tag">중립</span>
-      </div>
-    </div>
-
-    <div class="ag-card" style="--bc:#b5544a">
-      <span class="ag-card-badge">준비 중</span>
-      <div class="ag-card-icon">❓</div>
-      <div class="ag-card-name">질문</div>
-      <div class="ag-card-desc">
-        이건 왜 이렇게 표시했는지, 저 사건은 어떻게 봐야 하는지.
-        아는 만큼 답하고, 모르면 모른다고 말씀드립니다.
-      </div>
-    </div>
-
-    <div class="ag-card" style="--bc:#9a4fa0">
-      <span class="ag-card-badge">준비 중</span>
-      <div class="ag-card-icon">🌱</div>
-      <div class="ag-card-name">응원</div>
-      <div class="ag-card-desc">
-        잘 봤다는 한마디가 다음 한 편을 만듭니다.
-        혼자 만드는 지도라 특히 그렇습니다.
-      </div>
-    </div>
-
-  </div>
+  <div id="agList"><div class="ag-empty">불러오는 중…</div></div>
 
   <section class="ag-rules">
     <h2>광장에서 지켰으면 하는 것</h2>
     <ol>
       <li><b>반대는 환영합니다.</b> ATLAS는 하나의 정답을 강요하지 않습니다. 다른 견해가 나란히 놓일 때 읽는 사람이 스스로 판단할 수 있다고 믿습니다.</li>
-      <li><b>다만 근거를 들어 주세요.</b> “틀렸다”보다 “이 사료에는 이렇게 나옵니다”가 훨씬 멀리 갑니다. 반박당하지 않는 글은 근거가 있는 글입니다.</li>
+      <li><b>다만 근거를 들어 주세요.</b> "틀렸다"보다 "이 사료에는 이렇게 나옵니다"가 훨씬 멀리 갑니다. 반박당하지 않는 글은 근거가 있는 글입니다.</li>
       <li><b>사람이 아니라 주장을 다뤄 주세요.</b> 어떤 주장에 대한 반박은 얼마든지 좋지만, 그 주장을 한 사람을 향한 공격은 토론을 끝나게 만듭니다.</li>
       <li><b>제보에는 위치를 함께 적어 주세요.</b> 어느 지도의 어느 카드인지, 어느 자료실 글인지 알려주시면 훨씬 빨리 고칠 수 있습니다.</li>
       <li><b>지운다면 이런 경우입니다.</b> 욕설과 인신공격, 광고, 그리고 근거 없이 반복되는 시비. 그 외에는 불편한 의견이라도 남겨둡니다.</li>
     </ol>
-  </section>
-
-  <section class="ag-login">
-    <h2>로그인이 필요한 이유</h2>
-    <p>
-      익명으로 열어두면 글은 늘겠지만 대화는 줄어듭니다.
-      최소한의 로그인은 진입장벽이 아니라, 이야기를 이어갈 수 있게 하는 장치라고 생각했습니다.
-      가입 절차 없이 이미 쓰고 계신 계정으로 바로 참여하실 수 있습니다.
-    </p>
-    <div class="ag-login-row">
-      <span class="ag-oauth"><i style="background:#4285f4"></i>구글 — 준비 중</span>
-      <span class="ag-oauth"><i style="background:#fee500"></i>카카오 — 준비 중</span>
-      <span class="ag-oauth"><i style="background:#03c75a"></i>네이버 — 준비 중</span>
-    </div>
   </section>
 
   <div class="ag-foot">
@@ -235,5 +270,389 @@
 
 </div>
 
+<div class="ag-modal-scrim" id="agNickModal">
+  <div class="ag-modal">
+    <h2>활동명을 정해주세요</h2>
+    <p>
+      카카오·네이버·구글의 원래 이름은 광장에 표시되지 않습니다.
+      여기서 정한 이름만 다른 사람에게 보입니다. 2~20자, 신중히 정해주세요.
+    </p>
+    <input type="text" id="agNickInput" placeholder="예: 역사공부하는사람" maxlength="20">
+    <div class="ag-modal-err" id="agNickErr"></div>
+    <div class="ag-modal-actions">
+      <button class="ag-btn-primary" id="agNickSaveBtn" onclick="agSaveNickname()">시작하기</button>
+    </div>
+  </div>
+</div>
+
+<div class="ag-toast" id="agToast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  var SUPABASE_URL = 'https://qichxmrgfvjglkshopzm.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_fIIGCb62yz482OA6Q0kF4w_Ou1_1hRq';
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  window.agSb = sb;
+
+  var BOARDS = [
+    { key: 'all',      label: '전체', color: '#b89860', icon: '' },
+    { key: 'report',   label: '제보', color: '#c8963c', icon: '🔍' },
+    { key: 'suggest',  label: '제안', color: '#7a9a4b', icon: '💡' },
+    { key: 'debate',   label: '토론', color: '#6b8fd4', icon: '⚖️' },
+    { key: 'question', label: '질문', color: '#b5544a', icon: '❓' },
+    { key: 'cheer',    label: '응원', color: '#9a4fa0', icon: '🌱' },
+  ];
+  var boardMap = {}; BOARDS.forEach(function(b){ boardMap[b.key] = b; });
+
+  var state = {
+    session: null, profile: null, currentBoard: 'all', posts: [], counts: {},
+  };
+
+  var esc = function(s){ return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+
+  function toast(msg){
+    var t = document.getElementById('agToast');
+    t.textContent = msg; t.classList.add('on');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){ t.classList.remove('on'); }, 2600);
+  }
+
+  function timeAgo(iso){
+    var d = new Date(iso), now = new Date();
+    var sec = Math.floor((now - d) / 1000);
+    if (sec < 60) return '방금 전';
+    if (sec < 3600) return Math.floor(sec/60) + '분 전';
+    if (sec < 86400) return Math.floor(sec/3600) + '시간 전';
+    if (sec < 86400*7) return Math.floor(sec/86400) + '일 전';
+    return (d.getMonth()+1) + '.' + d.getDate() + '.' + String(d.getFullYear()).slice(2);
+  }
+
+  window.agSignIn = function(provider){
+    sb.auth.signInWithOAuth({
+      provider: provider,
+      options: { redirectTo: window.location.origin + window.location.pathname }
+    });
+  };
+
+  function renderAuthUI(){
+    var slot = document.getElementById('agAuthSlot');
+    var box = document.getElementById('agAuthBox');
+    if (state.session) {
+      box.style.display = 'none';
+      var name = state.profile ? state.profile.nickname : '설정 필요';
+      slot.innerHTML =
+        '<span class="ag-user">' +
+          '<span class="ag-user-name">' + esc(name) + '</span>' +
+          '<button class="ag-link" onclick="agSignOut()">로그아웃</button>' +
+        '</span>';
+    } else {
+      box.style.display = '';
+      slot.innerHTML = '';
+    }
+  }
+
+  window.agSignOut = function(){ sb.auth.signOut().then(function(){ location.reload(); }); };
+
+  async function loadProfile(userId){
+    var res = await sb.from('agora_profiles').select('*').eq('user_id', userId).maybeSingle();
+    if (res.error) { console.error(res.error); return null; }
+    return res.data;
+  }
+
+  function openNickModal(){ document.getElementById('agNickModal').classList.add('on'); }
+
+  window.agSaveNickname = async function(){
+    var input = document.getElementById('agNickInput');
+    var err = document.getElementById('agNickErr');
+    var nick = input.value.trim();
+    err.textContent = '';
+    if (nick.length < 2 || nick.length > 20) { err.textContent = '2~20자로 입력해주세요.'; return; }
+    var btn = document.getElementById('agNickSaveBtn');
+    btn.disabled = true; btn.textContent = '확인 중…';
+    var ins = await sb.from('agora_profiles').insert({
+      user_id: state.session.user.id, nickname: nick
+    }).select().single();
+    btn.disabled = false; btn.textContent = '시작하기';
+    if (ins.error) {
+      if (String(ins.error.message).indexOf('duplicate') !== -1 || String(ins.error.code) === '23505') {
+        err.textContent = '이미 쓰이고 있는 이름입니다. 다른 이름을 써주세요.';
+      } else {
+        err.textContent = '저장하지 못했습니다. 잠시 후 다시 시도해주세요.';
+        console.error(ins.error);
+      }
+      return;
+    }
+    state.profile = ins.data;
+    document.getElementById('agNickModal').classList.remove('on');
+    renderAuthUI();
+    toast('환영합니다, ' + nick + '님.');
+  };
+
+  function renderTabs(){
+    var wrap = document.getElementById('agTabs');
+    wrap.innerHTML = BOARDS.map(function(b){
+      var n = b.key === 'all'
+        ? Object.keys(state.counts).reduce(function(s,k){ return s + (state.counts[k]||0); }, 0)
+        : (state.counts[b.key] || 0);
+      return '<button class="ag-tab' + (state.currentBoard === b.key ? ' on' : '') +
+             '" style="--bc:' + b.color + '" data-board="' + b.key + '">' +
+             (b.icon ? b.icon + ' ' : '') + b.label +
+             '<span class="ag-tab-count">' + n + '</span></button>';
+    }).join('');
+    Array.prototype.forEach.call(wrap.querySelectorAll('.ag-tab'), function(el){
+      el.addEventListener('click', function(){
+        state.currentBoard = el.getAttribute('data-board');
+        renderTabs();
+        loadPosts();
+      });
+    });
+  }
+
+  var composerBoard = 'report';
+
+  function renderComposerBoardPick(){
+    var wrap = document.getElementById('agBoardPick');
+    wrap.innerHTML = BOARDS.filter(function(b){ return b.key !== 'all'; }).map(function(b){
+      return '<button class="ag-tab' + (composerBoard === b.key ? ' on' : '') +
+             '" style="--bc:' + b.color + '" data-board="' + b.key + '" type="button">' +
+             b.icon + ' ' + b.label + '</button>';
+    }).join('');
+    Array.prototype.forEach.call(wrap.querySelectorAll('.ag-tab'), function(el){
+      el.addEventListener('click', function(){
+        composerBoard = el.getAttribute('data-board');
+        renderComposerBoardPick();
+        updateComposerHint();
+      });
+    });
+  }
+
+  function updateComposerHint(){
+    var hints = {
+      report: '어느 지도의 어느 카드인지, 어느 자료실 글인지 함께 적어주시면 좋습니다.',
+      suggest: '추가했으면 하는 사건·인물·자료, 자유롭게 적어주세요.',
+      debate: '서술의 어느 부분에 대한 이야기인지 밝혀주시면 다른 분들이 따라오기 쉽습니다.',
+      question: '궁금하신 것을 편하게 적어주세요.',
+      cheer: '',
+    };
+    document.getElementById('agComposerHint').textContent = hints[composerBoard] || '';
+  }
+
+  window.agToggleComposer = function(){
+    if (!state.session) { toast('로그인 후 글을 쓰실 수 있습니다.'); return; }
+    if (!state.profile) { openNickModal(); return; }
+    var c = document.getElementById('agComposer');
+    var wasOn = c.classList.contains('on');
+    c.classList.toggle('on');
+    document.getElementById('agWriteToggle').style.display = wasOn ? '' : 'none';
+    if (!wasOn) {
+      renderComposerBoardPick();
+      updateComposerHint();
+      document.getElementById('agTitleInput').focus();
+    }
+  };
+
+  window.agSubmitPost = async function(){
+    var title = document.getElementById('agTitleInput').value.trim();
+    var body = document.getElementById('agBodyInput').value.trim();
+    if (!title) { toast('제목을 적어주세요.'); return; }
+    if (!body) { toast('내용을 적어주세요.'); return; }
+    var btn = document.getElementById('agSubmitBtn');
+    btn.disabled = true; btn.textContent = '올리는 중…';
+    var ins = await sb.from('agora_posts').insert({
+      user_id: state.session.user.id, nickname: state.profile.nickname,
+      board: composerBoard, title: title, body: body,
+    });
+    btn.disabled = false; btn.textContent = '올리기';
+    if (ins.error) { toast('올리지 못했습니다. 잠시 후 다시 시도해주세요.'); console.error(ins.error); return; }
+    document.getElementById('agTitleInput').value = '';
+    document.getElementById('agBodyInput').value = '';
+    agToggleComposer();
+    toast('올렸습니다.');
+    state.currentBoard = composerBoard;
+    renderTabs();
+    loadPosts();
+  };
+
+  async function loadCounts(){
+    var res = await sb.from('agora_posts').select('board');
+    if (res.error) { console.error(res.error); return; }
+    var c = {};
+    (res.data || []).forEach(function(r){ c[r.board] = (c[r.board]||0) + 1; });
+    state.counts = c;
+    renderTabs();
+  }
+
+  async function loadPosts(){
+    var list = document.getElementById('agList');
+    list.innerHTML = '<div class="ag-empty">불러오는 중…</div>';
+    var q = sb.from('agora_posts').select('*').order('created_at', { ascending: false }).limit(60);
+    if (state.currentBoard !== 'all') q = q.eq('board', state.currentBoard);
+    var res = await q;
+    if (res.error) {
+      list.innerHTML = '<div class="ag-empty">불러오지 못했습니다. 새로고침해 주세요.</div>';
+      console.error(res.error); return;
+    }
+    state.posts = res.data || [];
+    renderPosts();
+  }
+
+  function renderPosts(){
+    var list = document.getElementById('agList');
+    if (!state.posts.length) {
+      list.innerHTML = '<div class="ag-empty">아직 첫 글이 없습니다. 첫 글의 주인공이 되어주세요.</div>';
+      return;
+    }
+    list.innerHTML = state.posts.map(renderPostCard).join('');
+    state.posts.forEach(function(p){
+      var el = document.getElementById('ag-post-' + p.id);
+      if (!el) return;
+      var cbtn = el.querySelector('.ag-cbtn[data-act=comment]');
+      if (cbtn) cbtn.addEventListener('click', function(){ toggleComments(p.id, p.board); });
+    });
+  }
+
+  function renderPostCard(p){
+    var b = boardMap[p.board] || boardMap.report;
+    var targetHtml = p.target_title
+      ? '<div class="ag-post-target">📎 <a href="' + esc(p.target_url||'#') + '">' + esc(p.target_title) + '</a></div>'
+      : '';
+    return (
+      '<article class="ag-post" id="ag-post-' + p.id + '">' +
+        '<div class="ag-post-head">' +
+          '<span class="ag-badge" style="--bc:' + b.color + '">' + b.icon + ' ' + b.label + '</span>' +
+          '<span class="ag-post-nick">' + esc(p.nickname) + '</span>' +
+          '<span class="ag-post-time">' + timeAgo(p.created_at) + '</span>' +
+        '</div>' +
+        '<div class="ag-post-title">' + esc(p.title) + '</div>' +
+        targetHtml +
+        '<div class="ag-post-body">' + esc(p.body) + '</div>' +
+        '<div class="ag-post-foot">' +
+          '<button class="ag-cbtn" data-act="comment">💬 댓글</button>' +
+        '</div>' +
+        '<div class="ag-comments" id="ag-comments-' + p.id + '"></div>' +
+      '</article>'
+    );
+  }
+
+  async function toggleComments(postId, board){
+    var box = document.getElementById('ag-comments-' + postId);
+    var isOn = box.classList.contains('on');
+    if (isOn) { box.classList.remove('on'); return; }
+    box.classList.add('on');
+    box.innerHTML = '<div style="font-size:12.5px;color:#7d766a">불러오는 중…</div>';
+    var res = await sb.from('agora_comments').select('*').eq('post_id', postId).order('created_at', { ascending: true });
+    if (res.error) { box.innerHTML = '<div style="font-size:12.5px;color:#7d766a">불러오지 못했습니다.</div>'; return; }
+    renderComments(postId, board, res.data || []);
+  }
+
+  function renderComments(postId, board, comments){
+    var box = document.getElementById('ag-comments-' + postId);
+    var isDebate = board === 'debate';
+    var html = comments.map(function(c){
+      var stanceHtml = c.stance
+        ? '<span class="ag-stance ' + c.stance + '">' +
+          (c.stance === 'agree' ? '찬성' : c.stance === 'disagree' ? '반대' : '중립') + '</span>'
+        : '';
+      return '<div class="ag-comment"><div class="ag-comment-body">' +
+        '<div class="ag-comment-head">' +
+          '<span class="ag-comment-nick">' + esc(c.nickname) + '</span>' + stanceHtml +
+          '<span class="ag-comment-time">' + timeAgo(c.created_at) + '</span>' +
+        '</div>' +
+        '<div class="ag-comment-text">' + esc(c.body) + '</div>' +
+      '</div></div>';
+    }).join('');
+
+    var formHtml;
+    if (!state.session) {
+      formHtml = '<div class="ag-signin-nudge">댓글을 달려면 <button onclick="document.getElementById(\'agAuthBox\').scrollIntoView({behavior:\'smooth\'})">로그인</button>이 필요합니다.</div>';
+    } else if (!state.profile) {
+      formHtml = '<div class="ag-signin-nudge"><button onclick="agOpenNickFromComment()">활동명을 먼저 정해주세요</button></div>';
+    } else {
+      var stancePick = isDebate
+        ? '<div class="ag-stance-row" data-postid="' + postId + '">' +
+            '<button class="ag-stance-pick agree" data-stance="agree" type="button">찬성</button>' +
+            '<button class="ag-stance-pick disagree" data-stance="disagree" type="button">반대</button>' +
+            '<button class="ag-stance-pick neutral" data-stance="neutral" type="button">중립</button>' +
+          '</div>'
+        : '';
+      formHtml =
+        '<div class="ag-comment-form">' + stancePick +
+          '<textarea id="ag-cinput-' + postId + '" placeholder="' +
+            (isDebate ? '입장을 고르고 근거를 적어주세요.' : '댓글을 적어주세요.') + '"></textarea>' +
+          '<button class="ag-btn-primary" data-postid="' + postId + '" data-board="' + board + '">댓글 달기</button>' +
+        '</div>';
+    }
+
+    box.innerHTML = (comments.length ? html : '<div style="font-size:12.5px;color:#7d766a;padding:6px 0">첫 댓글을 남겨보세요.</div>') + formHtml;
+
+    if (state.session && state.profile) {
+      var chosenStance = null;
+      if (isDebate) {
+        Array.prototype.forEach.call(box.querySelectorAll('.ag-stance-pick'), function(btn){
+          btn.addEventListener('click', function(){
+            chosenStance = btn.getAttribute('data-stance');
+            Array.prototype.forEach.call(box.querySelectorAll('.ag-stance-pick'), function(b2){
+              b2.classList.toggle('on', b2 === btn);
+            });
+          });
+        });
+      }
+      var submitBtn = box.querySelector('.ag-btn-primary');
+      if (submitBtn) submitBtn.addEventListener('click', function(){
+        submitComment(postId, board, isDebate ? chosenStance : null);
+      });
+    }
+  }
+
+  window.agOpenNickFromComment = function(){ openNickModal(); };
+
+  async function submitComment(postId, board, stance){
+    if (board === 'debate' && !stance) { toast('찬성·반대·중립 중 하나를 골라주세요.'); return; }
+    var ta = document.getElementById('ag-cinput-' + postId);
+    var body = ta.value.trim();
+    if (!body) { toast('내용을 적어주세요.'); return; }
+    var ins = await sb.from('agora_comments').insert({
+      post_id: postId, user_id: state.session.user.id, nickname: state.profile.nickname,
+      stance: stance, body: body,
+    });
+    if (ins.error) { toast('댓글을 달지 못했습니다.'); console.error(ins.error); return; }
+    ta.value = '';
+    var res = await sb.from('agora_comments').select('*').eq('post_id', postId).order('created_at', { ascending: true });
+    renderComments(postId, board, res.data || []);
+    toast('댓글을 남겼습니다.');
+  }
+
+  async function init(){
+    var sess = await sb.auth.getSession();
+    state.session = sess.data.session;
+    if (state.session) state.profile = await loadProfile(state.session.user.id);
+    renderAuthUI();
+    if (state.session && !state.profile) openNickModal();
+
+    sb.auth.onAuthStateChange(function(event, sessNew){
+      state.session = sessNew;
+      if (sessNew && !state.profile) {
+        loadProfile(sessNew.user.id).then(function(p){
+          state.profile = p;
+          renderAuthUI();
+          if (!p) openNickModal();
+        });
+      } else {
+        renderAuthUI();
+      }
+    });
+
+    renderTabs();
+    await loadCounts();
+    await loadPosts();
+  }
+
+  init();
+})();
+</script>
 </body>
 </html>
