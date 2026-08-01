@@ -335,10 +335,18 @@
     // Custom Provider(네이버)는 Supabase SDK에서 'custom:식별자' 형태를
     // 요구한다. 구글·카카오는 내장 provider라 이름 그대로 쓴다.
     var providerId = (provider === 'naver') ? 'custom:naver' : provider;
-    sb.auth.signInWithOAuth({
-      provider: providerId,
-      options: { redirectTo: window.location.origin + window.location.pathname }
-    });
+
+    var opts = { redirectTo: window.location.origin + window.location.pathname };
+
+    // 카카오는 기본값으로 account_email까지 요청하는데, 이메일 항목은
+    // 비즈 앱 전환 전에는 카카오가 "권한 없음"으로 막아둔다. 허용되지
+    // 않은 scope가 하나라도 섞이면 카카오가 요청 전체를 KOE205로 거부하므로,
+    // 실제로 열어둔 항목만 명시해서 보낸다.
+    if (provider === 'kakao') {
+      opts.scopes = 'profile_nickname';
+    }
+
+    sb.auth.signInWithOAuth({ provider: providerId, options: opts });
   };
 
   function renderAuthUI(){
