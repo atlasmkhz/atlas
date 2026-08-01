@@ -332,8 +332,11 @@
   }
 
   window.agSignIn = function(provider){
+    // Custom Provider(네이버)는 Supabase SDK에서 'custom:식별자' 형태를
+    // 요구한다. 구글·카카오는 내장 provider라 이름 그대로 쓴다.
+    var providerId = (provider === 'naver') ? 'custom:naver' : provider;
     sb.auth.signInWithOAuth({
-      provider: provider,
+      provider: providerId,
       options: { redirectTo: window.location.origin + window.location.pathname }
     });
   };
@@ -627,12 +630,14 @@
   }
 
   async function init(){
-    var sess = await sb.auth.getSession();
-    state.session = sess.data.session;
-    if (state.session) state.profile = await loadProfile(state.session.user.id);
-    renderAuthUI();
-    if (state.session && !state.profile) openNickModal();
-
+    // ── 초기화 순서 ──────────────────────────────────────────
+    // 예전 버전은 getSession()으로 먼저 렌더링한 뒤 onAuthStateChange를
+    // 나중에 걸었다. 그런데 구글 로그인 후 리다이렉트로 돌아오는 순간
+    // Supabase JS가 URL의 인증 정보를 비동기로 처리하는 시점과
+    // getSession() 호출 시점이 어긋나면, 로그인 직후 화면이 "로그인 전"
+    // 상태로 한 번 굳어버릴 수 있다(실제로 이 증상이 보고됐다).
+    // onAuthStateChange를 먼저 걸어두면 INITIAL_SESSION 이벤트가
+    // 반드시 한 번 오고, 이후 SIGNED_IN 이벤트도 놓치지 않는다.
     sb.auth.onAuthStateChange(function(event, sessNew){
       state.session = sessNew;
       if (sessNew && !state.profile) {
