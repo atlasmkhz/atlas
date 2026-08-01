@@ -173,6 +173,7 @@
     // 히어로 이미지 2026-07-30 추가 — Midjourney v8.2, 인물 얼굴 특정
     // 없이 뒷모습 실루엣으로 처리(실존 인물 얼굴 묘사 금지 원칙 준수).
     { path: 'armed_struggle.html', name: '항일무장투쟁', tagline: '독립군은 하나가 아니었다', period: '1911~1945', waypoints: 65, color: '#c8963c', image: 'assets/images/route/route_armed_struggle_hero.webp', pinned_portal: true, updated: '2026-07-30' },
+    { path: 'forced_mobilization_map.html', name: '강제동원 분포도', tagline: '어디로 끌려갔는가', period: '1938~1945', waypoints: 12, color: '#8b3a3a', image: 'assets/images/route/route_forced_mobilization_hero.webp', updated: '2026-08-01' },
     // 근대(포털) — map.html
     { path: 'map.html?route=hong_beom_do', name: '홍범도', tagline: '포수에서 현충원까지', period: '1868~2021', waypoints: 26, color: '#c8a827', image: 'assets/images/entity/person/person_hong_beom_do_01.webp' },
     { path: 'map.html?route=righteous_struggle', name: '의열투쟁', tagline: '조선의 심장을 겨누다', period: '1908~1932', waypoints: 21, color: '#b8632f', image: 'assets/images/route/route_righteous_struggle_hero.webp' },
@@ -234,7 +235,7 @@
     { path: 'maps/medieval2/index.html?route=joseon_tongsinsa', name: '조선통신사 루트', tagline: '전쟁의 상처를 넘어, 200년 가까이 이어진 평화 외교', period: '1607~1811', waypoints: 8, color: '#2e6b6b', image: 'maps/medieval2/assets/images/route/route_joseon_tongsinsa_hero.webp' },
     { path: 'maps/medieval2/index.html?route=joseon_geniuses', name: '조선의 천재들 루트', tagline: '신분과 시대의 제약 속에서도 빛난 조선의 재능들', period: '15세기~19세기', waypoints: 8, color: '#6b4a2e', image: 'maps/medieval2/assets/images/route/route_joseon_geniuses_hero.webp' },
     { path: 'joseon_factions.html', name: '조선 붕당 계보도', tagline: '3백 년의 이합집산을 한 장으로', period: '1455~1863', waypoints: 11, color: '#6b5b3e', image: 'assets/images/route/route_joseon_factions_hero.webp', updated: '2026-07-31' },
-    { path: 'joseon_thinkers.html', name: '조선 사상가 분포도', tagline: '사상에도 지도가 있다', period: '1243~1877', waypoints: 27, color: '#6b8fd4', image: null, updated: '2026-08-01' },
+    { path: 'joseon_thinkers.html', name: '조선 사상가 분포도', tagline: '사상에도 지도가 있다', period: '1243~1877', waypoints: 35, color: '#6b8fd4', image: 'assets/images/route/route_joseon_thinkers_hero.webp', updated: '2026-08-01' },
 
     // 현대 — maps/contemporary/index.html
     { path: 'maps/contemporary/index.html?route=korea_disaster_history', name: '대한민국 재난사 루트', tagline: '반복된 참사, 그때마다 물었던 "왜 막지 못했는가"', period: '1994~2024', waypoints: 9, color: '#4a4a4a', image: 'maps/contemporary/assets/images/route/route_korea_disaster_history_hero.webp' },
@@ -358,7 +359,7 @@
   ];
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records'] },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records', 'forced_mobilization'] },
       // ── 시대연구 2분할 (2026-07-31) ─────────────────────────────
       // ⚠️ 이 taxonomy는 nav.js 7개 사본과 반드시 같아야 한다.
       // 포털(portal.js)이 8번째 사본이라는 점을 놓치기 쉽다 —

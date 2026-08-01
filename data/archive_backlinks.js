@@ -104,6 +104,41 @@ const ARCHIVE_BACKLINKS = {
       "title": "타율성론과 정체성론 — 식민사관의 두 기둥 해부"
     }
   ],
+  "policy_1937_02": [
+    {
+      "url": "archive/forced-mobilization/fm_04_comfort_women.html",
+      "series": "강제동원의 기록",
+      "title": "일본군 위안부 — 강제성을 둘러싼 30년의 공방"
+    }
+  ],
+  "policy_1938_01": [
+    {
+      "url": "archive/forced-mobilization/fm_00_intro.html",
+      "series": "강제동원의 기록",
+      "title": "지워지는 두 글자 — 이 시리즈가 다루는 것"
+    }
+  ],
+  "policy_1939_02": [
+    {
+      "url": "archive/forced-mobilization/fm_01_structure.html",
+      "series": "강제동원의 기록",
+      "title": "동원은 어떻게 이루어졌나 — 모집·관 알선·징용의 3단계"
+    }
+  ],
+  "policy_1939_04": [
+    {
+      "url": "archive/forced-mobilization/fm_02_sado.html",
+      "series": "강제동원의 기록",
+      "title": "사도광산 — 세계유산이 된 뒤 사라진 강제성"
+    }
+  ],
+  "policy_1943_02": [
+    {
+      "url": "archive/forced-mobilization/fm_03_hashima.html",
+      "series": "강제동원의 기록",
+      "title": "군함도 — 10년째 지켜지지 않는 약속"
+    }
+  ],
   "political_1923_01": [
     {
       "url": "archive/joseon-revolution-declaration/jrd_01_chapter1.html",

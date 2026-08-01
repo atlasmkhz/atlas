@@ -178,6 +178,16 @@ def main():
     lines.append('    <priority>0.8</priority>')
     lines.append('  </url>')
 
+    # 2026-08-01 신설: FAQ·광장·개인정보 처리방침
+    # FAQ는 FAQPage 구조화 데이터를 넣어 검색 노출을 노린다.
+    for _p, _pr in (('faq.html', '0.9'), ('agora.html', '0.7'), ('privacy.html', '0.3'),
+                    ('forced_mobilization_map.html', '0.85')):
+        lines.append('  <url>')
+        lines.append(f'    <loc>{SITE_ROOT}/{_p}</loc>')
+        lines.append('    <changefreq>monthly</changefreq>')
+        lines.append(f'    <priority>{_pr}</priority>')
+        lines.append('  </url>')
+
     # modern2 진입점
     lines.append('  <url>')
     lines.append(f'    <loc>{SITE_ROOT}/maps/modern2/</loc>')

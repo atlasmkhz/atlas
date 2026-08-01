@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강제동원 분포도 — 어디로 끌려갔는가 | ATLAS by MKHZ</title>
+<meta name="description" content="사도광산·군함도부터 사할린·남양군도까지, 일제강점기 조선인이 강제동원된 곳을 한 장의 지도에 담았습니다. 확인된 자료 기준의 수치만 표기하고 근거를 함께 밝힙니다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/forced_mobilization_map.html">
+<meta property="og:title" content="강제동원 분포도 — 어디로 끌려갔는가">
+<meta property="og:description" content="한반도에서 사할린, 일본 본토, 남양군도, 동남아시아까지.">
+<meta property="og:url" content="https://atlas.mkhz.kr/forced_mobilization_map.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://atlas.mkhz.kr/assets/images/route/route_forced_mobilization_hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{--ink:#14110c;--paper:#f2ede3;--dim:#b8b0a2;--gold:#b89860;--gold-hi:#d8b878;
+    --line:rgba(184,152,96,0.22)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:var(--ink);color:var(--paper);overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  .fm-top{position:absolute;top:0;left:0;right:0;z-index:900;height:48px;
+    display:flex;align-items:center;gap:12px;padding:0 14px;
+    background:rgba(20,17,12,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+  .fm-back{font-size:13px;font-weight:700;color:var(--gold);text-decoration:none;white-space:nowrap}
+  .fm-brand{font-size:13.5px;font-weight:800;letter-spacing:.6px;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .fm-brand small{font-weight:400;color:var(--dim);font-size:11px;margin-left:6px}
+  .fm-menu{margin-left:auto;display:flex;gap:3px}
+  .fm-link{font-size:12.5px;font-weight:700;color:var(--dim);text-decoration:none;
+    padding:6px 9px;border-radius:8px;white-space:nowrap}
+  .fm-link:hover{background:rgba(184,152,96,.14);color:var(--paper)}
+
+  #map{position:absolute;top:48px;left:0;right:0;bottom:0;background:#0e0c09}
+
+  .fm-legend{position:absolute;top:58px;right:10px;z-index:800;
+    width:min(238px,54vw);max-height:calc(100% - 118px);overflow-y:auto;
+    background:rgba(20,17,12,.9);border:1px solid var(--line);border-radius:11px;
+    padding:10px 11px;backdrop-filter:blur(8px)}
+  .fm-legend h2{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.5px;
+    margin-bottom:8px}
+  .fm-chip{display:flex;align-items:center;gap:7px;width:100%;text-align:left;
+    background:none;border:none;color:var(--paper);font-size:11.5px;font-weight:600;
+    padding:5px 6px;border-radius:7px;cursor:pointer;line-height:1.35;font-family:inherit}
+  .fm-chip:hover{background:rgba(184,152,96,.13)}
+  .fm-chip.off{opacity:.32}
+  .fm-chip i{width:10px;height:10px;border-radius:50%;flex:0 0 10px;
+    border:1.5px solid rgba(255,255,255,.35)}
+  .fm-legend-foot{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);
+    font-size:10.5px;color:#7d766a;line-height:1.65}
+
+  .fm-toggle{position:absolute;top:58px;right:10px;z-index:801;display:none;
+    background:rgba(20,17,12,.92);border:1px solid var(--line);color:var(--paper);
+    font-size:12px;font-weight:700;padding:8px 11px;border-radius:9px;cursor:pointer;
+    font-family:inherit}
+
+  .fm-pin{border-radius:50%;border:2px solid rgba(20,17,12,.9);
+    box-shadow:0 2px 8px rgba(0,0,0,.6)}
+  .fm-wrap{position:relative}
+  .fm-label{position:absolute;left:50%;transform:translateX(-50%);top:19px;
+    font-size:10.5px;font-weight:800;color:#fff;white-space:nowrap;
+    text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 7px rgba(0,0,0,.9);pointer-events:none}
+  .fm-label.hide{display:none}
+
+  .fm-sea{font-size:12px;font-weight:700;color:rgba(190,205,225,.5);
+    letter-spacing:3px;white-space:nowrap;pointer-events:none;
+    text-shadow:0 1px 4px rgba(0,0,0,.75)}
+  .fm-isle{font-size:10.5px;font-weight:700;color:rgba(214,226,240,.8);
+    white-space:nowrap;pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .fm-isle::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;
+    background:rgba(214,226,240,.85);margin-right:4px;vertical-align:middle}
+
+  .fm-panel{position:absolute;right:0;top:48px;bottom:0;width:min(400px,92vw);z-index:950;
+    background:rgba(24,21,16,.985);border-left:1px solid var(--line);
+    backdrop-filter:blur(10px);overflow-y:auto;padding:20px 22px 40px;
+    transform:translateX(102%);transition:transform .22s ease}
+  .fm-panel.on{transform:none}
+  .fm-close{position:absolute;top:12px;right:14px;background:none;border:none;
+    color:var(--dim);font-size:22px;cursor:pointer;line-height:1}
+  .fm-p-name{font-size:21px;font-weight:800;margin-bottom:3px;padding-right:26px}
+  .fm-p-kind{font-size:12.5px;font-weight:700;margin-bottom:3px}
+  .fm-p-years{font-size:12.5px;color:var(--dim);margin-bottom:14px;
+    font-variant-numeric:tabular-nums}
+  .fm-count{padding:13px 15px;border-radius:10px;margin-bottom:14px;
+    background:rgba(139,58,58,.14);border-left:3px solid #8b3a3a}
+  .fm-count b{display:block;font-size:23px;font-weight:800;color:#e8b0a0;
+    line-height:1.2;margin-bottom:4px;font-variant-numeric:tabular-nums}
+  .fm-count span{font-size:12.5px;color:#b8b0a2;line-height:1.7}
+  .fm-count.unknown{background:rgba(255,255,255,.035);border-left-color:rgba(184,152,96,.4)}
+  .fm-count.unknown b{font-size:14.5px;color:var(--gold-hi)}
+  .fm-p-sum{font-size:14.5px;line-height:1.9;color:#ddd5c6}
+  .fm-p-note{margin-top:12px;font-size:12px;color:#8d8579;line-height:1.7}
+  .fm-p-links{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+  .fm-p-links a{display:block;padding:11px 13px;border-radius:9px;font-size:13.5px;
+    font-weight:700;text-decoration:none;background:rgba(184,152,96,.12);
+    border:1px solid rgba(184,152,96,.28);color:var(--gold-hi)}
+  .fm-p-links a:hover{background:rgba(184,152,96,.2)}
+  .fm-p-links a span{display:block;font-weight:400;font-size:12px;color:var(--dim);margin-top:2px}
+
+  @media (max-width:640px){
+    .fm-legend{display:none;top:96px;width:76vw}
+    .fm-legend.open{display:block}
+    .fm-toggle{display:block}
+  }
+</style>
+</head>
+<body>
+
+<div class="fm-top">
+  <a class="fm-back" href="map.html">← 지도</a>
+  <div class="fm-brand">ATLAS <small>강제동원 분포도</small></div>
+  <div class="fm-menu">
+    <a class="fm-link" href="archive/forced-mobilization/index.html">자료실</a>
+    <a class="fm-link" href="index.html">포털</a>
+  </div>
+</div>
+
+<button class="fm-toggle" id="fmToggle">분류 ▾</button>
+
+<div id="map"></div>
+
+<div class="fm-legend" id="fmLegend">
+  <h2>분류 — 눌러서 켜고 끄기</h2>
+  <div id="fmChips"></div>
+  <div class="fm-legend-foot">
+    점 크기는 규모가 아니라 분류를 나타냅니다.<br>
+    확인된 자료 기준의 수치만 적었고, 확인되지 않은 곳은 그렇게 적었습니다.<br>
+    총계를 제시하지 않는 이유는 자료실 서론에 있습니다.
+  </div>
+</div>
+
+<aside class="fm-panel" id="fmPanel">
+  <button class="fm-close" id="fmClose" aria-label="닫기">×</button>
+  <div id="fmPanelBody"></div>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data/forced_mobilization_sites.js"></script>
+<script>
+(function(){
+  var D = window.FORCED_SITES, S = D.sites, K = D.kinds;
+  var esc = function(s){ return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+
+  // 한반도에서 남양군도·동남아까지 한 화면에 들어와야 하므로 넓게 잡는다.
+  var map = L.map('map', { zoomControl: true, attributionControl: false })
+    .setView([28, 130], 4);
+  // 라벨 없는 타일 — 현대 지명이 동원지 표시를 덮지 않도록.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    maxZoom: 11, minZoom: 3, subdomains: 'abcd', crossOrigin: true, errorTileUrl: ''
+  }).addTo(map);
+
+  function seaLabel(lat, lng, text, cls, size){
+    L.marker([lat, lng], { interactive: false,
+      icon: L.divIcon({ className: '', iconSize: size,
+        html: '<div class="' + cls + '">' + esc(text) + '</div>' }) }).addTo(map);
+  }
+  seaLabel(39.5, 133.5, '동  해', 'fm-sea', [90, 18]);
+  seaLabel(37.2416, 131.8664, '독도', 'fm-isle', [50, 14]);
+  seaLabel(25.0, 140.0, '태 평 양', 'fm-sea', [96, 18]);
+  seaLabel(20.0, 115.0, '남 중 국 해', 'fm-sea', [110, 18]);
+
+  var on = {}; Object.keys(K).forEach(function(k){ on[k] = true; });
+  var entries = [];
+
+  function pinIcon(color, name, big){
+    var d = big ? 17 : 13;
+    return L.divIcon({ className: '', iconSize: [d, d], iconAnchor: [d/2, d/2],
+      html: '<div class="fm-wrap"><div class="fm-pin" style="width:' + d + 'px;height:' + d +
+            'px;background:' + color + '"></div><div class="fm-label">' + esc(name) + '</div></div>' });
+  }
+
+  S.forEach(function(s){
+    var col = (K[s.kind] || {}).color || '#8a8276';
+    // 한반도(출발지)와 확정 수치가 있는 곳만 크게 — 규모가 아니라 기준점 표시
+    var big = (s.kind === 'origin' || !!s.count);
+    var m = L.marker([s.lat, s.lng], { icon: pinIcon(col, s.name, big), riseOnHover: true }).addTo(map);
+    m._home = [s.lat, s.lng];
+    m.on('click', function(){ openSite(s.id); });
+
+    // 권역 단위로만 확인되는 곳은 범위를 원으로 옅게 표시한다.
+    var ring = null;
+    if (s.precise === false) {
+      ring = L.circle([s.lat, s.lng], {
+        radius: s.kind === 'comfort' ? 900000 : 320000,
+        color: col, weight: 1, opacity: 0.3, fillColor: col, fillOpacity: 0.06,
+        interactive: false
+      }).addTo(map);
+    }
+    entries.push({ s: s, marker: m, ring: ring });
+  });
+
+  function applyFilter(){
+    entries.forEach(function(e){
+      var show = on[e.s.kind];
+      [e.marker, e.ring].forEach(function(l){
+        if (!l) return;
+        if (show && !map.hasLayer(l)) map.addLayer(l);
+        if (!show && map.hasLayer(l)) map.removeLayer(l);
+      });
+    });
+    declutter();
+  }
+
+  var chips = document.getElementById('fmChips');
+  chips.innerHTML = Object.keys(K).map(function(k){
+    var n = S.filter(function(s){ return s.kind === k; }).length;
+    if (!n) return '';
+    return '<button type="button" class="fm-chip" data-kind="' + k + '">' +
+           '<i style="background:' + K[k].color + '"></i>' + esc(K[k].label) +
+           ' <span style="opacity:.55">' + n + '</span></button>';
+  }).join('');
+  chips.addEventListener('click', function(e){
+    var b = e.target.closest('.fm-chip'); if (!b) return;
+    var k = b.getAttribute('data-kind');
+    on[k] = !on[k];
+    b.classList.toggle('off', !on[k]);
+    applyFilter();
+  });
+  document.getElementById('fmToggle').addEventListener('click', function(){
+    document.getElementById('fmLegend').classList.toggle('open');
+  });
+
+  // 라벨 겹침 해소 — 사상가 분포도와 같은 방식
+  function declutter(){
+    var vis = entries.filter(function(e){ return map.hasLayer(e.marker); });
+    var boxes = [];
+    vis.forEach(function(e){
+      var el = e.marker.getElement(); if (!el) return;
+      var lab = el.querySelector('.fm-label'); if (!lab) return;
+      lab.classList.remove('hide');
+      var p = map.latLngToContainerPoint(e.marker.getLatLng());
+      var w = e.s.name.length * 11 + 8;
+      var box = { x1: p.x - w/2, x2: p.x + w/2, y1: p.y + 16, y2: p.y + 32 };
+      var hit = boxes.some(function(b){
+        return !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2);
+      });
+      if (hit) lab.classList.add('hide'); else boxes.push(box);
+    });
+  }
+  map.on('zoomend moveend', declutter);
+  map.whenReady(function(){ setTimeout(declutter, 60); });
+
+  // ── 상세 패널 ──────────────────────────────────────────────
+  var panel = document.getElementById('fmPanel');
+  var body = document.getElementById('fmPanelBody');
+
+  function openSite(id){
+    var s = null;
+    for (var i = 0; i < S.length; i++) if (S[i].id === id) { s = S[i]; break; }
+    if (!s) return;
+    var k = K[s.kind] || {};
+    var h = [];
+    h.push('<div class="fm-p-name">' + esc(s.name) + '</div>');
+    h.push('<div class="fm-p-kind" style="color:' + (k.color || '#b8b0a2') + '">' +
+           esc(k.label || '') + '</div>');
+    h.push('<div class="fm-p-years">' + esc(s.years) + '</div>');
+
+    // 수치 — 확인된 것만 숫자로, 나머지는 그 사실을 그대로 적는다.
+    if (s.count) {
+      h.push('<div class="fm-count"><b>' + s.count.toLocaleString() + '명</b>' +
+             '<span>' + esc(s.count_note || '') + '</span></div>');
+    } else {
+      h.push('<div class="fm-count unknown"><b>확정된 수치 없음</b>' +
+             '<span>' + esc(s.est_note || '') + '</span></div>');
+    }
+
+    h.push('<div class="fm-p-sum">' + esc(s.summary) + '</div>');
+    if (s.precise === false)
+      h.push('<div class="fm-p-note">※ 지역·권역 단위로 확인되어 대표 좌표로 표시했습니다. 지도의 원은 실제 경계가 아니라 대략의 범위입니다.</div>');
+
+    h.push('<div class="fm-p-links">');
+    if (s.archive)
+      h.push('<a href="archive/forced-mobilization/' + esc(s.archive) +
+             '.html">자료실에서 읽기<span>강제동원의 기록</span></a>');
+    if (s.card_ref)
+      h.push('<a href="map.html?event=' + esc(s.card_ref) +
+             '">지도에서 보기<span>1876–1945 지도 사건 카드</span></a>');
+    h.push('</div>');
+
+    body.innerHTML = h.join('');
+    panel.classList.add('on');
+  }
+
+  document.getElementById('fmClose').addEventListener('click', function(){
+    panel.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>

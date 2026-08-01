@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
-  메인 페이지 1개 + 1876~1945 Event 482개 + 루트 10개 + 
+  메인 페이지 1개 + 1876~1945 Event 484개 + 루트 10개 + 
   근현대(1945~1993) 진입점 1개 + Event 475개 + 루트 10개 + 
-  현대(1994~2025) 진입점 1개 + Event 364개(루트 없음) + 
+  현대(1994~2025) 진입점 1개 + Event 374개(루트 없음) + 
   조선(1392~1875, 중세2) 진입점 1개 + Event 208개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 168개(루트 없음)를 포함한다.
   이 파일은 build/generate_unified_sitemap.py가 event/·route/ 디렉토리를
@@ -1733,6 +1733,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/event/1939-forced-mobilization-of-koreans-to-the</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/event/1939-formation-korean</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1794,6 +1799,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/event/1941-provisional-government</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/1942-forced-mobilization-of-koreans-to-the</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2511,6 +2521,26 @@
     <loc>https://atlas.mkhz.kr/joseon_thinkers.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/faq.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/agora.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/privacy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/forced_mobilization_map.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/</loc>
@@ -5308,6 +5338,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2004-miryang-gang-sexual</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2004-park-chan-wook</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5498,6 +5533,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2010-incheon-s-debt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2010-k-pop-idol</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -5514,6 +5554,16 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2010-prelude-savings-bank</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2010-seongnam-s-moratorium</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2010-seoul-s-debt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -5668,7 +5718,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2014-taebaek-o2-resort</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2015-2015-korea-japan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2015-busan-incheon-daegu</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6118,7 +6178,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-daegu-s-debt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-december-3-martial</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2024-gwangju-posts-korea</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -6208,12 +6278,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2025-yongin-light-rail</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2025-yoon-suk-yeol</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-9th-local-elections</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/contemporary/event/2026-chungbuk-s-debt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -10048,6 +10128,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/forced-mobilization</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/geonguk-jeonjaeng</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -10564,6 +10649,36 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/erased-names/yeo_un_hyung</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/forced-mobilization/fm_00_intro</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/forced-mobilization/fm_01_structure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/forced-mobilization/fm_02_sado</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/forced-mobilization/fm_03_hashima</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/forced-mobilization/fm_04_comfort_women</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/forced-mobilization/fm_05_today</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -11359,6 +11474,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/joseon-thought-history/th_17_choehangi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/joseon-thought-history/th_18_songsiyeol</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

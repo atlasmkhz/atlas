@@ -69,6 +69,7 @@ const ARCHIVE_SERIES_JOSEON_FACTION = {
   tagline: '서인 동인 남인 노론 소론, 어디서 갈라져 어디로 갔는가 — 판정 대신 선택을 묻는다',
   color: '#6b5b3e',
   hero_image: null,
+  updated: '2026-07-31',   // NEW 배지(7일) 판정용 — 포털·지도 자료실 공통
 
   posts: [
 

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광장 — 함께 만드는 ATLAS | ATLAS by MKHZ</title>
+<meta name="description" content="오류 제보, 콘텐츠 제안, 역사 토론, 질문, 응원. ATLAS를 함께 만들어가는 공간입니다. 구글·카카오·네이버 계정으로 참여하실 수 있습니다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/agora.html">
+<meta property="og:title" content="광장 — 함께 만드는 ATLAS">
+<meta property="og:description" content="제보하고, 제안하고, 토론하는 곳. 이 지도는 함께 만들어갑니다.">
+<meta property="og:url" content="https://atlas.mkhz.kr/agora.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://atlas.mkhz.kr/assets/images/portal-bg-v2.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --ink:#14110c; --paper:#f2ede3; --dim:#b8b0a2;
+    --gold:#b89860; --gold-hi:#d8b878; --line:rgba(184,152,96,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--ink);color:var(--paper);
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:inherit}
+
+  .ag-top{position:sticky;top:0;z-index:900;height:48px;display:flex;align-items:center;
+    gap:12px;padding:0 14px;background:rgba(20,17,12,.94);
+    border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+  .ag-back{font-size:13px;font-weight:700;color:var(--gold);text-decoration:none;white-space:nowrap}
+  .ag-brand{font-size:13.5px;font-weight:800;letter-spacing:.6px;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .ag-brand small{font-weight:400;color:var(--dim);font-size:11px;margin-left:6px}
+  .ag-menu{margin-left:auto;display:flex;gap:3px}
+  .ag-link{font-size:12.5px;font-weight:700;color:var(--dim);text-decoration:none;
+    padding:6px 9px;border-radius:8px;white-space:nowrap}
+  .ag-link:hover{background:rgba(184,152,96,.14);color:var(--paper)}
+
+  .ag-wrap{max-width:860px;margin:0 auto;padding:30px 18px 70px}
+
+  .ag-hero{margin-bottom:26px}
+  .ag-eyebrow{font-size:11.5px;font-weight:800;color:var(--gold);letter-spacing:2px;
+    margin-bottom:10px}
+  .ag-title{font-size:29px;font-weight:800;letter-spacing:-.6px;line-height:1.32;
+    margin-bottom:13px}
+  .ag-lead{font-size:15.5px;color:#ddd5c6;line-height:1.9}
+  .ag-lead em{color:var(--paper);font-style:normal;font-weight:700}
+
+  .ag-notice{margin:24px 0 32px;padding:18px 20px;border-radius:13px;
+    background:linear-gradient(150deg,rgba(107,143,212,.13),rgba(20,17,12,.2));
+    border:1px solid rgba(107,143,212,.3)}
+  .ag-notice-tag{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:1.2px;
+    color:#14110c;background:var(--gold-hi);padding:3px 9px;border-radius:999px;
+    margin-bottom:10px}
+  .ag-notice h2{font-size:17px;font-weight:800;margin-bottom:9px;letter-spacing:-.3px}
+  .ag-notice p{font-size:14.5px;line-height:1.85;color:#c9c1b2}
+  .ag-notice p+p{margin-top:10px}
+
+  .ag-sec-title{font-size:12px;font-weight:800;color:var(--dim);letter-spacing:1.2px;
+    margin:0 2px 12px}
+
+  .ag-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:12px}
+  .ag-card{position:relative;background:rgba(255,255,255,.03);
+    border:1px solid var(--line);border-radius:12px;padding:16px 17px;
+    border-top:3px solid var(--bc,#8a8276);opacity:.86}
+  .ag-card-badge{position:absolute;top:12px;right:13px;font-size:10px;font-weight:800;
+    color:#8d8579;background:rgba(255,255,255,.06);padding:3px 8px;border-radius:999px;
+    letter-spacing:.5px}
+  .ag-card-icon{font-size:20px;line-height:1;margin-bottom:9px}
+  .ag-card-name{font-size:16px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px}
+  .ag-card-desc{font-size:13px;line-height:1.75;color:#a99f8c}
+  .ag-card-tags{margin-top:11px;display:flex;flex-wrap:wrap;gap:5px}
+  .ag-tag{font-size:10.5px;font-weight:700;color:var(--bc,#b8b0a2);
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
+    padding:3px 8px;border-radius:999px}
+
+  .ag-rules{margin-top:34px;padding:20px;background:rgba(255,255,255,.025);
+    border:1px solid var(--line);border-radius:13px}
+  .ag-rules h2{font-size:16px;font-weight:800;margin-bottom:13px;letter-spacing:-.2px}
+  .ag-rules ol{list-style:none;counter-reset:r}
+  .ag-rules li{counter-increment:r;position:relative;padding-left:28px;
+    font-size:14.5px;line-height:1.85;color:#c9c1b2;margin-bottom:11px}
+  .ag-rules li:last-child{margin-bottom:0}
+  .ag-rules li::before{content:counter(r);position:absolute;left:0;top:3px;
+    width:19px;height:19px;border-radius:50%;background:rgba(184,152,96,.18);
+    color:var(--gold-hi);font-size:11px;font-weight:800;
+    display:flex;align-items:center;justify-content:center}
+  .ag-rules li b{color:var(--paper);font-weight:700}
+
+  .ag-login{margin-top:22px;padding:18px 20px;background:rgba(255,255,255,.02);
+    border:1px dashed var(--line);border-radius:13px}
+  .ag-login h2{font-size:14.5px;font-weight:800;margin-bottom:9px}
+  .ag-login p{font-size:13.5px;line-height:1.8;color:#a99f8c;margin-bottom:12px}
+  .ag-login-row{display:flex;flex-wrap:wrap;gap:8px}
+  .ag-oauth{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;
+    color:#8d8579;background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);padding:9px 14px;border-radius:9px}
+  .ag-oauth i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+  .ag-foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:12.5px;color:#7d766a;line-height:1.8}
+  .ag-foot a{color:var(--gold);text-decoration:none;font-weight:600}
+
+  @media (max-width:640px){
+    .ag-wrap{padding:24px 15px 56px}
+    .ag-title{font-size:24px}
+    .ag-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="ag-top">
+  <a class="ag-back" href="index.html">← 포털</a>
+  <div class="ag-brand">ATLAS <small>광장</small></div>
+  <div class="ag-menu">
+    <a class="ag-link" href="faq.html">FAQ</a>
+    <a class="ag-link" href="map.html">지도</a>
+  </div>
+</div>
+
+<div class="ag-wrap">
+
+  <header class="ag-hero">
+    <div class="ag-eyebrow">함께 만드는 ATLAS</div>
+    <h1 class="ag-title">광장</h1>
+    <p class="ag-lead">
+      ATLAS는 완성된 프로젝트가 아닙니다. 틀린 것이 있으면 고쳐야 하고,
+      빠진 것이 있으면 채워야 하며, 다르게 볼 수 있는 것은 함께 이야기해야 합니다.<br>
+      광장은 <em>그 이야기를 나누는 자리</em>입니다.
+    </p>
+  </header>
+
+  <div class="ag-notice">
+    <div class="ag-notice-tag">준비 중</div>
+    <h2>아직 문을 열지 않았습니다</h2>
+    <p>
+      구글·카카오·네이버 로그인 심사를 진행하고 있습니다.
+      세 가지가 모두 준비되면 한 번에 열 예정입니다 —
+      쓰고 싶은데 로그인 방법이 없어 돌아서는 일이 없도록 하기 위해서입니다.
+    </p>
+    <p>
+      그때까지 어떤 이야기를 나눌 수 있을지 아래에 미리 정리해 두었습니다.
+    </p>
+  </div>
+
+  <h2 class="ag-sec-title">게시판</h2>
+  <div class="ag-grid">
+
+    <div class="ag-card" style="--bc:#c8963c">
+      <span class="ag-card-badge">준비 중</span>
+      <div class="ag-card-icon">🔍</div>
+      <div class="ag-card-name">제보</div>
+      <div class="ag-card-desc">
+        틀린 연도, 잘못된 지명, 오탈자. 사소해 보여도 알려주시면 고칩니다.
+        지도 카드든 자료실 글이든 좋습니다.
+      </div>
+    </div>
+
+    <div class="ag-card" style="--bc:#7a9a4b">
+      <span class="ag-card-badge">준비 중</span>
+      <div class="ag-card-icon">💡</div>
+      <div class="ag-card-name">제안</div>
+      <div class="ag-card-desc">
+        이 사건도 넣었으면, 이 인물이 빠졌다, 우리 지역에 이런 유적이 있다.
+        사진이나 자료를 제보해 주셔도 좋습니다.
+      </div>
+    </div>
+
+    <div class="ag-card" style="--bc:#6b8fd4">
+      <span class="ag-card-badge">준비 중</span>
+      <div class="ag-card-icon">⚖️</div>
+      <div class="ag-card-name">토론</div>
+      <div class="ag-card-desc">
+        서술에 동의하지 않으실 수 있습니다. 다른 해석이 있을 수 있고요.
+        댓글에 입장을 밝히고 이야기를 이어갈 수 있습니다.
+      </div>
+      <div class="ag-card-tags">
+        <span class="ag-tag">찬성</span>
+        <span class="ag-tag">반대</span>
+        <span class="ag-tag">중립</span>
+      </div>
+    </div>
+
+    <div class="ag-card" style="--bc:#b5544a">
+      <span class="ag-card-badge">준비 중</span>
+      <div class="ag-card-icon">❓</div>
+      <div class="ag-card-name">질문</div>
+      <div class="ag-card-desc">
+        이건 왜 이렇게 표시했는지, 저 사건은 어떻게 봐야 하는지.
+        아는 만큼 답하고, 모르면 모른다고 말씀드립니다.
+      </div>
+    </div>
+
+    <div class="ag-card" style="--bc:#9a4fa0">
+      <span class="ag-card-badge">준비 중</span>
+      <div class="ag-card-icon">🌱</div>
+      <div class="ag-card-name">응원</div>
+      <div class="ag-card-desc">
+        잘 봤다는 한마디가 다음 한 편을 만듭니다.
+        혼자 만드는 지도라 특히 그렇습니다.
+      </div>
+    </div>
+
+  </div>
+
+  <section class="ag-rules">
+    <h2>광장에서 지켰으면 하는 것</h2>
+    <ol>
+      <li><b>반대는 환영합니다.</b> ATLAS는 하나의 정답을 강요하지 않습니다. 다른 견해가 나란히 놓일 때 읽는 사람이 스스로 판단할 수 있다고 믿습니다.</li>
+      <li><b>다만 근거를 들어 주세요.</b> “틀렸다”보다 “이 사료에는 이렇게 나옵니다”가 훨씬 멀리 갑니다. 반박당하지 않는 글은 근거가 있는 글입니다.</li>
+      <li><b>사람이 아니라 주장을 다뤄 주세요.</b> 어떤 주장에 대한 반박은 얼마든지 좋지만, 그 주장을 한 사람을 향한 공격은 토론을 끝나게 만듭니다.</li>
+      <li><b>제보에는 위치를 함께 적어 주세요.</b> 어느 지도의 어느 카드인지, 어느 자료실 글인지 알려주시면 훨씬 빨리 고칠 수 있습니다.</li>
+      <li><b>지운다면 이런 경우입니다.</b> 욕설과 인신공격, 광고, 그리고 근거 없이 반복되는 시비. 그 외에는 불편한 의견이라도 남겨둡니다.</li>
+    </ol>
+  </section>
+
+  <section class="ag-login">
+    <h2>로그인이 필요한 이유</h2>
+    <p>
+      익명으로 열어두면 글은 늘겠지만 대화는 줄어듭니다.
+      최소한의 로그인은 진입장벽이 아니라, 이야기를 이어갈 수 있게 하는 장치라고 생각했습니다.
+      가입 절차 없이 이미 쓰고 계신 계정으로 바로 참여하실 수 있습니다.
+    </p>
+    <div class="ag-login-row">
+      <span class="ag-oauth"><i style="background:#4285f4"></i>구글 — 준비 중</span>
+      <span class="ag-oauth"><i style="background:#fee500"></i>카카오 — 준비 중</span>
+      <span class="ag-oauth"><i style="background:#03c75a"></i>네이버 — 준비 중</span>
+    </div>
+  </section>
+
+  <div class="ag-foot">
+    ATLAS by MKHZ — 지도 위에서 다시 읽는 한국사<br>
+    <a href="index.html">포털</a> · <a href="faq.html">FAQ</a> · <a href="map.html">지도</a> · <a href="privacy.html">개인정보 처리방침</a>
+  </div>
+
+</div>
+
+</body>
+</html>

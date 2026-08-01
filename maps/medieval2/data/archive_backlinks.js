@@ -206,6 +206,13 @@ const ARCHIVE_BACKLINKS = {
       "title": "허균 — 두려워해야 할 것은 호민이다"
     }
   ],
+  "massacre_1689_02": [
+    {
+      "url": "../../archive/joseon-thought-history/th_18_songsiyeol.html",
+      "series": "조선 사상사",
+      "title": "송시열과 예학 — 주자를 지킨다는 것"
+    }
+  ],
   "massacre_1801_01": [
     {
       "url": "../../archive/joseon-thought-history/th_16_jeongyagyong.html",

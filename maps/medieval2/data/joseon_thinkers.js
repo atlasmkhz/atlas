@@ -123,6 +123,19 @@ window.JOSEON_THINKERS = {
       archive: 'th_07_yiyi', card_ref: 'political_1575_01', exiles: [],
     },
 
+    {
+      id: 'tk_gidaeseung', name: '기대승', years: '1527~1572', school: 'giho',
+      base: '전라도 광주 (고봉)', lat: 35.1600, lng: 126.8510, precise: true,
+      one_line: '이황과 8년간 편지를 주고받으며 사단칠정 논쟁을 만들었다.',
+      archive: 'th_06_yihwang_josik', card_ref: 'culture_1568_01', exiles: [],
+    },
+    {
+      id: 'tk_seonghon', name: '성혼', years: '1535~1598', school: 'giho',
+      base: '경기도 파주 우계', lat: 37.8600, lng: 126.8000, precise: true,
+      one_line: '이이의 벗이자 논적. 서인 학맥의 또 하나의 뿌리가 되었다.',
+      archive: 'th_07_yiyi', card_ref: 'political_1575_01', exiles: [],
+    },
+
     // ── 16~17세기 — 이단으로 몰린 사상 ───────────────────────
     {
       id: 'tk_jeongingong', name: '정인홍', years: '1536~1623', school: 'nammyeong',
@@ -177,6 +190,39 @@ window.JOSEON_THINKERS = {
       base: '강화 하곡', lat: 37.7470, lng: 126.4850, precise: true,
       one_line: '조선에서 유일하게 양명학을 학파로 세웠다 — 강화학파.',
       archive: 'th_13_gangwha', card_ref: 'culture_1709_01', exiles: [],
+    },
+
+    {
+      id: 'tk_kimjangsaeng', name: '김장생', years: '1548~1631', school: 'giho',
+      base: '충청도 연산 (논산)', lat: 36.2010, lng: 127.1990, precise: true,
+      one_line: '조선 예학(禮學)의 종장. 그의 예론이 예송논쟁의 토대가 되었다.',
+      archive: 'th_18_songsiyeol', card_ref: null, exiles: [],
+    },
+    {
+      id: 'tk_songsiyeol', name: '송시열', years: '1607~1689', school: 'giho',
+      base: '충청도 회덕 (대전) · 괴산 화양동', lat: 36.3504, lng: 127.3845, precise: true,
+      one_line: '주자를 절대화하고 북벌을 내걸었다. 조선 후기를 가장 오래 지배한 사상.',
+      archive: 'th_18_songsiyeol', card_ref: 'massacre_1689_02',
+      exiles: [
+        { to: '제주', lat: 33.4996, lng: 126.5312, year: 1689, note: '기사환국으로 유배' },
+        { to: '전라도 정읍', lat: 35.5699, lng: 126.8560, year: 1689, note: '국문을 위해 압송되던 중 사약을 받았다', kind: 'death' },
+      ],
+    },
+    {
+      id: 'tk_heomok', name: '허목', years: '1595~1682', school: 'yeongnam',
+      base: '경기도 연천 · 한양', lat: 38.0960, lng: 127.0750, precise: false,
+      one_line: '남인의 영수. 예송에서 왕은 사대부와 다르다고 맞섰다.',
+      archive: 'th_18_songsiyeol', card_ref: 'political_1659_02', exiles: [],
+    },
+    {
+      id: 'tk_yunseondo', name: '윤선도', years: '1587~1671', school: 'yeongnam',
+      base: '전라도 해남 녹우당', lat: 34.5730, lng: 126.6000, precise: true,
+      one_line: '어부사시사의 시인이자 남인 논객. 세 차례 유배를 살았다.',
+      archive: 'th_18_songsiyeol', card_ref: null,
+      exiles: [
+        { to: '함경도 삼수', lat: 41.3000, lng: 128.1000, year: 1660, note: '예송에서 서인을 공격하다 유배' },
+        { to: '전라도 보길도', lat: 34.1490, lng: 126.5390, year: 1667, note: '해배 후 은거하며 어부사시사를 지었다' },
+      ],
     },
 
     // ── 17~18세기 — 실학의 태동 ──────────────────────────────
@@ -240,5 +286,21 @@ window.JOSEON_THINKERS = {
       archive: 'th_17_choehangi', card_ref: 'culture_1857_01', exiles: [],
     },
 
+    {
+      id: 'tk_imseongju', name: '임성주', years: '1711~1788', school: 'gi',
+      base: '충청도 청주 · 공주', lat: 36.6420, lng: 127.4890, precise: false,
+      one_line: '서경덕의 기(氣) 철학을 조선 후기에 다시 세웠다.',
+      archive: 'th_17_choehangi', card_ref: null, exiles: [],
+    },
+    {
+      id: 'tk_kimjeonghui', name: '김정희', years: '1786~1856', school: 'silhak',
+      base: '충청도 예산 (추사고택)', lat: 36.7060, lng: 126.8420, precise: true,
+      one_line: '금석문을 실증으로 읽어냈다. 추사체와 세한도의 학예일치.',
+      archive: 'th_17_choehangi', card_ref: null,
+      exiles: [
+        { to: '제주 대정', lat: 33.2280, lng: 126.2540, year: 1840, note: '9년 유배 — 이 시기에 추사체가 완성되고 세한도가 나왔다' },
+        { to: '함경도 북청', lat: 40.2260, lng: 128.5330, year: 1851, note: '두 번째 유배' },
+      ],
+    },
   ],
 };

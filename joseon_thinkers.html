@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>조선 사상가 분포도 — 누가 어디에서 살았는가 | ATLAS by MKHZ</title>
-<meta name="description" content="안향에서 최한기까지 조선 사상가 27명이 나고 자라고 가르친 곳을 전국 지도 한 장에 담았습니다. 유배를 간 사람은 그 동선까지 함께 보여줍니다. 학파별로 걸러 보면 영남과 기호의 지역색이 드러납니다.">
+<meta name="description" content="안향에서 최한기까지 조선 사상가 35명이 나고 자라고 가르친 곳을 전국 지도 한 장에 담았습니다. 유배를 간 사람은 그 동선까지 함께 보여줍니다. 학파별로 걸러 보면 영남과 기호의 지역색이 드러납니다.">
 <link rel="canonical" href="https://atlas.mkhz.kr/joseon_thinkers.html">
 <meta property="og:title" content="조선 사상가 분포도 — 누가 어디에서 살았는가">
-<meta property="og:description" content="사상에도 지도가 있다. 27명의 연고지와 유배 동선.">
+<meta property="og:description" content="사상에도 지도가 있다. 35명의 연고지와 유배 동선.">
 <meta property="og:url" content="https://atlas.mkhz.kr/joseon_thinkers.html">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://atlas.mkhz.kr/assets/images/route/route_joseon_thinkers_hero.webp">
@@ -40,35 +40,48 @@
 
   #map{position:absolute;top:48px;left:0;right:0;bottom:0;background:#0e0c09}
 
-  /* 학파 필터 */
-  .tk-filter{position:absolute;top:58px;left:10px;z-index:800;
-    max-width:min(280px,58vw);max-height:calc(100% - 120px);overflow-y:auto;
+  /* 범례 — 오른쪽 (2026-08-01 왕두목 요청) */
+  .tk-filter{position:absolute;top:58px;right:10px;z-index:800;
+    width:min(232px,52vw);max-height:calc(100% - 118px);overflow-y:auto;
     background:rgba(20,17,12,.9);border:1px solid var(--line);border-radius:11px;
     padding:9px 10px;backdrop-filter:blur(8px)}
   .tk-filter h2{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.5px;
-    margin-bottom:7px;text-transform:none}
+    margin-bottom:7px}
   .tk-chip{display:flex;align-items:center;gap:7px;width:100%;text-align:left;
-    background:none;border:none;color:var(--paper);font-size:12px;font-weight:600;
-    padding:5px 6px;border-radius:7px;cursor:pointer;line-height:1.35;
-    font-family:inherit}
+    background:none;border:none;color:var(--paper);font-size:11.5px;font-weight:600;
+    padding:5px 6px;border-radius:7px;cursor:pointer;line-height:1.35;font-family:inherit}
   .tk-chip:hover{background:rgba(184,152,96,.13)}
-  .tk-chip.off{opacity:.34}
-  .tk-chip i{width:11px;height:11px;border-radius:50%;flex:0 0 11px;
+  .tk-chip.off{opacity:.32}
+  .tk-chip i{width:10px;height:10px;border-radius:50%;flex:0 0 10px;
     border:1.5px solid rgba(255,255,255,.35)}
   .tk-filter-foot{margin-top:7px;padding-top:7px;border-top:1px solid var(--line);
-    font-size:11px;color:#7d766a;line-height:1.55}
+    font-size:10.5px;color:#7d766a;line-height:1.6}
 
-  .tk-toggle{position:absolute;top:58px;left:10px;z-index:801;display:none;
+  .tk-toggle{position:absolute;top:58px;right:10px;z-index:801;display:none;
     background:rgba(20,17,12,.92);border:1px solid var(--line);color:var(--paper);
     font-size:12px;font-weight:700;padding:8px 11px;border-radius:9px;cursor:pointer;
     font-family:inherit}
 
-  /* 마커 */
-  .tk-pin{border-radius:50%;border:2px solid rgba(20,17,12,.85);
-    box-shadow:0 2px 7px rgba(0,0,0,.55)}
-  .tk-label{position:absolute;left:50%;transform:translateX(-50%);top:17px;
+  /* 마커 — 라벨은 겹침 판정을 통과한 것만 보인다 */
+  .tk-pin{width:13px;height:13px;border-radius:50%;
+    border:2px solid rgba(20,17,12,.9);box-shadow:0 2px 7px rgba(0,0,0,.6)}
+  .tk-wrap{position:relative}
+  .tk-label{position:absolute;left:50%;transform:translateX(-50%);top:16px;
     font-size:10.5px;font-weight:800;color:#fff;white-space:nowrap;
-    text-shadow:0 1px 3px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.8);pointer-events:none}
+    text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 7px rgba(0,0,0,.9);pointer-events:none}
+  .tk-label.hide{display:none}
+  /* 겹침 지점에서 펼쳐진 마커를 원래 자리와 잇는 실 */
+  .tk-leg{stroke-dasharray:2 3}
+
+  /* 바다·섬 라벨 (직접 그린다 — 타일은 라벨 없는 것을 쓴다) */
+  .tk-sea{font-size:12px;font-weight:700;color:rgba(190,205,225,.62);
+    letter-spacing:3px;white-space:nowrap;pointer-events:none;
+    text-shadow:0 1px 4px rgba(0,0,0,.75)}
+  .tk-isle{font-size:10.5px;font-weight:700;color:rgba(214,226,240,.82);
+    white-space:nowrap;pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .tk-isle::before{content:'';display:inline-block;width:4px;height:4px;
+    border-radius:50%;background:rgba(214,226,240,.85);margin-right:4px;
+    vertical-align:middle}
 
   /* 상세 패널 */
   .tk-panel{position:absolute;right:0;top:48px;bottom:0;width:min(392px,92vw);z-index:950;
@@ -101,7 +114,7 @@
   .tk-p-links a span{display:block;font-weight:400;font-size:12px;color:var(--dim);margin-top:2px}
 
   @media (max-width:640px){
-    .tk-filter{display:none;top:96px;max-width:74vw}
+    .tk-filter{display:none;top:96px;width:74vw}
     .tk-filter.open{display:block}
     .tk-toggle{display:block}
   }
@@ -127,7 +140,8 @@
   <div id="tkChips"></div>
   <div class="tk-filter-foot">
     점은 그 사람이 나고 자라고 가르친 곳입니다.<br>
-    붉은 점선은 유배 동선입니다.
+    옅은 붉은 점선은 유배 동선입니다.<br>
+    한곳에 여럿이 모인 지점은 확대하면 펼쳐집니다.
   </div>
 </div>
 
@@ -146,67 +160,103 @@
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
 
   var map = L.map('map', { zoomControl: true, attributionControl: false })
-    .setView([36.6, 127.8], 7);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    .setView([36.5, 128.4], 7);
+
+  // 라벨 없는 타일을 쓴다 — 현대 지명이 조선 사상가 분포를 덮지 않도록.
+  // (왕두목 요청 2026-08-01) 대신 동해·독도 등 필요한 라벨만 직접 얹는다.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
     maxZoom: 11, subdomains: 'abcd', crossOrigin: true, errorTileUrl: ''
   }).addTo(map);
 
-  // 학파별 표시 상태
-  var on = {};
-  Object.keys(S).forEach(function(k){ on[k] = true; });
+  // ── 바다·섬 라벨 ───────────────────────────────────────────
+  function seaLabel(lat, lng, text, cls, size){
+    L.marker([lat, lng], {
+      interactive: false,
+      icon: L.divIcon({ className: '', iconSize: size,
+        html: '<div class="' + cls + '">' + esc(text) + '</div>' })
+    }).addTo(map);
+  }
+  seaLabel(38.6, 131.4, '동  해', 'tk-sea', [90, 18]);
+  seaLabel(34.6, 124.6, '황  해', 'tk-sea', [90, 18]);
+  seaLabel(33.3, 128.2, '남  해', 'tk-sea', [90, 18]);
+  seaLabel(37.2416, 131.8664, '독도', 'tk-isle', [50, 14]);
+  seaLabel(37.4787, 130.9055, '울릉도', 'tk-isle', [56, 14]);
 
-  var layers = [];   // { school, marker, lines[] }
+  // ── 유배 동선 ──────────────────────────────────────────────
+  // 이전 버전은 선이 진하고(투명도 .72, 굵기 2) 색이 강해 서로 얽혀
+  // 보였다. 옅게 깔고, 마우스를 올리거나 그 사람을 선택했을 때만
+  // 또렷해지도록 바꾼다.
+  var exileLayer = L.layerGroup().addTo(map);
+
+  var entries = [];   // { t, marker, labelEl, lines[], dots[] }
 
   function pinIcon(color, name){
     return L.divIcon({
-      className: '',
-      iconSize: [14, 14],
-      iconAnchor: [7, 7],
-      html: '<div style="position:relative"><div class="tk-pin" style="width:14px;height:14px;' +
-            'background:' + color + '"></div><div class="tk-label">' + esc(name) + '</div></div>'
+      className: '', iconSize: [13, 13], iconAnchor: [6.5, 6.5],
+      html: '<div class="tk-wrap"><div class="tk-pin" style="background:' + color + '"></div>' +
+            '<div class="tk-label">' + esc(name) + '</div></div>'
     });
   }
 
   T.forEach(function(t){
     var col = (S[t.school] || {}).color || '#8a8276';
-    var m = L.marker([t.lat, t.lng], { icon: pinIcon(col, t.name) }).addTo(map);
+    var m = L.marker([t.lat, t.lng], { icon: pinIcon(col, t.name), riseOnHover: true }).addTo(map);
+    m._home = [t.lat, t.lng];
+    m._tid = t.id;
     m.on('click', function(){ openThinker(t.id); });
 
-    // 유배 동선 — 붉은 점선. 기점은 연고지.
-    var lines = [];
+    var lines = [], dots = [];
     var from = [t.lat, t.lng];
     (t.exiles || []).forEach(function(e){
       var line = L.polyline([from, [e.lat, e.lng]], {
-        color: e.kind === 'death' ? '#9a4fa0' : '#c44536',
-        weight: 2, opacity: 0.72, dashArray: '5 6', interactive: false
-      }).addTo(map);
+        color: e.kind === 'death' ? '#8f5f96' : '#a8564a',
+        weight: 1.2, opacity: 0.26, dashArray: '3 6', interactive: false
+      }).addTo(exileLayer);
       var dot = L.circleMarker([e.lat, e.lng], {
-        radius: 4, color: '#c44536', weight: 1.5,
-        fillColor: '#c44536', fillOpacity: 0.75
-      }).addTo(map);
-      dot.bindTooltip(t.name + ' — ' + e.to + ' (' + e.year + ')',
-        { direction: 'top', className: 'tk-tt' });
-      lines.push(line, dot);
-      from = [e.lat, e.lng];   // 이배(移配)는 이어서 그린다
+        radius: 2.6, color: '#a8564a', weight: 1, opacity: 0.42,
+        fillColor: '#a8564a', fillOpacity: 0.34
+      }).addTo(exileLayer);
+      dot.bindTooltip(t.name + ' — ' + e.to + ' (' + e.year + ')', { direction: 'top' });
+      lines.push(line); dots.push(dot);
+      from = [e.lat, e.lng];
     });
 
-    layers.push({ school: t.school, marker: m, lines: lines });
+    var en = { t: t, marker: m, lines: lines, dots: dots };
+    entries.push(en);
+    m.on('mouseover', function(){ highlight(en, true); });
+    m.on('mouseout',  function(){ if (activeId !== t.id) highlight(en, false); });
   });
 
-  function applyFilter(){
-    layers.forEach(function(L2){
-      var show = on[L2.school];
-      if (show) {
-        if (!map.hasLayer(L2.marker)) map.addLayer(L2.marker);
-        L2.lines.forEach(function(l){ if (!map.hasLayer(l)) map.addLayer(l); });
-      } else {
-        if (map.hasLayer(L2.marker)) map.removeLayer(L2.marker);
-        L2.lines.forEach(function(l){ if (map.hasLayer(l)) map.removeLayer(l); });
-      }
+  var activeId = null;
+  function highlight(en, on){
+    en.lines.forEach(function(l){
+      l.setStyle(on ? { opacity: 0.85, weight: 2 } : { opacity: 0.26, weight: 1.2 });
+      if (on && l.bringToFront) l.bringToFront();
+    });
+    en.dots.forEach(function(d){
+      d.setStyle(on ? { opacity: 0.95, fillOpacity: 0.9, radius: 4 }
+                    : { opacity: 0.42, fillOpacity: 0.34, radius: 2.6 });
     });
   }
 
-  // 학파 칩
+  // ── 학파 필터 ──────────────────────────────────────────────
+  var on = {};
+  Object.keys(S).forEach(function(k){ on[k] = true; });
+
+  function applyFilter(){
+    entries.forEach(function(en){
+      var show = on[en.t.school];
+      if (show) {
+        if (!map.hasLayer(en.marker)) map.addLayer(en.marker);
+        en.lines.concat(en.dots).forEach(function(l){ if (!exileLayer.hasLayer(l)) exileLayer.addLayer(l); });
+      } else {
+        if (map.hasLayer(en.marker)) map.removeLayer(en.marker);
+        en.lines.concat(en.dots).forEach(function(l){ if (exileLayer.hasLayer(l)) exileLayer.removeLayer(l); });
+      }
+    });
+    declutter();
+  }
+
   var chips = document.getElementById('tkChips');
   chips.innerHTML = Object.keys(S).map(function(k){
     var n = T.filter(function(t){ return t.school === k; }).length;
@@ -222,17 +272,98 @@
     b.classList.toggle('off', !on[k]);
     applyFilter();
   });
-
   document.getElementById('tkToggle').addEventListener('click', function(){
     document.getElementById('tkFilter').classList.toggle('open');
   });
+
+  // ── 겹침 해소 ──────────────────────────────────────────────
+  // 두 단계로 처리한다.
+  //  1) 마커 펼치기 — 같은 자리에 여럿이면 원형으로 벌리고 원래 자리와
+  //     실선으로 잇는다(항일무장투쟁 총람과 같은 방식).
+  //  2) 라벨 숨기기 — 펼친 뒤에도 이름표끼리 부딪히면 뒤엣것을 감춘다.
+  //     확대하면 자리가 생겨 저절로 다시 나타난다.
+  //  한양 일대에 정도전·박제가·최한기가, 개성에 이제현·서경덕이,
+  //  강릉에 이이·허균이 겹쳐 이름이 안 보이던 문제를 이걸로 푼다.
+  var legLines = [];
+
+  function declutter(){
+    legLines.forEach(function(l){ map.removeLayer(l); });
+    legLines = [];
+
+    var vis = entries.filter(function(en){ return map.hasLayer(en.marker); });
+    vis.forEach(function(en){ en.marker.setLatLng(L.latLng(en.marker._home[0], en.marker._home[1])); });
+
+    // 1) 펼치기
+    var pts = vis.map(function(en){
+      return { en: en, p: map.latLngToLayerPoint(L.latLng(en.marker._home)) };
+    });
+    var used = new Array(pts.length).fill(false);
+    var TH = 26;
+    for (var i = 0; i < pts.length; i++) {
+      if (used[i]) continue;
+      var grp = [i];
+      for (var j = i + 1; j < pts.length; j++) {
+        if (used[j]) continue;
+        var dx = pts[i].p.x - pts[j].p.x, dy = pts[i].p.y - pts[j].p.y;
+        if (Math.sqrt(dx*dx + dy*dy) < TH) { grp.push(j); used[j] = true; }
+      }
+      used[i] = true;
+      if (grp.length > 1) {
+        var cx = pts[i].p.x, cy = pts[i].p.y;
+        var origin = map.layerPointToLatLng(L.point(cx, cy));
+        var r = Math.max(20, grp.length * 8.5);
+        grp.forEach(function(gi, k){
+          var a = (2 * Math.PI * k) / grp.length - Math.PI / 2;
+          var np = L.point(cx + r * Math.cos(a), cy + r * Math.sin(a));
+          var nl = map.layerPointToLatLng(np);
+          pts[gi].en.marker.setLatLng(nl);
+          var leg = L.polyline([origin, nl], {
+            color: (S[pts[gi].en.t.school] || {}).color || '#b89860',
+            weight: 1, opacity: 0.38, interactive: false, className: 'tk-leg'
+          }).addTo(map);
+          legLines.push(leg);
+        });
+      }
+    }
+
+    // 2) 라벨 충돌 판정 — 화면 좌표로 사각형을 잡아 겹치면 뒤엣것 숨김
+    var boxes = [];
+    vis.forEach(function(en){
+      var el = en.marker.getElement();
+      if (!el) return;
+      var lab = el.querySelector('.tk-label');
+      if (!lab) return;
+      lab.classList.remove('hide');
+      var p = map.latLngToContainerPoint(en.marker.getLatLng());
+      var w = en.t.name.length * 11 + 8, h = 14;
+      var box = { x1: p.x - w/2, x2: p.x + w/2, y1: p.y + 14, y2: p.y + 14 + h };
+      var hit = boxes.some(function(b){
+        return !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2);
+      });
+      if (hit) lab.classList.add('hide'); else boxes.push(box);
+    });
+  }
+
+  map.on('zoomend moveend', declutter);
+  map.whenReady(function(){ setTimeout(declutter, 60); });
 
   // ── 상세 패널 ──────────────────────────────────────────────
   var panel = document.getElementById('tkPanel');
   var body = document.getElementById('tkPanelBody');
 
   function openThinker(id){
-    var t = T.find(function(x){ return x.id === id; }); if (!t) return;
+    var t = null;
+    for (var i = 0; i < T.length; i++) if (T[i].id === id) { t = T[i]; break; }
+    if (!t) return;
+
+    if (activeId) {
+      var prev = entries.filter(function(e){ return e.t.id === activeId; })[0];
+      if (prev) highlight(prev, false);
+    }
+    activeId = id;
+    var cur = entries.filter(function(e){ return e.t.id === id; })[0];
+    if (cur) highlight(cur, true);
+
     var sc = S[t.school] || {};
     var h = [];
     h.push('<div class="tk-p-name">' + esc(t.name) + '</div>');
@@ -267,6 +398,11 @@
 
   document.getElementById('tkClose').addEventListener('click', function(){
     panel.classList.remove('on');
+    if (activeId) {
+      var cur = entries.filter(function(e){ return e.t.id === activeId; })[0];
+      if (cur) highlight(cur, false);
+      activeId = null;
+    }
   });
 })();
 </script>

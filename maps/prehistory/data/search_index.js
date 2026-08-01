@@ -3767,6 +3767,15 @@ const SEARCH_INDEX = [
     "url": "/map.html?event=massacre_1939_02"
   },
   {
+    "id": "policy_1939_04",
+    "title_ko": "사도광산 조선인 강제동원 시작",
+    "people": [],
+    "year": 1939,
+    "mapKey": "modern1",
+    "mapLabel": "근대 (1876~1945)",
+    "url": "/map.html?event=policy_1939_04"
+  },
+  {
     "id": "political_1940_01",
     "title_ko": "한국독립당 통합 — 마침내 하나로",
     "people": [
@@ -3879,6 +3888,15 @@ const SEARCH_INDEX = [
     "mapKey": "modern1",
     "mapLabel": "근대 (1876~1945)",
     "url": "/map.html?event=battle_1942_01"
+  },
+  {
+    "id": "policy_1942_04",
+    "title_ko": "남양군도 조선인 강제동원",
+    "people": [],
+    "year": 1942,
+    "mapKey": "modern1",
+    "mapLabel": "근대 (1876~1945)",
+    "url": "/map.html?event=policy_1942_04"
   },
   {
     "id": "political_1943_01",
@@ -14148,6 +14166,15 @@ const SEARCH_INDEX = [
     "mapKey": "contemporary",
     "mapLabel": "현대 (1994~)",
     "url": "/maps/contemporary/index.html?event=person_2004_05"
+  },
+  {
+    "id": "massacre_2004_03",
+    "title_ko": "밀양 집단 성폭력 사건 — 형사처벌 없이 끝난 수사",
+    "people": [],
+    "year": 2004,
+    "mapKey": "contemporary",
+    "mapLabel": "현대 (1994~)",
+    "url": "/maps/contemporary/index.html?event=massacre_2004_03"
   },
   {
     "id": "political_2005_01",

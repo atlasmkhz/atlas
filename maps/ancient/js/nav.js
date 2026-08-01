@@ -115,7 +115,7 @@
   // 가리키는 게 아니라 "묶음"이라는 걸 UI로도 분명히 하기 위해서다).
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records'] },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records', 'forced_mobilization'] },
       // ── 시대연구 2분할 (2026-07-31, 왕두목 지시) ────────────────
       // 왕두목 지적: "지금 있는 시대연구는 주로 현대시대연구이네."
       // 확인 결과 기존 era_study 8개 시리즈 전부가 현대사였다(6개가
@@ -617,8 +617,14 @@
     const statusText = ready ? `${series.posts.length}편` : '준비 중';
     const disabledClass = ready ? '' : ' disabled';
     const name = series ? series.name : seriesId;
+    // 2026-08-01: 새로 올린 자료실 시리즈에도 7일간 NEW 배지를 붙인다.
+    // 시리즈 객체에 updated:'YYYY-MM-DD'만 적으면 되고 기간이 지나면
+    // 저절로 사라진다(루트 허브·포털과 같은 규칙).
+    const badge = (series && typeof routeNewBadge === 'function')
+      ? routeNewBadge(series.updated) : '';
     return `
       <button type="button" class="era-card-item${disabledClass}" data-series-id="${seriesId}">
+        ${badge}
         <span class="era-card-name">${name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;

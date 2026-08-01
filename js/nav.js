@@ -48,6 +48,9 @@
     // 단체가 100곳으로 늘어도 루트는 계속 이 하나다 —
     // 데이터(armed_groups.js + armed_group_events.js)만 늘어난다.
     { routeId:'armed_struggle', name:'항일무장투쟁', period:'1911–1945', tagline:'독립군은 하나가 아니었다 — 연표를 끌어 그 해의 만주를 본다', ready:true, thumbnail:null, href:'armed_struggle.html' },
+    // 2026-08-01 「강제동원 분포도」 — 동선이 아니라 분포다.
+    // 어디로 끌려갔는가를 한 장에 놓는다(사상가 분포도와 같은 형식).
+    { routeId:'forced_mobilization', name:'강제동원 분포도', period:'1938–1945', tagline:'사도광산에서 남양군도까지 — 어디로 끌려갔는가', ready:true, thumbnail:null, updated:'2026-08-01', href:'forced_mobilization_map.html' },
     { routeId:'hong_beom_do',       name:'홍범도',      period:'1868–2021', tagline:'포수에서 현충원까지', ready:true, thumbnail:null },
     { routeId:'kim_gu',             name:'백범 김구',    period:'1876–1949', tagline:'상놈의 아들에서 임시정부의 얼굴로', ready:true, thumbnail:null },
     { routeId:'kim_won_bong',       name:'김원봉',      period:'1898–1958', tagline:'의열단을 만든 사람, 두 번 지워진 이름', ready:true, thumbnail:null },
@@ -99,7 +102,7 @@
   // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
   const ARCHIVE_SUBCATEGORIES = {
     history: [
-      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records'] },
+      { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records', 'forced_mobilization'] },
       // ── 시대연구 2분할 (2026-07-31, 왕두목 지시) ────────────────
       // 왕두목 지적: "지금 있는 시대연구는 주로 현대시대연구이네."
       // 확인 결과 기존 era_study 8개 시리즈 전부가 현대사였다(6개가
@@ -214,8 +217,14 @@
     const statusText = ready ? `${series.posts.length}편` : '준비 중';
     const disabledClass = ready ? '' : ' disabled';
     const name = series ? series.name : seriesId;
+    // 2026-08-01: 새로 올린 자료실 시리즈에도 7일간 NEW 배지를 붙인다.
+    // 시리즈 객체에 updated:'YYYY-MM-DD'만 적으면 되고 기간이 지나면
+    // 저절로 사라진다(루트 허브·포털과 같은 규칙).
+    const badge = (series && typeof routeNewBadge === 'function')
+      ? routeNewBadge(series.updated) : '';
     return `
       <button type="button" class="era-card-item${disabledClass}" data-series-id="${seriesId}">
+        ${badge}
         <span class="era-card-name">${name}</span>
         <span class="era-card-status ${statusClass}">${statusText}</span>
       </button>`;
