@@ -128,6 +128,24 @@
   .ag-cbtn{display:flex;align-items:center;gap:6px;background:none;border:none;
     color:#8d8579;font-size:13px;font-weight:600;cursor:pointer;padding:4px 0}
   .ag-cbtn:hover{color:var(--paper)}
+  .ag-own-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+  .ag-own-actions .ag-link{font-size:12px;padding:0}
+  .ag-edit-form{padding:0 17px 15px}
+  .ag-edit-form input[type=text]{width:100%;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:14.5px;
+    color:var(--paper);margin-bottom:7px;font-family:inherit}
+  .ag-edit-form textarea{width:100%;min-height:80px;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px;
+    color:var(--paper);line-height:1.7;resize:vertical;font-family:inherit;margin-bottom:7px}
+  .ag-edit-form input:focus,.ag-edit-form textarea:focus{outline:none;border-color:var(--gold)}
+  .ag-edit-foot{display:flex;gap:8px}
+  .ag-edit-foot button{font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:8px;
+    cursor:pointer}
+  .ag-edit-save{background:var(--gold-hi);color:var(--ink);border:none}
+  .ag-edit-cancel{background:none;border:1px solid var(--line);color:#8d8579}
+  .ag-post-edited{font-size:10.5px;color:#7d766a;margin-left:4px}
+  .ag-admin-link{color:#c9757a!important}
+  .ag-admin-link:hover{color:#e08a8f!important}
 
   .ag-comments{border-top:1px solid var(--line);padding:14px 17px 16px;display:none}
   .ag-comments.on{display:block}
@@ -306,6 +324,11 @@
     { key: 'cheer',    label: '응원', color: '#9a4fa0', icon: '🌱' },
   ];
   var boardMap = {}; BOARDS.forEach(function(b){ boardMap[b.key] = b; });
+
+  var ADMIN_UID = 'c2b23ccd-ca6a-4e52-84e5-79bad6d8e310';
+  function isAdmin(){
+    return !!(state.session && state.session.user && state.session.user.id === ADMIN_UID);
+  }
 
   var state = {
     session: null, profile: null, currentBoard: 'all', posts: [], counts: {},
@@ -523,6 +546,12 @@
       if (!el) return;
       var cbtn = el.querySelector('.ag-cbtn[data-act=comment]');
       if (cbtn) cbtn.addEventListener('click', function(){ toggleComments(p.id, p.board); });
+      var ebtn = el.querySelector('[data-act=edit-post]');
+      if (ebtn) ebtn.addEventListener('click', function(){ agStartEditPost(p.id); });
+      var dbtn = el.querySelector('[data-act=delete-post]');
+      if (dbtn) dbtn.addEventListener('click', function(){ agDeletePost(p.id); });
+      var adbtn = el.querySelector('[data-act=admin-delete-post]');
+      if (adbtn) adbtn.addEventListener('click', function(){ agDeletePost(p.id); });
     });
   }
 
@@ -531,16 +560,29 @@
     var targetHtml = p.target_title
       ? '<div class="ag-post-target">📎 <a href="' + esc(p.target_url||'#') + '">' + esc(p.target_title) + '</a></div>'
       : '';
+    var isOwn = state.session && p.user_id === state.session.user.id;
+    var editedHtml = (p.updated_at && p.updated_at !== p.created_at)
+      ? '<span class="ag-post-edited">(수정됨)</span>' : '';
+    var ownActionsHtml = isOwn
+      ? '<span class="ag-own-actions">' +
+          '<button class="ag-link" data-act="edit-post" data-postid="' + p.id + '">수정</button>' +
+          '<button class="ag-link" data-act="delete-post" data-postid="' + p.id + '">삭제</button>' +
+        '</span>'
+      : (isAdmin()
+          ? '<span class="ag-own-actions"><button class="ag-link ag-admin-link" data-act="admin-delete-post" data-postid="' + p.id + '">🛡️ 관리자 삭제</button></span>'
+          : '');
     return (
       '<article class="ag-post" id="ag-post-' + p.id + '">' +
         '<div class="ag-post-head">' +
           '<span class="ag-badge" style="--bc:' + b.color + '">' + b.icon + ' ' + b.label + '</span>' +
           '<span class="ag-post-nick">' + esc(p.nickname) + '</span>' +
-          '<span class="ag-post-time">' + timeAgo(p.created_at) + '</span>' +
+          '<span class="ag-post-time">' + timeAgo(p.created_at) + editedHtml + '</span>' +
+          ownActionsHtml +
         '</div>' +
-        '<div class="ag-post-title">' + esc(p.title) + '</div>' +
-        targetHtml +
-        '<div class="ag-post-body">' + esc(p.body) + '</div>' +
+        '<div class="ag-post-title" id="ag-post-title-' + p.id + '">' + esc(p.title) + '</div>' +
+        '<div id="ag-post-target-' + p.id + '">' + targetHtml + '</div>' +
+        '<div class="ag-post-body" id="ag-post-body-' + p.id + '">' + esc(p.body) + '</div>' +
+        '<div id="ag-post-editform-' + p.id + '"></div>' +
         '<div class="ag-post-foot">' +
           '<button class="ag-cbtn" data-act="comment">💬 댓글</button>' +
         '</div>' +
@@ -548,6 +590,69 @@
       '</article>'
     );
   }
+
+  function findPost(postId){
+    for (var i = 0; i < state.posts.length; i++) if (state.posts[i].id === postId) return state.posts[i];
+    return null;
+  }
+
+  window.agStartEditPost = function(postId){
+    var p = findPost(postId);
+    if (!p) return;
+    document.getElementById('ag-post-title-' + postId).style.display = 'none';
+    document.getElementById('ag-post-body-' + postId).style.display = 'none';
+    var host = document.getElementById('ag-post-editform-' + postId);
+    host.innerHTML =
+      '<div class="ag-edit-form">' +
+        '<input type="text" id="ag-etitle-' + postId + '" value="' + esc(p.title) + '">' +
+        '<textarea id="ag-ebody-' + postId + '">' + esc(p.body) + '</textarea>' +
+        '<div class="ag-edit-foot">' +
+          '<button class="ag-edit-save" data-postid="' + postId + '">저장</button>' +
+          '<button class="ag-edit-cancel" data-postid="' + postId + '">취소</button>' +
+        '</div>' +
+      '</div>';
+    host.querySelector('.ag-edit-save').addEventListener('click', function(){ saveEditPost(postId); });
+    host.querySelector('.ag-edit-cancel').addEventListener('click', function(){ cancelEditPost(postId); });
+  };
+
+  function cancelEditPost(postId){
+    document.getElementById('ag-post-title-' + postId).style.display = '';
+    document.getElementById('ag-post-body-' + postId).style.display = '';
+    document.getElementById('ag-post-editform-' + postId).innerHTML = '';
+  }
+
+  async function saveEditPost(postId){
+    var title = document.getElementById('ag-etitle-' + postId).value.trim();
+    var body = document.getElementById('ag-ebody-' + postId).value.trim();
+    if (!title) { toast('제목을 적어주세요.'); return; }
+    if (!body) { toast('내용을 적어주세요.'); return; }
+    var upd = await sb.from('agora_posts').update({
+      title: title, body: body, updated_at: new Date().toISOString()
+    }).eq('id', postId);
+    if (upd.error) { toast('수정하지 못했습니다.'); console.error(upd.error); return; }
+    var p = findPost(postId);
+    if (p) { p.title = title; p.body = body; p.updated_at = new Date().toISOString(); }
+    document.getElementById('ag-post-title-' + postId).textContent = title;
+    document.getElementById('ag-post-body-' + postId).textContent = body;
+    cancelEditPost(postId);
+    renderPosts();
+    toast('수정했습니다.');
+  }
+
+  window.agDeletePost = async function(postId){
+    var p = findPost(postId);
+    var isOwn = p && state.session && p.user_id === state.session.user.id;
+    var msg = isOwn
+      ? '이 글을 삭제하시겠습니까? 되돌릴 수 없습니다.'
+      : '⚠️ 관리자 권한으로 다른 사람의 글을 삭제합니다. 되돌릴 수 없습니다. 계속할까요?';
+    if (!window.confirm(msg)) return;
+    var del = await sb.from('agora_posts').delete().eq('id', postId);
+    if (del.error) { toast('삭제하지 못했습니다.'); console.error(del.error); return; }
+    state.posts = state.posts.filter(function(p){ return p.id !== postId; });
+    renderPosts();
+    loadCounts();
+    toast('삭제했습니다.');
+  };
 
   async function toggleComments(postId, board){
     var box = document.getElementById('ag-comments-' + postId);
@@ -568,12 +673,23 @@
         ? '<span class="ag-stance ' + c.stance + '">' +
           (c.stance === 'agree' ? '찬성' : c.stance === 'disagree' ? '반대' : '중립') + '</span>'
         : '';
-      return '<div class="ag-comment"><div class="ag-comment-body">' +
+      var isOwn = state.session && c.user_id === state.session.user.id;
+      var ownActionsHtml = isOwn
+        ? '<span class="ag-own-actions">' +
+            '<button class="ag-link" data-act="edit-comment" data-cid="' + c.id + '">수정</button>' +
+            '<button class="ag-link" data-act="delete-comment" data-cid="' + c.id + '" data-postid="' + postId + '" data-board="' + board + '">삭제</button>' +
+          '</span>'
+        : (isAdmin()
+            ? '<span class="ag-own-actions"><button class="ag-link ag-admin-link" data-act="admin-delete-comment" data-cid="' + c.id + '" data-postid="' + postId + '" data-board="' + board + '">🛡️ 관리자 삭제</button></span>'
+            : '');
+      return '<div class="ag-comment" id="ag-comment-' + c.id + '"><div class="ag-comment-body">' +
         '<div class="ag-comment-head">' +
           '<span class="ag-comment-nick">' + esc(c.nickname) + '</span>' + stanceHtml +
           '<span class="ag-comment-time">' + timeAgo(c.created_at) + '</span>' +
+          ownActionsHtml +
         '</div>' +
-        '<div class="ag-comment-text">' + esc(c.body) + '</div>' +
+        '<div class="ag-comment-text" id="ag-ctext-' + c.id + '">' + esc(c.body) + '</div>' +
+        '<div id="ag-cedit-' + c.id + '"></div>' +
       '</div></div>';
     }).join('');
 
@@ -617,9 +733,69 @@
         submitComment(postId, board, isDebate ? chosenStance : null);
       });
     }
+
+    Array.prototype.forEach.call(box.querySelectorAll('[data-act=edit-comment]'), function(btn){
+      btn.addEventListener('click', function(){
+        var cid = btn.getAttribute('data-cid');
+        var c = comments.filter(function(x){ return x.id === cid; })[0];
+        if (c) agStartEditComment(c);
+      });
+    });
+    Array.prototype.forEach.call(box.querySelectorAll('[data-act=delete-comment]'), function(btn){
+      btn.addEventListener('click', function(){
+        agDeleteComment(btn.getAttribute('data-cid'), btn.getAttribute('data-postid'), btn.getAttribute('data-board'), true);
+      });
+    });
+    Array.prototype.forEach.call(box.querySelectorAll('[data-act=admin-delete-comment]'), function(btn){
+      btn.addEventListener('click', function(){
+        agDeleteComment(btn.getAttribute('data-cid'), btn.getAttribute('data-postid'), btn.getAttribute('data-board'), false);
+      });
+    });
   }
 
   window.agOpenNickFromComment = function(){ openNickModal(); };
+
+  window.agStartEditComment = function(c){
+    document.getElementById('ag-ctext-' + c.id).style.display = 'none';
+    var host = document.getElementById('ag-cedit-' + c.id);
+    host.innerHTML =
+      '<div class="ag-edit-form">' +
+        '<textarea id="ag-ceditbody-' + c.id + '">' + esc(c.body) + '</textarea>' +
+        '<div class="ag-edit-foot">' +
+          '<button class="ag-edit-save" data-cid="' + c.id + '">저장</button>' +
+          '<button class="ag-edit-cancel" data-cid="' + c.id + '">취소</button>' +
+        '</div>' +
+      '</div>';
+    host.querySelector('.ag-edit-save').addEventListener('click', function(){ saveEditComment(c.id); });
+    host.querySelector('.ag-edit-cancel').addEventListener('click', function(){ cancelEditComment(c.id); });
+  };
+
+  function cancelEditComment(cid){
+    document.getElementById('ag-ctext-' + cid).style.display = '';
+    document.getElementById('ag-cedit-' + cid).innerHTML = '';
+  }
+
+  async function saveEditComment(cid){
+    var body = document.getElementById('ag-ceditbody-' + cid).value.trim();
+    if (!body) { toast('내용을 적어주세요.'); return; }
+    var upd = await sb.from('agora_comments').update({ body: body }).eq('id', cid);
+    if (upd.error) { toast('수정하지 못했습니다.'); console.error(upd.error); return; }
+    document.getElementById('ag-ctext-' + cid).textContent = body;
+    cancelEditComment(cid);
+    toast('수정했습니다.');
+  }
+
+  window.agDeleteComment = async function(cid, postId, board, isOwn){
+    var msg = isOwn
+      ? '이 댓글을 삭제하시겠습니까? 되돌릴 수 없습니다.'
+      : '⚠️ 관리자 권한으로 다른 사람의 댓글을 삭제합니다. 되돌릴 수 없습니다. 계속할까요?';
+    if (!window.confirm(msg)) return;
+    var del = await sb.from('agora_comments').delete().eq('id', cid);
+    if (del.error) { toast('삭제하지 못했습니다.'); console.error(del.error); return; }
+    var res = await sb.from('agora_comments').select('*').eq('post_id', postId).order('created_at', { ascending: true });
+    renderComments(postId, board, res.data || []);
+    toast('삭제했습니다.');
+  };
 
   async function submitComment(postId, board, stance){
     if (board === 'debate' && !stance) { toast('찬성·반대·중립 중 하나를 골라주세요.'); return; }

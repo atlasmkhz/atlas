@@ -81,9 +81,12 @@ create policy "posts_insert_own" on public.agora_posts
 create policy "posts_update_own" on public.agora_posts
   for update using (auth.uid() = user_id);
 
--- 게시글: 작성자 본인만 삭제 가능.
+-- 게시글: 작성자 본인 또는 관리자만 삭제 가능.
 create policy "posts_delete_own" on public.agora_posts
-  for delete using (auth.uid() = user_id);
+  for delete using (
+    auth.uid() = user_id
+    or auth.uid() = 'c2b23ccd-ca6a-4e52-84e5-79bad6d8e310'
+  );
 
 -- 댓글: 숨김 안 된 댓글은 누구나 읽기 가능.
 create policy "comments_select_public" on public.agora_comments
@@ -92,8 +95,15 @@ create policy "comments_select_public" on public.agora_comments
 create policy "comments_insert_own" on public.agora_comments
   for insert with check (auth.uid() = user_id);
 
+create policy "comments_update_own" on public.agora_comments
+  for update using (auth.uid() = user_id);
+
+-- 댓글: 작성자 본인 또는 관리자만 삭제 가능.
 create policy "comments_delete_own" on public.agora_comments
-  for delete using (auth.uid() = user_id);
+  for delete using (
+    auth.uid() = user_id
+    or auth.uid() = 'c2b23ccd-ca6a-4e52-84e5-79bad6d8e310'
+  );
 
 -- 프로필: 닉네임 목록은 공개(글에 이름 표시해야 하니). 단, 본인 것만 쓰기.
 create policy "profiles_select_public" on public.agora_profiles
