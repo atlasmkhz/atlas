@@ -31,6 +31,49 @@
     return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
   }
 
+  // ── 1-1. 포털 대표 이미지(배경) 주간 로테이션 ──────────────────
+  // assets/images/portal-bg/portal-bg-1.jpg ~ portal-bg-5.jpg 5장을 두고,
+  // ISO 주차(월요일 00:00 KST 기준) % 5 로 이번 주 사진을 고른다.
+  // 같은 주에는 누가 접속하든 같은 사진, 다음 주 월요일에 다음 사진으로.
+  // 사진을 5장보다 늘리고 싶으면 PORTAL_BG_COUNT만 바꾸면 된다(파일명은
+  // portal-bg-6.jpg 식으로 이어서 추가).
+  const PORTAL_BG_COUNT = 5;
+
+  // 배포 시점(2026-08-03 이후 첫 월요일, KST 31주차)에 2번 사진부터
+  // 시작하도록 오프셋을 넣었다(1번을 너무 오래 써서 2번부터 시작하기로
+  // 함). 순서 자체는 그대로 1→2→3→4→5→1...로 순환하되, 시작 위치만
+  // 2번으로 맞춘 것.
+  // (계산: 31주차는 오프셋 없이 2번으로 떨어져서, 오프셋 0으로 그대로 둠)
+  const PORTAL_BG_START_OFFSET = 0;
+
+  function currentPortalBgUrl() {
+    // ISO 주차 계산에 KST 보정을 넣어, 한국 시간 기준 월요일 자정에
+    // 정확히 다음 사진으로 넘어가도록 한다(위 kstDayIndex와 동일한 이유).
+    const kstNow = new Date(Date.now() + 9 * 3600000);
+    const week = getISOWeek(kstNow) + PORTAL_BG_START_OFFSET;
+    const index = (week % PORTAL_BG_COUNT) + 1; // 1 ~ PORTAL_BG_COUNT
+    return `assets/images/portal-bg/portal-bg-${index}.jpg`;
+  }
+
+  function applyPortalBg() {
+    const bgEl = document.querySelector('.portal-map-bg');
+    if (!bgEl) return;
+    const url = currentPortalBgUrl();
+    // 혹시 아직 업로드가 안 된 주차라도 사이트가 깨지지 않도록,
+    // 이미지 로드 성공을 확인한 뒤에만 배경으로 적용한다.
+    // 실패 시 CSS의 background-color(--ink)가 그대로 유지된다.
+    const probe = new Image();
+    probe.onload = function () {
+      bgEl.style.backgroundImage = `url('${url}')`;
+    };
+    probe.onerror = function () {
+      console.warn('[portal-bg] 이미지 로드 실패, 배경색으로 대체:', url);
+    };
+    probe.src = url;
+  }
+
+  applyPortalBg();
+
   // 한국 시간(KST, UTC+9) 기준 "오늘의 일수"를 계산한다. UTC 기준으로
   // Math.floor(Date.now()/86400000)를 쓰면 날짜 경계가 한국 자정이
   // 아니라 한국 시간 오전 9시가 되어버려("UTC 자정 = KST 09시"),
