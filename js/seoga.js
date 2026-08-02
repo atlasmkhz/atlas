@@ -200,6 +200,7 @@
   });
 
   render();
+  window.AtlasSeogaRender = render; // growth-sync.js가 병합 후 다시 그릴 때 쓴다
   // 「오늘의 변화」를 본 시점을 기록한다 — 다음 방문 때 비교 기준.
   // render() 뒤에 호출해야 이번 변화가 화면에 보인 뒤 스냅샷이 갱신된다.
   setTimeout(() => { try { G.markSeen(); } catch (e) {} }, 1500);

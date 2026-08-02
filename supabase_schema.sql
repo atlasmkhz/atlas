@@ -59,6 +59,15 @@ create table if not exists public.agora_likes (
   primary key (post_id, user_id)
 );
 
+-- ── 5. 나의 서재 동기화 (growth.js의 atlas_growth_v1 데이터를
+--       로그인 사용자에 한해 서버에도 저장한다. 로그인 안 한 사람은
+--       지금처럼 localStorage만 쓰고, 이 테이블과는 무관하다) ────
+create table if not exists public.user_growth (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  data jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
 -- ═══════════════════════════════════════════════════════════════
 -- Row Level Security — 반드시 켠다. (Supabase 프로젝트 생성 시
 -- "Automatically expose new tables"를 껐던 것과 같은 원칙:
@@ -68,6 +77,7 @@ alter table public.agora_posts enable row level security;
 alter table public.agora_comments enable row level security;
 alter table public.agora_profiles enable row level security;
 alter table public.agora_likes enable row level security;
+alter table public.user_growth enable row level security;
 
 -- 게시글: 숨김 처리 안 된 글은 누구나(비로그인 포함) 읽을 수 있다.
 create policy "posts_select_public" on public.agora_posts
@@ -125,8 +135,19 @@ create policy "likes_insert_own" on public.agora_likes
 create policy "likes_delete_own" on public.agora_likes
   for delete using (auth.uid() = user_id);
 
+-- 나의 서재: 공개 게시판과 달리 개인 열람 기록이므로 본인만 읽고
+-- 쓸 수 있게 한다(다른 광장 테이블처럼 공개 select를 두지 않는다).
+create policy "growth_select_own" on public.user_growth
+  for select using (auth.uid() = user_id);
+
+create policy "growth_insert_own" on public.user_growth
+  for insert with check (auth.uid() = user_id);
+
+create policy "growth_update_own" on public.user_growth
+  for update using (auth.uid() = user_id);
+
 -- ═══════════════════════════════════════════════════════════════
 -- 완료. 이 파일을 실행한 뒤 Supabase 대시보드 좌측
--- "Table Editor"에서 4개 테이블(agora_posts, agora_comments,
--- agora_profiles, agora_likes)이 보이면 성공입니다.
+-- "Table Editor"에서 5개 테이블(agora_posts, agora_comments,
+-- agora_profiles, agora_likes, user_growth)이 보이면 성공입니다.
 -- ═══════════════════════════════════════════════════════════════

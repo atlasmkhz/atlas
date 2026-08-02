@@ -652,6 +652,14 @@
     return out;
   }
 
+  // 병합 결과 등 외부에서 만든 데이터를 현재 상태에 반영하고 즉시 저장한다.
+  // growth-sync.js가 로그인 시 "로컬 ⊕ 서버" 병합 결과를 적용할 때 쓴다.
+  function replaceData(newData) {
+    if (!newData || typeof newData !== 'object') return;
+    data = migrate(newData);
+    save(data, true);
+  }
+
   // ── 초기화 ─────────────────────────────────────────────────
   function init() {
     if (!data.firstVisit) {
@@ -690,6 +698,7 @@
     isScrapped: isScrapped,
     toggleScrap: toggleScrap,
     merge: merge,
+    replaceData: replaceData,
     currentEra: () => currentEra,
     // 개발/디버그용 — 콘솔에서 상태를 초기화할 때 쓴다
     _reset: () => { data = emptyData(); save(data, true); },

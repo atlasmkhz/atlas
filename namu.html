@@ -80,11 +80,21 @@
     <p class="namu-empty" id="scrapEmpty" hidden>아직 스크랩한 것이 없습니다. 지도 카드·자료실 글·답사 카드에서 스크랩 버튼을 눌러보세요.</p>
   </section>
 
-  <!-- ── 안내 ────────────────────────── -->
+  <!-- ── 안내 / 동기화 ──────────────────
+       2026-08-02: 로그인하면 이 서재를 다른 기기에서도 이어갈 수 있다.
+       비로그인 상태와 로그인 상태에 따라 growth-sync.js가 이 섹션의
+       내용을 바꿔 채운다. -->
   <section class="namu-section namu-note-box">
     <h2>기록에 대하여</h2>
-    <p>이 기록은 지금 쓰는 브라우저에만 저장됩니다. 서버로 보내지 않고, 누구와도 공유되지 않습니다.</p>
-    <p>다른 기기에서도 서재를 이어가려면 나중에 추가될 로그인이 필요합니다. 그때 지금까지의 기록을 그대로 가져갈 수 있습니다.</p>
+    <div id="growthSyncBox">
+      <p>이 기록은 지금 쓰는 브라우저에만 저장됩니다. 서버로 보내지 않고, 누구와도 공유되지 않습니다.</p>
+      <p>광장에서 로그인하면 이 서재가 계정에 저장되어, 다른 기기에서도 이어서 볼 수 있습니다. 지금까지 쌓인 기록은 그대로 가져갑니다.</p>
+      <div class="namu-actions" id="growthLoginActions">
+        <button type="button" class="namu-btn" data-provider="kakao">카카오로 로그인</button>
+        <button type="button" class="namu-btn" data-provider="google">구글로 로그인</button>
+        <button type="button" class="namu-btn" data-provider="naver">네이버로 로그인</button>
+      </div>
+    </div>
     <div class="namu-actions">
       <button type="button" class="namu-btn" id="exportBtn">기록 내보내기</button>
       <label class="namu-btn" for="importFile">기록 불러오기</label>
@@ -96,9 +106,11 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/growth.js"></script>
 <script src="js/newBadge.js"></script>
 <script src="js/library.js"></script>
 <script src="js/seoga.js"></script>
+<script src="js/growth-sync.js"></script>
 </body>
 </html>
