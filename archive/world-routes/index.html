@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="세계사 루트 | ATLAS by MKHZ 자료실">
 <meta name="twitter:description" content="세계지도 위에서 시간 순서로 따라가는 세계사의 흐름">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "세계사 루트", "description": "세계지도 위에서 시간 순서로 따라가는 세계사의 흐름", "url": "https://atlas.mkhz.kr/archive/world-routes", "numberOfItems": 6, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "길가메시의 여정 — 우루크에서 세상 끝까지", "url": "https://atlas.mkhz.kr/archive/world-routes/gilgamesh"}, {"@type": "ListItem", "position": 2, "name": "오디세우스의 항해 — 트로이에서 이타카까지", "url": "https://atlas.mkhz.kr/archive/world-routes/odyssey"}, {"@type": "ListItem", "position": 3, "name": "그리스 신화 성소 순례 — 신들의 무대를 찾아서", "url": "https://atlas.mkhz.kr/archive/world-routes/greek-sanctuaries"}, {"@type": "ListItem", "position": 4, "name": "헤라클레스의 12과업 — 속죄에서 신격까지", "url": "https://atlas.mkhz.kr/archive/world-routes/greek-heracles"}, {"@type": "ListItem", "position": 5, "name": "양자역학 루트 — 베를린에서 대전까지", "url": "https://atlas.mkhz.kr/archive/world-routes/quantum-mechanics"}, {"@type": "ListItem", "position": 6, "name": "이란 현대사 — 호르무즈를 둘러싼 100년", "url": "https://atlas.mkhz.kr/archive/world-routes/iran-hormuz"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "세계사 루트", "description": "세계지도 위에서 시간 순서로 따라가는 세계사의 흐름", "url": "https://atlas.mkhz.kr/archive/world-routes", "numberOfItems": 7, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "길가메시의 여정 — 우루크에서 세상 끝까지", "url": "https://atlas.mkhz.kr/archive/world-routes/gilgamesh"}, {"@type": "ListItem", "position": 2, "name": "오디세우스의 항해 — 트로이에서 이타카까지", "url": "https://atlas.mkhz.kr/archive/world-routes/odyssey"}, {"@type": "ListItem", "position": 3, "name": "그리스 신화 성소 순례 — 신들의 무대를 찾아서", "url": "https://atlas.mkhz.kr/archive/world-routes/greek-sanctuaries"}, {"@type": "ListItem", "position": 4, "name": "헤라클레스의 12과업 — 속죄에서 신격까지", "url": "https://atlas.mkhz.kr/archive/world-routes/greek-heracles"}, {"@type": "ListItem", "position": 5, "name": "양자역학 루트 — 베를린에서 대전까지", "url": "https://atlas.mkhz.kr/archive/world-routes/quantum-mechanics"}, {"@type": "ListItem", "position": 6, "name": "이란 현대사 — 호르무즈를 둘러싼 100년", "url": "https://atlas.mkhz.kr/archive/world-routes/iran-hormuz"}, {"@type": "ListItem", "position": 7, "name": "이스라엘·팔레스타인 — 한 땅, 두 민족의 100년", "url": "https://atlas.mkhz.kr/archive/world-routes/israel-palestine"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ATLAS", "item": "https://atlas.mkhz.kr/"}, {"@type": "ListItem", "position": 2, "name": "자료실", "item": "https://atlas.mkhz.kr/?nav=archive"}, {"@type": "ListItem", "position": 3, "name": "세계사"}, {"@type": "ListItem", "position": 4, "name": "세계사 루트", "item": "https://atlas.mkhz.kr/archive/world-routes"}]}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
 <script>
@@ -42,6 +42,14 @@
 .wr-card .wr-tagline { display: block; font-size: 14px; color: #6b6355; line-height: 1.65; }
 .wr-card.soon { opacity: .55; pointer-events: none; }
 .wr-card.soon .wr-period::after { content: " · 준비 중"; color: #a39a8c; }
+/* NEW 배지 — 포털/nav와 같은 7일 규칙. data-updated를 읽어 아래
+   스크립트가 붙였다 떼므로 날짜만 적어두면 관리가 필요 없다. */
+.wr-new {
+  display: inline-block; margin-left: 8px; padding: 2px 7px;
+  font-size: 10px; font-weight: 800; letter-spacing: .5px;
+  color: #fffdf8; background: #b0532f; border-radius: 999px;
+  vertical-align: 2px;
+}
 .wr-note { margin-top: 26px; font-size: 13px; color: #a39a8c; line-height: 1.7; }
 </style>
 </head>
@@ -53,7 +61,7 @@
 <p class="summary">한국사 지도의 루트가 이 땅 위의 발자취를 따라간다면, 세계사 루트는 세계지도 위에서 시간의 흐름을 따라간다. 사건과 인물을 순서대로 걸으며, 한 세기의 이야기를 한눈에 붙잡는다.</p>
 
 <section class="series-list">
-<h2>루트 목록 (6개)</h2>
+<h2>루트 목록 (7개)</h2>
 <ul class="wr-list">
   <li>
     <a class="wr-card" href="gilgamesh.html">
@@ -91,10 +99,17 @@
     </a>
   </li>
   <li>
-    <a class="wr-card" href="iran-hormuz.html">
+    <a class="wr-card" href="iran-hormuz.html" data-updated="2026-08-02">
       <span class="wr-name">이란 현대사 — 호르무즈를 둘러싼 100년</span>
       <span class="wr-period">1901 – 현재 · 11개 지점</span>
       <span class="wr-tagline">한 장의 석유 채굴권 계약에서 시작해 1953년 쿠데타, 1979년 혁명, 그리고 오늘의 해협 봉쇄까지 — 세계 석유 물동량의 5분의 1이 지나는 좁은 길목을 둘러싼 100년. 자원과 주권은 누구의 것인가라는 물음을 지도 위에서 따라간다.</span>
+    </a>
+  </li>
+  <li>
+    <a class="wr-card" href="israel-palestine.html" data-updated="2026-08-05">
+      <span class="wr-name">이스라엘·팔레스타인 — 한 땅, 두 민족의 100년</span>
+      <span class="wr-period">1897 – 현재 · 13개 지점</span>
+      <span class="wr-tagline">1897년 바젤의 회의장에서 겹쳐진 세 개의 약속과 유엔 분할안을 지나, 한쪽에게는 건국이고 다른 쪽에게는 나크바였던 1948년, 점령과 인티파다와 오슬로의 짧은 희망을 거쳐 오늘의 가자까지 — 두 개의 절박함이 한 땅 위에서 충돌한 100년을 지도 위에서 따라간다.</span>
     </a>
   </li>
   <li>
@@ -114,8 +129,25 @@
 </ul>
 </section>
 
-<p class="wr-note">깊이 읽고 싶다면 자료실 세계사의 시리즈들이 각 지점의 이야기를 글로 담고 있다 — 정신사 &rsaquo; <a href="../gilgamesh-epic/index.html">「길가메시 서사시」(6편)</a>, <a href="../homer-epics/index.html">「일리아스와 오디세이아」(7편)</a>, 문명사 &rsaquo; <a href="../quantum-century/index.html">「양자역학 100년」(12편)</a>, 격변사 &rsaquo; <a href="../iran-modern/index.html">「이란 현대사」(8편)</a>. 루트는 흐름을, 시리즈는 깊이를 맡는다.</p>
+<p class="wr-note">깊이 읽고 싶다면 자료실 세계사의 시리즈들이 각 지점의 이야기를 글로 담고 있다 — 정신사 &rsaquo; <a href="../gilgamesh-epic/index.html">「길가메시 서사시」(6편)</a>, <a href="../homer-epics/index.html">「일리아스와 오디세이아」(7편)</a>, 문명사 &rsaquo; <a href="../quantum-century/index.html">「양자역학 100년」(12편)</a>, 격변사 &rsaquo; <a href="../iran-modern/index.html">「이란 현대사」(8편)</a>, <a href="../israel-palestine/index.html">「이스라엘·팔레스타인」(10편)</a>. 루트는 흐름을, 시리즈는 깊이를 맡는다.</p>
 </article>
+<script>
+// NEW 배지 — 포털(portal.js)·지도(nav.js)와 동일한 7일 규칙의 정적 페이지판.
+// 카드에 data-updated="YYYY-MM-DD"만 적어두면 그 날로부터 7일간 이름 옆에
+// NEW가 뜨고, 기간이 지나면 저절로 사라진다(속성을 지울 필요 없음).
+(function(){
+  var DAYS = 7;
+  document.querySelectorAll('.wr-card[data-updated]').forEach(function(card){
+    var t = Date.parse(card.dataset.updated + 'T00:00:00+09:00');
+    if (isNaN(t)) return;
+    var elapsed = Date.now() - t;
+    if (elapsed >= 0 && elapsed < DAYS * 86400000) {
+      var name = card.querySelector('.wr-name');
+      if (name) name.insertAdjacentHTML('beforeend', '<span class="wr-new">NEW</span>');
+    }
+  });
+})();
+</script>
 <link rel="stylesheet" href="/css/namu.css">
 <script src="/js/growth.js"></script>
 <script src="/js/library.js"></script>

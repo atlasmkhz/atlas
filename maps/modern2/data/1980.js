@@ -117,7 +117,7 @@ const EVENTS_1980 = [
     connections:['massacre_1980_01','massacre_1980_02','movement_1980_01'],
     tags:['person','광주','안병하','5·18','경찰','발포거부','고문'],
     sources:['위키백과 안병하','경향신문 안병하 치안감 추서식','국제신문 고 안병하 경무관 치안감 특진 추서'],
-    content:{ hero:null, gallery:[] } },
+    content:{ hero:{"url": "assets/images/entity/person/person_ahn_byung_ha_01.webp", "alt": "안병하", "caption": "안병하 (당시 전라남도 경찰국장)", "credit": "", "is_ai": false, "source_type": "archive", "image_type": "portrait"}, gallery:[] } },
 
   { id:'person_1980_01', year:1980, visible_from:1980, visible_until:1981,
     month:8, day:1, type:'person', priority:1,

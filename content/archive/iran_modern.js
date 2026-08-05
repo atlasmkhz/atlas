@@ -37,6 +37,9 @@ const ARCHIVE_SERIES_IRAN_MODERN = {
   tagline: '한 장의 석유 채굴권에서 시작해 쿠데타와 혁명을 지나 오늘의 해협 봉쇄까지 — 자원과 주권은 누구의 것인가',
   color: '#5c3a2f',
   hero_image: null,
+  // NEW 배지(7일 규칙). 시리즈 생성일 — 처음부터 빠뜨려서 배지가 한 번도
+  // 뜨지 않았던 것을 2026-08-05에 발견해 소급 기입.
+  updated: '2026-08-02',
 
   posts: [
 

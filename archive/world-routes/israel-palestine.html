@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#101418">
+<title>이스라엘·팔레스타인 — 한 땅, 두 민족의 100년 | ATLAS by MKHZ</title>
+<meta name="description" content="1897년 바젤의 시온주의자 대회에서 밸푸어 선언, 유엔 분할안, 1948년 건국과 나크바, 6일 전쟁과 오슬로를 거쳐 오늘의 가자까지 — 한 땅을 둘러싼 두 민족의 100년을 세계지도 위에서 따라간다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/archive/world-routes/israel-palestine">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://atlas.mkhz.kr/archive/world-routes/israel-palestine">
+<meta property="og:title" content="이스라엘·팔레스타인 — 한 땅, 두 민족의 100년 | ATLAS by MKHZ">
+<meta property="og:description" content="겹쳐진 약속에서 오늘의 가자까지 — 세계지도 위에서 따라간다.">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="이스라엘·팔레스타인 — 한 땅, 두 민족의 100년">
+<meta name="twitter:description" content="겹쳐진 약속에서 오늘의 가자까지 — 세계지도 위에서 따라간다.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ATLAS", "item": "https://atlas.mkhz.kr/"}, {"@type": "ListItem", "position": 2, "name": "자료실", "item": "https://atlas.mkhz.kr/?nav=archive"}, {"@type": "ListItem", "position": 3, "name": "세계사 루트", "item": "https://atlas.mkhz.kr/archive/world-routes"}, {"@type": "ListItem", "position": 4, "name": "이스라엘·팔레스타인 루트", "item": "https://atlas.mkhz.kr/archive/world-routes/israel-palestine"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4');
+</script>
+<script src="../../js/analytics.js"></script>
+<style>
+/* ── 세계사 루트 전용 스타일 — 지도 SPA(다크 톤 + 골드 악센트)와
+   같은 계열을 쓰되 독립 페이지로 완결. ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: #101418; color: #e8e2d6;
+  font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+}
+#map { position: absolute; inset: 0; z-index: 0; background: #101418; }
+
+/* 상단 바 */
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 10px 14px;
+  background: linear-gradient(to bottom, rgba(16,20,24,.92), rgba(16,20,24,0));
+  pointer-events: none;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.topbar a.back {
+  pointer-events: auto; text-decoration: none;
+  color: #b89860; font-size: 13px; letter-spacing: .3px;
+}
+.topbar .title { font-size: 15px; font-weight: 700; color: #f0ead9; }
+.topbar .subtitle { font-size: 12px; color: #9a927f; }
+
+/* 연도 칩 스트립 */
+.chips {
+  position: absolute; left: 0; right: 0; z-index: 1000;
+  bottom: calc(190px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 6px; overflow-x: auto; padding: 6px 12px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: 0 0 auto; border: 1px solid rgba(184,152,96,.45);
+  background: rgba(16,20,24,.85); color: #cfc6b2;
+  font-size: 12px; padding: 5px 10px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap;
+}
+.chip.active { background: #b89860; color: #14110b; font-weight: 700; border-color: #b89860; }
+
+/* 하단 카드 패널 */
+.panel {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1001;
+  background: rgba(20, 24, 30, .96);
+  border-top: 1px solid rgba(184,152,96,.35);
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  min-height: 190px;
+  backdrop-filter: blur(6px);
+}
+.panel .meta { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.panel .num {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  background: #b89860; color: #14110b; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  align-self: center;
+}
+.panel .year { font-size: 13px; color: #b89860; font-weight: 700; letter-spacing: .5px; }
+.panel .place { font-size: 12px; color: #9a927f; }
+.panel h2 { font-size: 16px; color: #f0ead9; line-height: 1.45; margin: 2px 0 8px; }
+.panel p { font-size: 13.5px; color: #cfc6b2; line-height: 1.7; max-height: 118px; overflow-y: auto; }
+.panel .links { margin-top: 8px; }
+.panel .links a { color: #b89860; font-size: 12.5px; text-decoration: none; border-bottom: 1px solid rgba(184,152,96,.4); }
+.nav-btns { position: absolute; top: 12px; right: 14px; display: flex; gap: 8px; }
+.nav-btns button {
+  border: 1px solid rgba(184,152,96,.5); background: transparent; color: #b89860;
+  width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.nav-btns button:disabled { opacity: .3; cursor: default; }
+.progress { position: absolute; top: 20px; right: 100px; font-size: 12px; color: #9a927f; }
+
+/* 지점 마커 */
+.wp-marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #1d232b; border: 2px solid #b89860;
+  color: #e8e2d6; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.35);
+  transition: transform .15s ease;
+}
+.wp-marker.active { background: #b89860; color: #14110b; transform: scale(1.25); z-index: 999; }
+
+@media (min-width: 760px) {
+  .panel { left: auto; right: 18px; bottom: 18px; width: 420px; border: 1px solid rgba(184,152,96,.35); border-radius: 12px; }
+  .chips { bottom: 12px; right: 460px; left: 12px; }
+  .panel p { max-height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div class="topbar">
+  <a class="back" href="index.html">&larr; 세계사 루트</a>
+  <span class="title">이스라엘·팔레스타인 루트</span>
+  <span class="subtitle">한 땅, 두 민족의 100년, 1897 – 현재</span>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="panel" id="panel">
+  <div class="nav-btns">
+    <button id="prevBtn" aria-label="이전 지점">&larr;</button>
+    <button id="nextBtn" aria-label="다음 지점">&rarr;</button>
+  </div>
+  <div class="progress" id="progress"></div>
+  <div class="meta">
+    <span class="num" id="wpNum">1</span>
+    <span class="year" id="wpYear"></span>
+    <span class="place" id="wpPlace"></span>
+  </div>
+  <h2 id="wpTitle"></h2>
+  <p id="wpDesc"></p>
+  <div class="links" id="wpLinks"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  // ── 지점 데이터 — 시간 순서. post는 자료실 「이스라엘·팔레스타인」
+  //    시리즈(archive/israel-palestine/)의 글 id와 짝을 이룬다. ──
+  const WAYPOINTS = [
+    { year:'1897', place:'스위스 바젤', lat:47.5596, lng:7.5886, zoom:5,
+      title:'제1차 시온주의자 대회 — 유럽의 증오가 낳은 꿈',
+      desc:'포그롬과 드레퓌스 사건 — 유럽이 끝내 유대인을 받아들이지 않으리라는 절망 속에서, 헤르츨이 바젤에서 대회를 소집한다. "팔레스타인에 유대 민족의 고향을 세운다"는 강령이 채택된다. 그런데 그 땅에는 이미 수백 년을 살아온 사람들이 있었다.',
+      post:'zionism_1897' },
+    { year:'1917', place:'영국 런던', lat:51.5074, lng:-0.1278, zoom:5,
+      title:'밸푸어 선언 — 한 땅, 세 개의 약속',
+      desc:'1차 대전 중 영국은 같은 땅을 두고 아랍 독립(후세인-맥마흔), 영불 분할(사이크스-피코), 유대 민족의 고향(밸푸어)을 겹쳐 약속한다. 130단어의 밸푸어 선언에서, 당시 인구의 9할이던 아랍 주민의 정치적 권리는 언급되지 않았다.',
+      post:'balfour_1917' },
+    { year:'1920', place:'예루살렘', lat:31.7784, lng:35.2254, zoom:7,
+      title:'영국 위임통치 시작',
+      desc:'산레모 회의와 국제연맹 승인으로 팔레스타인은 영국 위임통치령이 된다. 밸푸어 선언이 통치 규약 안에 들어가고, 두 민족의 상반된 기대를 실은 30년이 시작된다. 유대인 이민은 나치 집권 후 급증해 인구의 3분의 1에 이른다.',
+      post:'mandate_1936' },
+    { year:'1936', place:'야파 · 팔레스타인 전역', lat:32.0504, lng:34.7522, zoom:7,
+      title:'아랍 대반란 — 3년의 봉기, 부러진 사회',
+      desc:'이민 중단과 독립을 요구하는 총파업이 3년의 대반란으로 번진다. 영국은 계엄과 처형, 추방으로 진압했고 아랍인 5천 명 안팎이 목숨을 잃었다. 지도부와 무장 역량을 상실한 팔레스타인 아랍 사회는 그 상태로 1948년을 맞게 된다.',
+      post:'mandate_1936' },
+    { year:'1947', place:'미국 뉴욕 레이크석세스', lat:40.7769, lng:-73.7176, zoom:4,
+      title:'유엔 분할안 결의 181호',
+      desc:'11월 29일, 유엔 총회가 팔레스타인을 유대국가(56%)와 아랍국가(43%)로 나누는 안을 가결한다. 유대 측은 수락, 인구의 3분의 2를 차지하던 아랍 측은 거부했다. 같은 몇 달 사이 한반도의 장래도 같은 회의장에서 표결에 부쳐지고 있었다.',
+      post:'partition_1947' },
+    { year:'1948. 5.', place:'텔아비브', lat:32.0623, lng:34.7702, zoom:8,
+      title:'이스라엘 건국 선언',
+      desc:'5월 14일, 벤구리온이 이스라엘 국가 수립을 선언한다. 2천 년의 이산과 홀로코스트의 잿더미 끝에 세워진 국가 — 몇 시간 뒤 아랍 국가들의 군대가 진입하며 1차 중동전쟁이 시작되고, 이스라엘은 분할안보다 넓은 78%의 땅으로 살아남는다.',
+      post:'nakba_1948' },
+    { year:'1948', place:'리다 · 람레 · 팔레스타인 전역', lat:31.9522, lng:34.8885, zoom:8,
+      title:'나크바 — 70만의 실향',
+      desc:'같은 전쟁의 다른 얼굴. 팔레스타인 아랍인 70만 명 안팎이 고향에서 떠나거나 쫓겨나고 400개 넘는 마을이 사라진다. 전후 이스라엘은 귀환을 허용하지 않았고, 유엔 결의 194호의 귀환 조항은 오늘까지 이행되지 않았다. 팔레스타인인들은 이 해를 "대재앙"이라 부른다.',
+      post:'nakba_1948' },
+    { year:'1967', place:'예루살렘 구시가', lat:31.7767, lng:35.2345, zoom:8,
+      title:'6일 전쟁 — 점령의 시작',
+      desc:'엿새 만에 이스라엘이 서안·가자·동예루살렘·골란·시나이를 점령한다. 유엔 결의 242호가 "땅과 평화의 교환"을 제시하지만 철수 대신 정착촌이 들어서기 시작하고, 100만이 넘는 팔레스타인인에 대한 군정 — 세계에서 가장 오래 지속되는 점령 — 이 시작된다.',
+      post:'six_day_1967' },
+    { year:'1987', place:'가자 자발리아 난민촌', lat:31.5272, lng:34.4830, zoom:9,
+      title:'1차 인티파다 — 돌을 든 봉기',
+      desc:'점령 20년째, 자발리아 난민촌에서 시작된 봉기가 점령지 전역으로 번진다. 망명 조직이 아니라 보통 사람들이, 총이 아니라 돌과 파업으로 일어선 이 봉기는 세계 여론을 움직였고, 같은 시기 가자에서는 하마스가 창설된다.',
+      post:'oslo_1993' },
+    { year:'1993', place:'미국 워싱턴 백악관', lat:38.8977, lng:-77.0365, zoom:4,
+      title:'오슬로 협정 — 라빈과 아라파트의 악수',
+      desc:'상호 인정과 단계적 자치 — 그러나 예루살렘·난민·정착촌·국경은 모두 뒤로 미뤄졌다. 1995년 라빈이 이스라엘 극우 청년에게 암살되고, 2000년 최종지위협상이 결렬되며 2차 인티파다가 폭발한다. 열렸던 문이 닫힌다.',
+      post:'oslo_1993' },
+    { year:'2007', place:'가자지구', lat:31.5017, lng:34.4668, zoom:9,
+      title:'봉쇄 — 서울의 절반, 갇힌 200만',
+      desc:'2005년 이스라엘의 가자 철수, 2006년 하마스의 총선 승리, 2007년 가자 무력 장악을 거쳐 육해공 봉쇄가 시작된다. 봉쇄 아래 2008·2012·2014·2021년 전쟁이 반복되고, 인구 절반이 아이들인 이 땅에서 한 세대가 봉쇄 바깥을 모른 채 자란다.',
+      post:'gaza_2007' },
+    { year:'2023', place:'이스라엘 남부 · 가자 국경', lat:31.4380, lng:34.5380, zoom:9,
+      title:'10월 7일 — 그리고 가자 전쟁',
+      desc:'하마스 주도 무장대원들이 국경을 돌파해 약 1,200명을 살해하고 251명을 인질로 끌고 간다(이스라엘 집계). 이스라엘의 전면전으로 가자는 무너진다 — 가자 보건부 집계 사망자는 2026년 6월 기준 7만 3천 명을 넘어섰고, ICJ에서는 제노사이드협약 위반 여부를 다투는 재판이 진행 중이다.',
+      post:'october_2023' },
+    { year:'오늘', place:'가자지구', lat:31.4500, lng:34.4000, zoom:8,
+      title:'휴전과 폐허 — 아직 끝나지 않은 100년',
+      desc:'2025년 10월 10일 휴전이 발효되고 인질이 석방되었지만, 무장해제와 철수를 둘러싼 교착 속에 휴전 후에도 죽음은 이어지고 있다. 2026년 8월 현재 가자는 전쟁과 평화 사이에 방치되어 있다. 1897년 바젤에서 시작된 물음 — 이 땅에서 두 민족은 어떻게 함께 사는가 — 은 아직 답을 얻지 못했다.',
+      post:'october_2023' },
+  ];
+
+  // ── 지도 ──
+  const map = L.map('map', { zoomControl: false, worldCopyJump: true })
+    .setView([WAYPOINTS[0].lat, WAYPOINTS[0].lng], 5);
+  L.control.zoom({ position: 'topright' }).addTo(map);
+  // dark_nolabels: 국가/도시/바다 명칭 라벨이 없는 순수 지형 타일.
+  // 장소명은 마커·연도칩·하단 패널에서 우리가 직접 표기한다
+  // (iran-hormuz.html과 같은 선택 — 상세 이유는 그 파일 주석 참고).
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 12, minZoom: 2
+  }).addTo(map);
+
+  // 경로선 — 시간 순서를 잇는 점선
+  L.polyline(WAYPOINTS.map(w => [w.lat, w.lng]), {
+    color: '#b89860', weight: 2, opacity: .55, dashArray: '6 8'
+  }).addTo(map);
+
+  // 지점 마커
+  const markers = WAYPOINTS.map((w, i) => {
+    const icon = L.divIcon({ className: '', html: `<div class="wp-marker" data-i="${i}">${i + 1}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+    const m = L.marker([w.lat, w.lng], { icon }).addTo(map);
+    m.on('click', () => go(i));
+    return m;
+  });
+
+  // 연도 칩
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = WAYPOINTS.map((w, i) => `<button class="chip" data-i="${i}">${i + 1}. ${w.year}</button>`).join('');
+  chipsEl.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (b) go(parseInt(b.dataset.i, 10));
+  });
+
+  // ── 패널 렌더 ──
+  let cur = 0;
+  const $ = id => document.getElementById(id);
+  function go(i) {
+    cur = Math.max(0, Math.min(WAYPOINTS.length - 1, i));
+    const w = WAYPOINTS[cur];
+    $('wpNum').textContent = cur + 1;
+    $('wpYear').textContent = w.year;
+    $('wpPlace').textContent = w.place;
+    $('wpTitle').textContent = w.title;
+    $('wpDesc').textContent = w.desc;
+    $('wpLinks').innerHTML = w.post
+      ? `<a href="../israel-palestine/${w.post}.html">깊이 읽기 — 「이스라엘·팔레스타인」 시리즈에서 이 장면 읽기 &rsaquo;</a>` : '';
+    $('progress').textContent = `${cur + 1} / ${WAYPOINTS.length}`;
+    $('prevBtn').disabled = cur === 0;
+    $('nextBtn').disabled = cur === WAYPOINTS.length - 1;
+    document.querySelectorAll('.wp-marker').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    document.querySelectorAll('.chip').forEach(el => el.classList.toggle('active', parseInt(el.dataset.i, 10) === cur));
+    const activeChip = chipsEl.querySelector('.chip.active');
+    if (activeChip) activeChip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    map.flyTo([w.lat, w.lng], w.zoom || 5, { duration: 1.1 });
+    if (window.trackPageView) window.trackPageView('world_route_israel_palestine', `wp_${cur + 1}`);
+  }
+  $('prevBtn').addEventListener('click', () => go(cur - 1));
+  $('nextBtn').addEventListener('click', () => go(cur + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+  });
+
+  // 자료실 글의 "세계지도 루트에서 이 장면 보기"에서
+  // ?point=post_id로 들어오면 해당 웨이포인트로 바로 진입시킨다.
+  const qp = new URLSearchParams(location.search).get('point');
+  const startIdx = qp ? WAYPOINTS.findIndex(w => w.post === qp) : -1;
+  go(startIdx >= 0 ? startIdx : 0);
+})();
+</script>
+<link rel="stylesheet" href="/css/namu.css">
+<script src="/js/growth.js"></script>
+<script src="/js/library.js"></script>
+<!-- namuBadge.js 미포함 — 우하단 고정 버튼이 루트 하단 패널과
+     겹치는 문제로 세계사 루트 전체에서 제외(2026-08-02 결정). -->
+</body>
+</html>
