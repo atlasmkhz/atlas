@@ -80,6 +80,7 @@ def main():
       place_ko: {js_str(ev['place'])},
       lat: {ev['lat']}, lng: {ev['lng']},
       card_ref: null, card_map: null,
+      map_link: {{ url: {js_str('../../memorial_garden.html?plaque=' + ev['id'])}, label: '기억의 뜰 분포도에서 이 명패 보기' }},
       body_ko: {js_str(body)},
       claim_ko: null,
       rebuttal_ko: null,

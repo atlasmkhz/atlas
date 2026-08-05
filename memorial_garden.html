@@ -351,6 +351,22 @@
 
   syncSlider();
   map.whenReady(function(){ setTimeout(declutter, 60); });
+
+  // 자료실 글의 "기억의 뜰 분포도에서 이 명패 보기"에서 ?plaque=id로
+  // 들어오면, 안내 화면을 건너뛰고 그 명패를 바로 연다. 슬라이더는
+  // 오늘(전체 표시) 상태 그대로 두어 그 죽음이 놓인 자리가 전체 안에서
+  // 어디쯤인지 함께 보이게 한다.
+  var pq = new URLSearchParams(location.search).get('plaque');
+  if (pq) {
+    var target = null;
+    for (var j = 0; j < E.length; j++) if (E[j].id === pq) { target = E[j]; break; }
+    if (target) {
+      document.getElementById('mgIntro').classList.add('hide');
+      map.setView([target.lat, target.lng], target.precise === false ? 7 : 9);
+      openPlaque(target.id);
+      setTimeout(declutter, 120);
+    }
+  }
 })();
 </script>
 </body>

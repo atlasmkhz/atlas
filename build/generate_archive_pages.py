@@ -582,6 +582,16 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
     # 세계사 루트 웨이포인트(world_route)를 동시에 가진 글은 두 CTA를 모두
     # 보여준다. elif 체인이라 card_ref가 world_route를 가리던 것을 고쳤다.
     map_cta_parts = []
+    if post.get('map_link'):
+        # map_link: { url, label } — 시대 지도도 세계사 루트도 아닌
+        # 독립 지도 페이지로 보내야 하는 시리즈용(2026-08-05 신설).
+        # 「기억의 뜰」이 첫 사례다: 명패 글은 한반도 좌표를 갖고 있어서
+        # 아래 폴백 규칙에 걸리면 근대 지도(map.html)로 가버리는데,
+        # 이 글들이 속한 지도는 기억의 뜰 분포도이므로 그쪽으로 보낸다.
+        # url은 자료실 글 기준 상대경로(../../…)로 적는다.
+        ml = post['map_link']
+        map_cta_parts.append(
+            f'<p class="map-cta"><a href="{esc(ml.get("url",""))}">{esc(ml.get("label","지도에서 보기"))}</a></p>')
     if post.get('card_ref'):
         map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
         map_cta_url = f"{map_prefix}?event={post['card_ref']}"
