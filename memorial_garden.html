@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기억의 뜰 — 이 땅에서 목숨을 잃은 분들을 기억합니다 | ATLAS by MKHZ</title>
+<meta name="description" content="동학농민혁명부터 오늘까지, 항쟁과 순직과 국가폭력과 참사로 목숨을 잃은 분들을 사건 단위 명패로 기억하는 공간. 시간을 끌면 죽음의 기록이 지도 위에 쌓입니다.">
+<link rel="canonical" href="https://atlas.mkhz.kr/memorial_garden.html">
+<meta property="og:title" content="기억의 뜰 — 이 땅에서 목숨을 잃은 분들을 기억합니다">
+<meta property="og:description" content="1894년부터 오늘까지, 38개의 명패. 감사와 경의를, 애도와 진실의 기록을.">
+<meta property="og:url" content="https://atlas.mkhz.kr/memorial_garden.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9C05WN48C4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-9C05WN48C4');
+</script>
+<script src="js/analytics.js"></script>
+<!-- 이 페이지의 예외 규칙: growth.js·library.js·namu 배지 등 게임화
+     요소를 전부 제외한다. 명패는 조용해야 한다. (기억의 뜰 원칙) -->
+<style>
+  :root{--ink:#14110c;--paper:#f2ede3;--dim:#b8b0a2;--gold:#b89860;
+    --line:rgba(184,152,96,0.22)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:var(--ink);color:var(--paper);overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  .mg-top{position:absolute;top:0;left:0;right:0;z-index:900;height:48px;
+    display:flex;align-items:center;gap:12px;padding:0 14px;
+    background:rgba(20,17,12,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+  .mg-back{font-size:13px;font-weight:700;color:var(--gold);text-decoration:none;white-space:nowrap}
+  .mg-brand{font-size:13.5px;font-weight:800;letter-spacing:.6px;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .mg-brand small{font-weight:400;color:var(--dim);font-size:11px;margin-left:6px}
+  .mg-menu{margin-left:auto;display:flex;gap:3px}
+  .mg-link{font-size:12.5px;font-weight:700;color:var(--dim);text-decoration:none;
+    padding:6px 9px;border-radius:8px;white-space:nowrap}
+  .mg-link:hover{background:rgba(184,152,96,.14);color:var(--paper)}
+
+  #map{position:absolute;top:48px;left:0;right:0;bottom:0;background:#0e0c09}
+
+  /* 들어가는 글 — 처음 한 번, 공간의 성격을 알린다 */
+  .mg-intro{position:absolute;inset:0;z-index:1200;display:flex;
+    align-items:center;justify-content:center;background:rgba(14,12,9,.93);
+    backdrop-filter:blur(4px);padding:24px}
+  .mg-intro.hide{display:none}
+  .mg-intro-card{max-width:520px;text-align:center}
+  .mg-intro-card h1{font-size:22px;font-weight:800;letter-spacing:2px;color:var(--paper);
+    margin-bottom:14px}
+  .mg-intro-card h1 small{display:block;font-size:11px;font-weight:400;color:var(--gold);
+    letter-spacing:4px;margin-bottom:10px}
+  .mg-intro-card p{font-size:13.5px;line-height:1.9;color:var(--dim);margin-bottom:10px}
+  .mg-intro-card p b{color:var(--paper);font-weight:600}
+  .mg-enter{margin-top:16px;background:none;border:1px solid var(--gold);color:var(--gold);
+    font-size:13px;font-weight:700;padding:10px 34px;border-radius:999px;cursor:pointer;
+    font-family:inherit;letter-spacing:2px}
+  .mg-enter:hover{background:rgba(184,152,96,.12)}
+
+  /* 구역 범례 */
+  .mg-legend{position:absolute;top:58px;right:10px;z-index:800;
+    width:min(250px,58vw);background:rgba(20,17,12,.9);border:1px solid var(--line);
+    border-radius:11px;padding:10px 11px;backdrop-filter:blur(8px)}
+  .mg-legend h2{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.5px;
+    margin-bottom:8px}
+  .mg-chip{display:flex;align-items:flex-start;gap:7px;width:100%;text-align:left;
+    background:none;border:none;color:var(--paper);font-size:11.5px;font-weight:600;
+    padding:5px 6px;border-radius:7px;cursor:pointer;line-height:1.4;font-family:inherit}
+  .mg-chip:hover{background:rgba(184,152,96,.13)}
+  .mg-chip.off{opacity:.32}
+  .mg-chip i{flex:0 0 10px;width:10px;height:10px;border-radius:50%;margin-top:3px}
+  .mg-chip small{display:block;font-weight:400;color:var(--dim);font-size:10px;margin-top:1px}
+  .mg-legend-foot{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);
+    font-size:10px;color:var(--dim);line-height:1.6}
+  .mg-toggle{display:none}
+
+  /* 시간 슬라이더 */
+  .mg-time{position:absolute;left:12px;right:12px;bottom:12px;z-index:850;
+    background:rgba(20,17,12,.92);border:1px solid var(--line);border-radius:12px;
+    padding:10px 16px 12px;backdrop-filter:blur(8px)}
+  .mg-time-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+  .mg-year{font-size:20px;font-weight:800;color:var(--gold);letter-spacing:1px;
+    font-variant-numeric:tabular-nums;min-width:64px}
+  .mg-count{font-size:11.5px;color:var(--dim)}
+  .mg-time input[type=range]{width:100%;-webkit-appearance:none;appearance:none;
+    height:4px;border-radius:4px;background:linear-gradient(to right,var(--gold) 0%,var(--gold) var(--p,100%),rgba(184,152,96,.2) var(--p,100%));outline:none}
+  .mg-time input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:18px;height:18px;border-radius:50%;background:var(--gold);cursor:pointer;
+    border:3px solid var(--ink)}
+  .mg-time input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:var(--gold);cursor:pointer;border:3px solid var(--ink)}
+  .mg-time-ticks{display:flex;justify-content:space-between;margin-top:5px;
+    font-size:9.5px;color:var(--dim);letter-spacing:.3px}
+
+  /* 마커 */
+  .mg-wrap{position:relative}
+  .mg-pin{border-radius:50%;box-shadow:0 0 0 2px rgba(14,12,9,.6);
+    animation:mgIn .5s ease}
+  @keyframes mgIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+  .mg-label{position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);
+    white-space:nowrap;font-size:10.5px;font-weight:700;color:var(--paper);
+    text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7);pointer-events:none}
+  .mg-label.hide{display:none}
+
+  /* 명패 패널 */
+  .mg-panel{position:absolute;top:48px;right:0;bottom:0;z-index:1000;
+    width:min(400px,100vw);background:rgba(18,15,11,.97);border-left:1px solid var(--line);
+    transform:translateX(102%);transition:transform .28s ease;overflow-y:auto;
+    padding:20px 20px 30px;backdrop-filter:blur(10px)}
+  .mg-panel.on{transform:translateX(0)}
+  .mg-close{position:absolute;top:10px;right:12px;background:none;border:none;
+    color:var(--dim);font-size:22px;cursor:pointer;line-height:1;padding:6px}
+  .mg-p-zone{font-size:10.5px;font-weight:800;letter-spacing:1.5px;margin-bottom:8px}
+  .mg-p-name{font-size:19px;font-weight:800;line-height:1.4;margin-bottom:4px}
+  .mg-p-meta{font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6}
+  .mg-p-sec{font-size:10.5px;font-weight:800;color:var(--dim);letter-spacing:1px;
+    margin:14px 0 5px}
+  .mg-p-body{font-size:13px;line-height:1.85;color:var(--paper)}
+  .mg-p-body.dim{color:#d5cdbd}
+  .mg-tribute{margin-top:18px;padding:14px 16px;border-left:2px solid var(--gold);
+    background:rgba(184,152,96,.06);font-size:13.5px;line-height:2.0;color:#efe8d8}
+  .mg-p-links{margin-top:18px;display:grid;gap:8px}
+  .mg-p-links a{display:block;padding:10px 12px;border:1px solid var(--line);
+    border-radius:9px;text-decoration:none;font-size:12.5px;font-weight:700}
+  .mg-p-links a span{display:block;font-weight:400;color:var(--dim);font-size:11px;margin-top:2px}
+  .mg-p-links a:hover{border-color:var(--gold)}
+  .mg-p-src{margin-top:14px;font-size:10.5px;color:var(--dim)}
+  .mg-p-src a{color:var(--dim)}
+
+  @media(max-width:720px){
+    .mg-legend{display:none}
+    .mg-legend.open{display:block}
+    .mg-toggle{display:block;position:absolute;top:58px;right:10px;z-index:810;
+      background:rgba(20,17,12,.9);border:1px solid var(--line);color:var(--paper);
+      font-size:11.5px;font-weight:700;padding:7px 11px;border-radius:9px;cursor:pointer;
+      font-family:inherit}
+    .mg-legend{top:96px}
+    .mg-time{left:8px;right:8px;bottom:8px;padding:8px 12px 10px}
+    .mg-year{font-size:17px}
+  }
+</style>
+</head>
+<body>
+
+<div class="mg-top">
+  <a class="mg-back" href="index.html">← 포털</a>
+  <div class="mg-brand">ATLAS <small>기억의 뜰</small></div>
+  <div class="mg-menu">
+    <a class="mg-link" href="archive/memorial-garden/index.html">자료실</a>
+    <a class="mg-link" href="map.html">지도</a>
+  </div>
+</div>
+
+<div class="mg-intro" id="mgIntro">
+  <div class="mg-intro-card">
+    <h1><small>MEMORIAL GARDEN</small>기억의 뜰</h1>
+    <p>1894년부터 오늘까지, 이 공동체의 역사 속에서<br>목숨을 잃은 분들을 기억하는 공간입니다.</p>
+    <p>스스로 일어나 싸우다, 복무 중 나라와 이웃을 지키다,<br>
+       국가의 폭력에, 지켜지지 못한 일상 속에 —<br>
+       서른여덟 개의 명패가 지도 위에 놓여 있습니다.</p>
+    <p><b>아래의 시간을 끌면, 죽음의 기록이 지도 위에 쌓입니다.</b><br>
+       지워지지 않고, 쌓입니다.</p>
+    <button class="mg-enter" id="mgEnter">들어가기</button>
+  </div>
+</div>
+
+<button class="mg-toggle" id="mgToggle">구역 ▾</button>
+
+<div id="map"></div>
+
+<div class="mg-legend" id="mgLegend">
+  <h2>네 개의 구역 — 눌러서 켜고 끄기</h2>
+  <div id="mgChips"></div>
+  <div class="mg-legend-foot">
+    감사라는 말은 스스로 바치신 분들께만 씁니다.<br>
+    빼앗기신 분들께는 애도와 진실의 기록을 —<br>
+    구역마다 헌사의 언어가 다른 이유입니다.<br>
+    규모는 집계 주체를 함께 적었고, 세지 못한 죽음은<br>
+    세지 못했다고 적었습니다.
+  </div>
+</div>
+
+<div class="mg-time">
+  <div class="mg-time-head">
+    <span class="mg-year" id="mgYear">오늘</span>
+    <span class="mg-count" id="mgCount"></span>
+  </div>
+  <input type="range" id="mgSlider" min="1894" max="2026" value="2026" step="1">
+  <div class="mg-time-ticks">
+    <span>1894</span><span>1919</span><span>1945</span><span>1960</span>
+    <span>1980</span><span>2000</span><span>오늘</span>
+  </div>
+</div>
+
+<aside class="mg-panel" id="mgPanel">
+  <button class="mg-close" id="mgClose" aria-label="닫기">×</button>
+  <div id="mgPanelBody"></div>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data/memorial_garden_events.js"></script>
+<script>
+(function(){
+  var D = window.MEMORIAL_GARDEN, E = D.events, Z = D.zones;
+  var esc = function(s){ return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+
+  document.getElementById('mgEnter').addEventListener('click', function(){
+    document.getElementById('mgIntro').classList.add('hide');
+  });
+
+  var map = L.map('map', { zoomControl: true, attributionControl: false })
+    .setView([36.3, 127.6], 7);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    maxZoom: 12, minZoom: 6, subdomains: 'abcd', crossOrigin: true, errorTileUrl: ''
+  }).addTo(map);
+
+  var on = {}; Object.keys(Z).forEach(function(k){ on[k] = true; });
+  var curYear = 2026;
+  var entries = [];
+
+  function pinIcon(color, name){
+    var d = 14;
+    return L.divIcon({ className: '', iconSize: [d, d], iconAnchor: [d/2, d/2],
+      html: '<div class="mg-wrap"><div class="mg-pin" style="width:' + d + 'px;height:' + d +
+            'px;background:' + color + '"></div><div class="mg-label">' + esc(name) + '</div></div>' });
+  }
+
+  E.forEach(function(ev){
+    var col = (Z[ev.zone] || {}).color || '#8a8276';
+    var m = L.marker([ev.lat, ev.lng], { icon: pinIcon(col, ev.name), riseOnHover: true });
+    m.on('click', function(){ openPlaque(ev.id); });
+    var ring = null;
+    if (ev.precise === false) {
+      ring = L.circle([ev.lat, ev.lng], {
+        radius: 220000, color: col, weight: 1, opacity: 0.3,
+        fillColor: col, fillOpacity: 0.05, interactive: false });
+    }
+    entries.push({ ev: ev, marker: m, ring: ring });
+  });
+
+  function applyFilter(){
+    var shown = 0;
+    entries.forEach(function(e){
+      var show = on[e.ev.zone] && e.ev.year <= curYear;
+      if (show) shown++;
+      [e.marker, e.ring].forEach(function(l){
+        if (!l) return;
+        if (show && !map.hasLayer(l)) map.addLayer(l);
+        if (!show && map.hasLayer(l)) map.removeLayer(l);
+      });
+    });
+    document.getElementById('mgCount').textContent =
+      '명패 ' + shown + ' / ' + E.length;
+    declutter();
+  }
+
+  // 구역 칩
+  var chips = document.getElementById('mgChips');
+  chips.innerHTML = Object.keys(Z).map(function(k){
+    var n = E.filter(function(ev){ return ev.zone === k; }).length;
+    return '<button type="button" class="mg-chip" data-zone="' + k + '">' +
+           '<i style="background:' + Z[k].color + '"></i><span>' + esc(Z[k].label) +
+           ' <span style="opacity:.55">' + n + '</span><small>' + esc(Z[k].desc) + '</small></span></button>';
+  }).join('');
+  chips.addEventListener('click', function(e){
+    var b = e.target.closest('.mg-chip'); if (!b) return;
+    var k = b.getAttribute('data-zone');
+    on[k] = !on[k];
+    b.classList.toggle('off', !on[k]);
+    applyFilter();
+  });
+  document.getElementById('mgToggle').addEventListener('click', function(){
+    document.getElementById('mgLegend').classList.toggle('open');
+  });
+
+  // 시간 슬라이더 — 죽음의 기록은 지워지지 않고 쌓인다
+  var slider = document.getElementById('mgSlider');
+  var yearEl = document.getElementById('mgYear');
+  function syncSlider(){
+    curYear = parseInt(slider.value, 10);
+    yearEl.textContent = curYear >= 2026 ? '오늘' : curYear + '년';
+    var p = ((curYear - 1894) / (2026 - 1894)) * 100;
+    slider.style.setProperty('--p', p + '%');
+    applyFilter();
+  }
+  slider.addEventListener('input', syncSlider);
+
+  // 라벨 겹침 해소 — 분포도 공통 방식
+  function declutter(){
+    var vis = entries.filter(function(e){ return map.hasLayer(e.marker); });
+    var boxes = [];
+    vis.forEach(function(e){
+      var el = e.marker.getElement(); if (!el) return;
+      var lab = el.querySelector('.mg-label'); if (!lab) return;
+      lab.classList.remove('hide');
+      var p = map.latLngToContainerPoint(e.marker.getLatLng());
+      var w = e.ev.name.length * 11 + 8;
+      var box = { x1: p.x - w/2, x2: p.x + w/2, y1: p.y + 16, y2: p.y + 32 };
+      var hit = boxes.some(function(b){
+        return !(box.x2 < b.x1 || box.x1 > b.x2 || box.y2 < b.y1 || box.y1 > b.y2);
+      });
+      if (hit) lab.classList.add('hide'); else boxes.push(box);
+    });
+  }
+  map.on('zoomend moveend', declutter);
+
+  // ── 명패 패널 ──────────────────────────────────────────────
+  var panel = document.getElementById('mgPanel');
+  var body = document.getElementById('mgPanelBody');
+
+  function openPlaque(id){
+    var ev = null;
+    for (var i = 0; i < E.length; i++) if (E[i].id === id) { ev = E[i]; break; }
+    if (!ev) return;
+    var z = Z[ev.zone] || {};
+    var h = [];
+    h.push('<div class="mg-p-zone" style="color:' + (z.color || '#b8b0a2') + '">제' +
+           (['struggle','duty','violence','disaster'].indexOf(ev.zone) + 1) + '구역 · ' +
+           esc(z.label || '') + '</div>');
+    h.push('<div class="mg-p-name">' + esc(ev.name) + '</div>');
+    h.push('<div class="mg-p-meta">' + esc(ev.period) + ' · ' + esc(ev.place) + '</div>');
+    h.push('<div class="mg-p-body">' + esc(ev.summary) + '</div>');
+    h.push('<div class="mg-p-sec">규모</div>');
+    h.push('<div class="mg-p-body dim">' + esc(ev.scale) + '</div>');
+    h.push('<div class="mg-p-sec">기억의 현재</div>');
+    h.push('<div class="mg-p-body dim">' + esc(ev.memory) + '</div>');
+    h.push('<div class="mg-tribute">' + esc(ev.tribute) + '</div>');
+    h.push('<div class="mg-p-links">');
+    h.push('<a href="archive/memorial-garden/' + esc(ev.id) + '.html">자료실에서 읽기<span>기억의 뜰 — 명패의 기록</span></a>');
+    if (ev.archive_link)
+      h.push('<a href="' + esc(ev.archive_link.url) + '">' + esc(ev.archive_link.title) + '<span>함께 보기</span></a>');
+    h.push('</div>');
+    if (ev.source)
+      h.push('<div class="mg-p-src">근거 · <a href="' + esc(ev.source.url) + '" target="_blank" rel="noopener">' +
+             esc(ev.source.name) + '</a></div>');
+    body.innerHTML = h.join('');
+    panel.classList.add('on');
+    if (window.trackPageView) window.trackPageView('memorial_garden', ev.id);
+  }
+
+  document.getElementById('mgClose').addEventListener('click', function(){
+    panel.classList.remove('on');
+  });
+
+  syncSlider();
+  map.whenReady(function(){ setTimeout(declutter, 60); });
+})();
+</script>
+</body>
+</html>

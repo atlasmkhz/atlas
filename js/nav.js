@@ -51,6 +51,11 @@
     // 2026-08-01 「강제동원 분포도」 — 동선이 아니라 분포다.
     // 어디로 끌려갔는가를 한 장에 놓는다(사상가 분포도와 같은 형식).
     { routeId:'forced_mobilization', name:'강제동원 분포도', period:'1938–1945', tagline:'사도광산에서 남양군도까지 — 어디로 끌려갔는가', ready:true, thumbnail:null, updated:'2026-08-01', href:'forced_mobilization_map.html' },
+    // 2026-08-05 「기억의 뜰」 — 분포이자 시간축. 이 공동체의 역사 속에서
+    // 목숨을 잃은 분들의 명패 38개를 지도 위에 놓고, 슬라이더를 끌면
+    // 죽음의 기록이 쌓인다. 이 카드만은 updated를 두지 않는다 —
+    // 추모 공간에 NEW 배지를 달지 않는다는 원칙(왕두목, 2026-08-05).
+    { routeId:'memorial_garden', name:'기억의 뜰', period:'1894–현재', tagline:'이 땅에서 목숨을 잃은 분들을 기억합니다 — 네 개의 구역, 서른여덟 개의 명패', ready:true, thumbnail:null, href:'memorial_garden.html' },
     { routeId:'hong_beom_do',       name:'홍범도',      period:'1868–2021', tagline:'포수에서 현충원까지', ready:true, thumbnail:null },
     { routeId:'kim_gu',             name:'백범 김구',    period:'1876–1949', tagline:'상놈의 아들에서 임시정부의 얼굴로', ready:true, thumbnail:null },
     { routeId:'kim_won_bong',       name:'김원봉',      period:'1898–1958', tagline:'의열단을 만든 사람, 두 번 지워진 이름', ready:true, thumbnail:null },
@@ -102,6 +107,10 @@
   // ARCHIVE_REGISTRY에 실제로 등록돼 있어야 "입장 가능"으로 뜬다.
   const ARCHIVE_SUBCATEGORIES = {
     history: [
+      // 기억의 뜰 (2026-08-05 신설) — 이 공동체의 역사 속에서 목숨을
+      // 잃은 분들의 사건 단위 명패. 분포도(memorial_garden.html)와 짝.
+      // 이 시리즈만은 updated/NEW 배지를 쓰지 않는다 — 명패는 조용해야 한다.
+      { subcat: 'memorial_garden', name: '기억의 뜰', seriesIds: ['memorial_garden'] },
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records', 'forced_mobilization'] },
       // ── 시대연구 2분할 (2026-07-31, 왕두목 지시) ────────────────
       // 왕두목 지적: "지금 있는 시대연구는 주로 현대시대연구이네."

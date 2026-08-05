@@ -134,6 +134,47 @@ article section p {
 .related-group a { color: #8a6a3a; }
 .book-meta { color: #a39a8c; font-size: 12px; }
 
+/* 관련 영상 — 썸네일 카드 (2026-08-05 신설).
+   자료실 글에서 유튜브로 넘어가는 동선이 제목 텍스트뿐이라 눈에 띄지
+   않던 것을 카드로 바꾼다. 페이퍼 톤을 깨지 않도록 테두리는 얇게, 재생
+   버튼만 붉은 점으로 둔다. */
+.related-group li.video-item { padding: 5px 0; }
+.video-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px; border: 1px solid rgba(58,53,44,0.1); border-radius: 10px;
+  text-decoration: none; background: #fffdf8;
+  transition: border-color .15s ease;
+}
+.video-card:hover { border-color: #b89860; }
+.video-thumb {
+  position: relative; flex: 0 0 132px; width: 132px; aspect-ratio: 16 / 9;
+  border-radius: 7px; overflow: hidden; background: #e8e2d6;
+}
+.video-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+/* hqdefault는 4:3 레터박스라 위아래 검은 띠가 생긴다 — 살짝 확대해 잘라낸다 */
+.video-thumb img { transform: scale(1.35); }
+.video-play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 34px; height: 24px; border-radius: 6px; background: rgba(20,17,12,.72);
+}
+.video-play::after {
+  content: ''; position: absolute; left: 13px; top: 6px;
+  border-style: solid; border-width: 6px 0 6px 9px;
+  border-color: transparent transparent transparent #fff;
+}
+.video-title {
+  font-size: 13px; font-weight: 700; line-height: 1.5; color: #3a352c;
+}
+.video-sub {
+  display: block; font-size: 11.5px; font-weight: 400; color: #a39a8c; margin-top: 3px;
+}
+@media (max-width: 520px) {
+  .video-thumb { flex-basis: 104px; width: 104px; }
+  .video-title { font-size: 12.5px; }
+}
+
 /* ── 시리즈 컨텍스트 / 목록(랜딩 페이지) ── */
 .series-context, .series-list { font-size: 13.5px; color: #6a655c; }
 .series-context a, .series-list a { color: #8a6a3a; }

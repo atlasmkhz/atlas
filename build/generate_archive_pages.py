@@ -254,6 +254,38 @@ def render_book_item(book):
     return f'<li>{label}{meta_html}</li>'
 
 
+def youtube_id(url):
+    """유튜브 URL에서 영상 ID를 뽑는다. 지원 형태:
+    youtu.be/ID, youtube.com/watch?v=ID, /embed/ID, /shorts/ID.
+    유튜브가 아니거나 못 알아보면 None — 그 경우 기존 텍스트 링크로 떨어진다."""
+    if not url:
+        return None
+    m = re.search(r'(?:youtu\.be/|youtube\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/))([A-Za-z0-9_-]{11})', url)
+    return m.group(1) if m else None
+
+
+def render_video_item(video):
+    """관련 영상 — 썸네일 카드. 2026-08-05 신설.
+    그동안 영상이 제목 텍스트 링크로만 나가서, 자료실 글에서 영상으로
+    넘어가는 동선이 눈에 띄지 않았다. 지도 팝업(renderer.js)이 이미
+    img.youtube.com/vi/{id}/hqdefault.jpg를 쓰고 있으므로 같은 방식으로
+    통일한다. 유튜브가 아닌 링크는 예전처럼 텍스트로 남긴다."""
+    title = video.get('title', '')
+    url = video.get('url', '')
+    vid = youtube_id(url)
+    if not vid:
+        return (f'<li><a href="{esc(url)}">{esc(title)}</a></li>' if url
+                else f'<li>{esc(title)}</li>')
+    return (
+        f'<li class="video-item"><a class="video-card" href="{esc(url)}" target="_blank" rel="noopener">'
+        f'<span class="video-thumb">'
+        f'<img src="https://img.youtube.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy">'
+        f'<span class="video-play" aria-hidden="true"></span></span>'
+        f'<span class="video-title">{esc(title)}<span class="video-sub">유튜브에서 보기</span></span>'
+        f'</a></li>'
+    )
+
+
 def render_related_section(related):
     if not related:
         return ''
@@ -264,6 +296,8 @@ def render_related_section(related):
             continue
         if key == 'books':
             lis = ''.join(render_book_item(b) for b in items)
+        elif key == 'videos':
+            lis = ''.join(render_video_item(v) for v in items)
         else:
             lis = ''.join(
                 f'<li><a href="{esc(it.get("url",""))}">{esc(it.get("title",""))}</a></li>' if it.get('url')

@@ -112,6 +112,10 @@
   // 가리키는 게 아니라 "묶음"이라는 걸 UI로도 분명히 하기 위해서다).
   const ARCHIVE_SUBCATEGORIES = {
     history: [
+      // 기억의 뜰 (2026-08-05 신설) — 이 공동체의 역사 속에서 목숨을
+      // 잃은 분들의 사건 단위 명패. 분포도(memorial_garden.html)와 짝.
+      // 이 시리즈만은 updated/NEW 배지를 쓰지 않는다 — 명패는 조용해야 한다.
+      { subcat: 'memorial_garden', name: '기억의 뜰', seriesIds: ['memorial_garden'] },
       { subcat: 'revisionism', name: '역사왜곡', seriesIds: ['historical_revisionism', 'geonguk_jeonjaeng', 'dokdo_records', 'forced_mobilization'] },
       // ── 시대연구 2분할 (2026-07-31, 왕두목 지시) ────────────────
       // 왕두목 지적: "지금 있는 시대연구는 주로 현대시대연구이네."
