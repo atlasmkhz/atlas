@@ -100,7 +100,7 @@ window.DAMSA_THEMES = [
           src: 'photos/ganghwa-park.jpg',
           alt: '강화 부근리 지석묘 — 덮개돌을 두 굄돌이 받친 탁자식 고인돌',
           caption: '강화 부근리 지석묘. 교과서에 실린 그 한 기다.',
-          credit: ''
+          credit: '국가유산청 국가유산포털 (공공누리 제1유형)'
         },
         region: 'ganghwa',
         name: '강화 고인돌공원 · 강화역사박물관',
@@ -142,9 +142,9 @@ window.DAMSA_THEMES = [
         // damsa.js가 '사진 준비 중' 띠로 접는다(카드가 깨지지 않는다).
         photo: {
           src: 'photos/ganghwa-jeomgol.jpg',
-          alt: '강화 부근리 점골 고인돌 — 굄돌이 안쪽으로 기운 탁자식 1기',
-          caption: '점골 고인돌. 길가 콩밭 옆에 그냥 서 있다.',
-          credit: ''
+          alt: '강화 부근리 점골 고인돌 — 마을 안 낮은 대지에 선 탁자식 고인돌 1기',
+          caption: '점골 고인돌. 마을 한복판, 창고와 전신주 사이에 그냥 서 있다.',
+          credit: '국가유산청 국가유산포털 (공공누리 제1유형)'
         },
         region: 'ganghwa',
         name: '강화 부근리 점골 고인돌',
@@ -175,7 +175,7 @@ window.DAMSA_THEMES = [
           src: 'photos/ganghwa-osangri.jpg',
           alt: '강화 오상리 고인돌군 — 낮은 탁자식 고인돌 여러 기가 모여 있는 모습',
           caption: '오상리 고인돌군. 여러 기가 한눈에 들어오는 곳.',
-          credit: ''
+          credit: '국가유산청 국가유산포털 (공공누리 제1유형)'
         },
         region: 'ganghwa',
         name: '강화 오상리 고인돌군',
@@ -208,8 +208,8 @@ window.DAMSA_THEMES = [
         photo: {
           src: 'photos/gochang-museum.jpg',
           alt: '고창 죽림리 지석묘군 — 능선을 따라 늘어선 고인돌 무리',
-          caption: '고창 죽림리 지석묘군. 단일 지역 밀집도로는 국내 최대급이다.',
-          credit: ''
+          caption: '고창 죽림리 지석묘군. 능선 아래 초지에 수백 기가 흩어져 있다 — 단일 지역 밀집도로는 국내 최대급이다.',
+          credit: '국가유산청 국가유산포털 (공공누리 제1유형)'
         },
         region: 'gochang',
         name: '고창 세계유산 고인돌박물관 · 죽림리 유적',
@@ -254,7 +254,7 @@ window.DAMSA_THEMES = [
           src: 'photos/gochang-dosanri.jpg',
           alt: '고창 도산리 고인돌 — 민가 옆 마당에 놓인 탁자식 고인돌',
           caption: '도산리 고인돌. 마을 안에 살아남은 한 기.',
-          credit: ''
+          credit: '국가유산청 국가유산포털 (공공누리 제1유형)'
         },
         region: 'gochang',
         name: '고창 도산리 고인돌',
@@ -286,9 +286,9 @@ window.DAMSA_THEMES = [
         // damsa.js가 '사진 준비 중' 띠로 접는다(카드가 깨지지 않는다).
         photo: {
           src: 'photos/hwasun-hyosan.jpg',
-          alt: '화순 효산리 감태바위 고인돌군 — 산기슭에 흩어진 고인돌들',
-          caption: '화순 효산리 감태바위 일대. 채석장까지 함께 남아 있다.',
-          credit: ''
+          alt: '화순 고인돌 유적 항공사진 — 효산리에서 대신리로 이어지는 골짜기',
+          caption: '화순 고인돌 유적이 이어지는 계곡. 효산리에서 대신리까지 5km 골짜기를 따라 596기가 흩어져 있다.',
+          credit: '국가유산청 국가유산포털 (공공누리 제1유형)'
         },
         region: 'hwasun',
         name: '화순 고인돌 유적 — 효산리 입구 (고인돌문화공원)',
@@ -331,8 +331,8 @@ window.DAMSA_THEMES = [
         photo: {
           src: 'photos/hwasun-daesin.jpg',
           alt: '화순 대신리 핑매바위 — 200톤이 넘는 국내 최대급 덮개돌',
-          caption: '핑매바위. 덮개돌 무게만 280톤으로 추정된다.',
-          credit: ''
+          caption: '핑매바위. 옆의 안내판과 견주어 보면 크기가 짐작된다 — 덮개돌 무게만 280톤으로 추정된다.',
+          credit: 'ⓒ한국관광공사 포토코리아'
         },
         region: 'hwasun',
         name: '화순 고인돌 유적 — 대신리 입구 (발굴지·핑매바위)',
