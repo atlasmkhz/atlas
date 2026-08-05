@@ -393,6 +393,17 @@ const SEARCH_INDEX = [
     "url": "/map.html?event=person_1895_01"
   },
   {
+    "id": "person_1895_02",
+    "title_ko": "김개남의 처형 — 재판 없이 목이 잘린 남접의 장수",
+    "people": [
+      "김개남"
+    ],
+    "year": 1895,
+    "mapKey": "modern1",
+    "mapLabel": "근대 (1876~1945)",
+    "url": "/map.html?event=person_1895_02"
+  },
+  {
     "id": "political_1895_01",
     "title_ko": "시모노세키조약과 삼국간섭",
     "people": [],
@@ -12489,6 +12500,17 @@ const SEARCH_INDEX = [
     "mapKey": "modern2",
     "mapLabel": "근현대 (1945~1993)",
     "url": "/maps/modern2/index.html?event=organization_1980_01"
+  },
+  {
+    "id": "person_1980_11",
+    "title_ko": "안병하 — 발포 명령을 거부한 전남도경국장",
+    "people": [
+      "안병하"
+    ],
+    "year": 1980,
+    "mapKey": "modern2",
+    "mapLabel": "근현대 (1945~1993)",
+    "url": "/maps/modern2/index.html?event=person_1980_11"
   },
   {
     "id": "person_1980_01",

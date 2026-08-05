@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ATLAS by MKHZ — sitemap.xml (통합)
-  메인 페이지 1개 + 1876~1945 Event 484개 + 루트 10개 + 
-  근현대(1945~1993) 진입점 1개 + Event 475개 + 루트 10개 + 
+  메인 페이지 1개 + 1876~1945 Event 485개 + 루트 10개 + 
+  근현대(1945~1993) 진입점 1개 + Event 476개 + 루트 10개 + 
   현대(1994~2025) 진입점 1개 + Event 374개(루트 없음) + 
   조선(1392~1875, 중세2) 진입점 1개 + Event 208개(루트 없음) + 
   고려(918~1392, 중세1) 진입점 1개 + Event 168개(루트 없음)를 포함한다.
@@ -214,6 +214,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/event/1895-eulmi-righteous-army</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/event/1895-the-execution-of-kim-gae-nam</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3884,6 +3889,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/maps/modern2/event/1979-yh-trading-company</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/maps/modern2/event/1980-ahn-byung-ha-the-police-chief-who-refused</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
