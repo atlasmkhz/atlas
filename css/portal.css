@@ -221,6 +221,13 @@ body.portal {
 /* 답사 항목이 추가되면서 4열 → 5열. 모바일 2열에서는 답사가 홀로 남으므로
    전체 너비를 차지하게 해 신규 갈래를 눈에 띄게 한다(아래 미디어쿼리). */
 .portal-quick-item-damsa { border-color:rgba(190,140,80,.45); }
+/* 기억의 뜰 (2026-08-05) — 다른 칸보다 차분하게. 강조하되 들뜨지 않도록
+   테두리만 옅은 금색으로 두고 배경은 살짝 어둡게 눌러 둔다. */
+.portal-quick-item-memorial {
+  border-color: rgba(184,152,96,.42);
+  background: linear-gradient(180deg, rgba(184,152,96,.06), rgba(20,17,12,.02));
+}
+.portal-quick-item-memorial:hover { border-color: rgba(184,152,96,.75); }
 .portal-quick-item {
   display:flex; flex-direction:row; align-items:center; gap:14px;
   padding:18px 18px; border-radius:14px; text-decoration:none;

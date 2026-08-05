@@ -51,10 +51,13 @@ def main():
     for ev in events:
         z = zones[ev['zone']]
         zone_label = f"제{ZONE_NUM[ev['zone']]}구역 · {z['label']}"
+        # 개행은 실제 줄바꿈 문자로 둔다. 여기서 "\\n"처럼 이스케이프를
+        # 한 번 더 넣으면 json.dumps가 백슬래시까지 escape해서, 최종 JS
+        # 문자열에 \n이 글자 그대로 남는다(2026-08-05 실제로 그렇게 나감).
         body = (
-            f"{ev['summary']}\\n\\n"
-            f"【규모】 {ev['scale']}\\n\\n"
-            f"【기억의 현재】 {ev['memory']}\\n\\n"
+            f"{ev['summary']}\n\n"
+            f"【규모】 {ev['scale']}\n\n"
+            f"【기억의 현재】 {ev['memory']}\n\n"
             f"【헌사】 {ev['tribute']}"
         )
         related_events = [
