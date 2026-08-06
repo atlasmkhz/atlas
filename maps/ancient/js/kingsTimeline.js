@@ -55,7 +55,6 @@
         '<button type="button" class="ys-kings-toggle" id="ysKingsToggle">왕대 연표</button>' +
       '</div>' +
       '<div class="ys-track">' +
-        '<div class="ys-band" id="ysBand"></div>' +
         '<div class="ys-marks" id="ysMarks"></div>' +
         '<input type="range" id="ysRange" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" step="1" value="' + curYear + '">' +
       '</div>' +
@@ -75,7 +74,10 @@
       setPanelOpen(!panelOpen);
     });
     syncTimelineHeight();
-    window.addEventListener('resize', syncTimelineHeight);
+    window.addEventListener('resize', function(){
+      syncTimelineHeight();
+      layoutChapterBand();
+    });
   }
 
   // ── 슬라이더 ↔ 챕터 시각 동기화 ──────────────────────
@@ -134,16 +136,45 @@
     });
   }
 
-  function updateBand(){
-    var band = document.getElementById('ysBand');
-    if (!band || typeof BLOCKS === 'undefined' || typeof blockIndexForYear !== 'function') return;
-    var b = BLOCKS[blockIndexForYear(curYear)];
-    if (!b) return;
-    band.style.left = pct(b.start_year) + '%';
-    band.style.width = Math.max(0.6, pct(b.end_year) - pct(b.start_year)) + '%';
+  // ── 챕터 박스를 슬라이더 시간축에 비례 배치 ──────────
+  // 최종 해법(왕두목 3차 지적): 트랙에 밴드를 그리는 우회가 아니라
+  // 박스 자체가 자기 연대 구간 아래에 앉아야 한다. 313~475 박스는
+  // 슬라이더의 313~475 구간 바로 밑에. 그래서 데스크톱에서는 박스
+  // 폭을 기간 비례(flex-grow=기간)로 바꾼다.
+  //  - 나당전쟁(16년)처럼 짧은 시기는 비례로는 20px밖에 안 되므로
+  //    min-width로 최소 클릭 폭을 지키고(rb-slim: 글자 축소),
+  //    그만큼의 오차는 나머지 박스가 비례로 흡수한다.
+  //  - 모바일(≤860px)은 화면이 좁아 비례 배치가 성립하지 않으므로
+  //    기존의 가로 스크롤 방식을 그대로 둔다.
+  function layoutChapterBand(){
+    var band = document.getElementById('reignBand');
+    if (!band || typeof BLOCKS === 'undefined') return;
+    var btns = band.querySelectorAll('.reign-chapter-btn');
+    if (btns.length !== BLOCKS.length) return;
+    var desktop = window.innerWidth > 860;
+    var total = YEAR_MAX - YEAR_MIN;
+    band.classList.toggle('rb-proportional', desktop);
+    btns.forEach ? null : null;
+    Array.prototype.forEach.call(btns, function(btn, i){
+      var b = BLOCKS[i];
+      var span = Math.max(b.end_year - b.start_year, 1);
+      if (desktop){
+        btn.style.width = 'auto';
+        btn.style.flex = span + ' 1 0px';
+        btn.style.minWidth = '54px';
+        btn.classList.toggle('rb-slim', span / total < 0.055);
+      } else {
+        // 모바일 복원: timeline.js가 넣은 원래 픽셀 폭으로 되돌린다
+        var w = Math.max(128, Math.round(span * 0.85));
+        btn.style.width = w + 'px';
+        btn.style.flex = '0 0 ' + w + 'px';
+        btn.style.minWidth = '';
+        btn.classList.remove('rb-slim');
+      }
+    });
   }
 
-  // 범례(.legend)·레이어 박스(.layer-toggle)는 bottom 고정값(110px)으로
+  // 범례(.legend)·레이어 박스(.layer-toggle)는  // 범례(.legend)·레이어 박스(.layer-toggle)는 bottom 고정값(110px)으로
   // 타임라인 위에 떠 있었는데, 슬라이더가 끼며 타임라인이 높아져 겹치게
   // 됐다(왕두목 지적). 실제 높이를 재서 CSS 변수로 넘긴다.
   function syncTimelineHeight(){
@@ -303,7 +334,6 @@
       }
     }
     renderKings(curYear);
-    updateBand();
   }
 
   // ── 챕터 전환과의 동기화 ────────────────────────────
@@ -330,6 +360,7 @@
   injectSlider();
   injectPanel();
   buildScale();
+  layoutChapterBand();
   setPanelOpen(panelOpen);
   setYear(curYear, { renderTerritory: false });
 })();

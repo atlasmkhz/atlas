@@ -1752,14 +1752,9 @@ body.map-light .kp-caveat { color:#5a5344; background:rgba(184,152,96,0.1); }
 .legend.pc-collapsed .legend-title, .layer-toggle.pc-collapsed .toggle-title { margin-bottom:0; }
 
 /* ── 슬라이더 ↔ 챕터 시각 동기화 (2026-08-06) ──
-   트랙 위 세로 눈금 = 챕터 경계, 금색 밴드 = 현재 챕터 구간.
-   연도 라벨은 균등 분배가 아니라 실제 시간 위치에 비례 배치한다. */
+   트랙 위 세로 눈금 = 챕터 경계. 연도 라벨은 실제 시간 위치에 비례 배치.
+   (한때 있던 '현재 챕터 밴드'는 제거 — 박스 자체가 비례 배치되므로 불필요) */
 .ys-track { position:relative; }
-.ys-band {
-  position:absolute; top:50%; transform:translateY(-50%); height:12px;
-  background:rgba(184,152,96,0.16); border:1px solid rgba(184,152,96,0.28);
-  border-radius:6px; pointer-events:none; transition:left .18s ease, width .18s ease;
-}
 .ys-marks { position:absolute; inset:0; pointer-events:none; }
 .ys-marks i {
   position:absolute; top:50%; transform:translate(-0.5px,-50%);
@@ -1771,3 +1766,17 @@ body.map-light .kp-caveat { color:#5a5344; background:rgba(184,152,96,0.1); }
   position:absolute; top:0; transform:translateX(-50%);
   font-size:9px; color:#8f8776; letter-spacing:0.3px; white-space:nowrap;
 }
+
+
+/* ── 챕터 박스 비례 배치 모드 (2026-08-06, 데스크톱 전용) ──
+   kingsTimeline.js의 layoutChapterBand()가 켠다. 박스가 자기 연대 구간
+   아래에 앉도록 스크롤을 끄고 전체 폭 flex로 편다. */
+.reign-band.rb-proportional {
+  overflow:visible; gap:3px; scroll-snap-type:none; padding-bottom:0;
+}
+.reign-band.rb-proportional .reign-chapter-btn { padding:7px 4px; scroll-snap-align:none; }
+.reign-band.rb-proportional .rb-slim .reign-chapter-name,
+.reign-band.rb-proportional .reign-chapter-btn.rb-slim .reign-chapter-name {
+  font-size:10px; line-height:1.15;
+}
+.reign-band.rb-proportional .reign-chapter-btn.rb-slim .reign-chapter-years { font-size:8px; }
