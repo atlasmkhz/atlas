@@ -329,6 +329,24 @@ body.portal {
 .portal-footer-links a:hover { color:var(--gold-bright); }
 .portal-footer-links span { color:var(--paper-faint); opacity:0.5; }
 
+/* 2026-08-06: 패밀리 사이트 블록(엠케이아틀라스 우산).
+   4칸 그리드 고정 — 과학·철학이 공개되면 .is-soon만 떼면 된다. */
+.portal-family { margin-top:18px; padding-top:16px; border-top:1px solid rgba(238,231,216,0.08); }
+.portal-family-brand { font-size:12px; font-weight:700; letter-spacing:0.02em; color:var(--paper-dim); margin-bottom:10px; }
+.portal-family-brand span { font-weight:500; opacity:0.45; margin-left:6px; letter-spacing:0.08em; }
+.portal-family-list { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+.portal-family-list li { border:1px solid rgba(238,231,216,0.10); border-radius:8px; padding:10px 12px; }
+.portal-family-list a { display:block; text-decoration:none; }
+.portal-family-list .pf-name { display:block; font-size:12.5px; font-weight:700; color:var(--paper-dim); }
+.portal-family-list .pf-note { display:block; font-size:11px; margin-top:3px; color:var(--paper-faint); opacity:0.6; }
+.portal-family-list a:hover .pf-name { color:var(--gold-bright); }
+.portal-family-list li.is-current { border-color:rgba(238,231,216,0.22); }
+.portal-family-list li.is-soon { opacity:0.42; }
+
+@media (max-width:900px) {
+  .portal-family-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
 .info-modal-body p { font-size:13.5px; line-height:1.8; color:#4a443a; margin-bottom:14px; }
 
 @media (max-width:900px) {

@@ -4,22 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#15130f">
-<title>ATLAS | 지도 위에서 다시 읽는 한국사</title>
+<title>엠케이아틀라스 · 역사 아틀라스 | 지도 위에서 다시 읽는 한국사</title>
 <meta name="description" content="역사는 사건의 나열이 아니라 인간이 남긴 기억의 지도입니다. 1876년 개항부터 현대까지, 한국 근현대사를 지도와 이야기로 연결합니다.">
 <link rel="canonical" href="https://atlas.mkhz.kr/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://atlas.mkhz.kr/">
-<meta property="og:title" content="ATLAS | 지도 위에서 다시 읽는 한국사">
+<meta property="og:site_name" content="엠케이아틀라스">
+<meta property="og:title" content="엠케이아틀라스 · 역사 아틀라스 | 지도 위에서 다시 읽는 한국사">
 <meta property="og:description" content="사건과 인물, 장소와 기록이 하나의 역사로 연결됩니다. 1876년부터 오늘까지.">
 <meta property="og:image" content="https://atlas.mkhz.kr/assets/images/og-image.jpg">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ATLAS | 지도 위에서 다시 읽는 한국사">
+<meta name="twitter:title" content="엠케이아틀라스 · 역사 아틀라스 | 지도 위에서 다시 읽는 한국사">
 <meta name="twitter:description" content="사건과 인물, 장소와 기록이 하나의 역사로 연결됩니다.">
 <meta name="twitter:image" content="https://atlas.mkhz.kr/assets/images/og-image.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"ATLAS by MKHZ","url":"https://atlas.mkhz.kr/","description":"대한민국 근현대사를 지도 위에서 다시 읽는 프로젝트","inLanguage":"ko"}
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://atlas.mkhz.kr/#mkatlas","name":"엠케이아틀라스","alternateName":["MK ATLAS","ATLAS by MKHZ","MKHZ"],"url":"https://atlas.mkhz.kr/","description":"역사·과학·철학·오늘을 지도 위에 기록하는 아틀라스 네트워크"},
+{"@type":"WebSite","@id":"https://atlas.mkhz.kr/#website","name":"역사 아틀라스","alternateName":["엠케이아틀라스 역사 아틀라스","ATLAS by MKHZ","지도 위에서 다시 읽는 한국사"],"url":"https://atlas.mkhz.kr/","description":"대한민국 역사를 지도 위에서 다시 읽는 프로젝트","inLanguage":"ko","publisher":{"@id":"https://atlas.mkhz.kr/#mkatlas"}},
+{"@type":"WebSite","name":"아틀라스 투데이","alternateName":["ATLAS TODAY"],"url":"https://politics.mkhz.kr/","description":"오늘을 기록합니다. 내일의 역사가 됩니다.","inLanguage":"ko","publisher":{"@id":"https://atlas.mkhz.kr/#mkatlas"}}
+]}
 </script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/portal.css?v=20260715a">
@@ -228,6 +233,21 @@
 
 <footer class="portal-footer">
   ATLAS는 대한민국 역사를 더 정확하고, 더 입체적으로 기록하기 위한 프로젝트입니다.
+  <!-- 2026-08-06: 패밀리 사이트 블록.
+       엠케이아틀라스(우산 브랜드) 아래 네 개의 아틀라스를 한 자리에 노출한다.
+       역사·투데이는 공개, 과학·철학은 준비 중이라 비활성 상태로 자리만
+       잡아둔다 — 나중에 공개될 때 href만 채우면 되도록 4칸 구조를 처음부터
+       고정했다(2칸으로 만들었다가 다시 고치는 일을 피하기 위함).
+       같은 블록을 아틀라스 투데이에도 그대로 복제해 쓴다. -->
+  <div class="portal-family">
+    <div class="portal-family-brand">엠케이아틀라스 <span>MK ATLAS</span></div>
+    <ul class="portal-family-list">
+      <li class="is-current"><span class="pf-name">역사 아틀라스</span><span class="pf-note">지금 보는 곳</span></li>
+      <li><a href="https://politics.mkhz.kr" target="_blank" rel="noopener"><span class="pf-name">아틀라스 투데이</span><span class="pf-note">오늘의 기록</span></a></li>
+      <li class="is-soon"><span class="pf-name">과학 아틀라스</span><span class="pf-note">준비 중</span></li>
+      <li class="is-soon"><span class="pf-name">철학 아틀라스</span><span class="pf-note">준비 중</span></li>
+    </ul>
+  </div>
   <!-- 2026-07-24: 튜토리얼 다시 보기.
        지도 페이지는 소개 모달 안에 이 버튼을 뒀는데 포털에는 그 모달이
        없어서 넣을 자리가 없었다. 한 번 건너뛰면 콘솔 말고는 다시 열 방법이
