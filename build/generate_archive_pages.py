@@ -622,10 +622,33 @@ def render_post_page(series, post, series_slug, prev_post, next_post, out_path):
         _la, _ln = post['lat'], post['lng']
         _in_korea = (33.0 <= _la <= 43.5) and (124.0 <= _ln <= 132.0)
         if _in_korea:
+            # 2026-08-06 시대 라우팅 도입(왕두목: "엉뚱한 방향으로 가는
+            # 경우가 많다"). 종전 폴백은 card_map 미지정 시 무조건 근대
+            # 지도(map.html)로 보냈다 — 660년 웅진성 글이 1876년 지도에
+            # 떨어지는 식. 기억의 뜰(→map_link 신설), 삼국사기, 강제동원
+            # 에서 세 번 반복된 함정이라, 폴백 자체를 연도 기반으로
+            # 고친다. 시대 경계는 포털 시대 버튼과 동일하며, 모든 시대
+            # 지도는 ?lat&lng&year 파라미터를 같은 방식으로 처리한다.
+            # card_map이 명시된 글은 종전대로 그 지도를 우선한다.
+            def _era_map_for_year(y):
+                if y is None: return None, None
+                if y <= 936:  return '../../maps/ancient/index.html', '고대'
+                if y <= 1391: return '../../maps/medieval1/index.html', '고려'
+                if y <= 1875: return '../../maps/medieval2/index.html', '조선'
+                if y <= 1945: return '../../map.html', '근대'
+                if y <= 1993: return '../../maps/modern2/index.html', '해방과 전쟁, 산업화'
+                return '../../maps/contemporary/index.html', '민주화 이후'
             year_qs = f"&year={post['year']}" if post.get('year') is not None else ''
-            map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
+            if post.get('card_map'):
+                map_prefix = CARD_MAP_PREFIX.get(post.get('card_map'), CARD_MAP_PREFIX['root'])
+                era_label = None
+            else:
+                map_prefix, era_label = _era_map_for_year(post.get('year'))
+                if map_prefix is None:
+                    map_prefix = CARD_MAP_PREFIX['root']
             map_cta_url = f"{map_prefix}?lat={post['lat']}&lng={post['lng']}{year_qs}"
-            map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">지도에서 관련 지역 보기</a></p>'
+            cta_text = f'{era_label} 지도에서 관련 지역 보기' if era_label else '지도에서 관련 지역 보기'
+            map_cta_html = f'<p class="map-cta"><a href="{map_cta_url}">{cta_text}</a></p>'
 
     # 「나의 역사 나무」용 식별자 — JS 문자열 리터럴로 안전하게 넘긴다
     series_id_js = json.dumps(series.get('id', ''), ensure_ascii=False)

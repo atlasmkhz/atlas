@@ -12503,22 +12503,37 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_06_uija</loc>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_06_annals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_07_sinchaeho</loc>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_07_yeoljeon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_08_reappraisal</loc>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_08_ji</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_09_ilyeon</loc>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_09_uija</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_10_sinchaeho</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_11_reappraisal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_12_ilyeon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
