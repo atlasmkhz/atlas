@@ -27,7 +27,12 @@
 (function(){
   if (typeof KINGS_TIMELINE === 'undefined') return;
 
-  var YEAR_MIN = -60, YEAR_MAX = 936;
+  // 슬라이더 범위는 지도의 시대 표기(BCE 37–936) 및 첫 챕터(기원전
+  // 37~)와 정확히 일치시킨다. 처음에 -60으로 잡았다가 "슬라이더는
+  // 기원전 60인데 박스는 기원전 37"이라는 어긋남 지적을 받았다(왕두목).
+  // 신라 건국(기원전 57)은 범위 밖이지만, 기원전 37 시점 조회에서
+  // 혁거세 거서간(재위 -57~4)이 정상 표시되므로 정보 손실은 없다.
+  var YEAR_MIN = -37, YEAR_MAX = 936;
   var curYear = 450;   // 초기값 — 첫 챕터 동기화가 곧 덮어쓴다
   var panelOpen = window.innerWidth > 860; // 데스크톱은 펼침, 모바일은 접힘
 
@@ -92,14 +97,37 @@
       }).join('') + '<i style="left:100%"></i>';
       marks.innerHTML = mh;
     }
-    // 연도 라벨은 실제 위치에 비례 배치한다 — 예전의 균등 분배(space-
-    // between)는 450 라벨이 438년 자리에 서는 식으로 눈금과 어긋났다.
-    var labels = [-60, 200, 450, 700, 936];
-    scale.innerHTML = labels.map(function(y, i){
-      var cls = i === 0 ? ' style="transform:none"' :
-                i === labels.length - 1 ? ' style="transform:translateX(-100%)"' : '';
-      return '<span' + cls + ' data-p="' + pct(y).toFixed(2) + '">' +
-             (y < 0 ? '기원전 ' + (-y) : y) + '</span>';
+    // 연도 라벨은 임의 연도가 아니라 챕터 경계 연도를 쓴다 — 하단
+    // 블록이 "기원전 37~313"이라 말하면 슬라이더 눈금도 같은 숫자를
+    // 말해야 두 UI가 한 체계로 읽힌다(왕두목 지적). 660·676처럼
+    // 경계가 촘촘한 구간은 라벨이 겹치므로, 직전 라벨과 6% 이상
+    // 떨어진 경계만 라벨을 붙인다(눈금 선은 전부 그린다).
+    var bounds = [];
+    if (typeof BLOCKS !== 'undefined'){
+      BLOCKS.forEach(function(b){ bounds.push(b.start_year); });
+      bounds.push(YEAR_MAX);
+    } else {
+      bounds = [YEAR_MIN, YEAR_MAX];
+    }
+    // 1차: 직전 라벨과 6% 미만이면 건너뛰며 수집
+    var kept = [], lastP = -100;
+    bounds.forEach(function(y){
+      var pv = pct(y);
+      if (pv - lastP < 6) return;
+      kept.push({ y: y, p: pv });
+      lastP = pv;
+    });
+    // 2차: 끝 라벨(936)은 반드시 남긴다 — 근접한 직전 라벨(900)을 뺀다
+    var endP = pct(YEAR_MAX);
+    if (!kept.length || kept[kept.length - 1].y !== YEAR_MAX){
+      while (kept.length && endP - kept[kept.length - 1].p < 6) kept.pop();
+      kept.push({ y: YEAR_MAX, p: endP });
+    }
+    scale.innerHTML = kept.map(function(k, i){
+      var st = i === 0 ? ' style="transform:none"' :
+               (i === kept.length - 1) ? ' style="transform:translateX(-100%)"' : '';
+      return '<span' + st + ' data-p="' + k.p.toFixed(2) + '">' +
+             (k.y < 0 ? '기원전 ' + (-k.y) : k.y) + '</span>';
     }).join('');
     Array.prototype.forEach.call(scale.children, function(el){
       el.style.left = el.getAttribute('data-p') + '%';
