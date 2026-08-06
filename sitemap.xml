@@ -10673,6 +10673,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/samguk-yusa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -12469,6 +12474,51 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/quantum-century/solvay_1927</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_01_prologue</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_02_gyeongju</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_03_myocheong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_04_pyo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_05_bongi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_06_uija</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_07_sinchaeho</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_08_reappraisal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/samguk-sagi/sk_09_ilyeon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
