@@ -61,13 +61,6 @@ function renderWorldEvents(year){
     const ramp = 1 - Math.abs(t - 0.5) * 2;            // 0(끝)~1(중간)
     const intensity = 0.5 + 0.5 * ramp;                // 0.5~1.0
 
-    // 한국사보다 항상 약하게: 면 투명도는 낮게 유지.
-    const baseFill = (w.priority === 1 ? 0.12 : w.priority === 2 ? 0.09 : 0.07) * intensity;
-
-    const radiusByVisual = {
-      spread: 520000, radiate: 460000, wave: 600000, expand: 520000, flow: 440000
-    };
-    const radius = (radiusByVisual[w.visual] || 460000) * (0.85 + 0.15 * ramp);
 
     const openThis = ()=>{
       if (window.trackPageView) window.trackPageView('world_event', w.title_ko || w.title_en || w.id);
@@ -75,37 +68,13 @@ function renderWorldEvents(year){
       if (window.openInfoPanel) openInfoPanel(worldPanelHtml(w, currentDisplayYear()));
     };
 
-    // ── 사건 영역(면) ──
-    // 클릭 가능. 형태별로 면 구성이 달라진다.
-    const areaOpts = (r, fill)=>({
-      radius:r, color, fillColor:color, fillOpacity:fill,
-      weight:0, opacity:0, className:'world-area'
-    });
-
-    if (w.visual === 'wave'){
-      // ECONOMY: 다중 파동(동심원 3겹) — 바깥일수록 옅게.
-      [1.0, 0.66, 0.36].forEach((k, i)=>{
-        const ring = L.circle(w.location, areaOpts(radius*k, baseFill*(0.5 + i*0.28))).addTo(map);
-        ring.on('click', openThis);
-        worldLayers.push(ring);
-      });
-    } else if (w.visual === 'radiate'){
-      // REVOLUTION: 원형 확산 + 안쪽 코어.
-      const halo = L.circle(w.location, areaOpts(radius, baseFill*0.7)).addTo(map);
-      const core = L.circle(w.location, areaOpts(radius*0.5, baseFill*1.25)).addTo(map);
-      halo.on('click', openThis); core.on('click', openThis);
-      worldLayers.push(halo, core);
-    } else if (w.visual === 'expand'){
-      // EMPIRE: 완만한 영역 음영(넓고 균일하게 옅음).
-      const shade = L.circle(w.location, areaOpts(radius, baseFill*0.85)).addTo(map);
-      shade.on('click', openThis);
-      worldLayers.push(shade);
-    } else {
-      // WAR(spread) / POLITICS(flow): 면 하나.
-      const area = L.circle(w.location, areaOpts(radius, baseFill)).addTo(map);
-      area.on('click', openThis);
-      worldLayers.push(area);
-    }
+    // ── 사건 영역(면) 제거 ──
+    // 2026-08-06 왕두목 확정: 세계·중국 이벤트에 씌우던 대형 반투명 원
+    // (반경 440~600km, wave 3겹·radiate 2겹 등)을 전부 제거한다.
+    // 지역을 뒤덮는 큰 원이 지도를 어지럽히고 본진(한국사)을 가린다는
+    // 판단. 세계 이벤트는 아래의 중심 마커(◉) 하나로만 표시하고,
+    // 클릭·정보창 동작은 마커가 그대로 담당한다. visual/priority 필드는
+    // 데이터에 남겨둔다 — 마커 강도 조절과 향후 다른 표현에 쓸 수 있다.
 
     // ── 중심 마커(◉) ──
     // 한국 마커보다 크지만 채도 낮고 반투명한 보조 마커. 클릭 시 정보창.

@@ -21,9 +21,9 @@
 <meta name="twitter:image" content="https://atlas.mkhz.kr/assets/images/og-image.jpg">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://atlas.mkhz.kr/#mkatlas","name":"엠케이아틀라스","alternateName":["MK ATLAS","ATLAS by MKHZ","MKHZ"],"url":"https://atlas.mkhz.kr/","description":"역사·과학·철학·오늘을 지도 위에 기록하는 아틀라스 네트워크"},
+{"@type":"Organization","@id":"https://atlas.mkhz.kr/#mkatlas","name":"엠케이아틀라스","alternateName":["MK ATLAS","ATLAS by MKHZ","MKHZ"],"url":"https://atlas.mkhz.kr/","description":"역사·정치·과학·철학을 지도 위에 기록하는 아틀라스 네트워크"},
 {"@type":"WebSite","@id":"https://atlas.mkhz.kr/#website","name":"역사 아틀라스","alternateName":["엠케이아틀라스 역사 아틀라스","ATLAS by MKHZ","지도 위에서 다시 읽는 한국사"],"url":"https://atlas.mkhz.kr/","description":"대한민국 역사를 지도 위에서 다시 읽는 프로젝트","inLanguage":"ko","publisher":{"@id":"https://atlas.mkhz.kr/#mkatlas"}},
-{"@type":"WebSite","name":"아틀라스 투데이","alternateName":["ATLAS TODAY"],"url":"https://politics.mkhz.kr/","description":"오늘을 기록합니다. 내일의 역사가 됩니다.","inLanguage":"ko","publisher":{"@id":"https://atlas.mkhz.kr/#mkatlas"}}
+{"@type":"WebSite","name":"정치 아틀라스","alternateName":["아틀라스 투데이","ATLAS TODAY"],"url":"https://politics.mkhz.kr/","description":"정치·경제·외교 — 제도와 개념은 어떻게 작동하고 어떤 내력을 갖는가","inLanguage":"ko","publisher":{"@id":"https://atlas.mkhz.kr/#mkatlas"}}
 ]}
 </script>
 <link rel="stylesheet" href="css/style.css">
@@ -101,17 +101,13 @@
             <span class="portal-era-btn-period">1994–현재</span>
             <span class="portal-era-btn-name">민주화 이후</span>
           </a>
-          <!-- ATLAS TODAY — 시대 버튼의 마지막 칸.
-               2026-08-05: 한때 줄 밖 배너로 빼봤으나 되돌렸다. 이 칸이
-               시대 줄 안에 있어야 "고대 → … → 민주화 이후 → 오늘"로
-               타임라인이 이어지기 때문이다(왕두목). 대신 같은 줄에서
-               한눈에 튀도록 금색으로 채우고, 상시 갱신되는 자매
-               사이트라는 신호로 붉은 점을 깜빡인다. -->
-          <a class="portal-era-btn portal-era-btn-today" href="https://politics.mkhz.kr"
-             target="_blank" rel="noopener">
-            <span class="portal-era-btn-period"><i class="today-dot"></i>오늘의 역사 ↗</span>
-            <span class="portal-era-btn-name">ATLAS TODAY</span>
-          </a>
+          <!-- 2026-08-06: ATLAS TODAY 칸 제거. "고대→…→민주화 이후→오늘"
+               타임라인 논리는 투데이가 매일 발행물일 때의 것이었다(2026-08-05
+               왕두목 확정). 투데이가 정치 아틀라스로 개편되면서 이 칸의
+               전제가 사라졌다 — 정치 아틀라스는 시대가 아니라 지식 영역이라
+               시대 줄에 넣으면 방금 정리한 분류 기준을 다시 섞는 셈이다.
+               자매 사이트 통로는 빠른 접근 칸과 푸터 패밀리 블록이 맡는다.
+               관련 CSS(portal-era-btn-today, today-dot)는 남겨둔다. -->
         </div>
       </div>
     </header>
@@ -187,17 +183,9 @@
         <span class="portal-quick-sub">지금 갈 수 있는 역사의 현장</span>
       </span>
     </a>
-    <!-- 2026-08-05: 빠른 접근에도 ATLAS TODAY 칸을 둔다. 시대 줄의
-         버튼은 히어로 안에 있어 스크롤하면 사라지는데, 포털을 훑어
-         내려온 사람에게도 통로가 하나 더 있어야 한다는 판단(왕두목). -->
-    <a class="portal-quick-item portal-quick-item-today" href="https://politics.mkhz.kr"
-       target="_blank" rel="noopener">
-      <span class="portal-quick-badge">📰</span>
-      <span class="portal-quick-text">
-        <span class="portal-quick-label">ATLAS TODAY <b class="today-dot"></b></span>
-        <span class="portal-quick-sub">오늘을 기록합니다. 내일의 역사가 됩니다 ↗</span>
-      </span>
-    </a>
+    <!-- 2026-08-06(2차): 정치 아틀라스가 "준비 중"으로 확정되며 빠른 접근
+         칸 제거. 개편 전의 투데이 화면으로 통로를 열어두면 혼란만 준다.
+         개편 완료 후 이 자리에 복구한다. -->
     <!-- 2026-08-05 기억의 뜰. NEW 배지를 붙이지 않는다 — 추모 공간에는
          새것임을 알리는 표시를 두지 않는다는 원칙(왕두목). -->
     <a class="portal-quick-item portal-quick-item-memorial" href="memorial_garden.html">
@@ -238,14 +226,14 @@
        역사·투데이는 공개, 과학·철학은 준비 중이라 비활성 상태로 자리만
        잡아둔다 — 나중에 공개될 때 href만 채우면 되도록 4칸 구조를 처음부터
        고정했다(2칸으로 만들었다가 다시 고치는 일을 피하기 위함).
-       같은 블록을 아틀라스 투데이에도 그대로 복제해 쓴다. -->
+       같은 블록을 정치 아틀라스에도 그대로 복제해 쓴다. 각 칸의 설명은 네 아틀라스의 분류 기준("무엇을 묻는 글인가")을 그대로 노출한 것이다. -->
   <div class="portal-family">
     <div class="portal-family-brand">엠케이아틀라스 <span>MK ATLAS</span></div>
     <ul class="portal-family-list">
-      <li class="is-current"><span class="pf-name">역사 아틀라스</span><span class="pf-note">지금 보는 곳</span></li>
-      <li><a href="https://politics.mkhz.kr" target="_blank" rel="noopener"><span class="pf-name">아틀라스 투데이</span><span class="pf-note">오늘의 기록</span></a></li>
-      <li class="is-soon"><span class="pf-name">과학 아틀라스</span><span class="pf-note">준비 중</span></li>
-      <li class="is-soon"><span class="pf-name">철학 아틀라스</span><span class="pf-note">준비 중</span></li>
+      <li class="is-current"><span class="pf-name">역사 아틀라스</span><span class="pf-note">무슨 일이 있었나</span></li>
+      <li class="is-soon"><span class="pf-name">정치 아틀라스</span><span class="pf-note">어떻게 작동하나 · 준비 중</span></li>
+      <li class="is-soon"><span class="pf-name">과학 아틀라스</span><span class="pf-note">어떻게 알아냈나</span></li>
+      <li class="is-soon"><span class="pf-name">철학 아틀라스</span><span class="pf-note">어떻게 사유했나</span></li>
     </ul>
   </div>
   <!-- 2026-07-24: 튜토리얼 다시 보기.
