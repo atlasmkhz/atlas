@@ -3,6 +3,13 @@
 // 직접 편집하지 말 것 — 자료실(content/archive/*.js)의 card_ref를
 // 수정한 뒤 스크립트를 재실행하면 갱신된다.
 const ARCHIVE_BACKLINKS = {
+  "battle_400_01": [
+    {
+      "url": "../../archive/gwanggaeto-stele/gs_04_campaigns.html",
+      "series": "광개토대왕릉비",
+      "title": "광개토대왕릉비 ④ 훈적기사 — 비려에서 동부여까지, 스물두 해의 원정"
+    }
+  ],
   "culture_686_01": [
     {
       "url": "../../archive/classical-literature-silla/sla_01.html",
@@ -76,6 +83,13 @@ const ARCHIVE_BACKLINKS = {
       "url": "../../archive/dokdo-records/dk_02.html",
       "series": "독도, 기록의 섬",
       "title": "이사부와 우산국 (512) — 나무 사자와 함께 시작된 기록"
+    }
+  ],
+  "political_391_01": [
+    {
+      "url": "../../archive/gwanggaeto-stele/gs_03_enthronement.html",
+      "series": "광개토대왕릉비",
+      "title": "광개토대왕릉비 ③ 열여덟에 오르고 서른아홉에 지다 — 비를 세운 이유"
     }
   ],
   "political_42_01": [

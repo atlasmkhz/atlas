@@ -10568,6 +10568,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/historical-revisionism</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -11368,6 +11373,46 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_01_rediscovery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_02_origin</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_03_enthronement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_04_campaigns</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_05_sinmyo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_06_sumyo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_07_rubbings</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/gwanggaeto-stele/gs_08_today</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -11434,6 +11479,11 @@
   </url>
   <url>
     <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_14</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://atlas.mkhz.kr/archive/historical-revisionism/wp_15</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
