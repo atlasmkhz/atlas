@@ -218,7 +218,7 @@
     { path: 'armed_struggle.html', name: '항일무장투쟁', tagline: '독립군은 하나가 아니었다', period: '1911~1945', waypoints: 65, color: '#c8963c', image: 'assets/images/route/route_armed_struggle_hero.webp', pinned_portal: true, updated: '2026-07-30' },
     { path: 'forced_mobilization_map.html', name: '강제동원 분포도', tagline: '어디로 끌려갔는가', period: '1938~1945', waypoints: 12, color: '#8b3a3a', image: 'assets/images/route/route_forced_mobilization_hero.webp', updated: '2026-08-01' },
     // 「기억의 뜰」 — updated 없음(추모 공간에 NEW 배지를 달지 않는다).
-    { path: 'memorial_garden.html', name: '기억의 뜰', tagline: '이 땅에서 목숨을 잃은 분들을 기억합니다', period: '1894~현재', waypoints: 38, color: '#b89860', image: null },
+    { path: 'memorial_garden.html', name: '기억의 뜰', tagline: '이 땅에서 목숨을 잃은 분들을 기억합니다', period: '1894~현재', waypoints: 38, color: '#b89860', image: 'assets/images/route/route_memorial_garden_hero.webp' },
     // 근대(포털) — map.html
     { path: 'map.html?route=hong_beom_do', name: '홍범도', tagline: '포수에서 현충원까지', period: '1868~2021', waypoints: 26, color: '#c8a827', image: 'assets/images/entity/person/person_hong_beom_do_01.webp' },
     { path: 'map.html?route=righteous_struggle', name: '의열투쟁', tagline: '조선의 심장을 겨누다', period: '1908~1932', waypoints: 21, color: '#b8632f', image: 'assets/images/route/route_righteous_struggle_hero.webp' },
