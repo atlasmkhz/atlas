@@ -49,8 +49,12 @@
         '<span class="ys-snap" id="ysSnap"></span>' +
         '<button type="button" class="ys-kings-toggle" id="ysKingsToggle">왕대 연표</button>' +
       '</div>' +
-      '<input type="range" id="ysRange" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" step="1" value="' + curYear + '">' +
-      '<div class="ys-ticks"><span>기원전 60</span><span>200</span><span>450</span><span>700</span><span>936</span></div>';
+      '<div class="ys-track">' +
+        '<div class="ys-band" id="ysBand"></div>' +
+        '<div class="ys-marks" id="ysMarks"></div>' +
+        '<input type="range" id="ysRange" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" step="1" value="' + curYear + '">' +
+      '</div>' +
+      '<div class="ys-scale" id="ysScale"></div>';
     tl.insertBefore(bar, tl.firstChild);
 
     var range = bar.querySelector('#ysRange');
@@ -67,6 +71,48 @@
     });
     syncTimelineHeight();
     window.addEventListener('resize', syncTimelineHeight);
+  }
+
+  // ── 슬라이더 ↔ 챕터 시각 동기화 ──────────────────────
+  // 하단 챕터 블록은 균등폭 버튼(350년짜리 시기와 16년짜리 시기를 같은
+  // 크기로)이라 시간 비례 배치가 아니다 — 그래서 슬라이더 위치와 블록
+  // 위치가 눈으로는 어긋나 보인다(왕두목 지적). 블록 폭을 시간 비례로
+  // 바꾸면 16년짜리 '나당전쟁' 블록은 누를 수 없이 좁아지므로, 대신
+  // 슬라이더 트랙 쪽에 챕터 경계 눈금을 새기고 현재 챕터 구간을 금색
+  // 밴드로 칠해 "지금 어느 블록 구간에 있는지"를 트랙 위에서 보여준다.
+  function pct(y){ return ((y - YEAR_MIN) / (YEAR_MAX - YEAR_MIN)) * 100; }
+
+  function buildScale(){
+    var marks = document.getElementById('ysMarks');
+    var scale = document.getElementById('ysScale');
+    if (!marks || !scale) return;
+    if (typeof BLOCKS !== 'undefined'){
+      var mh = BLOCKS.map(function(b){
+        return '<i style="left:' + pct(b.start_year).toFixed(2) + '%"></i>';
+      }).join('') + '<i style="left:100%"></i>';
+      marks.innerHTML = mh;
+    }
+    // 연도 라벨은 실제 위치에 비례 배치한다 — 예전의 균등 분배(space-
+    // between)는 450 라벨이 438년 자리에 서는 식으로 눈금과 어긋났다.
+    var labels = [-60, 200, 450, 700, 936];
+    scale.innerHTML = labels.map(function(y, i){
+      var cls = i === 0 ? ' style="transform:none"' :
+                i === labels.length - 1 ? ' style="transform:translateX(-100%)"' : '';
+      return '<span' + cls + ' data-p="' + pct(y).toFixed(2) + '">' +
+             (y < 0 ? '기원전 ' + (-y) : y) + '</span>';
+    }).join('');
+    Array.prototype.forEach.call(scale.children, function(el){
+      el.style.left = el.getAttribute('data-p') + '%';
+    });
+  }
+
+  function updateBand(){
+    var band = document.getElementById('ysBand');
+    if (!band || typeof BLOCKS === 'undefined' || typeof blockIndexForYear !== 'function') return;
+    var b = BLOCKS[blockIndexForYear(curYear)];
+    if (!b) return;
+    band.style.left = pct(b.start_year) + '%';
+    band.style.width = Math.max(0.6, pct(b.end_year) - pct(b.start_year)) + '%';
   }
 
   // 범례(.legend)·레이어 박스(.layer-toggle)는 bottom 고정값(110px)으로
@@ -229,6 +275,7 @@
       }
     }
     renderKings(curYear);
+    updateBand();
   }
 
   // ── 챕터 전환과의 동기화 ────────────────────────────
@@ -254,6 +301,7 @@
   // ── 시작 ──
   injectSlider();
   injectPanel();
+  buildScale();
   setPanelOpen(panelOpen);
   setYear(curYear, { renderTerritory: false });
 })();

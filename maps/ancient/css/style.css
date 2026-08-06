@@ -1737,3 +1737,35 @@ body.map-light .kp-caveat { color:#5a5344; background:rgba(184,152,96,0.1); }
 }
 .ys-kings-toggle.panel-closed:hover { background:#d4b578; }
 @media (max-width:860px){ .ys-kings-toggle { margin-right:48px; } }
+
+/* ── 범례·레이어 박스 접기 (2026-08-06, js/panelCollapse.js) ──
+   기본은 접힘(제목 칩만). 제목 클릭으로 펼치고, 상태는 전 시대 지도에서
+   공유된다. 지도 위 상시 팝업 두 개가 거슬린다는 지적의 해법. */
+.legend.pc-collapsed > *:not(.legend-title),
+.layer-toggle.pc-collapsed > *:not(.toggle-title) { display:none !important; }
+.legend-title, .toggle-title { cursor:pointer; user-select:none; display:flex; align-items:center; }
+.legend-title:hover, .toggle-title:hover { color:#d4b578; }
+.pc-arrow { margin-left:auto; padding-left:10px; font-size:9px; opacity:0.75; }
+.legend.pc-collapsed, .layer-toggle.pc-collapsed { padding:7px 11px; }
+.legend.pc-collapsed .legend-title, .layer-toggle.pc-collapsed .toggle-title { margin-bottom:0; }
+
+/* ── 슬라이더 ↔ 챕터 시각 동기화 (2026-08-06) ──
+   트랙 위 세로 눈금 = 챕터 경계, 금색 밴드 = 현재 챕터 구간.
+   연도 라벨은 균등 분배가 아니라 실제 시간 위치에 비례 배치한다. */
+.ys-track { position:relative; }
+.ys-band {
+  position:absolute; top:50%; transform:translateY(-50%); height:12px;
+  background:rgba(184,152,96,0.16); border:1px solid rgba(184,152,96,0.28);
+  border-radius:6px; pointer-events:none; transition:left .18s ease, width .18s ease;
+}
+.ys-marks { position:absolute; inset:0; pointer-events:none; }
+.ys-marks i {
+  position:absolute; top:50%; transform:translate(-0.5px,-50%);
+  width:1px; height:9px; background:rgba(210,195,165,0.35);
+}
+.ys-track #ysRange { position:relative; z-index:2; }
+.ys-scale { position:relative; height:13px; margin-top:3px; }
+.ys-scale span {
+  position:absolute; top:0; transform:translateX(-50%);
+  font-size:9px; color:#8f8776; letter-spacing:0.3px; white-space:nowrap;
+}

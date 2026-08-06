@@ -1550,3 +1550,14 @@ body.map-light .hist-pin-dot {
   padding: 2px 6px; border-radius: 999px; line-height: 1.4;
   box-shadow: 0 2px 8px rgba(0,0,0,0.45);
 }
+
+/* ── 범례·레이어 박스 접기 (2026-08-06, js/panelCollapse.js) ──
+   기본은 접힘(제목 칩만). 제목 클릭으로 펼치고, 상태는 전 시대 지도에서
+   공유된다. 지도 위 상시 팝업 두 개가 거슬린다는 지적의 해법. */
+.legend.pc-collapsed > *:not(.legend-title),
+.layer-toggle.pc-collapsed > *:not(.toggle-title) { display:none !important; }
+.legend-title, .toggle-title { cursor:pointer; user-select:none; display:flex; align-items:center; }
+.legend-title:hover, .toggle-title:hover { color:#d4b578; }
+.pc-arrow { margin-left:auto; padding-left:10px; font-size:9px; opacity:0.75; }
+.legend.pc-collapsed, .layer-toggle.pc-collapsed { padding:7px 11px; }
+.legend.pc-collapsed .legend-title, .layer-toggle.pc-collapsed .toggle-title { margin-bottom:0; }
