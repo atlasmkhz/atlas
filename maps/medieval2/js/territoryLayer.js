@@ -158,7 +158,8 @@ function _renderSnapshot(snap) {
   if (capEl) {
     capEl.innerHTML =
       `<strong>${snap.label} 기준</strong> — ${snap.caption} ` +
-      `<span class="territory-caveat">짙을수록 중심부이며, 세력의 겹침은 오류가 아니라 당대의 실상입니다.</span>`;
+      `<span class="territory-caveat">지도를 축소하면 세계 전체의 분포가 보입니다. ` +
+      `짙을수록 중심부이며, 세력의 겹침은 오류가 아니라 당대의 실상입니다.</span>`;
     capEl.style.display = 'block';
   }
 }
@@ -200,6 +201,22 @@ function renderTerritoryForRange(startYear, endYear) {
   clearTerritory();
   const capEl = document.getElementById('territoryCaption');
   const snaps = _snapshotsInRange(startYear, endYear);
+
+  // 2026-08-07 버그 수정: 스냅샷이 없는 왕대에서 토글을 켜면 아무
+  // 반응이 없어 "고장난 것처럼" 보였다(왕두목 리포트 — 기본 챕터가
+  // 태조라 첫 화면에서 켜면 반드시 이 경로였다). 침묵 대신 어느
+  // 왕대로 가야 보이는지 안내한다.
+  if (isTerritoryLayerOn() && !snaps.length) {
+    if (capEl) {
+      capEl.innerHTML =
+        '<strong>세계 세력</strong> — 이 왕대에는 아직 세력 스냅샷이 없습니다. ' +
+        '현재는 16세기 파일럿 한 장으로, <b>연산군~선조</b> 챕터에서 표시됩니다. ' +
+        '<span class="territory-caveat">검증 후 15·17·18·19세기로 확장 예정입니다.</span>';
+      capEl.style.display = 'block';
+    }
+    _renderChips([], null);
+    return;
+  }
 
   if (!isTerritoryLayerOn() || !snaps.length) {
     if (capEl) capEl.style.display = 'none';
