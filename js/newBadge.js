@@ -62,6 +62,13 @@
       views: 4,        // 왕두목 확정 "3~5회" 중간값
       maxDays: 45,
     },
+    {
+      key: 'worldTerritory',   // medieval2 레이어 토글 "세계 세력" (2026-08-07 파일럿)
+      label: 'NEW',
+      launchedAt: '2026-08-07',
+      views: 4,
+      maxDays: 45,
+    },
     // ※ 「항일무장투쟁」(armed_struggle) NEW 배지는 여기 없다 — 실수로
     // 한 번 등록했다가 뺐다. 포털 메인의 루트 카드는 이미 자체 배지
     // 시스템(js/portal.js의 newBadgeHtml/isRecentlyUpdated, updated

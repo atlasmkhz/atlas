@@ -78,12 +78,19 @@ function renderWorldEvents(year){
 
     // ── 중심 마커(◉) ──
     // 한국 마커보다 크지만 채도 낮고 반투명한 보조 마커. 클릭 시 정보창.
+    // 호버 툴팁 — 클릭 전에도 "어느 나라(당시) 사건인지" 알 수 있게
+    // 당시 정치체 이름 + 제목을 함께 보여준다. (2026-08-07 가독성 피드백)
+    const tipHtml = w.polity
+      ? `<b>${w.polity}</b><br>${w.title}`
+      : w.title;
+
     if (typeof makeWorldMarkerIcon === 'function'){
       const m = L.marker(w.location, {
         icon: makeWorldMarkerIcon(color, intensity),
         zIndexOffset: -500,            // 한국 마커보다 항상 아래
         keyboard: false
       }).addTo(map);
+      m.bindTooltip(tipHtml, { direction:'top', offset:[0,-6], className:'world-tip', opacity:0.95 });
       m.on('click', openThis);
       worldLayers.push(m);
     } else {
@@ -92,6 +99,7 @@ function renderWorldEvents(year){
         radius:6, color, fillColor:color, fillOpacity:0.5*intensity,
         weight:1, opacity:0.5*intensity, className:'world-center'
       }).addTo(map);
+      dot.bindTooltip(tipHtml, { direction:'top', offset:[0,-6], className:'world-tip', opacity:0.95 });
       dot.on('click', openThis);
       worldLayers.push(dot);
     }
@@ -178,6 +186,13 @@ function worldEventCardHtml(w, year){
     figuresHtml = `<div class="world-figures-wrap"><div class="world-figures-label">대표 인물</div><ul class="world-figures">${items}</ul></div>`;
   }
 
+  // 당시 국가·제국명(polity) + 현대 기준 지역(region).
+  // "독일" "이란" 같은 현대 지명만으로는 어느 나라 사건인지 읽기 어렵다는
+  // 피드백(2026-08-07)에 따라, 당시 정치체 이름을 카드에 항상 표시한다.
+  const placeHtml = (w.polity || w.region)
+    ? `<div class="world-polity">${w.polity ? `<b>🏛 ${w.polity}</b>` : ''}${w.polity && w.region ? '<span class="world-polity-sep">·</span>' : ''}${w.region ? `<span class="world-region">${w.region}</span>` : ''}</div>`
+    : '';
+
   return `
     <div class="world-event">
       <div class="world-event-head">
@@ -186,6 +201,7 @@ function worldEventCardHtml(w, year){
         <span class="world-period">${periodStr}</span>
         ${stateTag}
       </div>
+      ${placeHtml}
       ${phaseHtml}
       ${bodyHtml}
       ${figuresHtml}
@@ -593,6 +609,8 @@ function renderRange(startYear, endYear){
   declutterMarkers();
   // 중국 왕조 라벨 레이어도 이 챕터 범위로 함께 갱신 (js/chinaLayer.js)
   if (typeof renderChinaDynasties === 'function') { try { renderChinaDynasties(startYear, endYear); } catch(_){} }
+  // 세계 세력 스냅샷 레이어 (js/territoryLayer.js, 2026-08-07 파일럿)
+  if (typeof renderTerritoryForRange === 'function') { try { renderTerritoryForRange(startYear, endYear); } catch(_){} }
 }
 
 // ── 안전 렌더링 래퍼(챕터 버전) ──

@@ -55,7 +55,7 @@
 <script src="js/analytics.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="css/style.css?v=20260718a" />
+<link rel="stylesheet" href="css/style.css?v=20260807a" />
 <link rel="stylesheet" href="../../css/namu.css">
 <link rel="stylesheet" href="../../css/tutorial.css">
 </head>
@@ -279,11 +279,19 @@
     <label class="toggle-item"><input type="checkbox" id="layerPerson" checked> 인물</label>
     <label class="toggle-item"><input type="checkbox" id="layerPolicy" checked> 배경·정책</label>
     <label class="toggle-item"><input type="checkbox" id="layerChina" checked><span class="legend-swatch china-swatch"></span>중국사</label>
+    <!-- 2026-08-07 세계 세력 스냅샷 파일럿 (16세기). 기본 꺼짐 —
+         2026-08-06 "세계 레이어가 본진을 가리면 안 된다" 결정과의
+         절충: 원하는 사람만 켜서 본다. -->
+    <label class="toggle-item"><input type="checkbox" id="layerTerritory"><span class="legend-swatch territory-swatch"></span>세계 세력<span class="nav-new" data-new-key="worldTerritory">NEW</span></label>
     <div class="toggle-sep mobile-only"></div>
     <label class="toggle-item mobile-only"><input type="checkbox" id="autoHideControls" checked> 정보창 열 때 자동 숨김</label>
   </div>
 
 </div>
+
+<!-- 2026-08-07 세계 세력 스냅샷 칩·캡션 (territoryLayer.js가 채운다) -->
+<div id="territoryChips" class="territory-chips" style="display:none"></div>
+<div id="territoryCaption" class="territory-caption" style="display:none"></div>
 
 <div class="timeline">
   <!-- 왕조 챕터 내비게이션 — js/reigns.js의 REIGNS 배열로 timeline.js가
@@ -348,6 +356,7 @@
 
 <!-- ── 세계의 흐름 (World Context Layer) — 한국사와 분리된 독립 레이어 ── -->
 <script src="data/world_events.js"></script>
+<script src="data/territory_snapshots.js?v=20260807a"></script>
 <script src="data/world_context.js"></script>
 
 <script src="data/china_dynasties.js"></script>
@@ -369,7 +378,8 @@
 <script src="js/markerIcons.js"></script>
 <script src="data/archive_backlinks.js?v=20260801a"></script>
 <script src="data/search_index.js?v=20260801b"></script>
-<script src="js/renderer.js?v=20260801a"></script>
+<script src="js/renderer.js?v=20260807a"></script>
+<script src="js/territoryLayer.js?v=20260807a"></script>
 <script src="js/infoPanel.js"></script>
 <script src="js/search.js?v=20260801a"></script>
 <script src="js/timeline.js"></script>

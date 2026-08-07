@@ -22,6 +22,7 @@ const WORLD_EVENTS = {
   world_1405_zhenghe: {
     id:'world_1405_zhenghe', title:'정화의 대항해', start:1405, end:1433,
     regionKey:'east_asia', region:'동아시아~아프리카 (명)', location:[31.2304, 121.4737],
+    polity:'명(明)',   // 당시 국가·제국
     type:'ECONOMY', visual:'expand', priority:2,
     summary:{
       what:'명 영락제의 명으로 환관 정화가 대함대를 이끌고 동남아시아·인도를 거쳐 아프리카 동해안까지 일곱 차례 항해했다.',
@@ -34,6 +35,7 @@ const WORLD_EVENTS = {
   world_1453_constantinople: {
     id:'world_1453_constantinople', title:'비잔티움 제국의 멸망', start:1453, end:1453,
     regionKey:'mideast', region:'중동·유럽 접경 (콘스탄티노폴리스)', location:[41.0082, 28.9784],
+    polity:'오스만 제국 vs 비잔티움 제국',   // 당시 국가·제국
     type:'WAR', visual:'radiate', priority:2,
     summary:{
       what:'오스만 제국의 메흐메트 2세가 천년 도시 콘스탄티노폴리스를 함락시켰다.',
@@ -46,6 +48,7 @@ const WORLD_EVENTS = {
   world_1455_gutenberg: {
     id:'world_1455_gutenberg', title:'구텐베르크의 활판 인쇄술', start:1450, end:1455,
     regionKey:'europe', region:'유럽 (독일)', location:[49.9929, 8.2473],
+    polity:'신성 로마 제국 (마인츠)',   // 당시 국가·제국
     type:'TECH', visual:'spread', priority:2,
     summary:{
       what:'독일의 구텐베르크가 금속활자 인쇄기로 성서를 대량으로 찍어냈다.',
@@ -58,6 +61,7 @@ const WORLD_EVENTS = {
   world_1492_columbus: {
     id:'world_1492_columbus', title:'콜럼버스의 아메리카 도달과 신항로 개척', start:1487, end:1522,
     regionKey:'global', region:'대서양~아메리카·아시아', location:[9.5, -80.0],
+    polity:'에스파냐 왕국·포르투갈 왕국',   // 당시 국가·제국
     type:'ECONOMY', visual:'expand', priority:1,
     summary:{
       what:'포르투갈·에스파냐가 인도로 가는 새 항로를 찾던 중, 콜럼버스는 아메리카에 도달했고 바스쿠 다가마는 인도 항로를, 마젤란 일행은 세계 일주를 이뤘다.',
@@ -70,6 +74,7 @@ const WORLD_EVENTS = {
   world_1517_reformation: {
     id:'world_1517_reformation', title:'루터의 종교개혁', start:1517, end:1555,
     regionKey:'europe', region:'유럽 (독일)', location:[51.8, 12.65],
+    polity:'신성 로마 제국',   // 당시 국가·제국
     type:'IDEA', visual:'spread', priority:1,
     summary:{
       what:'교황이 성당 증축 비용을 위해 면벌부를 팔자, 성직자 루터가 95개조 반박문을 내걸고 이를 비판했다.',
@@ -82,6 +87,7 @@ const WORLD_EVENTS = {
   world_1526_mughal: {
     id:'world_1526_mughal', title:'인도 무굴 제국의 성립', start:1526, end:1707,
     regionKey:'south_asia', region:'남아시아 (인도)', location:[27.1767, 78.0081],
+    polity:'무굴 제국',   // 당시 국가·제국
     type:'EMPIRE', visual:'expand', priority:2,
     summary:{
       what:'티무르의 후예 바부르가 델리 술탄 왕조를 무너뜨리고 무굴 제국을 세웠다.',
@@ -94,6 +100,7 @@ const WORLD_EVENTS = {
   world_1588_armada: {
     id:'world_1588_armada', title:'에스파냐 무적함대의 패배와 영국의 부상', start:1588, end:1603,
     regionKey:'europe', region:'유럽 (영국·에스파냐)', location:[50.5, -3.5],
+    polity:'잉글랜드 왕국 vs 에스파냐 제국',   // 당시 국가·제국
     type:'WAR', visual:'radiate', priority:2,
     summary:{
       what:'절대왕정의 전성기를 구가하던 에스파냐의 무적함대가 영국 해군에 패했다.',
@@ -106,6 +113,7 @@ const WORLD_EVENTS = {
   world_1600_edo: {
     id:'world_1600_edo', title:'일본 에도 막부의 성립과 쇄국', start:1603, end:1853,
     regionKey:'east_asia', region:'동아시아 (일본)', location:[35.6762, 139.6503],
+    polity:'에도 막부 (일본)',   // 당시 국가·제국
     type:'POLITICS', visual:'flow', priority:1,
     summary:{
       what:'도쿠가와 이에야스가 세키가하라 전투에서 승리해 에도 막부를 열고 약 260년간 이어질 통치를 시작했다.',
@@ -118,6 +126,7 @@ const WORLD_EVENTS = {
   world_1618_thirty_years: {
     id:'world_1618_thirty_years', title:'30년 전쟁과 베스트팔렌 조약', start:1618, end:1648,
     regionKey:'europe', region:'유럽 (독일)', location:[51.0, 10.0],
+    polity:'신성 로마 제국',   // 당시 국가·제국
     type:'WAR', visual:'expand', priority:1,
     summary:{
       what:'신성로마제국의 신교 탄압에서 시작된 종교전쟁이 유럽 여러 나라가 뒤섞인 국제전으로 커졌다.',
@@ -130,6 +139,7 @@ const WORLD_EVENTS = {
   world_1636_qing: {
     id:'world_1636_qing', title:'청의 건국과 명의 멸망', start:1616, end:1644,
     regionKey:'east_asia', region:'동아시아 (만주·베이징)', location:[39.9042, 116.4074],
+    polity:'청(淸) vs 명(明)',   // 당시 국가·제국
     type:'EMPIRE', visual:'expand', priority:1,
     summary:{
       what:'만주족을 통일한 누르하치가 후금을 세웠고, 그 아들 홍타이지가 국호를 청으로 바꿨으며 조선을 침략(병자호란)했다.',
@@ -142,6 +152,7 @@ const WORLD_EVENTS = {
   world_1642_english_civil_war: {
     id:'world_1642_english_civil_war', title:'영국 청교도혁명과 명예혁명', start:1642, end:1689,
     regionKey:'europe', region:'유럽 (영국)', location:[51.5074, -0.1278],
+    polity:'잉글랜드 왕국',   // 당시 국가·제국
     type:'REVOLUTION', visual:'radiate', priority:1,
     summary:{
       what:'왕권신수설을 고수한 찰스 1세와 의회가 충돌해 내전 끝에 왕이 처형되고 공화정이 들어섰다(청교도혁명).',
@@ -154,6 +165,7 @@ const WORLD_EVENTS = {
   world_1687_newton: {
     id:'world_1687_newton', title:'뉴턴과 과학혁명', start:1543, end:1687,
     regionKey:'europe', region:'유럽', location:[52.2, 0.12],
+    polity:'잉글랜드 왕국 등 유럽 각국',   // 당시 국가·제국
     type:'TECH', visual:'spread', priority:1,
     summary:{
       what:'코페르니쿠스의 지동설에서 시작해 갈릴레이·케플러를 거쳐 뉴턴이 만유인력의 법칙으로 우주의 운동을 수학적으로 설명했다.',
@@ -166,6 +178,7 @@ const WORLD_EVENTS = {
   world_1689_absolutism: {
     id:'world_1689_absolutism', title:'루이 14세와 절대왕정의 전성기', start:1643, end:1715,
     regionKey:'europe', region:'유럽 (프랑스)', location:[48.8566, 2.3522],
+    polity:'프랑스 왕국',   // 당시 국가·제국
     type:'POLITICS', visual:'radiate', priority:2,
     summary:{
       what:'"짐이 곧 국가"라 칭한 루이 14세가 베르사유 궁전을 짓고 왕권신수설에 기반한 절대왕정의 절정을 이뤘다.',
@@ -178,6 +191,7 @@ const WORLD_EVENTS = {
   world_1740_qianlong: {
     id:'world_1740_qianlong', title:'청 건륭제와 중화제국의 최대 판도', start:1735, end:1796,
     regionKey:'east_asia', region:'동아시아 (베이징)', location:[39.9042, 116.4074],
+    polity:'청(淸)',   // 당시 국가·제국
     type:'EMPIRE', visual:'expand', priority:1,
     summary:{
       what:'청의 전성기를 이끈 건륭제는 티베트·신장·몽골을 정복해 오늘날 중국 영토의 대부분을 확보했다.',
@@ -190,6 +204,7 @@ const WORLD_EVENTS = {
   world_1776_enlightenment: {
     id:'world_1776_enlightenment', title:'계몽사상과 미국독립혁명', start:1690, end:1783,
     regionKey:'europe', region:'유럽·북아메리카', location:[38.9072, -77.0369],
+    polity:'영국령 13개 식민지 → 미합중국',   // 당시 국가·제국
     type:'REVOLUTION', visual:'spread', priority:1,
     summary:{
       what:'로크·몽테스키외·루소 등 계몽사상가들이 자유·평등과 사회계약론을 내세워 절대왕정을 비판했고, 북아메리카 13개 식민지는 이를 바탕으로 독립을 선언했다.',
@@ -202,6 +217,7 @@ const WORLD_EVENTS = {
   world_1789_french_rev: {
     id:'world_1789_french_rev', title:'프랑스 혁명', start:1789, end:1799,
     regionKey:'europe', region:'유럽 (프랑스)', location:[48.8566, 2.3522],
+    polity:'프랑스 왕국 → 프랑스 공화국',   // 당시 국가·제국
     type:'REVOLUTION', visual:'radiate', priority:1,
     summary:{
       what:'재정 위기 속에 소집된 삼부회에서 제3신분이 국민의회를 결성했고, 파리 시민의 바스티유 습격을 계기로 혁명이 전국으로 번졌다.',
@@ -214,6 +230,7 @@ const WORLD_EVENTS = {
   world_1840_opium_war: {
     id:'world_1840_opium_war', title:'아편전쟁과 중국의 개항', start:1840, end:1860,
     regionKey:'east_asia', region:'동아시아 (중국)', location:[23.1291, 113.2644],
+    polity:'청(淸) vs 영국',   // 당시 국가·제국
     type:'WAR', visual:'radiate', priority:1,
     summary:{
       what:'차·비단 무역으로 은이 유출되자 영국이 인도산 아편을 밀수출했고, 청이 이를 단속하자 영국이 전쟁을 일으켜 승리했다.',
@@ -226,6 +243,7 @@ const WORLD_EVENTS = {
   world_1853_perry: {
     id:'world_1853_perry', title:'페리 제독과 일본의 개항', start:1853, end:1868,
     regionKey:'east_asia', region:'동아시아 (일본)', location:[35.6762, 139.6503],
+    polity:'에도 막부 vs 미국',   // 당시 국가·제국
     type:'POLITICS', visual:'radiate', priority:1,
     summary:{
       what:'미국의 페리 제독이 군함을 이끌고 일본에 개항을 요구해, 에도 막부는 미일화친조약을 맺어야 했다.',
@@ -249,6 +267,7 @@ const WORLD_EVENTS = {
   world_1392_timur: {
     id:'world_1392_timur', title:'티무르 제국과 사마르칸트', start:1392, end:1507,
     regionKey:'eurasia', region:'중앙아시아 (사마르칸트)', location:[39.6547, 66.9758],
+    polity:'티무르 제국',   // 당시 국가·제국
     type:'EMPIRE', visual:'expand', priority:2,
     summary:{
       what:'몽골 제국의 후계자를 자처한 티무르가 중앙아시아에서 인도·서아시아까지 정복하고, 수도 사마르칸트를 학문과 건축의 중심지로 키웠다.',
@@ -261,6 +280,7 @@ const WORLD_EVENTS = {
   world_1400_melaka: {
     id:'world_1400_melaka', title:'믈라카 술탄국 — 바다 실크로드의 관문', start:1400, end:1511,
     regionKey:'sea', region:'동남아시아 (말레이반도)', location:[2.1896, 102.2501],
+    polity:'믈라카 술탄국',   // 당시 국가·제국
     type:'ECONOMY', visual:'flow', priority:2,
     summary:{
       what:'말레이반도의 작은 항구 믈라카가 인도양과 남중국해를 잇는 해상 무역의 중심으로 성장했다.',
@@ -273,6 +293,7 @@ const WORLD_EVENTS = {
   world_1428_aztec: {
     id:'world_1428_aztec', title:'아스테카 — 호수 위의 대도시 테노치티틀란', start:1428, end:1521,
     regionKey:'north_america', region:'아메리카 (멕시코 고원)', location:[19.4326, -99.1332],
+    polity:'아스테카 제국',   // 당시 국가·제국
     type:'EMPIRE', visual:'expand', priority:2,
     summary:{
       what:'멕시코 고원의 아스테카가 삼각동맹을 맺고 주변을 아우르는 제국으로 성장했다. 호수 위에 세운 수도 테노치티틀란은 인구 20만을 헤아리는 당대 세계 최대급 도시였다.',
@@ -285,6 +306,7 @@ const WORLD_EVENTS = {
   world_1438_inca: {
     id:'world_1438_inca', title:'잉카 제국 — 안데스를 잇는 길의 제국', start:1438, end:1533,
     regionKey:'south_america', region:'아메리카 (안데스)', location:[-13.5320, -71.9675],
+    polity:'잉카 제국',   // 당시 국가·제국
     type:'EMPIRE', visual:'expand', priority:2,
     summary:{
       what:'파차쿠티 황제 아래 쿠스코의 잉카가 안데스 산맥을 따라 남북 4천 킬로미터에 이르는 제국을 세웠다.',
@@ -297,6 +319,7 @@ const WORLD_EVENTS = {
   world_1464_songhai: {
     id:'world_1464_songhai', title:'송가이 제국과 학문 도시 팀북투', start:1464, end:1591,
     regionKey:'africa', region:'아프리카 (서아프리카)', location:[16.7735, -3.0074],
+    polity:'송가이 제국',   // 당시 국가·제국
     type:'CULTURE', visual:'spread', priority:2,
     summary:{
       what:'니제르강 유역의 송가이가 서아프리카 최대 제국으로 성장했고, 팀북투는 수만 권의 필사본과 수천 명의 학생이 모이는 학문 도시로 번영했다.',
@@ -310,6 +333,7 @@ const WORLD_EVENTS = {
   world_1501_safavid: {
     id:'world_1501_safavid', title:'사파비 왕조 — 시아파 이란의 성립', start:1501, end:1736,
     regionKey:'mideast', region:'중동 (이란)', location:[32.6539, 51.6660],
+    polity:'사파비 왕조 (이란)',   // 당시 국가·제국
     type:'POLITICS', visual:'flow', priority:2,
     summary:{
       what:'사파비 왕조가 이란을 통일하고 시아파 이슬람을 국교로 삼았다. 수도 이스파한은 "세계의 절반"이라 불릴 만큼 번영했다.',
@@ -322,6 +346,7 @@ const WORLD_EVENTS = {
   world_1520_suleiman: {
     id:'world_1520_suleiman', title:'오스만 제국의 전성기 — 술레이만 1세', start:1520, end:1566,
     regionKey:'mideast', region:'중동·유럽 접경 (이스탄불)', location:[41.0082, 28.9784],
+    polity:'오스만 제국',   // 당시 국가·제국
     type:'EMPIRE', visual:'expand', priority:2,
     summary:{
       what:'술레이만 1세의 오스만 제국이 헝가리에서 북아프리카·페르시아만까지 세 대륙에 걸친 최대 판도를 이뤘고, 1529년에는 빈을 포위해 유럽을 떨게 했다.',
@@ -334,6 +359,7 @@ const WORLD_EVENTS = {
   world_1502_slave_trade: {
     id:'world_1502_slave_trade', title:'대서양 노예무역 — 360년의 강제 이주', start:1502, end:1867,
     regionKey:'africa', region:'아프리카~아메리카 (대서양)', location:[14.6672, -17.3980],
+    polity:'유럽 각국·서아프리카 왕국들',   // 당시 국가·제국
     type:'ECONOMY', visual:'flow', priority:2,
     summary:{
       what:'아프리카에서 아메리카로 사람을 사고파는 무역이 시작돼 360여 년간 이어졌다. 강제로 실려 간 사람은 학계 추산 1,200만 명이 넘는다.',
@@ -346,6 +372,7 @@ const WORLD_EVENTS = {
   world_1545_potosi: {
     id:'world_1545_potosi', title:'포토시 은광 — 세계를 하나로 묶은 은', start:1545, end:1650,
     regionKey:'south_america', region:'아메리카 (안데스)', location:[-19.5836, -65.7531],
+    polity:'에스파냐령 페루 부왕령',   // 당시 국가·제국
     type:'ECONOMY', visual:'wave', priority:1,
     summary:{
       what:'안데스 고원 포토시에서 사상 최대의 은광이 발견됐다. 원주민의 강제 노동으로 캐낸 은이 유럽과 마닐라를 거쳐 명으로 흘러들었다.',
@@ -358,6 +385,7 @@ const WORLD_EVENTS = {
   world_1571_manila: {
     id:'world_1571_manila', title:'마닐라 갈레온 — 태평양을 건넌 무역선', start:1571, end:1815,
     regionKey:'sea', region:'동남아시아 (필리핀)', location:[14.5995, 120.9842],
+    polity:'에스파냐령 필리핀',   // 당시 국가·제국
     type:'ECONOMY', visual:'flow', priority:2,
     summary:{
       what:'에스파냐가 마닐라를 세우고, 멕시코 아카풀코와 마닐라를 잇는 갈레온 무역선을 240여 년간 운항했다.',
@@ -371,6 +399,7 @@ const WORLD_EVENTS = {
   world_1602_voc: {
     id:'world_1602_voc', title:'네덜란드 동인도회사(VOC)와 바타비아', start:1602, end:1799,
     regionKey:'sea', region:'동남아시아 (자바)', location:[-6.2088, 106.8456],
+    polity:'네덜란드 공화국 (동인도회사)',   // 당시 국가·제국
     type:'ECONOMY', visual:'flow', priority:2,
     summary:{
       what:'네덜란드가 세계 최초의 주식회사인 동인도회사를 세우고, 자바의 바타비아(자카르타)를 거점으로 아시아 향신료 무역을 장악했다.',
@@ -384,6 +413,7 @@ const WORLD_EVENTS = {
   world_1757_plassey: {
     id:'world_1757_plassey', title:'플라시 전투 — 회사가 인도를 지배하다', start:1757, end:1857,
     regionKey:'south_asia', region:'남아시아 (벵골)', location:[23.8036, 88.2529],
+    polity:'영국 동인도회사 vs 벵골 (무굴 제국)',   // 당시 국가·제국
     type:'WAR', visual:'spread', priority:2,
     summary:{
       what:'영국 동인도회사가 플라시 전투에서 벵골 태수를 꺾고, 인도에서 가장 부유한 벵골의 징세권을 손에 넣었다.',
@@ -396,6 +426,7 @@ const WORLD_EVENTS = {
   world_1770_cook: {
     id:'world_1770_cook', title:'쿡의 태평양 항해와 오스트레일리아 식민화', start:1768, end:1788,
     regionKey:'oceania', region:'오세아니아', location:[-33.8688, 151.2093],
+    polity:'그레이트브리튼 왕국 (영국)',   // 당시 국가·제국
     type:'POLITICS', visual:'flow', priority:2,
     summary:{
       what:'영국의 쿡 선장이 태평양을 세 차례 항해하며 뉴질랜드와 오스트레일리아 동해안을 지도에 올렸고, 1788년 영국은 시드니에 유형 식민지를 세웠다.',
@@ -408,6 +439,7 @@ const WORLD_EVENTS = {
   world_1791_haiti: {
     id:'world_1791_haiti', title:'아이티 혁명 — 노예들이 세운 첫 공화국', start:1791, end:1804,
     regionKey:'north_america', region:'아메리카 (카리브)', location:[18.5392, -72.3364],
+    polity:'프랑스령 생도맹그 → 아이티',   // 당시 국가·제국
     type:'REVOLUTION', visual:'radiate', priority:1,
     summary:{
       what:'프랑스 식민지 생도맹그의 노예들이 봉기해 나폴레옹의 군대까지 물리치고, 1804년 세계 최초의 흑인 공화국 아이티를 세웠다.',
@@ -421,6 +453,7 @@ const WORLD_EVENTS = {
   world_1839_tanzimat: {
     id:'world_1839_tanzimat', title:'오스만 탄지마트 — 제국의 개혁 실험', start:1839, end:1876,
     regionKey:'mideast', region:'중동·유럽 접경 (이스탄불)', location:[41.0082, 28.9784],
+    polity:'오스만 제국',   // 당시 국가·제국
     type:'POLITICS', visual:'flow', priority:2,
     summary:{
       what:'서구 열강의 압박에 밀리던 오스만 제국이 법 앞의 평등과 행정·군사 개혁을 내건 위로부터의 개혁, 탄지마트를 단행했다.',
@@ -433,6 +466,7 @@ const WORLD_EVENTS = {
   world_1857_sepoy: {
     id:'world_1857_sepoy', title:'세포이 항쟁 — 인도, 회사 지배에 맞서다', start:1857, end:1858,
     regionKey:'south_asia', region:'남아시아 (델리)', location:[28.6139, 77.2090],
+    polity:'영국 동인도회사령 인도·무굴 제국',   // 당시 국가·제국
     type:'WAR', visual:'radiate', priority:2,
     summary:{
       what:'동인도회사의 인도인 용병(세포이)들이 봉기해 델리를 점령하고 무굴 황제를 다시 세웠으나, 1년여 만에 진압됐다.',
@@ -448,6 +482,7 @@ const WORLD_EVENTS = {
   world_bg_oceania: {
     id:'world_bg_oceania', title:'오세아니아 — 6만 년의 대륙, 별을 읽는 항해자들', start:1392, end:1768,
     regionKey:'oceania', region:'오세아니아', location:[-25.0, 133.0],
+    polity:'애버리지니·폴리네시아 세계',   // 당시 국가·제국
     type:'CULTURE', visual:'spread', priority:3,
     summary:{
       what:'조선 오백 년 내내 오스트레일리아에는 6만 년을 이어온 애버리지니의 세계가, 태평양에는 별과 해류를 읽으며 카누로 대양을 건너온 폴리네시아인의 섬 세계가 있었다.',
