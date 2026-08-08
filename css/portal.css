@@ -46,7 +46,7 @@ body.portal {
 .portal-map-bg {
   position:fixed; inset:0; z-index:0;
   background-color: var(--ink);
-  /* background-image is now set inline by js/portal.js (weekly rotation) */
+  /* background-image는 js/portal.js가 인라인으로 넣는다 (일간 로테이션, 2026-08-07) */
   background-position: center 42%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -397,3 +397,85 @@ body.portal {
   border-radius: 3px; padding: 1px 3px 0;
 }
 a.portal-nav-item { text-decoration: none; display: inline-flex; align-items: center; }
+
+/* ═══════════════════════════════════════════════════════
+   주간(라이트) 모드 — 2026-08-07
+   ═══════════════════════════════════════════════════════
+   포털에도 주간/야간 전환을 넣는다(왕두목 지시). 지도 페이지는
+   타일 URL을 밝은 것으로 갈아끼우는 방식이지만, 포털에는 타일이
+   없고 배경 사진 한 장이 깔려 있을 뿐이다. 그래서 방식이 다르다.
+
+   핵심 판단: 사진은 그대로 두고 그 위의 스크림을 뒤집는다.
+   야간에는 어두운 스크림으로 사진을 눌러 흰 글씨를 받쳤다면,
+   주간에는 밝은 스크림(종이색 워시)을 얹어 사진을 바래게 하고
+   그 위에 어두운 글씨를 올린다. 배경 사진의 밝은 버전을 따로
+   만들 필요가 없고, 오래된 종이 지도 같은 인상이라 브랜드와도
+   맞는다.
+
+   색 토큰(--ink/--paper)을 통째로 뒤집으므로 대부분의 규칙은
+   자동으로 따라온다. 다만 rgba로 하드코딩된 표면·테두리는
+   야간 기준(어두운 판, 밝은 테두리)이라 아래에서 개별로 뒤집는다. */
+
+body.portal.portal-light {
+  --ink:#f2ece0; --ink-soft:#fbf7ee; --paper:#2a251c;
+  --paper-dim:#4e463a; --paper-faint:#6d6555;
+  --gold:#8a6d34; --gold-bright:#6f5626;
+  color:var(--paper);
+}
+
+/* 스크림 반전 — 어둡게 누르던 두 겹을 밝게 바래는 두 겹으로.
+   히어로 텍스트가 놓이는 좌상단은 야간과 마찬가지로 더 강하게
+   덮어, 어떤 사진이 걸려도 글씨가 읽히도록 보호한다. */
+/* 2026-08-07 재조정: 최초 값(0.90/0.74/0.42 + 0.62~0.93)은 너무 두꺼웠다.
+   PIL로 실제 합성해 재보니 원본 사진의 명암 편차 42~84가 합성 후 5~13으로
+   무너져, 주간 모드에서는 배경 사진이 사실상 백지가 됐다(전체 평균 밝기
+   224/255). 어두운 사진 넉 장만 놓고 "밝게만 만들면 된다"고 잡은 값이었다.
+   아래 값은 같은 방식으로 다시 재서 고른 것 — 전체 평균 198/255, 편차 15로
+   사진이 바랜 채 살아 있고, 히어로 텍스트 대비는 최저 8.85:1로 여전히
+   기준(4.5:1)을 크게 넘는다. */
+body.portal-light .portal-map-bg::after {
+  background:
+    radial-gradient(120% 85% at 8% 22%, rgba(246,241,231,0.78) 0%, rgba(246,241,231,0.58) 38%, rgba(246,241,231,0.22) 68%),
+    linear-gradient(180deg, rgba(246,241,231,0.42) 0%, rgba(246,241,231,0.46) 30%, rgba(246,241,231,0.62) 70%, rgba(246,241,231,0.78) 100%);
+}
+
+/* 야간용 글자 그림자는 밝은 바탕에서 글씨를 뭉개므로 없앤다. */
+body.portal-light .portal-nav-menu a,
+body.portal-light .portal-nav-menu button { text-shadow:none; }
+body.portal-light .portal-hero-range { text-shadow:none; }
+body.portal-light .portal-hero-title { color:#7a5f2a; }
+
+/* 어두운 반투명 판 → 밝은 반투명 판.
+   (--ink-soft를 쓰는 .featured-card/.stats-card는 토큰 반전으로
+   자동 처리되므로 여기 없다.) */
+body.portal-light .portal-era-btn { background:rgba(255,253,248,0.72); }
+body.portal-light .portal-explore-card { background:rgba(255,253,248,0.72); }
+body.portal-light .stats-card { background:rgba(255,253,248,0.55); }
+body.portal-light .portal-quick-item { background:rgba(255,253,248,0.62); }
+body.portal-light .portal-quick-item:hover { background:rgba(255,253,248,0.85); }
+
+/* 밝은 테두리(rgba(238,231,216,x)) → 어두운 테두리.
+   야간에는 어두운 판 위의 밝은 선이었지만, 주간에는 반대가 되어야
+   경계가 보인다. */
+body.portal-light .featured-card,
+body.portal-light .portal-quick-item,
+body.portal-light .stats-card,
+body.portal-light .route-card,
+body.portal-light .portal-family-list li { border-color:rgba(60,52,38,0.20); }
+body.portal-light .portal-family-list li.is-current { border-color:rgba(60,52,38,0.38); }
+body.portal-light .portal-routes-scroll::-webkit-scrollbar-thumb { background:rgba(60,52,38,0.22); }
+body.portal-light .portal-quick-badge {
+  background:rgba(160,120,50,0.14); border-color:rgba(160,120,50,0.34);
+}
+
+/* 루트 카드는 사진 위에 흰 글씨를 얹는 구조라, 주간에도 카드 안쪽은
+   어두운 채로 둔다 — 사진을 밝게 바래면 글씨가 죽는다. */
+body.portal-light .route-card-name,
+body.portal-light .route-card-tagline,
+body.portal-light .route-card-period { color:#f4efe2; }
+
+/* CTA(금색 버튼)는 야간에 어두운 글자였는데, 주간에도 금색 판
+   위에 어두운 글자라 그대로 두면 된다 — 대비가 충분하다. */
+
+/* 영상 썸네일 위 재생 버튼은 흰 글자가 전제 — 그대로 둔다. */
+body.portal-light .featured-play { color:#fff; }

@@ -23,6 +23,9 @@
   // ── 1. 오늘의 특집 로테이션 ──────────────────────────────────
   const RECENT_DAYS = 14; // 이 안에 올라온 영상이 있으면 무조건 그게 특집.
 
+  // 2026-08-07: 배경 로테이션이 주간 → 일간으로 바뀌면서 호출처가
+  // 사라졌다. 지우지 않고 남겨둔다 — 주 단위 순환이 다시 필요해질 수
+  // 있고(예: 주간 특집), ISO 주차 계산은 직접 짜면 경계에서 틀리기 쉽다.
   function getISOWeek(date) {
     const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
     const dayNum = d.getUTCDay() || 7;
@@ -31,27 +34,40 @@
     return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
   }
 
-  // ── 1-1. 포털 대표 이미지(배경) 주간 로테이션 ──────────────────
+  // ── 1-1. 포털 대표 이미지(배경) 일간 로테이션 ──────────────────
   // assets/images/portal-bg/portal-bg-1.jpg ~ portal-bg-5.jpg 5장을 두고,
-  // ISO 주차(월요일 00:00 KST 기준) % 5 로 이번 주 사진을 고른다.
-  // 같은 주에는 누가 접속하든 같은 사진, 다음 주 월요일에 다음 사진으로.
-  // 사진을 5장보다 늘리고 싶으면 PORTAL_BG_COUNT만 바꾸면 된다(파일명은
-  // portal-bg-6.jpg 식으로 이어서 추가).
-  const PORTAL_BG_COUNT = 5;
+  // KST 기준 "오늘의 일수" % 5 로 오늘 사진을 고른다.
+  // 같은 날에는 누가 접속하든 같은 사진, 다음 날 한국 자정에 다음 사진으로.
+  // 사진을 늘리고 싶으면 PORTAL_BG_COUNT만 바꾸면 된다(파일명은
+  // portal-bg-5.jpg 식으로 이어서 추가).
+  //
+  // 2026-08-07 변경(왕두목 지시): 주간 → 일간.
+  // 종전에는 ISO 주차 기준이라 한 사진을 7일 내리 봤고, 5장을 한 바퀴
+  // 도는 데 5주가 걸렸다. 하루 단위로 바꾸면 5일이면 한 바퀴가 돌아
+  // 재방문자에게 "매일 다른 얼굴"이 된다. 날짜 경계 처리는 아래
+  // kstDayIndex()와 같은 이유로 KST 자정 기준이다(UTC를 그대로 쓰면
+  // 한국 시간 오전 9시에 바뀌어버린다).
+  // 2026-08-07: 5 → 4 → 12.
+  //  ① 1번(한반도 야경 위성 이미지)을 뺐다 — 다른 사진은 풍경인데 그
+  //     한 장만 지도처럼 보여 포털의 실제 지도와 혼동을 준다(왕두목).
+  //  ② 이어서 8장을 새로 추가해 12장이 됐다. 선사(고인돌)부터 근대
+  //     (개항장)까지 시대 축과, 남쪽 섬 같은 지역 축을 함께 깔았고,
+  //     회화 3장(설경 유화 · 발굴 단면 수채 · 고분 벽화)을 섞었다.
+  //     회화가 섞인 데는 이유가 있다 — 주간 모드는 사진 위에 밝은
+  //     워시를 얹기 때문에, 어두운 사진만 모이면 낮에 전부 잿빛이 된다.
+  // 파일 수와 이 값은 반드시 같이 움직여야 한다. 값이 파일보다 크면
+  // 그 번호가 걸리는 날 하루는 배경이 통째로 빈 색이 된다.
+  const PORTAL_BG_COUNT = 12;
 
-  // 배포 시점(2026-08-03 이후 첫 월요일, KST 31주차)에 2번 사진부터
-  // 시작하도록 오프셋을 넣었다(1번을 너무 오래 써서 2번부터 시작하기로
-  // 함). 순서 자체는 그대로 1→2→3→4→5→1...로 순환하되, 시작 위치만
-  // 2번으로 맞춘 것.
-  // (계산: 31주차는 오프셋 없이 2번으로 떨어져서, 오프셋 0으로 그대로 둠)
+  // 순환 시작 위치 보정용. 오늘 나올 사진을 당기거나 미루고 싶을 때
+  // 이 값만 조정한다(예: +1 하면 내일 사진이 오늘 나온다).
   const PORTAL_BG_START_OFFSET = 0;
 
   function currentPortalBgUrl() {
-    // ISO 주차 계산에 KST 보정을 넣어, 한국 시간 기준 월요일 자정에
-    // 정확히 다음 사진으로 넘어가도록 한다(위 kstDayIndex와 동일한 이유).
-    const kstNow = new Date(Date.now() + 9 * 3600000);
-    const week = getISOWeek(kstNow) + PORTAL_BG_START_OFFSET;
-    const index = (week % PORTAL_BG_COUNT) + 1; // 1 ~ PORTAL_BG_COUNT
+    // KST 자정 기준 일수 — 정의는 아래 kstDayIndex()와 동일하나,
+    // 이 함수가 먼저 실행되므로 여기서 직접 계산한다.
+    const dayIdx = Math.floor((Date.now() + 9 * 3600000) / 86400000);
+    const index = ((dayIdx + PORTAL_BG_START_OFFSET) % PORTAL_BG_COUNT) + 1; // 1 ~ PORTAL_BG_COUNT
     return `assets/images/portal-bg/portal-bg-${index}.jpg`;
   }
 
@@ -73,6 +89,43 @@
   }
 
   applyPortalBg();
+
+  // ── 1-2. 주간/야간(라이트/다크) 전환 ──────────────────────────
+  // 2026-08-07(왕두목 지시): 지도 페이지에만 있던 밝기 전환을 포털에도.
+  // localStorage 키를 지도와 공유(atlas_map_theme)해서, 포털에서 주간을
+  // 골라 지도로 들어가면 지도도 주간으로 열린다 — 사이트를 오갈 때마다
+  // 다시 누르게 만들지 않기 위함이다.
+  // 초기 클래스는 아래가 아니라 <head>의 인라인 스크립트가 붙인다
+  // (여기서 붙이면 어두운 화면이 한 번 번쩍인 뒤 밝아진다).
+  const PORTAL_THEME_KEY = 'atlas_map_theme';
+
+  function portalSavedTheme() {
+    try { return localStorage.getItem(PORTAL_THEME_KEY) === 'light' ? 'light' : 'dark'; }
+    catch (_) { return 'dark'; }
+  }
+
+  function applyPortalTheme(theme) {
+    const light = (theme === 'light');
+    document.body.classList.toggle('portal-light', light);
+    const btn = document.getElementById('portalThemeToggle');
+    if (btn) {
+      // 버튼에는 "누르면 어떻게 되는지"가 아니라 "지금 상태"를 적는다
+      // — 지도 페이지(js/ui.js)와 같은 규칙이라 표기가 어긋나지 않는다.
+      btn.innerHTML = light
+        ? '☀️ <span class="label-full">주간</span>'
+        : '🌙 <span class="label-full">야간</span>';
+    }
+    try { localStorage.setItem(PORTAL_THEME_KEY, light ? 'light' : 'dark'); } catch (_) {}
+  }
+
+  (function initPortalTheme() {
+    applyPortalTheme(portalSavedTheme());
+    const btn = document.getElementById('portalThemeToggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      applyPortalTheme(portalSavedTheme() === 'light' ? 'dark' : 'light');
+    });
+  })();
 
   // 한국 시간(KST, UTC+9) 기준 "오늘의 일수"를 계산한다. UTC 기준으로
   // Math.floor(Date.now()/86400000)를 쓰면 날짜 경계가 한국 자정이
