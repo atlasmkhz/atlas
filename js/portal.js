@@ -109,11 +109,13 @@
     document.body.classList.toggle('portal-light', light);
     const btn = document.getElementById('portalThemeToggle');
     if (btn) {
-      // 버튼에는 "누르면 어떻게 되는지"가 아니라 "지금 상태"를 적는다
-      // — 지도 페이지(js/ui.js)와 같은 규칙이라 표기가 어긋나지 않는다.
+      // 2026-08-07 표기 반전(왕두목): "지금 상태"가 아니라 "누르면
+      // 무엇이 되는지"를 적는다. 지도 페이지(js/ui.js) 7곳도 같은
+      // 규칙으로 함께 바꿨다 — 포털과 지도가 반대로 적히면 오갈 때
+      // 혼란이 더 커지기 때문이다.
       btn.innerHTML = light
-        ? '☀️ <span class="label-full">주간</span>'
-        : '🌙 <span class="label-full">야간</span>';
+        ? '🌙 <span class="label-full">야간으로</span>'
+        : '☀️ <span class="label-full">주간으로</span>';
     }
     try { localStorage.setItem(PORTAL_THEME_KEY, light ? 'light' : 'dark'); } catch (_) {}
   }

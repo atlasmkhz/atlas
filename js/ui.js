@@ -142,9 +142,11 @@ document.getElementById('eraCloseBtn').addEventListener('click', function(e){
   if (!btn) return;
 
   function label(theme){
-    // 버튼에는 "지금 눌렀을 때 어떻게 되는지"가 아니라 "현재 상태"를
-    // 적는다 — 야간 지도를 보는 중이면 🌙 야간.
-    return theme === 'light' ? '☀️ 주간' : '🌙 야간';
+    // 2026-08-07 표기 반전(왕두목): 버튼 글자는 "현재 상태"가 아니라
+    // "누르면 무엇이 되는지"를 적는다. 종전에는 야간 지도를 보는 중에
+    // 🌙 야간이라고 적혀 있어, 야간으로 가려면 그 버튼을 눌러야 하는
+    // 것처럼 읽혔다. 조사 '~으로'를 붙여 동작임을 확실히 한다.
+    return theme === 'light' ? '🌙 야간으로' : '☀️ 주간으로';
   }
 
   function current(){
